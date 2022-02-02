@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cannot_change_reinstatement_status</fullName>
+    <active>true</active>
+    <description>Status of a Reinstatement application cannot be changed.</description>
+    <errorConditionFormula>ISCHANGED(Status__c) &amp;&amp; RecordType.DeveloperName = &apos;MRIS_Reinstatement_Application&apos;</errorConditionFormula>
+    <errorMessage>Cannot change the status of a Reinstatement application.</errorMessage>
+</ValidationRule>

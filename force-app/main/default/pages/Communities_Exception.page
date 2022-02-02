@@ -1,0 +1,12 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false"  lightningstylesheets="true">
+    <apex:composition template="Communities_Base">
+        <apex:define name="content">
+            <apex:form id="portal">
+            <c:Bootstrap_Resources />
+            <p class="alert alert-danger">
+                We're sorry we could not complete your request. Please contact the Customer Support Center for assistance at 1-844-55-BRIGHT (1-844-552-7444) or via email at support@brightmls.com.
+            </p>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

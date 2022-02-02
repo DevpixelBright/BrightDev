@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HomePageLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <narrowComponents>Bright Links</narrowComponents>
+    <narrowComponents>standard-CreateNew</narrowComponents>
+    <narrowComponents>standard-StandardSearch</narrowComponents>
+    <narrowComponents>standard-RecentItems</narrowComponents>
+    <narrowComponents>standard-MessagesAndAlerts</narrowComponents>
+    <narrowComponents>QAS_NA__QAS Apex Session</narrowComponents>
+    <narrowComponents>QAS_NA__QAS Console Helper</narrowComponents>
+    <wideComponents>standard-Dashboard</wideComponents>
+    <wideComponents>standard-Tasks</wideComponents>
+    <wideComponents>standard-Calendar</wideComponents>
+</HomePageLayout>

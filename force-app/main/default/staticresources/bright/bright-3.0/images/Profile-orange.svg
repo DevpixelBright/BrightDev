@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="15" viewBox="0 0 15 15">
+  <defs>
+    <clipPath id="clip-Custom_Size_1">
+      <rect width="15" height="15"/>
+    </clipPath>
+  </defs>
+  <g id="Custom_Size_1" data-name="Custom Size – 1" clip-path="url(#clip-Custom_Size_1)">
+    <path id="Icon_awesome-user-circle" data-name="Icon awesome-user-circle" d="M7.5.562a7.5,7.5,0,1,0,7.5,7.5A7.5,7.5,0,0,0,7.5.562Zm0,2.9A2.661,2.661,0,1,1,4.839,6.127,2.661,2.661,0,0,1,7.5,3.466Zm0,10.4a5.8,5.8,0,0,1-4.43-2.062A3.372,3.372,0,0,1,6.048,10a.74.74,0,0,1,.215.033A4,4,0,0,0,7.5,10.24a3.989,3.989,0,0,0,1.237-.209A.74.74,0,0,1,8.952,10a3.372,3.372,0,0,1,2.979,1.808A5.8,5.8,0,0,1,7.5,13.869Z" transform="translate(0 -0.563)" fill="#fc2900"/>
+  </g>
+</svg>

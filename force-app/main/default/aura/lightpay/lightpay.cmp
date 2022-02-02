@@ -1,0 +1,374 @@
+<aura:component>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <ltng:require styles="{!$Resource.headerpart }"></ltng:require>
+   <ltng:require styles="{!$Resource.side }"></ltng:require> 
+   <ltng:require styles="{!$Resource.body }"></ltng:require>
+ <aura:attribute name="popup1" type="boolean" default="false"/>
+   
+   <div class="c-container">
+      <div class="fullpage slds-scope">
+         <div class="slds-grid slds-wrap">
+            <lightning:layout multipleRows="true">
+               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage header-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:header />
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+               <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                    <c:mobilemenu />
+                   <lightning:layout>
+                     <div class="new-containerpage">
+                        <div class="slds-container--x-large new-container">
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <c:sidebarnew />
+                           </lightning:layoutItem>
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                              <div class="page-section page-main">
+                                 <div class="middlebar1">
+                                    <h2>Pay My Balances</h2>
+                           
+                                         <lightning:button class="brand" variant="brand" label="Continue" title="Brand action" onclick="{! c.openModel }" />
+                         </div>
+                                 <div class="dev">
+                                     <p class="recent">Review your current bill to ensure you recognize all charges listed. Each charge is itemized for ease of understanding. For Data Access products, proration can apply to quantity changes. See <a href="#">here</a> for further explanation and full details on each order.</p>
+                                     <div class="view"></div>
+                                     
+                                     <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+            <div class="part0">
+                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                               <div class="layer part1"> 
+                           
+                            <h3 class="part1">Total Balance on Account: $5627.70</h3>
+                                
+                             </div>
+                </lightning:layoutItem>
+                      <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">                            
+                                <div class="layer part3"> 
+                             
+                             
+                             </div>
+                </lightning:layoutItem>
+                  
+                        </div>
+
+            </lightning:layoutItem>  
+                                     
+                                     
+                                     <div class="lake1">
+                                         <div class="table-form">
+                         <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped newtin">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            
+                                            
+                                           
+                                            
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Opportunity Name">Invoice Number</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Invoice Details</div>
+                                            </th>
+                                                          <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name"></div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Close Date">Post Date</div>
+                                            </th>
+                                          <th class="" scope="col">
+                                                <div class="slds-truncate" title="Opportunity Name">Balance</div>
+                                            </th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="slds-hint-parent blue">
+                                   
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">INV00105584</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Sphere Office by BrightMLS Monthly</div>
+                                                <div class="slds-truncate spere" title="Cloudhub">Sphere by Bright MLS Office IDX Sphere<br />by Bright MLS Office IDX Monthly</div>
+                                            </td>
+                                                                   <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">$ 129.95</div>
+                                                 <div class="slds-truncate spere" title="4/14/2015">$ 79.95</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">11/27/2020</div>
+                                            </td>
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">$ 500.00</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                   
+     <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">INV00105584</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Sphere Office by BrightMLS Monthly</div>
+                                                <div class="slds-truncate spere" title="Cloudhub">Sphere by Bright MLS Office IDX Sphere<br />by Bright MLS Office IDX Monthly</div>
+                                            </td>
+                                                                   <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">$ 129.95</div>
+                                                 <div class="slds-truncate spere" title="4/14/2015">$ 79.95</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">11/27/2020</div>
+                                            </td>
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">$ 500.00</div>
+                                            </td>
+                                        </tr>
+                                         <tr class="slds-hint-parent blue">
+                                   
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">INV00105584</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Sphere Office by BrightMLS Monthly</div>
+                                                <div class="slds-truncate spere" title="Cloudhub">Sphere by Bright MLS Office IDX Sphere<br />by Bright MLS Office IDX Monthly</div>
+                                            </td>
+                                                                   <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">$ 129.95</div>
+                                                 <div class="slds-truncate spere" title="4/14/2015">$ 79.95</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">11/27/2020</div>
+                                            </td>
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">$ 500.00</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                   
+     <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">INV00105584</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Sphere Office by BrightMLS Monthly</div>
+                                                <div class="slds-truncate spere" title="Cloudhub">Sphere by Bright MLS Office IDX Sphere<br />by Bright MLS Office IDX Monthly</div>
+                                            </td>
+                                                                   <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">$ 129.95</div>
+                                                 <div class="slds-truncate spere" title="4/14/2015">$ 79.95</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">11/27/2020</div>
+                                            </td>
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">$ 500.00</div>
+                                            </td>
+                                        </tr>
+                                         <tr class="slds-hint-parent blue">
+                                   
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">INV00105584</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Sphere Office by BrightMLS Monthly</div>
+                                                <div class="slds-truncate spere" title="Cloudhub">Sphere by Bright MLS Office IDX Sphere<br />by Bright MLS Office IDX Monthly</div>
+                                            </td>
+                                                                   <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">$ 129.95</div>
+                                                 <div class="slds-truncate spere" title="4/14/2015">$ 79.95</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">11/27/2020</div>
+                                            </td>
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">$ 500.00</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                   
+     <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">INV00105584</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Sphere Office by BrightMLS Monthly</div>
+                                                <div class="slds-truncate spere" title="Cloudhub">Sphere by Bright MLS Office IDX Sphere<br />by Bright MLS Office IDX Monthly</div>
+                                            </td>
+                                                                   <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">$ 129.95</div>
+                                                 <div class="slds-truncate spere" title="4/14/2015">$ 79.95</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">11/27/2020</div>
+                                            </td>
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">$ 500.00</div>
+                                            </td>
+                                        </tr>
+                                         <tr class="slds-hint-parent blue">
+                                   
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">INV00105584</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Sphere Office by BrightMLS Monthly</div>
+                                                <div class="slds-truncate spere" title="Cloudhub">Sphere by Bright MLS Office IDX Sphere<br />by Bright MLS Office IDX Monthly</div>
+                                            </td>
+                                                                   <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">$ 129.95</div>
+                                                 <div class="slds-truncate spere" title="4/14/2015">$ 79.95</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">11/27/2020</div>
+                                            </td>
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">$ 500.00</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                   
+     <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">INV00105584</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Sphere Office by BrightMLS Monthly</div>
+                                                <div class="slds-truncate spere" title="Cloudhub">Sphere by Bright MLS Office IDX Sphere<br />by Bright MLS Office IDX Monthly</div>
+                                            </td>
+                                                                   <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">$ 129.95</div>
+                                                 <div class="slds-truncate spere" title="4/14/2015">$ 79.95</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">11/27/2020</div>
+                                            </td>
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">$ 500.00</div>
+                                            </td>
+                                        </tr>
+                                        
+                                        
+                                        
+                                    </tbody>
+                                </table>
+                         </div>        </div>
+                                   
+                        
+                                 </div>
+                              </div>
+                           </lightning:layoutItem>
+                        </div>
+                     </div>
+                  </lightning:layout>
+               </lightning:layoutItem>
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage footer-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:footer />
+                         
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+            </lightning:layout>
+         </div>
+      </div>
+  <!-- PopUp 1 start -->
+       <aura:if isTrue="{!v.popup1}">
+           <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- ###### MODAL BOX HEADER Start ######-->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModel }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate email">Pay My Balances</h2>
+                    </header>
+                    <!--###### MODAL BOX BODY Part Start######-->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                         <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                              <div class="page-section page-main page-main2">
+                       <p>Select whether you will use an existing payment method already on file or add a new payment method to submit today’s payment, then follow the prompts to complete your transaction.</p>
+                                    <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                 <div class="visa">
+                                     
+                        <div class="leftvisa">
+                     <img  src="{!$Resource.bright + '/bright-3.0/images/visa.svg'}" alt="Bright" />
+                     <h4>**** **** **** 1234</h4>
+                        <h5>Expires on 12/2020</h5>    
+                     </div>
+                     
+                     <div class="rightvisa">
+                     <div class="visar">
+                          <img class="edit" src="{!$Resource.bright + '/bright-3.0/images/material-edit.svg'}" alt="Bright" />
+                         <img  src="{!$Resource.bright + '/bright-3.0/images/material-delete.svg'}" alt="Bright" />
+                         
+                         <h6 class="green1"> Active</h6>
+                         
+                         </div>
+                         
+                     </div>
+                     
+                              
+                                     </div>
+                                        <div class="visa">
+                                     
+                        <div class="leftvisa">
+                     <img  src="{!$Resource.bright + '/bright-3.0/images/visa.svg'}" alt="Bright" />
+                     <h4>**** **** **** 1234</h4>
+                        <h5>Expires on 12/2020</h5>    
+                     </div>
+                     
+                     <div class="rightvisa">
+                     <div class="visar">
+                          <img class="edit" src="{!$Resource.bright + '/bright-3.0/images/material-edit.svg'}" alt="Bright" />
+                         <img  src="{!$Resource.bright + '/bright-3.0/images/material-delete.svg'}" alt="Bright" />
+                         
+                         <h6 class="green1"> Active</h6>
+                         
+                         </div>
+                         
+                     </div>
+                     
+                              
+                                     </div>
+                                     </lightning:layoutItem>  
+                                  
+                                  
+                                  
+                                                                        
+                                                 
+                                        
+                                    
+                                     
+                              
+                                    
+                             
+                              </div>
+                           </lightning:layoutItem>
+                    </div>
+                    <!--###### MODAL BOX FOOTER Part Start ######-->
+                     <footer class="slds-modal__footer">
+                         <lightning:button class="brand" variant="brand" label="Continue" title="Brand action" onclick="{! c.handleClick }" />
+                       <lightning:button class="brand" variant="brand" label="Add New Payment Method" title="Brand action" onclick="{! c.handleClick }" />
+                       <!-- <lightning:button variant="neutral" 
+                                          label="Cancel"
+                                          title="Cancel"
+                                           class="newCancel"
+                                          onclick="{! c.closeModel1 }"/>-->
+                        
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+       </aura:if>
+       <!-- PopUp 1 end -->
+   </div>
+</aura:component>

@@ -1,0 +1,145 @@
+<apex:page applyHtmlTag="false"
+           showHeader="false" controller="GoodStandingController"  renderAs="pdf">
+    
+    <html>
+        <head>
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <TITLE>Good Standing Template</TITLE>
+            <META name="generator" content="BCL easyConverter SDK 5.0.252">
+            <META name="title" content="Good Standing Template">
+            <STYLE type="text/css">
+            
+                @page {
+                    size: A4;
+                    margin-top: 1cm;
+                    margin-bottom: 2cm;
+                    margin-left: 1cm;
+                    margin-right: 1cm;
+                    font-family: 'Arial Unicode MS';
+                    @top {
+                        content: element(header);
+                    }
+                    @bottom-left {
+                        content: element(footer);
+                    }
+                }
+                
+                div.footer {
+                    display: block;
+                    position: running(footer);
+                }
+                
+           
+            
+            
+
+            body {margin-top: 0px;margin-left: 0px; font-family: 'Arial Unicode MS'; }
+
+            #page_1 {position:relative; overflow: hidden;margin: 14px 0px 18px 23px;padding: 0px;border: none;width: 771px; font-family: 'Arial Unicode MS';}
+            #page_1 #id1_1 {border:none;margin: 0px 0px 0px 235px;padding: 0px;border:none;width: 490px;overflow: hidden; font-family: 'Arial Unicode MS';}
+            #page_1 #id1_2 {border:none;margin: 73px 0px 0px 4px;padding: 0px;border:none;width: 767px;overflow: hidden; font-family: 'Arial Unicode MS';}
+            #page_1 #id1_2 #id1_2_1 {float:left;border:none;margin: 0px 0px 0px 0px;padding: 0px;border:none;width: 690px;overflow: hidden; font-family: 'Arial Unicode MS';}
+            #page_1 #id1_2 #id1_2_2 {float:left;border:none;margin: 0px 0px 0px 0px;padding: 0px;border:none;width: 328px;overflow: hidden;}
+            #page_1 #id1_3 {border:none;margin: 0px 0px 0px 35px;padding: 20px;border:none;width: 734px;overflow: hidden; font-family: 'Arial Unicode MS';}
+            #page_1 #id1_4 {border:none;margin: 110px 0px 0px 0px;padding: 0px;border:none;width: 746px;overflow: hidden; font-family: 'Arial Unicode MS';}
+            #page_1 #id1_4 #id1_4_1 {float:left;border:none;margin: 5px 0px 0px 0px;padding: 0px;border:none;width: 426px;overflow: hidden; font-family: 'Arial Unicode MS';}
+            #page_1 #id1_4 #id1_4_2 {float:left;border:none;margin: 0px 0px 0px 0px;padding: 0px;border:none;width: 320px;overflow: hidden; font-family: 'Arial Unicode MS';}
+			
+            #page_1 #id1_5 {border:none; margin-top:60px;margin-left:250px;}
+			 #page_1 #id1_6 {border:none;margin: 0px 0px 0px 0px;padding: 0px;border:none;width: 734px;overflow: hidden; font-family: 'Arial Unicode MS';}
+            #page_1 #p1dimg1 {position:absolute;top:0px;left:300px;z-index:-1;width:432px;height:896px; font-family: 'Arial Unicode MS';}
+            #page_1 #p1dimg1 #p1img1 {width:432px;height:896px; font-family: 'Arial Unicode MS';}
+
+            #page_1 #p1inl_img1 {position:relative;width:1px;height:8px; font-family: 'Arial Unicode MS';}
+            #page_1 #p1inl_img2 {position:relative;width:4px;height:11px; font-family: 'Arial Unicode MS';}
+
+
+
+            .dclr {clear:both;float:none;height:1px;margin:0px;padding:0px;overflow:hidden; font-family: 'Arial Unicode MS';}
+
+            .ft0{font: bold 19px 'Arial';line-height: 22px;font-family: 'Arial Unicode MS';}
+            .ft1{font: 23px 'Arial';line-height: 26px;font-family: 'Arial Unicode MS';}
+            .ft2{font: 16px 'Arial';line-height: 18px;font-family: 'Arial Unicode MS';}
+            .ft3{font: 16px 'Arial';line-height: 23px;font-family: sans-serif;width: 100%;font-weight: bold; border-width: thin;
+     }
+
+            .p0{text-align: left;margin-top: 0px;margin-bottom: 0px;}
+            .p1{text-align: left;padding-left: 20px;margin-top: 10px;margin-bottom: 0px;font-family: 'Arial Unicode MS';}
+            .p2{text-align: left;margin-top: 20px;margin-bottom: 0px;font-family: 'Arial Unicode MS';}
+            .p3{text-align: left;margin-top: 2px;margin-bottom: 0px;font-family: 'Arial Unicode MS';}
+            .p4{text-align: left;margin-top: 2px;margin-bottom: 0px;font-family: 'Arial Unicode MS';}
+            
+           
+            
+            
+        </style>    
+            
+    </META>
+</META>
+</META> 
+<style>
+* {
+ box-sizing: border-box;
+}
+.tableClass {
+   font-family: arial, sans-serif;
+
+    border: 2px solid #ffff;
+}
+
+ .theHead, .col, t2 {
+  border: 1px solid #fff;
+    text-align: left;
+    padding: 8px;
+ }
+ h2 {
+  
+  margin-left: 10px;
+  padding: 20px;
+ }
+ .odd{
+    background-color: #f4fbe7;
+    border: 2px solid #ccc;
+    }
+ .even {
+    background-color: #e7e9ed;
+    border: 2px solid #ccc;
+}
+.even:hover {
+ border: 1px solid #222;
+}
+</style>
+            
+        </head>
+        <body>
+     
+    <DIV id="page_1">
+    <DIV class="dclr"></DIV>
+    
+        <DIV id="id1_2">
+
+            <P class="p0 ft2"><apex:outputText value="{0, date, MMMM d','  yyyy}"><apex:param value="{!Today()}" /></apex:outputText></P>
+            <P class="p0 ft2"><apex:outputText >{!Subscriptions.Contact__r.Name}</apex:outputText><br/>
+            <apex:outputText >{!Subscriptions.Street_Number__c},{!Subscriptions.Street_Name__c}</apex:outputText></P>
+  
+       </DIV>
+        
+       <DIV id="id1_2">
+           <DIV id="id1_2_1">
+               <P class="p0 ft3">RE: Letter of Good Standing for {!Subscriptions.Contact__r.Name} (Bright MLS #{!Subscriptions.Name})</P><br/>
+                              
+           </DIV>
+       </DIV>
+               
+          <DIV id="id1_4_2">
+            <P class="p0 ft2">Bright MLS provides MLS services for Real Estate Brokers and their licensees.  Bright MLS service area includes counties in the District of Columbia, Maryland, New Jersey, Pennsylvania, Delaware, West Virginia and Virginia.  I am pleased to verify that {!Subscriptions.Contact__r.Name} is in good standing with Bright MLS, does not have any outstanding balances as of <apex:outputText value="{0, date, MMMM d','  yyyy}"><apex:param value="{!Today()}" /></apex:outputText> and has full access to Bright MLS. {!Subscriptions.Contact__r.Name} has been an active subscriber with Bright MLS since November 20, 1998.</P>
+              <br/><P class="p0 ft2">This letter has been issued upon the customer's request and without any obligation on part.</P><br/>
+            <P class="p0 ft2">Sincerely,</P>
+			<P class="p0 ft2">Customer Support Membership Team</P>
+       </DIV>
+            </DIV><br/>
+            
+            
+		</body>
+    </html>
+</apex:page>

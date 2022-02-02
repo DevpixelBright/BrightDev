@@ -1,0 +1,253 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,force:appHostable,lightning:isUrlAddressable" controller="Communities_OfficeAccuracy" access="global">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  
+    <aura:attribute name="complianceFines" type="List"/>
+    <aura:attribute name="complianceFinesDisplay" type="List"/>
+    <aura:attribute name="complianceFinesByOffice" type="Map"/>
+    <aura:attribute name="subscriptionId" type="String" default=""/>
+    <aura:attribute name="offices" type="List" default="[]"/>
+    <aura:attribute name="SelectedOffices" type="String" />
+    <aura:attribute name="searchKey" type="String" />
+    
+    <aura:attribute type="Boolean" name="sortAsc" default="true"/>
+    <aura:attribute type="String" name="sortField" />
+    <!-- handlers -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <div class="c-container">
+        <div class="fullpage slds-scope">
+            <div class="slds-grid slds-wrap">
+                <lightning:layout multipleRows="true">
+                    
+                    <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                        <lightning:layout>
+                            <div class="new-containerpage">
+                                <div class="slds-container--x-large new-container">
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                        <div class="page-section page-main">
+                                            <div class="dev">
+                                                <div class="top">
+                                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="7" largeDeviceSize="7">
+                                                        <h2><img src="{!$Resource.acc + '/acc/images/user.svg'}" alt="" /><span>Brokerage Accuracy Notifications</span></h2>
+                                                    </lightning:layoutItem>
+                                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="5" largeDeviceSize="5">
+                                                        <div class="line">
+                                                            <lightning:button class="brand" variant="brand " label="Print" title="Brand action" onclick="{!c.print}"/>
+                                                            <lightning:button class="brand" variant="brand " label="Export" title="Brand action" onclick="{!c.export}" />                                                            
+                                                        </div>
+                                                    </lightning:layoutItem>
+                                                </div>
+                                                <div class="view"></div>
+                                                <div class="middle">
+                                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                                        <p class="recent">Below is a summary of the violation email notifications and fines issued to agents within your brokerage for the last 60 days. Please note, fine notices with a status of Pending will not be billed until after the appeal timeframe has expired. Any fine notices listed with a status of Billed will appear on the agent’s account statement.
+                                                        </p>
+                                                        <p class="recent">To learn about fines and our appeal process visit <a href="https://brightmls.com/accuracy">brightmls.com/accuracy</a>.</p>
+                                                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                                                            <h5 class="new">
+                                                                <lightning:input type="text"  name="input3" placeholder="Search by Agent Name, Subscriber ID, MLS#, Violation Type or Status (Pending, Billed, Under Appeal, etc.)  "  
+                                                                                 variant = "label-hidden" value="{!v.searchKey}" onchange="{!c.search}"/>
+                                                                <img src="{!$Resource.acc + '/acc/images/search1.svg'}" alt=""/>
+                                                            </h5></lightning:layoutItem>
+                                                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                                                            <div class="point">
+                                                                <lightning:combobox name="Office Dropdown"
+                                                                                    aura:id="office"
+                                                                                    value = "{!v.SelectedOffices}"
+                                                                                    variant = "label-hidden"
+                                                                                    placeholder="Select an Option" 
+                                                                                    options="{! v.offices }" 
+                                                                                    onchange="{!c.handleOfficeFilter}"/>
+                                                                
+                                                            </div>
+                                                        </lightning:layoutItem>
+                                                    </lightning:layoutItem>
+                                                </div>
+                                                <div class="view"></div>
+                                                <div class="middle">
+                                                    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped newtin">
+                                                        <thead>
+                                                            <tr class="slds-line-height_reset">
+                                                                <th class="" scope="col" >
+                                                                    <div class="slds-truncate"  title="" data-fld ="compliance.Compliance_Fines__r[0].Subscription__r.Contact__r.Name" onclick="{!c.sortByField}">
+                                                                        Agent
+                                                                       
+                                                                        <br/></div> <c:MARCOM_SortIcons sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="compliance.Compliance_Fines__r[0].Subscription__r.Contact__r.Name"/>   
+                                                                </th>
+                                                                <th class="" scope="col">
+                                                                    <div class="slds-truncate"  title="" data-fld ="Subscription__r.Name" onclick="{!c.sortByField}">
+                                                                        Subscription<br/>ID
+                                                                       
+                                                                    </div> <c:MARCOM_SortIcons sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="Subscription__r.Name"/>
+                                                                </th>
+                                                                <th class="" scope="col">
+                                                                    <div class="slds-truncate" title="" data-fld ="Subscription__r.Related_Location_Broker_Office__r.Name" onclick="{!c.sortByField}">
+                                                                        Office<br/>ID
+                                                                                                          </div>
+                                                                    <c:MARCOM_SortIcons sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="Subscription__r.Related_Location_Broker_Office__r.Name"/>
+                                                                </th> 
+                                 
+                                                                <th class="" scope="col">
+                                                                    <div class="slds-truncate" title="" data-fld ="MLS_Number__c" onclick="{!c.sortByField}">
+                                                                        MLS#
+                                                                        </div>
+                                                                     <c:MARCOM_SortIcons sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="MLS_Number__c"/>
+                                                                   
+                                                                </th>
+                                                                <th class="" scope="col">
+                                                                    <div class="slds-truncate" title="" data-fld ="compliance.Violation__c" onclick="{!c.sortByField}">
+                                                                        Violation<br/>Type
+                                                                      </div>
+                                                                      <c:MARCOM_SortIcons sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="compliance.Violation__c"/>
+                                                                    
+                                                                </th>
+                                                                <th class="" scope="col">
+                                                                    <div class="slds-truncate" title="" data-fld ="Compliance_Violation__r.Name" onclick="{!c.sortByField}">
+                                                                        Violation<br/>Number
+                                                                        </div>
+                                                                      <c:MARCOM_SortIcons sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="Compliance_Violation__r.Name"/>
+                                                                  
+                                                                </th>
+                                                                <th class="" scope="col">
+                                                                    <div class="slds-truncate" title="" data-fld ="Notification_Type__c" onclick="{!c.sortByField}">Notification<br/>Type
+                                                                         </div>
+                                                                     <c:MARCOM_SortIcons sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="Notification_Type__c"/>
+                                                                  
+                                                                </th>
+                                                                <th class="" scope="col">
+                                                                    <div class="slds-truncate" title="" data-fld ="Date_of_Fine__c" onclick="{!c.sortByField}">Notification<br/>Date
+                                                                        </div>
+                                                                     <c:MARCOM_SortIcons sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="Date_of_Fine__c"/>
+                                                                   
+                                                                </th>
+                                                                <th class="" scope="col">
+                                                                    <div class="slds-truncate" title="" data-fld ="Fine_Amount__c" onclick="{!c.sortByField}">Fine<br/>Amount
+                                                                         </div>
+                                                                     <c:MARCOM_SortIcons sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="Fine_Amount__c"/>
+                                                                  
+                                                                </th>
+                                                                <th class="" scope="col">
+                                                                    <div class="slds-truncate" title="" data-fld ="Status__c" onclick="{!c.sortByField}">Status
+                                                                         
+                                                                    </div>
+                                                                     <c:MARCOM_SortIcons sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="Status__c"/>
+                                                                      
+                                                                </th>
+                                                                <th class="" scope="col">
+                                                                    <div class="slds-truncate" title="" data-fld ="Last_Date_to_Appeal__c" onclick="{!c.sortByField}">Last Date<br/>to Appeal
+                                                                         </div>
+                                                                      <c:MARCOM_SortIcons sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="Last_Date_to_Appeal__c"/>
+                                                                 
+                                                                </th>
+                                                                
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <aura:iteration items="{!v.complianceFinesDisplay}" var="violation" >
+                                                                <tr class="slds-hint-parent blue">
+                                                                    <td data-label="Opportunity Name" scope="row">
+                                                                        <div class="slds-truncate" title="">{!violation.compliance.Compliance_Fines__r[0].Subscription__r.Contact__r.Name}</div>
+                                                                    </td>
+                                                                    <td data-label="Account Name">
+                                                                        <div class="slds-truncate" title="">{!violation.compliance.Compliance_Fines__r[0].Subscription__r.Name}</div>
+                                                                    </td>
+                                                                    <td data-label="Close Date">
+                                                                        <div class="slds-truncate" title="">{!violation.compliance.Compliance_Fines__r[0].Subscription__r.Related_Location_Broker_Office__r.Name}</div>
+                                                                    </td>
+                                                                    <td data-label="Prospecting">
+                                                                        <div class="slds-truncate" title="">{!violation.compliance.Compliance_Fines__r[0].MLS_Number__c}</div>
+                                                                    </td>
+                                                                    <td  class="data" data-label="Confidence">
+                                                                        <aura:if isTrue="{!violation.compliance.Compliance_Fines__r.length>1}">
+                                                                        <div class="slds-truncate" title="" onclick="{!c.toggleOldfines}" data-value ="{!violation.compliance.Id}">
+                                                                            <lightning:input aura:id="toggleBox" class="slds-hide" type="checkbox" 
+                                                                                             name="{!violation.compliance.Id}" checked="{!violation.showRemainingFines}"/>
+                                                                            <a href="#">{!violation.compliance.Compliance_Fines__r[0].Violation__c}</a>
+                                                                            </div>
+                                                                            <aura:set attribute="else">
+                                                                                {!violation.compliance.Compliance_Fines__r[0].Violation__c}
+                                                                            </aura:set>
+                                                                        </aura:if>
+                                                                    </td>
+                                                                    <td data-label="Amount">
+                                                                        <div class="slds-truncate" title="">{!violation.compliance.Compliance_Fines__r[0].Name}</div>
+                                                                    </td>
+                                                                    <td data-label="Amount2">
+                                                                        <div class="slds-truncate" title="">{!violation.compliance.Compliance_Fines__r[0].Notification_Type__c}</div>
+                                                                    </td>
+                                                                    <td data-label="Amount3">
+                                                                        <div class="slds-truncate" title="">{!violation.compliance.Compliance_Fines__r[0].Date_of_Fine__c}</div>
+                                                                    </td>
+                                                                    <td data-label="Amount4">
+                                                                        <div class="slds-truncate" title="">{!violation.compliance.Compliance_Fines__r[0].Fine_Amount__c}</div>
+                                                                    </td>
+                                                                    <td data-label="Amount5">
+                                                                        <div class="slds-truncate" title="">{!violation.compliance.Compliance_Fines__r[0].Status__c}</div>
+                                                                    </td>
+                                                                    <td data-label="Amount5">
+                                                                        <div class="slds-truncate" title="">{!violation.compliance.Compliance_Fines__r[0].Last_Date_to_Appeal__c}</div>
+                                                                    </td>
+                                                                </tr>
+                                                                <aura:if isTrue="{!and(violation.compliance.Compliance_Fines__r.length>1,violation.showRemainingFines)}">
+                                                                    <td style="text-align: right;" data-label="Opportunity Name" scope="row" colspan="5" rowspan="{!violation.compliance.Compliance_Fines__r.length}">
+                                                                        List of violations
+                                                                    </td>
+                                                                    <aura:iteration items="{!violation.compliance.Compliance_Fines__r}" var="oldFine" indexVar="varIdx" >
+                                                                        <aura:if isTrue="{!varIdx!=0}">
+                                                                            <tr class="slds-hint-parent blue">
+                                                                                
+                                                                                <!--
+                                                                                <td data-label="Opportunity Name" scope="row">
+                                                                                    <div class="slds-truncate" title="">{!oldFine.Subscription__r.Contact__r.Name}</div>
+                                                                                </td>
+                                                                                <td data-label="Account Name">
+                                                                                    <div class="slds-truncate" title="">{!oldFine.Subscription__r.Name}</div>
+                                                                                </td>
+                                                                                <td data-label="Close Date">
+                                                                                    <div class="slds-truncate" title="">{!oldFine.Subscription__r.Related_Location_Broker_Office__r.Name}</div>
+                                                                                </td>
+                                                                                <td data-label="Prospecting">
+                                                                                    <div class="slds-truncate" title="">{!oldFine.MLS_Number__c}</div>
+                                                                                </td>
+                                                                                <td  class="data" data-label="Confidence">
+                                                                                    <div class="slds-truncate" title=""><a href="#">{!oldFine.Violation__c}</a></div>
+                                                                                </td>-->
+                                                                                <td data-label="Amount">
+                                                                                    <div class="slds-truncate" title="">{!violation.Name}</div>
+                                                                                </td>
+                                                                                <td data-label="Amount2">
+                                                                                    <div class="slds-truncate" title="">{!oldFine.Notification_Type__c}</div>
+                                                                                </td>
+                                                                                <td data-label="Amount3">
+                                                                                    <div class="slds-truncate" title="">{!oldFine.Date_of_Fine__c}</div>
+                                                                                </td>
+                                                                                <td data-label="Amount4">
+                                                                                    <div class="slds-truncate" title="">{!oldFine.Fine_Amount__c}</div>
+                                                                                </td>
+                                                                                <td data-label="Amount5">
+                                                                                    <div class="slds-truncate" title="">{!oldFine.Status__c}</div>
+                                                                                </td>
+                                                                                <td data-label="Amount5">
+                                                                                    <div class="slds-truncate" title="">{!oldFine.Last_Date_to_Appeal__c}</div>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </aura:if>
+                                                                    </aura:iteration>
+                                                                </aura:if>
+                                                            </aura:iteration>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="view"></div>
+                                            </div>
+                                        </div>
+                                    </lightning:layoutItem>
+                                </div>
+                            </div>
+                        </lightning:layout>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </div>
+        </div>
+    </div>
+</aura:component>

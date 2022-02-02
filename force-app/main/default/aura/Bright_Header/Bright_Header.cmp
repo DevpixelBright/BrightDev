@@ -1,0 +1,29 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+	<ltng:require styles="{!$Resource.brightcss }"></ltng:require> 
+    <div class="new-containerpage">
+            <div class="slds-container--x-large new-container">
+               <div class="header-full">
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 header-part">
+                     <div class="logo"> 
+                         <img src="{!$Resource.bright + '/bright-3.0/images/brightlogolightning.png'}" alt="Bright" />
+                     </div>
+                  </div>
+                   <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 header-part">
+                     <div class="account">
+                      <h3>Accounts &amp; Settings</h3>
+                     </div>
+                  </div>
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 header-part header-part1">
+                      <div class="all">
+                          <h5>AL</h5>
+                          </div>
+                      <div class="call">
+                         
+                        <h4>Amanda Lynn </h4>
+                        <h3>Subscriber ID: 8987987 &nbsp;<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" />  | <a href="#">Active</a></h3>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+</aura:component>

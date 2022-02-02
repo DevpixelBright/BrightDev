@@ -1,0 +1,1066 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Already_Subscriber_Login</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Already Subscriber Login</shortDescription>
+        <value>https://login.brightmls.com/login</value>
+    </labels>
+    <labels>
+        <fullName>Apply_Discounts_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Apply Discounts Error</shortDescription>
+        <value>Discount could not be applied.</value>
+    </labels>
+    <labels>
+        <fullName>Apply_Discounts_Success</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Apply Discounts Success</shortDescription>
+        <value>Discount applied successfully.</value>
+    </labels>
+    <labels>
+        <fullName>Apply_Discounts_Success_for_Elevate_Boss</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Apply Discounts Success for Elevate Boss</shortDescription>
+        <value>Discount successfully applied.</value>
+    </labels>
+    <labels>
+        <fullName>BAR_here_Link</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAR here Link</shortDescription>
+        <value>https://dev-dev-dev.cs10.force.com/customers/apex/Communities_BrokerAuthorizationRequest?id=</value>
+    </labels>
+    <labels>
+        <fullName>BAR_here_Link_for_BOR</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAR here Link for BOR</shortDescription>
+        <value>https://dev-dev-dev.cs10.force.com/customers/apex/Communities_Brokerage</value>
+    </labels>
+    <labels>
+        <fullName>BCOM_Footer_Accessibility</fullName>
+        <categories>BCOM Header and Footer</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BCOM_Footer_Accessibility</shortDescription>
+        <value>https://www.dev.brightmls.com/accessibility</value>
+    </labels>
+    <labels>
+        <fullName>BCOM_Footer_BRIGHTMLSHomes</fullName>
+        <categories>BCOM Header and Footer</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BCOM_Footer_BRIGHTMLSHomes</shortDescription>
+        <value>https://www.brightmlshomes.com</value>
+    </labels>
+    <labels>
+        <fullName>BCOM_Footer_ContactUs</fullName>
+        <categories>BCOM Header and Footer</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BCOM_Footer_ContactUs</shortDescription>
+        <value>https://www.dev.brightmls.com/contact-us</value>
+    </labels>
+    <labels>
+        <fullName>BCOM_Footer_Copyright</fullName>
+        <categories>BCOM Header and Footer</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BCOM_Footer_Copyright</shortDescription>
+        <value>https://www.dev.brightmls.com/copyright</value>
+    </labels>
+    <labels>
+        <fullName>BCOM_Footer_Facebook</fullName>
+        <categories>BCOM Header and Footer</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BCOM_Footer_Facebook</shortDescription>
+        <value>https://www.facebook.com/BrightMLS</value>
+    </labels>
+    <labels>
+        <fullName>BCOM_Footer_Instagram</fullName>
+        <categories>BCOM Header and Footer</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BCOM_Footer_Instagram</shortDescription>
+        <value>https://www.instagram.com/brightmls</value>
+    </labels>
+    <labels>
+        <fullName>BCOM_Footer_Linkedin</fullName>
+        <categories>BCOM Header and Footer</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BCOM_Footer_Linkedin</shortDescription>
+        <value>https://www.linkedin.com/company/brightmls</value>
+    </labels>
+    <labels>
+        <fullName>BCOM_Footer_Privacy</fullName>
+        <categories>BCOM Header and Footer</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BCOM_Footer_Privacy</shortDescription>
+        <value>https://www.dev.brightmls.com/privacy</value>
+    </labels>
+    <labels>
+        <fullName>BCOM_Footer_SubscriberAgreement</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BCOM_Footer_SubscriberAgreement</shortDescription>
+        <value>https://assets.ctfassets.net/1g8q1frp41ix/5eoZZ7ciywp6ZdA8yad1zR/6c953876db0adf26999b1af4c58dac33/Bright_Subscription_Agreement_103019.pdf</value>
+    </labels>
+    <labels>
+        <fullName>BCOM_Footer_Support</fullName>
+        <categories>BCOM Header and Footer</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BCOM_Footer_Support</shortDescription>
+        <value>https://www.dev.brightmls.com/bright-support</value>
+    </labels>
+    <labels>
+        <fullName>BCOM_Footer_Terms</fullName>
+        <categories>BCOM Header and Footer</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BCOM_Footer_Terms</shortDescription>
+        <value>https://www.dev.brightmls.com/terms</value>
+    </labels>
+    <labels>
+        <fullName>BCOM_Footer_Twitter</fullName>
+        <categories>BCOM Header and Footer</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BCOM_Footer_Twitter</shortDescription>
+        <value>https://twitter.com/Bright_MLS</value>
+    </labels>
+    <labels>
+        <fullName>BCOM_Footer_YouTube</fullName>
+        <categories>BCOM Header and Footer</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BCOM_Footer_YouTube</shortDescription>
+        <value>https://www.youtube.com/c/BrightMLS</value>
+    </labels>
+    <labels>
+        <fullName>BCOM_Header_CSS</fullName>
+        <categories>BCOM Header and Footer</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BCOM_Header_CSS</shortDescription>
+        <value>https://menu.dev.brightmls.com/assets/menu/css/brightmlsmenu.min.css</value>
+    </labels>
+    <labels>
+        <fullName>BCOM_Header_JS</fullName>
+        <categories>BCOM Header and Footer</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BCOM_Header_JS</shortDescription>
+        <value>https://menu.dev.brightmls.com/assets/menu/js/brightmlsmenu.js</value>
+    </labels>
+    <labels>
+        <fullName>BRIGHT_Header_Clock</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BRIGHT_Header_Clock</shortDescription>
+        <value>https://mris--dev--c.cs10.content.force.com/servlet/servlet.ImageServer?id=015J0000001FWvB&amp;oid=00DJ0000003OJ9o</value>
+    </labels>
+    <labels>
+        <fullName>BRIGHT_Logo_Link</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BRIGHT_Logo_Link</shortDescription>
+        <value>https://mris--dev.my.salesforce.com/</value>
+    </labels>
+    <labels>
+        <fullName>Brian_Donnellan_Signature</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Brian Donnellan Signature</shortDescription>
+        <value>https://mris--dev--c.cs10.content.force.com/servlet/servlet.ImageServer?id=015J0000001pL0G&amp;oid=00DJ0000003OJ9o</value>
+    </labels>
+    <labels>
+        <fullName>BrightQuestLink</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BrightQuestLink</shortDescription>
+        <value>https://dev-mrisonboarding.cs10.force.com/bright</value>
+    </labels>
+    <labels>
+        <fullName>Bright_Email_Header</fullName>
+        <categories>Bright header logo</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Bright Email Header</shortDescription>
+        <value>https://mris--dev--c.documentforce.com/servlet/servlet.ImageServer?id=015J0000001oCmR&amp;oid=00DJ0000003OJ9o&amp;lastMod=1612202141000</value>
+    </labels>
+    <labels>
+        <fullName>Bright_Email_Header2</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Bright_Email_Header2</shortDescription>
+        <value>ttps://mris--dev--c.documentforce.com/servlet/servlet.ImageServer?id=015J0000001oCmR&amp;oid=00DJ0000003OJ9o&amp;lastMod=1612202141000</value>
+    </labels>
+    <labels>
+        <fullName>Broker_Authorization_Form_Product_Pricing</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Broker Authorization Form Product Pricing</shortDescription>
+        <value>https://www.brightmls.com/#/IDX</value>
+    </labels>
+    <labels>
+        <fullName>Broker_Authorization_Form_Success_Msg</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Broker Authorization Form Success Msg</shortDescription>
+        <value>brokerauthorization@brightmls.com</value>
+    </labels>
+    <labels>
+        <fullName>Broker_Authorization_Form_Vendor_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Broker Authorization Form Vendor Name</shortDescription>
+        <value>https://www.brightmls.com/#/bright-mls-approved-idx-vow-vendors</value>
+    </labels>
+    <labels>
+        <fullName>Broker_Authorization_Form_Vendor_Name_Error_Message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Broker Authorization Form Vendor Name Error Message</shortDescription>
+        <value>https://www.brightmls.com/services/sites/default/files/pdfs/Bright%20MLS%20Approved%20IDX%20Vendors-0619.pdf</value>
+    </labels>
+    <labels>
+        <fullName>BuyNowHereLink</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BuyNowHereLink</shortDescription>
+        <value>https://dev-dev-dev.cs10.force.com/customers/apex/Communities_SubscribedProducts?id=</value>
+    </labels>
+    <labels>
+        <fullName>BuyPremiumProduct</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BuyPremiumProduct</shortDescription>
+        <value>Where applicable, taxes will be added during the payment for the premium product before submission.</value>
+    </labels>
+    <labels>
+        <fullName>CSODLogin_Redirection_URL</fullName>
+        <categories>https://www.tst.brightmls.com/#/login/redirect?dest=https://dev-dev-dev.cs10.force.com/learnbrightmls/s/classdetail?classId=a3xJ0000000DkdQIAS</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CSODLogin_Redirection_URL</shortDescription>
+        <value>https://dev-dev-dev.cs10.force.com/learnbrightmls/login?so=00DJ0000003OJ9o&amp;retURL=/s/classdetail?classId=</value>
+    </labels>
+    <labels>
+        <fullName>Communities_AgentAccuracy_Appeal</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Communities_AgentAccuracy_Appeal</shortDescription>
+        <value>/customers/apex/communities_appealform?vid=</value>
+    </labels>
+    <labels>
+        <fullName>Communities_AgentAccuracy_Article</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Communities_AgentAccuracy_Article</shortDescription>
+        <value>https://support.brightmls.com/s/article/Fine-Appeal-Status-Definitions</value>
+    </labels>
+    <labels>
+        <fullName>Communities_MLS_Settings_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Communities MLS Settings URL</shortDescription>
+        <value>https://matrix.dev.brightmls.com/Matrix/MyMatrix/Settings</value>
+    </labels>
+    <labels>
+        <fullName>Communities_Manage_Act_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Communities Manage Act URL</shortDescription>
+        <value>https://apps.tst.brightmls.com/permissions/ManageSelfServeActAsPermissions</value>
+    </labels>
+    <labels>
+        <fullName>Communities_OfficeExclusives_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Communities_OfficeExclusives_URL</shortDescription>
+        <value>https://dev-dev-dev.cs10.force.com/</value>
+    </labels>
+    <labels>
+        <fullName>Communities_Permissions_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Communities Permissions URL</shortDescription>
+        <value>https://apps.tst.brightmls.com/permissions/</value>
+    </labels>
+    <labels>
+        <fullName>Cure_Dispatch_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Cure Dispatch Id</shortDescription>
+        <value>00GJ0000002pWEz</value>
+    </labels>
+    <labels>
+        <fullName>Date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Date</shortDescription>
+        <value>30</value>
+    </labels>
+    <labels>
+        <fullName>ET_Link</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ET Link</shortDescription>
+        <value>https://mris--dev.lightning.force.com/</value>
+    </labels>
+    <labels>
+        <fullName>ET_Team_Approvelink</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ET_Team_Approvelink</shortDescription>
+        <value>https://teams.dev.brightmls.com/approveTeam/</value>
+    </labels>
+    <labels>
+        <fullName>ET_Team_ManageLink</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ET_Team_ManageLink</shortDescription>
+        <value>https://teams.dev.brightmls.com/manageTeam/</value>
+    </labels>
+    <labels>
+        <fullName>ET_Team_uniquelink</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ET_Team uniquelink</shortDescription>
+        <value>https://teams.dev.brightmls.com/agentResponse/</value>
+    </labels>
+    <labels>
+        <fullName>EZJoin_Broker_Link</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EZJoin Broker Link</shortDescription>
+        <value>https://www.brightmls.com/#/join/broker-appraiser-assistant</value>
+    </labels>
+    <labels>
+        <fullName>EmailTemplate_AgentAccuracy</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EmailTemplate_AgentAccuracy</shortDescription>
+        <value>https://dev-dev-dev.cs10.force.com/customers/apex/Communities_AgentAccuracy?id=</value>
+    </labels>
+    <labels>
+        <fullName>EmailTemplate_BRIGHT_Calender_Expired_Image</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EmailTemplate_BRIGHT_Calender_Expired_Image</shortDescription>
+        <value>https://mris--Dev--c.documentforce.com/sfc/dist/version/download/?oid=00DJ0000003OJ9o&amp;ids=068J0000000l7O7&amp;d=%2Fa%2FJ00000004Kwj%2F6o6i.q_PTDvtxNOLRtxIlWnrIwZKFxYpl7y6.H2cUPc&amp;asPdf=false</value>
+    </labels>
+    <labels>
+        <fullName>EmailTemplate_BRIGHT_Remainder_Image</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EmailTemplate BRIGHT_Remainder_Image</shortDescription>
+        <value>https://mris--Dev--c.documentforce.com/sfc/dist/version/download/?oid=00DJ0000003OJ9o&amp;ids=068J0000000l7OC&amp;d=%2Fa%2FJ00000004Kwt%2FveqlYaqXZ0iFo1RFOzm.2tiJddjxaj0i2811PHEbIk0&amp;asPdf=false</value>
+    </labels>
+    <labels>
+        <fullName>EmailTemplate_Banner_2_sans_logo</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EmailTemplate Banner#2 sans logo</shortDescription>
+        <value>https://mris--Dev--c.documentforce.com/sfc/dist/version/download/?oid=00DJ0000003OJ9o&amp;ids=068J0000000l7OA&amp;d=%2Fa%2FJ00000004Kwx%2F_32bKyOsvHcDZcscJQjhejjw8bPCE1gyW3mgOtVYOAg&amp;asPdf=false</value>
+    </labels>
+    <labels>
+        <fullName>EmailTemplate_BrightRules</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EmailTemplate_BrightRules</shortDescription>
+        <value>https://www.brightmls.com/rules-and-regulations</value>
+    </labels>
+    <labels>
+        <fullName>EmailTemplate_Bright_Preview_Email_Header_Logo</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EmailTemplate Bright Preview Email Header Logo</shortDescription>
+        <value>https://mris--Dev--c.documentforce.com/sfc/dist/version/download/?oid=00DJ0000003OJ9o&amp;ids=068J0000000l7O8&amp;d=%2Fa%2FJ00000004Kws%2FNpB1KreXULMDDWAA7xA.1.UbVYhx8N.ZG1Hhf.TZ220&amp;asPdf=false</value>
+    </labels>
+    <labels>
+        <fullName>EmailTemplate_Paying_Bills</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EmailTemplate: Paying Bills</shortDescription>
+        <value>https://mris--Dev--c.documentforce.com/sfc/dist/version/download/?oid=00DJ0000003OJ9o&amp;ids=068J0000000l7OK&amp;d=%2Fa%2FJ00000004KwK%2Fsv83I.qtiA2cghCBviOttj8dggpTBm0RST4Fp2KjVXA&amp;asPdf=false</value>
+    </labels>
+    <labels>
+        <fullName>EmailTemplate_Reinstate_Link</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EmailTemplate Reinstate Link</shortDescription>
+        <value>https://dev-mrisonboarding.cs10.force.com/eProcess/EZJoin_Reactivate</value>
+    </labels>
+    <labels>
+        <fullName>EmailTemplate_Responsible_Broker</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EmailTemplate Responsible Broker</shortDescription>
+        <value>https://mris--dev--c.cs10.content.force.com/servlet/servlet.ImageServer?id=015J0000001VfwY&amp;oid=00DJ0000003OJ9o</value>
+    </labels>
+    <labels>
+        <fullName>EmailTemplate_Sphere_Bright_Logo</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EmailTemplate Sphere Bright Logo</shortDescription>
+        <value>https://mris--Dev--c.documentforce.com/sfc/dist/version/download/?oid=00DJ0000003OJ9o&amp;ids=068J0000000je1N&amp;d=%2Fa%2FJ00000008Tdk%2F92N.e_NoHPQ1imCMIX4edqk9oCm.kwIc0bpad5knCzQ&amp;asPdf=false</value>
+    </labels>
+    <labels>
+        <fullName>EmailTemplates_BRIGHTLogo</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email Templates: BRIGHT Logo</shortDescription>
+        <value>https://mris--dev--c.documentforce.com/sfc/dist/version/renditionDownload?rendition=ORIGINAL_Jpg&amp;versionId=068J0000000l7DV&amp;operationContext=DELIVERY&amp;contentId=05TJ0000001kfSM&amp;page=0&amp;d=/a/J00000004Kw9/DRW0rF825vbOUgiN89xXV0Bzf0eozRJ5URpdPXaOW4w&amp;oid=00DJ0000003OJ9o&amp;dpt=null&amp;viewId=</value>
+    </labels>
+    <labels>
+        <fullName>EmailTemplates_SphereIDX</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email Templates: Sphere IDX</shortDescription>
+        <value>https://mris--Dev--c.documentforce.com/sfc/dist/version/download/?oid=00DJ0000003OJ9o&amp;ids=068J0000000l7O6&amp;d=%2Fa%2FJ00000004KwE%2F5J.tDtyZzOEKlLhMqObK6gTqOwv2G7JhwH.yenmUYfk&amp;asPdf=false</value>
+    </labels>
+    <labels>
+        <fullName>Email_Template_Bright_Suspended_Image</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email Template:Bright Suspended Image</shortDescription>
+        <value>https://mris--Dev--c.documentforce.com/sfc/dist/version/download/?oid=00DJ0000003OJ9o&amp;ids=068J0000000l7OB&amp;d=%2Fa%2FJ00000004KwU%2FD5bSSogwFkcF6mTyOwQt4B9UF5Wu_aUBYB3Qh0qiANg&amp;asPdf=false</value>
+    </labels>
+    <labels>
+        <fullName>Email_Template_Bright_Welcome</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email Template: Bright Welcome</shortDescription>
+        <value>https://mris--dev--c.documentforce.com/servlet/servlet.ImageServer?id=015J0000001NIN3&amp;oid=00DJ0000003OJ9o&amp;lastMod=1602866650000</value>
+    </labels>
+    <labels>
+        <fullName>Email_Template_Header_OkOfficeGroup</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email Template:Header OkOfficeGroup</shortDescription>
+        <value>https://mris--Dev--c.documentforce.com/sfc/dist/version/download/?oid=00DJ0000003OJ9o&amp;ids=068J0000000l7T7&amp;d=%2Fa%2FJ00000004KwJ%2FhIQiQzJUCsD52vgBaV.xrF0LJLRq6k6xFlG1JzhrL3c&amp;asPdf=false</value>
+    </labels>
+    <labels>
+        <fullName>Email_Template_Invoice_Amount_Header</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email_Template_Invoice_Amount_Header</shortDescription>
+        <value>https://mris--Dev--c.documentforce.com/sfc/dist/version/download/?oid=00DJ0000003OJ9o&amp;ids=068J0000000l7Sx&amp;d=%2Fa%2FJ00000004KwO%2FN625dc8JY5eBTx8rxWlpUu7JhjlvhFz5IamkWO1eoxc&amp;asPdf=false</value>
+    </labels>
+    <labels>
+        <fullName>Email_Template_Register_Bright_Logo</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email Template: Register Bright Logo</shortDescription>
+        <value>https://mris--dev--c.documentforce.com/servlet/servlet.ImageServer?id=015J0000001oCmR&amp;oid=00DJ0000003OJ9o&amp;lastMod=1612202141000</value>
+    </labels>
+    <labels>
+        <fullName>Email_Template_Reinstatement_link</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email Template: Reinstatement link</shortDescription>
+        <value>https://mris--dev--c.cs10.content.force.com/servlet/servlet.ImageServer?id=015J0000001QxC0&amp;oid=00DJ0000003OJ9o</value>
+    </labels>
+    <labels>
+        <fullName>Email_Template_Thumbs_Up_Tealcrop_Image</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email Template Thumbs Up Tealcrop Image</shortDescription>
+        <value>https://mris--Dev--c.documentforce.com/sfc/dist/version/download/?oid=00DJ0000003OJ9o&amp;ids=068J0000000l7Sn&amp;d=%2Fa%2FJ00000004KwY%2F9hOE93utriF47xVzIB1d2OOm6os3pyKjfNN02H6yMhs&amp;asPdf=false</value>
+    </labels>
+    <labels>
+        <fullName>Email_to_Salesforce_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email to Salesforce Id</shortDescription>
+        <value>emailtosalesforce@z-lh9dypma9adpo2pq0q6zgoeut46ejmjs7k17uk5g001ihkri0.j-3oj9omag.cs10.le.sandbox.salesforce.com</value>
+    </labels>
+    <labels>
+        <fullName>EzjoinDate</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EzjoinDate</shortDescription>
+        <value>&lt;script&gt;document.write(new Date().getFullYear())&lt;/script&gt;</value>
+    </labels>
+    <labels>
+        <fullName>Ezjoin_App_Status</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Ezjoin App Status</shortDescription>
+        <value>https://dev-mrisonboarding.cs10.force.com/eProcess/EZJoin_ApplicationStatus</value>
+    </labels>
+    <labels>
+        <fullName>Ezjoin_OS_Redirect</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Ezjoin OS Redirect</shortDescription>
+        <value>https://dev-mrisonboarding.cs10.force.com/eProcess/EZJoin_NewApplication?type=OfficeSecretary</value>
+    </labels>
+    <labels>
+        <fullName>Ezjoin_PA_Redirect</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Ezjoin PA Redirect</shortDescription>
+        <value>https://dev-mrisonboarding.cs10.force.com/eProcess/EZJoin_ReactivateSubscription?Id=</value>
+    </labels>
+    <labels>
+        <fullName>Ezjoin_agent_Redirect</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Ezjoin agent Redirect</shortDescription>
+        <value>https://dev-mrisonboarding.cs10.force.com/eProcess/EZJoin_ReactivateSubscription?Id=</value>
+    </labels>
+    <labels>
+        <fullName>Ezjoin_agent_Redirection</fullName>
+        <categories>EZJoin</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Ezjoin agent Redirection</shortDescription>
+        <value>https://dev-mrisonboarding.cs10.force.com/eProcess/EZJoin_ApplicationDetails?Id=</value>
+    </labels>
+    <labels>
+        <fullName>Ezjoin_redirect</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Ezjoin redirect</shortDescription>
+        <value>https://dev-mrisonboarding.cs10.force.com/eProcess/</value>
+    </labels>
+    <labels>
+        <fullName>Generic_Payment_Wrapper</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Generic Payment Wrapper</shortDescription>
+        <value>https://dev-mrisonboarding.cs10.force.com</value>
+    </labels>
+    <labels>
+        <fullName>GoogleAnalyticsId</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>GoogleAnalyticsId</shortDescription>
+        <value>UA-97199314-12</value>
+    </labels>
+    <labels>
+        <fullName>Home</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Home</shortDescription>
+        <value>https://dev-mrisonboarding.cs10.force.com/eProcess</value>
+    </labels>
+    <labels>
+        <fullName>IDX_List</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IDX List</shortDescription>
+        <value>https://www.brightmls.com/bright-mls-approved-idx-vow-vendors</value>
+    </labels>
+    <labels>
+        <fullName>Lead_Team_uniquelink</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Lead_Team uniquelink</shortDescription>
+        <value>https://teams.dev.brightmls.com/approveTeam/{guid}</value>
+    </labels>
+    <labels>
+        <fullName>LearnBrightMLSCustomerURL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LearnBrightMLSCustomerURL</shortDescription>
+        <value>https://dev-dev-dev.cs10.force.com/customers/apex/Communities_Cases_Create?kb=true</value>
+    </labels>
+    <labels>
+        <fullName>LearnBrightMlsCommURL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LearnBrightMlsCommURL</shortDescription>
+        <value>https://dev-dev-dev.cs10.force.com/learnbrightmls/s</value>
+    </labels>
+    <labels>
+        <fullName>LicenseOnSubscriptionFromOneDayExpiry</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LicenseOnSubscriptionFromOneDayExpiry</shortDescription>
+        <value>https://dev-dev-dev.cs10.force.com/customers/apex/Communities_LicenseAssociations?sid=</value>
+    </labels>
+    <labels>
+        <fullName>License_Agreement_Personal_Assistant</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>License Agreement Personal Assistant</shortDescription>
+        <value>https://dev-mrisonboarding.cs10.force.com/eProcess/apex/NewAgentApplication_BRIGHTAgreement</value>
+    </labels>
+    <labels>
+        <fullName>ListingTransfer_ErrorMessage</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ListingTransfer:ErrorMessage</shortDescription>
+        <value>We are sorry. You do not have authority to access this process. Please contact your Broker for assistance.</value>
+    </labels>
+    <labels>
+        <fullName>Login_Name_Change_Notification_Image</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Login_Name_Change_Notification_Image</shortDescription>
+        <value>https://mris--dev--c.cs10.content.force.com/servlet/servlet.ImageServer?id=015J0000001KAxn&amp;oid=00DJ0000003OJ9o</value>
+    </labels>
+    <labels>
+        <fullName>Logout_URL</fullName>
+        <categories>Bright URL</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Logout_URL</shortDescription>
+        <value>https://dev-dev-dev.cs10.force.com/customers/secur/logout.jsp</value>
+    </labels>
+    <labels>
+        <fullName>MARCOM_SearchBody</fullName>
+        <categories>Marcom Dashboard</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MARCOM_SearchBody</shortDescription>
+        <value>true</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_CSS_PORTAL_INTERNAL_URL</fullName>
+        <categories>MRIS URL</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_CSS_PORTAL_INTERNAL_URL</shortDescription>
+        <value>https://csstrong.mris.com/_res/css/portal_internal.css</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_CSS_PORTAL_URL</fullName>
+        <categories>MRIS URL</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_CSS_PORTAL_URL</shortDescription>
+        <value>https://csstrong.mris.com/_res/css/portal.css</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_Communities_Bypass_Access_Control</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_Communities_Bypass_Access_Control</shortDescription>
+        <value>false</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_Communities_Enable_BrokerOptions</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_Communities_Enable_BrokerOptions</shortDescription>
+        <value>true</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_Communities_Enable_ChatterAnswers</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_Communities_Enable_ChatterAnswers</shortDescription>
+        <value>false</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_Communities_Enable_Ideas</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_Communities_Enable_Ideas</shortDescription>
+        <value>false</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_Communities_Logout_Redirect_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_Communities_Logout_Redirect_URL</shortDescription>
+        <value>https://www.mris.com</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_Communities_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_Communities_URL</shortDescription>
+        <value>https://dev-dev-dev.cs10.force.com/customers/</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_CopyrightNotice_URL</fullName>
+        <categories>MRIS URL</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_CopyrightNotice_URL</shortDescription>
+        <value>http://devweb.mris.com/copyright-notice/</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_Customer_PermissionSet</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS Customer PermissionSet</shortDescription>
+        <value>Community_Access</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_Customer_Profile</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS Customer Profile</shortDescription>
+        <value>MRIS Customer Community Login</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_DataArchive_Profiles</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS DataArchive Profiles</shortDescription>
+        <value>API,System Administrator</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_Feedback_URL</fullName>
+        <categories>MRIS URL</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_Feedback_URL</shortDescription>
+        <value>http://devweb.mris.com/mris-feedback</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_Jquery_URL</fullName>
+        <categories>MRIS URL</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_Jquery_URL</shortDescription>
+        <value>https://online.qas.com/SalesForceV3/Scripts/all_sf_with_jQuery-2.0.min.js</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_LEP_ADDENDUM_TITLE</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_LEP_ADDENDUM_TITLE</shortDescription>
+        <value>Listing Enforcement Program Addendum</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_LEP_ADDENDUM_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_LEP_ADDENDUM_URL</shortDescription>
+        <value>https://mris--Dev--c.visualforce.com/apex/LEPAddendum</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_LISTING_PROTECT_DESCRIPTION_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_LISTING_PROTECT_DESCRIPTION_URL</shortDescription>
+        <value>#</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_LISTING_PROTECT_TITLE</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_LISTING_PROTECT_TITLE</shortDescription>
+        <value>ListingProtect™ Program</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_LISTING_PROTECT_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_LISTING_PROTECT_URL</shortDescription>
+        <value>https://mris--dev.cs10.visual.force.com/apex/ListingProtect</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_MANAGE_MY_LISTING_URL</fullName>
+        <categories>MRIS URL</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_MANAGE_MY_LISTING_URL</shortDescription>
+        <value>http://devweb.mris.com/mris-customers/my-account/broker-opt-out</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_MY_ACCOUNT_TITLE</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_MY_ACCOUNT_TITLE</shortDescription>
+        <value>My Account</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_MY_ACCOUNT_URL</fullName>
+        <categories>MRIS URL</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_MY_ACCOUNT_URL</shortDescription>
+        <value>https://mris--dev.cs10.visual.force.com/apex/myaccount</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_NRDS_retrieveID_URL</fullName>
+        <categories>MRIS URL</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_NRDS_retrieveID_URL</shortDescription>
+        <value>http://s://reg.realtor.org/roreg.nsf/retrieveID?OpenForm</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_PROFILE_PIC_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_PROFILE_PIC_URL</shortDescription>
+        <value>http://testassets.mris.com/assetproxy/agents/</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_PrivacyPolicy_URL</fullName>
+        <categories>MRIS URL</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_PrivacyPolicy_URL</shortDescription>
+        <value>https://www.mris.com/privacy-policy/</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_QASTypedownProxy_URL</fullName>
+        <categories>MRIS URL</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_QASTypedownProxy_URL</shortDescription>
+        <value>https://mris--dev--c.cs10.visual.force.com/apex/QASTypedownProxy</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_QP_CONN_TIMEOUT</fullName>
+        <categories>MRIS QP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS.QP.CONN.TIMEOUT</shortDescription>
+        <value>60000</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_QP_Sent_Status_Delay</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS QP Sent Status Delay</shortDescription>
+        <value>900000</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_QP_URL</fullName>
+        <categories>MRIS QP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS.QP.URL</shortDescription>
+        <value>https://services.dev.mris.com/QueueProcessor/services/QueueProcessor</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_SALESFORCE_LOGOUT</fullName>
+        <categories>MRIS_URL</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Salesforce Logout</shortDescription>
+        <value>https://mris--dev--c.visualforce.com/secur/logout.jsp</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_SMS_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_SMS_URL</shortDescription>
+        <value>https://dev-mrisonboarding.cs10.force.com/SMS/</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_SSO_requestauth_Url</fullName>
+        <categories>MRIS URL</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_SSO_requestauth_Url</shortDescription>
+        <value>https://devweb.mris.com/sso/requestauth/</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_SiteMap_URL</fullName>
+        <categories>MRIS URL</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_SiteMap_URL</shortDescription>
+        <value>https://devweb.mris.com/site-map</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_TargetDomainParameterKey_URL</fullName>
+        <categories>MRIS URL</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_TargetDomainParameterKey_URL</shortDescription>
+        <value>https://mris--dev--c.visualforce.com</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_TermsOfUse_URL</fullName>
+        <categories>MRIS URL</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_TermsOfUse_URL</shortDescription>
+        <value>https://devweb.mris.com/terms-of-use/</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_VERINT_BATCH_DELETE_DAYS</fullName>
+        <categories>MRIS Batch</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_VERINT_BATCH_DELETE_DAYS</shortDescription>
+        <value>30</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_VERINT_BATCH_EMAIL_ADDR</fullName>
+        <categories>MRIS Batch</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_VERINT_BATCH_EMAIL_ADDR</shortDescription>
+        <value>smilligan@rainmaker-llc.com,nmallick@rainmaker-llc.com</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_VERINT_BATCH_RUN_DAY</fullName>
+        <categories>MRIS Batch</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS.VERINT.BATCH.RUN.DAY</shortDescription>
+        <value>0</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_Zuora_Discount_Product_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_Zuora_Discount_Product_Name</shortDescription>
+        <value>Promotions</value>
+    </labels>
+    <labels>
+        <fullName>MRIS_Zuora_Fee_Product_Names</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MRIS_Zuora_Fee_Product_Names</shortDescription>
+        <value>Compliance Fine, Compliance Fines, Late Fee, No Show Fee</value>
+    </labels>
+    <labels>
+        <fullName>OM_Agent_Assign</fullName>
+        <categories>Office Manager Emails</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OM Agent Assign</shortDescription>
+        <value>Office_Manager_Assigned_Email_to_Subscriber</value>
+    </labels>
+    <labels>
+        <fullName>OM_Agent_Removal</fullName>
+        <categories>Office Manager Emails</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OM Agent Removal</shortDescription>
+        <value>Office_Manager_Removal_Email_to_Subscriber</value>
+    </labels>
+    <labels>
+        <fullName>OM_BOR_Assign</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OM BOR Assign</shortDescription>
+        <value>Office_Manager_Assigned_Email_to_Broker</value>
+    </labels>
+    <labels>
+        <fullName>OM_BOR_Removal</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OM BOR Removal</shortDescription>
+        <value>Office_Manager_Removal_Email_to_Broker</value>
+    </labels>
+    <labels>
+        <fullName>Organization_Time_Zone</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Organization Time Zone</shortDescription>
+        <value>America/New_York</value>
+    </labels>
+    <labels>
+        <fullName>Pendo_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Pendo URL</shortDescription>
+        <value>https://cdn.pendo.io/agent/static/cfe3c6e1-62b7-419a-7949-c0fcd2685291test/pendo.js</value>
+    </labels>
+    <labels>
+        <fullName>RetsBrokerageProducts</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RetsBrokerageProducts</shortDescription>
+        <value>https://dev-dev-dev.cs10.force.com/customers/apex/Communities_BrokerageDataLicensing?brokerage=true&amp;id=</value>
+    </labels>
+    <labels>
+        <fullName>RetsProductUrl</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RetsProductUrl</shortDescription>
+        <value>https://dev-dev-dev.cs10.force.com/customers/apex/Communities_RETS_Product_VF?id=</value>
+    </labels>
+    <labels>
+        <fullName>SMS_LateFee_Product_ID</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SMS LateFee Product ID</shortDescription>
+        <value>2c92c0f941cc43f50141dcb56a3d24e6</value>
+    </labels>
+    <labels>
+        <fullName>SMS_LateFee_Waiver_Subject</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SMS LateFee Waiver Subject</shortDescription>
+        <value>Request Late fee Waiver</value>
+    </labels>
+    <labels>
+        <fullName>SMS_Provisioned_Product_Queue_Label</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SMS Provisioned Product Queue Label</shortDescription>
+        <value>SMS Product Team</value>
+    </labels>
+    <labels>
+        <fullName>Suppressed_CloudCMA</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Suppressed CloudCMA</shortDescription>
+        <value>2c92c0f851b3af4e0151c9b1f7830c00</value>
+    </labels>
+    <labels>
+        <fullName>Suppressed_CloudCMA_2_Year</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Suppressed CloudCMA 2 Year</shortDescription>
+        <value>2c92c0f951b3bf470151c9b4e0a938da</value>
+    </labels>
+    <labels>
+        <fullName>Suppressed_CloudCMA_Homebeat_Monthly</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Suppressed CloudCMA Homebeat Monthly</shortDescription>
+        <value>2c92c0f9712998b301712f43036f4221</value>
+    </labels>
+    <labels>
+        <fullName>VendorCommunityLogout_ClickHere_Link</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VendorCommunityLogout ClickHere Link</shortDescription>
+        <value>https://dev-dev-dev.cs10.force.com/Vendor/</value>
+    </labels>
+    <labels>
+        <fullName>VendorCommunitySoaURL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VendorCommunitySoaURL</shortDescription>
+        <value>https://dev-dev-dev.cs10.force.com/Vendor/VendorCommunity_soa?id=</value>
+    </labels>
+    <labels>
+        <fullName>VendorCommunity_Reconciliation_editable_days</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VendorCommunity Reconciliation editable days</shortDescription>
+        <value>14</value>
+    </labels>
+    <labels>
+        <fullName>Vendor_Communities_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Vendor_Communities_URL</shortDescription>
+        <value>https://dev-dev-dev.cs10.force.com/Vendor/</value>
+    </labels>
+    <labels>
+        <fullName>WF_BusinessView_SFemail_check</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>WF_BusinessView SFemail check</shortDescription>
+        <value>sandbox.salesforce.com</value>
+    </labels>
+</CustomLabels>

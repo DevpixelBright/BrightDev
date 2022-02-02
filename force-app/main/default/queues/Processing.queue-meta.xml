@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <email>noemail@mris.net</email>
+    <name>Processing</name>
+    <queueMembers>
+        <users>
+            <user>antonio.ross@mris.net</user>
+            <user>brian.frankl@mris.net</user>
+            <user>cameron.jones@mris.net</user>
+            <user>corey.floyd@mris.net</user>
+            <user>donna.price@mris.net</user>
+            <user>glennae.russell@mris.net</user>
+            <user>hamza.fellah@brightmls.com</user>
+            <user>ivy.chike-uwajeh@mris.net</user>
+            <user>jacqueline.williams@mris.net</user>
+            <user>katrina.washington@mris.net</user>
+            <user>laurie.egbert@mris.net</user>
+            <user>monica.williams@mris.net</user>
+            <user>processor.user@mris.net</user>
+            <user>shawn.stotelmyer@mris.net</user>
+            <user>thayree.ways@mris.net</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>Case</sobjectType>
+    </queueSobject>
+</Queue>

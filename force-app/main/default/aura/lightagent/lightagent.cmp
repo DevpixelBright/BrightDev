@@ -1,0 +1,242 @@
+<aura:component>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <ltng:require styles="{!$Resource.headerpart }"></ltng:require>
+   <ltng:require styles="{!$Resource.side }"></ltng:require> 
+   <ltng:require styles="{!$Resource.body }"></ltng:require>
+
+   
+   <div class="c-container">
+      <div class="fullpage slds-scope">
+         <div class="slds-grid slds-wrap">
+            <lightning:layout multipleRows="true">
+               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage header-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:header />
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+               <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <c:mobilemenu />
+                   <lightning:layout>
+                     <div class="new-containerpage">
+                        <div class="slds-container--x-large new-container">
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <c:sidebarnew />
+                           </lightning:layoutItem>
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                              <div class="page-section page-main">
+                                 <div class="middlebar1 titlebar">
+                                    <h2>Agent Accuracy Notifications</h2>
+                                            <lightning:button class="brand pdf" variant="brand " label="Export to CSV" title="Brand action"  />
+                       <lightning:button class="brand brand2 pdf" variant="brand " label="Print PDF" title="Brand action"  />
+                   </div>
+                                 <div class="dev">
+                                    <p class="recent">Below is a summary of the violation email notifications you received specific to your listings. This information includes courtesy notifications and fine notices. Please note, fine notices with a status of Pending will not be billed until after the appeal timeframe has expired. Any fine notices listed with a status of Billed will appear on your account statement.</p>
+                                    <p class="recent">Read the definitions of the Appeal Statuses <a href="#">here</a>.</p>
+                                     <p class="recent">Please note: A notification may take up to 24 hours to show below.</p>
+                                     <div class="view"></div>
+           
+                                     <div class="lake">
+                         <img src="{!$Resource.bright + '/bright-3.0/images/LakeMountain.svg'}" alt="Lake Mountain" />
+                         <p>No Compliance Fines</p>
+                         </div>
+                                    
+                            <div class="lake1">
+                                <div class="table-form">
+                         <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped newtin">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            
+                                            
+                                           
+                                            
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Opportunity Name">MLS #</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Violation Type</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Close Date">Violation No.</div>
+                                            </th>
+                                          <th class="" scope="col">
+                                                <div class="slds-truncate" title="Opportunity Name">Notification Type</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Notification Date</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Close Date">Fine Amount</div>
+                                            </th>
+                                             <th class="" scope="col">
+                                                <div class="slds-truncate" title="Close Date">Status</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="slds-hint-parent blue">
+                                   
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">MDFR123456</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">No Photo</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">1234567890</div>
+                                            </td>
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Courtesy Notice</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">10/10/2020</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015"></div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015"></div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                   
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">MDFR123456</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">No Photo</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">1234567890</div>
+                                            </td>
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Courtesy Notice</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">10/10/2020</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015"></div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015"></div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                   
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">MDFR123456</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">No Photo</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">1234567890</div>
+                                            </td>
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Courtesy Notice</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">10/10/2020</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015"></div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015"></div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                   
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">MDFR123456</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">No Photo</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">1234567890</div>
+                                            </td>
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Courtesy Notice</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">10/10/2020</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015"></div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015"></div>
+                                            </td>
+                                        </tr>
+                                        
+                                        
+                                        
+                                    </tbody>
+                                </table></div>
+                         </div>        
+                                    
+                                  
+                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                <div class="part0">
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">               
+                <div class="layer part1"> 
+                           
+                            
+                                   <h5 class="search1">
+                                  Showing 1 to 10 of 34 entries
+                                   </h5>
+                             </div>
+                </lightning:layoutItem>   
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                                <div class="layer part3"> 
+                             
+                                   <h5 class="onechoose1">           
+                                    <div class="pagination">
+  <a href="#">Previous</a>
+  <a href="#" class="active">1</a>
+  <a href="#" >2</a>
+  
+  <a href="#">Next</a>
+</div>
+                                    </h5>
+                    </div></lightning:layoutItem>
+                </div>
+                        </lightning:layoutItem>        
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                  
+                                   
+                                    
+                                 </div>
+                              </div>
+                           </lightning:layoutItem>
+                        </div>
+                     </div>
+                  </lightning:layout>
+               </lightning:layoutItem>
+                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage footer-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:footer />
+                         
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+            </lightning:layout>
+         </div>
+      </div>
+
+   </div>
+</aura:component>

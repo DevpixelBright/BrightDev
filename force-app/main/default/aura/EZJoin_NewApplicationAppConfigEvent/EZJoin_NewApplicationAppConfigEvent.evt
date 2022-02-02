@@ -1,0 +1,5 @@
+<aura:event type="APPLICATION">
+    <aura:attribute name="currentCmp" type="String" />
+    <aura:attribute name="applicationConfig" type="List" />
+    <aura:attribute name="applicationData" type="Object" />
+</aura:event>

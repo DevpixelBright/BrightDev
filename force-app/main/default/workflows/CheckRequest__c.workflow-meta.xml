@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Approve_Check_Request</fullName>
+        <description>Please Approve Check Request</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>elena.medved@mris.net</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>gail.kern@mris.net</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>norma.velasquez@mris.net</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>API_Names/Check_Approval_for_Data_Management</template>
+    </alerts>
+    <alerts>
+        <fullName>Approved_by_Finance</fullName>
+        <description>You check approved by Finance</description>
+        <protected>false</protected>
+        <recipients>
+            <type>creator</type>
+        </recipients>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>API_Names/Check_Approval_for_Data_Management</template>
+    </alerts>
+    <alerts>
+        <fullName>Check_Request_Approved</fullName>
+        <description>Check Request Approved</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>gail.kern@mris.net</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>API_Names/Check_Approval_for_Data_Management</template>
+    </alerts>
+    <alerts>
+        <fullName>Check_Request_Email_Alert_7_days_pass</fullName>
+        <description>Check Request Email Alert 7 days pass</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>elena.medved@mris.net</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Data_Collection_Email_Templates/Check_Request_Alert_Pass_7_days</template>
+    </alerts>
+    <alerts>
+        <fullName>Check_Request_Ready_for_Approval</fullName>
+        <description>Check Request Ready for Approval</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>gail.kern@mris.net</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>API_Names/Check_Approval_for_Data_Management</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_Check_Request_Alert_7_Days</fullName>
+        <ccEmails>emailtosalesforce@6atq7uyeywjc3prgp048joma3mcm0xlt0qee3z3nqh6who3yf.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>Email Check Request Alert 7 Days pass to Salesforce</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_ID__c</field>
+            <type>contactLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Data_Collection_Email_Templates/Check_Request_Alert_Pass_7_days</template>
+    </alerts>
+    <alerts>
+        <fullName>Fianance_Please_approve_Check_Request</fullName>
+        <description>Finance please approve Check Request</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>elena.medved@mris.net</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>gail.kern@mris.net</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>API_Names/Check_Approval_for_Data_Management</template>
+    </alerts>
+    <alerts>
+        <fullName>Manager_rejects_Check_Request</fullName>
+        <description>Manager rejects Check Request</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>elena.medved@mris.net</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>gail.kern@mris.net</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>API_Names/Check_Approval_for_Data_Management</template>
+    </alerts>
+    <alerts>
+        <fullName>You_check_disapproved_by_Finance</fullName>
+        <description>You check disapproved by Finance</description>
+        <protected>false</protected>
+        <recipients>
+            <type>creator</type>
+        </recipients>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>API_Names/Check_Approval_for_Data_Management</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Approved_By_Finance</fullName>
+        <field>Finance_Approval__c</field>
+        <literalValue>1</literalValue>
+        <name>Approved By Finance</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approved_By_Finance_Date</fullName>
+        <field>Disapproved_by_Finance_Date__c</field>
+        <formula>TODAY()</formula>
+        <name>Approved By Finance Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approved_By_Finance_Status</fullName>
+        <field>Status__c</field>
+        <literalValue>Approved by Finance</literalValue>
+        <name>Approved By Finance Status</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approved_By_Manager</fullName>
+        <field>AMS_Manager_Approval__c</field>
+        <literalValue>1</literalValue>
+        <name>Approved By Manager</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approved_By_Manager_Status</fullName>
+        <field>Status__c</field>
+        <literalValue>Approved by Manager</literalValue>
+        <name>Approved By Manager Status</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approved_Finance_Date</fullName>
+        <field>Approved_by_Finance_Date__c</field>
+        <formula>TODAY()</formula>
+        <name>Approved By Finance Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approved_by_Manager_Date</fullName>
+        <field>Approved_by_AMS_Manager_Date__c</field>
+        <formula>TODAY()</formula>
+        <name>Approved by Manager Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Disapproved_By_Finance</fullName>
+        <field>Disapproved_By_Finance__c</field>
+        <literalValue>1</literalValue>
+        <name>Disapproved By Finance</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Disapproved_By_Finance_Date</fullName>
+        <field>Disapproved_by_Manager_Date__c</field>
+        <formula>TODAY()</formula>
+        <name>Disapproved By Finance Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Disapproved_By_Finance_Status</fullName>
+        <field>Status__c</field>
+        <literalValue>Disapproved by Finance</literalValue>
+        <name>Disapproved By Finance Status</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Disapproved_By_Manager_Status</fullName>
+        <field>Status__c</field>
+        <literalValue>Disapproved By Manager</literalValue>
+        <name>Disapproved By Manager Status</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Manager_Disapprove</fullName>
+        <field>Disapproved_by_AMS_Manager__c</field>
+        <literalValue>1</literalValue>
+        <name>Manager Disapprove</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Manager_Disapprove_Date</fullName>
+        <field>Disapproved_by_Manager_Date__c</field>
+        <formula>TODAY()</formula>
+        <name>Manager Disapprove Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Submitted_for_Manager_Approval_Date</fullName>
+        <field>Submitted_for_Manager_Approval__c</field>
+        <formula>TODAY()</formula>
+        <name>Submitted for Manager Approval Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Submitted_to_Finance_Date</fullName>
+        <field>Submitted_to_Finance__c</field>
+        <formula>TODAY()</formula>
+        <name>Submitted to Finance Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>DC Check Request Alert 7 Days pass</fullName>
+        <active>false</active>
+        <formula>IF((ISBLANK(Date_Check_Received__c)) &amp;&amp; (TODAY() - Date__c &gt;7),True,False)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Check_Request_Email_Alert_7_days_pass</name>
+                <type>Alert</type>
+            </actions>
+            <actions>
+                <name>Email_Check_Request_Alert_7_Days</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>CheckRequest__c.Date__c</offsetFromField>
+            <timeLength>7</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <tasks>
+        <fullName>Check_Issuance</fullName>
+        <assignedTo>gail.kern@mris.net</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>7</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Check Issuance</subject>
+    </tasks>
+    <tasks>
+        <fullName>Finance_approve_check_request</fullName>
+        <assignedTo>elena.medved@mris.net</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>7</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Finace please approve the check request</subject>
+    </tasks>
+    <tasks>
+        <fullName>First_Step</fullName>
+        <assignedTo>elena.medved@mris.net</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>7</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>First Step</subject>
+    </tasks>
+    <tasks>
+        <fullName>Please_approve_check</fullName>
+        <assignedTo>elena.medved@mris.net</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>7</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Please approve check</subject>
+    </tasks>
+    <tasks>
+        <fullName>Second_Step</fullName>
+        <assignedTo>gail.kern@mris.net</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Second Step</subject>
+    </tasks>
+    <tasks>
+        <fullName>Send_the_check</fullName>
+        <assignedTo>elena.medved@mris.net</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>2</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Send the check</subject>
+    </tasks>
+</Workflow>

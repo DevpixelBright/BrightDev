@@ -1,0 +1,3126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MRIS_Reinstatement_Application</fullName>
+    <active>true</active>
+    <label>Reinstatement Application</label>
+    <picklistValues>
+        <picklist>Application_Type__c</picklist>
+        <values>
+            <fullName>Agent Transfer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New Agent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reinstatement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Team Request</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Authorized_Use__c</picklist>
+        <values>
+            <fullName>Broker Only</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IDX</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VOW</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Billing_Country__c</picklist>
+        <values>
+            <fullName>CANADA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNITED STATES</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>UNKNOWN</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Billing_State__c</picklist>
+        <values>
+            <fullName>AA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AZ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GU</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ID</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ME</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MTAA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ND</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NH</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NJ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OH</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TX</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WV</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Billing_Street_Direction__c</picklist>
+        <values>
+            <fullName>E%2C EAST</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>N%2C NORTH</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NE%2C NORTHEAST</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NW%2C NORTHWEST</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>S%2C SOUTH</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SE%2C SOUTHEAST</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SW%2C SOUTHWEST</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>W%2C WEST</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Billing_Street_Type__c</picklist>
+        <values>
+            <fullName>ACRES%2C ACRES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ALLEY%2C ALY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ANNEX%2C ANX</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ARCADE%2C ARC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AVENUE%2C AVE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BAY%2C BAY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BAYOU%2C BYU</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BEACH%2C BCH</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BELTWAY%2C BLTY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BEND%2C BND</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BLUFF%2C BLF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BOTTOM%2C BTM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BOULEVARD%2C BLVD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BRANCH%2C BR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BRIDGE%2C BRG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BROOK%2C BRK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BURG%2C BG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BYPASS%2C BYP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CAMP%2C CP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CANYON%2C CYN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CAPE%2C CPE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CAUSEWAY%2C CSWY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CENTER%2C CTR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CHASE%2C CHASE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CIRCLE%2C CIR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CLIFFS%2C CLFS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CLUB%2C CLB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CLUSTER%2C CL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>COMMON%2C COM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CORNER%2C COR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CORNERS%2C CORS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CORRIDOR%2C CORR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>COURSE%2C CRSE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>COURT%2C CT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>COURTS%2C CTS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>COVE%2C CV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CREEK%2C CRK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CRESCENT%2C CRES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CREST%2C CRST</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CROSSING%2C XING</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CROSSOVER%2C XOVER</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CROSSROAD%2C XRD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CROSSROADS%2C XRDS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CURVE%2C CURV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DALE%2C DL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DAM%2C DM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DELL%2C DELL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DIVIDE%2C DV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DRIVE%2C DR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DRIVEWAY%2C DRWY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>END%2C END</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ESPLANADE%2C ESP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ESTATE%2C EST</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ESTATES%2C ESTS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EXPRESSWAY%2C EXPY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EXTENSION%2C EXT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FALL%2C FL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FALLS%2C FLS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FARE%2C FARE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FERRY%2C FRY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FIELD%2C FLD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FIELDS%2C FLDS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FLATS%2C FLT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FORD%2C FRD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FOREST%2C FRST</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FORGE%2C FRG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FORK%2C FRK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FORKS%2C FRKS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FORT%2C FT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FREEWAY%2C FWY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GAP%2C GAP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GARDENS%2C GDNS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GARTH%2C GRTH</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GATE%2C GATE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GATEWAY%2C GTWY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GLEN%2C GLN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GRADE%2C GRADE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GREEN%2C GRN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GROVE%2C GRV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HARBOR%2C HBR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HAVEN%2C HVN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HEIGHTS%2C HTS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HIGHWAY%2C HWY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HILL%2C HL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HILLS%2C HLS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HOLLOW%2C HOLW</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INLET%2C INLT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ISLAND%2C ISL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ISLANDS%2C ISS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ISLE%2C ISLE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>JUNCTION%2C JCT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KEY%2C KY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KEYS%2C KYS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KNOLL%2C KNL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KNOLLS%2C KNLS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LAKE%2C LK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LAKES%2C LKS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LAND%2C LAND</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LANDING%2C LNDG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LANE%2C LN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LIGHT%2C LGT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LINE%2C LINE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LOCK%2C LCK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LOCKS%2C LCKS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LODGE%2C LDG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LOFT%2C LF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LOOP%2C LOOP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MALL%2C MALL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MANOR%2C MNR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MEADOW%2C MDW</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MEADOWS%2C MDWS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MEWS%2C MEWS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MILL%2C ML</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MILLS%2C MLS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MISSION%2C MSN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MOUNT%2C MT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MOUNTAIN%2C MTN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MOUNTAINS%2C MTNS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NECK%2C NCK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NOOK%2C NOOK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NORTHWAY%2C NWAY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ORCHARD%2C ORCH</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OVAL%2C OVAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OVERLOOK%2C OLOOK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PARK%2C PARK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PARKWAY%2C PKWY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PASS%2C PASS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PASSAGE%2C PSGE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PATH%2C PATH</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PENINSULA%2C PNSLA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PIKE%2C PIKE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PINES%2C PNES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PLACE%2C PL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PLAIN%2C PLN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PLAINS%2C PLNS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PLAZA%2C PLZ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>POINT%2C PT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>POND%2C POND</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PORT%2C PRT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PRAIRIE%2C PR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QUAY%2C QUAY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RADIAL%2C RADL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RANCH%2C RNCH</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RAPIDS%2C RPDS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>REST%2C RST</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RIDGE%2C RDG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RIDING%2C RDNG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RIVER%2C RIV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ROAD%2C RD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ROADWAY%2C RDWY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ROUTE%2C RTE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ROW%2C ROW</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RUN%2C RUN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SHOAL%2C SHL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SHOALS%2C SHLS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SHORE%2C SHR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SHORES%2C SHRS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SOUTHWAY%2C SWAY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SPRING%2C SPG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SPRINGS%2C SPGS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SPUR%2C SPUR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SQUARE%2C SQ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>STATION%2C STA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>STRAIT%2C STRT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>STRAVENUE%2C STV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>STREAM%2C STRM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>STREET%2C ST</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>STREETS%2C STS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SUMMIT%2C SMT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TERRACE%2C TER</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TRACE%2C TRCE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TRACT%2C TRACT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TRAIL%2C TRL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TRAILER%2C TRLR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TUNNEL%2C TUNL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TURN%2C TURN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TURNPIKE%2C TPKE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNDEFINED%2C UNDEF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNION%2C UN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VALLEY%2C VLY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VIADUCT%2C VIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VIEW%2C VW</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VIEWS%2C VWS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VILLAGE%2C VLG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VILLE%2C VL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VISTA%2C VIS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WALK%2C WALK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WALKWAY%2C WWAY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WALL%2C WL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WAY%2C WAY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WELLS%2C WLS</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Billing_Unit_Type__c</picklist>
+        <values>
+            <fullName>%23%2C %23</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>APT%23%2C APARTMENT %23</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>APT%2C APARTMENT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BLDG%23%2C BUILDING %23</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BLDG%2C BUILDING</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BSMT%2C BASEMENT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DEPT%23%2C DEPARTMENT %23</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DEPT%2C DEPARTMENT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FL%2C FLOOR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FLR%2C FLOOR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FRNT%2C FRONT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HNGR%2C HANGAR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KEY%2C KEY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LBBY%2C LOBBY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LOT%2C LOT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LOWR%2C LOWER</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OFC%23%2C OFFICE %23</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OFC%2C OFFICE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PH%2C PENTHOUSE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PIER%2C PIER</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>REAR%2C REAR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RM%23%2C ROOM %23</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RM%2C ROOM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SIDE%2C SIDE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SLIP%2C SLIP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SPC%2C SPACE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>STE%23%2C SUITE %23</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>STE%2C SUITE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>STOP%2C STOP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SU%2C SUITE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TRLR%2C TRAILER</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNIT%2C UNIT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNIT%2C UNIT %23</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UPPR%2C UPPER</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Country__c</picklist>
+        <values>
+            <fullName>CANADA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNITED STATES</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>UNKNOWN</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Date_Expires_Month__c</picklist>
+        <values>
+            <fullName>April</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aug</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dec</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Feb</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jan</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>July</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>June</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mar</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>May</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nov</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Oct</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sept</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Date_Expires_Year__c</picklist>
+        <values>
+            <fullName>2012</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2013</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2014</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2015</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2016</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2017</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2018</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2019</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2020</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Disabilities__c</picklist>
+        <values>
+            <fullName>Hearing Impaired</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Visually Impaired</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wheelchair Access</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>License_State__c</picklist>
+        <values>
+            <fullName>AA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AZ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GU</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ID</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ME</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MTAA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ND</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NH</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NJ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OH</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TX</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WV</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>License_Type__c</picklist>
+        <values>
+            <fullName>Appraiser</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Associate Broker</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Broker</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Salesperson</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Professional_Designations__c</picklist>
+        <values>
+            <fullName>ABR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ABRM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AHWD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ALC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BPOR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CCIM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CIPS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CPM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CRB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CRE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CRS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GAA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GRI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MRP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PMN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RAA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RCE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RSPS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SFR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SIOR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SRES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SRS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ePRO</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Salutation__c</picklist>
+        <values>
+            <fullName>Dr%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Miss</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mr%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mrs%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ms%2E</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Service_Jurisdiction__c</picklist>
+        <values>
+            <fullName>BRIGHT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MRIS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TREND</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>State__c</picklist>
+        <values>
+            <fullName>AA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AZ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GU</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ID</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ME</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MTAA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ND</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NH</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NJ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OH</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TX</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WV</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approved - Expired</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deferred</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Expired</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Street_Direction__c</picklist>
+        <values>
+            <fullName>E%2C EAST</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>N%2C NORTH</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NE%2C NORTHEAST</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NW%2C NORTHWEST</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>S%2C SOUTH</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SE%2C SOUTHEAST</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SW%2C SOUTHWEST</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>W%2C WEST</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Street_Type__c</picklist>
+        <values>
+            <fullName>ACRES%2C ACRES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ALLEY%2C ALY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ANNEX%2C ANX</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ARCADE%2C ARC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AVENUE%2C AVE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BAY%2C BAY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BAYOU%2C BYU</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BEACH%2C BCH</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BELTWAY%2C BLTY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BEND%2C BND</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BLUFF%2C BLF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BOTTOM%2C BTM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BOULEVARD%2C BLVD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BRANCH%2C BR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BRIDGE%2C BRG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BROOK%2C BRK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BURG%2C BG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BYPASS%2C BYP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CAMP%2C CP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CANYON%2C CYN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CAPE%2C CPE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CAUSEWAY%2C CSWY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CENTER%2C CTR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CHASE%2C CHASE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CIRCLE%2C CIR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CLIFFS%2C CLFS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CLUB%2C CLB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CLUSTER%2C CL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>COMMON%2C COM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CORNER%2C COR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CORNERS%2C CORS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CORRIDOR%2C CORR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>COURSE%2C CRSE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>COURT%2C CT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>COURTS%2C CTS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>COVE%2C CV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CREEK%2C CRK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CRESCENT%2C CRES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CREST%2C CRST</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CROSSING%2C XING</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CROSSOVER%2C XOVER</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CROSSROAD%2C XRD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CROSSROADS%2C XRDS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CURVE%2C CURV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DALE%2C DL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DAM%2C DM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DELL%2C DELL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DIVIDE%2C DV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DRIVE%2C DR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DRIVEWAY%2C DRWY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>END%2C END</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ESPLANADE%2C ESP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ESTATE%2C EST</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ESTATES%2C ESTS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EXPRESSWAY%2C EXPY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EXTENSION%2C EXT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FALL%2C FL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FALLS%2C FLS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FARE%2C FARE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FERRY%2C FRY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FIELD%2C FLD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FIELDS%2C FLDS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FLATS%2C FLT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FORD%2C FRD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FOREST%2C FRST</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FORGE%2C FRG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FORK%2C FRK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FORKS%2C FRKS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FORT%2C FT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FREEWAY%2C FWY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GAP%2C GAP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GARDENS%2C GDNS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GARTH%2C GRTH</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GATE%2C GATE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GATEWAY%2C GTWY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GLEN%2C GLN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GRADE%2C GRADE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GREEN%2C GRN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GROVE%2C GRV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HARBOR%2C HBR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HAVEN%2C HVN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HEIGHTS%2C HTS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HIGHWAY%2C HWY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HILL%2C HL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HILLS%2C HLS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HOLLOW%2C HOLW</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INLET%2C INLT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ISLAND%2C ISL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ISLANDS%2C ISS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ISLE%2C ISLE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>JUNCTION%2C JCT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KEY%2C KY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KEYS%2C KYS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KNOLL%2C KNL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KNOLLS%2C KNLS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LAKE%2C LK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LAKES%2C LKS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LAND%2C LAND</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LANDING%2C LNDG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LANE%2C LN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LIGHT%2C LGT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LINE%2C LINE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LOCK%2C LCK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LOCKS%2C LCKS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LODGE%2C LDG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LOFT%2C LF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LOOP%2C LOOP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MALL%2C MALL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MANOR%2C MNR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MEADOW%2C MDW</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MEADOWS%2C MDWS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MEWS%2C MEWS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MILL%2C ML</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MILLS%2C MLS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MISSION%2C MSN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MOUNT%2C MT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MOUNTAIN%2C MTN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MOUNTAINS%2C MTNS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NECK%2C NCK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NOOK%2C NOOK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NORTHWAY%2C NWAY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ORCHARD%2C ORCH</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OVAL%2C OVAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OVERLOOK%2C OLOOK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PARK%2C PARK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PARKWAY%2C PKWY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PASS%2C PASS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PASSAGE%2C PSGE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PATH%2C PATH</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PENINSULA%2C PNSLA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PIKE%2C PIKE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PINES%2C PNES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PLACE%2C PL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PLAIN%2C PLN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PLAINS%2C PLNS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PLAZA%2C PLZ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>POINT%2C PT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>POND%2C POND</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PORT%2C PRT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PRAIRIE%2C PR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QUAY%2C QUAY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RADIAL%2C RADL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RANCH%2C RNCH</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RAPIDS%2C RPDS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>REST%2C RST</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RIDGE%2C RDG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RIDING%2C RDNG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RIVER%2C RIV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ROAD%2C RD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ROADWAY%2C RDWY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ROUTE%2C RTE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ROW%2C ROW</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RUN%2C RUN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SHOAL%2C SHL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SHOALS%2C SHLS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SHORE%2C SHR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SHORES%2C SHRS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SOUTHWAY%2C SWAY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SPRING%2C SPG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SPRINGS%2C SPGS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SPUR%2C SPUR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SQUARE%2C SQ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>STATION%2C STA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>STRAIT%2C STRT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>STRAVENUE%2C STV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>STREAM%2C STRM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>STREET%2C ST</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>STREETS%2C STS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SUMMIT%2C SMT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TERRACE%2C TER</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TRACE%2C TRCE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TRACT%2C TRACT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TRAIL%2C TRL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TRAILER%2C TRLR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TUNNEL%2C TUNL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TURN%2C TURN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TURNPIKE%2C TPKE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNDEFINED%2C UNDEF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNION%2C UN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VALLEY%2C VLY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VIADUCT%2C VIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VIEW%2C VW</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VIEWS%2C VWS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VILLAGE%2C VLG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VILLE%2C VL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VISTA%2C VIS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WALK%2C WALK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WALKWAY%2C WWAY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WALL%2C WL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WAY%2C WAY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WELLS%2C WLS</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Subscription_Type__c</picklist>
+        <values>
+            <fullName>Association Staff</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Broker Staff</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CURE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Government Agency</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Government Agency - N%2FC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Government Agency%2FPA - N%2FC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Licensed Appraiser%2FNon Realtor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Licensee</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Licensee%2FNon Realtor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MDS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MRIS Consultant</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MRIS Manager</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MRIS Staff</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MRIS Vendor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Non-Subscribing Consultant</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Non-Subscribing Manager</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Office Secretary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Office Secretary - NC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Personal Assistant</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Personal Assistant to Appraiser</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RETS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RETS%2FMDS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Realtor%2FAppraiser Non Shareholder</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Realtor%2FAppraiser Shareholder</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Realtor%2FNon Shareholder</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Realtor%2FShareholder</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VT Vendor</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Suffix__c</picklist>
+        <values>
+            <fullName>I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>JR%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SR%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>V</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type__c</picklist>
+        <values>
+            <fullName>Agent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Appraiser</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistant</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Broker</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CURE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Consultant</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Employee</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Government Agency</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Office Manager</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Staff</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Vendor</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Unit_Type__c</picklist>
+        <values>
+            <fullName>%23%2C %23</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>APT%23%2C APARTMENT %23</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>APT%2C APARTMENT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BLDG%23%2C BUILDING %23</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BLDG%2C BUILDING</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BSMT%2C BASEMENT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DEPT%23%2C DEPARTMENT %23</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DEPT%2C DEPARTMENT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FL%2C FLOOR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FLR%2C FLOOR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FRNT%2C FRONT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HNGR%2C HANGAR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KEY%2C KEY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LBBY%2C LOBBY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LOT%2C LOT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LOWR%2C LOWER</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OFC%23%2C OFFICE %23</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OFC%2C OFFICE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PH%2C PENTHOUSE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PIER%2C PIER</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>REAR%2C REAR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RM%23%2C ROOM %23</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RM%2C ROOM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SIDE%2C SIDE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SLIP%2C SLIP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SPC%2C SPACE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>STE%23%2C SUITE %23</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>STE%2C SUITE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>STOP%2C STOP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SU%2C SUITE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TRLR%2C TRAILER</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNIT%2C UNIT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNIT%2C UNIT %23</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UPPR%2C UPPER</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

@@ -1,0 +1,555 @@
+<aura:component>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <ltng:require styles="{!$Resource.headerpart }"></ltng:require>
+   <ltng:require styles="{!$Resource.side }"></ltng:require> 
+   <ltng:require styles="{!$Resource.body }"></ltng:require>
+    <aura:attribute name="popup1" type="boolean" default="false"/>
+   
+   <div class="c-container">
+      <div class="fullpage slds-scope">
+         <div class="slds-grid slds-wrap">
+            <lightning:layout multipleRows="true">
+               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage header-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:header />
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+               <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                    <c:mobilemenu />
+                   <lightning:layout>
+                     <div class="new-containerpage">
+                        <div class="slds-container--x-large new-container">
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <c:sidebarnew />
+                           </lightning:layoutItem>
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                              <div class="page-section page-main">
+                                 <div class="middlebar1">
+                                    <h2>IDX &amp; VOW Agent Request Forms</h2>
+                                    
+                         </div>
+                                 <div class="dev">
+                                     <p class="recent">Below is a list of IDX and VOW agent requests from your brokerage that require approval. Click the Application ID number to review and approve or decline the request.</p>
+                                     <p class="recent">Note: If you would like to sort the application requests by Status (New, Approved, Declined, etc.), click the Status dropdown button located in the upper right corner of the screen.</p>
+                                     <div class="view"></div>
+                                     
+                                     
+                                     <div class="part0">
+                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                               <div class="layer part1"> 
+                           
+                             <h5 class="search">
+                                  <lightning:input type="text" name="input3" placeholder="Type your search terms here"  variant = "label-hidden" />
+                                    <img src="{!$Resource.bright + '/bright-3.0/images/search.svg'}" alt="Bright" />
+                                   </h5>
+                                
+                             </div>
+                </lightning:layoutItem>
+                      <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">                            
+                                <div class="layer part3"> 
+                             
+                                   <h5 class="onechoose">  <lightning:select name="select1" label="" required="false" variant = "label-hidden">
+        <option value="">choose one...</option>
+        <option value="1">one</option>
+        <option value="2">two</option>
+        <option value="3">three</option>
+    </lightning:select>
+                                    
+                                    
+                                    </h5>
+                             </div>
+                </lightning:layoutItem>
+                  
+                        <div class="font">
+                               <div class="table-form ">         
+                                         <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped new newapp">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            
+                                            
+                              
+                                            
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Opportunity Name">Application ID     </div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Agent Name</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Vendor Name</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Close Date">URL Address</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Stage">Product Type</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Confidence">Status</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Amount">Status Reason</div>
+                                            </th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="slds-hint-parent blue">
+                                            <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#"  onclick="{! c.openModel }">010110</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Test Agent </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Rainbow VIP (RVP1)</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">www.yahoo.com</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">IDX</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">Approved</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Approved by Test Age</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                          <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#">005021</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Test Agent </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Rainbow VIP (RVP1)</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">www.yahoo.com</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">IDX</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">Approved</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Approved by Test Age</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                            <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#">005021</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Test Agent </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Rainbow VIP (RVP1)</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">www.yahoo.com</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">IDX</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">Approved</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Approved by Test Age</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                          <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#">005021</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Test Agent </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Rainbow VIP (RVP1)</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">www.yahoo.com</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">IDX</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">Approved</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Approved by Test Age</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                            <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#">005021</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Test Agent </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Rainbow VIP (RVP1)</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">www.yahoo.com</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">IDX</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">Approved</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Approved by Test Age</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                          <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#">005021</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Test Agent </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Rainbow VIP (RVP1)</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">www.yahoo.com</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">IDX</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">Approved</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Approved by Test Age</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                            <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#">005021</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Test Agent </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Rainbow VIP (RVP1)</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">www.yahoo.com</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">IDX</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">Approved</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Approved by Test Age</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                          <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#">005021</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Test Agent </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Rainbow VIP (RVP1)</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">www.yahoo.com</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">IDX</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">Approved</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Approved by Test Age</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                            <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#">005021</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Test Agent </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Rainbow VIP (RVP1)</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">www.yahoo.com</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">IDX</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">Approved</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Approved by Test Age</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                          <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#">005021</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Test Agent </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Rainbow VIP (RVP1)</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">www.yahoo.com</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">IDX</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">Approved</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Approved by Test Age</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                            <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#">005021</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Test Agent </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Rainbow VIP (RVP1)</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">www.yahoo.com</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">IDX</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">Approved</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Approved by Test Age</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                          <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#">005021</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Test Agent </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Rainbow VIP (RVP1)</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">www.yahoo.com</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">IDX</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">Approved</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Approved by Test Age</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                            <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#">005021</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Test Agent </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Rainbow VIP (RVP1)</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">www.yahoo.com</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">IDX</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">Approved</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Approved by Test Age</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table></div> 
+                                         </div>
+                                         <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                <div class="part0">
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">               
+                <div class="layer part1"> 
+                           
+                            
+                                   <h5 class="search1">
+                                  Showing 1 to 10 of 34 entries
+                                   </h5>
+                             </div>
+                </lightning:layoutItem>   
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                                <div class="layer part3"> 
+                             
+                                   <h5 class="onechoose1">           
+                                    <div class="pagination">
+  <a href="#">Previous</a>
+  <a href="#" class="active">1</a>
+  <a href="#" >2</a>
+  
+  <a href="#">Next</a>
+</div>
+                                    </h5>
+                    </div></lightning:layoutItem>
+                </div>
+                        </lightning:layoutItem>
+                        </div>
+           
+                                    
+                                    
+                                    
+                                    
+                                  
+                                   
+                                    
+                                 </div>
+                              </div>
+                           </lightning:layoutItem>
+                        </div>
+                     </div>
+                  </lightning:layout>
+               </lightning:layoutItem>
+                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage footer-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:footer />
+                         
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+            </lightning:layout>
+         </div>
+      </div>
+    <!-- PopUp 1 start -->
+       <aura:if isTrue="{!v.popup1}">
+           <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- ###### MODAL BOX HEADER Start ######-->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModel }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate email">Application Details </h2>
+                    </header>
+                    <!--###### MODAL BOX BODY Part Start######-->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                         <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                              <div class="page-section page-main page-main2">
+                               
+                    
+                                     <h2 class="notice">
+                                     Broker Request
+                                    </h2>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                                        <h4>Application Type</h4>
+                                   <h5>IDX &amp; VOW Agent Request</h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                           <h4>Status</h4>
+                                   <h5>Approved</h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part2">
+                                           <h4>Phone</h4>
+                                   <h5>123456901</h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                    </lightning:layoutItem>
+                                  
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                            <h4>Vendor Office ID</h4>
+                                   <h5>RVP1</h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                          <h4>Product Type</h4>
+                                   <h5>VOW</h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part2">
+                                          <h4>URL Address</h4>
+                                   <h5>www.yahoo.com</h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                    </lightning:layoutItem>
+                                    
+                                                                     
+                                  
+                                   
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                              
+                                    
+                             
+                              </div>
+                           </lightning:layoutItem>
+                    </div>
+                    <!--###### MODAL BOX FOOTER Part Start ######-->
+                    
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+       </aura:if>
+       <!-- PopUp 1 end -->
+   </div>
+</aura:component>

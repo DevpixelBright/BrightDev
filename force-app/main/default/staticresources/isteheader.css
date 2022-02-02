@@ -1,0 +1,100 @@
+@font-face {
+    font-family: 'Avenir-Regular';
+    src: url(/resource/istenew/iste/fonts/Avenir-Regular.ttf);  
+}
+@font-face {
+    font-family: 'Avenir-Black';
+    src: url(/resource/istenew/iste/fonts/Avenir-Black.ttf);  
+}
+@font-face {
+    font-family: 'Avenir-Medium';
+    src: url(/resource/istenew/iste/fonts/Avenir-Medium.ttf);  
+}
+@font-face {
+    font-family: 'Avenir-Light';
+    src: url(/resource/istenew/iste/fonts/Avenir-Light.ttf);  
+}
+.slds-scope{ background:#EFF2F5;}
+ .fullpage { background:#f2f3f7;  margin:0;  padding:0;}
+ .slds-box_x-small{ padding:0; border:none;}
+ .new-container { margin: 0 auto; border: none; width: -webkit-fill-available;width:100%;}
+ .new-containerpage { background:#f2f3f7;margin: 0 auto; width: -webkit-fill-available;width:100%;}
+ .header-new-containerpage{background:#fff;    overflow: overlay;} 
+ .slds-wrap{width:100%;}
+
+ .slds-p-around_small{display:inline-block; vertical-align: top;}
+ .slds-grow{ display:inline-block;vertical-align: top;}
+/*header css start*/
+ .slds-p-around_small{padding:0;}
+.c-container {
+    border: 1px solid #d8dde6;
+    margin: 0;
+}
+ .page-section {
+  
+    padding: 1rem;
+  display: flow-root;
+}
+ .page-header,
+  {
+    height: auto;
+    padding:25
+        px 0;
+    border:none;
+    overflow: auto;
+}
+ #carousel-image-0 .slds-text-link_reset{ border:none;}
+ .logo #carousel-image-0 .slds-text-link_reset img{ width:85px;}
+ .slds-carousel__content{height: auto; padding: 0;}
+ .slds-carousel__image{ border:none;}
+ .slds-text-link_reset{
+    color: inherit;
+    text-decoration: inherit;
+    outline: none;
+    box-shadow: none;
+}
+ .slds-text-link_reset:active{
+    color: inherit;
+    text-decoration: inherit;
+    outline: none;
+    box-shadow: none;
+}
+ .slds-text-link_reset:focus {
+    color: inherit;
+    text-decoration: inherit;
+    outline: none;
+    box-shadow: none;
+}
+.THIS .slds-col_bump-left {
+    margin-left: auto;float:right;
+}
+
+ .page-header div{display:inline-block;    vertical-align: top;}
+.page-header div.slds-col_bump-right{ float:right}
+ .logo{ display:inline-block; margin:0 40px 0 0 ;}
+ .account{  margin: 0 0 0;}
+ .account h3 {
+    margin: 0px 0 0 0;
+    padding: 0;
+    color: #1284A9;
+    font-size: 24px;
+    font-family: 'Avenir-Black';
+}
+
+.logo img.web{ display:block;    width: 70px;}
+ /*header css end*/
+
+
+/* footer css start*/
+ .footer-new-containerpage{background:#152C53 !important;    overflow: overlay;box-shadow:none !important;    border: none;
+} 
+
+.copy{ float:none; margin:0;padding:0;text-align:center;}
+.page-footer{    border: none;
+}
+.copy p{ color:#8698B7; font-family: 'Avenir-Medium'; font-size:11px; margin:0;padding:0;}
+/*footer css end*/
+
+
+
+

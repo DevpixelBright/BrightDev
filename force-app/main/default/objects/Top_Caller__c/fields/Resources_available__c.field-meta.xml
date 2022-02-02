@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Resources_available__c</fullName>
+    <description>What resources is the customer aware of that may help solve their issues?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>What resources is the customer aware of that may help solve their issues?</inlineHelpText>
+    <label>What resources is the customer aware of</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>None</fullName>
+                <default>false</default>
+                <label>None</label>
+            </value>
+            <value>
+                <fullName>In Person Training at the board office</fullName>
+                <default>false</default>
+                <label>In Person Training at the board office</label>
+            </value>
+            <value>
+                <fullName>Online training Resources</fullName>
+                <default>false</default>
+                <label>Online training Resources</label>
+            </value>
+            <value>
+                <fullName>Self Help Tutorial Documents</fullName>
+                <default>false</default>
+                <label>Self Help Tutorial Documents</label>
+            </value>
+            <value>
+                <fullName>Built in/Hover Help within the products</fullName>
+                <default>false</default>
+                <label>Built in/Hover Help within the products</label>
+            </value>
+            <value>
+                <fullName>Email support</fullName>
+                <default>false</default>
+                <label>Email support</label>
+            </value>
+            <value>
+                <fullName>On-line chat</fullName>
+                <default>false</default>
+                <label>On-line chat</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

@@ -1,0 +1,207 @@
+<apex:page controller="SSV_AddressValidation" docType="html-5.0" standardStylesheets="false" sidebar="false" lightningstylesheets="true">
+
+<apex:form >
+
+    <c:Bootstrap_Resources />   
+    <c:Communities_AddressValidation />    
+    
+    <style>
+        h4.title {
+            display: block;
+            padding: 40px 40px 10px 40px;
+            margin-bottom: 60px;
+            font-size: 30px;
+            border-bottom: 1px solid #69a61f;
+        }
+
+        h4.title i {
+            padding-right: 10px;
+        }
+
+        label {
+            display: block;
+            text-align: right;
+            font-weight: normal;
+        }
+
+        .buttons {
+            margin-top: 20px; 
+            margin-bottom: 60px;
+        }
+
+        .btn-bootstrap {
+            display: inline-block;
+            margin-bottom: 0;
+            font-weight: 400;
+            text-align: center;
+            vertical-align: middle;
+            cursor: pointer;
+            background-image: none;
+            border-width: 1px;
+            border-style: solid;
+            white-space: nowrap;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            border-radius: 4px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;            
+        }
+
+        .btn-bootstrap[disabled] {
+            opacity: 0.5;
+        }
+    </style>
+
+    <h4 class="title"><i class="glyphicon glyphicon-send"></i> USPS Address Validation</h4>
+
+    <div class="container">
+        <script>
+            var mailing_address = AddressValidation.standardize({
+                Street_Number__c          : "{!record['Street_Number__c']}",
+                Street_Number_Suffix__c   : "{!record['Street_Number_Suffix__c']}",
+                Street_Name__c            : "{!record['Street_Name__c']}",
+                Street_Type__c            : "{!record['QAS_Mailing_Street_Type__c']}",
+                Street_Direction__c       : "{!record['QAS_Mailing_Street_Direction__c']}",
+                Unit_Type__c              : "{!record['QAS_Mailing_Unit_Type__c']}",
+                Unit__c                   : "{!record['Unit__c']}",
+                City__c                   : "{!record['City__c']}",
+                State__c                  : "{!record['State__c']}",
+                Zip__c                    : "{!record['Zip__c']}",
+                Zip_4__c                  : "{!record['Zip_4__c']}",
+                Country__c                : "{!record['Country__c']}",
+                POBox__c                  : "{!record['QAS_Mailing_POBox__c']}",
+                Addl_Display_Name__c      : "{!record['Addl_Display_Name__c']}",
+                County__c                 : "{!record['County__c']}",            
+            }); 
+        </script>  
+
+        <div id="mailing-address-edit" class="address-edit">
+            <div class="sf-fields">
+                <apex:inputField value="{!record['Street_Number__c']}"                  html-data-bind="Street_Number__c"/>
+                <apex:inputField value="{!record['Street_Number_Suffix__c']}"           html-data-bind="Street_Number_Suffix__c"/> 
+                <apex:inputField value="{!record['Street_Name__c']}"                    html-data-bind="Street_Name__c"/>
+                <apex:inputField value="{!record['QAS_Mailing_Street_Type__c']}"        html-data-bind="Street_Type__c"/>
+                <apex:inputField value="{!record['QAS_Mailing_Street_Direction__c']}"   html-data-bind="Street_Direction__c"/>
+                <apex:inputField value="{!record['QAS_Mailing_Unit_Type__c']}"          html-data-bind="Unit_Type__c"/>
+                <apex:inputField value="{!record['Unit__c']}"                           html-data-bind="Unit__c"/>
+                <apex:inputText value="{!record['City__c']}"                            html-data-bind="City__c"/>
+                <apex:inputField value="{!record['State__c']}"                          html-data-bind="State__c"/>
+                <apex:inputText value="{!record['Zip__c']}"                             html-data-bind="Zip__c"/>
+                <apex:inputField value="{!record['Zip_4__c']}"                          html-data-bind="Zip_4__c"/>
+                <apex:inputField value="{!record['Country__c']}"                        html-data-bind="Country__c"/>
+                <apex:inputField value="{!record['QAS_Mailing_POBox__c']}"              html-data-bind="POBox__c"/>
+                <apex:inputField value="{!record['Addl_Display_Name__c']}"              html-data-bind="Addl_Display_Name__c"/>
+                <apex:inputField value="{!record['QAS_Mailing_County__c']}"             html-data-bind="County__c"/>            
+            </div>
+            <div class="form-group clearfix">
+                <div class="col-sm-2">
+                    <apex:outputLabel value="Mailing Address"/>
+                </div>
+                <div class="col-sm-8">
+                    <input class="form-control full-address" type="text"></input>
+                </div>
+            </div>
+            <div class="form-group clearfix alerts">
+                <div class="col-sm-offset-2 col-sm-8">
+                    <div class="alert"></div>
+                </div>
+            </div>
+            <div class="form-group clearfix options">
+                <div class="col-sm-offset-2 col-sm-8">
+                    <ul></ul>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            jQuery(document).ready(function () {
+                jQuery("#mailing-address-edit input").val(mailing_address.render.text);
+                new AddressValidation.bind("#mailing-address-edit", "input.my_save");
+            });
+        </script>
+
+        <apex:outputPanel rendered="{!objectName == 'Subscriptions__c' && record['Service_Jurisdiction__c'] == 'TREND'}">
+        
+            <script>
+                var home_address = AddressValidation.standardize({
+                    Street_Number__c          : "{!record['Billing_Street_Number__c']}",
+                    Street_Number_Suffix__c   : "{!record['Billing_Street_Suffix__c']}",
+                    Street_Name__c            : "{!record['Billing_Street_Name__c']}",
+                    Street_Type__c            : "{!record['QAS_Billing_Street_Type__c']}",
+                    Street_Direction__c       : "{!record['QAS_Billing_Street_Direction__c']}",
+                    Unit_Type__c              : "{!record['QAS_Billing_Unit_Type__c']}",
+                    Unit__c                   : "{!record['Billing_Unit_Number__c']}",
+                    City__c                   : "{!record['Billing_City__c']}",
+                    State__c                  : "{!record['Billing_State__c']}",
+                    Zip__c                    : "{!record['Billing_Zip__c']}",
+                    Zip_4__c                  : "{!record['Billing_Zip_4__c']}",
+                    Country__c                : "{!record['Billing_Country__c']}",
+                    POBox__c                  : "{!record['Billing_Box__c']}",
+                    Addl_Display_Name__c      : "{!record['Billing_Addl_Display_Name__c']}",
+                    County__c                 : "{!record['QAS_Billing_County__c']}",
+                }); 
+            </script>
+
+            <div id="home-address-edit" class="address-edit">
+                <div class="sf-fields">
+                    <apex:inputField value="{!record['Billing_Street_Number__c']}"          html-data-bind="Street_Number__c"/>
+                    <apex:inputField value="{!record['Billing_Street_Suffix__c']}"          html-data-bind="Street_Number_Suffix__c"/> 
+                    <apex:inputField value="{!record['Billing_Street_Name__c']}"            html-data-bind="Street_Name__c"/> 
+                    <apex:inputField value="{!record['QAS_Billing_Street_Type__c']}"        html-data-bind="Street_Type__c"/>
+                    <apex:inputField value="{!record['QAS_Billing_Street_Direction__c']}"   html-data-bind="Street_Direction__c"/>
+                    <apex:inputField value="{!record['QAS_Billing_Unit_Type__c']}"          html-data-bind="Unit_Type__c"/>
+                    <apex:inputField value="{!record['Billing_Unit_Number__c']}"            html-data-bind="Unit__c"/>
+                    <apex:inputField value="{!record['Billing_City__c']}"                   html-data-bind="City__c"/>
+                    <apex:inputField value="{!record['Billing_State__c']}"                  html-data-bind="State__c"/>
+                    <apex:inputField value="{!record['Billing_Zip__c']}"                    html-data-bind="Zip__c"/>
+                    <apex:inputField value="{!record['Billing_Zip_4__c']}"                  html-data-bind="Zip_4__c"/>
+                    <apex:inputField value="{!record['Billing_Country__c']}"                html-data-bind="Country__c"/>
+                    <apex:inputField value="{!record['Billing_Box__c']}"                    html-data-bind="POBox__c"/>
+                    <apex:inputField value="{!record['Billing_Addl_Display_Name__c']}"      html-data-bind="Addl_Display_Name__c"/>
+                    <apex:inputField value="{!record['QAS_Billing_County__c']}"             html-data-bind="County__c"/>
+                </div>
+                <div class="form-group clearfix">
+                    <div class="col-sm-2">
+                        <apex:outputLabel value="Home Address"/>
+                    </div>
+                    <div class="col-sm-8">
+                        <input class="form-control full-address" type="text"></input>
+                    </div>
+                </div>
+                <div class="form-group clearfix alerts">
+                    <div class="col-sm-offset-2 col-sm-8">
+                        <div class="alert"></div>
+                    </div>
+                </div>
+                <div class="form-group clearfix options">
+                    <div class="col-sm-offset-2 col-sm-8">
+                        <ul></ul>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                jQuery(document).ready(function () {
+                    jQuery("#home-address-edit input").val(home_address.render.text);
+                    new AddressValidation.bind("#home-address-edit", "input.my_save");
+                });
+            </script>
+        
+        </apex:outputPanel>       
+
+        <div class="col-sm-offset-2 col-sm-8 buttons">
+            <apex:commandButton id="cancel-button" styleClass="btn-bootstrap btn-default my_cancel" value="Cancel" action="{!useEnteredAddress}" /> 
+            <apex:commandButton id="save-button" styleClass="btn-bootstrap btn-primary my_save" value="Continue" action="{!saveAddress}" />
+
+            <script>
+                jQuery(".btn-bootstrap").removeClass("btn");
+            </script>
+        </div>
+    </div>
+
+</apex:form>
+
+</apex:page>

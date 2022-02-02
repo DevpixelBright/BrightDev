@@ -1,0 +1,3 @@
+<apex:page controller="SMS_DataArchive_Retrieval_Controller"  cache="true" contentType="application/octet-stream#{!fileName}.csv" showHeader="false" sidebar="false" standardStylesheets="false"  lightningstylesheets="true">
+        <apex:outputText value="{!archivedDataCSV}" escape="false"/>
+</apex:page>

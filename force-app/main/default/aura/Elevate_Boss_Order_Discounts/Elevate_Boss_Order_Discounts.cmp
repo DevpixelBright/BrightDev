@@ -1,0 +1,90 @@
+<aura:component Controller="ElevateBoss_Product_Discounts" implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global" >
+    <aura:attribute name="EB_ProductOrder__c" type="EB_ProductOrder__c" default="{'sobjectType':'EB_ProductOrder__c', 
+                                                                                 'Name': '',
+                                                                                 'ProductStatus__c': ''}"/>
+    <aura:attribute name="recordId" type="String"/>  
+    <aura:attribute name="loading" type="Boolean" default="true"/>  
+    <aura:attribute name="ElevateBossProduct" type="Object"/>
+    <aura:attribute name="recordError" type="String"/>
+    <aura:attribute name="productId" type="String"/>
+    <aura:attribute name="options" type="List" access="PRIVATE"/>
+    
+    <aura:attribute name="displayMsg" type="boolean" default="false" /> 
+    <aura:attribute name="selectedValue" type="string"/>   
+    <aura:attribute name="isDisabled" type="Boolean" default="false"/>   
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="stylecss" type="String"/>
+    <aura:unescapedHtml value="{!v.stylecss}"/>
+    <lightning:notificationsLibrary aura:id="notifLib"/>
+    
+    <div class="modal-header slds-modal__header">
+        <h2 class="title slds-text-heading--medium slds-hyphenate">Apply Discount</h2>
+    </div>
+    <div>
+        <aura:if isTrue="{!v.loading}">
+            <div class="spinnerContainer">
+                <lightning:spinner alternativeText="Loading" size="medium" class="spinnerwidget"/>
+            </div>
+            <aura:set attribute="else">
+                
+                <aura:if isTrue= "{!v.options.length > 1}" >
+                    <div class="slds-p-around--medium">
+                        <div class="slds-form-element__label">
+                            Current premium product rate plan:
+                        </div>
+                        <lightning:recordViewForm recordId="{!v.recordId}" objectApiName="EB_ProductOrder__c">
+                            <lightning:outputField fieldName="ProductType__c" variant="label-hidden"/>
+                        </lightning:recordViewForm>
+                        <br/>
+                        <lightning:select label="Select a discount:" value="{!v.selectedValue}">
+                            <aura:iteration items="{!v.options}" var="option">
+                                <option text="{!option.label}" value="{!option.ratePlanId +'-'+ option.ratePlanChargeId}" disabled="{!option.ratePlanId == ''}" selected="{!option.ratePlanId == ''}"/>
+                            </aura:iteration>
+                        </lightning:select>
+                    </div>
+                    <div class="modal-footer slds-modal__footer">
+                        <button class="slds-button slds-button_neutral" onclick="{!c.handleCancel}">Cancel</button>
+                        <lightning:button label="Save" variant="brand" onclick="{!c.onSubmit}" disabled="{!v.isDisabled || v.selectedValue == '-'}"/>
+                    </div>
+                    <aura:set attribute="else">
+                        <div class="slds-notify slds-notify_toast slds-theme_error">
+                            <span class="slds-assistive-text">error</span>
+                             Error encountered applying discount. Please try again.
+                            <br/>
+                        </div>
+                    </aura:set>
+                </aura:if>
+            </aura:set> 
+            <aura:set attribute="else">
+                
+                <aura:if isTrue= "{!v.options.length -- 0}" >
+                    <div class="slds-p-around--medium">
+                        <div class="slds-form-element__label">
+                            Current premium product rate plan:
+                        </div>
+                        <lightning:recordViewForm recordId="{!v.recordId}" objectApiName="EB_ProductOrder__c">
+                            <lightning:outputField fieldName="ProductType__c" variant="label-hidden"/>
+                        </lightning:recordViewForm>
+                        <br/>
+                        <lightning:select label="Select a discount:" value="{!v.selectedValue}">
+                            <aura:iteration items="{!v.options}" var="option">
+                                <option text="{!option.label}" value="{!option.ratePlanId +'-'+ option.ratePlanChargeId}" disabled="{!option.ratePlanId == ''}" selected="{!option.ratePlanId == ''}"/>
+                            </aura:iteration>
+                        </lightning:select>
+                    </div>
+                    <div class="modal-footer slds-modal__footer">
+                        <button class="slds-button slds-button_neutral" onclick="{!c.handleCancel}">Cancel</button>
+                        <lightning:button label="Save" variant="brand" onclick="{!c.onSubmit}" disabled="{!v.isDisabled || v.selectedValue == '-'}"/>
+                    </div>
+                    <aura:set attribute="else">
+                        <div class="slds-notify slds-notify_toast slds-theme_error">
+                            <span class="slds-assistive-text">error</span>
+                            There are no discounts set up for this product.
+                            <br/>
+                        </div>
+                    </aura:set>
+                </aura:if>
+            </aura:set>  
+        </aura:if>
+    </div>
+</aura:component>

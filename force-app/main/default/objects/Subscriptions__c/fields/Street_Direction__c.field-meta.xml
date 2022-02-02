@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Street_Direction__c</fullName>
+    <externalId>false</externalId>
+    <label>CS_Street Direction</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>SW, SOUTHWEST</fullName>
+                <default>false</default>
+                <label>SW, SOUTHWEST</label>
+            </value>
+            <value>
+                <fullName>N, NORTH</fullName>
+                <default>false</default>
+                <label>N, NORTH</label>
+            </value>
+            <value>
+                <fullName>SE, SOUTHEAST</fullName>
+                <default>false</default>
+                <label>SE, SOUTHEAST</label>
+            </value>
+            <value>
+                <fullName>E, EAST</fullName>
+                <default>false</default>
+                <label>E, EAST</label>
+            </value>
+            <value>
+                <fullName>S, SOUTH</fullName>
+                <default>false</default>
+                <label>S, SOUTH</label>
+            </value>
+            <value>
+                <fullName>NE, NORTHEAST</fullName>
+                <default>false</default>
+                <label>NE, NORTHEAST</label>
+            </value>
+            <value>
+                <fullName>W, WEST</fullName>
+                <default>false</default>
+                <label>W, WEST</label>
+            </value>
+            <value>
+                <fullName>NW, NORTHWEST</fullName>
+                <default>false</default>
+                <label>NW, NORTHWEST</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

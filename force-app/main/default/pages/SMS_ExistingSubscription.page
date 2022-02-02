@@ -1,0 +1,323 @@
+<apex:page controller="SMS_ExistingSubscription" sidebar="false" standardStylesheets="false" lightningstylesheets="true">   
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            font-size:12px;
+        }
+        h2 {
+            font-size:100%;
+        }
+        .cbtn {
+          background: #3498db !important;
+          background-image: -webkit-linear-gradient(top, #3498db, #2980b9) !important;
+          background-image: -moz-linear-gradient(top, #3498db, #2980b9) !important;
+          background-image: -ms-linear-gradient(top, #3498db, #2980b9) !important;
+          background-image: -o-linear-gradient(top, #3498db, #2980b9) !important;
+          background-image: linear-gradient(to bottom, #3498db, #2980b9) !important;
+          -webkit-border-radius: 3 !important;
+          -moz-border-radius: 3 !important;
+          border-radius: 3px !important;
+          font-family: Arial !important;
+          color: #ffffff !important;
+          font-size: 16px !important;
+          padding: 9px 20px 9px 20px !important;
+          text-decoration: none !important;
+        }
+        .cbtn2 {
+          background: #3498db !important;
+          background-image: -webkit-linear-gradient(top, #3498db, #2980b9) !important;
+          background-image: -moz-linear-gradient(top, #3498db, #2980b9) !important;
+          background-image: -ms-linear-gradient(top, #3498db, #2980b9) !important;
+          background-image: -o-linear-gradient(top, #3498db, #2980b9) !important;
+          background-image: linear-gradient(to bottom, #3498db, #2980b9) !important;
+          -webkit-border-radius: 3 !important;
+          -moz-border-radius: 3 !important;
+          border-radius: 3px !important;
+          font-family: Arial !important;
+          color: #ffffff !important;
+          font-size: 12px !important;
+          padding: 5px 7px 5px 7px !important;
+          text-decoration: none !important;
+        }         
+        
+        .cbtn:hover {
+          background: #3cb0fd !important;
+          background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db) !important;
+          background-image: -moz-linear-gradient(top, #3cb0fd, #3498db) !important;
+          background-image: -ms-linear-gradient(top, #3cb0fd, #3498db) !important;
+          background-image: -o-linear-gradient(top, #3cb0fd, #3498db) !important;
+          background-image: linear-gradient(to bottom, #3cb0fd, #3498db) !important;
+          text-decoration: none;
+        }      
+        .MainInput input[type="text"] {
+          padding: 10px !important;
+          border: solid 1px #dcdcdc !important;
+          transition: box-shadow 0.3s, border 0.3s !important;
+          width:30%;
+        }
+        .MainInput input[type="text"]:focus,
+        .MainInput input[type="text"].focus {
+          border: solid 1px #707070 !important;
+          box-shadow: 0 0 5px 1px #969696 !important;
+        }  
+        .lable {
+            font-size:16px;
+            font-weight:bold;   
+        }  
+        
+        .bs-wizard {margin-top: 40px;}
+        
+        /*Form Wizard*/
+        .bs-wizard {border-bottom: solid 1px #e0e0e0; padding: 0 0 10px 0;}
+        .bs-wizard > .bs-wizard-step {padding: 0; position: relative;}
+        .bs-wizard > .bs-wizard-step + .bs-wizard-step {}
+        .bs-wizard > .bs-wizard-step .bs-wizard-stepnum {color: #595959; font-size: 16px; margin-bottom: 5px;}
+        .bs-wizard > .bs-wizard-step .bs-wizard-info {color: #999; font-size: 14px;}
+        .bs-wizard > .bs-wizard-step > .bs-wizard-dot {position: absolute; width: 30px; height: 30px; display: block; background: #fbe8aa; top: 45px; left: 50%; margin-top: -15px; margin-left: -15px; border-radius: 50%;} 
+        .bs-wizard > .bs-wizard-step > .bs-wizard-dot:after {content: ' '; width: 14px; height: 14px; background: #fbbd19; border-radius: 50px; position: absolute; top: 8px; left: 8px; } 
+        .bs-wizard > .bs-wizard-step > .progress {position: relative; border-radius: 0px; height: 8px; box-shadow: none; margin: 20px 0;}
+        .bs-wizard > .bs-wizard-step > .progress > .progress-bar {width:0px; box-shadow: none; background: #fbe8aa;}
+        .bs-wizard > .bs-wizard-step.complete > .progress > .progress-bar {width:100%;}
+        .bs-wizard > .bs-wizard-step.active > .progress > .progress-bar {width:50%;}
+        .bs-wizard > .bs-wizard-step:first-child.active > .progress > .progress-bar {width:0%;}
+        .bs-wizard > .bs-wizard-step:last-child.active > .progress > .progress-bar {width: 100%;}
+        .bs-wizard > .bs-wizard-step.disabled > .bs-wizard-dot {background-color: #f5f5f5;}
+        .bs-wizard > .bs-wizard-step.disabled > .bs-wizard-dot:after {opacity: 0;}    
+        .bs-wizard > .bs-wizard-step:first-child  > .progress {left: 50%; width: 50%;}
+        .bs-wizard > .bs-wizard-step:last-child  > .progress {width: 50%;}
+        .bs-wizard > .bs-wizard-step.disabled a.bs-wizard-dot{ pointer-events: none; }
+        /*END Form Wizard*/ 
+        
+        .messageText h4 {
+            margin-top:0px;
+            margin-bottom:2px;
+        }          
+    </style>
+     
+    
+    <div class="col-sm-3" style="font-size:14px;border: 1px solid #ccc; border-radius: 7px; padding-top:10px; padding-bottom:10px; margin-top:3%; margin-bottom:2%;">
+        <h4><span class="glyphicon glyphicon-thumbs-up"></span> Info</h4><br/><br/>
+        Creation of a Subscription in Zuora with the subscription information from Salesforce is a three step process. <br/><br/>
+        <table>
+            <tr>
+                <td width="20%"><b>Step 1:</b></td>
+                <td>Person Account needs to exist for the related Subscription.</td>
+            </tr>
+        </table><br/>
+        <table>
+            <tr>
+                <td width="20%"><b>Step 2:</b></td>
+                <td>Zuora Structure that includes the Parent and Child Account needs to be created in Zuora.</td>
+            </tr>
+        </table><br/>
+        <table>
+            <tr>
+                <td width="20%"><b>Step 3:</b></td>
+                <td>Zuora Subscription needs to be created, Since the Service Activation Date is usually in the past, An ability to change the date and other information is provided in the creation process. </td>
+            </tr>
+        </table> 
+        <br/>               
+        <!--
+        <ul style="-webkit-padding-start: 20px; padding-top:10px;">
+            <li>Fields marked with an asterisk (<font color="red">*</font>) are required for case submission.<br/><br/></li>
+            <li>To submit a case, first select the department where your case should be directed and provide a short description of your case.<br/><br/></li>
+            <li>If your case involves a listing, please provide the MLS number.<br/><br/></li>
+            <li>Attachments may be added to your case by using the Browse button and selecting the file(s) you wish to upload.<br/><br/></li>
+            <li>More than one file may be attached to a case.<br/><br/></li>
+            <li>Maximum file size can not exceed 4MB.<br/><br/></li>
+            <li>When you are finished, click Submit to submit your case to your selected department.</li>
+        </ul>
+        -->    
+    </div>    
+    <div class="col-sm-9" style="font-size:14px;">
+        <apex:pagemessages ></apex:pagemessages> <br/>
+        <apex:form >
+            
+            <apex:actionFunction name="validate" action="{!verifySubscription}" status="ProcessStatus" reRender="Result" oncomplete="confirmPersonAccountProceed()">
+                <apex:param name="Parameter" assignTo="{!mrisSubscription}" value="" />
+            </apex:actionFunction>
+            
+            <apex:actionFunction name="validate2" action="{!createZuoraAccounts}" status="ProcessStatus" reRender="Result" oncomplete="confirmZuoraAccountProceed()">
+                
+            </apex:actionFunction> 
+            
+            <apex:actionFunction name="validate3" action="{!createZuoraSubscription}" status="ProcessStatus" reRender="Result" oncomplete="confirmZuoraSubscription()">
+                
+            </apex:actionFunction> 
+                                           
+        
+            <div style="width:100%; margin-top:20px;" class="MainInput"> 
+                <center>
+                    <span class="lable">BRIGHT Subscription</span> &nbsp; &nbsp; 
+                    <input type="text" value="" id="SubscriptionId" /> &nbsp; &nbsp; 
+                    <input type="button" value="Create" class="cbtn" onclick="validate($('#SubscriptionId').val())" />
+                </center>
+                
+            </div>
+          
+            <apex:outputPanel id="Result">
+            
+            <apex:actionStatus id="ProcessStatus">
+                <apex:facet name="start">
+                    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 1000; background-color: black;">
+                         <div class="alert alert-info" style="width:50%; margin:auto; margin-top:10%; color:black; font-size:16px; font-weight:bold;">
+                             <center>Account creation in process. Please wait ...<br/>
+                                 <img src="{!URLFOR($Resource.AngularLibrary,'/Cursor_Windows_Vista.gif')}" />
+                             </center>
+                         </div>
+                    </div>
+                    <apex:facet name="stop">
+                         <div class="alert alert-danger" id="status"  style="display:none; width:60%; margin:auto; margin-top:20px;">
+                             <center>
+                                 {!if(personAccountState != 'disabled' && personAccountState != 'complete', personAccountState, '')}
+                                 {!if(zuoraAccountState != 'disabled' && zuoraAccountState != 'complete', zuoraAccountState, '')}
+                                 {!if(zuoraSubState != 'disabled' && zuoraSubState != 'complete', zuoraSubState, '')}  
+                             </center>
+                         </div>
+                    </apex:facet>                      
+
+                </apex:facet>              
+            </apex:actionStatus>              
+            
+            <script>
+                function confirmPersonAccountProceed() {
+                    var result = "{!personAccountState}";
+                    if(result == "complete") {
+                        validate2();
+                    }
+                    else { 
+                        $("#status").show();
+                    }
+                }
+                
+                function confirmZuoraAccountProceed() {
+                    var result = "{!zuoraAccountState}";
+                    if(result != "complete")
+                        $("#status").show();
+                }
+                
+                function confirmZuoraSubscription() {
+                    var result = "{!zuoraSubState}";
+                    if(result != "complete")
+                        $("#status").show();                
+                }
+            </script>            
+            
+            <div class="row bs-wizard" style="border-bottom:0;">
+            
+                <div class="col-xs-3 bs-wizard-step {!personAccountState}">
+                    <div class="text-center bs-wizard-stepnum">Step 1</div>
+                    <div class="progress">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <a href="#" class="bs-wizard-dot"></a>
+                    
+                    <apex:outputPanel id="PersonAccountStatus2" rendered="{!personAccountStatus}">
+                        <center><span style="color:{! if(personAccountLable == 'success', '#d6e9c6', '#bce8f1')}; line-height:0.5;" class="glyphicon glyphicon-triangle-top"></span></center>
+                        <div class="alert alert-{! if(personAccountLable == 'success', 'success', 'info')}" style="width:80%; margin:auto;">
+                         
+                          <div class="bs-wizard-info text-center" style="border">
+                            <div style="margin-bottom:5px;"><b>Person Account</b></div>
+                            
+                            <div style="margin-bottom:5px; color:#31708f;"><b><a href="/{!accId}" target="_blank">{!accName}</a></b></div>
+                            <span class="label label-{!personAccountLable}" >{! if(personAccountLable == 'success', 'Created', 'Already Exists')}</span>
+                          </div>
+                        </div>
+                    </apex:outputPanel>
+                    
+                    <apex:outputPanel id="PersonAccountStatus1" rendered="{!!personAccountStatus}">
+                        <div class="bs-wizard-info text-center">
+                            Person Account
+                        </div>                    
+                    </apex:outputPanel>                                      
+                </div>
+                
+                <div class="col-xs-3 bs-wizard-step {!zuoraAccountState}">
+                    <div class="text-center bs-wizard-stepnum">Step 2</div>
+                    <div class="progress"><div class="progress-bar"></div></div>
+                    <a href="#" class="bs-wizard-dot"></a>
+                    
+                    <apex:outputPanel id="zuoraAccountStatus2" rendered="{!zuoraAccountStatus}">
+                        <center><span style="color:{! if(zuoraAccountLable == 'success', '#d6e9c6', '#bce8f1')}; line-height:0.5;" class="glyphicon glyphicon-triangle-top"></span></center>
+                        <div class="alert alert-{! if(zuoraAccountLable == 'success', 'success', 'info')}" style="width:90%; margin:auto;">
+                         
+                          <div class="bs-wizard-info text-center" style="border">
+                            <div style="margin-bottom:5px;"><b>Zuora Account</b></div>
+                            
+                            <div style="margin-bottom:5px; color:#31708f;"><b>{!zAccName}</b> <br/> <span style="font-size:11px;">{!zAccId}</span></div>
+                            <span class="label label-{!zuoraAccountLable}" >{! if(zuoraAccountLable == 'success', 'Created', 'Already Exists')}</span>
+                          </div>
+                        </div>
+                    </apex:outputPanel>
+                    
+                    <apex:outputPanel id="zuoraAccountStatus1" rendered="{!!zuoraAccountStatus}">
+                        <div class="bs-wizard-info text-center">
+                            Zuora Account
+                        </div>                    
+                    </apex:outputPanel>                   
+                </div>
+                
+                <div class="col-xs-3 bs-wizard-step {!zuoraSubState}">
+                    <div class="text-center bs-wizard-stepnum">Step 3</div>
+                    <div class="progress"><div class="progress-bar"></div></div>
+                    <a href="#" class="bs-wizard-dot"></a>
+                    
+                    <apex:outputPanel id="zuoraSubscriptionStatus1" rendered="{!!zuoraSubStatus1}">
+                        <div class="bs-wizard-info text-center">
+                            {! if(zuoraSubStatus2, '', 'Zuora Subscription')}
+                        </div>                         
+                    </apex:outputPanel>                    
+                    
+                    <apex:outputPanel id="zuoraSubscriptionStatus2" rendered="{!zuoraSubStatus1}">
+                        <center><span style="color:#bce8f1; line-height:0.5;" class="glyphicon glyphicon-triangle-top"></span></center>
+                        <div class="alert alert-info" style="width:100%; margin:auto;">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Service Activation Date</label>
+                                <apex:inputText value="{!CFDate}" styleClass="form-control" />
+                                
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Contract Effective Date</label>
+                                <apex:inputText value="{!SADate}" styleClass="form-control" />
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <apex:inputCheckbox value="{!autoRenew}" /> Auto Renew
+                                </label>
+                            </div>
+                            <!-- <apex:commandButton action="{!createZuoraSubscription}" value="Create Zuora Subscription" styleClass="cbtn2"  /> -->
+                            <input type="button" value="Create Zuora Subscription" class="cbtn2" onclick="validate3()"  />
+                        </div>                      
+                    </apex:outputPanel>                    
+                    
+                    <apex:outputPanel id="zuoraSubscriptionStatus3" rendered="{!zuoraSubStatus2}">
+                        <center><span style="color:{! if(zuoraSubLable == 'success', '#d6e9c6', '#bce8f1')}; line-height:0.5;" class="glyphicon glyphicon-triangle-top"></span></center>
+                        <div class="alert alert-{! if(zuoraSubLable == 'success', 'success', 'info')}" style="width:80%; margin:auto;">
+                         
+                          <div class="bs-wizard-info text-center" style="border">
+                            <div style="margin-bottom:5px;"><b>Zuora Subscription</b></div>
+                            
+                            <div style="margin-bottom:5px; color:#31708f;"><b>{!zSubNumber}</b></div>
+                            <span class="label label-{!zuoraSubLable}" >{!if(zuoraSubLable == 'primary', 'Already Exists', 'Created')}</span>
+                          </div>
+                        </div>                    
+                    </apex:outputPanel>
+                </div>
+                
+                <div class="col-xs-3 bs-wizard-step {! if(zuoraSubStatus2, 'complete', 'disabled')}"><!-- active -->
+                    <div class="text-center bs-wizard-stepnum">Step 4</div>
+                    <div class="progress"><div class="progress-bar"></div></div>
+                    <a href="#" class="bs-wizard-dot"></a>
+                    <div class="bs-wizard-info text-center">
+                        Finish
+                    </div>
+                </div>
+            
+            </div>
+            </apex:outputPanel>            
+        </apex:form>
+    </div>
+
+</apex:page>

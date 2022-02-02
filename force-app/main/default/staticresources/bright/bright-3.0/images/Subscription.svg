@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="15" viewBox="0 0 15 15">
+  <defs>
+    <clipPath id="clip-Custom_Size_1">
+      <rect width="15" height="15"/>
+    </clipPath>
+  </defs>
+  <g id="Custom_Size_1" data-name="Custom Size – 1" clip-path="url(#clip-Custom_Size_1)">
+    <path id="Icon_material-credit-card" data-name="Icon material-credit-card" d="M16.5,6H4.5A1.488,1.488,0,0,0,3.007,7.5L3,16.5A1.5,1.5,0,0,0,4.5,18h12A1.5,1.5,0,0,0,18,16.5v-9A1.5,1.5,0,0,0,16.5,6Zm0,10.5H4.5V12h12Zm0-7.5H4.5V7.5h12Z" transform="translate(-3 -4)" fill="#4f5a65"/>
+  </g>
+</svg>

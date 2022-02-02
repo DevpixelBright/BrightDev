@@ -1,0 +1,85 @@
+<aura:component controller="EZJoin_NewApplicationController">
+    <!-- Aura Attributes -->
+    <aura:attribute name="appConfig" type="List" default="[]" />
+    <aura:attribute name="appData" type="Object" />
+    <aura:attribute name="currentConfig" type="Object" />
+    <aura:attribute name="errorMsg" type="String" default="" description="test" />
+    <aura:attribute name="states" type="List" default="[]" />
+    <aura:attribute name="brokerCode" type="Object" default="{}" />
+    <aura:attribute name="appType" type="String" default="" />
+    <aura:attribute name="myDate" type="date" default="" />
+    <aura:attribute name="license" type="Object" default="{}" />
+    <aura:attribute name="association" type="Object" default="{}" /> 
+    <aura:attribute name="showSpinner" type="Boolean" default="false" />
+    
+    <!-- Aura Actions -->
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}" />
+    
+    <!-- Application Events -->
+    <aura:registerEvent name="EZJoin_NewApplicationAppConfigEvent" type="c:EZJoin_NewApplicationAppConfigEvent" /> 
+    <aura:handler name="cmpEvent1" event="c:EZJoin_AutoCompleteClearEvent" action="{!c.handleClearEvent}" />
+    <aura:registerEvent name="cmpEvent" type="c:EZJoin_LoadComponentEvent" /> 
+    
+    <!-- Loading spinner container -->
+    <aura:if isTrue="{!v.showSpinner}">
+        <div class="slds-is-relative">
+            <lightning:spinner />
+        </div>
+    </aura:if>    
+    
+    
+    <div class="slds-text-longform">
+        <h3 class="slds-text-heading_medium">Enter license information</h3>
+        
+        <aura:if isTrue="{!v.errorMsg != ''}">
+            <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error blueline" role="alert" style="margin-bottom:26px; border-radius: 2px;">
+                <span class="slds-assistive-text">error</span>
+                <span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small" title="Description of icon when needed"></span>
+                <h2 class="newarrow" style="margin:0;"><img src="{!$Resource.ejoin + '/ejoinimages/ezjoininfo.png'}" /><aura:unescapedHtml  value="{!v.errorMsg}" /></h2>
+            </div>
+        </aura:if>        
+        
+        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 full-field field2">
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow1">
+                <lightning:input type="text" class="required" name="LicenseNumber" minlength="5" aura:id="LicenseNumber" label="License Number" placeholder="Enter License number" required="true" value="{!v.appData.license.licenseNumber}" maxlength="14" pattern="^[A-Za-z0-9]+$" messageWhenPatternMismatch="License number must be alpha-numeric" messageWhenTooShort="License number must contain 5 to 14 characters" />
+            </div>
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow1">
+                <lightning:input type="date" dateStyle="short" name="ExpirationDate" label="License Expiration (M/D/YYYY)" aura:id="LicenseExpiration" placeholder="Enter expiration date" required="true" class="required" value="{!v.appData.license.licenseExpirationDate}" maxlength="40"  messageWhenPatternMismatch="test" /> 
+            </div>
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+                <lightning:select name="State" aura:id="LicenseState" label="License State" class="required" required="true" value="{!v.appData.license.licenseState}">
+                    <aura:iteration items="{!v.states}" var="st">
+                        <option value="{!st.value}">{!st.label}</option>
+                    </aura:iteration>
+                </lightning:select>                
+            </div>
+        </div>
+        
+        <aura:if isTrue="{!and(v.appData.license.licenseNumber != '', v.appData.license.licenseState != '')}">
+            <aura:if isTrue="{!and(v.appData.license.licenseExpirationDate, v.appData.license.licenseExpirationDate != '')}">
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field1">
+                <h3 class="slds-text-heading_medium">Broker &amp; NRDS ID</h3>
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 required">
+                    <c:EZJoin_AutoCompleteComponent aura:id="BrokerCodeCmp" applicationType="{!v.appType}" cmpType="BrokerCode" label="Broker Code" inputValue="{!(v.brokerCode.Account_Name__c ? (v.brokerCode.Account_Name__c + ' - ' + v.brokerCode.Name) : '')}" selectedOption="{!(v.brokerCode.Account_Name__c ? '0' : '')}" selectedObj="{!v.brokerCode}" placeHolder="Start typing the broker code..." />
+                </div>
+            </div> 
+            
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 full-field field2">
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow1 ">
+                    <lightning:input type="text" name="NRDSId" aura:id="NRDSId" label="NRDS ID" placeholder="Enter NRDS ID" value="{!v.appData.license.nrdsId}" maxlength="40" />
+                </div>
+                
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow1">
+                    <c:EZJoin_AutoCompleteComponent aura:id="AssociationCmp" applicationType="{!v.appType}" cmpType="Association" label="Association Name" inputValue="{!(v.association.Account_Name__c ? (v.association.Account_Name__c + ' - ' + v.association.Name) : '')}" selectedOption="{!(v.association.Account_Name__c ? '0' : '')}" selectedObj="{!v.association}" placeHolder="Start typing the association name..." />
+                	<div lightning-input_input="" id="AssociationError" data-help-message="true" role="alert" class="slds-form-element__help" style="color: rgb(194, 57, 52);"></div>
+                </div>
+            </div>
+            
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 spaceline2"></div>
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                <button class="slds-button slds-button_brand" onclick="{!c.submitBtnHandler}" disabled="{!!and(v.brokerCode.Name, v.appData.license.licenseNumber)}">Continue</button>
+            </div>    
+                </aura:if>
+        </aura:if>
+    </div>    
+</aura:component>

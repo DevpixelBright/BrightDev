@@ -1,0 +1,331 @@
+<aura:component>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <ltng:require styles="{!$Resource.headerpart }"></ltng:require>
+   <ltng:require styles="{!$Resource.side }"></ltng:require> 
+   <ltng:require styles="{!$Resource.body }"></ltng:require>
+  <aura:attribute name="toggle1" type="boolean" default="false"/>
+    
+    <aura:attribute name="toggle2" type="boolean" default="false"/>
+   	<aura:attribute name="toggle3" type="boolean" default="false"/>
+   
+   <div class="c-container">
+      <div class="fullpage slds-scope">
+         <div class="slds-grid slds-wrap">
+            <lightning:layout multipleRows="true">
+               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage header-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:header />
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+               <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                   <c:mobilemenu />
+                   <lightning:layout>
+                     <div class="slds-container--x-large new-container">
+                         <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+            
+            
+                  <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                   <div class=" middlebar1">
+     <lightning:breadcrumbs>
+        <lightning:breadcrumb label="Authorized Signers"  href="#" class="parent"/>
+        <lightning:breadcrumb label="Add an Authorized Signer" href="#" class="parent2"/>
+    </lightning:breadcrumbs>   
+                      
+                      </div> 
+                             </lightning:layoutItem>
+                    
+                     <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="bottombar bottombar1">
+                     <div class="dev dev1">
+                       <h4 class="an">Add an Authorized Signer</h4>
+                         <div class="bodybottom">
+          
+                
+                
+                <div class="slds-container--x-large new-container">
+                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                     <div class=" footer-full tabset">
+                    
+                   <div class="slds-vertical-tabs">
+  <ul class="slds-vertical-tabs__nav" role="tablist" aria-orientation="vertical">
+    <li class="slds-vertical-tabs__nav-item " title="Tab 1" role="presentation">
+      <a class="slds-vertical-tabs__link" href="#" role="tab" tabindex="0" aria-selected="true" aria-controls="slds-vertical-tabs-0" id="slds-vertical-tabs-0__nav">
+        <span class="slds-vertical-tabs__left-icon"></span>
+        <span class="slds-truncate" title="Tab 1">Step 1 :<p>Select the individual you wish to assign as a Responsible Broker for the offices and listings in your brokerage.</p></span>
+        <span class="slds-vertical-tabs__right-icon"></span>
+          
+          <div class="arrow-left"><img src="{!$Resource.bright + '/bright-3.0/images/sidearrow.svg'}" alt="Bright" /></div>
+      </a>
+    </li>
+    <li class="slds-vertical-tabs__nav-item  " title="Tab 2" role="presentation">
+      <a class="slds-vertical-tabs__link" href="#" role="tab" tabindex="-1" aria-selected="false" aria-controls="slds-vertical-tabs-1" id="slds-vertical-tabs-1__nav">
+        <span class="slds-vertical-tabs__left-icon"></span>
+        <span class="slds-truncate" title="Tab 2">Step 2 :<p>The offices below have been assigned to this Responsible Broker by default. Verify changes before proceeding.</p> </span>
+        <span class="slds-vertical-tabs__right-icon"></span>
+           <div class="arrow-left"><img src="{!$Resource.bright + '/bright-3.0/images/sidearrow.svg'}" alt="Bright" /></div>
+          
+      </a>
+    </li>
+    <li class="slds-vertical-tabs__nav-item slds-is-active" title="Tab 3 has a really long label and can wrap or truncate" role="presentation">
+      <a class="slds-vertical-tabs__link" href="#" role="tab" tabindex="-1" aria-selected="false" aria-controls="slds-vertical-tabs-2" id="slds-vertical-tabs-2__nav">
+        <span class="slds-vertical-tabs__left-icon"></span>
+        <span class="slds-truncate" title="Tab 3">Step 3 :<p>Summary of Changes and additional Terms and conditions for Broker designating a Responsible Broker</p></span>
+        <span class="slds-vertical-tabs__right-icon"></span>
+           <div class="arrow-left"><img src="{!$Resource.bright + '/bright-3.0/images/sidearrow.svg'}" alt="Bright" /></div>
+      </a>
+    </li>
+  </ul>
+  <div class="slds-vertical-tabs__content  slds-hide" id="slds-vertical-tabs-0" role="tabpanel" aria-labelledby="slds-vertical-tabs-0__nav">
+    <div class="slds-text-longform">
+      <div class="long">
+        <h2>Select Individual</h2>
+          <div class="table-form">
+          <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped new">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            
+                                            
+                                            <th class="" scope="col" style="width: 32px;">
+              
+                      
+                                               </th>
+                                            
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Opportunity Name">Subscriber Name     </div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Subscription ID</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Close Date">License Number</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Stage">License State</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Confidence">License Expiration Date</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Amount">License Type</div>
+                                            </th>
+                  
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="slds-hint-parent blue">
+                                           <th data-label="Opportunity Name" scope="row"> <ui:inputRadio aura:id="r0" name="others" label="" />   </th>
+     
+                                           <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Bright test </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">1234556</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">123456</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">NJ</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">10/10/2020</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Broker</div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                          <th data-label="Opportunity Name" scope="row"> <ui:inputRadio aura:id="r0" name="others" label="" />   </th>
+     
+                                           <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Bright test </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">1234556</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">123456</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">NJ</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">10/10/2020</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Broker</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                            <th data-label="Opportunity Name" scope="row"> <ui:inputRadio aura:id="r0" name="others" label="" />   </th>
+     
+                                           <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Bright test </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">1234556</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">123456</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">NJ</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">10/10/2020</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Broker</div>
+                                            </td>
+                                        </tr>
+                                        
+                                        
+                                    </tbody>
+                                </table>
+          </div>
+          <lightning:button class="brand " variant="brand " label="Continue" title="Brand action" onclick="{! c.handleClick }" />
+        </div>
+    </div>
+  </div>
+  <div class="slds-vertical-tabs__content slds-hide" id="slds-vertical-tabs-1" role="tabpanel" aria-labelledby="slds-vertical-tabs-1__nav">
+    <div class="slds-text-longform">
+      <div class="long">
+        <h2>Assign Responsible Broker &amp; Review Changes</h2>
+   <p>The offices below have been assigned to this Responsible Broker by default.</p>
+          <h3>John Smith</h3>
+          <p class="addr">Phone: 111-222-3332</p>
+          <p>Email: brighttest@yopmail.com</p>
+          <h3>Bright test (BRGT040)</h3>
+          <p class="addr">9707 Key West</p>
+              <p>Rockville MD 20850</p>
+          <h4>License Details</h4>
+          <div class="periodline">
+          <h5>License Number: <span>123456</span></h5>
+              <h5>License State: <span>NJ</span></h5>
+              <h5>License Expiration Date: <span>10/10/2020</span></h5>
+              <h5>License Type: <span>Broker</span></h5>
+          </div>
+         <h4>Offices Assigned</h4>
+          <fieldset class="slds-form-element">
+
+  <div class="slds-form-element__control">
+    <div class="slds-checkbox">
+      <input type="checkbox" name="options" id="checkbox-unique-id-76" value="checkbox-unique-id-76" checked="" />
+      <label class="slds-checkbox__label" for="checkbox-unique-id-76">
+        <span class="slds-checkbox_faux"></span>
+        <span class="slds-form-element__label">BRGT040(Rockville, MD)</span>
+      </label>
+    </div>
+    <div class="slds-checkbox">
+      <input type="checkbox" name="options" id="checkbox-unique-id-77" value="checkbox-unique-id-77" />
+      <label class="slds-checkbox__label" for="checkbox-unique-id-77">
+        <span class="slds-checkbox_faux"></span>
+        <span class="slds-form-element__label">BRGT_BR-040-MD(Clarksburg, MD)</span>
+      </label>
+    </div>
+  </div>
+</fieldset>
+          <div class="sline"></div>
+          <lightning:button class="brand " variant="brand " label="Continue" title="Brand action" onclick="{! c.handleClick }" />
+        </div>
+    </div>
+  </div>
+  <div class="slds-vertical-tabs__content slds-show" id="slds-vertical-tabs-2" role="tabpanel" aria-labelledby="slds-vertical-tabs-2__nav">
+    <div class="slds-text-longform">
+        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+        <div class="part0">
+        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+        <div class="part1">
+            <div class="long">
+        <h2>Summary</h2>
+   
+          <h3>John Smith</h3>
+          <p class="addr">Phone: 111-222-3332</p>
+          <p>Email: brighttest@yopmail.com</p>
+          <h3>Bright test (BRGT040)</h3>
+          <p class="addr">9707 Key West</p>
+              <p>Rockville MD 20850</p>
+          <h4 class="detail">License Details</h4>
+          <div class="periodline periodline1">
+          <h5>License Number: <span>123456</span></h5>
+              <h5>License State: <span>NJ</span></h5>
+              <h5>License Expiration Date: <span>10/10/2020</span></h5>
+              <h5>License Type: <span>Broker</span></h5>
+          </div>
+         <h4 class="detail">Offices Assigned</h4>
+          <ul class="added">
+                <li><h6>Previous</h6></li>
+              <li><h6>Added</h6> <p>BRGT040(Rockville, MD)<br />BRGT_BR-040-MD(Clarksburg, MD)</p></li>
+              <li><h6>Removed</h6></li>
+                  <li><h6>Current</h6><p>BRGT040(Rockville, MD)<br />BRGT_BR-040-MD(Clarksburg, MD)</p></li>
+                
+                </ul>
+          
+        </div>
+            </div>
+            </lightning:layoutItem>
+            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                <div class="part3">
+                    <div class="long">
+                    <h2>Terms &amp; Conditions</h2>
+                        <lightning:textarea name="input3" label="Textarea field with a placeholder" placeholder="type here..." variant = "label-hidden" />
+                        <div class="slds-form-element__control">
+    <div class="slds-checkbox">
+      <input type="checkbox" name="options" id="checkbox-unique-id-78" value="checkbox-unique-id-78" checked="" />
+      <label class="slds-checkbox__label" for="checkbox-unique-id-78">
+        <span class="slds-checkbox_faux"></span>
+        <span class="slds-form-element__label">I accept the additional Terms for Designating a Responsible Broker</span>
+      </label>
+    </div>
+   
+  </div>
+                    </div>
+            </div>
+            </lightning:layoutItem>
+            <div class="sline"></div>
+          <lightning:button class="brand " variant="brand " label="Continue" title="Brand action" onclick="{! c.handleClick }" />
+        </div>
+        </lightning:layoutItem>
+        
+      
+    </div>
+  </div>
+</div>
+                    </div>
+                    </lightning:layoutItem>
+                </div></div>
+                         
+                         
+                         
+                         
+                         
+                   
+                         
+                  </div>
+                  
+               </div>
+                             </lightning:layoutItem>
+           
+                
+          
+                         </lightning:layoutItem>
+         </div>
+                  </lightning:layout>
+               </lightning:layoutItem>
+                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage footer-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:footer />
+                         
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+            </lightning:layout>
+         </div>
+      </div>
+    
+   </div>
+</aura:component>

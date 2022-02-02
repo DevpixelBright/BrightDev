@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT">
+    <aura:attribute name="cmpType" type="String" />
+    <aura:attribute name="objSelected" type="Object" />
+</aura:event>

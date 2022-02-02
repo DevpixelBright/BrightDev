@@ -1,0 +1,16 @@
+<apex:page showHeader="false" standardStylesheets="false">
+    <apex:includeLightning />
+    <apex:slds />
+    <div id="dataTable" />
+    <script>
+        $Lightning.use("c:EZJoin_ReactivateApp", function() {
+            $Lightning.createComponent("c:EZJoin_Reactivate", {}, "dataTable", function(cmp) {
+                console.log('done');
+                var headerHeight = document.getElementById('header-container').offsetHeight;
+                var footerHeight = document.getElementById('footer-container').offsetHeight;
+                var windowHeight = window.innerHeight;
+                document.getElementById('content-container').style.minHeight  = (windowHeight - headerHeight - footerHeight - 2) + 'px';   
+            });
+        });        
+    </script>
+</apex:page>

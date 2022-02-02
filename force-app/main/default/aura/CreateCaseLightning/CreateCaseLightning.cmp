@@ -1,0 +1,55 @@
+<aura:component controller='CreateCaseApexController' implements="forceCommunity:availableForAllPageTypes" access="global" >
+    <aura:attribute name="inputCase" type="Case" default="{'sobjectType': 'Case',
+                                                          'Origin': 'CURE Community',
+                                                          }"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <div><center><b>CREATE A CASE</b></center></div> 
+		<div>
+        Subject: <force:inputField aura:id="subject" value="{!v.inputCase.Subject}" required="true"/> 
+</div>
+    <ui:inputSelect label="Request Type" class="dynamic" aura:id="requestType" value="{!v.inputCase.Request_Type__c}" required="true"/>
+    <div>
+        CURE Group: <force:inputField aura:id="cureGroup" value="{!v.inputCase.CURE_Group__c}" />
+    </div>
+        <ui:inputSelect label="CURE Customer" class="dynamic" aura:id="cureCustomer" value="{!v.inputCase.CURE_Customer__c}"  required="true"/>
+    
+        <ui:inputSelect label="Category/Resource" class="dynamic" aura:id="category" value="{!v.inputCase.Category_Resource__c}" required="true" /> 
+    
+        <ui:inputSelect label="Component/Function" class="dynamic" aura:id="component1" value="{!v.inputCase.Component_Function__c}" required="true" />
+    	<div>
+        Description: <force:inputField aura:id="description" value="{!v.inputCase.Description_RTF__c}"  required="true"/>
+        </div>
+            <ui:inputSelect label="Environment" class="dynamic" aura:id="environment" value="{!v.inputCase.Environment__c}" required="true" />
+    
+        <ui:inputSelect label="Reload/Data Refresh" class="dynamic" aura:id="reload" value="{!v.inputCase.Reload_Data_Refresh__c}"  required="true" change="{!c.onChangeFunction}" />
+
+        <span aura:id="detailsLabel">Reload Details:</span> <force:inputField aura:id="details" value="{!v.inputCase.Reload_Details__c}"  />
+
+        <ui:inputSelect label="Impact VIP" class="dynamic" aura:id="impact" value="{!v.inputCase.Impact_VIP__c}"  />
+    
+        <ui:inputSelect label="Urgencey Critical Business Time" class="dynamic" aura:id="urgency" value="{!v.inputCase.Urgency_Critical_Business_Time__c}"  /> 
+    <div>
+        Example Data: <force:inputField aura:id="example" value="{!v.inputCase.Example_Data__c}"  />
+        </div>
+    <div>   
+    Additional Details: <force:inputField aura:id="additional" value="{!v.inputCase.Additional_Details_Acceptance_criteria__c}"  />  
+     </div>    
+        <aura:attribute name="parentId" type="Id"/>
+        <aura:method name="saveAtt" action="{!c.save2}"></aura:method>
+    
+        <!--c:auraMethod
+    
+        
+        
+        <aura:handler event="aura:waiting" action="{!c.waiting}"/>
+        <aura:handler event="aura:doneWaiting" action="{!c.doneWaiting}"/>-->
+        
+        <div class="container" >
+            <input type="file" class="file" aura:id="file" />
+            <div aura:id="uploading" class="notUploading">
+            </div>
+        </div>
+        <div class="submitButtonContainer">
+        <ui:button label='Create Case' press="{!c.create}"/>
+        </div>
+</aura:component>

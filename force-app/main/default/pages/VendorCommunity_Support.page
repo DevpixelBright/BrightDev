@@ -1,0 +1,48 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false"  lightningstylesheets="true">
+    <apex:composition template="VendorCommunity_Base">
+        
+        <apex:define name="content">
+            <c:Bootstrap_Resources />
+            <style>
+                
+                .jumbotron {
+                    padding-top: 10px;
+                    padding-bottom: 20px;
+                }
+                .jumbotron p {
+                    font-size: 17px;
+                }
+            </style>
+            
+            <div class="jumbotron landing_instructions">
+                <p>BRIGHT is committed to helping our customers use our tools and services to their full potential. If you have a question or concern about your 
+                </p><p>
+                  MLS subscription or specific MLS products, you’ve come to the right place.</p>
+            </div>
+            
+            <div class="row action-panels">
+ 
+                <div class="col-sm-6 col-md-4">
+                    <a href="VendorCommunity_Cases_View">
+                        <h4><i class="fa fa-archive fa-2x"></i>View Cases</h4>
+                        <!--<p>Have you previously submitted a case and want to check on its status? View your submitted cases here.</p>-->
+                        <p> View the status of any of your current cases. </p>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <a href="VendorCommunity_Cases_Create">
+                        <h4><i class="fa fa-envelope-o fa-2x"></i>Submit a Case</h4>
+                        <!--<p>Do you have a question about your subscription? Experiencing a technical issue with an MLS product? Submit a case to the MLS Support Center.</p>-->
+                        <p>Have a problem or a question? Submit a case to Bright MLS. </p>
+                    </a>
+                </div>                          
+            </div>
+
+            <script>
+                markOptionPanel("vendorsupport");
+            //markUserId("{!$CurrentPage.parameters.id}");
+            </script>
+        </apex:define>
+
+    </apex:composition> 
+</apex:page>

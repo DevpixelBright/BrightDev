@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DelegateGroup xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customObjects>Subscriptions</customObjects>
+    <customObjects>License</customObjects>
+    <customObjects>MRIS_Application</customObjects>
+    <customObjects>Related_Agent</customObjects>
+    <customObjects>Related_Association</customObjects>
+    <customObjects>Relationship</customObjects>
+    <customObjects>Subscription_License</customObjects>
+    <customObjects>Subscription_Role</customObjects>
+    <label>Support Managment</label>
+    <loginAccess>true</loginAccess>
+    <profiles>Support Center Supervisors</profiles>
+    <profiles>Custom High Volume Portal User</profiles>
+    <profiles>Processors</profiles>
+    <profiles>Support Center (HD Analysts) lvl3</profiles>
+    <profiles>Support Center lvl1</profiles>
+    <profiles>Support Center lvl2</profiles>
+    <roles>Staff</roles>
+</DelegateGroup>

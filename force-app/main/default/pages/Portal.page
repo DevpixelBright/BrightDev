@@ -1,0 +1,60 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="Portal_Controller" lightningstylesheets="true">
+    <head>
+        <title>MRIS {!$Label[Target + "TITLE"]}</title>
+    </head>
+
+    <apex:composition template="Bootstrap_Single">
+
+        <apex:define name="title">
+            {!$Label[Target + "TITLE"]}
+        </apex:define>
+
+        <apex:define name="instructions">
+            <iframe src="{!$Label.MRIS_SALESFORCE_LOGOUT}" class="hide"></iframe>
+            
+            <div class="row-fluid">
+                <div class="span4 offset4" style="text-align: center; font-weight: bold; margin-top: 30px;">
+                    Establishing Secure Session
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span4 offset4">
+                    <div class="progress progress-striped active">
+                        <div class="bar" style="width: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <style>
+                iframe#target {
+                    position: absolute;
+                    top: 0px;
+                    height: 100%;
+                    width: 100%;
+                    border: 0px;
+                    padding: 0px;
+                    margin: 0px;
+                    display: none;
+                }
+            </style>
+            
+            <script>
+                $(function () {
+                    var iframe = $('<iframe id="target" src="{!$Label[Target + "URL"]}" frameborder="0">');
+                    
+                    window.setTimeout(function () {
+                        if (navigator.userAgent.indexOf("MSIE") >= 0)
+                            location.href = "{!$Label[Target + "URL"]}";
+                        else
+                            $("body").append(iframe);
+                    }, 2000);
+
+                    window.setTimeout(function () {
+                        iframe.show();
+                    }, 3000);
+                });
+            </script>
+        </apex:define>
+        
+    </apex:composition>         
+</apex:page>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>License_View</fullName>
+    <columns>Contact__c</columns>
+    <columns>NAME</columns>
+    <columns>License_State__c</columns>
+    <columns>License_Expiration_Date__c</columns>
+    <columns>License_Type__c</columns>
+    <columns>PrismLicenseID__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <label>License View</label>
+</ListView>

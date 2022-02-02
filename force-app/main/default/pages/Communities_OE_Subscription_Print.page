@@ -1,0 +1,35 @@
+<apex:page renderAs="pdf" controller="Communities_OE_Subscription_Print" applyHtmlTag="false"
+           showHeader="false" docType="html-5.0" standardStylesheets="false" readOnly="true" lightningstylesheets="true">  
+    <apex:composition template="Communities_Base_PDF">  </apex:composition> 
+    <div class="col-xs-12 instructions" style="padding-top:20px; padding-bottom:20px; margin:0;">
+        <div class="col-xs-9" style="margin:0; padding:0;">
+            <p style="margin:0; padding:0;">Below is a summary of the Office Exclusives submitted to Bright by agents in your office(s). 
+            </p>
+        </div>
+    </div>
+    <table style="font-size:11px; width:100%">
+        <thead>
+            <tr>
+                <th style="text-align:left; width:150px">Property Address</th>
+                <th style="text-align:left">City</th>
+                <th style="text-align:left">State</th>
+                <th style="text-align:left">Zip</th>
+                <th style="text-align:left;width:90px;">Office Exclusive Date Submitted</th>
+                <th style="text-align:left">Submitted by</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <apex:repeat value="{!officeExclusives}" var="offexc" id="officeExclusivesId">
+                <tr>
+                    <td style="text-align:left">{!offexc.propertyAddress}</td>
+                    <td style="text-align:left">{!offexc.city}</td>
+                    <td style="text-align:left">{!offexc.state}</td>
+                    <td style="text-align:left">{!offexc.zip}</td>
+                    <td style="text-align:left">{!offexc.submittedOnStr}</td>
+                    <td style="text-align:left">{!offexc.submittedBy}</td>
+                </tr>
+            </apex:repeat>
+        </tbody>                                        
+    </table>  
+</apex:page>

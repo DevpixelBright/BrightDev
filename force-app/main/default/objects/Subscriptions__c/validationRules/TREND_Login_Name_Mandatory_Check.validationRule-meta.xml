@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TREND_Login_Name_Mandatory_Check</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISPICKVAL(Service_Jurisdiction__c, &apos;TREND&apos;) &amp;&amp;  TREND_Login_Name__c == null</errorConditionFormula>
+    <errorDisplayField>TREND_Login_Name__c</errorDisplayField>
+    <errorMessage>Missing required field: TREND Login Name</errorMessage>
+</ValidationRule>

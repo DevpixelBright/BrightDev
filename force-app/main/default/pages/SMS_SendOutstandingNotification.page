@@ -1,0 +1,402 @@
+<apex:page id="thepage" controller="SMS_SendOutstandNotification_Controller" tabStyle="Account" sidebar="false" lightningstylesheets="true">
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/angular.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/ui-bootstrap-tpls-0.12.0.js')}"/>
+    
+    <apex:includeScript value="{!URLFOR($Resource.AngularJsTable,'/ng-table.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.AngularJsTable,'/ng-table.css')}"/>
+    <c:Bootstrap_Resources />    
+    
+    <style>
+        body {
+            font-size:12px;
+        }
+        h2 { 
+            font-size:100%;
+        }
+        .nav-tabs>li>a {
+            font-weight:bold;
+        }
+        .btn1-primary {
+          color: #fff;
+          background-color: #337ab7;
+          border-color: #2e6da4;
+        }          
+        .btn1 {
+          display: inline-block;
+          margin-bottom: 0;
+          font-weight: 400;
+          text-align: center;
+          vertical-align: middle;
+          cursor: pointer;
+          background-image: none;
+          border: 1px solid transparent;
+          white-space: nowrap;
+          padding: 4px 10px;
+          font-size: 13px;
+          line-height: 1.42857143;
+          border-radius: 2px;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+        } 
+        .pagination {
+            margin:0px;
+        }   
+        .pull-right {
+            margin-top:5px;
+        }  
+        input[type=checkbox] {
+            margin-top:3px !important;
+        }  
+        .panel-heading {
+            
+        }
+        .radioOpt td, .radioOptinput, .radioOpt label{
+        //color:#666c71; 
+        //font-family : Verdana, Geneva, sans-serif;
+            font-size : 12px;
+            font-weight: normal;
+            margin-top: -15px;
+        }    
+    </style>
+
+    <apex:form id="theForm">
+        <apex:actionFunction name="sendNotification" action="{!generateInvoicePdfs}" status="PaymentStatus" reRender="out3" oncomplete="confirmRecordsUpload();">
+            <apex:param name="Parameter" assignTo="{!finalAccounts}" value="" />
+        </apex:actionFunction>
+        
+        <apex:outputPanel id="out3">
+            <script>
+            function confirmRecordsUpload(){             
+                var processStatus = "{!batchStatus}";
+                var msg = "{!batchStatusMsg}";
+                if(processStatus == "Success") {
+                    $('#successMsg').show();
+                    $('#successMsg').html('<span class="glyphicon glyphicon-ok"></span> ' + msg);
+                    $('#failedMsg').hide();
+                }
+                else {
+                    $('#failedMsg').show();
+                    $('#failedMsg').html('<span class="glyphicon glyphicon-remove"></span> ' + msg);
+                    $('#successMsg').hide();                    
+                }
+            }           
+            </script>       
+        </apex:outputPanel>           
+        
+        
+        <apex:actionStatus id="PaymentStatus">
+            <apex:facet name="start">
+                <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 1000; background-color: black;">
+                    <div class="alert alert-info" style="width:50%; margin:auto; margin-top:15%; color:black; font-size:16px; font-weight:bold;">
+                        <center>Processing request. Please wait ...<br/>
+                            <img src="{!URLFOR($Resource.AngularLibrary,'/Cursor_Windows_Vista.gif')}" />
+                        </center>
+                    </div>
+                </div>
+            </apex:facet>
+            <apex:facet name="stop">
+                <div class="alert alert-success" id="successMsg"  style="display:none; font-size:13px;">
+                    
+                </div>
+                <div class="alert alert-danger" id="failedMsg"  style="display:none; font-size:13px;">
+                    
+                </div>             
+            </apex:facet>                
+        </apex:actionStatus>          
+    
+        <div id="resultPanel" ng-app="first" ng-controller="firstcontroller" style="font-size:12px;">
+            
+            <div class="col-sm-2" style="font-size:14px; color:#428bca; border: 1px solid #ccc; border-radius: 7px; padding-top:10px; padding-bottom:10px; margin-bottom:2%;">
+                <div style="font-weight:bold;">
+                    <span class="glyphicon glyphicon-search"></span> Search
+                </div>            
+                
+                <div class="form-group" style="margin-top:5px;margin-bottom:5px;">
+                    <input type="text" class="form-control" placeholder="Search Accounts" ng-model="search"  />
+                </div>
+                <br/>
+                <div style="margin-bottom:10px; font-weight:bold;"><!--margin-top:5px;-->
+                    <span class="glyphicon glyphicon-info-sign"></span> Filter Results
+                </div>             
+                <div style="font-size:12px; color:black;">
+                    <table>
+                        <tr>
+                            <td style="">Total Accounts: </td><td style="padding-left:5px;"><span class="label label-info">{{allAccountsCount()}}</span></td>
+                        </tr>
+                        <tr>
+                            <td style="padding-top:2px;">Active Accounts: </td><td style="padding-left:5px;  padding-top:2px;"><span class="label label-primary">{{activeAccountsCount()}}</span></td><!--{!activeOutstandingCount}-->
+                        </tr>
+                        <tr>
+                            <td style="padding-top:2px;">Inactive Accounts: </td><td style="padding-left:5px; padding-top:2px;"><span class="label label-warning">{{inactiveAccountsCount()}}</span></td><!--{!inactiveOutstandingCount}-->
+                        </tr>
+                    </table>
+                </div>
+                
+                <br/>
+                <div style="margin-bottom:10px; font-weight:bold;"><!--margin-top:10px;-->
+                    <span class="glyphicon glyphicon-filter"></span> Filters
+                </div>
+                
+                <div class="form-group">
+                    <div style="float:left; padding-top:5%;">
+                        <label for="exampleInputEmail1" style="font-weight:200; color:black; font-size:12px; font-weight:bold;">Status</label>
+                    </div>
+                    <!--<div class="checkbox" style="font-size:12px; color:black;">
+                        <label>
+                            <input type="checkbox" ng-model="filterActive" ng-change="filterResults()"  /> Active
+                        </label>
+                    </div>
+                    <div class="checkbox" style="font-size:12px; color:black;">
+                        <label>
+                            <input type="checkbox" ng-model="filterInactive" ng-change="filterResults()"  /> Inactive
+                        </label>
+                    </div>-->
+                    <div style="float:right; padding-right:10%;">
+                        <apex:selectCheckboxes layout="pageDirection" value="{!checksSelected}" onchange="statusFilter();" styleClass="radioOpt" style=" " >
+                            <apex:selectOption itemLabel="Active" itemValue="Active" />
+                            <apex:selectOption itemLabel="Inactive" itemValue="Inactive"/>
+                        </apex:selectCheckboxes>                    
+                        <apex:actionFunction name="statusFilter" action="{!statusFilter}" />
+                    </div>
+                    <!--<div>
+                        <apex:selectRadio value="{!statusSelected}" onchange="statusFilter();" layout="pageDirection" styleClass="radioOpt" style=" margin-top: -15px;">
+                            <apex:selectOption itemLabel="Active" itemValue="Active" /><br/>
+                            <apex:selectOption itemLabel="Inactive" itemValue="Inactive"/>
+                        </apex:selectRadio>
+                    </div>
+                    -->
+                </div>
+                <br/><br/><br/>
+                <div class="form-group">
+                    <div>
+                        <label for="exampleInputEmail1" style="font-weight:200; color:black; font-size:12px; font-weight:bold;">Service Jurisdiction</label>
+                    </div>
+                    <div >
+                        <apex:selectList value="{!selectedSJs}" multiselect="true" size="3" style="border-radius: 4px; color:black;">
+                            <apex:selectOptions value="{!SJOptions}"/>
+                        </apex:selectList>
+                    </div>
+                </div>
+                
+                
+                <div class="form-group">
+                    <div >
+                        <label for="exampleInputEmail1" style="font-weight:200; color:black; font-size:12px; font-weight:bold;">Billing Jurisdiction</label>
+                    </div>
+                    <div >
+                        <apex:selectList value="{!selectedBJs}" multiselect="true" style="border-radius: 4px; color:black;">
+                            <apex:selectOptions value="{!BJOptions}"/>
+                        </apex:selectList>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <apex:commandButton styleClass="btn" value="Go" action="{!serviceBillingFilter}" />
+                </div>            
+                
+                <div class="form-group">
+                    <label style="font-weight:200; color:black; font-size:12px; font-weight:bold;">Outstanding days range</label><br/>
+                    <input type="text" class="form-control" placeholder="" ng-model="filterDays" ng-change="filterResults()" style="width:46%; display:inline;" />
+                    <span> - </span>
+                    <input type="text" class="form-control" placeholder="" ng-model="filterDays1" ng-change="filterResults()" style="width:46%; display:inline;" />
+                </div> 
+                
+                <div class="form-group">
+                    <label style="font-weight:200; color:black; font-size:12px; font-weight:bold;">Outstanding amount range</label><!--Min outstanding amount-->
+                    <input type="text" class="form-control" placeholder="" ng-model="filterAmount" ng-change="filterResults()" style="width:46%; display:inline;"/>
+                    <span> - </span>
+                    <input type="text" class="form-control" placeholder="" ng-model="filterAmount1" ng-change="filterResults()" style="width:46%; display:inline;"/>
+                </div>
+            </div>           
+            <apex:outputPanel id="resultPanel">
+                <div class="col-sm-10" id="balAccId">
+                    <div class="panel panel-default">
+                        
+                        <div class="panel-heading">
+                            <h3 class="panel-title" style="color:#428bca; font-weight:bold; font-size:14px;">
+                                <span class="glyphicon glyphicon-th-list"></span> Outstanding Balance Accounts
+                            </h3>
+                            
+                            <apex:outputLink style="float:right;" onclick="NextResult();" rendered="{!if(outstandingCount >= 25000 , true, false )}">Next Accounts
+                                <apex:actionFunction name="NextResult" action="{!NextResult}" />
+                            </apex:outputLink>
+                            
+                            <input type="button" class="btn1 btn1-primary" style="float:right; margin-top:-5px; margin-right: 1%;" ng-click="sendAngularNotification()" value="Send Notification" />
+                        </div>
+                        
+                        <div class="panel-body">
+                            <table ng-table="tableParams" class='table' id='table'>
+                                <tr ng-repeat="account in $data">
+                                    <td data-title="'Name'" sortable="'name'">{{account.name}}</td>
+                                    <td data-title="'Subscription Id'" sortable="'subscriptionId'">{{account.subscriptionId}}</td>
+                                    <td data-title="'Subscription Status'" sortable="'status'">{{account.status}}</td>
+                                    <!--<td data-title="'Zuora Account Id'" sortable="'zuoraId'">{{account.zuoraId}}</td>-->
+                                    <td data-title="'Account Balance'" sortable="'accountBalance'" style="text-align:right; padding-right:28px;">$ {{account.accountBalance | number:2}}</td>
+                                    <td data-title="'Oldest Invoice Date'" sortable="'oldestInvoiceDate'">{{account.oldestInvoiceDate}}</td>
+                                    <td data-title="'Billing Jurisdiction'" sortable="'billJurisdiction'">{{account.billJurisdiction}}</td>              
+                                    <td data-title="'Service Jurisdiction'" sortable="'servJurisdiction'">{{account.servJurisdiction}}</td>              
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+           
+                <script>
+                var app = angular.module('first', ['ngTable']).
+                controller('firstcontroller', function($scope, $filter, NgTableParams) {
+                    $scope.accounts = {!activeOutstandingAccountsStr};
+                    var data = {!activeOutstandingAccountsStr}; 
+                    
+                    $scope.filterDays = 0;
+                    $scope.filterDays1 = 0;
+                    $scope.filterAmount = 0;
+                    $scope.filterAmount1 = 0;
+                    $scope.filterActive = true;
+                    $scope.filterInactive = true;                  
+                    
+                    $scope.tableParams = new NgTableParams({
+                        page: 1,            // show first page
+                        count: 10,          // count per page
+                        sorting: {
+                            name: 'asc'     // initial sorting
+                        }
+                    }, 
+                    {
+                        total: data.length, // length of data
+                        getData: function($defer, params) {
+                            var searchedData = searchData();
+                            params.total(searchedData.length);
+                            var orderedData = params.sorting() ? $filter('orderBy')(searchedData , params.orderBy()) : searchedData;                     
+                            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                        }
+                    });
+                    
+                    $scope.$watch("search", function () {
+                        $scope.tableParams.reload();
+                    });                
+                    
+                    var searchData = function(){
+                        if($scope.search)
+                            return $filter('filter')(data,$scope.search);
+                        return data;
+                    }                
+                    
+                    $scope.filterResults = function() {
+                        var dateToFilter = new Date();
+                        var status1 = '';
+                        var status2 = '';
+                        
+                        if($scope.filterActive)
+                            status1 = 'Active';
+                        if($scope.filterInactive)
+                            status2 = 'Inactive';
+                        if(!$scope.filterActive && !$scope.filterInactive) {
+                            status1 = '';
+                            status2 = '';
+                        }
+                        
+                        
+                        if($scope.days != '' && $scope.days != 0) {
+                            //var numberOfDaysToAdd = $scope.days;
+                            //dateToFilter.setDate(dateToFilter.getDate() - numberOfDaysToAdd);                
+                        }                  
+                        
+                        data = [];
+                        for(var i=0; i<$scope.accounts.length; i++) {
+                            var invoiceDate = new Date($scope.accounts[i].oldestInvoiceDate);
+                            var timeDiff = Math.abs(dateToFilter.getTime() - invoiceDate.getTime());
+                            var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+                            
+                            if($scope.filterDays1 > 0 && $scope.filterAmount1 > 0) {
+                                if(($scope.accounts[i].status == status1 || $scope.accounts[i].status == status2) && ( $scope.accounts[i].accountBalance >= $scope.filterAmount && $scope.accounts[i].accountBalance <= $scope.filterAmount1) && (diffDays >= $scope.filterDays && diffDays <= $scope.filterDays1)) {
+                                    data.push($scope.accounts[i]);
+                                }                        
+                            }
+                            else if($scope.filterDays1 > 0 ) {
+                                if(($scope.accounts[i].status == status1 || $scope.accounts[i].status == status2) && $scope.accounts[i].accountBalance >= $scope.filterAmount && (diffDays >= $scope.filterDays && diffDays <= $scope.filterDays1)) {
+                                    data.push($scope.accounts[i]);
+                                }                        
+                            }
+                            else if($scope.filterAmount1 > 0) {
+                                if(($scope.accounts[i].status == status1 || $scope.accounts[i].status == status2) && ($scope.accounts[i].accountBalance >= $scope.filterAmount && $scope.accounts[i].accountBalance <= $scope.filterAmount1) && diffDays >= $scope.filterDays ) {
+                                    data.push($scope.accounts[i]);
+                                }                        
+                            }
+                            else {
+                                if(($scope.accounts[i].status == status1 || $scope.accounts[i].status == status2) && $scope.accounts[i].accountBalance >= $scope.filterAmount && diffDays >= $scope.filterDays) {
+                                    data.push($scope.accounts[i]);
+                                }
+                            }
+                        }
+                        
+                        $scope.tableParams.total(data.length);
+                        $scope.tableParams.reload();
+                    }
+                    
+                    $scope.activeAccountsCount = function() {
+                        var j = 0;
+                        if(data) {
+                            for(var i=0; i<data.length; i++) {
+                                if(data[i].status == 'Active') 
+                                    j++;
+                            }
+                        }
+                        return j;
+                    } 
+                    
+                    $scope.inactiveAccountsCount = function() {
+                        var j = 0;
+                        if(data) {
+                            for(var i=0; i<data.length; i++) {
+                                if(data[i].status == 'Inactive') 
+                                    j++;
+                            }
+                        }
+                        return j;
+                    } 
+                    
+                    $scope.allAccountsCount = function() {
+                        
+                        return data.length;
+                    }
+                    
+                    $scope.sendAngularNotification = function() {
+                        
+                        
+                        console.log('--temp-->'+temp);
+                        var confirmMsg = "Are you sure? You want to send a notification to filtered Accounts (" + data.length + ") which have\n1. Status: ";
+                        
+                        var temp = "{!checksSelected}";
+                        temp = temp.replace(/\[/g, '').replace(/]/g, '');
+                        confirmMsg += temp.split(',')[0];
+                        
+                        if(temp.split(',')[1] != null && temp.split(',')[1] != 'undefined')
+                           confirmMsg += " Or " + temp.split(',')[1];
+                           
+                                                
+                        confirmMsg += "\n2. Outstanding Days Range: " + $scope.filterDays + " - " + $scope.filterDays1;
+                        confirmMsg += "\n3. Outstanding Amount Range: $ " + $scope.filterAmount + " - " + $scope.filterAmount1;
+                        
+                        if(confirm(confirmMsg )) {
+                            $scope.finalResult = [];
+                            if(data) {
+                                for(var i=0; i<data.length; i++) {
+                                    $scope.finalResult.push(data[i].Id);
+                                } 
+                            }
+                            
+                            if($scope.finalResult.length > 0) {
+                                sendNotification(JSON.stringify($scope.finalResult));                     
+                            }
+                            else
+                                alert("No accounts found to send notification.");                    
+                        }
+                    }                                                 
+                });
+                </script> 
+            </apex:outputPanel>       
+        </div>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,45 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false"  controller="VendorCommunity_SubmitCases" lightningstylesheets="true">
+    <apex:composition template="VendorCommunity_Base">
+        <apex:define name="content">
+            <apex:form id="portal">
+                <c:Bootstrap_Resources />
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"></link>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+                
+                <apex:pageBlock title="Search" >
+                    <apex:inputText value="{!searchstring}" id="theSearchstring" maxlength="100" size="110"/> &nbsp;
+                    <!--<apex:commandButton value="Go" id="submitButton" style="width:30" reRender="theSearchResults" /> -->
+                </apex:pageBlock>
+                <apex:messages />
+                <apex:pageBlock >
+                
+                </apex:pageBlock>
+                
+                <apex:pageBlock > 
+                    
+                    <apex:panelGroup id="theSearchResults" >
+                        <apex:panelGrid width="100%">
+                            
+                            <knowledge:articleList articleVar="article" pageNumber="{!currentPageNumber}" Keyword="{!searchstring}" hasMoreVar="false" pageSize="2">
+                                        <div class="container">
+                                            <div class="card">
+                                                <div class="card-header">{!article.title}</div>
+                                                <div class="card-body">{!article.abstract}</div> 
+                                             </div>
+                                         </div>
+                                                <br/><br/>
+                            </knowledge:articleList>
+                        </apex:panelGrid> 
+                        <apex:panelGrid columns="2">
+                            <apex:commandLink action="{!previous}" value="Previous" style="{!IF(prevRequired = true,'display:block','display:none')}" reRender="theSearchResults"/> 
+                            <apex:commandLink action="{!next}" value="Next"  style="{!IF(nextRequired = true,'display:block','display:none')}" reRender="theSearchResults"/>  
+                        </apex:panelGrid>
+                    </apex:panelGroup>
+                </apex:pageBlock>
+                
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

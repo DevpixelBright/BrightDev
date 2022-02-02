@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="15" viewBox="0 0 15 15">
+  <defs>
+    <clipPath id="clip-Custom_Size_1">
+      <rect width="15" height="15"/>
+    </clipPath>
+  </defs>
+  <g id="Custom_Size_1" data-name="Custom Size – 1" clip-path="url(#clip-Custom_Size_1)">
+    <path id="Icon_material-person-add" data-name="Icon material-person-add" d="M11.045,11.455A2.727,2.727,0,1,0,8.318,8.727,2.727,2.727,0,0,0,11.045,11.455ZM4.909,10.091V8.045H3.545v2.045H1.5v1.364H3.545V13.5H4.909V11.455H6.955V10.091Zm6.136,2.727c-1.82,0-5.455.914-5.455,2.727v1.364H16.5V15.545C16.5,13.732,12.866,12.818,11.045,12.818Z" transform="translate(-1.5 -4)" fill="#4f5a65"/>
+  </g>
+</svg>

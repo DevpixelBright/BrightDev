@@ -1,0 +1,85 @@
+<aura:component>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <ltng:require styles="{!$Resource.headerpart }"></ltng:require>
+   <ltng:require styles="{!$Resource.side }"></ltng:require> 
+   <ltng:require styles="{!$Resource.body }"></ltng:require>
+
+   
+   <div class="c-container">
+      <div class="fullpage slds-scope">
+         <div class="slds-grid slds-wrap">
+            <lightning:layout multipleRows="true">
+               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage header-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:header />
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+               <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                   <c:mobilemenu />
+                   <lightning:layout>
+                     <div class="new-containerpage">
+                        <div class="slds-container--x-large new-container">
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <c:sidebarnew />
+                           </lightning:layoutItem>
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                              <div class="page-section page-main">
+                                 <div class="middlebar1">
+                                    <h2>Agent Listing Transfer</h2>
+                                    
+                         </div>
+                                 <div class="dev">
+                                   <div class="bodybottom">
+          
+                
+                
+                <div class="slds-container--x-large new-container">
+                     <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                     <div class="footer-full ">
+                        
+                         <div class="sucuss">
+                             
+                         <img src="{!$Resource.bright + '/bright-3.0/images/success.svg'}" alt="Bright" />
+                             <h4>Request Submitted Successfully</h4>
+                             <p>Your request to transfer listings is submitted successfully. An email has been sent to your<br/>registered mail address. Please check the mail for more details on this request status.</p>
+                             <lightning:button class="brand " variant="brand " label="Back to Home" title="Brand action" onclick="{! c.handleClick }" />
+                         </div>
+                   
+                    </div>
+                    </lightning:layoutItem>
+                </div></div>
+                                                                  
+                            
+                            
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                  
+                                   
+                                    
+                                 </div>
+                              </div>
+                           </lightning:layoutItem>
+                        </div>
+                     </div>
+                  </lightning:layout>
+               </lightning:layoutItem>
+                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage footer-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:footer />
+                         
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+            </lightning:layout>
+         </div>
+      </div>
+    
+   </div>
+</aura:component>

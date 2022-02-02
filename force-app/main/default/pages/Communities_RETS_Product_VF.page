@@ -1,0 +1,360 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="Communities_RETS_Product_Controller" lightningstylesheets="true">
+    <apex:composition template="Communities_Base">
+        <apex:define name="content">
+            <apex:form styleClass="form-horizontal">
+            
+                <c:Bootstrap_Resources />
+                <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+                <apex:pageBlock id="details" >
+                     
+                    <style>
+                        .two_buttons{text-align:right; margin-bottom:-44px; margin-top:40px;}
+                        h2{font-size:22px !important; margin:5px 0px !important;}
+                        .tertiaryPalette{display:none !important;}
+                        .for_inputs h4{border-bottom: 1px solid #69A61F; padding-bottom: 10px;}
+                        h2{display:none;}
+                        label{padding-top:0px !important;}
+                        .margin{margin:20px 0 10px 0;}
+                        @media(min-width:400px){
+                        .detailList th{width:30% !important;}
+                        .mandatory{color:red; font-weight:bold; font-size:18px;}
+                        }
+                        i.fa {margin: auto 20px;
+                        position: relative;
+                        top: 0px;}
+                        .fa-2x {
+                        font-size: 2em;
+                        }
+                        .fa {
+                        display: inline-block;
+                        font-family: FontAwesome;
+                        font-style: normal;
+                        font-weight: normal;
+                        line-height: 1;
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        }
+                        .form-horizontal .form-group { margin:0px; }                       
+                        .terminateReason {
+                        margin:0px;
+                        height:28px;
+                        font-size:12px;
+                        }
+                        #terminateButtonGroup { display:none; }
+                        input[type=checkbox] { margin-top: 4px !important; }
+                        .table>tbody>tr>td { border-top:none; padding: 10px 15px; }
+                        .table>thead>tr>th { border-bottom:none; padding: 10px 15px; }
+                        .amount-type {text-align:right;}
+                        .dataTables_filter{text-align:left; padding-left:0px; margin-top:25px; padding-right:0px;}
+                        .dataTables_filter input { width:100% !important; height:35px !important; margin-left:0px !important;}
+                        .dataTables_info {text-align:right; padding-right:0px; color:#ccc; font-size:12px;}
+                        #active_orders_length { padding-top:3px; padding-left:0px; }
+                        #active_orders_paginate { padding-right:0px;}
+                        //.search_help {color:#ccc; font-size:12px;}
+                        .top {margin-bottom:10px; border-bottom: 1px solid #388EDD; padding-bottom:20px; }
+                        .bottom{margin-top:10px; border-top: 1px solid #388EDD; padding-top:20px; }
+                        input[type=search] {width:100%;}
+                        .table-bordered {border: 1px solid #fff;}
+                        .dropdowns { text-align:right; text-align:right; border-bottom: 1px solid #69A61F; padding-bottom:5px; padding-right:0px; padding-top:16px; }
+                        .dropdowns select {width:100px; display:inline;}
+                        .table-striped>tbody>tr:nth-child(odd)>td, .table-striped>tbody>tr:nth-child(odd)>th {
+                        background-color: #eee;
+                        }
+                        .table-bordered>thead>tr>th, .table-bordered>tbody>tr>td {border:1px solid #fff;}
+                        /* enable absolute positioning */
+                        .inner-addon {
+                        position: relative;
+                        width:70%;
+                        margin:auto;
+                        }
+                        
+                        /* style glyph */
+                        .inner-addon .glyphicon {
+                        position: absolute;
+                        padding: 10px;
+                        pointer-events: none;
+                        }
+                        
+                        /* align glyph */
+                        .left-addon .glyphicon  { left:  0px;}
+                        .right-addon .glyphicon { right: 0px;}
+                        
+                        /* add padding  */
+                        .left-addon input  { padding-left:  30px; }
+                        .right-addon input { padding-right: 30px; } 
+                        .content-block { display:none;} 
+                        .alertPanel{margin-top:20px;}
+                        .active_orders_listing {padding-right:0px;}
+                        .left_panel {padding-right:0px;}   
+
+                        .content-block > .instructions {
+                            display: none;
+                        }               
+
+                        .content-block.home > .instructions.home {
+                            display: block;
+                        }               
+
+                        .content-block.inactive > .instructions.inactive {
+                            display: block;
+                        }               
+                    </style>                
+                    <div class="row content-block home">
+                        <c:Communities_Definition pageTitle="Data Licensing" pageTitleClass="fa fa-briefcase fa-2x" hasDefinitions="true">
+                            <p>
+                                <b class="term">Order ID</b> is the ID you should reference if you ever need to contact Bright Support about your data licensing order.
+                            </p>
+                            <p>
+                                <b class="term">Data License</b> is the type of the license you have purchased or the third party vendor product name associated with that license.
+                            </p>
+                            <p>
+                                <b class="term">Start Date</b> is the date the data license was activated.
+                            </p>
+                            <p>
+                                <b class="term">End Date</b> is the date that the data license was deactivated after cancellation.
+                            </p>
+                            <p>
+                                <b class="term">URL</b> is the URL of the website that is associated with your data license.
+                            </p>
+                            <p>
+                                <b class="term">On Behalf of Agent</b> displays the subscriber’s name if you are paying for that subscriber to have a data license.
+                            </p>
+                        </c:Communities_Definition>
+
+                        <div class="col-xs-12 instructions home">
+                            <p>Below is a list of all the data licenses to which you are currently subscribed and are being billed. For a list of data licenses you have had in the past, but are no longer being billed for, click the <b>Inactive</b> tab.</p>
+
+                            <p>See a data license for a product you don’t recognize? Click <b>Not My Product</b> to submit a case to our Support team. Please provide as many details as you can so we can correct this information quickly.</p>
+                        </div>
+                        <div class="col-xs-12 instructions inactive">
+                            <p>Below is a list of all data licenses to which you have been subscribed to in the past. To see third party vendor products that you are currently being billed for, click the <b>Billed</b> tab.</p>
+                        </div>
+                    </div>
+                    <script>
+                        $(document).ready(function() {
+                            $(".errorM3").addClass("alert alert-danger");
+                            $(".infoM3").addClass("alert alert-info");
+                            $(".confirmM3").addClass("alert alert-success"); 
+                            $('#active_orders_filter').hide();
+                            
+                            $('#active_orders_info').addClass('col-sm-12');
+                            $("#active_orders_info").after( "<div style='clear:both;'></div>" );
+                            $('#active_orders_length').addClass('col-sm-6');
+                            $('#active_orders_paginate').addClass('col-sm-6');
+                            $("#active_orders_paginate").after( "<div style='clear:both;'></div>" );
+                            //$("input[type=search]").attr('placeholder', 'Type in your search terms here...');  
+                            $("#loading-block").hide();                               
+                            $(".content-block").show();
+                             activeTable = $('#active_orders').DataTable({
+                                "dom": '<"top"fi>rt<"bottom"lp><"clear">'                                   
+                            });
+                            inactiveTable = $('#inactive_orders').DataTable({
+                                "dom": '<"top"fi>rt<"bottom"lp><"clear">'                                   
+                            });
+                            unbilledTable = $('#unbilled_orders').DataTable({
+                                "dom": '<"top"fi>rt<"bottom"lp><"clear">'                                   
+                            });
+                            $('#active_orders_filter').hide();
+                            $('#active_orders_length').hide();
+                            $('#inactive_orders_filter').hide();
+                            $('#inactive_orders_length').hide();
+                         
+                            $('#billed-tab').click(function () { 
+                                $('div.content-block')
+                                    .removeClass("inactive")
+                                    .addClass("home");
+                            });
+
+                            $('#inactive-tab').click(function () { 
+                                $('div.content-block')
+                                    .removeClass("home")
+                                    .addClass("inactive");
+                            });
+                       });
+                        markOptionPanel("subscription");
+                    </script>
+                    
+                     <!-- Tabs -->
+                    <ul id="myTab" class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#home" id="billed-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Billed</a></li>
+<!--                         <li role="presentation" class=""><a href="#unbilled" role="tab" id="unbilled-tab" data-toggle="tab" aria-controls="unbilled" aria-expanded="false">Not Billed</a></li> -->
+                        <li role="presentation" class=""><a href="#inactive" role="tab" id="inactive-tab" data-toggle="tab" aria-controls="inactive" aria-expanded="false">Inactive</a></li>
+                    </ul> 
+                    <div id="myTabContent" class="tab-content"> 
+                        
+                        <!-- Results display panel -->  
+                        <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="billed-tab" style="min-height:250px;">
+                            
+                            
+                            <apex:outputPanel rendered="{!if(activebilledorders != null && activebilledorders.size > 0, true, false)}" title="Active Billing Orders">                   
+                                
+                                <div class="row list content-block listing-block">
+                                    <table class="table table-striped table-bordered" id="active_orders">
+                                        <thead>
+                                            <tr>
+                                                <th>Order ID</th>
+<!--                                                 <th>Vendor Product Name</th> -->
+<!--                                                 <th>Vendor Product Authorized Use</th> -->
+                                                <th>Data License(s)</th>
+                                                <th>Start Date</th>
+<!--                                                <th>End Date</th> -->
+                                                <th>URL</th>
+                                                <th>On Behalf of Agent</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>                                
+                                    <apex:repeat value="{!activebilledorders}" var="ord">
+                                        <tr>
+                                            <td>{!ord.Name}</td>
+<!--                                             <td>{!ord.Vendor_Product__r.Name}</td> -->
+<!--                                             <td>{!ord.Vendor_Product__r.Authorized_Use__c}</td> -->
+                                            <td>{!ord.RETS_Sub_Product__r.Name__c}</td>
+                                            <td>
+                                            <apex:outputText value="{0,date,MM/dd/yyyy}">
+                                                <apex:param value="{!ord.Start_Date__c}" /> 
+                                            </apex:outputText>
+                                            </td>
+<!--                                                <td> -->
+<!--                                                    <apex:outputText value="{0,date,MM/dd/yyyy}"> -->
+<!--                                                    <apex:param value="{!ord.End_Date__c}" />  -->
+<!--                                                </apex:outputText> -->
+<!--                                             </td> -->
+                                            <td>{!ord.URL__c }</td>
+                                            <td>{!ord.On_Behalf_of_Agent__r.contact__r.Name}</td>
+                                            <!--<td><u><apex:commandLink action="{!createCase}" value="Not My Product" /></u></td>-->
+                                            <td><u><apex:commandLink action="/Communities_Cases_Create?id={!subscriptionId}&department=VA&orderId={!ord.Name}" Target="_blank" value="Not My Product" /></u></td>
+                                        </tr>
+                                    </apex:repeat>
+                                </tbody>
+                            </table>                      
+                        </div>
+
+                    </apex:outputPanel>
+                    
+                    <apex:outputPanel rendered="{!if(activebilledorders == null || activebilledorders.size == 0, true, false)}" title="Active Billing Orders">
+                        <div class="alert alert-warning" role="alert" style="margin-top : 20px;">
+                            No Products
+                        </div>
+                    </apex:outputPanel>
+                    
+                    </div>
+                        
+                        
+                        <!-- Results display panel -->  
+<!--                         <div role="tabpanel" class="tab-pane fade" id="unbilled" aria-labelledby="unbilled-tab" style="min-height:250px;"> -->
+                            
+<!--                             <apex:outputPanel rendered="{!if(activeunbilledorders != null && activeunbilledorders.size > 0, true, false)}" title="Active UnBilled Orders">                    -->
+                                
+<!--                                 <div class="row list content-block listing-block"> -->
+<!--                                     <table class="table table-striped table-bordered" id="unbilled_orders"> -->
+<!--                                         <thead> -->
+<!--                                             <tr> -->
+<!--                                                 <th>Order ID</th> -->
+<!--                                                 <th>Vendor Product Name</th> -->
+<!--                                                 <th>Vendor Product Authorized Use</th> -->
+<!--                                                 <th>Data Access Product</th> -->
+<!--                                                <th>Start Date</th> -->
+<!--                                                <th>End Date</th> -->
+<!--                                                 <th>URL</th> -->
+<!--                                                 <th>On Behalf of Agent</th> -->
+<!--                                             </tr> -->
+<!--                                         </thead> -->
+<!--                                         <tbody>                                 -->
+<!--                                             <apex:repeat value="{!activeunbilledorders}" var="ord"> -->
+<!--                                                 <tr> -->
+<!--                                                     <td>{!ord.Name}</td> -->
+<!--                                                     <td>{!ord.Agent__r.Name}</td> -->
+<!--                                                     <td>{!ord.Vendor_Product__r.Authorized_Use__c}</td> -->
+<!--                                                     <td>{!ord.RETS_Sub_Product__r.Name}</td> -->
+<!--                                                     <td> -->
+<!--                                                        <apex:outputText value="{0,date,MM/dd/yyyy}"> -->
+<!--                                                            <apex:param value="{!ord.Start_Date__c}" />  -->
+<!--                                                        </apex:outputText> -->
+<!--                                                     </td> -->
+<!--                                                    <td> -->
+<!--                                                        <apex:outputText value="{0,date,MM/dd/yyyy}"> -->
+<!--                                                            <apex:param value="{!ord.End_Date__c}" />  -->
+<!--                                                        </apex:outputText> -->
+<!--                                                    </td> -->
+<!--                                                     <td>{!ord.URL__c }</td> -->
+<!--                                                     <td>{!ord.On_Behalf_of_Agent__r.Name}</td> -->
+<!--                                                 </tr> -->
+<!--                                             </apex:repeat> -->
+<!--                                         </tbody> -->
+<!--                                     </table>                       -->
+<!--                                 </div> -->
+<!--                             </apex:outputPanel> -->
+                    
+<!--                     <apex:outputPanel rendered="{!if(activeunbilledorders == null || activeunbilledorders.size == 0, true, false)}" title="Active UnBilled Orders"> -->
+<!--                         <div class="alert alert-warning" role="alert" style="margin-top : 20px;"> -->
+<!--                             No Products -->
+<!--                         </div> -->
+<!--                     </apex:outputPanel> -->
+<!--                     </div> -->
+                    
+                    
+                  <!-- Results display panel -->  
+                        <div role="tabpanel" class="tab-pane fade" id="inactive" aria-labelledby="inactive-tab" style="min-height:250px;">
+                         
+                   
+                    <apex:outputPanel rendered="{!if(inactiveorders != null && inactiveorders.size > 0, true, false)}" title="InActive Billing Orders">                   
+
+                        <div class="row list content-block listing-block">
+                            <table class="table table-striped table-bordered" id="inactive_orders">
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+<!--                                         <th>Vendor Product Name</th> -->
+<!--                                         <th>Vendor Product Authorized Use</th> -->
+                                        <th>Data License(s)</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>URL</th>
+                                        <th>On Behalf of Agent</th>
+                                    </tr>
+                                </thead>
+                                <tbody>                                
+                                    <apex:repeat value="{!inactiveorders}" var="ord">
+                                        <tr>
+                                            <td>{!ord.Name}</td>
+<!--                                             <td>{!ord.Agent__r.Name}</td> -->
+<!--                                             <td>{!ord.Vendor_Product__r.Authorized_Use__c}</td> -->
+                                            <td>{!ord.RETS_Sub_Product__r.Name__c}</td>
+                                            <td>
+                                                <apex:outputText value="{0,date,MM/dd/yyyy}">
+                                                    <apex:param value="{!ord.Start_Date__c}" /> 
+                                                </apex:outputText>
+                                            </td>
+                                            <td>
+                                                <apex:outputText value="{0,date,MM/dd/yyyy}">
+                                                    <apex:param value="{!ord.End_Date__c}" /> 
+                                                </apex:outputText>
+                                            </td>
+                                            <td>{!ord.URL__c }</td>
+                                            <td>{!ord.On_Behalf_of_Agent__r.contact__r.Name}</td>
+                                        </tr>
+                                    </apex:repeat>
+                                </tbody>
+                            </table>                      
+                        </div>
+
+                    </apex:outputPanel>
+                    
+                    <apex:outputPanel rendered="{!if(inactiveorders == null || inactiveorders.size == 0, true, false)}" title="InActive Billing Orders">
+                        <div class="alert alert-warning" role="alert" style="margin-top : 20px;">
+                            No Products
+                        </div>
+                    </apex:outputPanel>
+                    </div>
+                    </div>
+                </apex:pageBlock>
+                
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+    <script src="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/jquery.dataTables.min.js')}"></script>
+    <script src="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/dataTables.bootstrap.min.js')}"></script>
+    <link href="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/dataTables.bootstrap.min.css')}" rel="stylesheet" type="text/css" />
+  
+</apex:page>

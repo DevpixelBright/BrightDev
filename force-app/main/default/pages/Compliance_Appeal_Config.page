@@ -1,0 +1,27 @@
+<apex:page controller="Compliance_Appeal_Config" lightningStyleSheets="true" >
+<apex:form >
+<apex:pageMessages />
+<apex:pageBlock title="Compliance Appeal Configuration" mode="edit">
+   <apex:pageBlockTable value="{!ca}" var="c1"  rendered="{!NOT(IsEdit)}">
+      <apex:column headerValue="Action">              
+         <apex:commandLink action="{!editConfig}" value="Edit">
+         </apex:commandLink>
+      </apex:column>
+      <apex:column value="{!c1.Appeal_Timer__c}"/>
+      <apex:column value="{!c1.mail_days1__c}"/>
+      <apex:column value="{!c1.mail_days2__c}"/>
+      <apex:column value="{!c1.mail_days3__c}"/>
+   </apex:pageBlockTable>
+   <apex:pageBlockSection rendered="{!IsEdit}">
+      <apex:inputField value="{!ca.Appeal_Timer__c}"/><br/>
+      <apex:inputField value="{!ca.mail_days1__c}"/><br/>
+      <apex:inputField value="{!ca.mail_days2__c}"/><br/>    
+      <apex:inputField value="{!ca.mail_days3__c}"/><br/>
+   </apex:pageBlockSection> 
+   <apex:pageBlockButtons location="bottom" rendered="{!IsEdit}">
+      <apex:commandButton value="Save" action="{!submit}"/>
+      <apex:commandButton value="Cancel" action="{!cancel}"/>
+   </apex:pageBlockButtons>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

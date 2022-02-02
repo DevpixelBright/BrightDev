@@ -1,0 +1,726 @@
+<apex:component controller="Communities_AddressValidation_Controller" layout="none">
+    <style>
+        .address-edit * {
+        transition: all 0.5s;
+        }
+        
+        .address-edit .sf-fields {
+        display: none;
+        }
+        
+        .address-edit .address-input {
+        margin-bottom: 0px;
+        }
+        
+        .address-edit label {
+        }
+        
+        .address-edit input {
+        }
+        
+        .address-edit .alerts {
+        margin-bottom: 15px;
+        }
+        
+        .address-edit .alerts .alert {
+        margin-bottom: 0px;
+        border-radius: 0px;
+        border: none;
+        }
+        
+        .address-edit .options {
+        margin-bottom: 0px;
+        overflow: hidden;
+        }
+        
+        .address-edit .options ul {
+        list-style: none;
+        height: 0px;
+        padding: 0px;
+        margin: 0px;
+        }
+        
+        .address-edit .options li {
+        margin: 0px 0px 15px 0px;
+        border-radius: 0px;
+        border: none;
+        cursor: pointer;
+        }
+        
+        .address-edit .options li:hover {
+        background-color: #dff0d8;
+        border-color: #d6e9c6;
+        color: #3c763d;
+        }
+        
+        @media (max-width: 767px) {
+        .address-edit .alerts label,
+        .address-edit .options label {
+        display: none;
+        }
+        }
+    </style>
+    
+    <script>
+    var AddressValidation = {
+        standardize: function (mapping) { 
+            console.log("Standardizing:");
+            console.log(mapping);
+            
+            var a1 = [
+                mapping.Street_Number__c,
+                mapping.Street_Number_Suffix__c,
+                mapping.Street_Name__c,
+                mapping.Street_Type__c,
+                mapping.Street_Direction__c
+            ];
+            a1 = a1.filter(Boolean).join(" ").trim();
+            
+            var a2 = [
+                mapping.Unit_Type__c,
+                mapping.Unit__c
+            ];
+            a2 = a2.filter(Boolean).join(" ").trim();
+            
+            var a3 = [
+                mapping.City__c,
+                mapping.State__c
+            ];
+            a3 = a3.filter(Boolean).join(", ").trim();
+            
+            var a4 = [
+                mapping.Zip__c,
+                mapping.Zip_4__c
+            ];
+            a4 = a4.filter(Boolean).join("-").trim();
+            
+            var a5 = mapping.POBox__c ? "PO Box " + mapping.POBox__c : "";
+            
+            var result;
+            
+            if (a5) 
+                result = {
+                    delivery_line_1: a5,
+                    last_line: (a3 + " " + a4).trim(),
+                }
+                else 
+                    result = {
+                        delivery_line_1: a1,
+                        delivery_line_2: a2,
+                        last_line: (a3 + " " + a4).trim(),
+                    }
+                    
+                    var template =  (result.delivery_line_1 ? result.delivery_line_1 + "//// " : "") +
+                        (result.delivery_line_2 ? result.delivery_line_2 + "//// " : "") +
+                        (result.last_line ? result.last_line : "");
+            template = template.trim();
+            
+            result.render = {
+                text: template.replace(/[/]{4}/g, ","),
+                                       html: template.replace(/[/]{4}/g, "<br />"),
+                                       };
+                                       
+                                       console.log("Standardized:");
+                console.log(result);
+                
+                return result;
+            },
+                bind: function (form, save) {
+                    var animation_duration = 500;
+                    
+                    var form = jQuery(form);
+                    var save = jQuery(save);
+                    
+                    var key = "AddressValidation";
+                    var id = Date.now();
+                    
+                    if (!save.data(key)) save.data(key, {});
+                    save.data(key)[id] = false;
+                    
+                    var input = {
+                        input: form.find("input.full-address"),
+                        color: {
+                            normal: "rgb(217, 237, 247)",
+                            waiting: "rgb(217, 237, 247)",
+                            checking: "rgb(252, 248, 227)",
+                            error: "rgb(242, 222, 222)",
+                            match: "rgb(223, 240, 216)",
+                            almost: "rgb(252, 248, 227)",
+                            options: "rgb(252, 248, 227)",
+                        },
+                        state: null,
+                        clearing: false,
+                        callback: null,
+                        clear: function (callback) {
+                            input.callback = callback;
+                            
+                            if (input.clearing) 
+                                return false;
+                            else if (input.state == "clear") {
+                                if (typeof(input.callback) == "function")
+                                    input.callback();
+                                else
+                                    return true;
+                            }
+                                else
+                                    input.state = "clear";
+                            
+                            if (input.input.css("border-color") !=  input.color.normal) {
+                                alert.clearing = true;
+                                
+                                input.input.css("border-color", input.color.normal);
+                                
+                                window.setTimeout(
+                                    function () {
+                                        alert.clearing = false;
+                                        
+                                        if (typeof(input.callback) == "function")
+                                            input.callback();
+                                        else
+                                            return true;
+                                    }, 
+                                    animation_duration
+                                );
+                                
+                                return false;
+                            }
+                            
+                            if (typeof(input.callback) == "function")
+                                input.callback();
+                            else
+                                return true;
+                        },
+                        waiting: function () {
+                            if (input.state == "waiting") return;
+                            
+                            input.clear(function () {
+                                input.state = "waiting";
+                                input.input.css("border-color", input.color.waiting);
+                            });
+                        },
+                        checking: function () {
+                            if (input.state == "checking") return;
+                            
+                            input.clear(function () {
+                                input.state = "checking";
+                                input.input.css("border-color", input.color.checking);
+                            });
+                        },
+                        error: function () {
+                            if (input.state == "error") return;
+                            
+                            input.clear(function () {
+                                input.state = "error";
+                                input.input.css("border-color", input.color.error);
+                            });
+                        },
+                        match: function () {
+                            if (input.state == "match") return;
+                            
+                            input.clear(function () {
+                                input.state = "match";
+                                input.input.css("border-color", input.color.match);
+                            });
+                        },
+                        almost: function () {
+                            if (input.state == "almost") return;
+                            
+                            input.clear(function () {
+                                input.state = "almost";
+                                input.input.css("border-color", input.color.almost);
+                            });
+                        },
+                        options: function () {
+                            if (input.state == "options") return;
+                            
+                            input.clear(function () {
+                                input.state = "options";
+                                input.input.css("border-color", input.color.options);
+                            });
+                        },
+                    };
+                    
+                    var alert = {
+                        block: form.find(".alerts"),
+                        alert: form.find(".alerts .alert"),
+                        interval: null,
+                        text: {
+                            waiting:    "Example: 9707 Key West Avenue",
+                            checking:   "Checking with the USPS",
+                            error:      "Uh oh, the USPS didn't recognize what you've entered :(",
+                            match:      "Looks good!",
+                            almost:     "The USPS thinks this is what you meant. Please click on the address below to confirm we can use it.",
+                            options:    "Is any of these addresses the one you're entering? If so, please click on that address to confirm.",
+                        },
+                        color: {
+                            waiting: "alert-info",
+                            checking: "alert-warning",
+                            error: "alert-danger",
+                            match: "alert-success",
+                            almost: "alert-warning",
+                            options: "alert-warning",
+                        },
+                        state: null,
+                        set: function (state, callback) {
+                            if (alert.state == state) return;
+                            
+                            alert.clear(function () {
+                                alert.alert.text(alert.text[state]);
+                                
+                                var current = alert.color[alert.state];
+                                var incoming = alert.color[state];
+                                
+                                if (current != incoming) {
+                                    alert.alert.addClass(incoming);
+                                    
+                                    if (current)
+                                        alert.alert.removeClass(current);
+                                }
+                                
+                                alert.state = state;
+                                
+                                if (typeof(callback) == "function")
+                                    callback();
+                            });
+                        },
+                        clear: function (callback) {
+                            if (typeof(callback) == "function")
+                                callback();
+                            else
+                                return true;
+                        },
+                        waiting: function () {
+                            alert.set("waiting");
+                        },
+                        checking: function () {
+                            alert.set("checking", function () {
+                                alert.interval = window.setInterval(function () {
+                                    if (alert.state != "checking") {
+                                        window.clearInterval(alert.interval);
+                                        return;
+                                    }
+                                    
+                                    var text = alert.alert.text();
+                                    
+                                    var a = text.length;
+                                    text = text.replace(".....", "");
+                                    var b = text.length;
+                                    
+                                    if (a == b)
+                                        text += ".";
+                                    
+                                    alert.alert.text(text);
+                                }, animation_duration);                            
+                            });
+                        },
+                        error: function () {
+                            alert.set("error");
+                        },
+                        match: function () {
+                            alert.set("match");
+                        },
+                        almost: function () {
+                            alert.set("almost");
+                        },
+                        options: function () {
+                            alert.set("options");
+                        },
+                    };
+                    
+                    var options = {
+                        block: form.find(".options"),
+                        list: form.find(".options ul"),
+                        entries: function () { return options.list.find("li"); },
+                        options: [],
+                        state: null,
+                        clearing: false,
+                        callback: null,
+                        clear: function (callback) {
+                            options.callback = callback;
+                            
+                            if (options.clearing) 
+                                return false;
+                            else if (options.state == "clear") {
+                                if (typeof(options.callback) == "function")
+                                    options.callback();
+                                else
+                                    return true;
+                            }
+                                else
+                                    options.state = "clear";
+                            
+                            if (options.list.height() > 0) {
+                                options.clearing = true;
+                                
+                                options.list.animate(
+                                    { height: 0 }, 
+                                    animation_duration, 
+                                    function () { 
+                                        options.list.empty();
+                                        options.clearing = false;
+                                        
+                                        if (typeof(options.callback) == "function")
+                                            options.callback();
+                                        else
+                                            return true;
+                                    }
+                                );
+                                
+                                return false;
+                            }
+                            else
+                                options.list.empty();
+                            
+                            
+                            if (typeof(options.callback) == "function")
+                                options.callback();
+                            else
+                                return true;
+                        },
+                        refresh: function (almost) {
+                            options.clear(function () {
+                                var o = options.options;
+                                var l = almost ? 0 : 1;
+                                
+                                
+                                if (o.length <= l) return;
+                                
+                                for (var i = 0; i < o.length; i++) {
+                                    var d = o[i];
+                                    
+                                    var a1 = d.delivery_line_1;
+                                    var a2 = d.delivery_line_2;
+                                    var a3 = d.last_line;
+                                    
+                                    var i = a3.match(/ [A-Z]{2} [0-9]{5}/);
+                                    a3 = a3.substring(0, i.index) + "," + a3.substring(i.index);
+                                    
+                                    var a = a1 + (a2 && a2.length > 0 ? ", " + a2: "") + ", " + a3;
+                                    
+                                    var e = $('<li class="alert alert-warning">');
+                                    
+                                    e
+                                    .text(a)
+                                    .click(function (a) {
+                                        return function () { 
+                                            input.input.val(a); 
+                                            
+                                            api.last_queried = api.current();
+                                            api.last_checked = Date.now();
+                                            
+                                            controller.match();
+                                        };
+                                    }(a));
+                                    
+                                    options.list.append(e);
+                                }
+                                
+                                var e = options.entries();
+                                var h = 0;
+                                
+                                for (var i = 0; i < e.length; i++)
+                                    h += $(e[i]).outerHeight(true);
+                                
+                                options.list.animate({ height: h }, animation_duration);
+                            });
+                        },
+                    };
+                    
+                    var controller = {
+                        fields: form.find(".sf-fields > *"),
+                        state: null,
+                        clearing: false,
+                        callback: null,
+                        clear: function (callback) {
+                            controller.callback = callback;
+                            
+                            if (controller.clearing) 
+                                return false;
+                            else if (controller.state == "clear") {
+                                if (typeof(controller.callback) == "function")
+                                    controller.callback();
+                                else
+                                    return true;
+                            }
+                            
+                            controller.clearing = true;
+                            controller.state = "clear";
+                            controller.fields.val("");
+                            
+                            options.clear(function () {
+                                alert.clear(function () {
+                                    input.clear(function () {
+                                        controller.clearing = false;
+                                        
+                                        if (typeof(controller.callback) == "function")
+                                            controller.callback();
+                                        else
+                                            return true;
+                                    });
+                                });
+                            });
+                            
+                            return false;
+                        },
+                        enable: function () {
+                            save.data(key)[id] = true;
+                            
+                            for (var i in save.data(key))
+                                if (!save.data(key)[i]) return;
+                            
+                            save.prop("disabled", false);
+                        },
+                        disable: function () {
+                            save.data(key)[id] = false;
+                            save.prop("disabled", true);
+                        },
+                        waiting: function () {
+                            if (controller.state == "waiting") {
+                                if (input.input.val().trim() == "") controller.enable();
+                                else controller.disable();
+                                
+                                return;
+                            }
+                            
+                            controller.clear(function () {
+                                controller.state = "waiting";
+                                
+                                input.waiting();
+                                alert.waiting();
+                                options.refresh();
+                                
+                                if (input.input.val().trim() == "") controller.enable();
+                                else controller.disable();
+                            });
+                        },
+                        checking: function () {
+                            
+                            if (controller.state == "checking"){
+                                return;
+                            }
+                            
+                            controller.clear(function () {
+                                controller.state = "checking";
+                                
+                                input.checking();
+                                alert.checking();
+                                options.refresh();
+                                
+                                controller.disable();
+                            });
+                        },
+                        error: function () {
+                            if (controller.state == "error") return;
+                            
+                            controller.clear(function () {
+                                controller.state = "error";
+                                
+                                input.error();
+                                alert.error();
+                                options.refresh();
+                                
+                                controller.disable();
+                            });
+                        },
+                        match: function () {
+                            
+                            if (controller.state == "match") return;
+                            
+                            controller.clear(function () {
+                                controller.state = "match";
+                                
+                                input.match();
+                                alert.match();
+                                options.refresh();
+                                
+                                var d = options.options[0];
+                                
+                                console.log("Received Data:");
+                                console.log(d);
+                                
+                                var mappings;
+                                
+                                if (d.metadata.zip_type == "POBox" || d.components.street_name == "PO Box") {
+                                    mappings = {
+                                        Street_Number__c          : "",
+                                        Street_Number_Suffix__c   : "",
+                                        Street_Name__c            : "",
+                                        Street_Type__c            : "",
+                                        Street_Direction__c       : "",
+                                        Unit_Type__c              : "",
+                                        Unit__c                   : "",
+                                        City__c                   : d.components.city_name,
+                                        State__c                  : d.components.state_abbreviation,
+                                        Zip__c                    : d.components.zipcode,
+                                        Zip_4__c                  : d.components.plus4_code,
+                                        Country__c                : "UNITED STATES OF AMERICA",
+                                        POBox__c                  : d.components.primary_number,
+                                        County__c                 : d.metadata.county_name,
+                                    };
+                                }
+                                else {
+                                    mappings = {
+                                        Street_Number__c          : d.components.primary_number,
+                                        Street_Number_Suffix__c   : d.components.street_predirection,
+                                        Street_Name__c            : d.components.street_name,
+                                        Street_Type__c            : d.components.street_suffix,
+                                        Street_Direction__c       : d.components.street_postdirection,
+                                        Unit_Type__c              : d.components.secondary_designator,
+                                        Unit__c                   : d.components.secondary_number,
+                                        City__c                   : d.components.city_name,
+                                        State__c                  : d.components.state_abbreviation,
+                                        Zip__c                    : d.components.zipcode,
+                                        Zip_4__c                  : d.components.plus4_code,
+                                        Country__c                : "UNITED STATES OF AMERICA",
+                                        POBox__c                  : '',
+                                        County__c                 : d.metadata.county_name,
+                                        AddressLine1			  : d.delivery_line_1,
+                                    };
+                                }
+                                
+                                //console.log("controller.fields:",controller.fields);
+                                //console.log("Mapped Data:");
+                                //console.log(mappings);
+                                
+                                controller.fields.each(function () {
+                                    $(this).val(mappings[$(this).attr("data-bind")]);
+                                });
+                                
+                                controller.enable();
+                            });
+                        },
+                        almost: function () {
+                            if (controller.state == "almost") return;
+                            
+                            controller.clear(function () {
+                                controller.state = "almost";
+                                
+                                input.almost();
+                                alert.almost();
+                                options.refresh(true);
+                                
+                                controller.disable();
+                            });
+                        },
+                        options: function () {
+                            if (controller.state == "options") return;
+                            
+                            controller.clear(function () {
+                                controller.state = "options";
+                                
+                                input.options();
+                                alert.options();
+                                options.refresh();
+                                
+                                controller.disable();
+                            });
+                        },
+                    };
+                    console.log("Service");
+                    var api = {
+                        
+                        current: function () { 
+                            var a = input.input.val().trim().toLowerCase(); 
+                            a = a.replace(/  /g, " ");
+                            a = a.replace(/ ,/g, ",");
+                            
+                            return a;
+                        },
+                        checked: null,
+                        last_checked: null,
+                        last_queried: null,
+                        check_gap: 1000,
+                        first_time: true,
+                        stable: function () {
+                            var current = api.current();
+                            
+                            if (current == api.last_queried) return true;
+                            
+                            if (current.length < 12 || (current != api.checked && !api.first_time)) { 
+                                api.checked = current;
+                                api.last_checked = null;
+                                
+                                controller.waiting();
+                                return false;
+                            }
+                            
+                            if (api.last_checked == null) {
+                                api.last_checked = Date.now();
+                                
+                                controller.waiting();
+                                return false;                       
+                            }
+                            
+                            if ((Date.now() - api.last_checked) < api.check_gap) {
+                                controller.waiting();
+                                return false;
+                            }
+                            
+                            return true;
+                        },
+                        start: function () {            
+                            
+                            if (!api.stable()) {
+                                window.setTimeout(api.start, api.check_gap);
+                                return;
+                            }
+                            
+                            api.first_time = false;
+                            
+                            var current = api.current();
+                            
+                            if (current == api.last_queried) {
+                                window.setTimeout(api.start, api.check_gap);
+                                return;
+                            }
+                            
+                            controller.checking();
+                            api.last_queried = current;
+                            
+                            var u = encodeURI(current); 						
+                            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.Communities_AddressValidation_Controller.smartyValidation}', u, function(result, event){                        
+                                var data = jQuery.parseJSON(JSON.parse(result));
+                                
+                                options.options = data;
+                                
+                                if (data.length == 0) {
+                                    controller.error();
+                                }
+                                else if (data.length == 1) {
+                                    var d = data[0];
+                                    var a1 = d.delivery_line_1;
+                                    var a2 = d.delivery_line_2;
+                                    var a3 = d.last_line;
+                                    
+                                    if (!current.match(/[-][0-9]*$/)) {
+                                        var i = a3.match(/[-][0-9]{4}$/);
+                                        if (i) a3 = a3.substring(0, i.index);
+                                    }
+                                    
+                                    var a = a1 + (a2 && a2.length > 0 ? ", " + a2: "") + ", " + a3;
+                                    a = a.replace(/[^0-9a-z ]/gi, "").toLowerCase();
+                                    
+                                    var c = current.replace(/[^0-9a-z ]/gi, "").toLowerCase();
+                                    
+                                    if (a == c){
+                                        controller.match();
+                                    }
+                                    else{
+                                        controller.almost();
+                                    }
+                                } 
+                                    else {
+                                        controller.options();
+                                    }
+                                
+                                window.setTimeout(api.start, api.check_gap);
+                            }, {buffer: false, escape: false, timeout: 30000});
+                            
+                        },
+                    };
+                    
+                    controller.clear(api.start);
+                },
+        };
+        </script>
+</apex:component>

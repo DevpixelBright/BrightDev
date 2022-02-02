@@ -1,0 +1,123 @@
+<apex:page tabStyle="Subscriptions__c" controller="SMS_StaffOrder_Controller" sidebar="false" standardStylesheets="false"  lightningstylesheets="true"> 
+    <apex:includeScript value="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/jquery.min.js')}"/>   
+    <apex:includeScript value="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/jquery.sticky.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/html5shiv.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/postmessage.js')}"/>
+<apex:form >
+<style>
+select {
+width: 30%;
+border: 1px solid #95B3CF;
+border-radius: 0.5em 0.5em 0.5em 0.5em;
+margin-bottom: 0;
+padding: 5px;
+}
+.detailList th{
+vertical-align:middle !important;
+}
+input[type="text"] {
+
+border: 1px solid #95B3CF;
+border-radius: 0.5em 0.5em 0.5em 0.5em;
+margin-bottom: 0;
+padding: 5px;
+}
+.pbHeader table{
+background-color: #60a0e1;
+width: 99%;
+color: white;
+padding: 5px;
+font-weight: bold;
+margin-bottom: 5px;
+}
+.mainTitle {
+color:white !important;
+}
+.secondaryPalette {
+background-color:white !important;
+}
+</style>
+<apex:outputPanel id="Messages">
+    <apex:pagemessages ></apex:pagemessages>
+</apex:outputPanel>
+<apex:pagemessages ></apex:pagemessages>
+    <apex:pageBlock title="Subscription Details" mode="edit">
+        <apex:pageBlockSection columns="2">       
+            <apex:outputText label="MRIS Subscription Id" ><apex:outputLink value="/{!subscription.Id}">
+                {!subscription.Name}
+                </apex:outputLink></apex:outputText> 
+            <apex:outputField value="{!subscription.Related_Location_Broker_Office__r.Name}" ></apex:outputField> 
+            <apex:outputField value="{!subscription.Contact_Type__c}" ></apex:outputField> 
+            <apex:outputField value="{!subscription.Subscription_Type__c}"  ></apex:outputField> 
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    <apex:pageBlock title="Select Products" mode="edit" rendered="{!showProducts}">
+        
+        <apex:pageBlockSection columns="1">
+                       
+            <apex:selectList value="{!zProductId}" size="1" label="Product" >
+                <apex:selectOptions value="{!ZProducts}"/>
+                <apex:actionSupport action="{!populateProductRatePlans}"  event="onchange" reRender="Recurring,Onetime,Messages" />              
+            </apex:selectList>
+            <apex:selectList id="Onetime" value="{!zOneTimeProductRatePlanId}" size="1" label="One-Time Rate Plan">
+                <apex:selectOptions value="{!zOnetimeRatePlans}"/>
+            </apex:selectList>            
+            <apex:selectList id="Recurring" value="{!zRecurringProductRatePlanId}" size="1" label="Rate Plan">
+                <apex:selectOptions value="{!zProductRatePlans}"/>
+            </apex:selectList>
+            <apex:selectList value="{!zDiscountProductRatePlanId}" size="1" label="Discount Rate Plan">
+                <apex:selectOptions value="{!zDiscountRatePlans}"/>
+            </apex:selectList>
+            <apex:outputText value="{!termDuration}" label="Term Duration"></apex:outputText>
+            
+        </apex:pageBlockSection>
+        <apex:pageBlockButtons location="bottom">
+           <apex:commandButton action="{!addToCart}" value="Add To Cart"/>
+           <apex:commandButton action="{!cancel}" value="Cancel Order"/>
+        </apex:pageBlockButtons>
+    </apex:pageBlock>
+    
+    <apex:pageBlock title="Cart Summary" rendered="{!showCart}">
+        <apex:pageBlockTable value="{!cartItems}" var="ci">
+            <apex:column >  
+                <apex:inputCheckbox value="{!ci.check}"/> 
+            </apex:column>
+            <apex:column value="{!ci.ProductName}" headerValue="Product"/>
+            <apex:column value="{!ci.OneProductRatePlanName}" headerValue="One-Time Rate Plan"/>           
+            <apex:column value="{!ci.RecurringProductRatePlanName}" headerValue="Recurring Rate Plan"/>
+            <apex:column value="{!ci.DiscountProductRatePlanName}" headerValue="Discount Rate Plan"/>             
+            <apex:column value="{!ci.TermDuration}" headerValue="TermDuration"/>  
+                  
+        </apex:pageBlockTable>
+        <apex:pageBlockButtons location="Bottom">
+            <apex:commandButton value="Remove from Cart" action="{!removeFromCart}"/>
+            <apex:commandButton value="Place Order" styleClass="btn" action="{!confirm}" reRender="PaymentProcess,Messages" />
+        </apex:pageBlockButtons> 
+    </apex:pageBlock>
+    <apex:outputPanel id="PaymentProcess">
+    <apex:pageBlock title="Payment Process" rendered="{!showProcess}" >
+        <iframe src="{!processURL}" style="height: 674px;" width="100%" frameborder="0" height="300" id='gpp_iframe' />
+            <script>
+                function resize_iframe(height) {
+                    $("#gpp_iframe").height(height);
+                }
+
+                ZXD.receiveMessage(function (e) {
+                    var data = JSON.parse(e.data);
+
+                    if (data.operation == "resize_iframe")
+                        resize_iframe(data.params.height);
+                    else if (data.operation == "payment_success") {
+                    }
+                    else if (data.operation == "generic_payment_complete")
+                        top.window.location.href = "<apex:outputText value="{!redirectUrl}" />";    //location.href = "<apex:outputText value="{!redirectUrl}" />";  
+                    else if (data.operation == "generic_payment_cancel")
+                        top.window.location.href = "<apex:outputText value="{!cancelUrl}" />";       //location.href = "<apex:outputText value="{!cancelUrl}" />";
+                       
+                }, "{!iframeDomain}");
+            </script>            
+    </apex:pageBlock>
+    </apex:outputPanel>
+</apex:form>
+
+</apex:page>

@@ -1,0 +1,93 @@
+<aura:component controller="Communities_Inactives" implements="flexipage:availableForAllPageTypes,force:hasRecordId,lightning:isUrlAddressable" access="global">
+    <ltng:require styles="{!$Resource.bcomfooter }"></ltng:require>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" /> 
+    <aura:attribute name="subscription" type="Object"/>
+    <aura:attribute name="isInactiveSub" type="Boolean"/>
+    <aura:attribute name="currentYear" type="string" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <div class="fullpage slds-scope">
+        <div class="slds-grid slds-wrap">
+            <div class="new-containerpage">
+                <div class="slds-container_x-large new-container">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12  header-full">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 header-part">
+                            <div class="logo">
+                                <img src="{!$Resource.brightlogolightning}" />
+                            </div>
+                        </div>
+                        
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 header-part">
+                            <div class="call">
+                                <h4>Looking for support? </h4>
+                                <h3>Call: 1-844-552-7444</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-container--x-large new-container">
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 inflow">
+                        
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 inactive">
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 flow1">
+                                <img src="{!$Resource.newpeople}" />
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_9-of-12 slds-large-size_9-of-12 inactive">
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 flow2">
+                                <aura:if isTrue= "{!!v.isInactiveSub}">
+                                    <h2>Welcome Back!</h2>
+                                    <p class="flowpoint">We missed you! Your account is currently inactive.</p>
+                                    <p>Let's reactivate your subscription to Bright and pay off any balance.</p>
+                                    <p class="flowpoint">Rejoin in just a few steps.</p>
+                                    <button class="slds-button slds-button_brand" onclick="{!c.appTypeClickEvtHandler2}">Let's Get Started</button>
+                                </aura:if>
+                                <aura:if isTrue= "{!v.isInactiveSub}">
+                                 <p class="flowpoint">It looks like your account is currently active.</p>
+                                </aura:if>
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                    <aura:if isTrue= "{!!v.isInactiveSub}">
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 tax">
+                                            <h4><a href="#" onclick="{!c.appTypeClickEvtHandler1}">How much do I owe?</a></h4>
+                                            <h4><a href="#" onclick="{!c.appTypeClickEvtHandler}">View past payments</a></h4>
+                                            <h4><a href="#" onclick="{!c.appTypeClickEvtHandler}">Download Tax Documents</a></h4>
+                                        </div>
+                                    </aura:if>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="footerpartdown">
+                <div class="slds-grid slds-wrap containerfooter">
+                    <div class="slds-container--x-large new-container">
+                        <c:bcomfooter/>
+                    </div>
+                </div>
+            </div>
+            <!--
+            <div class="footerbottom">
+                <div class="slds-container_x-large new-container">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 footer-full">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 footer-part">
+                            <p><a href="https://www.brightmls.com/#/privacy" target="_blank">Privacy</a> 
+                            </p>
+                            <p><a href="https://www.brightmls.com/#/copyright" target="_blank">Copyright</a>
+                            </p>
+                            <p><a href="https://www.brightmls.com/#/terms" target="_blank">Terms of Use</a>
+                            </p>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 footer-part">
+                            <p class="copy">Copyright © {!v.currentYear} Bright MLS, Inc.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            -->
+        </div>
+    </div>
+</aura:component>

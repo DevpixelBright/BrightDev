@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="15" viewBox="0 0 15 15">
+  <defs>
+    <clipPath id="clip-Custom_Size_1">
+      <rect width="15" height="15"/>
+    </clipPath>
+  </defs>
+  <g id="Custom_Size_1" data-name="Custom Size – 1" clip-path="url(#clip-Custom_Size_1)">
+    <path id="Icon_material-library-books" data-name="Icon material-library-books" d="M4.5,6H3V16.5A1.5,1.5,0,0,0,4.5,18H15V16.5H4.5Zm12-3h-9A1.5,1.5,0,0,0,6,4.5v9A1.5,1.5,0,0,0,7.5,15h9A1.5,1.5,0,0,0,18,13.5v-9A1.5,1.5,0,0,0,16.5,3Zm-.75,6.75H8.25V8.25h7.5Zm-3,3H8.25v-1.5h4.5Zm3-6H8.25V5.25h7.5Z" transform="translate(-3 -3)" fill="#4f5a65"/>
+  </g>
+</svg>

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Bright_MLS_Auto_Suspend_Notification_Alert</fullName>
+        <description>Bright MLS Auto Suspend Notification Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Support_Center_Email_Templates/BRIGHT_MLS_Billing_Suspension_for_Non_Payment</template>
+    </alerts>
+    <alerts>
+        <fullName>Bright_MLS_Auto_Suspend_Notification_Alert_Email_to_SF</fullName>
+        <ccEmails>emailtosalesforce@z-lh9dypma9adpo2pq0q6zgoeut46ejmjs7k17uk5g001ihkri0.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <ccEmails>test.mrisblt@gmail.com</ccEmails>
+        <description>Bright MLS Auto Suspend Notification Alert Email to SF</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Support_Center_Email_Templates/BRIGHT_MLS_Billing_Suspension_for_Non_Payment</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_Auto_Suspend_Notification_Alert</fullName>
+        <description>SMS Auto Suspend Notification Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_Billing_Suspension_for_Non_Payment</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_Auto_Suspend_Notification_Alert_Email_to_SF</fullName>
+        <ccEmails>emailtosalesforce@z-lh9dypma9adpo2pq0q6zgoeut46ejmjs7k17uk5g001ihkri0.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <ccEmails>test.mrisblt@gmail.com</ccEmails>
+        <description>SMS Auto Suspend Notification Alert Email to SF</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_Billing_Suspension_for_Non_Payment</template>
+    </alerts>
+    <alerts>
+        <fullName>TEST_Email_Template</fullName>
+        <description>TEST Email Template</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/TEST_Email_Template</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>SMS_Auto_Suspend_Update_Status</fullName>
+        <field>Status__c</field>
+        <literalValue>Failed</literalValue>
+        <name>SMS Auto Suspend Update Status</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>SMS_Auto_Suspend_Update_Status_Message</fullName>
+        <field>Status_Message__c</field>
+        <formula>&apos;Timed Out&apos;</formula>
+        <name>SMS Auto Suspend Update Status Message</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>SMS_Auto_Suspend_Update_Timed_Out</fullName>
+        <field>Timed_Out__c</field>
+        <literalValue>1</literalValue>
+        <name>SMS Auto Suspend Update Timed Out</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <outboundMessages>
+        <fullName>SMS_Auto_Suspend_Outbound_Message</fullName>
+        <apiVersion>30.0</apiVersion>
+        <endpointUrl>http://aue1d1z1bevautosuspend.dev.aws.brightmls.com</endpointUrl>
+        <fields>Id</fields>
+        <fields>MRIS_Subscription_ID__c</fields>
+        <includeSessionId>true</includeSessionId>
+        <integrationUser>mris_sf_api_no_obm@mris.net</integrationUser>
+        <name>SMS Auto Suspend Outbound Message</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>Bright MLS Auto Suspend Notification</fullName>
+        <actions>
+            <name>Bright_MLS_Auto_Suspend_Notification_Alert</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Bright_MLS_Auto_Suspend_Notification_Alert_Email_to_SF</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>{&quot;SJ&quot;:&quot;BRIGHT&quot;,&quot;BJ&quot;:&quot;No Jurisdiction&quot;,&quot;TE&quot;: &quot;Auto Suspended&quot;,&quot;BE&quot;:&quot;Subscrption Suspended&quot;,&quot;Des&quot;: &quot;An email will be sent to the Subscription suspended for non-payment&quot;}</description>
+        <formula>AND( ISPICKVAL( Status__c , &apos;Success&apos;), ISPICKVAL(Bright_Subscription__r.Service_Jurisdiction__c,&apos;BRIGHT&apos; ),$Profile.Name = &apos;API&apos; )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>SMS Auto Suspend Abandon</fullName>
+        <actions>
+            <name>SMS_Auto_Suspend_Update_Status</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>SMS_Auto_Suspend_Update_Status_Message</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>SMS_Auto_Suspended_Account__c.Timed_Out__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Auto_Suspended_Account__c.Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>SMS Auto Suspend Notification</fullName>
+        <actions>
+            <name>SMS_Auto_Suspend_Notification_Alert</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>SMS_Auto_Suspend_Notification_Alert_Email_to_SF</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>{&quot;SJ&quot;:&quot;BRIGHT&quot;,&quot;BJ&quot;:&quot;No Jurisdiction&quot;,&quot;TE&quot;: &quot;Auto Suspended&quot;,&quot;BE&quot;:&quot;Subscrption Suspended&quot;,&quot;Des&quot;: &quot;An email will be sent to the Subscription suspended for non-payment&quot;}</description>
+        <formula>AND( ISPICKVAL( Status__c , &apos;Success&apos;), NOT(ISPICKVAL(Bright_Subscription__r.Service_Jurisdiction__c,&apos;BRIGHT&apos; )),$Profile.Name = &apos;API&apos; )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>SMS Auto Suspend Outbound Message</fullName>
+        <actions>
+            <name>SMS_Auto_Suspend_Outbound_Message</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>SMS_Auto_Suspended_Account__c.MRIS_Subscription_ID__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>SMS Auto Suspend Update Timed Out</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>SMS_Auto_Suspended_Account__c.MRIS_Subscription_ID__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>Timed Out field will be updated to true</description>
+        <triggerType>onCreateOnly</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>SMS_Auto_Suspend_Update_Timed_Out</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>SMS_Auto_Suspended_Account__c.CreatedDate</offsetFromField>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>TEST Email Template Bright MLS Auto Suspend Notification</fullName>
+        <active>true</active>
+        <description>{&quot;SJ&quot;:&quot;BRIGHT&quot;,&quot;BJ&quot;:&quot;No Jurisdiction&quot;,&quot;TE&quot;: &quot;Auto Suspended&quot;,&quot;BE&quot;:&quot;Subscrption Suspended&quot;,&quot;Des&quot;: &quot;An email will be sent to the Subscription suspended for non-payment&quot;}</description>
+        <formula>AND( ISPICKVAL( Status__c , &apos;Success&apos;), ISPICKVAL(Bright_Subscription__r.Service_Jurisdiction__c,&apos;BRIGHT&apos; ))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>TEST_Email_Template</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>SMS_Auto_Suspended_Account__c.LastModifiedDate</offsetFromField>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+</Workflow>

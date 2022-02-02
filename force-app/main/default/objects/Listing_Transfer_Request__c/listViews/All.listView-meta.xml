@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>IsActive__c</columns>
+    <columns>Requested_By__c</columns>
+    <columns>ListingKey__c</columns>
+    <columns>StatusCode__c</columns>
+    <columns>DestinationDecision__c</columns>
+    <columns>DestinationOfficeCode__c</columns>
+    <columns>OriginationDecision__c</columns>
+    <columns>OriginationOfficeCode__c</columns>
+    <columns>Reassigned_To__c</columns>
+    <columns>ExpirationDate__c</columns>
+    <columns>LUSStatus__c</columns>
+    <columns>LUSStatusMessage__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+</ListView>

@@ -1,0 +1,64 @@
+<apex:page docType="html-5.0" controller="Communities_Base_Controller" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" lightningstylesheets="true">
+    
+    <html>
+    <head>
+       <link rel="shortcut icon" href="{!URLFOR($Resource.brightas + '/brightas/images/favicon.ico')}" type="image/vnd.microsoft.icon" />
+    </head>
+        <body>
+     <apex:includeLightning />       
+      
+    <script>
+    /* functions to load BCOM megamenu */
+    function loadMenu() {
+        var subscriptionId = '{!$CurrentPage.parameters.id}';
+        // alert(subscriptionId);
+        window.InitMenu(
+            Number(subscriptionId),
+            Number(subscriptionId),
+            'N',
+            false,
+            false,
+        )
+     }
+            
+    function loadMegaMenuScript() {
+        const link = document.createElement('link')
+        //link.href = 'https://menu.dev.brightmls.com/assets/menu/css/brightmlsmenu.min.css'
+        link.href = '{!$Label.BCOM_Header_CSS}'
+        link.type = 'text/css'
+        link.rel = 'stylesheet'                     
+        const script = document.createElement('script')
+        //script.src = 'https://menu.dev.brightmls.com/assets/menu/js/brightmlsmenu.js'
+        script.src = '{!$Label.BCOM_Header_JS}'
+        script.async = true
+        script.onload = () => loadMenu()
+ 
+        document.getElementsByTagName('head')[0].appendChild(script)
+        document.getElementsByTagName('head')[0].appendChild(link)
+    }   
+    
+    loadMegaMenuScript();
+    </script>
+    
+    <div id="insertBefore" />
+    <div id="dataTable" />
+    
+    <script>
+    try {
+        $Lightning.use("c:BuyPremiumProductApp", function() {
+            $Lightning.createComponent("c:BuyPremiumProduct", {}, "dataTable", function(cmp) {
+                console.log('done');
+            });
+        });       
+    }
+    catch(err) {
+        if(err.message && err.message.contains('This page has an error. You might just need to refresh it.'))
+            window.location = '';
+    }
+    </script>
+    <style>
+        #auraErrorMessage {display:none;}
+    </style> 
+              </body>
+    </html>
+</apex:page>

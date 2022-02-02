@@ -1,0 +1,83 @@
+<aura:component >
+    <!-- Aura Attributes -->
+    <aura:attribute name="appConfig" type="List" default="[]" />
+    <aura:attribute name="appData" type="Object" />
+    <aura:attribute name="currentConfig" type="Object" />
+    <aura:attribute name="brokerCode" type="Object" default="{}" />
+    <aura:attribute name="agents" type="List" default="[]" />
+    <aura:attribute name="errorMsg" type="String" default="" />
+    <aura:attribute name="appType" type="String" default="" />
+    <aura:attribute name="reload" type="Boolean" default="true" />
+    
+    <!-- Aura Actions -->
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}" />
+    <aura:handler name="cmpEvent" event="c:EZJoin_AutoCompleteSelectionEvt" action="{!c.handleComponentEvent}" />
+    <aura:handler name="cmpEvent1" event="c:EZJoin_AutoCompleteClearEvent" action="{!c.handleClearEvent}" />
+    
+    <!-- Application Events -->
+    <aura:registerEvent name="EZJoin_NewApplicationAppConfigEvent" type="c:EZJoin_NewApplicationAppConfigEvent" />    
+
+    <div class="slds-text-longform">
+        <h3 class="slds-text-heading_medium">
+            <aura:if isTrue="{!v.appType == 'PersonalAssistant'}">
+                Enter broker code and (if needed) up to five agent(s)
+            </aura:if>
+            
+            <aura:if isTrue="{!v.appType == 'OfficeSecretary'}">
+                Verify the broker code
+            </aura:if>            
+        </h3>
+        
+        <aura:if isTrue="{!v.errorMsg != ''}">
+            <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert" style="margin-bottom:26px; border-radius: 2px;">
+                <span class="slds-assistive-text">error</span>
+                <span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small" title="Description of icon when needed">
+    
+                </span>
+                <h2 style="margin:0;">{!v.errorMsg}</h2>
+            </div>
+        </aura:if>
+        
+        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+			<c:EZJoin_AutoCompleteComponent aura:id="BrokerCodeCmp" applicationType="{!v.appType}" cmpType="BrokerCode" label="Enter broker code" inputValue="{!(v.brokerCode.Account_Name__c ? (v.brokerCode.Account_Name__c + ' - ' + v.brokerCode.Name) : '')}" selectedOption="{!(v.brokerCode.Account_Name__c ? '0' : '')}" selectedObj="{!v.brokerCode}" placeHolder="Start typing the broker code..." />
+        </div>
+
+		<aura:if isTrue="{!v.appType == 'PersonalAssistant'}">     
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field1">
+                <aura:if isTrue="{!v.brokerCode.Type != 'Appraiser'}">
+                    <aura:if isTrue="{!v.reload}">
+                    	<c:EZJoin_AutoCompleteComponent aura:id="AgentsCmp" applicationType="{!v.appType}" brokerCode="{!v.brokerCode}" agents="{!v.agents}" cmpType="Agents" label="Select agent(s)" placeHolder="Start typing the agent name or agent id..." />
+                	</aura:if>
+               	</aura:if>
+                
+                <aura:if isTrue="{!v.brokerCode.Type == 'Appraiser'}">
+                    <c:EZJoin_AutoCompleteComponent aura:id="AppraiserCmp" applicationType="{!v.appType}" brokerCode="{!v.brokerCode}" cmpType="Appraiser" label="Select Appraiser" inputValue="{!(v.agents[0].Contact__r.Name ? (v.agents[0].Contact__r.Name + ' - ' + v.agents[0].Name) : '')}" selectedOption="{!(v.agents[0].Name ? '0' : '')}" selectedObj="{!v.agents[0]}" placeHolder="Start typing the appraiser..." />
+                </aura:if>                
+            </div>
+        </aura:if> 
+        
+        <aura:if isTrue="{!v.brokerCode.Type != 'Appraiser'}">
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 flow2">
+                    <aura:iteration items="{!v.agents}" var="agent" indexVar="index">
+                        <p>
+                            <img src="{!$Resource.ejoin + '/ejoinimages/ejoincorrect.jpg'}" />{!agent.Contact__r.Name} - {!agent.Name}
+                            <img class="delete" src="{!$Resource.ejoin + '/ejoinimages/ejoindelete.jpg'}" data-index="{!index}" onclick="{!c.deleteAgentEvtHandler}" />
+                        </p>
+                    </aura:iteration>               
+                </div>
+            </div>
+        </aura:if>
+        
+        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 spaceline2"></div>
+        
+        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+            <aura:if isTrue="{!v.appType == 'PersonalAssistant'}">
+            	<button class="slds-button slds-button_brand" onclick="{!c.submitBtnHandler}" disabled="{!!and(v.brokerCode.Name, v.agents.length > 0)}">Continue</button>
+                <aura:set attribute="else">
+                    <button class="slds-button slds-button_brand" onclick="{!c.submitBtnHandler}" disabled="{!!v.brokerCode.Name}">Continue</button>
+                </aura:set>            	
+            </aura:if>
+       </div>
+    </div>
+</aura:component>

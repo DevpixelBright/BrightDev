@@ -1,0 +1,10 @@
+<apex:page controller="SubdivisionBuilding_Form" renderAs="pdf" showHeader="false" applyHtmlTag="false" applyBodyTag="false">
+    <h4 style="text-align: center;font-size:20px; margin-top:120px;">Thank you for submitting a {!if(subDivisionOrBuilding=='Subdivision','Subdivision Name request','Building Name request')} </h4>
+    <p style="text-align: left;font-size:20px;">Your request has been submitted to Bright. Thank you for helping us enhance the data integrity of our Multiple Listing Service. We will contact you as soon as your request for the new {!if(subDivisionOrBuilding=='Subdivision','Subdivision Name','Building Name')} is validated and is available in Bright.</p>
+    <div style="width:750px;">
+            <h5 style="text-align: left; word-break: break-all;font-size:20px;">{!if(subDivisionOrBuilding=='Subdivision','Subdivision','Building')} Name: {!subDivisionOrBuildingName}</h5>
+    </div>
+    <h5 style="text-align: left;font-size:20px;">Date of Request: <apex:outputText value="{0, date,  MM / dd / yyyy}">
+        <apex:param value="{!NOW()}" />
+        </apex:outputText></h5>
+</apex:page>

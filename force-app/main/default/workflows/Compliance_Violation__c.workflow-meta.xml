@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>LDC_Email_to_Salesforce_Violation_Notification_Email_Alert</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>LDC Email to Salesforce Violation Notification Email Alert</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/LDC_Violation_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>LDC_Violation_Notification_Email_Alert</fullName>
+        <description>LDC Violation Notification Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/LDC_Violation_Notification</template>
+    </alerts>
+</Workflow>

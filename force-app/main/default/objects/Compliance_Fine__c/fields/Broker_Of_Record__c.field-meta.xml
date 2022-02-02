@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Broker_Of_Record__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Broker_Of_Record</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Broker_Of_Record</inlineHelpText>
+    <label>Broker Of Record</label>
+    <referenceTo>Subscriptions__c</referenceTo>
+    <relationshipLabel>SMS Compliance Fines (Broker_Of_Record)</relationshipLabel>
+    <relationshipName>Compliance_Fines</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reasons_Not_To_Use_Alternative_Resources__c</fullName>
+    <description>What are the reasons the customer does not use alternate resources?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>What are the reasons the customer does not use alternate resources?</inlineHelpText>
+    <label>Reasons not to use alternative resources</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>None</fullName>
+                <default>false</default>
+                <label>None</label>
+            </value>
+            <value>
+                <fullName>N/A customer use alternate resources</fullName>
+                <default>false</default>
+                <label>N/A customer use alternate resources</label>
+            </value>
+            <value>
+                <fullName>Easier to call the Support Center</fullName>
+                <default>false</default>
+                <label>Easier to call the Support Center</label>
+            </value>
+            <value>
+                <fullName>Prefers 1-2-1 help vs Self Help</fullName>
+                <default>false</default>
+                <label>Prefers 1-2-1 help vs Self Help</label>
+            </value>
+            <value>
+                <fullName>Unaware of the Alternate resources</fullName>
+                <default>false</default>
+                <label>Unaware of the Alternate resources</label>
+            </value>
+            <value>
+                <fullName>Doesn’t have time to attend classes</fullName>
+                <default>false</default>
+                <label>Doesn’t have time to attend classes</label>
+            </value>
+            <value>
+                <fullName>Classes locations are not convenient</fullName>
+                <default>false</default>
+                <label>Classes locations are not convenient</label>
+            </value>
+            <value>
+                <fullName>Classes are not relevant</fullName>
+                <default>false</default>
+                <label>Classes are not relevant</label>
+            </value>
+            <value>
+                <fullName>Online resources are hard to find</fullName>
+                <default>false</default>
+                <label>Online resources are hard to find</label>
+            </value>
+            <value>
+                <fullName>Online resources too long to navigate</fullName>
+                <default>false</default>
+                <label>Online resources too long to navigate</label>
+            </value>
+            <value>
+                <fullName>Online resources don’t resolve my issues</fullName>
+                <default>false</default>
+                <label>Online resources don’t resolve my issues</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>10</visibleLines>
+</CustomField>

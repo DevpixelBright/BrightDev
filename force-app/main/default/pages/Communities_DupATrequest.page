@@ -1,0 +1,713 @@
+<apex:page controller="Communities_DupATrequest" docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" lightningstylesheets="true">
+ <apex:composition template="Communities_Base">
+        <apex:define name="content">
+            <apex:form styleClass="form-horizontal">
+                <c:Bootstrap_Resources />   
+                <script>
+                    markOptionPanel("Subscription");
+                </script>
+                 <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/jquery.min.js')}"></script>
+        <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/bootstrap.min.js')}"></script>   
+        <apex:stylesheet value="{!URLFOR($Resource.Bootstrap_Layout_Library, '/css/bootstrap.min.css')}"/>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+              
+                <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+                
+                <apex:pageBlock id="error_details" rendered="{!hasInitialError}">
+                    <div id="messages">
+                        We’re sorry, but you do not appear to have access to this page.
+                    </div>                      
+                </apex:pageBlock>
+                
+                <apex:pageBlock title="Subscription" id="details" rendered="{!!hasInitialError}">
+                    <style>
+                        .two_buttons{text-align:right; margin-bottom:-44px; margin-top:40px;}
+                        h2{font-size:22px !important; margin:5px 0px !important;}
+                        .tertiaryPalette{display:none !important;}
+                        .for_inputs h4{border-bottom: 1px solid #69A61F; padding-bottom: 10px;}
+                        h2{display:none;}
+                        label{padding-top:7px !important;}
+                        .margin{margin:20px 0 10px 0;}
+                        #content-container{margin-top:0px !important;}
+                        @media(min-width:400px){
+                        .detailList th{width:30% !important;}
+                        .mandatory{color:red; font-weight:bold; font-size:18px;}
+                        }
+
+                        .fa-2x {
+                        font-size: 2em;
+                        }
+                        .fa {
+                        display: inline-block;
+                        font-family: FontAwesome;
+                        font-style: normal;
+                        font-weight: normal;
+                        line-height: 1;
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        }
+                        
+                        h4 i.fa {
+                            top:0px;
+                        }
+                        .soa { margin-bottom: 50px;}
+                        .soa .list .emphasised {
+                            font-weight: bold;
+                        }
+                    
+                        .soa .list .row {
+                            border-radius: 4px;
+                            display: table;
+                            width: 100%;
+                            margin-left: 0px;
+                            margin-right: 0px;
+                        }
+                        
+                        .soa .list .row:nth-child(even) {
+                            background-color: #eee;
+                        }
+                        
+                        .soa .list .row + .row {
+                            border-top: 1px solid #eee;
+                        }
+
+                        .soa .list .row > div {
+                            display: table-cell;
+                            float: none;
+                            vertical-align: middle;
+                            padding: 10px 15px;
+                        }
+                        
+                        .soa .list .row > div + div {
+                            border-left: 1px solid #fff;
+                        }
+                        .edit a {float:left; margin-left:30px;}
+                        .add {margin-top:-65px;  display:inline; float:right; padding:3px; padding-top:0px; padding-bottom:0px; }
+                        .add a {color:#ccc;}
+                        .add a:hover {color:#69a61f;}
+                        .form-horizontal .form-group { margin:0px; }
+                        .modal-row {border:1px solid #ddd; border-bottom:none; margin: 0 0 0 0; padding:15px;}
+                        .modal-last-row {border:1px solid #ddd; margin: 0 0 0 0; padding:15px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;}
+                        .modal-first-row {border:1px solid #ddd; border-top-left-radius:5px; border-top-right-radius:5px; border-bottom:none; margin: 0 0 0 0; padding:15px;}                                                                  
+                        .errorMsg {display:none;}
+                        .required{color:red;}
+                        .view-row {padding:10px;border-bottom:1px solid #eee;}
+                        .last {border-bottom:none;}
+                        .clear {clear:both;}
+                        .view-header-row{padding:10px;border-bottom:1px solid #eee; font-size:18px; font-weight:bold;}
+                        .modal-footer .terms {text-align:left; padding-left:5px;}
+                        .modal-footer .buttons {text-align:right;}
+                        .menu-header p{ padding-top:5px; line-height:18px; font-size:13px; color:#727272;}
+                    </style> 
+                    
+    
+                   
+                    
+                    <apex:actionFunction name="destinationVerified" action="{!destinationVerified}" reRender="DestinationBlock, ContactBlock, ProgressBar">
+                    
+                    </apex:actionFunction>
+                    
+                    <apex:actionFunction name="next" action="{!next}" reRender="PABlock, ContactBlock, ProgressBar">
+                    
+                    </apex:actionFunction>
+                    
+                    <apex:actionFunction name="continueToReview2" action="{!continueToReview}" reRender="PABlock, ReviewBlock, ProgressBar">
+                        <apex:param name="Parameter" assignTo="{!selectedPAStr}" value="" />        
+                    </apex:actionFunction>                      
+                    
+                    <script>
+                        $(document).ready(function() {
+                            $(".errorM3").addClass("alert alert-danger");
+                            $(".infoM3").addClass("alert alert-info");
+                            $(".confirmM3").addClass("alert alert-success");  
+                             $('[id$=continue]').attr('disabled', 'disabled');
+                             $("#BrokerCodeInput").click(function() {
+                                     $('[id$=continue]').removeAttr('disabled'); 
+                            });
+                       });
+                       
+                        function continueToReview() {
+                            var selectedOffices = [];
+                            $('.PACheckbox').each(function() {
+                                if($(this).is(':checked')) {
+                                    selectedOffices.push($(this).val());    
+                                }
+                            });
+                            var jsonString = JSON.stringify(selectedOffices);
+                            continueToReview2(jsonString);
+                        }         
+           
+     
+</script>
+
+                    <div class="row">
+                        <c:Communities_Definition pageTitle="Agent Transfer" pageTitleClass="fa fa-arrow-right fa-2x" hasDefinitions="false">
+                            <p><b class="term">Term</b> Definition goes here.</p>
+                        </c:Communities_Definition>
+
+                        <div class="col-xs-12 instructions">
+                            <p>This is your request to transfer Broker offices. You will be asked to verify and edit your contact information for your private email address and submit your request to transfer. Once your request is submitted, your new Broker is automatically notified. Please follow up with them within the next seven days to ensure the transfer is complete.</p>
+                        </div>
+                    </div>
+
+                    <div id="messages">
+                        <apex:pagemessages ></apex:pagemessages>
+                    </div> 
+
+                    <style>
+                        .header_row{ padding:12px; background-color:#388edd;}
+                        .header_row img.logo{padding: 12px 0px;}
+                        .body_content { padding-top: 20px; padding-bottom: 20px; color:#565656;}
+                        .body_content h3{ font-size:22px; margin:0px; padding:4px 0px;}
+                        .body_content p{ padding-top:5px; line-height:18px; font-size:13px; color:#727272;}
+                        .form_style{background-color:#fff; border:1px solid #e7e7e7; padding-top:15px; margin-top:22px; border-radius:4px; -o-border-radius:4px; -webkit-border-radius:4px; -moz-border-radius:4px; -ms-border-radius:4px;}            
+                        .panel-default { border:none; }
+                        .panel-default>.panel-heading { background-color:#fff; color:#565656; border:none; }
+                        .panel-group .panel-heading+.panel-collapse .panel-body { border:none; }
+                        .col-sm-1 { width:1.3333%; }
+                        .panel-heading { padding:0px;}
+                        .menu-header {padding:10px;}
+                        .menu-header-right { border-top:1px solid #ccc;}
+                        .menu-header-left { padding-right:30px;}
+                        h3 {padding:10px;}
+                        .menu-header p { margin:0px;}
+                        .menu-header p { text-decoration:none; }
+                        .panel {box-shadow:none; border-radius:0px; }
+                        .panel-group .panel { border-radius:0px; }
+                        .active { background-color: #f5f5f5;}
+                        .panel-body {padding:10px;}
+                        .panel-title a {
+                            color: #565656;
+                            text-decoration: none;                            
+                        }
+                        .panel-title {
+                            font-size: 22px;
+                            margin: 0px;
+                            padding: 4px 0px;                            
+                        }   
+                        .ui-autocomplete-loading {
+            background: white url("http://jqueryui.com/resources/demos/autocomplete/images/ui-anim_basic_16x16.gif") right center no-repeat;
+        }
+                    </style>
+                    
+                    <div class="row">
+                        <div class="col-sm-10">
+                        </div>
+                
+                        <div class="col-sm-2">
+                            <span style="color:#565656; font-size:11px;">Application Progress</span>
+                            <apex:outputPanel id="ProgressBar">
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="{!progressValue}" aria-valuemin="0" aria-valuemax="100" style="width:{!progressValue}%">
+                                        <span style="padding-left:10px;">{!progressValue}%</span>
+                                    </div>
+                                </div>
+                            </apex:outputPanel>            
+                        </div>                    
+                    </div>
+                    <br/> 
+                    <div class="row">
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            
+                            <!-- Destination Broker Info -->
+                            <apex:outputPanel id="DestinationBlock">
+                                
+                              
+                            <div class="panel panel-default {!if(searchBlockState == 'Started', 'active', 'inactive')}">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <div class="col-sm-12 menu-header menu-header-right">
+                                            <table style="width:100%;" class="panel-title">
+                                                <tr>
+                                                    <td style="width:50px; vertical-align:top; text-align:center;">
+                                                        1.
+                                                    </td>
+                                                    <td style="{!if(searchBlockState == 'Started', 'border-bottom:1px solid #95D1E6; padding-bottom:7px;', '')}">
+                                                        <apex:outputPanel >
+                                                            <apex:commandLink action="{!accordian1}" rerender="DestinationBlock">
+                                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                Destination Broker Information
+                                                            </a>
+                                                            </apex:commandLink>
+                                                        </apex:outputPanel>
+                                                        
+                                                        <apex:outputPanel rendered="{!reviewBlockState == 'Completed'}">
+                                                            <a>
+                                                                Destination Broker Information
+                                                            </a>
+                                                        </apex:outputPanel>                                            
+                                                        
+                                                        <p>Enter the destination broker information</p>
+                                                    </td>
+                                                    <td style="width:3%; color:#5cb85c;">
+                                                        <apex:outputText rendered="{!if(searchBlockState == 'Completed', true, false)}">
+                                                            <i class="glyphicon glyphicon-ok" />
+                                                        </apex:outputText> 
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                    </div>
+                                </div>
+            
+                                <div id="collapseOne" class="panel-collapse {!if(searchBlockState == 'Started', 'collapse in', 'collapse')}" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body">
+                                        <table style="width:100%;">
+                                            <tr>
+                                                <td style="width:50px; vertical-align:top; text-align:center;">
+                
+                                                </td>
+                                                <td>                    
+                                                    <div class="col-sm-12" style="padding:10px;">
+                                                        <div class="col-sm-12" style="color:#3590e4; font-size:16px;">
+                                                            <b>{!subscription.Contact__r.Name}</b> 
+                                                        </div>                                         
+                                                    </div>
+                                                    <div class="col-sm-12" style="padding:10px; border-bottom:1px solid #fff;">
+                                                        <div class="col-sm-6">
+                                                            <b>Origination Office:</b><br/>
+                                                            <div  style="padding-top:10px;">
+                                                                {!subscription.Related_Location_Broker_Office__r.Account_Name__c} ({!subscription.Related_Location_Broker_Office__r.Name})<br/>
+                                                                {!subscription.Related_Location_Broker_Office__r.Street_Number__c} {!subscription.Related_Location_Broker_Office__r.Street_Name__c}<br/>
+                                                                {!subscription.Related_Location_Broker_Office__r.City__c} {!subscription.Related_Location_Broker_Office__r.State__c} {!subscription.Related_Location_Broker_Office__r.Zip__c}
+                                                            </div>
+                                                        </div>
+                                                        <b>Destination Office:</b><br/>
+                                                        <div id="BrokerInfo" style="padding-top:10px;">
+                                                              
+                                                            <apex:outputPanel rendered="{!isVerified}" >
+                                                              
+                                                                <div   >
+                                                                    {!destinationBrokerOffice.Account_Name__c} ({!destinationBrokerOffice.Name})<br/>
+                                                                    {!destinationBrokerOffice.Street_Number__c} {!destinationBrokerOffice.Street_Name__c}<br/>
+                                                                    {!destinationBrokerOffice.City__c} {!destinationBrokerOffice.State__c} {!destinationBrokerOffice.Zip__c}<br/><br/>
+                                                                    <!-- <a><i class="glyphicon glyphicon-arrow-left" /> Change</a> -->
+                                                                </div>                                                    
+                                                            </apex:outputPanel>
+                                                        </div>                                                                                                
+                                                    </div>
+                                               
+                                                    <div class="col-sm-12" style="padding:12px;">
+                                                        <div class="col-sm-4">
+                                                            <apex:outputPanel >
+                                                          <script>
+                                                              var isAccountTypeDownSelect = false;
+                                                               $( function() {
+                                                                            var availableTags = [];
+                                                                            $("#BrokerCodeInput").autocomplete({
+                                                                                source: function( request, response ) {
+                                                                                    $("[id$=BrokerCode]").val('');
+                                                                                    $("#BrokerInfo").html('');                        
+                                                                                    
+                                                                                    Visualforce.remoting.Manager.invokeAction(
+                                                                                        '{!$RemoteAction.Communities_DupATrequest.searchBroker}', 
+                                                                                        request.term, '{!subscription.Service_Jurisdiction__c}',
+                                                                                        function(result, event) {                                    
+                                                                                            availableTags = [];
+                                                                                            for(var i=0; i<result.length; i++) {
+                                                                                                var parser = new DOMParser;
+                                                                                                var dom = parser.parseFromString('<!doctype html><body>' + result[i].Account_Name__c, 'text/html');
+                                                                                                var decodedString = dom.body.textContent;                        
+                                                                                                availableTags.push({value:decodedString + ' - ' + result[i].Name, id:result[i].Id, name:result[i].Name, accountName:result[i].Account_Name__c, city:result[i].City__c, state:result[i].State__c, zip:result[i].Zip__c});    
+                                                                                            }
+                                                                                            response(availableTags);                                                                         
+                                                                                        }, 
+                                                                                        {buffer: false, escape: true, timeout: 120000}
+                                                                                    );        
+                                                                                },
+                                                                                minLength: 2,
+                                                                                select: function( event, ui ) {
+                                                                                    console.log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+                                                                                    $("[id$=BrokerCode]").val(ui.item.name);
+                                                                                    isAccountTypeDownSelect = true;
+                                                                                    $("#BrokerInfo").html(ui.item.name + ' ' + ui.item.accountName + '<br/>' + ui.item.city + ' ' + ui.item.state + ' ' + ui.item.zip);
+                                                                                }
+                                                                            });
+                                                                        });
+                                                                        function checkAccountDetails() {
+                                                                                if($("[id$=BrokerCode]").val() == '' || !isAccountTypeDownSelect) {
+                                                                                    $("[id$=BrokerCode]").val($("#BrokerCodeInput").val());    
+                                                                                }
+
+                                                                            return true;
+                                                                        }                                                                        
+                                                                  </script>  
+                                                               <div class="form-group">
+                                                                    <label for="Search">Destination Broker Code</label>
+                                                                    <div class="col-sm-8" style="padding-left:0px; paddin-right:0px;">        
+                                                                      <!--  <apex:inputText styleClass="form-control" value="{!destinationBrokerCode}" /> -->
+                                                                         <input type="text" class="form-control" id="BrokerCodeInput" value="{!destinationBrokerOffice.Account_Name__c}" />
+                                                                        <apex:inputHidden id="BrokerCode" value="{!destinationBrokerCode}" /> 
+                                                                    </div>
+   
+                                                               </div>
+                                                            </apex:outputPanel>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <apex:outputPanel rendered="{!destinationBlockError != null}">
+            
+                                                                <div class="alert alert-danger" role="alert" style="margin-top:10px;">
+                                                                {!destinationBlockError}
+                                                                </div>
+            
+                                                            </apex:outputPanel>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <apex:outputPanel >
+                                                                 <apex:commandButton onclick="return checkAccountDetails();" id="continue" style="float:right; margin-top:18px;" action="{!destinationVerified}" value="Continue" styleClass="btn btn-primary" /> 
+                                                               <!-- <input type="button" class="btn btn-primary" onclick="destinationVerified()" value="Continue" style="float:right; margin-top:20px;" /> -->
+                                                            </apex:outputPanel>
+                                                        </div> 
+                                                    </div>                                        
+                                                </td>
+                                                <td style="width:3%;"></td>
+                                            </tr>
+                                        </table>                        
+                                    </div>
+                                </div>
+            
+                            </div>
+                            </apex:outputPanel>
+                            
+                            <!-- Contact Information -->
+                            <apex:outputPanel id="ContactBlock">
+                            <div class="panel panel-default {!if(contactBlockState == 'Started', 'active', 'inactive')}">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <div class="col-sm-12 menu-header menu-header-right">
+            
+                                            <table style="width:100%;" class="panel-title">
+                                                <tr>
+                                                    <td style="width:50px; vertical-align:top; text-align:center;">
+                                                        2.
+                                                    </td>
+                                                    <td style="{!if(contactBlockState == 'Started', 'border-bottom:1px solid #95D1E6; padding-bottom:7px;', '')}">
+                                                        <apex:outputPanel rendered="{!reviewBlockState != 'Completed'}">
+                                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
+                                                                Contact Information
+                                                            </a>
+                                                        </apex:outputPanel>
+                                                        
+                                                        <apex:outputPanel rendered="{!reviewBlockState == 'Completed'}">
+                                                            <a>
+                                                                Contact Information
+                                                            </a>
+                                                        </apex:outputPanel>                                            
+                                                        <p>Enter the destination broker information</p>
+                                                    </td>
+                                                    <td style="width:3%; color:#5cb85c;">
+                                                        <apex:outputText rendered="{!if(contactBlockState == 'Completed', true, false)}">
+                                                            <i class="glyphicon glyphicon-ok" />
+                                                        </apex:outputText> 
+                                                    </td>
+                                                </tr>
+                                            </table>
+            
+                                    </div>
+                                </div>
+            
+                                <div id="collapseTwo" class="panel-collapse {!if(contactBlockState == 'Started', 'collapse in', 'collapse')}" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body">
+                                        <table style="width:100%;">
+                                            <tr>
+                                                <td style="width:50px; vertical-align:top; text-align:center;">
+                
+                                                </td>
+                                                <td>                    
+                                                    <div class="col-sm-12" style="padding:10px;">
+                                                        <div class="col-sm-12" style="color:#3590e4; font-size:16px;">
+                                                            <b>{!subscription.Contact__r.Name}</b> 
+                                                        </div>                                         
+                                                    </div>
+                                                    <div class="col-sm-12" style="padding:10px; border-bottom:1px solid #fff;">
+                                                        <div class="col-sm-6">
+                                                            <b>Origination Office:</b><br/>
+                                                            <div style="padding-top:10px;">
+                                                                {!subscription.Related_Location_Broker_Office__r.Account_Name__c} ({!subscription.Related_Location_Broker_Office__r.Name})<br/>
+                                                                {!subscription.Related_Location_Broker_Office__r.Street_Number__c} {!subscription.Related_Location_Broker_Office__r.Street_Name__c}<br/>
+                                                                {!subscription.Related_Location_Broker_Office__r.City__c} {!subscription.Related_Location_Broker_Office__r.State__c} {!subscription.Related_Location_Broker_Office__r.Zip__c}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <apex:outputPanel rendered="{!isVerified}">
+                                                                <b>Destination Office:</b><br/>
+                                                                <div style="padding-top:10px;">
+                                                                    {!destinationBrokerOffice.Account_Name__c} ({!destinationBrokerOffice.Name})<br/>
+                                                                    {!destinationBrokerOffice.Street_Number__c} {!destinationBrokerOffice.Street_Name__c}<br/>
+                                                                    {!destinationBrokerOffice.City__c} {!destinationBrokerOffice.State__c} {!destinationBrokerOffice.Zip__c}<br/><br/>
+                                                                    <!-- <a><i class="glyphicon glyphicon-arrow-left" /> Change</a> -->
+                                                                </div>                                                    
+                                                            </apex:outputPanel>
+                                                        </div>                                                                                                
+                                                    </div> 
+                                                    <div class="col-sm-12" style="padding:10px; border-bottom:1px solid #fff;">
+            
+                                                            The private email address listed below is on file with MRIS for all communications regarding your Account.
+                                                            If this information is correct, please Click "Next". If not please select "New Email Address" and click "Next"
+                                                            <br/><br/>
+                                                            <div>
+                                                                <apex:selectRadio value="{!isChangeEmail}" layout="pageDirection">
+                                                                    <apex:selectOption itemValue="false" itemLabel="Use {!subscription.Private_Email__c}"/>
+                                                                    <apex:selectOption itemValue="true" itemLabel="Enter new email address"/>
+                                                                    <apex:actionSupport action="{!reload}" event="onchange"/>
+                                                                </apex:selectRadio>
+                                                                <apex:inputText styleClass="form-control" style="width:30%;" value="{!newEmailAddress}" id="emailId" rendered="{!isChangeEmail}"/>
+                                                            </div>
+            
+                                                    </div>                                                                                   
+                                                    <div class="col-sm-12" style="padding:12px;">                                           
+                                                        <div class="col-sm-12">
+                                                            <apex:outputPanel rendered="{!isVerified}">
+                                                                <!-- <apex:commandButton style="float:right;" action="{!next}" value="Continue" styleClass="btn btn-primary" /> -->    
+                                                                <input type="button" class="btn btn-primary" onclick="next()" value="Continue" style="float:right;" />
+                                                            </apex:outputPanel>
+                                                        </div> 
+                                                    </div>                                        
+                                                </td>
+                                                <td style="width:3%;"></td>
+                                            </tr>
+                                        </table>                        
+                                    </div>
+                                </div>
+            
+                            </div>
+                            </apex:outputPanel>
+                            
+                            <!-- Personal Assistants -->
+                            <apex:outputPanel id="PABlock">
+                            <div class="panel panel-default {!if(assistantBlockState == 'Started', 'active', 'inactive')}">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <div class="col-sm-12 menu-header menu-header-right">
+            
+                                            <table style="width:100%;" class="panel-title">
+                                                <tr>
+                                                    <td style="width:50px; vertical-align:top; text-align:center;">
+                                                        3.
+                                                    </td>
+                                                    <td style="{!if(assistantBlockState == 'Started', 'border-bottom:1px solid #95D1E6; padding-bottom:7px;', '')}">
+                                                        <apex:outputPanel rendered="{!reviewBlockState != 'Completed'}">
+                                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseOne">
+                                                                Personal Assistants
+                                                            </a>
+                                                        </apex:outputPanel>
+                                                        
+                                                        <apex:outputPanel rendered="{!reviewBlockState == 'Completed'}">
+                                                            <a>
+                                                                Personal Assistants
+                                                            </a>
+                                                        </apex:outputPanel>                                            
+                                                        <p>If personal assistants in the office are displayed, do not select any if they are not assigned to you.   Only select a personal assistant in your office if they currently are associated with you in the MLS.  </p>
+                                                    </td>
+                                                    <td style="width:3%; color:#5cb85c;">
+                                                        <apex:outputText rendered="{!if(assistantBlockState == 'Completed', true, false)}">
+                                                            <i class="glyphicon glyphicon-ok" />
+                                                        </apex:outputText> 
+                                                    </td>
+                                                </tr>
+                                            </table>
+            
+                                    </div>
+                                </div>
+            
+                                <div id="collapseThree" class="panel-collapse {!if(assistantBlockState == 'Started', 'collapse in', 'collapse')}" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body">
+                                        <table style="width:100%;">
+                                            <tr>
+                                                <td style="width:50px; vertical-align:top; text-align:center;">
+                
+                                                </td>
+                                                <td>                    
+                                                    <div class="col-sm-12" style="padding:10px;">
+                                                        <div class="col-sm-12" style="color:#3590e4; font-size:16px;">
+                                                            <b>{!subscription.Contact__r.Name}</b> 
+                                                        </div>                                         
+                                                    </div>
+                                                    <div class="col-sm-12" style="padding:10px; border-bottom:1px solid #fff;">
+                                                        <div class="col-sm-6">
+                                                            <b>Origination Office:</b><br/>
+                                                            <div style="padding-top:10px;">
+                                                                {!subscription.Related_Location_Broker_Office__r.Account_Name__c} ({!subscription.Related_Location_Broker_Office__r.Name})<br/>
+                                                                {!subscription.Related_Location_Broker_Office__r.Street_Number__c} {!subscription.Related_Location_Broker_Office__r.Street_Name__c}<br/>
+                                                                {!subscription.Related_Location_Broker_Office__r.City__c} {!subscription.Related_Location_Broker_Office__r.State__c} {!subscription.Related_Location_Broker_Office__r.Zip__c}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <apex:outputPanel rendered="{!isVerified}">
+                                                                <b>Destination Office:</b><br/>
+                                                                <div style="padding-top:10px;">
+                                                                    {!destinationBrokerOffice.Account_Name__c} ({!destinationBrokerOffice.Name})<br/>
+                                                                    {!destinationBrokerOffice.Street_Number__c} {!destinationBrokerOffice.Street_Name__c}<br/>
+                                                                    {!destinationBrokerOffice.City__c} {!destinationBrokerOffice.State__c} {!destinationBrokerOffice.Zip__c}<br/><br/>
+                                                                    <!-- <a><i class="glyphicon glyphicon-arrow-left" /> Change</a> -->
+                                                                </div>                                                    
+                                                            </apex:outputPanel>
+                                                        </div>                                                                                                
+                                                    </div>
+                                                    <div style="clear:both;" />
+                                                     
+                                                    <div class="col-sm-12" style="padding:10px; border-bottom:1px solid #fff;">
+                                                        <apex:outputPanel rendered="{!personalAssistants.size > 0}">
+                                                        <div class="col-sm-12">
+                                                            Please select the personal assistant(s) assigned to you from below<br/><br/>
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th></th>
+                                                                        <th>Subscriber Id</th>
+                                                                        <th>First Name</th>
+                                                                        <th>Last Name</th>
+                                                                        <th>Title</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <apex:repeat value="{!personalAssistants}" var="personalAssistant">
+                                                                        <tr>
+                                                                        <td><input type="checkbox" class="PACheckbox" value="{!personalAssistant.Personal_Assistant_Sub_ID__c}" /></td>
+                                                                        <td>{!personalAssistant.Personal_Assistant_Sub_ID__r.Name}</td>
+                                                                        <td>{!personalAssistant.Personal_Assistant__r.FirstName}</td>
+                                                                        <td>{!personalAssistant.Personal_Assistant__r.LastName}</td>
+                                                                        <td>Personal Assistant</td>
+                                                                            </tr>
+                                                                    </apex:repeat>
+                                                                </tbody>
+                                                            </table>      
+                                                        </div>
+                                                        </apex:outputPanel> 
+                                                        <div style="clear:both;" />
+                                                        <apex:outputPanel rendered="{!personalAssistants.size == 0}">
+                                                            <div class="col-sm-12">
+                                                            <div class="alert alert-warning" role="alert">
+                                                                No personal assistants found
+                                                            </div>
+                                                            </div>
+                                                        </apex:outputPanel>                                             
+                                                    </div>
+            
+            
+                                                                                                                                       
+                                                    <div class="col-sm-12" style="padding:12px;">                                           
+                                                        <div class="col-sm-12">
+                                                            <apex:outputPanel rendered="{!isVerified}">
+                                                                <!-- <apex:commandButton style="float:right;" action="{!continueToReview}" value="Continue" styleClass="btn btn-primary" /> -->    
+                                                                <input type="button" class="btn btn-primary" onclick="continueToReview()" value="Continue" style="float:right;" />
+                                                            </apex:outputPanel>
+                                                        </div> 
+                                                    </div>                                        
+                                                </td>
+                                                <td style="width:3%;"></td>
+                                            </tr>
+                                        </table>                        
+                                    </div>
+                                </div>
+            
+                            </div>
+                            </apex:outputPanel>               
+                             
+                            <!-- Review -->
+                            <apex:outputPanel id="ReviewBlock">
+                            <div class="panel panel-default {!if(reviewBlockState == 'Started', 'active', 'inactive')}">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <div class="col-sm-12 menu-header menu-header-right">
+            
+                                            <table style="width:100%;" class="panel-title">
+                                                <tr>
+                                                    <td style="width:50px; vertical-align:top; text-align:center;">
+                                                        4.
+                                                    </td>
+                                                    <td style="{!if(reviewBlockState == 'Started', 'border-bottom:1px solid #95D1E6; padding-bottom:7px;', '')}">
+                                                        <apex:outputPanel rendered="{!reviewBlockState != 'Completed'}">
+                                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseOne">
+                                                                Review &amp; Submit
+                                                            </a>
+                                                        </apex:outputPanel>
+                                                        
+                                                        <apex:outputPanel rendered="{!reviewBlockState == 'Completed'}">
+                                                            <a>
+                                                                Review &amp; Submit
+                                                            </a>
+                                                        </apex:outputPanel>                                            
+                                                        <p></p>
+                                                    </td>
+                                                    <td style="width:3%; color:#5cb85c;">
+                                                        <apex:outputText rendered="{!if(reviewBlockState == 'Completed', true, false)}">
+                                                            <i class="glyphicon glyphicon-ok" />
+                                                        </apex:outputText> 
+                                                    </td>
+                                                </tr>
+                                            </table>
+            
+                                    </div>
+                                </div>
+            
+                                <div id="collapseFour" class="panel-collapse {!if(reviewBlockState == 'Started', 'collapse in', 'collapse')}" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body">
+                                        <table style="width:100%;">
+                                            <tr>
+                                                <td style="width:50px; vertical-align:top; text-align:center;">
+                
+                                                </td>
+                                                <td>                    
+                                                    <div class="col-sm-12" style="padding:10px;">
+                                                        <div class="col-sm-12" style="color:#3590e4; font-size:16px;">
+                                                            <b>{!subscription.Contact__r.Name}</b> 
+                                                        </div>                                         
+                                                    </div>
+                                                    <div class="col-sm-12" style="padding:10px; border-bottom:1px solid #fff;">
+                                                        <div class="col-sm-6">
+                                                            <b>Origination Office:</b><br/>
+                                                            <div style="padding-top:10px;">
+                                                                {!subscription.Related_Location_Broker_Office__r.Account_Name__c} ({!subscription.Related_Location_Broker_Office__r.Name})<br/>
+                                                                {!subscription.Related_Location_Broker_Office__r.Street_Number__c} {!subscription.Related_Location_Broker_Office__r.Street_Name__c}<br/>
+                                                                {!subscription.Related_Location_Broker_Office__r.City__c} {!subscription.Related_Location_Broker_Office__r.State__c} {!subscription.Related_Location_Broker_Office__r.Zip__c}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <apex:outputPanel rendered="{!isVerified}">
+                                                                <b>Destination Office:</b><br/>
+                                                                <div style="padding-top:10px;">
+                                                                    {!destinationBrokerOffice.Account_Name__c} ({!destinationBrokerOffice.Name})<br/>
+                                                                    {!destinationBrokerOffice.Street_Number__c} {!destinationBrokerOffice.Street_Name__c}<br/>
+                                                                    {!destinationBrokerOffice.City__c} {!destinationBrokerOffice.State__c} {!destinationBrokerOffice.Zip__c}<br/><br/>
+                                                                    <!-- <a><i class="glyphicon glyphicon-arrow-left" /> Change</a> -->
+                                                                </div>                                                    
+                                                            </apex:outputPanel>
+                                                        </div>                                                                                                
+                                                    </div> 
+                                                    <div class="col-sm-12" style="padding:10px; border-bottom:1px solid #fff;">
+            
+                                                        <div class="col-sm-6">
+                                                            <b>Contact Email:</b><br/>
+                                                            <div style="padding-top:10px;">
+                                                                {!subscription.Private_Email__c}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <b>Personal Assistants Selected:</b><br/>
+                                                            <div style="padding-top:10px;">
+                                                                {!selectedPANames}
+                                                            </div>    
+                                                        </div>  
+            
+                                                    </div>                                                                                   
+                                                    <div class="col-sm-12" style="padding:12px;">                                           
+                                                        <div class="col-sm-12">
+                                                            <apex:outputPanel rendered="{!isVerified}">
+                                                                <apex:commandButton style="float:right;" action="{!submitApplication}" value="Submit" styleClass="btn btn-primary" />    
+                                                            </apex:outputPanel>
+                                                        </div> 
+                                                    </div>                                        
+                                                </td>
+                                                <td style="width:3%;"></td>
+                                            </tr>
+                                        </table>                        
+                                    </div>
+                                </div>
+            
+                            </div>                   
+                            </apex:outputPanel>    
+                        </div>                     
+                    </div>             
+                  
+                </apex:pageBlock>           
+            </apex:form>
+        </apex:define>       
+    </apex:composition>  
+</apex:page>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="15" viewBox="0 0 15 15">
+  <defs>
+    <clipPath id="clip-Custom_Size_1">
+      <rect width="15" height="15"/>
+    </clipPath>
+  </defs>
+  <g id="Custom_Size_1" data-name="Custom Size – 1" clip-path="url(#clip-Custom_Size_1)">
+    <g id="Icon_ionic-md-options" data-name="Icon ionic-md-options" transform="translate(0 0)">
+      <g id="Group_6" data-name="Group 6" transform="translate(0 9.652)">
+        <path id="Path_1" data-name="Path 1" d="M2.25,27H16.834v1.07H2.25Z" transform="translate(-2.25 -24.861)" fill="#4d5a66"/>
+        <path id="Path_2" data-name="Path 2" d="M28.125,27H30.8v1.07H28.125Z" transform="translate(-15.799 -24.861)" fill="#4d5a66"/>
+        <path id="Path_3" data-name="Path 3" d="M24.639,26.762a1.078,1.078,0,0,1-1.07,1.086h0a1.078,1.078,0,0,1-1.07-1.086V23.586A1.078,1.078,0,0,1,23.57,22.5h0a1.078,1.078,0,0,1,1.07,1.086Z" transform="translate(-12.854 -22.5)" fill="#4d5a66"/>
+      </g>
+      <g id="Group_7" data-name="Group 7" transform="translate(0 4.826)">
+        <path id="Path_4" data-name="Path 4" d="M2.25,16.875H4.924v1.07H2.25Z" transform="translate(-2.25 -14.736)" fill="#4d5a66"/>
+        <path id="Path_5" data-name="Path 5" d="M14.625,16.875H29.209v1.07H14.625Z" transform="translate(-14.209 -14.736)" fill="#4d5a66"/>
+        <path id="Path_6" data-name="Path 6" d="M11.139,16.637a1.078,1.078,0,0,1-1.07,1.086h0A1.078,1.078,0,0,1,9,16.637V13.461a1.078,1.078,0,0,1,1.07-1.086h0a1.078,1.078,0,0,1,1.07,1.086Z" transform="translate(-5.785 -12.375)" fill="#4d5a66"/>
+      </g>
+      <g id="Group_8" data-name="Group 8" transform="translate(0 0)">
+        <path id="Path_7" data-name="Path 7" d="M2.25,6.75H16.834V7.82H2.25Z" transform="translate(-2.25 -4.611)" fill="#4d5a66"/>
+        <path id="Path_8" data-name="Path 8" d="M28.125,6.75H30.8V7.82H28.125Z" transform="translate(-15.799 -4.611)" fill="#4d5a66"/>
+        <path id="Path_9" data-name="Path 9" d="M24.639,6.512A1.078,1.078,0,0,1,23.57,7.6h0A1.078,1.078,0,0,1,22.5,6.512V3.336A1.078,1.078,0,0,1,23.57,2.25h0a1.078,1.078,0,0,1,1.07,1.086Z" transform="translate(-12.854 -2.25)" fill="#4d5a66"/>
+      </g>
+    </g>
+  </g>
+</svg>

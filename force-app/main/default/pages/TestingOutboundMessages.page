@@ -1,0 +1,9 @@
+<apex:page controller="TestingOutboundMessages" lightningstylesheets="true">
+    <apex:form >
+    <apex:pageMessages ></apex:pageMessages>
+        <apex:pageBlock >
+            <apex:inputText title="Number of Accounts" value="{!count}" />
+            <apex:commandButton value="Insert Accounts" action="{!saveAccounts}"/>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

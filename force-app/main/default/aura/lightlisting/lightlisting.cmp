@@ -1,0 +1,374 @@
+<aura:component>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <ltng:require styles="{!$Resource.headerpart }"></ltng:require>
+   <ltng:require styles="{!$Resource.side }"></ltng:require> 
+   <ltng:require styles="{!$Resource.body }"></ltng:require>
+
+   
+   <div class="c-container">
+      <div class="fullpage slds-scope">
+         <div class="slds-grid slds-wrap">
+            <lightning:layout multipleRows="true">
+               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage header-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:header />
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+               <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                   <c:mobilemenu />
+                   <lightning:layout>
+                     <div class="new-containerpage">
+                        <div class="slds-container--x-large new-container">
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <c:sidebarnew />
+                           </lightning:layoutItem>
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                              <div class="page-section page-main">
+                                 <div class="middlebar1">
+                                    <h2>Agent Listing Transfer</h2>
+                                  
+                         </div>
+                                 <div class="dev dev1">
+                                         <h3>Once the request has been submitted</h3>
+                         <ul class="been">
+                         <li> The origination office (the office that owns the listing) will be notified of your request and will have seven days to approve or decline the transfer </li>
+                         <li>If approved, the destination office will be notified of your request and will have seven days to approve or decline the transfer </li>
+                          <li>If declined by either the origination or the destination office, listings will not be transferred </li>
+                             <li>Please contact the appropriate Broker office if you have any questions</li>
+                         </ul>
+                                  
+           
+ <div class="reviewpoint">
+                        <h3>Select Listings<img src="{!$Resource.bright + '/bright-3.0/images/information.svg'}" alt="Bright" /><p>This is your request to transfer listings to the destination office, the office you currently work for.</p></h3>
+                         <lightning:button class="brand" variant="brand" label="Continue" title="Brand action" onclick="{! c.handleClick }" />
+                         </div>
+                                    
+                         
+            
+             <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+            
+                 <div class="lineby">
+                 <ul>
+                     <li class="active"><a href="#">Eligible</a></li>
+                     <li><a href="#">Pending Approval</a></li>
+                     <li><a href="#">Ineligible</a></li>
+                     <li><a href="#">All</a></li>
+                     </ul>
+                 
+                 </div>
+                 
+                 
+            <div class=" part">
+                
+                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                               <div class="layer part1"> 
+                           
+                            
+                                
+                             </div>
+                </lightning:layoutItem>  
+                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                <div class="layer part1"> 
+                             
+                                   <h5 class="onechoose2 ">  <lightning:select name="select1" label="" required="false" variant = "label-hidden">
+        <option value="">choose one...</option>
+        <option value="1">one</option>
+        <option value="2">two</option>
+        <option value="3">three</option>
+    </lightning:select>
+                                    
+                                    
+                                    </h5>
+                             </div>
+                </lightning:layoutItem>
+                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="2" largeDeviceSize="2">
+                           <div class="layer part2"> 
+                             
+                                   <h5 class="onechoose2">  <lightning:select name="select1" label="" required="false" variant = "label-hidden">
+        <option value="">choose one...</option>
+        <option value="1">one</option>
+        <option value="2">two</option>
+        <option value="3">three</option>
+    </lightning:select>
+                                    
+                                    
+                                    </h5>
+                    </div></lightning:layoutItem>
+            
+                </div></lightning:layoutItem>
+
+        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">     
+         
+             
+                    <div class=" part9">
+                   <div class="layer part7">
+                          <div class="slds-form-element">
+  
+  <div class="slds-form-element__control">
+    <span class="slds-checkbox slds-checkbox_standalone">
+      <input type="checkbox" id="checkbox-unique-id-75" name="label" value="option" />
+      <span class="slds-checkbox_faux"></span>
+    </span>
+  </div>
+                 </div>
+                  
+                        </div>
+                        <div class="layer part8">
+                   <h2>Select all</h2>
+                        </div>
+                   </div>
+           
+            </lightning:layoutItem>
+            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">  
+          <div class="part9">
+          
+               <div class="layer part7">
+                          <div class="slds-form-element">
+  
+  <div class="slds-form-element__control">
+    <span class="slds-checkbox slds-checkbox_standalone">
+      <input type="checkbox" id="checkbox-unique-id-75" name="label" value="option" />
+      <span class="slds-checkbox_faux"></span>
+    </span>
+  </div>
+                 </div>
+                  
+                        </div>
+              
+             
+                    <div class="layer part8">
+       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12"> 
+                  <div class="part10">
+                           
+                            
+                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                       <div class="layer part11"> 
+                          <img src="{!$Resource.bright + '/bright-3.0/images/home-bg.svg'}" alt="Bright" /> 
+                                </div></lightning:layoutItem>
+                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                              
+                             <div class="layer part15">
+                                 
+                                 <h3>Key west, Beallville, MD 20839</h3>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                                  <div class=" layer part12">
+                                      <h4>MLS#: 1000678890<br/> Status: Active</h4>
+                                     </div></lightning:layoutItem>
+                                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                      <div class=" layer part12">
+                          <h4>List Price: $350000.00<br/> List office: ADKINDS</h4>
+                                     </div></lightning:layoutItem>
+                                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                                 <div class=" layer part12">
+                                     <h4>Bedrooms: 4<br/> Full Baths: 3</h4>
+                                     </div></lightning:layoutItem>
+                                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                                 <div class=" layer part12">
+                                 <h4 class="green"> <img src="{!$Resource.bright + '/bright-3.0/images/green-dot.svg'}" alt="Bright" />  ELIGIBLE</h4>
+                                     </div></lightning:layoutItem></lightning:layoutItem>
+                      </div>
+                            </lightning:layoutItem>
+                
+                      
+                        </div>
+                      </lightning:layoutItem>
+                   </div>
+          
+            
+            </div>
+            </lightning:layoutItem>
+            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">  
+          <div class="part9">
+          
+               <div class="layer part7">
+                          <div class="slds-form-element">
+  
+  <div class="slds-form-element__control">
+    <span class="slds-checkbox slds-checkbox_standalone">
+      <input type="checkbox" id="checkbox-unique-id-75" name="label" value="option" />
+      <span class="slds-checkbox_faux"></span>
+    </span>
+  </div>
+                 </div>
+                  
+                        </div>
+              
+             
+                    <div class="layer part8">
+       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12"> 
+                  <div class="part10">
+                           
+                            
+                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                       <div class="layer part11"> 
+                          <img src="{!$Resource.bright + '/bright-3.0/images/home-bg.svg'}" alt="Bright" /> 
+                                </div></lightning:layoutItem>
+                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                              
+                             <div class="layer part15">
+                                 
+                                 <h3>Key west, Beallville, MD 20839</h3>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                                  <div class=" layer part12">
+                                      <h4>MLS#: 1000678890<br/> Status: Active</h4>
+                                     </div></lightning:layoutItem>
+                                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                      <div class=" layer part12">
+                          <h4>List Price: $350000.00<br/> List office: ADKINDS</h4>
+                                     </div></lightning:layoutItem>
+                                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                                 <div class=" layer part12">
+                                     <h4>Bedrooms: 4<br/> Full Baths: 3</h4>
+                                     </div></lightning:layoutItem>
+                                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                                 <div class=" layer part12">
+                                 <h4 class="green"> <img src="{!$Resource.bright + '/bright-3.0/images/green-dot.svg'}" alt="Bright" />  ELIGIBLE</h4>
+                                     </div></lightning:layoutItem></lightning:layoutItem>
+                      </div>
+                            </lightning:layoutItem>
+                
+                      
+                        </div>
+                      </lightning:layoutItem>
+                   </div>
+          
+            
+            </div>
+            </lightning:layoutItem>
+            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">  
+          <div class="part9">
+          
+               <div class="layer part7">
+                          <div class="slds-form-element">
+  
+  <div class="slds-form-element__control">
+    <span class="slds-checkbox slds-checkbox_standalone">
+      <input type="checkbox" id="checkbox-unique-id-75" name="label" value="option" />
+      <span class="slds-checkbox_faux"></span>
+    </span>
+  </div>
+                 </div>
+                  
+                        </div>
+              
+             
+                    <div class="layer part8">
+       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12"> 
+                  <div class="part10">
+                           
+                            
+                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                       <div class="layer part11"> 
+                          <img src="{!$Resource.bright + '/bright-3.0/images/home-bg.svg'}" alt="Bright" /> 
+                                </div></lightning:layoutItem>
+                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                              
+                             <div class="layer part15">
+                                 
+                                 <h3>Key west, Beallville, MD 20839</h3>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                                  <div class=" layer part12">
+                                      <h4>MLS#: 1000678890<br/> Status: Active</h4>
+                                     </div></lightning:layoutItem>
+                                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                      <div class=" layer part12">
+                          <h4>List Price: $350000.00<br/> List office: ADKINDS</h4>
+                                     </div></lightning:layoutItem>
+                                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                                 <div class=" layer part12">
+                                     <h4>Bedrooms: 4<br/> Full Baths: 3</h4>
+                                     </div></lightning:layoutItem>
+                                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                                 <div class=" layer part12">
+                                 <h4 class="green"> <img src="{!$Resource.bright + '/bright-3.0/images/green-dot.svg'}" alt="Bright" />  ELIGIBLE</h4>
+                                     </div></lightning:layoutItem></lightning:layoutItem>
+                      </div>
+                            </lightning:layoutItem>
+                
+                      
+                        </div>
+                      </lightning:layoutItem>
+                   </div>
+          
+            
+            </div>
+            </lightning:layoutItem>
+            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">     
+         
+             
+                    <div class=" part9">
+                   <div class="layer part7">
+                          
+                  
+                        </div>
+                        <div class="layer part8">
+                  <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                <div class="part0">
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">               
+                <div class="layer part1"> 
+                           
+                            
+                               <lightning:button class="brand" variant="brand" label="Continue" title="Brand action" onclick="{! c.handleClick }" />
+                             </div>
+                </lightning:layoutItem>   
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                                <div class="layer part3"> 
+                             
+                                   <h5 class="onechoose1">           
+                                    <div class="pagination">
+  <a href="#">Previous</a>
+  <a href="#" class="active">1</a>
+  <a href="#" >2</a>
+  
+  <a href="#">Next</a>
+</div>
+                                    </h5>
+                    </div></lightning:layoutItem>
+                </div>
+                        </lightning:layoutItem>  
+                        </div>
+                   </div>
+           
+            </lightning:layoutItem>
+            
+            
+            
+            
+               
+                                  
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                  
+                                   
+                                    
+                                 </div>
+                              </div>
+                           </lightning:layoutItem>
+                        </div>
+                     </div>
+                  </lightning:layout>
+               </lightning:layoutItem>
+                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage footer-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:footer />
+                         
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+            </lightning:layout>
+         </div>
+      </div>
+  
+   </div>
+</aura:component>

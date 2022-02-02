@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>AccountCityAddressStandard</fullName>
+        <field>BillingCity</field>
+        <formula>UPPER(City__c)</formula>
+        <name>AccountCityAddressStandard</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>AccountCountryAddressStand</fullName>
+        <field>BillingState</field>
+        <formula>UPPER(IF( CONTAINS(TEXT(Country__c), &apos;UNITED STATES OF AMERICA&apos;), &apos;USA&apos;, TEXT(Country__c)))</formula>
+        <name>AccountCountryAddressStand</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>AccountStateAddressStand</fullName>
+        <field>BillingState</field>
+        <formula>Trim(UPPER(TEXT(State__c)))</formula>
+        <name>AccountStateAddressStand</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>AccountStreetAddressStandard</fullName>
+        <field>BillingStreet</field>
+        <formula>IF(ISBLANK(Street_Name__c),&apos;&apos;,(TRIM(UPPER(TRIM(Street_Number__c +&apos; &apos;+ Street_Name__c+ &apos; &apos;)
+
++ IF(ISBLANK( QAS_Mailing_Street_Type__c), &apos;&apos;, &apos; &apos;+ QAS_Mailing_Street_Type__c)
+
+
++ IF(ISBLANK(QAS_Mailing_Record_Type__c), &apos;&apos;, &apos; &apos;+ QAS_Mailing_Record_Type__c)
+
++ IF(ISBLANK(Unit__c), &apos;&apos;, &apos; &apos;+ Unit__c)))
+
++IF(ISBLANK(QAS_Mailing_POBox__c), &apos;&apos;, IF (CONTAINS(QAS_Mailing_POBox__c, &apos;PO&apos;), &apos; &apos;+ QAS_Mailing_POBox__c, &apos; PO &apos;+QAS_Mailing_POBox__c))))</formula>
+        <name>AccountStreetAddressStandard</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>AccountZipAddressStand</fullName>
+        <field>BillingPostalCode</field>
+        <formula>Zip__c + IF(ISBLANK(Zip_4__c),&apos;&apos;,&apos;-&apos;+Zip_4__c)</formula>
+        <name>AccountZipAddressStand</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Account_Owner</fullName>
+        <field>OwnerId</field>
+        <lookupValue>admi.user@mris.net</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Account_Owner</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Check_Copy_Address_to_Billing</fullName>
+        <description>Copy Mailing Address to Billing</description>
+        <field>Copy_Address_to_Billing__c</field>
+        <literalValue>1</literalValue>
+        <name>Check Copy Address to Billing</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>SJ_Set_Default_for_Account</fullName>
+        <description>Set Account Primary service jurisdiction to MRIS as default value</description>
+        <field>Primary_Service_Jurisdiction__c</field>
+        <literalValue>MRIS</literalValue>
+        <name>SJ: Set Default for Account</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Save_Concatenated_Address_Formula</fullName>
+        <field>BrokerAddress__c</field>
+        <formula>Full_Street_Address__c</formula>
+        <name>Save Concatenated Address Formula</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Addl_Display_Name</fullName>
+        <field>Addl_Display_Name__c</field>
+        <formula>UPPER( Addl_Display_Name__c )</formula>
+        <name>Update Addl Display Name</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Billing_Addl_Display_Name</fullName>
+        <field>Billing_Addl_Display_Name__c</field>
+        <formula>UPPER( Billing_Addl_Display_Name__c )</formula>
+        <name>Update Billing Addl Display Name</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Billing_Box</fullName>
+        <field>Billing_Box__c</field>
+        <formula>UPPER( Billing_Box__c )</formula>
+        <name>Update Billing Box #</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Billing_City</fullName>
+        <field>Billing_City__c</field>
+        <formula>UPPER( Billing_City__c )</formula>
+        <name>Update Billing City</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Billing_County</fullName>
+        <field>Billing_County__c</field>
+        <formula>UPPER( Billing_County__c )</formula>
+        <name>Update Billing County</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Billing_Street_Name</fullName>
+        <field>Billing_Street_Name__c</field>
+        <formula>UPPER( Billing_Street_Name__c )</formula>
+        <name>Update Billing Street Name</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Billing_Street_Number</fullName>
+        <field>Billing_Street_Number__c</field>
+        <formula>UPPER( Billing_Street_Number__c )</formula>
+        <name>Update Billing Street Number</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Billing_Street_Number_Suffix</fullName>
+        <field>Billing_Street_Number_Suffix__c</field>
+        <formula>UPPER( Billing_Street_Number_Suffix__c )</formula>
+        <name>Update Billing Street Number Suffix</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Billing_Unit_Number</fullName>
+        <field>Billing_Unit_Number__c</field>
+        <formula>UPPER( Billing_Unit_Number__c )</formula>
+        <name>Update Billing Unit Number</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Broker_Office_Account_Name</fullName>
+        <field>Name</field>
+        <formula>UPPER(Name)</formula>
+        <name>Update Broker Office Account Name</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <outboundMessages>
+        <fullName>Account_Update</fullName>
+        <apiVersion>39.0</apiVersion>
+        <endpointUrl>http://talend.dev.brightmls.com/services/SFaccount</endpointUrl>
+        <fields>Account_Name__c</fields>
+        <fields>Id</fields>
+        <fields>Primary_Service_Jurisdiction__c</fields>
+        <fields>Secondary_Service_Jurisdiction__c</fields>
+        <fields>Type</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>mris_sf_api@mris.net</integrationUser>
+        <name>Account_Update</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <outboundMessages>
+        <fullName>SFDC_Account</fullName>
+        <apiVersion>52.0</apiVersion>
+        <endpointUrl>https://sfdcservices.dev.brightmls.com/account</endpointUrl>
+        <fields>Account_Name__c</fields>
+        <fields>Id</fields>
+        <fields>Primary_Service_Jurisdiction__c</fields>
+        <fields>Secondary_Service_Jurisdiction__c</fields>
+        <fields>SystemModstamp</fields>
+        <fields>Type</fields>
+        <includeSessionId>true</includeSessionId>
+        <integrationUser>mris_sf_api@mris.net</integrationUser>
+        <name>SFDC Account</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <outboundMessages>
+        <fullName>Testing_Outbound_Messages</fullName>
+        <apiVersion>38.0</apiVersion>
+        <endpointUrl>https://ashtalend01-sf.tst.mris.com:443/services/SFaccount</endpointUrl>
+        <fields>Account_Name__c</fields>
+        <fields>Id</fields>
+        <fields>Primary_Service_Jurisdiction__c</fields>
+        <fields>Secondary_Service_Jurisdiction__c</fields>
+        <includeSessionId>true</includeSessionId>
+        <integrationUser>abhi.kankanala@bltglobalventures.com</integrationUser>
+        <name>Testing Outbound Messages</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>Account Deactivates</fullName>
+        <actions>
+            <name>Testing_Outbound_Messages</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.Zuora__Active__c</field>
+            <operation>equals</operation>
+            <value>No</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Account active changes</fullName>
+        <actions>
+            <name>Testing_Outbound_Messages</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.Status__c</field>
+            <operation>equals</operation>
+            <value>Active</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>AccountStandardAddress</fullName>
+        <actions>
+            <name>AccountCityAddressStandard</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>AccountCountryAddressStand</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>AccountStateAddressStand</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>AccountStreetAddressStandard</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>AccountZipAddressStand</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>OR(ISCHANGED(Street_Number__c),ISCHANGED(Street_Name__c),ISCHANGED(City__c),ISCHANGED(Country__c),ISCHANGED(Zip__c), ISCHANGED(Zip_4__c), ISCHANGED(QAS_Mailing_POBox__c), ISCHANGED(QAS_Mailing_Street_Type__c),ISCHANGED(Unit__c), ISCHANGED(QAS_Mailing_Unit_Type__c))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Account_Inactivated</fullName>
+        <actions>
+            <name>SFDC_Account</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>true</active>
+        <formula>AND( 
+NOT(ISPICKVAL(PRIORVALUE(Status__c),&quot;In Progress&quot;)), ISPICKVAL(Status__c,&quot;Inactive&quot;), 
+OR( 
+ISPICKVAL(Primary_Service_Jurisdiction__c , &quot;TREND&quot;), 
+ISPICKVAL(Secondary_Service_Jurisdiction__c, &quot;TREND&quot;), 
+ISPICKVAL(Primary_Service_Jurisdiction__c , &quot;BRIGHT&quot;), 
+ISPICKVAL(Secondary_Service_Jurisdiction__c, &quot;BRIGHT&quot;),
+ISPICKVAL(Type, &apos;Association&apos;)), NOT(ISPICKVAL(Type, &quot;Non Core Parent&quot;)) 
+)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Account_Updated</fullName>
+        <actions>
+            <name>SFDC_Account</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>true</active>
+        <formula>AND(AND( 
+ISPICKVAL(Status__c, &quot;Active&quot;), 
+OR( 
+ISPICKVAL(Primary_Service_Jurisdiction__c , &quot;TREND&quot;), 
+ISPICKVAL(Secondary_Service_Jurisdiction__c, &quot;TREND&quot;), 
+ISPICKVAL(Primary_Service_Jurisdiction__c , &quot;BRIGHT&quot;), 
+ISPICKVAL(Secondary_Service_Jurisdiction__c, &quot;BRIGHT&quot;),
+ISPICKVAL(Type, &apos;Association&apos;)  
+)),
+NOT(OR(
+ ISCHANGED(RETS_Agent_Count__c),
+ ISCHANGED(RETS_BillingHasFullDiscount__c),
+ ISCHANGED(RETS_Billing_Type__c),
+ ISCHANGED(RETS_Billing_Exclusion__c),
+ ISCHANGED(RETS_Product_Count__c),
+ ISCHANGED(RETS_Broker_Count__c)
+)),NOT( ISPICKVAL(Type, &quot;Non Core Parent&quot;) )
+)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Capitalize Account Fields</fullName>
+        <actions>
+            <name>Update_Addl_Display_Name</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Billing_Addl_Display_Name</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Billing_Box</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Billing_City</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Billing_County</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Billing_Street_Name</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Billing_Street_Number</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Billing_Street_Number_Suffix</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Billing_Unit_Number</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Broker_Office_Account_Name</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.Name</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Concatenate Address</fullName>
+        <actions>
+            <name>Save_Concatenated_Address_Formula</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.Name</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Copy Address to Billing - Account</fullName>
+        <actions>
+            <name>Check_Copy_Address_to_Billing</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND (2 OR 3)</booleanFilter>
+        <criteriaItems>
+            <field>Account.Copy_Address_to_Billing__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Service_Jurisdiction__pc</field>
+            <operation>equals</operation>
+            <value>TREND</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Service_Jurisdiction__pc</field>
+            <operation>equals</operation>
+            <value>BRIGHT</value>
+        </criteriaItems>
+        <description>Copy Mailing Address to Billing Address</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Service Jurisdiction%3A Account Default</fullName>
+        <actions>
+            <name>SJ_Set_Default_for_Account</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.Primary_Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <description>If no value is set for Service Jurisdiction, MRIS is set to default(like ezjoin processes)</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Account Owner</fullName>
+        <actions>
+            <name>Account_Owner</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.OwnerId</field>
+            <operation>notEqual</operation>
+            <value>Admin User</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

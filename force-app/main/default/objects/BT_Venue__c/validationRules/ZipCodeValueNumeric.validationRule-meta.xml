@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ZipCodeValueNumeric</fullName>
+    <active>true</active>
+    <description>Validates if the zip code has a value and is numeric</description>
+    <errorConditionFormula>AND(OR(NOT(ISNUMBER(ZipCode__c)),(CONTAINS(ZipCode__c, &quot;.&quot;))),  NOT(ISBLANK(ZipCode__c)))</errorConditionFormula>
+    <errorDisplayField>ZipCode__c</errorDisplayField>
+    <errorMessage>Zip Code must contain only numeric values</errorMessage>
+</ValidationRule>

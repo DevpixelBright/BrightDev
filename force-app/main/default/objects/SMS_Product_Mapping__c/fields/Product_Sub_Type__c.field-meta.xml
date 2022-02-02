@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_Sub_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Product Sub Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>XactSite Office IDX</fullName>
+                <default>false</default>
+                <label>XactSite Office IDX</label>
+            </value>
+            <value>
+                <fullName>XactSite Agent IDX</fullName>
+                <default>false</default>
+                <label>XactSite Agent IDX</label>
+            </value>
+            <value>
+                <fullName>XactSite Office Website</fullName>
+                <default>false</default>
+                <label>XactSite Office Website</label>
+            </value>
+            <value>
+                <fullName>XactSite Premium</fullName>
+                <default>false</default>
+                <label>XactSite Premium</label>
+            </value>
+            <value>
+                <fullName>XactSite Total</fullName>
+                <default>false</default>
+                <label>XactSite Total</label>
+            </value>
+            <value>
+                <fullName>XactSite Select</fullName>
+                <default>false</default>
+                <label>XactSite Select</label>
+            </value>
+            <value>
+                <fullName>realPING</fullName>
+                <default>false</default>
+                <label>realPING</label>
+            </value>
+            <value>
+                <fullName>Authentisign</fullName>
+                <default>false</default>
+                <label>Authentisign</label>
+            </value>
+            <value>
+                <fullName>CloudCMA 2 Year</fullName>
+                <default>false</default>
+                <label>CloudCMA 2 Year</label>
+            </value>
+            <value>
+                <fullName>CloudCMA 1 Year</fullName>
+                <default>false</default>
+                <label>CloudCMA 1 Year</label>
+            </value>
+            <value>
+                <fullName>CloudCMA Monthly</fullName>
+                <default>false</default>
+                <label>CloudCMA Monthly</label>
+            </value>
+            <value>
+                <fullName>Social Pro Annual</fullName>
+                <default>false</default>
+                <label>Social Pro Annual</label>
+            </value>
+            <value>
+                <fullName>Social Pro Monthly</fullName>
+                <default>false</default>
+                <label>Social Pro Monthly</label>
+            </value>
+            <value>
+                <fullName>Sphere by Bright MLS Basic</fullName>
+                <default>false</default>
+                <label>Sphere by Bright MLS Basic</label>
+            </value>
+            <value>
+                <fullName>Sphere by Bright MLS Pro</fullName>
+                <default>false</default>
+                <label>Sphere by Bright MLS Pro</label>
+            </value>
+            <value>
+                <fullName>Sphere by Bright MLS Office IDX</fullName>
+                <default>false</default>
+                <label>Sphere by Bright MLS Office IDX</label>
+            </value>
+            <value>
+                <fullName>Sphere by Bright MLS Agent IDX</fullName>
+                <default>false</default>
+                <label>Sphere by Bright MLS Agent IDX</label>
+            </value>
+            <value>
+                <fullName>Social Pro Office</fullName>
+                <default>false</default>
+                <label>Social Pro Office</label>
+            </value>
+            <value>
+                <fullName>Sphere Office by Bright MLS</fullName>
+                <default>false</default>
+                <label>Sphere Office by Bright MLS</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

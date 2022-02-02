@@ -1,0 +1,180 @@
+@font-face {
+  font-family: 'Acronym-Regular';
+  src: url(../../resource/brightas/brightas/fonts/Acronym-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'Acronym-Bold';
+  src: url(../../resource/brightas/brightas/fonts/Acronym-Bold.ttf);
+}
+.THIS body{margin:0;}
+.THIS.slds-scope {
+  background: #fff;
+}
+
+.THIS.slds-box_x-small {
+  padding: 0;
+  border: none;
+}
+
+.THIS .slds-p-around_small {
+  display: inline-block;
+  vertical-align: top;
+}
+.THIS .slds-grow {
+  display: inline-block;
+  vertical-align: top;
+}
+.THIS.slds-grid {
+    display: inline-flex !important;
+}
+
+.THIS .dev {
+    background: #fff;
+    padding: 20px 0;
+}
+.THIS .dev h2 {
+    color: #222c3d;
+    font-size: 18px;
+    font-family: 'Acronym-Regular';
+}
+
+.THIS .dev h2 img{
+    width: 20px;
+    margin: -4px 10px 0 0;
+}
+.THIS .slds-dropdown__item { 
+	display: none;
+}
+.THIS .slds-dropdown{
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+.THIS .brand:hover {
+    color: #fff;
+    background: #ff4500;
+    border: 2px solid #ff4500;
+}
+.THIS .line {    text-align: right;}
+.THIS .line .brand {
+    display: inline-block; margin-left:20px;
+}
+.THIS .brand {
+    color: #ff4500;
+    background: #fff;
+    font-family: 'Acronym-Bold';
+    border-radius: 20px;
+    font-size: 12px;
+    min-width: 100px;
+    display: block;
+    padding: 0px 20px;
+    border: 2px solid #ff4500;
+}
+.THIS .brand:focus {
+    color: #fff;
+    box-shadow: none;
+    outline: none;
+    background: #ff4500;
+    border: 2px solid #ff4500;
+}
+.THIS .view{ width:100%; height:1px; background:#05a6b0; margin:0 0 10px}
+.THIS .top{ margin:0;padding:10px;}
+.THIS .middle{ margin:0;padding:10px 10px 20px;    display: block;}
+.THIS p.recent {
+    padding: 0 0 0px 0;
+    color: #222c3d;
+    font-size: 16px;
+   font-family: 'Acronym-Regular';
+    border-bottom: none;
+    margin:0 0 10px;
+}
+.THIS .slds-truncate {    display: flex;
+    white-space: break-spaces;
+    word-break: break-all;}
+.THIS .slds-table thead th{     font-family: 'Acronym-Bold'; width:auto !important;color: #222c3d;}
+.THIS .slds-table thead th .slds-truncate {       font-family: 'Acronym-Bold';
+    color: #222c3d;
+   
+}
+.THIS .slds-table thead th:last-child .slds-resizable__divider{display:none;color: #222c3d;}
+.THIS .slds-table thead td{ font-family: 'Acronym-Regular';color: #222c3d;}
+.THIS .slds-table_bordered tbody td{ font-family: 'Acronym-Regular';color: #222c3d;}
+.THIS .slds-table_bordered tbody th{ font-family: 'Acronym-Regular';color: #222c3d;}
+
+.THIS .slds-form-element__label{ color: #222c3d;
+    font-size: 14px;padding-top: 5px;
+    font-family: 'Acronym-Regular';}
+.THIS p.recent a{ color:#1b6fff;    text-transform: none;}
+.THIS p.recent a:hover{ color:#1b6fff;    text-transform: underline;}
+
+.THIS  h5.new .slds-grow{ display:block;}
+.THIS .slds-input:focus{     box-shadow: none;
+    outline: none;
+    border: 1px solid #ccc;}
+.THIS .slds-input:active{  box-shadow: none;
+    outline: none;
+    border: 1px solid #ccc;}
+.THIS .recentz{ border-top:1px solid #388EDD;}
+
+
+.THIS .recentz h3{ font-family: 'Acronym-Regular'; font-size:16px;color: #222c3d;}
+.THIS h5.new{     position: relative; width:100%;}
+.THIS h5.new img{         position: absolute;
+    top: 8px;
+    width: 20px;
+    right: 8px;    cursor: pointer;}
+.THIS .slds-border_top{ padding-bottom:0;}
+ .THIS .show h4{     display: inline-block;
+    font-size: 14px;
+    color: #000;
+              font-family: 'Acronym-Regular';}
+ .THIS .newapplication3{ display:inline-block; margin:24px auto 0;text-align: right; }           
+   .THIS .newapplication3 .pagination a{              
+              color: #9d9d9d;
+    font-size: 14px;
+            padding: 5px 16px;}
+
+ .THIS .slds-scope .slds-icon-text-default{fill: #388edd;}
+   .THIS .show .slds-icon-text-default{fill: #000000;}
+.THIS .process{color:#222c3d;    margin: 14px 0 0 0;font-family: 'Acronym-Regular';}
+.THIS .process a {  color:#ff4500;font-family: 'Acronym-Regular';}
+.THIS .process a:hover{color:#ff4500; text-decoration: underline;}
+.THIS .inview .slds-grow {width:68%;color: #222c3d;}
+.THIS .partvire{ margin:0 0 10px 0;}
+.THIS .slds-button_brand{color: #fff; margin:0 0 0 20px;
+    background: #ff4500;
+      font-family: 'Acronym-Bold';
+    border-radius: 20px;
+    font-size: 12px;
+    min-width: 100px;
+    display: block;
+    padding: 0 16px;
+    border: 2px solid #ff4500;}
+.THIS .slds-button_brand:hover{color: #ff4500; border: 2px solid #ff4500;
+    background: #fff;}
+.THIS .slds-button_brand:disabled{ font-family: 'Acronym-Bold';}
+.THIS .slds-button_brand:disabled:hover{    background-color: var(--lwc-brandDisabled,rgb(201, 199, 197));
+    border-color: var(--lwc-brandDisabled,rgb(201, 199, 197));
+    color: var(--lwc-colorTextButtonBrandDisabled,rgb(255, 255, 255));
+}
+.THIS .slds-theme_success{ width:100%;background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #3c763d;
+    padding: 15px;
+    margin-bottom:0px;
+    border: 1px solid transparent;
+    border-radius: 4px;font-family: 'Acronym-Regular';
+}
+.THIS .slds-theme_error {
+    width: 100%;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+    color: #8a6d3b;
+    padding: 15px;
+    margin-bottom: 0;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-family: 'Acronym-Regular';
+}
+                .THIS .new-containerpage{z-index:0;}

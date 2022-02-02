@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <name>Marketing - Education</name>
+    <queueMembers>
+        <users>
+            <user>cassie.clancy@mris.net</user>
+            <user>destiny.slawson@mris.net</user>
+            <user>elizabeth.hale@mris.net</user>
+            <user>justin.fry@mris.net</user>
+            <user>mary.hancock@mris.net</user>
+            <user>nayoung.kim@mris.net</user>
+            <user>nichole.land@mris.net</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>Case</sobjectType>
+    </queueSobject>
+</Queue>

@@ -1,0 +1,51 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false"  lightningstylesheets="true">
+<html>
+<head>
+    <link rel="shortcut icon" href="{!URLFOR($Resource.Bootstrap_Layout_Library, '/img/favicon.ico')}" type="image/vnd.microsoft.icon" />
+    <c:Bootstrap_Resources />
+</head>
+
+<body>
+    <c:VendorCommunity_Header />
+    
+    <script>
+        $("#logo-panel").remove();
+
+        var header = $("#navigation-panel");
+        
+        $("button.navbar-toggle").click(function () {
+            var height = header.height();
+            
+            reportHeight();
+            
+            var interval = window.setInterval(function () {
+                var newHeight = header.height();
+                
+                if (newHeight == height)
+                    window.clearInterval(interval);
+                else
+                    reportHeight();
+            }, 10);
+        });
+        
+        function reportHeight() {
+            parent.headerBottomHeight(header.height());
+        }
+        
+        function reportWidth() {
+            parent.headerBottomWidth(header.width());
+        }
+        
+        $(window).resize(function () {
+            reportHeight();
+            reportWidth();
+        });
+        
+        $(function () {
+            reportHeight();
+            reportWidth();
+        });
+    </script>
+</body>
+</html>    
+</apex:page>

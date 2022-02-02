@@ -1,0 +1,1484 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="Communities_MyPaymentMethods_Controller" lightningstylesheets="true">
+    <apex:composition template="Communities_Base">
+        
+        <apex:define name="content">
+            <apex:form id="portal">
+                <apex:actionFunction action="{!initPaymentMethodPortal}" name="initPaymentMethodPortal" reRender="portal" />
+
+                <apex:actionFunction action="{!reloadPaymentMethods}" name="reloadPaymentMethods" reRender="portal" />
+                
+                <apex:actionFunction action="{!initHPM}" name="initHPM" reRender="hpm">
+                    <apex:param name="paymentOption" value="" />
+                </apex:actionFunction>
+
+                <apex:actionFunction action="{!reloadHPM}" name="reloadHPM" reRender="hpm_iframe" />
+
+                <apex:actionFunction action="{!removeHPM}" name="removeHPM" reRender="hpm" />
+                
+                <apex:actionFunction action="{!updatePaymentMethod}" name="updatePaymentMethod" reRender="edit-response"> 
+                    <apex:param name="pmId" value="" />
+                    <apex:param name="month" value="" />
+                    <apex:param name="year" value="" />
+                    <apex:param name="name" value="" />
+                    <apex:param name="add1" value="" />
+                    <apex:param name="add2" value="" />
+                    <apex:param name="city" value="" />
+                    <apex:param name="state" value="" />
+                    <apex:param name="zip" value="" />
+                </apex:actionFunction>
+                
+                <apex:actionFunction action="{!updateACHPaymentMethod}" name="updateACHPaymentMethod" reRender="edit-ach-response"> 
+                    <apex:param name="pmId" value="" />
+                    <apex:param name="aba" value="" />
+                    <apex:param name="type" value="" />
+                    <apex:param name="bank" value="" />
+                    <apex:param name="holder" value="" />
+                    <apex:param name="address1" value="" />
+                    <apex:param name="address2" value="" />
+                </apex:actionFunction>                
+                
+                <apex:actionFunction action="{!setDefaultPaymentMethod}" name="setDefaultPaymentMethod" reRender="portal"> 
+                    <apex:param name="pmId" value="" />
+                </apex:actionFunction>
+
+                <apex:actionFunction action="{!removeDefaultPaymentMethod}" name="removeDefaultPaymentMethod" reRender="portal"> 
+                    <apex:param name="pmId" value="" />
+                </apex:actionFunction>
+
+                <apex:actionFunction action="{!deletePaymentMethod}" name="deletePaymentMethod" reRender="portal"> 
+                    <apex:param name="pmId" value="" />
+                </apex:actionFunction>
+
+                <c:Bootstrap_Resources />
+
+                <div class="row">
+                    <c:Communities_Definition pageTitle="My Payment Methods" pageTitleClass="fa fa-credit-card fa-2x" hasDefinitions="false">
+                        <p><b class="term">Term</b> Definition goes here.</p>
+                    </c:Communities_Definition>
+                </div>
+
+                <div class="row" id="loading-block">
+                    <div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-5">
+                        <div class="progress progress-striped active">
+                            <div class="progress-bar" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    var loading_block = $("#loading-block");
+                </script>
+                
+                <apex:outputPanel layout="none" rendered="{!initialLoad}" >
+                    <script>$(initPaymentMethodPortal);</script>
+                </apex:outputPanel>
+
+                <apex:outputPanel layout="none" rendered="{!!initialLoad && hasError}" >
+                    <div id="error-block" style="display: none;">
+                        <div class="alert alert-danger">
+                            <!-- <p>We’re sorry. The connection has timed out.</p>
+                            <p>If this issue persists, please contact the Customer Support Center for assistance at 1-844-55-BRIGHT (1-844-552-7444) or via email at <a href="mailto:support@brightmls.com">support@brightmls.com</a>.</p>
+                            -->
+                            <p>We’re sorry an unexpected error occurred.</p>
+                            <p>Please contact the Bright Support Center at If you need any assistance, please contact the Customer Support Center at 1-844-55-BRIGHT (1-844-552-7444).</p>
+                            <apex:outputPanel layout="none" rendered="{!debugMode}" >
+                                <div><apex:pageMessages /></div>
+                            </apex:outputPanel>
+                        </div>
+                        <div class="row" style="margin-top: 30px;">
+                            <div class="col-md-2 col-md-offset-5">
+                                <div class="btn-group btn-group-justified">
+                                    <a href="{!cancelUrl}" class="btn btn-primary" role="button">Back</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <script>
+                            loading_block.hide();
+                            $("#error-block").show();
+                        </script>
+                    </div>
+                </apex:outputPanel>
+                
+                <apex:outputPanel layout="none" rendered="{!!initialLoad && !hasError}" >
+                    <style>
+                        .action-panels .new-payment-method {
+                            position: relative;
+                            height: 350px;
+                            padding-top: 115px;
+                            background-color: #F5F5F5;
+                            color: #00A7B0;
+                            text-align: center;
+                            cursor: pointer;
+                        }
+                        
+                        .ie8 .action-panels .new-payment-method {
+                            filter: inherit;
+                        }
+
+                        .action-panels .new-payment-method:hover {
+                            background-color: #00A7B0;
+                            border-color: #00A7B0;
+                            color: #FFFFFF;
+                        }
+                        
+                            .action-panels .new-payment-method i {
+                                font-size: 300%;
+                                margin-bottom: 20px;
+                            }
+
+                            .action-panels .new-payment-method p {
+                                font-size: 120%;
+                            }
+
+                        .payment-method {
+                            position: relative;
+                            height: 350px;
+                        }
+
+                        .ie8 .payment-method {
+                            filter: inherit;
+                        }
+
+                        .modal .payment-method {
+                            margin-top: 30px;
+                            height: auto;
+                        }
+                        
+                        .payment-method .icon {
+                            display: inline-block;
+                            width: 50px;
+                            height: 33px;
+                            margin-top: 3px;
+                            margin-right: 20px;
+                            overflow: hidden;
+                            position: absolute;
+                        }
+                        
+                        .ie8 .payment-method .icon {
+                            filter: inherit;
+                        }
+
+                        .payment-method img {
+                            height: 200px;
+                            position: relative;
+                        }
+                        
+                        .ie8 .payment-method img {
+                            filter: inherit;
+                        }
+
+                        .payment-method .MasterCard {
+                            top: -25px;
+                            left: -178px;
+                        }
+                        
+                        .payment-method .Visa {
+                            top: -25px;
+                            left: -103px;
+                        }
+                        
+                        .payment-method .AmericanExpress {
+                            top: -25px;
+                            left: -256px;
+                        }
+                        
+                        .payment-method .Discover {
+                            top: -142px;
+                            left: -178px;
+                        }
+                        
+                        .payment-method .ACH {
+                             top: -142px;
+                            left: -332px; 
+
+                        }
+                        
+                        .payment-method .title {
+                            margin-left: -10px;
+                            margin-right: -10px;
+                            padding-left: 60px;
+                            padding-bottom: 15px;
+                            white-space: nowrap;
+                            overflow: hidden;
+                        }
+
+                        .payment-method .actions {
+                            position: absolute;
+                            top: 0px;
+                            right: 0px;
+                        }
+
+                        .payment-method .actions > i {
+                            float: right;
+                            width: 20px;
+                            height: 54px;
+                            
+                            /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+                            background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+                            background: -moz-linear-gradient(left,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); /* FF3.6+ */
+                            background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
+                            background: -webkit-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
+                            background: -o-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
+                            background: -ms-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* IE10+ */
+                            background: linear-gradient(to right,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C */
+                            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=1 ); /* IE6-8 */
+                        }
+                        
+                        .payment-method .fa {
+                            position: relative;
+                            display: block;
+                            float: right;
+                            font-size: 150%;
+                            padding: 17px 10px 16px 10px;
+                            border-left: 1px solid #F5F5F5;
+                            background-color: #fff;
+                            color: #00A7B0;
+                        }
+                        
+                        .ie8 .payment-method .fa {
+                            padding-bottom: 17px;
+                        }
+                        
+                        .payment-method .fa:hover {
+                            text-decoration: none;
+                            background-color: #00A7B0;
+                            color: #fff;
+                        }
+
+                        .payment-method .fa + .fa {
+                            border-right: 0px;
+                        }
+
+                        .payment-method p {
+                            position: relative;
+                            overflow: hidden;
+                        }
+
+                        .ie8 .payment-method p {
+                            filter: inherit;
+                        }
+
+                        .payment-method p > b {
+                            display: inline-block;
+                            width: 30%;
+                            margin-right: 10px;
+                            text-align: right;
+                        }
+                        
+                        .payment-method p > b:after {
+                            content: ":";
+                        }
+
+                        .payment-method p > span {
+                            display: inline-block;
+                            width: 65%;
+                            white-space: nowrap;
+                        }
+                        
+                        .payment-method p > i {
+                            width: 20px;
+                            height: 100%;
+                            position: absolute;
+                            top: 0px;
+                            right: 0px;
+                            
+                            /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+                            background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+                            background: -moz-linear-gradient(left,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); /* FF3.6+ */
+                            background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
+                            background: -webkit-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
+                            background: -o-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
+                            background: -ms-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* IE10+ */
+                            background: linear-gradient(to right,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C */
+                            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=1 ); /* IE6-8 */
+                        }
+                        
+                        .payment-method .billing-info {
+                            display: inline-block;
+                            width: 65%;
+                            vertical-align: top;
+                        }
+                        
+                        .payment-method .input-group {
+                            margin-top: 10px;
+                        }
+
+                        .ie .payment-method .input-group .form-control {
+                            width: auto;
+                            margin-right: 20px;
+                        }
+                                                        
+                        .form-group {
+                            margin-bottom: 0px !important;
+                        }
+                        
+                        .form-group + .form-group {
+                            border-top: 1px solid #ddd;
+                        }
+                        
+                        .form-group > label {
+                            float: left;
+                            width: 160px;
+                            padding-right: 20px;
+                            text-align: right;
+                            font-weight: bold;
+                            line-height: 55px;
+                        }
+                        
+                        .form-group > .input {
+                            width: 396px;
+                        }
+                        
+                        .form-group > .input > input {
+                            width: 90%;
+                        }
+                        
+                        .form-group > .input > select {
+                            width: 90%;
+                        }
+
+                        .form-group > .input > select#edit-month, .form-group > .input > select#edit-year {
+                            display: inline;
+                            width: 125px;
+                        }
+                        
+                        .form-group > p.input {
+                            display: block;
+                            float: left;
+                            line-height: 55px;
+                            margin: 0px;
+                        }
+                        
+                        .form-group > div.input {
+                            float: left;
+                            margin-top: 11px;
+                            margin-bottom: 10px;
+                        }
+
+                        .hpm-container {
+                            border:1px solid #E1E2E3; 
+                            border-radius: 0px;
+                        }
+
+                        <!--[if gte IE 9]>
+                        .gradient {
+                           filter: none;
+                        }
+                        <![endif]-->
+
+                        .resp-tabs-list {
+                            list-style: none;
+                            margin: 0 0 0em 0;
+                            padding: 0;
+                        }
+
+                        .resp-tab-item{
+                            font-size: 14px;
+                            text-decoration: none;
+                            color: #a9acb1;
+                            font-weight:600;
+                            cursor: pointer;
+                            text-align: center;
+                            list-style: none;
+                            outline: none;
+                            -webkit-transition: all 0.3s ease-out;
+                            -moz-transition: all 0.3s ease-out;
+                            -ms-transition: all 0.3s ease-out;
+                            -o-transition: all 0.3s ease-out;
+                            transition: all 0.3s ease-out;
+                            text-transform:capitalize;
+                            display: inline-block;
+                            margin: 0 4%;
+                            float: left;
+                            width: 17%;
+                        }
+
+                        .resp-tab-active{
+                            color: #B3E03F;
+                        }
+
+                        .resp-tabs-container {
+                            padding: 0px;
+                            clear: left;
+                            padding: 2em 2.5em;
+                            background: #fff;
+                            border: 1px solid #e7ebee;  
+                        }
+
+                        h2.resp-accordion {
+                            cursor: pointer;
+                            padding: 5px;
+                            display: none;
+                        }
+
+                        .resp-tab-content {
+                            display: none;
+                        }
+
+                        .resp-content-active, 
+                        .resp-accordion-active {
+                           display: block;
+                        }
+
+                        li.resp-tab-item span .pic1{
+                            background: url(../images/pic2.png) no-repeat 38px 15px #fafafa !important;
+
+                        }
+
+                        li.resp-tab-item span .pic2{
+                            background: url(../images/pic3.png) no-repeat 38px 15px #fafafa !important;
+
+                        }                                             
+                    </style>
+                    
+                    <div id="content-block" style="display: none;">
+                        <div class="row">
+                            <div class="col-xs-12 instructions">
+                                <p>Welcome to My Payment Methods. To add a new Visa, Mastercard, American Express, Discover card or Direct Debit, click “Add New Payment Method.”</p>
+                                <p>Need to manage your current payment methods? You can edit and delete payment methods below by using the Edit and Delete icons located in the right corner when you hover over any existing payment method. From this edit screen, you can update Expiration Date, Cardholder Name and Address, and you can select or remove a card as your auto-payment method.</p>
+                                <p>If you need to change a card number, please delete the current card on file and add the new card using the “Add New Payment Method” option.</p>            
+                                <apex:outputPanel layout="none" rendered="{!debugMode}" >
+                                    <div><apex:pageMessages /></div>
+                                </apex:outputPanel>
+                            </div>
+                        </div>
+
+                        <div class="row action-panels">
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="new-payment-method" onclick="newPaymentOptions();">
+                                    <i class="fa fa-plus"></i><i class="fa fa-credit-card"></i>
+                                    <p>Add New Payment Method</p>
+                                </div>
+                            </div>
+
+                            <script>var payment_methods = {};</script>
+                            
+                            <apex:repeat value="{!Payment.PaymentMethods}" var="pm">
+                                <script>
+                                    payment_methods["{!pm.Id}"] = {
+                                        IsCreditCard: true,
+                                        NameOnCard: "{!pm.NameOnCard}",
+                                        Type: "{!pm.Type}",
+                                        LastFourDigits: "{!pm.LastFourDigits}",
+                                        ExpirationMonth: "{!pm.ExpirationMonth}",
+                                        ExpirationYear: "{!pm.ExpirationYear}",
+                                        Address1: "{!pm.Address1}",
+                                        Address2: "{!pm.Address2}",
+                                        City: "{!pm.City}",
+                                        State: "{!pm.State}",
+                                        PostalCode: "{!pm.PostalCode}",
+                                        LastUsed: "{!pm.LastUsed}",
+                                        IsDefault: {!pm.IsDefault}
+                                    };
+                                </script>
+                                
+                                <div class="col-sm-6 col-lg-4">
+                                    <div class="payment-method" id="{!pm.Id}">
+                                        <div class="icon">
+                                            <img class="{!pm.Type}" src="{!URLFOR($Resource.Communities_Images, 'Payment-Method-Icons.png')}"></img>
+                                        </div>
+                                        <h4 class="title">
+                                            {!pm.NameOnCard}
+                                        </h4>
+                                        <div class="actions">
+                                            <a class="fa fa-trash-o" href="#"></a>
+                                            <a class="fa fa-edit" href="#"></a>
+                                            <i></i>
+                                            <script>
+                                                $("#{!pm.Id} .fa-trash-o").click(function () {
+                                                    var modal = $("#delete-modal");
+                                                    
+                                                    modal.find(".payment-method").attr("id", "{!pm.Id}");
+                                                    modal.find(".payment-method .type span").text("{!pm.Type}");
+                                                    modal.find(".payment-method .name span").text("{!pm.NameOnCard}");
+                                                    modal.find(".payment-method .number span").text("{!pm.LastFourDigits}");
+                                                    modal.find(".payment-method .exp span").text("{!pm.ExpirationFormated}");
+                                                    
+                                                    modal.modal("show");
+                                                    
+                                                    return false;
+                                                });
+                                                
+                                                $("#{!pm.Id} .fa-edit").click(function () {
+                                                    var modal = $("#edit-modal");
+                                                    
+                                                    modal.find(".hpm-container").attr("id", "{!pm.Id}");
+                                                    modal.find("#edit-type").text("{!pm.Type}");
+                                                    modal.find("#edit-number").text("************{!pm.LastFourDigits}");
+                                                    modal.find("#edit-month").val("{!pm.ExpirationMonth}");
+                                                    modal.find("#edit-year").val("{!pm.ExpirationYear}");
+                                                    modal.find("#edit-name").val("{!pm.NameOnCard}");
+                                                    modal.find("#edit-address1").val("{!pm.Address1}");
+                                                    modal.find("#edit-address2").val("{!pm.Address2}");
+                                                    modal.find("#edit-city").val("{!pm.City}");
+                                                    modal.find("#edit-state").val("{!pm.State}");
+                                                    modal.find("#edit-zip").val("{!pm.PostalCode}");
+                                                    modal.find("input[type=checkbox]")
+                                                        .prop("checked", {!pm.IsDefault})
+                                                        .prop("original", {!pm.IsDefault});
+                                                    
+                                                    modal.modal("show");
+                                                    return false;
+                                                });
+                                            </script>
+                                        </div>
+                                        <p>
+                                            <b>Status</b>
+                                            <apex:outputPanel layout="none" rendered="{!pm.HasExpired}">
+                                                <span style="color: #f00;">Expired</span>
+                                            </apex:outputPanel>
+                                            <apex:outputPanel layout="none" rendered="{!!pm.HasExpired}">
+                                                <span>Active</span>
+                                            </apex:outputPanel>
+                                            <i class="gradient"></i>
+                                        </p>
+                                        <p>
+                                            <b>Expires On</b>
+                                            <span>{!pm.ExpirationFormated}</span>
+                                            <i class="gradient"></i>
+                                        </p>
+                                        <p>
+                                            <b>Card #</b>
+                                            <span>{!pm.LastFourDigits}</span>
+                                            <i class="gradient"></i>
+                                        </p>
+                                        <p>
+                                            <b>Billing Addr</b>
+                                            <span class="billing-info">
+                                                {!pm.Address1}<br />
+                                                <apex:outputPanel layout="none" rendered="{!pm.HasAddress2}">
+                                                    {!pm.Address2}<br />
+                                                </apex:outputPanel>
+                                                {!pm.City}, {!pm.State} {!pm.PostalCode}
+                                            </span>
+                                            <i class="gradient"></i>
+                                        </p>
+                                        <apex:outputPanel layout="none" rendered="{!!pm.HasExpired}">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <input type="checkbox" />
+                                                </span>
+                                                <span class="form-control">Use this payment method to automatically pay all future fees and charges accrued or associated with your MLS subscription</span>
+                                            </div>
+
+                                            <script>
+                                                $("#{!pm.Id} input[type=checkbox]").click(function () {
+                                                    var modal;
+                                                    
+                                                    if ({!pm.IsDefault}) {
+                                                        $(this).prop("checked", true);
+                                                        
+                                                        modal = $("#remove-default-modal");
+                                                    }
+                                                    else {
+                                                        $(this).prop("checked", false);
+
+                                                        modal = $("#set-default-modal");
+                                                    }
+                                                    
+                                                    modal.find(".payment-method").attr("id", "{!pm.Id}");
+                                                    modal.find(".payment-method .type span").text("{!pm.Type}");
+                                                    modal.find(".payment-method .name span").text("{!pm.NameOnCard}");
+                                                    modal.find(".payment-method .number span").text("{!pm.LastFourDigits}");
+                                                    modal.find(".payment-method .exp span").text("{!pm.ExpirationFormated}");
+                                                    modal.find(".payment-method .exp b").text("Expiration Date");
+                                                    
+                                                    modal.modal("show");
+
+                                                    return false;
+                                                });
+                                            </script>
+                                            
+                                            <apex:outputPanel layout="none" rendered="{!pm.IsDefault}">
+                                                <script>
+                                                    $("#{!pm.Id} input[type=checkbox]").prop("checked", true);
+                                                </script>
+                                            </apex:outputPanel>
+
+                                        </apex:outputPanel>
+                                    </div>
+                                </div>
+                            </apex:repeat>
+
+                            <apex:repeat value="{!Payment.LegacyACHs}" var="ach">
+                                <script>
+                                    payment_methods["{!ach.Id}"] = {
+                                        IsCreditCard: false,
+                                        HolderName: "{!ach.HolderName}",
+                                        AccountNumber: "{!ach.AccountNumber}",
+                                        ABACode: "{!ach.ABACode}",
+                                        BankName: "{!ach.BankName}",
+                                        AccountType: "{!ach.AccountType}",
+                                        Address1: "{!ach.Address1}",
+                                        Address2: "{!ach.Address2}",
+                                        LastUsed: "{!ach.LastUsed}",
+                                        IsDefault: {!ach.IsDefault}
+                                    };
+                                </script>
+                                
+                                <div class="col-sm-6 col-lg-4">
+                                    <div class="payment-method" id="{!ach.Id}">
+                                        <div class="icon">
+                                            <img class="ACH" src="{!URLFOR($Resource.Communities_Images, 'Payment-Method-Icons.png')}"></img>
+                                        </div>
+                                        <h4 class="title">
+                                            {!ach.HolderName}
+                                        </h4>
+                                        <div class="actions">
+                                            <a class="fa fa-trash-o" href="#"></a>
+                                            <a class="fa fa-edit" href="#"></a>
+                                            <i></i>
+                                            <script>
+                                                $("#{!ach.Id} .fa-edit").click(function () {
+                                                    var modal = $("#ach-edit-modal");
+                                                    
+                                                    modal.find(".hpm-container").attr("id", "{!ach.Id}");
+                                                    modal.find("#ach-edit-type").text("Direct Debit");
+                                                    modal.find("#ach-edit-number").text("{!ach.AccountNumber}");
+                                                    modal.find("#ach-edit-aba").val("{!ach.ABACode}");
+                                                    modal.find("#ach-edit-actype").val("{!ach.AccountType}");
+                                                    modal.find("#ach-edit-bank").val("{!ach.BankName}");
+                                                    modal.find("#ach-edit-holder").val("{!ach.HolderName}");
+                                                    modal.find("#ach-edit-address1").val("{!ach.Address1}");
+                                                    modal.find("#ach-edit-address2").val("{!ach.Address2}");
+                                                    modal.find("input[type=checkbox]")
+                                                        .prop("checked", {!ach.IsDefault})
+                                                        .prop("original", {!ach.IsDefault});
+                                                    
+                                                    modal.modal("show");
+                                                    return false;
+                                                });                                            
+                                            
+                                                $("#{!ach.Id} .fa-trash-o").click(function () {
+                                                    var modal = $("#delete-ach-modal");
+                                                    
+                                                    modal.find(".payment-method").attr("id", "{!ach.Id}");
+                                                    modal.find(".payment-method .type span").text("{!ach.AccountType}");
+                                                    modal.find(".payment-method .name span").text("{!ach.HolderName}");
+                                                    modal.find(".payment-method .routing-number span").text("{!ach.ABACode}");
+                                                    modal.find(".payment-method .account-number span").text("{!ach.AccountNumber}");
+                                                    
+                                                    modal.modal("show");
+
+                                                    return false;
+                                                });
+                                            </script>
+                                        </div>
+                                        <p>
+                                            <b>Bank Name</b>
+                                            <span>{!ach.BankName}</span>
+                                            <i class="gradient"></i>
+                                        </p>
+                                        <p>
+                                            <b>Routing #</b>
+                                            <span>{!ach.ABACode}</span>
+                                            <i class="gradient"></i>
+                                        </p>
+                                        <p>
+                                            <b>Account #</b>
+                                            <span>{!ach.AccountNumber}</span>
+                                            <i class="gradient"></i>
+                                        </p>
+                                        <p>
+                                            <b>Type</b>
+                                            <span>{!ach.AccountType}</span>
+                                            <i class="gradient"></i>
+                                        </p>
+
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <input type="checkbox" checked="" />
+                                                </span>
+                                                <span class="form-control">Use this payment method to automatically pay all future fees and charges accrued or associated with your MLS subscription</span>
+                                            </div>
+                                                
+                                            <script>
+                                                $("#{!ach.Id} input[type=checkbox]").click(function () {
+                                                        var modal;
+                                                        
+                                                        if ({!ach.IsDefault}) {
+                                                            $(this).prop("checked", true);
+                                                            
+                                                            modal = $("#remove-default-modal");
+                                                        }
+                                                        else {
+                                                            $(this).prop("checked", false);
+    
+                                                            modal = $("#set-default-modal");
+                                                        }
+                                                        
+                                                        modal.find(".payment-method").attr("id", "{!ach.Id}");
+                                                        modal.find(".payment-method .type span").text("{!ach.AccountType}");
+                                                        modal.find(".payment-method .name span").text("{!ach.HolderName}");
+                                                        modal.find(".payment-method .exp b").text("Routing#");
+                                                        modal.find(".payment-method .exp span").text("{!ach.ABACode}");
+                                                        modal.find(".payment-method .number span").text("{!ach.AccountNumber}");
+                                                        modal.modal("show");
+
+                                                        return false;
+                                                    });
+                                            </script>
+                                            
+                                            <apex:outputPanel layout="none" rendered="{!ach.IsDefault}">
+                                                <script>
+                                                    $("#{!ach.Id} input[type=checkbox]").prop("checked", true);
+                                                </script>
+                                            </apex:outputPanel>
+                                    </div>
+                                </div>
+                            </apex:repeat>
+                        </div>
+                        
+                        <div class="modal fade" id="create-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="modal-label">New Payment Method</h4>
+                                    </div>
+                                    <style>
+                                        .payment-select {
+                                            padding: 15px 10px; 
+                                            border:1px solid #E1E2E3; 
+                                            font-size:16px;
+                                            color:#212B3D;
+                                            cursor:pointer;
+                                        }
+
+                                        .payment-select:hover,
+                                        .payment-select.active {
+                                            background-color:#00A7B0;
+                                            color:white;
+                                        }
+
+                                        .payment-select + .payment-select {
+                                            margin-top: 10px;
+                                        }
+
+                                        .payment-select > i {
+                                            margin-right: 10px;
+                                        }
+
+                                        .payment-page {
+                                            display:none;
+                                            margin-top: 20px;
+                                        }
+                                    </style>
+                                    <div class="modal-body">
+                                        <div id="payment-options-block">
+                                            <p>Please select the payment option</p>
+                                            <div class="payment-select">
+                                                <i class="fa fa-square-o" aria-hidden="true"></i> 
+                                                <span>Credit Card</span>
+                                            </div>
+                                            <div class="payment-select">
+                                                <i class="fa fa-square-o" aria-hidden="true"></i> 
+                                                <span>Direct Debit</span>
+                                            </div>                                              
+                                            <!--                                         
+                                            <a onclick="newPaymentMethod('CREDIT-CARD')" style="cursor:pointer;">Credit Card</a><br/>
+                                            <a onclick="newPaymentMethod('ACH')" style="cursor:pointer;">ACH</a>   
+                                            -->
+                                        </div>
+                                        <div class="payment-page">
+                                            <apex:outputPanel id="hpm">
+                                                <p>Please enter the necessary information below and press "Submit" when done.</p>
+                                                <div class="alert alert-danger" style="display: none"></div>
+                                                
+                                                <apex:outputPanel layout="none" rendered="{!loadHPM}">
+                                                    <apex:outputPanel id="hpm_iframe">
+                                                        <div class="hpm-container">
+                                                            <iframe id="z_hppm_iframe" name="z_hppm_iframe" style="width: 100%; height:{!if(paymentSetting== 'Direct Debit', '280px', '550px')}; margin-bottom: -5px;" src="{!hpmUrl}" frameborder="0">
+
+                                                            </iframe>
+                                                        </div>
+                                                    </apex:outputPanel>
+                                                </apex:outputPanel>
+                                                
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <input type="checkbox" />
+                                                    </span>
+                                                    <span class="form-control">Use this payment method to automatically pay all future fees and charges accrued or associated with your MLS subscription</span>
+                                                </div>
+                                            </apex:outputPanel>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="removeHPM();">Cancel</button>
+                                        <button type="button" class="btn btn-primary" onclick="submitPaymentMethod();">Submit</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->    
+
+                        <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="modal-label">Edit Payment Method</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Please make your changes below and press "Save" when done.</p>
+                                        <div class="alert alert-danger" style="display: none"></div>
+                                        
+                                        <div class="hpm-container">
+                                            <div class="form-group">
+                                                <label>Card Type</label>
+                                                <p class="input" id="edit-type"></p>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Card Number</label>
+                                                <p class="input" id="edit-number"></p>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Expiration Date</label>
+                                                <div class="input">
+                                                    <select class="form-control" id="edit-month"></select>&nbsp;/
+                                                    <select class="form-control" id="edit-year"></select>
+                                                    
+                                                    <script>
+                                                        var now = new Date();
+                                                        var month = $("#edit-month");
+                                                        var year = $("#edit-year");
+                                                        
+                                                        month.append("<option>- Select One -</option>");
+
+                                                        for (var i = 1; i <=12; i++)
+                                                            month.append(String.format("<option value=\"{0}\">{0:00}</option>", i));
+
+                                                        year.append("<option>- Select One -</option>");
+
+                                                        for (var i = 0; i <=19; i++)
+                                                            year.append(String.format("<option value=\"{0}\">{0}</option>", now.getFullYear() + i));
+                                                    </script>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Cardholder Name</label>
+                                                <div class="input">
+                                                    <input class="form-control" id="edit-name" />
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Address 1</label>
+                                                <div class="input">
+                                                    <input class="form-control" id="edit-address1" />
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Address 2</label>
+                                                <div class="input">
+                                                    <input class="form-control" id="edit-address2" />
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>City</label>
+                                                <div class="input">
+                                                    <input class="form-control" id="edit-city" />
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>State</label>
+                                                <div class="input">
+                                                    <select class="form-control" id="edit-state"></select>
+                                                    
+                                                    <script>
+                                                        var states = [
+                                                            "Alabama",
+                                                            "Alaska",
+                                                            "Arizona",
+                                                            "Arkansas",
+                                                            "Armed Forces",
+                                                            "Armed Forces America",
+                                                            "Armed Forces Pacific",
+                                                            "California",
+                                                            "Colorado",
+                                                            "Connecticut",
+                                                            "Delaware",
+                                                            "Florida",
+                                                            "Georgia",
+                                                            "Guam",
+                                                            "Hawaii",
+                                                            "Idaho",
+                                                            "Illinois",
+                                                            "Indiana",
+                                                            "Iowa",
+                                                            "Kansas",
+                                                            "Kentucky",
+                                                            "Louisiana",
+                                                            "Maine",
+                                                            "Maryland",
+                                                            "Massachusetts",
+                                                            "Michigan",
+                                                            "Minnesota",
+                                                            "Mississippi",
+                                                            "Missouri",
+                                                            "Montana",
+                                                            "Nebraska",
+                                                            "Nevada",
+                                                            "New Hampshire",
+                                                            "New Jersey",
+                                                            "New Mexico",
+                                                            "New York",
+                                                            "North Carolina",
+                                                            "North Dakota",
+                                                            "Ohio",
+                                                            "Oklahoma",
+                                                            "Oregon",
+                                                            "Pennsylvania",
+                                                            "Puerto Rico",
+                                                            "Rhode Island",
+                                                            "South Carolina",
+                                                            "South Dakota",
+                                                            "Tennessee",
+                                                            "Texas",
+                                                            "Utah",
+                                                            "Vermont",
+                                                            "Virgin Islands",
+                                                            "Virginia",
+                                                            "Washington",
+                                                            "Washington DC",
+                                                            "West Virginia",
+                                                            "Wisconsin",
+                                                            "Wyoming"
+                                                        ];
+
+                                                        var state = $("#edit-state");
+                                                        
+                                                        state.append("<option>-- Select One --</option>");
+
+                                                        for (var i = 0; i < states.length; i++)
+                                                            state.append(String.format("<option value=\"{0}\">{0:00}</option>", states[i]));
+                                                    </script>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Postal Code</label>
+                                                <div class="input">
+                                                    <input class="form-control" id="edit-zip" />
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <input type="checkbox" />
+                                            </span>
+                                            <span class="form-control">Use this payment method to automatically pay all future fees and charges accrued or associated with your MLS subscription</span>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-primary" onclick="updateMethod();">Save</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal --> 
+                        
+                        <div class="modal fade" id="ach-edit-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="modal-label">Edit Payment Method</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Please make your changes below and press "Save" when done.</p>
+                                        <div class="alert alert-danger" style="display: none"></div>
+                                        
+                                        <div class="hpm-container">
+                                            <div class="form-group">
+                                                <label>Payment Method</label>
+                                                <p class="input" id="ach-edit-type">VISA</p>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Account Number</label>
+                                                <p class="input" id="ach-edit-number">VISA</p>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>ABA/Routing#</label>
+                                                <div class="input">
+                                                    <input class="form-control" id="ach-edit-aba" />
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Account Type</label>
+                                                <div class="input">
+                                                    <select class="form-control" id="ach-edit-actype">
+                                                        <option>-- Select One --</option>
+                                                        <option value="Checking">Checking</option>
+                                                        <option value="Saving">Saving</option>
+                                                        <option value="Business Checking">Business Checking</option>
+                                                    </select>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Bank Name</label>
+                                                <div class="input">
+                                                    <input class="form-control" id="ach-edit-bank" />
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>                                             
+                                            <div class="form-group">
+                                                <label>Account Holder</label>
+                                                <div class="input">
+                                                    <input class="form-control" id="ach-edit-holder" />
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <!--
+                                            <div class="form-group">
+                                                <label>ACH Address1</label>
+                                                <div class="input">
+                                                    <input class="form-control" id="ach-edit-address1" />
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div> 
+                                            <div class="form-group">
+                                                <label>ACH Address2</label>
+                                                <div class="input">
+                                                    <input class="form-control" id="ach-edit-address2" />
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div> -->                                                                                                                                                                                                                            
+                                        </div>
+                                        
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <input type="checkbox" />
+                                            </span>
+                                            <span class="form-control">Use this payment method to automatically pay all future fees and charges accrued or associated with your MRIS subscription</span>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-primary" onclick="updateACHMethod();">Save</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+
+                        <apex:outputPanel id="edit-response">
+                            <apex:outputPanel layout="none" rendered="{!edited && editSuccess}">
+                                <script>updateSuccess();</script>
+                            </apex:outputPanel>
+                        
+                            <apex:outputPanel layout="none" rendered="{!edited && !editSuccess}">
+                                <script>updateFail("{!editErrorMessage}");</script>
+                            </apex:outputPanel>
+                        </apex:outputPanel>
+                        
+                        <apex:outputPanel id="edit-ach-response">
+                            <apex:outputPanel layout="none" rendered="{!edited && editSuccess}">
+                                <script>updateACHSuccess();</script>
+                            </apex:outputPanel>
+                        
+                            <apex:outputPanel layout="none" rendered="{!edited && !editSuccess}">
+                                <script>updateACHFail("{!editErrorMessage}");</script>
+                            </apex:outputPanel>
+                        </apex:outputPanel>                        
+                        
+                        <div class="modal fade" id="set-default-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="modal-label">Set Automatic Payment</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Please confirm that you want to use this payment method to automatically pay all future fees and charges accrued or associated with your MLS subscription.</p>
+                                        <div class="payment-method">
+                                            <p class="type">
+                                                <b>Type</b>
+                                                <span></span>
+                                            </p>
+                                            <p class="name">
+                                                <b>Cardholder Name</b>
+                                                <span></span>
+                                            </p>
+                                            <p class="number">
+                                                <b>Card Number</b>
+                                                <span></span>
+                                            </p>                                             
+                                            <p class="exp">
+                                                <b>Expiration Date</b>
+                                                <span></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-primary" onclick="setDefault();">Confirm</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->                      
+
+                        <div class="modal fade" id="remove-default-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="modal-label">Remove Automatic Payment</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Please confirm that you no longer want to use this payment method to automatically pay all future fees and charges accrued or associated with your MLS subscription.</p>
+                                        <div class="payment-method">
+                                            <p class="type">
+                                                <b>Type</b>
+                                                <span></span>
+                                            </p>
+                                            <p class="name">
+                                                <b>Cardholder Name</b>
+                                                <span></span>
+                                            </p>
+                                            <p class="number">
+                                                <b>Card Number</b>
+                                                <span></span>
+                                            </p>                                             
+                                            <p class="exp">
+                                                <b>Expiration Date</b>
+                                                <span></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-primary" onclick="removeDefault();">Confirm</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->  
+
+                        <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="modal-label">Delete Payment Method</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Please confirm that you would like to <b>delete</b> the following payment method:</p>
+                                        <div class="payment-method">
+                                            <p class="type">
+                                                <b>Type</b>
+                                                <span></span>
+                                            </p>
+                                            <p class="name">
+                                                <b>Cardholder Name</b>
+                                                <span></span>
+                                            </p>
+                                            <p class="number">
+                                                <b>Card Number</b>
+                                                <span></span>
+                                            </p>                                             
+                                            <p class="exp">
+                                                <b>Expiration Date</b>
+                                                <span></span>
+                                            </p>
+                                                                                       
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-primary" onclick="deleteMethod();">Confirm</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->  
+                        
+                        <div class="modal fade" id="remove-ach-default-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="modal-label">Remove Automatic Payment</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Please confirm that you no longer want to use this payment method to automatically pay all future fees and charges accrued or associated with your MLS subscription.</p>
+                                        <div class="payment-method">
+                                            <p class="type">
+                                                <b>Type</b>
+                                                <span></span>
+                                            </p>
+                                            <p class="name">
+                                                <b>Holder Name</b>
+                                                <span></span>
+                                            </p>
+                                            <p class="routing-number">
+                                                <b>Routing Number</b>
+                                                <span></span>
+                                            </p>
+                                            <p class="account-number">
+                                                <b>Account Number</b>
+                                                <span></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-primary" onclick="removeACHDefault();">Confirm</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->  
+
+                        <div class="modal fade" id="delete-ach-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="modal-label">Delete Payment Method</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Please confirm that you would like to <b>delete</b> the following payment method:</p>
+                                        <div class="payment-method">
+                                            <p class="type">
+                                                <b>Type</b>
+                                                <span></span>
+                                            </p>
+                                            <p class="name">
+                                                <b>Holder Name</b>
+                                                <span></span>
+                                            </p>
+                                            <p class="routing-number">
+                                                <b>Routing Number</b>
+                                                <span></span>
+                                            </p>
+                                            <p class="account-number">
+                                                <b>Account Number</b>
+                                                <span></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-primary" onclick="deleteACHMethod();">Confirm</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->  
+                        
+                        <script>
+                            loading_block.hide();
+                            $("#content-block").show();
+                            init_action_panels();
+                            
+                            $(".payment-select").click(function(){
+                                $(".payment-select").removeClass('active');
+                                $(".payment-select").children("i").removeClass('fa-check-square-o');
+                                $(".payment-select").children("i").addClass('fa-square-o');
+                                var paymentOption = $(this).children("span").text();
+                                newPaymentMethod(paymentOption);
+
+                                $(this).addClass('active');
+                                $(this).children("i").removeClass('fa-square-o');
+                                $(this).children("i").addClass('fa-check-square-o');  
+                            });
+                           
+                            
+                            function newPaymentOptions() {
+                                $("#create-modal").modal("show");    
+                            }
+                            
+                            function newPaymentMethod(type) {
+                                initHPM(type);
+                                $(".payment-page").show();                                
+                                
+                                return false;
+                            }
+
+                            function act(modal, action) {
+                                modal = $(modal);
+
+                                modal.modal("hide");
+                                loading_block.show();
+                                $(".instructions, .action-panels").hide();
+                                
+                                var id = modal.find(".payment-method").attr("id");
+                                
+                                action(id);
+                            }
+                            
+                            function setDefault() {
+                                act("#set-default-modal", setDefaultPaymentMethod);
+                            }
+
+                            function removeDefault() {
+                                act("#remove-default-modal", removeDefaultPaymentMethod);
+                            }
+
+                            function removeACHDefault() {
+                                act("#remove-ach-default-modal", removeDefaultPaymentMethod);
+                            }
+                            
+                            function deleteMethod() {
+                                act("#delete-modal", deletePaymentMethod);
+                            }
+
+                            function deleteACHMethod() {
+                                act("#delete-ach-modal", deletePaymentMethod);
+                            }
+
+                            function submitPaymentMethod() {
+                                $("#create-modal").modal("hide");
+                                loading_block.show();
+                                $(".instructions, .action-panels").hide();
+                            
+                                var iframe = document.getElementById("z_hppm_iframe");
+                                var src = iframe.src + '#' + encodeURIComponent(document.location.href);
+                
+                                iframe.src = src;
+                                ZXD.postMessage("submit", src, iframe.contentWindow);
+                                console.log('--src->'+src);
+                                
+                            }
+                    
+                            function callbackSuccess(pmid) {
+                                removeHPM();
+
+                                if ($("#create-modal .input-group input[type=checkbox]:checked").size() > 0)
+                                    setDefaultPaymentMethod(pmid);
+                                else
+                                    reloadPaymentMethods();
+                            }
+                    
+                            function callbackFail(errorMessage) {
+                                reloadHPM();
+                                
+                                loading_block.hide();
+                                $(".instructions, .action-panels").show();
+
+                                var modal = $("#create-modal");
+                                
+                                modal.modal("show");
+                                
+                                modal.find(".alert")
+                                    .html(errorMessage)
+                                    .show();
+                            }
+
+                            function updateMethod() {
+                                var modal = $("#edit-modal");
+                                
+                                modal.modal("hide");
+                                loading_block.show();
+                                $(".instructions, .action-panels").hide();
+
+                                var id = modal.find(".hpm-container").attr("id");
+                                var month = modal.find("#edit-month").val();
+                                var year = modal.find("#edit-year").val();
+                                var name = modal.find("#edit-name").val();
+                                var add1 = modal.find("#edit-address1").val();
+                                var add2 = modal.find("#edit-address2").val();
+                                var city = modal.find("#edit-city").val();
+                                var state = modal.find("#edit-state").val();
+                                var zip = modal.find("#edit-zip").val();
+                                
+                                updatePaymentMethod(id, month, year, name, add1, add2, city, state, zip);
+                            }
+                            
+                            function updateACHMethod() {
+                                var modal = $("#ach-edit-modal");
+                                
+                                modal.modal("hide");
+                                loading_block.show();
+                                $(".instructions, .action-panels").hide();
+
+                                var id = modal.find(".hpm-container").attr("id");
+                                var aba = modal.find("#ach-edit-aba").val();
+                                var type = modal.find("#ach-edit-actype").val();
+                                var bank = modal.find("#ach-edit-bank").val();
+                                var holder = modal.find("#ach-edit-holder").val();
+                                var address1 = modal.find("#ach-edit-address1").val();
+                                var address2 = modal.find("#ach-edit-address2").val();
+
+                                updateACHPaymentMethod(id, aba, type, bank, holder, address1, address2);
+                            }                            
+                            
+                            function updateSuccess() {
+                                var modal = $("#edit-modal");
+                                var id = modal.find(".hpm-container").attr("id");
+
+                                var checkbox = modal.find(".input-group input[type=checkbox]");
+                                
+                                if (checkbox.prop("original") != checkbox.prop("checked")) {
+                                    if (checkbox.prop("checked"))
+                                        setDefaultPaymentMethod(id);
+                                    else
+                                        removeDefaultPaymentMethod(id);
+                                }
+                                else
+                                    reloadPaymentMethods();
+                            }
+
+                            function updateFail(errorMessage) {
+                                loading_block.hide();
+                                $(".instructions, .action-panels").show();
+
+                                var modal = $("#edit-modal");
+                                
+                                modal.modal("show");
+                                
+                                modal.find(".alert")
+                                    .html(errorMessage)
+                                    .show();
+                            }
+                            
+                            function updateACHSuccess() {
+                                var modal = $("#ach-edit-modal");
+                                var id = modal.find(".hpm-container").attr("id");
+
+                                var checkbox = modal.find(".input-group input[type=checkbox]");
+                                
+                                if (checkbox.prop("original") != checkbox.prop("checked")) {
+                                    if (checkbox.prop("checked"))
+                                        setDefaultPaymentMethod(id);
+                                    else
+                                        removeDefaultPaymentMethod(id);
+                                }
+                                else
+                                    reloadPaymentMethods();
+                            }
+
+                            function updateACHFail(errorMessage) {
+                                loading_block.hide();
+                                $(".instructions, .action-panels").show();
+
+                                var modal = $("#ach-edit-modal");
+                                
+                                modal.modal("show");
+                                
+                                modal.find(".alert")
+                                    .html(errorMessage)
+                                    .show();
+                            }                                                        
+                        </script>
+                    </div>
+                </apex:outputPanel>
+        
+                <script>
+                    markUserId("{!displayName}");
+                    markOptionPanel("subscription");
+                </script>
+            </apex:form>
+        </apex:define>
+
+    </apex:composition> 
+</apex:page>

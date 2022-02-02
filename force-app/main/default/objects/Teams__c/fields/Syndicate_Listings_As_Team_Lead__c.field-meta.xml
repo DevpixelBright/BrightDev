@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Syndicate_Listings_As_Team_Lead__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Dynamo DB will pass true or false to the field in the payload</description>
+    <externalId>false</externalId>
+    <label>Syndicate Listings As Team Lead</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,9 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="currentYear" type="string" />
+    
+   <!-- <div class="contact-support"><span>Didn't find what you were looking for?</span><a href="https://dev-dev-dev.cs10.force.com/customers/apex/Communities_Cases_Create?kb=true">Contact Support</a></div>-->
+    <div class="contact-support"><span>Didn't find what you were looking for?</span><a href="{!$Label.c.LearnBrightMLSCustomerURL}">Contact Support</a></div>
+
+    <div class="copyright-notice" style="font-size:100%">Copyright © {!v.currentYear} Bright MLS, Inc.</div>
+</aura:component>

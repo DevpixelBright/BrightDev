@@ -1,0 +1,9 @@
+<apex:page lightningstylesheets="true">
+  <apex:pageBlock id="sfqp" title="SFQP">
+    <apex:pageBlockSection >
+    
+    </apex:pageBlockSection>
+  </apex:pageBlock>
+
+
+</apex:page>

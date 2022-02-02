@@ -1,0 +1,22 @@
+<apex:page showHeader="false" standardStylesheets="false" cache="false">
+    <apex:includeLightning />
+    <apex:slds />
+    <div id="dataTable" />
+    <script>
+    try {
+        $Lightning.use("c:EZJoin_NewApplicationTypeApp", function() {
+            $Lightning.createComponent("c:EZJoin_NewApplicationType", {}, "dataTable", function(cmp) {
+                console.log('done');
+                var headerHeight = document.getElementById('header-container').offsetHeight;
+                var footerHeight = document.getElementById('footer-container').offsetHeight;
+                var windowHeight = window.innerHeight;
+                document.getElementById('content-container').style.minHeight  = (windowHeight - headerHeight - footerHeight - 2) + 'px';                 
+            });
+        }); 
+    }
+    catch(err) {
+        if(err.message == '$Lightning is not defined')
+        	window.location = '';
+    }
+    </script>
+</apex:page>

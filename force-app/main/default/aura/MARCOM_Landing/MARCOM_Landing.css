@@ -1,0 +1,203 @@
+@font-face {
+    font-family: 'LatoBold';
+    src: url(/resource/LatoBold);
+}
+@font-face {
+    font-family: 'LatoRegular';
+    src: url(/resource/LatoRegular);
+}
+.THIS.slds-scope{}
+.THIS .fullpage {   margin:0;  padding:0;}
+.THIS .slds-box_x-small{ padding:0; border:none;}
+.THIS.step1{ background:#fff;}
+.THIS.step2{ background:#f2f3f7;}
+/*header css start*/
+.THIS .header-part{ display: inline-block; padding:0;line-height: 40px; vertical-align: top;}
+.THIS .header-part .logo img{ width:140px;}
+.THIS .new-container { margin: 0 auto; border: none; width: -webkit-fill-available; width:100%;}
+.THIS .new-containerpage { margin: 0 auto;border-bottom:1px solid #ccc;  width:100%;width: -webkit-fill-available;}
+.THIS .header-full{ padding:14px 40px;}
+.THIS .header-part .bar h2{ color: #00b0b9;font-size: 20px;font-family:LatoBold;} 
+.THIS .header-part .bar1 h2{ color: #282828;} 
+.THIS .bar-title-box{display: inline-block;}
+.THIS .bar-title{ display:block;line-height: normal;}
+.THIS .bar-title h5{ display:inline-block; color:#333; font-family:LatoRegular; font-size:13px;}
+.THIS .bar-title h6{color:#333; font-family:LatoRegular; font-size:13px; text-align: right;}
+.THIS .call{ margin:0; padding:0;text-align: right;line-height: normal;}
+.THIS .call h4{ color:#333; font-family:LatoRegular; font-size:13px; margin:12px 54px 5px 0;}
+.THIS .call h3{ color:#282828; font-family:LatoRegular; font-size:18px;}
+.THIS .middleone{vertical-align: top;text-align: left;  margin: 8px 0 0 0;}
+/*header css end*/
+/*footer css start*/
+.THIS .footer-full{ padding:0 0 26px 0; margin:0;}
+.THIS .footerbottom{width: 100%;}
+.THIS .footer-part{ margin:0; padding:0; display:inline-block;}
+.THIS .footer-part p{color:#999a9c; margin:0 ;font-size:14px; font-family:LatoRegular;  display:inline-block; }
+.THIS .footer-part p a{color:#a8b3c6; margin:0 40px 0 0 ;font-size:14px; font-family:LatoRegular;  display:inline-block; }
+.THIS .footer-part p.copy{   text-align: center;    display: block;}
+
+/*footer css end*/
+/*content css start*/
+.THIS .slds-button_icon-bare svg{ margin-top:-5px;    width: 12px;}
+.THIS .cal svg{ margin-right:-28px;} 
+.THIS .slds-datepicker__filter_month .slds-align-middle .slds-button_icon-container svg{    margin: 0; text-align:center !important;}
+.THIS .slds-datepicker__filter_month .slds-align-middle .slds-button_icon-container svg:focus{outline:none}
+.THIS .slds-button:focus {outline: 0;box-shadow: none;}
+.THIS .slds-shrink-none .slds-form-element__control .slds-select_container:before{ margin-right:-6px;}
+.THIS .slds-shrink-none .slds-form-element__control .slds-select_container:after{ margin-right:-6px;}
+.THIS .h-logo{ line-height:normal;}
+.THIS .newapplication{ margin:20px 0; padding:0;}
+.THIS .newapplication h2{ margin:0 0 20px; padding:0; color:#000;font-family: 'LatoBold'; font-size:20px; text-align:left;}
+.THIS .newapplication .Edit{ display:inline-block; margin:0;padding:0;}
+.THIS .newapplication .Edit1{ text-align:right;}
+.THIS .newapplication .Edit h2{ margin:0 0 20px; padding:0; color:#ff8100;font-family: 'LatoBold'; font-size:18px; text-align:left;}
+.THIS .newapplication .Edit .slds-button_brand{  border-radius:0px; height:auto; margin:0 0 26px 0 ;    min-width: auto; color:#fff;border:1px solid #ff8100; font-size:14px; padding:5px 30px; background:#ff8100; font-family:LatoRegular;}
+.THIS .newapplication .Edit .slds-button_brand:hover{border:1px solid #ff8100;color:#ff8100;background:#fff;}
+.THIS .newapplication .Edit .slds-button_brand:active{border:1px solid #ff8100;color:#ff8100;background:#fff;}
+.THIS .newapplication .Edit .slds-button_brand:focus{border:1px solid #ff8100;color:#ff8100;background:#fff;outline: 0; box-shadow: none;}
+.THIS .newapplication1{ margin:0; padding:0; display:inline-block; vertical-align: top;}
+.THIS .newapplication1 h3{ margin:0 0 10px; padding:0; color:#d33e00;font-family: 'LatoBold';font-size:14px;text-align:left; }
+.THIS .newapplication3 h3{ margin:0 0 0; padding:0; color:#666; font-family: 'LatoRegular';font-size:14px;text-align:left; }
+.THIS .newapplication3 h4{ margin:0 0 0; padding:0; color:#000; font-family: 'LatoRegular';font-size:14px;text-align:left; }
+.THIS .newapplication2{ display:inline-block; margin:30px auto 0;text-align: center; }
+.THIS .newapplication3{ display:inline-block; margin:0 0 0px;}
+.THIS .newapplication4{ display:inline-block; margin:0 0 5px;padding: 0 20px 0 0;}
+.THIS .newlogo{ display:inline-block;   padding: 0 0 0 10px;vertical-align: top;}
+.THIS .slds-icon-text-default {width:10px; margin:0 0 0 10px;}
+.THIS .newlogo h4 .slds-input {
+    height: inherit;
+    margin: 12px 0 0 0;
+    border: 1px solid #dcdadb;
+    padding: 2px 10px;
+    color: #9a9997;
+    background: #fff;
+    font-family: 'LatoRegular';
+    font-size: 13px;
+    border-radius: 5px
+}
+.THIS .slds-select_container:after{ bottom: calc((1.75rem / 2) - 0px);}
+.THIS .slds-select_container:before{top:calc((1.75rem / 2) - 0px)}
+.THIS .slds-form-element{padding: 0 0px 0;}
+.THIS .partbypart h4{    color: #282828;
+    font-family: 'LatoBold';
+    margin: 0px 0 0 0;
+    text-align: center;
+}
+.THIS .newapplication41{ padding:0;}
+.THIS .newapplication41 h4 .slds-input{ padding:0 10px 0 0;}
+.THIS .agentname1{ text-align:right;}
+.THIS .newapplication3 h4 label{ display:none;}
+.THIS .newapplication3 h4 .slds-input:focus {border: 1px solid #ccc;
+    outline: none;
+    box-shadow: none;}
+.THIS .agentname{ display:inline-block;}
+.THIS .agentname h4 .slds-input {
+    height: inherit;margin:0;
+    border: 1px solid #ccc;
+    padding: 2px 4px;
+    color: #000;
+    background: #fff;
+    border-radius: 0;
+    font-size: 14px;
+    font-family: 'LatoRegular';font-size:14px;
+}
+.THIS .slds-truncate img.sort{ width:12px; margin:0 0 0 5px}
+.THIS .agentname1{ text-align:right;}
+.THIS .agentname img{ margin:0 0 0 5px; height:35px; text-align:left;}
+.THIS .newapplication3 h4 .slds-input {
+    height: inherit;margin:0;
+    border: 1px solid #ccc;
+    padding: 2px 4px;
+    color: #000;
+    background: #fff;
+    border-radius: 0;
+    font-size: 14px;
+    font-family: 'LatoRegular';font-size:14px;
+}
+.THIS .slds-select_container .slds-select {
+    margin: 0;
+    border: 1px solid #dcdadb;
+    padding: 2px 10px;
+    color: #9a9997;
+    background: #fff;
+    font-family: 'LatoRegular';
+    font-size: 13px;
+    border-radius: 5px;
+    line-height:16px;
+}
+.THIS .slds-select_container .slds-select option { color: #9a9997;}
+.THIS .slds-input {
+    margin: 0;
+    border: 1px solid #dcdadb;
+    padding: 2px 10px;
+    color: #9a9997;
+    background: #fff;
+    font-family: 'LatoRegular';
+    font-size: 13px;
+    border-radius: 5px;
+    line-height:16px;
+}
+
+.THIS .timepoint{    background: #fff;
+    padding: 20px 40px;
+    border-radius: 10px;
+    margin: 40px auto;}
+.THIS .timepoint .spaceline2 {
+    margin: 26px 0;
+    border-bottom: 1px solid #ccc;
+}
+.THIS .newlogo label{display:none;}
+.THIS .gridcell{border-top: none; }
+.THIS .slds-table_fixed-layout{  border-top: none;border-bottom: none;}
+.THIS .timepoint .slds-button_brand .ezjoinarrow{position: absolute;
+    right: 14px;}
+.THIS .timepoint .slds-button_brand{  border-radius:5px; height:50px; margin:0 0 26px 0 ;    min-width: 150px; color:#fff;border:1px solid #d64300; font-size:14px; padding:7px 10px; background:#d64300; font-family:LatoRegular;}
+.THIS .timepoint .slds-button_brand:hover{border:1px solid #d64300;color:#d64300;background:#fff;}
+.THIS .timepoint .slds-button_brand:active{border:1px solid #d64300;color:#d64300;background:#fff;}
+.THIS .timepoint .slds-button_brand:focus{border:1px solid #d64300;color:#d64300;background:#fff;outline: 0; box-shadow: none;}
+.THIS .slds-truncate a{color:#ff8100; vertical-align: top;text-decoration: none;}
+.THIS .slds-truncate a:hover{text-decoration: underline;}
+.THIS .slds-truncate a.namestatus:hover{text-decoration: none;}
+.THIS .slds-truncate a.namestatus:focus{text-decoration: none;outline:none;}
+.THIS .slds-truncate a.namestatus:active{text-decoration: none;outline:none;}
+
+.THIS .slds-truncate a:focus{outline:none; }
+.THIS .slds-truncate{color:#242b3b;    white-space: break-spaces; }
+.THIS .slds-table_bordered tbody td{ vertical-align: top;}
+.THIS .slds-table_bordered tbody th{ vertical-align: top;}
+.THIS .slds-table thead th:focus{outline:none; box-shadow: none;}
+.THIS .slds-table thead th a:focus{outline:none; box-shadow: none;}
+.THIS .slds-th__action:focus:hover{outline:none; box-shadow: none;}
+.THIS .slds-grid_vertical-align-center img{ width:10px; margin:0 0px 0 10px;}
+.THIS .pagination {
+  display: inline-block;
+}
+.THIS .slds-is-resizable th:focus{outline:none; box-shadow: none;}
+.THIS .slds-is-resizable th a:focus{outline:none;box-shadow: none;}
+.THIS .pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+        font-size: 10px;
+}
+
+.THIS .pagination a.active {
+  background-color: #ff8100;
+  color: white;
+  border: 1px solid #ff8100;
+}
+
+.THIS .pagination a:hover:not(.active) {background-color: #ddd;}
+
+.THIS .pagination a:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.THIS .pagination a:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+/*footer css end*/

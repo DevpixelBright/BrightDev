@@ -1,0 +1,47 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId,lightning:isUrlAddressable" 
+                access="global">
+    
+    <aura:html tag="style">
+        .cuf-content {
+        padding: 0 0rem !important;
+        }
+        .slds-p-around--medium {
+        padding: 0rem !important;
+        }       
+        .slds-modal__content{
+        overflow-y:hidden !important;
+        height:unset !important;
+        max-height:unset !important;
+        }
+        
+    </aura:html>
+    
+    <div class="modal-header slds-modal__header slds-size_1-of-1">
+        <lightning:layoutItem  >
+            <div class="custom-box logo">
+                <img class="web left" src="{!$Resource.brightas + '/brightas/images/bright-main-logo.svg'}" alt="" />
+                <img class="mobile left" src="{!$Resource.brightas + '/brightas/images/mobile-bright-logo.svg'}" alt="" />
+                
+            </div>
+        </lightning:layoutItem>
+    </div>
+    
+    
+    <div class="slds-modal__content slds-p-around--x-small slds-align_absolute-center slds-size_1-of-1 slds-is-relative" aura:id="modalbody" id="modalbody">
+        <form class="slds-form--stacked">
+            
+        </form> 
+        
+    </div>    
+    
+    <div class="modal-footer slds-modal__footer slds-size_1-of-1">
+        <div class="forceChangeRecordTypeFooter">
+            <div class="page-section page-footer">
+                <span class="left"><a>Contact Us</a>&nbsp;&nbsp;&nbsp;
+                    <a>Support</a></span>
+                <span class="right"> &copy; 2021 Bright MLS, Inc. All Rights Reserved.</span></div> 
+        </div>
+    </div>
+    
+    
+</aura:component>

@@ -1,0 +1,609 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+    
+    <aura:attribute name="popup1" type="boolean" default="false"/>
+    
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <div class="fullpage slds-scope">
+      <div class="slds-grid slds-wrap">
+         <div class="new-containerpage">
+            <div class="slds-container--x-large new-container">
+               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12  header-full">
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 header-part">
+                     <div class="logo"> 
+                         <img src="{!$Resource.bright + '/bright-3.0/images/brightlogolightning.png'}" alt="Bright" />
+                     </div>
+                  </div>
+                   <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 header-part">
+                     <div class="account">
+                      <h3>Accounts &amp; Settings</h3>
+                     </div>
+                  </div>
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 header-part header-part1">
+                      <div class="all">
+                          <h5>AL</h5>
+                          </div>
+                      <div class="call">
+                         
+                        <h4>Amanda Lynn </h4>
+                        <h3>Subscriber ID: 8987987 &nbsp;<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" />  | <a href="#">Active</a></h3>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="slds-container--x-large new-container">
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 sidebar">
+                <ul class="menuside">
+                    <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/AccountsHome-black.svg'}" alt="Accounts Home" />Accounts Home</a></li>
+                    <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                    <li onclick="{!c.treeMenu}"><a><img src="{!$Resource.bright + '/bright-3.0/images/Brokerage.svg'}" alt="Brokerage" />Brokerage<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                      <ul class="submenu submenu1">
+                         <li><a  class="active" href="#">Office Roster</a></li>
+                        <li><a href="#">Office Statement </a></li>
+                        <li><a href="#">W-9 Forms </a></li>
+                        <li><a href="#">Office Information </a></li>
+                        <li><a href="#">Responsible Broker </a></li>
+                         <li><a href="#">Authorized Signers</a></li>
+                        <li><a href="#">Office Managers</a></li>
+                        <li><a href="#">Accuracy Notifications</a></li>
+                        <li><a href="#">Data Licensing</a></li>
+                        </ul>
+                    
+                    </li>
+                    <li onclick="{!c.treeMenu1}"><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Subscription.svg'}" alt="Subscription" />Subscription<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                     <ul class="submenu submenu2">
+                         <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                        </ul>
+                    </li>
+                    <li onclick="{!c.treeMenu2}"><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Requests.svg'}" alt="Requests" />Requests<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                    <ul class="submenu submenu3">
+                         <li><a href="#">Office Roster</a></li>
+                        <li><a href="#">Office Statement </a></li>
+                        <li><a href="#">W-9 Forms </a></li>
+                        <li><a href="#">Office Information </a></li>
+                        <li><a href="#">Responsible Broker </a></li>
+                         <li><a href="#">Authorized Signers</a></li>
+                        <li><a href="#">Office Managers</a></li>
+                        <li><a href="#">Accuracy Notifications</a></li>
+                        <li><a href="#">Data Licensing</a></li>
+                        </ul>
+                    </li>
+                    <li onclick="{!c.treeMenu3}"><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Finance.svg'}" alt="Finance" />Finance<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                    <ul class="submenu submenu4">
+                         <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Notification-Preferences.svg'}" alt="Notification" />Notification Preferences</a></li>
+                    <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Settings-Permissions.svg'}" alt="Settings" />Settings &amp; Permissions</a></li>
+                     <li class="logout"><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Logout.svg'}" alt="Logout" />Logout</a></li>
+                </ul>
+                
+                </div>
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_9-of-12 slds-large-size_9-of-12 middlebar">
+                 
+                   <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 middlebar1">
+                   <h2><b>New Applications</b></h2> 
+                   
+                   </div>    
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bottombar bottombar1">
+                     <div class="dev dev1">
+             <div class="bodybottom">
+          
+                
+                
+                <div class="slds-container--x-large new-container">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 footer-full">
+                              <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 layer part1"> 
+                           
+                            
+                                   <h5 class="search">
+                                  <lightning:input type="text" name="input3" placeholder="Type your search terms here"  variant = "label-hidden" />
+                                   </h5>
+                             </div>
+                                                 
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 layer part3"> 
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_5-of-12 slds-large-size_5-of-12 layer part1"> 
+                                   <h5>  <lightning:select name="select1" label="" required="false" variant = "label-hidden">
+        <option value="">choose one...</option>
+        <option value="1">one</option>
+        <option value="2">two</option>
+        <option value="3">three</option>
+    </lightning:select>
+                                    
+                                    
+                                    </h5>
+                                    </div>
+                                                      <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_7-of-12 slds-large-size_7-of-12 layer part3"> 
+                                   <h5>  <lightning:select name="select1" label="" required="false" variant = "label-hidden">
+        <option value="">choose one...</option>
+        <option value="1">one</option>
+        <option value="2">two</option>
+        <option value="3">three</option>
+    </lightning:select>
+                                    
+                                    
+                                    </h5>
+                                    </div>
+                             </div>
+                  
+                        </div>
+
+       
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped new newapp">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            
+                                            
+                              
+                                            
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Opportunity Name">Application ID     </div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Office ID</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Type</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Close Date">Subscription Type</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Stage">License</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Confidence">Application Type</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Amount">Status</div>
+                                            </th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="slds-hint-parent blue">
+                                            <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#"  onclick="{! c.openModel }">005021</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TSTOFF </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Agent</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Realtor/Non Shareholder</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">44444</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">New Agent</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Expired</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                          <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#">005021</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TSTOFF </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Agent</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Realtor/Non Shareholder</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">44444</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">New Agent</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Expired</div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                            <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#">005021</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TSTOFF </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Agent</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Realtor/Non Shareholder</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">44444</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">New Agent</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Expired</div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                          <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#">005021</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TSTOFF </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Agent</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Realtor/Non Shareholder</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">44444</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">New Agent</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Expired</div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                            <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#">005021</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TSTOFF </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Agent</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Realtor/Non Shareholder</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">44444</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">New Agent</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Expired</div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                          <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#">005021</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TSTOFF </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Agent</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Realtor/Non Shareholder</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">44444</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">New Agent</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Expired</div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                            <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#">005021</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TSTOFF </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Agent</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Realtor/Non Shareholder</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">44444</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">New Agent</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Expired</div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                          <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#">005021</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TSTOFF </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Agent</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Realtor/Non Shareholder</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">44444</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">New Agent</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Expired</div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                            <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#">005021</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TSTOFF </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Agent</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Realtor/Non Shareholder</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">44444</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">New Agent</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Expired</div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                          <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#">005021</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TSTOFF </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Agent</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Realtor/Non Shareholder</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">44444</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">New Agent</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Expired</div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                            <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#">005021</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TSTOFF </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Agent</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Realtor/Non Shareholder</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">44444</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">New Agent</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Expired</div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                          <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#">005021</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TSTOFF </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Agent</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Realtor/Non Shareholder</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">44444</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">New Agent</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Expired</div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                            <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#">005021</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TSTOFF </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Agent</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Realtor/Non Shareholder</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">44444</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">New Agent</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">Expired</div>
+                                            </td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 layer part1"> 
+                           
+                            
+                                   <h5 class="search1">
+                                  Showing 1 to 10 of 34 entries
+                                   </h5>
+                             </div>
+                                                 
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 layer part3"> 
+                             
+                                   <h5 class="onechoose1">           
+                                    <div class="pagination">
+  <a href="#">Previous</a>
+  <a href="#" class="active">1</a>
+  <a href="#" >2</a>
+  
+  <a href="#">Next</a>
+</div>
+                                    </h5>
+                             </div>
+                  
+                        </div>
+                        
+                    </div>
+                </div></div>
+                  </div>
+                  
+               </div>
+            </div>
+                
+            </div>
+         </div>
+      
+      </div>
+       
+       <!-- PopUp 1 start -->
+       <aura:if isTrue="{!v.popup1}">
+           <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- ###### MODAL BOX HEADER Start ######-->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModel }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate email">Application Details </h2>
+                    </header>
+                    <!--###### MODAL BOX BODY Part Start######-->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                       <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodyline">
+                      
+                        <h2>Mr. TSTOFF</h2>
+             
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_8-of-12 slds-medium-size_8-of-12 slds-large-size_12-of-12 bodyline2">
+                     <div class="review ">
+                        
+                           <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1 partc"> 
+                               <h4>Application Type</h4>
+                                   <h5>New Agent</h5>
+                             </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part2 partc"> 
+                               <h4>Status</h4>
+                                   <h5>Expired</h5>
+                             </div>
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part3 partc"> 
+                               <h4>Phone</h4>
+                                   <h5>123456901</h5>
+                             </div>
+                  
+                        </div>
+                              <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1 partc"> 
+                               <h4>Email</h4>
+                                   <h5>newagent@email.com</h5>
+                             </div>
+                    
+                             
+                  
+                        </div> 
+                         <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1 partc"> 
+                               <h4>License Number</h4>
+                                   <h5>newagent@email.com</h5>
+                             </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part2 partc"> 
+                               <h4>License Type</h4>
+                                   <h5>Associate Broker</h5>
+                             </div>
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part3 partc"> 
+                               <h4>License State</h4>
+                                   <h5>MD</h5>
+                             </div>
+                  
+                        </div>
+                          <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 layer part1 partc"> 
+                               <h4>License Expiration</h4>
+                                   <h5>Thu Jan 20 00:00:00 GMT 2022</h5>
+                             </div>
+                    
+                             
+                  
+                        </div>
+                         <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1 partc"> 
+                               <h4>NRDS ID</h4>
+                                   <h5>-</h5>
+                             </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part2 partc"> 
+                               <h4>Primary Association</h4>
+                                   <h5>-</h5>
+                             </div>
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part3 partc"> 
+                               <h4>TSTOFF</h4>
+                                   <h5>Rockville MD, 20850</h5>
+                             </div>
+                  
+                        </div>
+                            </div>       
+                                   
+          
+                        </div>
+                  
+           
+                        
+                        
+                    </div>
+                    </div>
+                    <!--###### MODAL BOX FOOTER Part Start ######-->
+                    
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+       </aura:if>
+       <!-- PopUp 1 end -->
+       
+   </div>
+</aura:component>

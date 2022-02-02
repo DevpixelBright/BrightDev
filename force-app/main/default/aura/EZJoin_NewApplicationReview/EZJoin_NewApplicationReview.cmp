@@ -1,0 +1,13 @@
+<aura:component >
+    <!-- Aura Attributes -->
+    <aura:attribute name="appConfig" type="List" default="[]" />
+    <aura:attribute name="appData" type="Object" />
+    <aura:attribute name="currentConfig" type="Object" />
+    
+    This is the review component<br/>
+    Broker Code: {!v.appData.Broker_Code__c}<br/>
+    NRDS ID: {!v.appData.nrdsId__c}<br/>
+    First Name: {!v.appData.FirstName}<br/>
+    Last Name: {!v.appData.LastName}<br/>
+    <lightning:button variant="brand" label="Submit Application" />
+</aura:component>

@@ -1,0 +1,19 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false" lightningstylesheets="true">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){   
+      $.ajax('https://firestore.googleapis.com/v1beta1/projects/first-project-7dd75/databases/(default)/documents/Categories/EGmCVss2fPf7enR1RE7l',
+        {          
+          success: function(response) {
+              document.write(response);
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+
+          }
+        }
+      );            
+});
+</script>
+
+</apex:page>

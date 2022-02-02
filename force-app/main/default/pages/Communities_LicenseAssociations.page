@@ -1,0 +1,850 @@
+<apex:page controller="Communities_LicenseAssociations" docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" lightningstylesheets="true">
+    <apex:composition template="Communities_Base">
+        <apex:define name="content">
+            <apex:form styleClass="form-horizontal" id="theform">
+                <c:Bootstrap_Resources />   
+                <script>
+                markUserId("{!displayName}");
+                markOptionPanel("Subscription");
+                </script>
+                
+                <link href="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/css/font-awesome.min.css')}" rel="stylesheet" type="text/css" />
+                <apex:pageBlock title="Subscription Id - {!subscription.Name}" id="details" >
+                    <style>
+                        .two_buttons{text-align:right; margin-bottom:-44px; margin-top:40px;}
+                        h2{font-size:22px !important; margin:5px 0px !important;}
+                        .tertiaryPalette{display:none !important;}
+                        .for_inputs h4{border-bottom: 1px solid #69A61F; padding-bottom: 10px;}
+                        h2{display:none;}
+                        label{padding-top:7px !important;}
+                        .margin{margin:20px 0 10px 0;}
+                        #content-container{margin-top:0px !important;}
+                        @media(min-width:400px){
+                        .detailList th{width:30% !important;}
+                        .mandatory{color:red; font-weight:bold; font-size:18px;}
+                        }
+                        .fa-2x {
+                        font-size: 2em;
+                        }
+                        .fa {
+                        display: inline-block;
+                        font-family: FontAwesome;
+                        font-style: normal;
+                        font-weight: normal;
+                        line-height: 1;
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        }
+                        
+                        h4 i.fa {
+                        top:0px;
+                        }
+                        .soa { margin-bottom: 50px;}
+                        .soa .list {}
+                        
+                        .soa .list .emphasised {
+                        font-weight: bold;
+                        }
+                        
+                        .soa .list .row {
+                        border-radius: 4px;
+                        display: table;
+                        width: 100%;
+                        margin-left: 0px;
+                        margin-right: 0px;
+                        }
+                        
+                        .soa .list .row:nth-child(even) {
+                        background-color: #eee;
+                        }
+                        
+                        .soa .list .row + .row {
+                        border-top: 1px solid #eee;
+                        }
+                        
+                        .soa .list .row > div {
+                        /*width:260px;*/
+                        text-align: left;
+                        display: table-cell;
+                        float: left;
+                        vertical-align: middle;
+                        padding: 10px 15px;
+                        word-break: break-all;
+                        }
+                        
+                        .soa .list .row > div + div {
+                        border-left: 1px solid #fff;
+                        }
+                        .edit {width: 60px !important; float:right !important;}
+                        .edit a {margin: 0 auto;
+                        text-align: center;
+                        display: block;}
+                        .add {margin-top:-65px;  display:inline; float:right; padding:3px; padding-top:0px; padding-bottom:0px; }
+                        .add a {color:#ccc;}
+                        .add a:hover {color:#69a61f;}
+                        select[multiple] {height: 200px !important;width:200px !important;} 
+                        input[type=checkbox] { margin-top: 8px !important; }                        
+                        .multiSelectPicklistCell { padding:5px; } 
+                        .form-horizontal .form-group { margin:0px; }
+                        .modal-row {border:1px solid #ddd; border-bottom:none; margin: 0 0 0 0; padding:15px;}
+                        .modal-last-row {border:1px solid #ddd; margin: 0 0 0 0; padding:15px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;}
+                        .modal-first-row {border:1px solid #ddd; border-top-left-radius:5px; border-top-right-radius:5px; border-bottom:none; margin: 0 0 0 0; padding:15px;}                                                                  
+                        .errorMsg {display:none;}
+                        .required{color:red;}
+                        .mls-panel {padding-left:25px;}
+                        .mls-panel select {width:50%;}
+                        .mls-panel select[multiple] {width:auto !important;}
+                        .mls-panel input[type=submit] {display:none;}
+                        #savebuttonMLS {opacity:1 !important;}
+                        .designation-panel input[type=submit] {display:none;}
+                        .alert-panel { display:none; }
+                        .fa-trash-o:before {content: "\f014";}
+                        #delete-License-modal{top:30%;}
+                        #delete-License-modal .modal-footer .btn+.btn{min-width:84px;}
+                        #delete-License-modal .btn-default{min-width:84px;}
+                        #delete-License-modal .modal-body{padding:30px 20px;}
+                        #msg-License-modal{top:30%;}
+                        #msg-License-modal .modal-footer .btn+.btn{min-width:84px;}
+                        #msg-License-modal .btn-default{min-width:84px;}
+                        #msg-License-modal .modal-body{padding:30px 20px;}
+                        .btnaction {min-width:80px;}
+                        .modal-backdrop {fade out;}
+                        .newvalue span{padding-top: 7px; display: block;}
+                        
+                        .Invalid input,
+                        .Invalid textarea,
+                        .Invalid select {
+                        border-color: red;
+                        }
+                        .Invalid .control-label {
+                        color: red;
+                        }
+                        .alert h4 {
+                        margin-top: 0;
+                        color: inherit;
+                        display: none;
+                        }
+                        
+                        .tooltip1 {
+            display: inline-block !important;
+    position: relative;
+    border-bottom: 1px dotted #666;
+    text-align: left;
+    padding: 5px 0 10px 5px!important;
+    border: 0 !important;
+    margin: 0 0 0 0 !important;
+    vertical-align: top;
+    cursor: pointer !important;
+}
+.action-panels > div {
+    margin-bottom: 10px !important;
+                        }
+.tooltip1 h3 {margin:2px 0; font-size:13px;    font-style: italic;font-weight:normal; line-height:20px;}
+
+.tooltip1 .top {
+    min-width:300px;
+    max-width:300px;
+    top: -4px;
+    left: 63%;
+    transform:translate(-30%,-100%);
+    padding:10px 20px;
+    color:#444;
+    background-color:#eee;
+    font-weight:normal;
+    font-size:14px;
+    border-radius:8px;
+    position:absolute;
+    z-index:99999999;
+    box-sizing:border-box;
+    box-shadow:0 1px 8px rgb(0 0 0 / 50%);
+    display:none;
+                        
+}
+
+.tooltip1:hover .top {
+    display:block;
+}
+
+.tooltip1 .top i {
+    position:absolute;
+    top:100%;
+    left:30%;
+    margin-left:-15px;
+    width:30px;
+    height:15px;
+    overflow:hidden;
+                     
+}
+
+.tooltip1 .top i::after {
+    content:'';
+    position:absolute;
+    width:15px;
+    height:15px;
+    left:50%;
+    transform:translate(-50%,-50%) rotate(45deg);
+    background-color:#EEEEEE;
+    box-shadow:0 1px 8px rgb(0 0 0 / 50%);
+}
+#state_options{    
+}
+                        
+                    </style>  
+                    
+                    <script>
+                    function refreshPage(){
+                        window.location.top.reload();
+                        alert('Setting Saved');
+                    }
+                    $(document).ready(function() {
+                        var currentUrl = window.location.href;
+                        if(!(currentUrl.indexOf('sid') > 0))
+                            window.history.pushState({}, null, window.location.href + '?sid={!subscriptionId}');
+                        //window.location.href = window.location.href + '&prama=test';
+                        $(".errorM3").addClass("alert alert-danger");
+                        $(".infoM3").addClass("alert alert-info");
+                        $(".confirmM3").addClass("alert alert-success");
+                        
+                        reloadAdditionalMLS($('[id$=PrimaryMLS]').val());
+                        
+                        $('[id$=LicenseButton]').click(function() {
+                            var errorMsg = '';
+                            
+                            var licenseNumber = $('[id$=LicenseNumber]').val();
+                            if(licenseNumber == '')
+                                $('[id$=LicenseNumber]').closest(".form-group").addClass('Invalid');
+                            else
+                                $('[id$=LicenseNumber]').closest(".form-group").removeClass('Invalid');
+                            if($('[id$=LicenseState]').val() == '')
+                                $('[id$=LicenseState]').closest(".form-group").addClass('Invalid');
+                            else
+                                $('[id$=LicenseState]').closest(".form-group").removeClass('Invalid');
+                            if($('[id$=LicenseType]').val() == '' )
+                                $('[id$=LicenseType]').closest(".form-group").addClass('Invalid');
+                            else
+                                $('[id$=LicenseType]').closest(".form-group").removeClass('Invalid');
+                            if($('[id$=LicenseExpiration]').val() == '')
+                                $('[id$=LicenseExpiration]').closest(".form-group").addClass('Invalid'); 
+                            else
+                                $('[id$=LicenseExpiration]').closest(".form-group").removeClass('Invalid');
+                            if(licenseNumber == '' || $('[id$=LicenseState]').val() == '' || $('[id$=LicenseType]').val() == '' || $('[id$=LicenseExpiration]').val() == '')
+                                errorMsg += ' Error:  The required information below must be completed. ';
+                            
+                            if(licenseNumber && licenseNumber != '' && (licenseNumber.length < 5 || licenseNumber.length > 14))
+                                errorMsg += ' <li>Invalid Data: License number must contain 5 to 14 characters </li>'; 
+                            
+                            //var regx = /^[A-Za-z0-9]+$/;
+                            var regx = /^[A-Za-z0-9-]+$/;
+                            if (licenseNumber && licenseNumber != '' && !regx.test(licenseNumber) ) 
+                                errorMsg += ' <li>Invalid Data: License number must be alpha-numeric </li>';                                                                          
+                            
+                            var dateParts = $('[id$=LicenseExpiration]').val().split('/');
+                            var expirationDate = new Date(parseInt(dateParts[2]), parseInt(dateParts[0])-1, parseInt(dateParts[1]));
+                            if(expirationDate - new Date().getTime() <= 0) 
+                                errorMsg += ' <li>Invalid Data: License Expiration Date must be greater than today </li>';   
+                            
+                            if(errorMsg != '') {    
+                                var errorBlock = '<div class="message errorM3 alert alert-danger" role="alert"><ul>' + errorMsg + '</ul></div>';
+                                $('#licenseMessages').html(errorBlock);
+                                return false;
+                            }
+                            else {
+                                $('#licenseMessages').html('');
+                                return true;
+                            }                        
+                        });
+                        
+                        $("[id$=PrimaryMLS]").change(function(){
+                            $("[id$=MLSButton]").show();
+                        });
+                        
+                        $("[id$=AdditionalMLS_unselected]").change(function(){
+                            $("[id$=MLSButton]").show();
+                        });
+                        
+                        $("[id$=AdditionalMLS_selected]").change(function(){
+                            $("[id$=MLSButton]").show();
+                        });
+                        
+                        $("[id$=PersonalDesignations_unselected]").change(function(){
+                            $("[id$=DesignationButton]").show();
+                        });
+                        
+                        $("[id$=PersonalDesignations_selected]").change(function(){
+                            $("[id$=DesignationButton]").show();
+                        });
+                        
+                        $("[id$=MLSButton]").click(function() {
+                            var errorMsg = '';
+                            if($("[id$=PrimaryMLS]").val() == '')
+                                errorMsg = 'Please select Primary MLS';
+                            if(errorMsg != '') {
+                                $(".MLS_Alert").html("<h4>Error:</h4>" + errorMsg);
+                                $(".MLS_Alert").show();
+                                return false;
+                            }
+                            else
+                                $(".MLS_Alert").hide();    
+                        });
+                        
+                        $("[id$=DesignationButton]").click(function() {
+                            
+                            var selectedOpts = [];
+                            
+                            $("[id$=PersonalDesignations_selected] option").each(function() {
+                                selectedOpts.push(this.text);    
+                            }); 
+                            
+                            var errorMsg = '';
+                            if(selectedOpts.length > 5)
+                                errorMsg = 'Only 5 Professional Designations can be added';
+                            if(errorMsg != '') {
+                                $(".Designation_Alert").html("<h4>Error:</h4>" + errorMsg);
+                                $(".Designation_Alert").show();
+                                return false;
+                            }
+                            else
+                                $(".Designation_Alert").hide();                            
+                        });                                                                                                                                                                        
+                    });
+                    
+                    function additionalDetailsChange() {
+                        reloadAdditionalMLS($('[id$=PrimaryMLS]').val());
+                    }
+                    
+                    function reloadAdditionalMLS(primaryMLS) {
+                        if(primaryMLS != '') {
+                            $("[id$=AdditionalMLS_unselected]").html('');
+                            var selectedOpts = [];
+                            
+                            $("[id$=AdditionalMLS_selected] option").each(function() {
+                                selectedOpts.push(this.text);    
+                            });
+                            
+                            
+                            var optionsTxt = '<optgroup style="text-decoration:none;" label="Available">';
+                            var i = 0;
+                            $("[id$=PrimaryMLS] option").each(function() {
+                                if(this.value != primaryMLS && this.value != '' && selectedOpts.indexOf(this.value) < 0) {
+                                    optionsTxt += '<option value="' + i + '">' + this.value + '</option>';
+                                }
+                                if(this.value != '')
+                                    i++;
+                            });
+                            optionsTxt += '</optgroup>';
+                            
+                            $("[id$=AdditionalMLS_unselected]").html(optionsTxt);
+                            
+                            if(selectedOpts.length > 0) {
+                                $("[id$=AdditionalMLS_selected] option").each(function() { 
+                                    if(this.text == primaryMLS)
+                                        $(this).remove();
+                                });
+                            }
+                            
+                            $("[id$=AdditionalMLS_unselected]").removeAttr('disabled');
+                            $("[id$=AdditionalMLS_selected]").removeAttr('disabled');                                 
+                        }
+                        else {
+                            $("[id$=AdditionalMLS_unselected]").attr('disabled', 'disabled');
+                            $("[id$=AdditionalMLS_selected]").attr('disabled', 'disabled');
+                        }
+                    }
+                    
+                    
+                    </script>
+                    <apex:actionFunction name="deleteLicense" action="{!removeLicense}" reRender="theform">
+                        <apex:param value="" assignTo="{!licenseSelectedForDelete}" name="removeLicense"/>
+                    </apex:actionFunction>
+                    
+                    <apex:actionFunction name="editLicense" action="{!addLicense}" reRender="theform">
+                        <apex:param value="" name="newLicense" assignTo="{!licenseSelected}"/>
+                    </apex:actionFunction>                    
+                    
+                    <apex:outputPanel id="licenseEdit" rendered="{!isEditLicense}">
+                        <script>
+                        $(document).ready(function(){
+                            $('#License-modal').modal('show');
+                        });
+                        </script>
+                    </apex:outputPanel>
+                    
+                    <apex:outputPanel id="licenseDelete" rendered="{!isDeleteLicense}">
+                        <script>
+                        $(document).ready(function(){
+                            $('#delete-License-modal').modal('show');
+                        });
+                        </script>
+                    </apex:outputPanel>
+                    
+                    <apex:outputPanel id="successErrorMessage" rendered="{!(isSuccessMessage || isErrorMessage)}">
+                        <script>
+                        $(document).ready(function(){
+                            $('#delete-License-modal').modal('hide');
+                            $('#msg-License-modal').modal('show');
+                        });
+                        </script>
+                    </apex:outputPanel>
+                    
+                    <apex:outputPanel id="associationEdit" rendered="{!isEditAssociation}">
+                        <script>
+                        $(document).ready(function(){
+                            $('#Association-modal').modal('show');
+                        });
+                        </script>
+                    </apex:outputPanel>                    
+                    
+                    <div id="messages">
+                        <apex:pagemessages rendered="{!if(!isEditLicense, if(!isEditAssociation, true, false),false)}" showdetail="true"></apex:pagemessages>
+                        <!-- <apex:pageMessage rendered="{!if(!isEditLicense, if(!isEditAssociation, true, false),false)}" summary="This pageMessage will always display. Validation error 
+messages appear in the pageMessages component." title="My title" severity="CONFIRM" />-->
+                    </div>                    
+                    
+                    <div class="row" >
+                        <c:Communities_Definition pageTitle="Licenses" pageTitleClass="fa fa-id-card fa-2x" hasDefinitions="false">
+                            <p><b class="term">Term</b> Definition goes here.</p>
+                        </c:Communities_Definition>
+                        <!--
+<div class="add">
+<apex:commandLink action="{!addLicense}" title="Add new license">
+<i class="fa fa-plus fa-2x"></i>
+<apex:param value="" name="newLicense" assignTo="{!licenseSelected}"/>
+</apex:commandLink>                                                     
+</div>
+--> 
+                        <div class="col-xs-12 instructions">
+                            <p>Your license information currently displayed in the MLS is below. Only one license (Agent, Associate
+                                Broker or Broker) can be added per state. Office licenses cannot be added. To update your License 
+                                Expiration date before it expires, click the Pencil icon. Please note, you can only update the 
+                                Expiration date on your license currently displayed in the MLS. To remove a license that is no longer
+                                active, click the Trash Can icon.​</p>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    <!-- Licenses Block -->
+                    <apex:outputPanel id="Licenses_Block" rendered="{!licenses.size > 0}">                   
+                        <div class="soa"> 
+                            <div class="row list">
+                                <div class="row emphasised">
+                                    <div class="col-xs-3 col-sm-3">Number</div>
+                                    <div class="col-xs-3 col-sm-2">Type</div>
+                                    <div class="col-xs-3 col-sm-2">State</div>
+                                    <div class="col-xs-3 col-sm-3 date">Expiration</div>
+                                    <div class="col-xs-3 col-sm-1 edit">&nbsp;</div>
+                                    <div class="col-xs-3 col-sm-1 edit">&nbsp;</div>
+                                </div>
+                                <apex:repeat value="{!licenses}" var="license">
+                                    <div class="row line-item">
+                                        <div class="col-xs-3 col-sm-3">{!license.Name}</div>
+                                        <div class="col-xs-3 col-sm-2">{!license.License_Type__c}</div>
+                                        <div class="col-xs-3 col-sm-2">{!license.License_State__c}</div>
+                                        <div class="col-xs-3 col-sm-3 date">
+                                            <apex:outputText value="{0,date,MM/dd/yyyy}"> 
+                                                <apex:param value="{!license.License_Expiration_Date__c}" /> 
+                                            </apex:outputText>                                
+                                        </div>
+                                        <div class="col-xs-3 col-sm-1 edit">
+                                            <a onclick="deleteLicense('{!license.Id}'); $(this).css('pointer-events', 'none');"><i class="fa fa-trash-o"></i></a>
+                                        </div>
+                                        <div class="col-xs-3 col-sm-1 edit">
+                                            <a onclick="editLicense('{!license.Id}'); $(this).css('pointer-events', 'none');">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </div>
+                                        
+                                    </div>
+                                </apex:repeat>
+                                
+                                <div style="padding:10px; font-weight:bold;">
+                                    <apex:commandLink action="{!addLicense}" reRender="theform" title="Add a New License">
+                                        + Add a New License
+                                        <apex:param value="" name="newLicense" assignTo="{!licenseSelected}"/>
+                                    </apex:commandLink> 
+                                </div>                                
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+                    
+                    <apex:outputPanel rendered="{!licenses.size == 0}">
+                        <div class="alert alert-warning" role="alert">
+                            No license associated with this subscription
+                        </div>
+                        
+                        <div style="padding-bottom:20px; font-weight:bold;">
+                            <apex:commandLink action="{!addLicense}" reRender="theform" title="Add a New License">
+                                + Add a New License
+                                <apex:param value="" name="newLicense" assignTo="{!licenseSelected}"/>
+                            </apex:commandLink> 
+                        </div>                        
+                    </apex:outputPanel>
+                    <!-- End of license block -->
+                    
+                    <div class="row">
+                        <c:Communities_Definition pageTitle="Associations" pageTitleClass="fa fa-university fa-2x" hasDefinitions="false">
+                            <p><b class="term">Term</b> Definition goes here.</p>
+                        </c:Communities_Definition>
+                        <div class="add">
+                            
+                        </div> 
+                        <div class="col-xs-12 instructions">
+                            <p>Your current association information with the MLS is below. Please use the Edit Association button to change any Association information.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Associations Block --> 
+                    <apex:outputPanel rendered="{!associations.size > 0}">                   
+                        <div class="soa"> 
+                            <div class="row list">
+                                <div class="row emphasised">
+                                    <div class="col-xs-3 col-sm-4">Name</div>
+                                    <div class="col-xs-3 col-sm-2">Association</div>                                                                        
+                                    <div class="col-xs-3 col-sm-2 date">Start Date</div>
+                                    <div class="col-xs-3 col-sm-2 date">End Date</div>
+                                    <div class="col-xs-3 col-sm-1">Primary</div>
+                                    <div class="col-xs-3 col-sm-1">&nbsp;</div>
+                                </div>
+                                <apex:repeat value="{!associations}" var="association">
+                                    <div class="row line-item">
+                                        <div class="col-xs-3 col-sm-4">{!association.Association_Name__c}</div>
+                                        <div class="col-xs-3 col-sm-2">{!association.Association__r.Name}</div>                                                                        
+                                        <div class="col-xs-3 col-sm-2">
+                                            <apex:outputText value="{0,date,MM/dd/yyyy}"> 
+                                                <apex:param value="{!association.Start_Date__c}" /> 
+                                            </apex:outputText>                                 
+                                        </div>
+                                        <div class="col-xs-3 col-sm-2">
+                                            <apex:outputText value="{0,date,MM/dd/yyyy}"> 
+                                                <apex:param value="{!association.End_Date__c}" /> 
+                                            </apex:outputText>                                 
+                                        </div>
+                                        <div class="col-xs-3 col-sm-1">{!association.Primary__c}</div>
+                                        <div class="col-xs-3 col-sm-1 edit">
+                                            <apex:commandLink action="{!addAssociation}">
+                                                <i class="fa fa-edit" href="#"></i>
+                                                <apex:param value="{!association.Id}" name="newLicense" assignTo="{!associationSelected}"/>
+                                            </apex:commandLink>
+                                        </div>                                
+                                    </div>
+                                </apex:repeat>
+                                
+                                <div style="padding:10px; font-weight:bold;">
+                                    <apex:commandLink action="{!addAssociation}" title="Add new association">
+                                        + Add New Association
+                                        <apex:param value="" name="newAssociation" assignTo="{!associationSelected}"/>
+                                    </apex:commandLink>
+                                </div>                                
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+                    
+                    <apex:outputPanel rendered="{!associations.size == 0}"> 
+                        <div class="alert alert-warning" role="alert">
+                            No Association found for this Subscription
+                        </div>
+                        
+                        <div style="padding:10px; font-weight:bold;">
+                            <apex:commandLink action="{!addAssociation}" reRender="theform" title="Add new association">
+                                + Add New Association
+                                <apex:param value="" name="newAssociation" assignTo="{!associationSelected}"/>
+                            </apex:commandLink>
+                        </div>                        
+                    </apex:outputPanel>                  
+                    <!-- End of license block -->                    
+                    
+                    <!-- Professional Designations -->
+                    <div class="row">
+                        <c:Communities_Definition pageTitle="Professional Designations" pageTitleClass="fa fa-address-book-o fa-2x" hasDefinitions="false">
+                            <p><b class="term">Term</b> Definition goes here.</p>
+                        </c:Communities_Definition>
+                        
+                        <div class="col-xs-12 instructions">
+                            <p>To update your professional designations, please select from the below list and click the right arrow. To remove a designation, select it from the “Chosen” list and click the left arrow.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xs-12 alert alert-danger alert-panel Designation_Alert" role="alert">
+                        
+                    </div>                    
+                    
+                    <div class="row action-panels soa designation-panel">
+                        <div style="padding-left:25px;">
+                            <apex:inputField id="PersonalDesignations" value="{!subscription.Contact__r.Professional_Designations__c}" styleClass="form-control" /><br/>
+                            <apex:commandButton id="DesignationButton" styleClass="btn btn-primary" value="Save" action="{!saveProfessionalDesignations}" />
+                        </div>
+                    </div> 
+                    
+                    <!-- Primary MLS -->
+                    <div class="row">
+                        <c:Communities_Definition pageTitle="MLS" pageTitleClass="fa fa-building-o fa-2x" hasDefinitions="false">
+                            <p><b class="term">Term</b> Definition goes here.</p>
+                        </c:Communities_Definition>
+                        
+                        <div class="col-xs-12 instructions">
+                                 <p>If you subscribe to another MLS in addition to Bright, please select the state where your additional MLS is located from the dropdown menu below, then select the MLS(s) you wish to add (<i>Note: Delaware, Maryland and District of Columbia are not displayed underneath the State dropdown menu because Bright MLS serves as the sole MLS for these areas</i>).
+                            </p><p>Once selected, use the right-facing arrow to move your selected MLS(s) to the box on the right. To remove an MLS you are no longer subscribed to, select that MLS from the list on the right and click the left-facing arrow. When you have finished making changes, click Save.
+									​</p>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="col-xs-12 alert alert-danger alert-panel MLS_Alert" role="alert">
+                        
+                    </div>
+                    <div>
+                        <div class="row action-panels">
+                            <div class="mls-panel">
+                                <apex:outputLabel style="padding-bottom:5px;" value="State"/>
+                                <apex:actionFunction name="loadStateOptions" action="{!loadStateOptions}" reRender="state_options, savebuttonMLS"/>
+                                <apex:selectList value="{!selectedState}" size="1" onchange="loadStateOptions()"
+                                                 styleclass="slds-select" style="padding: 7px;border-radius: 4px; color:black; width:700px;margin-bottom: 12px;display: block">
+                                    <apex:selectOptions value="{!stateOptions}"/>
+                                </apex:selectList>
+                                
+                                <apex:outputLabel style="padding-bottom:5px;" value="MLS Options"  />
+                               <!-- !<div class="Helptooltip">
+                                        <img src="{!$Resource.BlueHelpIcon}"/>
+                                        <div class="top" style="font-style:italic">
+                                            <span>Tip: To select multiple MLSs, hold down the CTRL key (Command key on a Mac) while you click additional MLSs. <a href="{!$Label.Broker_Authorization_Form_Vendor_Name}" target="_blank">here</a></span>.                                                
+                                        </div>
+                                    </div>-->
+                                <div class="tooltip1">
+                                      <img src="{!$Resource.BlueHelpIcon}"/>
+                                 <div class="top">
+                                    <h3>Tip: To select multiple MLSs, hold down the CTRL key (Command key on a Mac) while you click additional MLSs. <!--<a href="{!$Label.Broker_Authorization_Form_Vendor_Name}" target="_blank">here</a>--></h3>
+                                   
+                                    <i></i>
+                                </div>
+                            </div>
+                                
+								<br/>
+								
+                                <apex:outputPanel id="state_options" style="position: relative;vertical-align: top;display: block;" >
+                                    <apex:selectList value="{!leftselectedMLSOptions}" multiselect="true" styleclass="slds-select"
+                                                     style="overflow-y: auto;padding: 5px;min-width:325px !important;border-radius: 4px; color:black;display:inline-block;">
+                                        <apex:selectOptions value="{!leftstateMLSOptions}"/>
+                                    </apex:selectList>
+                                    
+                                    <div class="arrows" style = "display:inline-block;margin:10px;vertical-align:top;">
+                                        <div style="padding:inherit;">
+                                            <apex:actionFunction name="selectOptionClick" action="{!selectOptionClick}" reRender="state_options, savebuttonMLS"/>
+                                            <span  class="slds-icon_container slds-icon-standard-account" title="Add" onclick="selectOptionClick();" >
+                                                <svg aria-hidden="true" class="slds-icon" style="width: 30px;margin: 0;height: 40px;padding: 0;line-height: 40px;">
+                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#chevronright"></use>
+                                                </svg>
+                                            </span>
+                                            
+                                        </div>
+                                        <div >
+                                            <!--<apex:image alt="Remove" value="/img/s.gif" style="height: 20px;" styleClass="leftArrowIcon slds-button_icon" title="Remove" onclick="unselectBJclick();" />-->
+                                            <apex:actionFunction name="unselectOptionClick" action="{!unselectOptionClick}" reRender="state_options,savebuttonMLS"/>
+                                            <span class="slds-icon_container slds-icon-standard-account" title="Remove" onclick="unselectOptionClick();" >
+                                                <svg class="slds-icon" style="width: 30px;margin: 0;height: 40px;padding: 0;line-height: 40px;">
+                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#chevronleft"></use>                                                            
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    
+                                    <apex:outputLabel style="padding-bottom:5px;position: absolute; top: -34px;" value="Selected MLS(s)"  />
+                                    <apex:selectList value="{!rightselectedMLSOptions}" multiselect="true" size="{!picklistlength}"
+                                                     style="overflow-y: auto;padding:5px;min-width:325px !important;border-radius: 4px; color:black;display:inline-block;" styleclass="slds-select ">
+                                        <apex:selectOptions value="{!rightstateMLSOptions}"/>
+                                    </apex:selectList>
+                                </apex:outputPanel>
+                            </div>
+                        </div>    
+                        <!--<p style=" margin-left:10px;">Tip: To select multiple MLSs, hold down the CTRL key (Command key on a Mac) while you click additional MLSs. </p>-->
+                        <apex:outputPanel id="savebuttonMLS" style="opacity: 1 !important;margin-left: 10px;">
+                            <apex:commandButton value="Save" styleClass="btn btn-primary" action="{!saveMLS}" disabled="{!termsDisabled}"/>
+                        </apex:outputPanel>
+                    </div>
+                    
+                    <!-- License action modal -->
+                    <!-- <apex:outputPanel id="licenseModal1" rendered="{!!isEditLicense}">
+
+<p>Please enter all the required information below and click Submit.</p>
+</apex:outputPanel>-->
+                    <apex:outputPanel id="licenseModal" rendered="{!isEditLicense}">
+                        <div class="modal fade" id="License-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="false" data-backdrop="static" data-keyboard="false">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="window.location='/customers/apex/Communities_LicenseAssociations?sid={!subscriptionId}';">&times;</button>
+                                        <h4 class="modal-title" id="modal-label"><i class="fa fa-id-card"></i> &nbsp; {!if(newLicense.Id != null, 'Edit License Expiration Date', 'Add a New License')}</h4>
+                                    </div>
+                                    <div class="modal-body">{!if(newLicense.Id != null, 'Please enter the new expiration date in the License Expiration field below and click Submit.', 'Please enter all the required information below and click Submit.')}
+                                        <p></p>
+                                        
+                                        <div id="licenseMessages">
+                                            <apex:pagemessages rendered="{!isEditLicense}"></apex:pagemessages>
+                                        </div> 
+                                        
+                                        <div class="form-group modal-first-row">
+                                            <!-- <label for="License" class="col-sm-4 control-label">License Number <span class="required">*</span></label>-->
+                                            <apex:outputLabel for="License" styleclass="col-sm-4 control-label" value="License Number" rendered="{!if(licenseSelected != null, 'false', 'true')}">&nbsp;<span class="required">*</span></apex:outputLabel>
+                                            <apex:outputLabel for="License" styleclass="col-sm-4 control-label" value="License Number" rendered="{!if(licenseSelected != null, 'true', 'false')}"/>
+                                            <div class="col-sm-7 newvalue">
+                                                <apex:inputField value="{!newLicense.Name}" id="LicenseNumber" styleClass="form-control" rendered="{!if(licenseSelected != null, 'false', 'true')}" />
+                                                <apex:outputField value="{!newLicense.Name}" id="LicenseNumberRead" styleClass="form-control" rendered="{!if(licenseSelected != null, 'true', 'false')}"/>
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group modal-row">
+                                            <!-- <label for="License" class="col-sm-4 control-label">License Type <span class="required">*</span></label> -->
+                                            <apex:outputLabel for="License" styleclass="col-sm-4 control-label" value="License Type" rendered="{!if(licenseSelected != null, 'false', 'true')}">&nbsp;<span class="required">*</span></apex:outputLabel>
+                                            <apex:outputLabel for="License" styleclass="col-sm-4 control-label" value="License Type" rendered="{!if(licenseSelected != null, 'true', 'false')}"/>
+                                            <div class="col-sm-7 newvalue">
+                                                <apex:inputField value="{!newLicense.License_Type__c}" id="LicenseType" styleClass="form-control" rendered="{!if(licenseSelected != null, 'false', 'true')}"/>
+                                                <apex:outputField value="{!newLicense.License_Type__c}" id="LicenseTypeRead" styleClass="form-control" rendered="{!if(licenseSelected != null, 'true', 'false')}"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group modal-row">
+                                            <label for="License" class="col-sm-4 control-label">License Expiration <span class="required">*</span></label>
+                                            <div class="col-sm-7">
+                                                <apex:inputField value="{!newLicense.License_Expiration_Date__c}" id="LicenseExpiration" styleClass="form-control" />
+                                            </div>
+                                        </div> 
+                                        <div class="form-group modal-last-row">
+                                            <!-- <label for="License" class="col-sm-4 control-label">License State <span class="required">*</span></label> -->
+                                            <apex:outputLabel for="License" styleclass="col-sm-4 control-label" value="License State" rendered="{!if(licenseSelected != null, 'false', 'true')}">&nbsp;<span class="required">*</span></apex:outputLabel>
+                                            <apex:outputLabel for="License" styleclass="col-sm-4 control-label" value="License State" rendered="{!if(licenseSelected != null, 'true', 'false')}"/>
+                                            <div class="col-sm-7 newvalue">
+                                                <apex:inputField value="{!newLicense.License_State__c}" id="LicenseState" styleClass="form-control" rendered="{!if(licenseSelected != null, 'false', 'true')}"/>
+                                                <apex:outputField value="{!newLicense.License_State__c}" id="LicenseStateRead" styleClass="form-control" rendered="{!if(licenseSelected != null, 'true', 'false')}"/>
+                                            </div>
+                                        </div>                                                                                                                                             
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-default" data-dismiss="modal" onclick="window.location='/customers/apex/Communities_LicenseAssociations?sid={!subscriptionId}';">Cancel</button>
+                                        <apex:commandButton id="LicenseButton" styleClass="btn btn-primary" value="Submit" action="{!saveLicense}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </apex:outputPanel>
+                    
+                    
+                    <apex:outputPanel id="deleteLicenseModal" rendered="{!isDeleteLicense}">
+                        <div class="modal fade" id="delete-License-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="false" data-backdrop="static" data-keyboard="false">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="window.location='/customers/apex/Communities_LicenseAssociations?sid={!subscriptionId}';">&times;</button>
+                                        <h4 class="modal-title" id="modal-label">You’re about to remove this license.</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>By clicking Delete, this license will be permanently removed from the system.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-default" data-dismiss="modal" onclick="window.location='/customers/apex/Communities_LicenseAssociations?sid={!subscriptionId}';">Cancel</button>
+                                        <apex:commandButton id="LicenseButton1" styleClass="btn btn-primary"  value="Delete" action="{!removeOnConfirm}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </apex:outputPanel>
+                    
+                    <!-- <apex:outputPanel id="successErrorModal" rendered="{!(isSuccessMessage || isErrorMessage)}">
+<div class="modal fade" id="msg-License-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="false" data-backdrop="static" data-keyboard="false">
+<div class="modal-dialog">
+<div class="modal-content">
+<apex:outputPanel rendered="{!isSuccessMessage}">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="window.location='/customers/apex/Communities_LicenseAssociations?sid={!subscriptionId}';">&times;</button>
+<h4 class="modal-title" id="modal-label">License removed</h4>
+</div>
+</apex:outputPanel>
+<apex:outputPanel rendered="{!isErrorMessage}">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="window.location='/customers/apex/Communities_LicenseAssociations?sid={!subscriptionId}';">&times;</button>
+<h4 class="modal-title" id="modal-label">Unable to remove license</h4>
+</div>
+</apex:outputPanel>
+<apex:outputPanel rendered="{!isSuccessMessage}">
+<div class="modal-body">
+<p>This license you selected is now removed from the system.</p>
+</div>
+</apex:outputPanel>
+<apex:outputPanel rendered="{!isErrorMessage}">
+<div class="modal-body">
+<p>An error has occurred and the license has not been removed. A support case has been created. We will contact you as soon as its resolved.</p>
+</div>
+</apex:outputPanel>
+<div class="modal-footer">
+<apex:commandButton styleClass="btn btn-primary btnaction" reRender="theform" value="OK" action="{!closeModal}" onclick="$('#msg-License-modal').modal('hide'); $('.modal-backdrop').hide();"/>
+</div>
+</div>
+</div>
+</div> 
+</apex:outputPanel>-->
+                    
+                    <!-- Association action modal -->
+                    <apex:outputPanel id="associationModal" rendered="{!isEditAssociation}">
+                        <div class="modal fade" id="Association-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="false" data-backdrop="static" data-keyboard="false">
+                            <div class="modal-dialog"> 
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="window.location='/customers/apex/Communities_LicenseAssociations?sid={!subscriptionId}';">&times;</button>
+                                        <h4 class="modal-title" id="modal-label"><i class="fa fa-university"></i> &nbsp; {!if(newAssociation.Name != null, 'Edit Association', 'Add New Association')}</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <apex:outputPanel rendered="{!newAssociation.Id == null}">
+                                        <p>Please enter the new Association information and click Submit.</p>
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!newAssociation.Id != null}">
+                                        <p>Please edit the Association information and click Submit.</p>
+                                        </apex:outputPanel>
+                                        <div id="associationMessages">
+                                            <apex:pagemessages rendered="{!isEditAssociation}"></apex:pagemessages>
+                                        </div> 
+                                        <div class="form-group modal-first-row">
+                                            <label for="License" class="col-sm-4 control-label">Association</label>
+                                            <div class="col-sm-7">                                            
+                                                <apex:selectList size="1" styleClass="form-control" value="{!newAssociation.Association__c}" multiselect="false">
+                                                    <apex:selectOptions value="{!options}"/>
+                                                </apex:selectList>
+                                                
+                                            </div>
+                                        </div> 
+                                        
+                                        <apex:outputPanel rendered="{!newAssociation.Id == null}">
+                                            <div class="form-group modal-row">
+                                                <label for="License" class="col-sm-4 control-label">Start Date</label>
+                                                <div class="col-sm-7">
+                                                    <apex:inputField value="{!newAssociation.Start_Date__c}" styleClass="form-control" />
+                                                </div>
+                                            </div>    
+                                        </apex:outputPanel>
+                                        <!--	
+<apex:outputPanel rendered="{!newAssociation.Id == null}">                                    
+<div class="form-group modal-row">
+<label for="License" class="col-sm-5 control-label">End Date</label>
+<div class="col-sm-6">
+<apex:inputField value="{!newAssociation.End_Date__c}" styleClass="form-control" />
+</div>
+</div>                                    
+</apex:outputPanel>
+-->
+                                        <div class="form-group modal-last-row">
+                                            <label for="License" class="col-sm-4 control-label">Primary</label>
+                                            <div class="col-sm-7">
+                                                <apex:inputField value="{!newAssociation.Primary__c}" />
+                                            </div>
+                                        </div>                                                                                                                                                                                                                   
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-default" data-dismiss="modal" onclick="window.location='/customers/apex/Communities_LicenseAssociations?sid={!subscriptionId}';">Cancel</button>
+                                        <apex:commandButton styleClass="btn btn-primary" value="Submit" action="{!saveAssociation}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </apex:outputPanel>                                                   
+                </apex:pageBlock>           
+            </apex:form>
+        </apex:define>       
+    </apex:composition>  
+</apex:page>

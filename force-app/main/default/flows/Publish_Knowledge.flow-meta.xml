@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <interviewLabel>Publish Knowledge {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Publish Knowledge</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordUpdates>
+        <name>Update_Is_Published</name>
+        <label>Update Is Published</label>
+        <locationX>265</locationX>
+        <locationY>475</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>ArticleId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Is_Published__c</field>
+        </inputAssignments>
+        <object>Knowledge__kav</object>
+    </recordUpdates>
+    <runInMode>SystemModeWithoutSharing</runInMode>
+    <screens>
+        <name>Publish_Knowledge_Article</name>
+        <label>Publish Knowledge Article</label>
+        <locationX>266</locationX>
+        <locationY>276</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Update_Is_Published</targetReference>
+        </connector>
+        <fields>
+            <name>ConfirmationText</name>
+            <fieldText>&lt;p&gt;Are you sure want to delete?&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Publish_Knowledge_Article</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>ArticleId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

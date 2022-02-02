@@ -1,0 +1,291 @@
+<aura:component controller="EZJoin_NewApplicationController">
+    <!-- Aura Attributes -->
+    <aura:attribute name="appConfig" type="List" default="[]" />
+    <aura:attribute name="appData" type="Object" />
+    <aura:attribute name="currentConfig" type="Object" />
+    <aura:attribute name="errorMsg" type="String" default="" />
+    <aura:attribute name="dupSubscripErrorMsg" type="String" default="" />
+    <aura:attribute name="enableTerms" type="Boolean" default="false" />
+    <aura:attribute name="applicationType" type="String" default="" />
+    
+    <!-- Aura Actions -->
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}" /> 
+    
+    <!-- Application Events -->
+    <aura:registerEvent name="cmpEvent" type="c:EZJoin_LoadComponentEvent" />
+
+    <div class="slds-text-longform">
+        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+            <aura:if isTrue="{!v.dupSubscripErrorMsg != ''}">
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert" style="margin-bottom:26px; border-radius: 2px;">
+                    <span class="slds-assistive-text">error</span>
+                    <span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small" title="Description of icon when needed">
+                        
+                    </span>
+                    <h2 style="margin:0;display: block;"><aura:unescapedHtml value="{!v.dupSubscripErrorMsg}"/></h2>
+                </div>
+            </aura:if>
+            
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 flow2 flow3">
+                <h3 class="slds-text-heading_medium">Review Application</h3>
+       			 
+                <aura:if isTrue="{!v.appData.license}">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+                            <h6>License Number</h6>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+                            <h5>{!v.appData.license.licenseNumber}</h5>
+                        </div>
+                    </div>
+                    
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+                            <h6>License Expiration</h6>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+                            <h5><ui:outputDate format="M/D/YYYY" value="{!v.appData.license.licenseExpirationDate}" /></h5>
+                        </div>
+                    </div> 
+                    
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+                            <h6>License State</h6>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+                            <h5>{!v.appData.license.licenseState}</h5>
+                        </div>
+                    </div> 
+                    
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+                            <h6>License Type</h6>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+                            <h5>
+                                <aura:if isTrue="{!v.appData.license.licenseType == 'AssociateBroker'}">
+                                    Associate Broker
+                                    <aura:set attribute="else">
+                                    	{!v.appData.license.licenseType}
+                                    </aura:set>
+                                </aura:if>
+                            </h5>
+                        </div>
+                    </div>
+                </aura:if>
+                
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+                        <h6>Broker Office ID</h6>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+                        <h5>{!v.appData.broker.Name}</h5>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+                        <h6>Broker Office Name</h6>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+                        <h5>{!v.appData.broker.Account_Name__c}</h5>
+                    </div>
+                </div>
+                
+                <aura:if isTrue="{!and(v.appData.license, v.appData.license.nrdsId != '')}">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+                            <h6>NRDS ID</h6>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+                            <h5>{!v.appData.license.nrdsId}</h5>
+                        </div>
+                    </div>
+                </aura:if>
+                
+                <aura:if isTrue="{!v.appData.association.Name}">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+                            <h6>Association ID</h6>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+                            <h5>{!v.appData.association.Name}</h5>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+                            <h6>Association Name</h6>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+                            <h5>{!v.appData.association.Account_Name__c}</h5>
+                        </div>
+                    </div>                    
+                </aura:if>
+                
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+                        <h6>City</h6>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+                        <h5>{!v.appData.broker.City__c}</h5>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+                        <h6>State</h6>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+                        <h5>{!v.appData.broker.State__c}</h5>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+                        <h6>Zip</h6>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+                        <h5>{!v.appData.broker.Zip__c}</h5>
+                    </div>
+                </div>
+                                
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+                        <h6>Salutation</h6>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+                        <h5>{!v.appData.contact.salutation}</h5>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+                        <h6>First Name</h6>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+                        <h5>{!v.appData.contact.firstName}</h5>
+                    </div>
+                </div>
+                
+                <aura:if isTrue="{!v.appData.contact.middleName != ''}">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+                            <h6>Middle Name</h6>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+                            <h5>{!v.appData.contact.middleName}</h5>
+                        </div>
+                    </div>
+                </aura:if>                
+                
+                <aura:if isTrue="{!v.appData.contact.lastName != ''}">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+                            <h6>Last Name</h6>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+                            <h5>{!v.appData.contact.lastName}</h5>
+                        </div>
+                    </div>
+                </aura:if>
+
+                <aura:if isTrue="{!v.appData.contact.suffix != ''}">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+                            <h6>Suffix</h6>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+                            <h5>{!v.appData.contact.suffix}</h5>
+                        </div>
+                    </div>
+                </aura:if>                
+                
+                <aura:if isTrue="{!v.appData.contact.nickName != ''}">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+                            <h6>Nick Name</h6>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+                            <h5>{!v.appData.contact.nickName}</h5>
+                        </div>
+                    </div>
+                </aura:if>
+                
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+                        <h6>Email</h6>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+                        <h5>{!v.appData.contact.email}</h5>
+                    </div>
+                </div> 
+
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+                        <h6>Phone</h6>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+                        <h5>{!v.appData.contact.phone}</h5>
+                    </div>
+                </div>
+                
+                <aura:if isTrue="{!and(v.appData.contact.mobile != null, v.appData.contact.mobile != '')}">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+                            <h6>Mobile Number</h6>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+                            <h5>{!v.appData.contact.mobile}</h5>
+                        </div>
+                    </div>
+                </aura:if>
+                
+                <aura:if isTrue="{!v.appData.agents.length > 0}">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 flow2">
+                            <aura:if isTrue="{!v.appData.broker.Type != 'Appraiser'}">
+                            	<h1>Selected Agents</h1>
+                                <aura:set attribute="else">
+                                    <h1>Selected Appraiser</h1>
+                                </aura:set>                                  
+                            </aura:if>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 flow2">
+                            <aura:iteration items="{!v.appData.agents}" var="agent" indexVar="index">
+                                <p>
+                                    <h5>{!agent.Contact__r.Name} - {!agent.Name}</h5>
+                                </p>
+                            </aura:iteration> 
+                        </div>
+                    </div>
+                </aura:if>
+            </div>
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 flow2">
+                <h4 class="slds-text-heading_medium">Review and Accept License Agreement</h4>
+                <label>Please scroll to the bottom to accept the terms of this agreement.</label>
+                <aura:if isTrue="{!v.errorMsg != ''}">
+                    <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert" style="margin-bottom:26px; border-radius: 2px;">
+                        <span class="slds-assistive-text">error</span>
+                        <span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small" title="Description of icon when needed">
+                            
+                        </span>
+                        <h2 style="margin:0;">{!v.errorMsg}</h2>
+                    </div>
+                </aura:if>                
+                
+                <div class="accept" id="terms-div" onscroll="{!c.scrolled}">
+                    <!--
+                    <iframe src="{! 'https://dev-mrisonboarding.cs10.force.com/eProcess/apex/NewAgentApplication_BRIGHTAgreement' }" style="" />
+                	-->
+                    <c:EZJoin_NewApplicationAgreement />
+				</div>
+                <div class="agree">
+                    <!--<lightning:input type="checkbox" disabled="{!!v.enableTerms}" label="I have read and accept the terms and conditions" name="input1" value="{!v.appData.acceptTerms}" onchange="{!c.termsChkBoxEvtHandler}" />-->
+                        <lightning:input type="checkbox" disabled="{!!v.enableTerms}" label="By clicking 'I agree' below, you acknowledge that you read, understand, and agree to be bound by the terms of this Agreement. You will receive an e-mail confirming your selection, with a link to this Agreement; please retain the e-mail for your records." name="input1" value="{!v.appData.acceptTerms}" onchange="{!c.termsChkBoxEvtHandler}" />  
+                    
+                </div>
+            </div>
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 spaceline2"></div>
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                <button class="slds-button slds-button_brand2" onclick="{!c.previousBtnEvtHandler}">Previous</button>
+                <lightning:button label="Submit" class="slds-button slds-button_brand" onclick="{!c.submitBtnHandler}" disabled="{!!v.appData.acceptTerms}" />
+            </div>
+        </div>
+    </div>
+</aura:component>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Email_to_CAMP</fullName>
+        <description>Email to CAMP</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Account_CAM__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>API_Names/CAMP_Office_Visit_Request</template>
+    </alerts>
+    <rules>
+        <fullName>New Office Request Email</fullName>
+        <actions>
+            <name>Email_to_CAMP</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>OfficeVisitRequest__c.Campaign_Owner__c</field>
+            <operation>notEqual</operation>
+            <value></value>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Office visit request - Email to Case</fullName>
+        <active>false</active>
+        <formula>DATEVALUE(CreatedDate) =  TODAY()</formula>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+</Workflow>

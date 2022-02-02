@@ -1,0 +1,446 @@
+<aura:component>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <ltng:require styles="{!$Resource.headerpart }"></ltng:require>
+   <ltng:require styles="{!$Resource.side }"></ltng:require> 
+   <ltng:require styles="{!$Resource.body }"></ltng:require>
+    <aura:attribute name="popup1" type="boolean" default="false"/>
+   <aura:attribute name="popup2" type="boolean" default="false"/>
+   <div class="c-container">
+      <div class="fullpage slds-scope">
+         <div class="slds-grid slds-wrap">
+            <lightning:layout multipleRows="true">
+               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage header-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:header />
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+               <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                   <c:mobilemenu />
+                   <lightning:layout>
+                     <div class="new-containerpage">
+                        <div class="slds-container--x-large new-container">
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <c:sidebarnew />
+                           </lightning:layoutItem>
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                              <div class="page-section page-main">
+                                 <div class="middlebar1">
+                                    <h2>Profile</h2>
+                                    <lightning:button class="brand cancel" variant="brand " label="Cancel" title="Brand action" onclick="{! c.handleClick }" />
+                                    <lightning:button class="brand brand2" variant="brand " label="Reset" title="Brand action" onclick="{! c.handleClick }" />
+                                    <lightning:button class="brand" variant="brand" label="Edit" title="Brand action" onclick="{! c.handleClick }" />
+                                 </div>
+                                 <div class="dev">
+                                    <p class="recent">Have your contact details recently changed? Update the contact information for your MLS Subscription.</p>
+                                      <div class="view"></div>
+                                     <h2 class="notes">
+                                       <lightning:icon src="/resource/bright/bright-3.0/images/Notification-Preferences.svg"/>
+                                       Personal Information
+                                    </h2>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Title</h4>
+                                             <h5>
+                                                <lightning:input type="text" name="input3" placeholder="Enter the title"  variant = "label-hidden" />
+                                             </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1 log">
+                                             <h4>Login Name <a onclick="{! c.openModel2 }"> <span>Change Login Name</span> </a></h4>
+                                             <h5>
+                                                <lightning:input type="text" name="input3" placeholder="Enter first name"  variant = "label-hidden" />
+                                             </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part2">
+                                             <h4>Job Title</h4>
+                                             <h5>
+                                                <lightning:select name="select1" label="" required="false" variant = "label-hidden">
+                                                   <option value="">choose one...</option>
+                                                   <option value="1">one</option>
+                                                   <option value="2">two</option>
+                                                   <option value="3">three</option>
+                                                </lightning:select>
+                                             </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1 log">
+                                             <h4>First Name <a onclick="{! c.openModel2 }"> <span>Change First Name</span> </a></h4>
+                                             <h5>
+                                                <lightning:input type="text" name="input3" placeholder="Enter first name"  variant = "label-hidden" />
+                                             </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Middle Initial </h4>
+                                             <h5>
+                                                <lightning:input type="text" name="input3" placeholder="Enter middle initial"  variant = "label-hidden" />
+                                             </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part2">
+                                             <h4>Last Name</h4>
+                                             <h5>
+                                                <lightning:input type="text" name="input3" placeholder="Enter last name"  variant = "label-hidden" />
+                                             </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Generation/Suffix</h4>
+                                             <h5>
+                                                <lightning:select name="select1" label="" required="false" variant = "label-hidden">
+                                                   <option value="">choose one...</option>
+                                                   <option value="1">one</option>
+                                                   <option value="2">two</option>
+                                                   <option value="3">three</option>
+                                                </lightning:select>
+                                             </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Nickname </h4>
+                                             <h5>
+                                                <lightning:input type="text" name="input3" placeholder="Enter last name"  variant = "label-hidden" />
+                                             </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="7" largeDeviceSize="7">
+                                          <div class="layer part3">
+                                             <h4>Preferred Name</h4>
+                                          </div>
+                                          <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                             <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="2" largeDeviceSize="2">
+                                                <div class="layer part4">
+                                                   <h5 class="once">
+                                                      <lightning:select name="select1" label="" required="false" variant = "label-hidden">
+                                                         <option value="">choose one...</option>
+                                                         <option value="1">one</option>
+                                                         <option value="2">two</option>
+                                                         <option value="3">three</option>
+                                                      </lightning:select>
+                                                   </h5>
+                                                </div>
+                                             </lightning:layoutItem>
+                                             <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="5" largeDeviceSize="5">
+                                                <div class="layer part4">
+                                                   <h5 class="once">
+                                                      <lightning:select name="select1" label="" required="false" variant = "label-hidden">
+                                                         <option value="">choose one...</option>
+                                                         <option value="1">one</option>
+                                                         <option value="2">two</option>
+                                                         <option value="3">three</option>
+                                                      </lightning:select>
+                                                   </h5>
+                                                </div>
+                                             </lightning:layoutItem>
+                                             <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="5" largeDeviceSize="5">
+                                                <div class="layer part4">
+                                                   <h5>
+                                                      <lightning:select name="select1" label="" required="false" variant = "label-hidden">
+                                                         <option value="">choose one...</option>
+                                                         <option value="1">one</option>
+                                                         <option value="2">two</option>
+                                                         <option value="3">three</option>
+                                                      </lightning:select>
+                                                   </h5>
+                                                </div>
+                                             </lightning:layoutItem>
+                                          </lightning:layoutItem>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="5" largeDeviceSize="5">
+                                          <div class="layer part2">
+                                             <h4></h4>
+                                             <h5 class="info">
+                                                <img  src="{!$Resource.bright + '/bright-3.0/images/information.svg'}" alt="Account &amp; Settings Notifications" />
+                                                <p>The last name plus any suffix. Please make sure that your preferred name complies with your jurisdiction real estate licensing requirements &amp; regulations.</p>
+                                             </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Website</h4>
+                                             <h5>-</h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                    </lightning:layoutItem>
+                                    <div class="view"></div>
+                                    <h2 class="notes">
+                                       <lightning:icon src="{!$Resource.bright + '/bright-3.0/images/Personal-Information.svg'}" alternativeText="My Custom Icon" />
+                                       Telephone &amp; Contact Information
+                                    </h2>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Preferred Phone</h4>
+                                             <h5>
+                                                <lightning:input type="text" name="input3" placeholder="Enter preferred phone"  variant = "label-hidden" />
+                                             </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Mobile</h4>
+                                             <h5>
+                                                <lightning:input type="text" name="input3" placeholder="Enter mobile"  variant = "label-hidden" />
+                                             </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Home Phone</h4>
+                                             <h5>
+                                                <lightning:input type="text" name="input3" placeholder="Enter home phone"  variant = "label-hidden" />
+                                             </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Home Fax </h4>
+                                             <h5>
+                                                <lightning:input type="text" name="input3" placeholder="Enter home fax"  variant = "label-hidden" />
+                                             </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part2">
+                                             <h4>Agent Office Phone</h4>
+                                             <h5>
+                                                <lightning:input type="text" name="input3" placeholder="Enter agent office phone"  variant = "label-hidden" />
+                                             </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <div class="layer part2">
+                                          <p><img src="{!$Resource.bright + '/bright-3.0/images/information.svg'}" alt="Account &amp; Settings Notifications" />This information WILL appear in your listings</p>
+                                       </div>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Public Email</h4>
+                                             <h5>
+                                                <lightning:input type="text" name="input3" placeholder="Enter email"  variant = "label-hidden" />
+                                             </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <div class="layer part2">
+                                          <p><img src="{!$Resource.bright + '/bright-3.0/images/information.svg'}" alt="Account &amp; Settings Notifications" />This information WILL NOT appear in your listings</p>
+                                       </div>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Private Email</h4>
+                                             <h5>
+                                                <lightning:input type="text" name="input3" placeholder="Enter private email"  variant = "label-hidden" />
+                                             </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Alternate Private Email </h4>
+                                             <h5>
+                                                <lightning:input type="text" name="input3" placeholder="Enter alternate private email"  variant = "label-hidden" />
+                                             </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>NRDS ID</h4>
+                                             <h5>
+                                                <lightning:input type="text" name="input3" placeholder="Nrds ID"  variant = "label-hidden" />
+                                             </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <lightning:button class="brand step" variant="brand" label="Find my NRDS ID"  onclick="{! c.handleClick }" />
+                                          </div>
+                                       </lightning:layoutItem>
+                                    </lightning:layoutItem>
+                                    <div class="view"></div>
+                                    <h2 class="notes">
+                                       <lightning:icon src="{!$Resource.bright + '/bright-3.0/images/Personal-Information.svg'}" alternativeText="My Custom Icon" />
+                                       Address(es
+                                    </h2>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Mailing Address</h4>
+                                             <h5>
+                                                <lightning:textarea type="textarea" name="input2" placeholder="Enter mailing address"  variant = "label-hidden"/>
+                                             </h5>
+                                             <p class="addr">Looks Good!</p>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Home Address</h4>
+                                             <h5>
+                                                <lightning:textarea type="textarea" name="input2" placeholder="Enter home address"  variant = "label-hidden"/>
+                                             </h5>
+                                             <p class="addr">Example: 9707 Key West Avenue, Suite 300, Rockville, MD 20850</p>
+                                          </div>
+                                       </lightning:layoutItem>
+                                    </lightning:layoutItem>
+                                 </div>
+                              </div>
+                           </lightning:layoutItem>
+                            
+                            
+                             <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage footer-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:footer />
+                         
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+                        </div>
+                     </div>
+                  </lightning:layout>
+               </lightning:layoutItem>
+            </lightning:layout>
+         </div>
+      </div>
+      <!-- PopUp 1 start -->
+      <aura:if isTrue="{!v.popup1}">
+         <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+               <!-- ###### MODAL BOX HEADER Start ######-->
+               <header class="slds-modal__header">
+                  <lightning:buttonIcon iconName="utility:close"
+                     onclick="{! c.closeModel }"
+                     alternativeText="close"
+                     variant="bare-inverse"
+                     class="slds-modal__close"/>
+                  <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate email">Change Login Name <span><img src="{!$Resource.bright + '/bright-3.0/images/information.svg'}" alt="information" />Once the Login Name is changed, you will be logged out.</span> </h2>
+               </header>
+               <!--###### MODAL BOX BODY Part Start######-->
+               <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                     <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                         <div class="bodyline">
+                          <h2>Current Login Name</h2>
+                     <h3>319005</h3>
+                     <h4>Login Name</h4>
+                         </div>
+                         <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                         
+                         <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="8" largeDeviceSize="8">
+                             <lightning:input type="text" name="input3" placeholder="Enter login name"  variant = "label-hidden" />
+                             </lightning:layoutItem>
+                             <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                 <div class="bodyline2">
+                             <lightning:button class="brand" variant="brand" label="Validate" title="Brand action" onclick="{! c.handleClick }" />
+                </div>
+                             </lightning:layoutItem>
+                         </lightning:layoutItem>
+                          <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                        <div class="bodyline2">
+                                   <ul>
+                           <li>min 3 characters and max 25 characters</li>
+                           <li>can contain letters and numbers</li>
+                           <li>only 4 special characters @ or period or space or dash allowed</li>
+                        </ul>
+                              </div>
+                         
+                         </lightning:layoutItem>
+                   </lightning:layoutItem>
+                  
+               </div>
+               <!--###### MODAL BOX FOOTER Part Start ######-->
+               <footer class="slds-modal__footer">
+                  <lightning:button class="brand" variant="brand" label="Submit" title="Brand action" onclick="{! c.handleClick }" />
+                  <lightning:button variant="neutral" 
+                     label="Cancel"
+                     title="Cancel"
+                     class="newCancel"
+                     onclick="{! c.closeModel }"/>
+               </footer>
+            </div>
+         </section>
+         <div class="slds-backdrop slds-backdrop_open"></div>
+      </aura:if>
+      <!-- PopUp 1 end -->
+      <!-- PopUp 2 start -->
+      <aura:if isTrue="{!v.popup2}">
+         <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+               <header class="slds-modal__header">
+                  <lightning:buttonIcon iconName="utility:close"
+                     onclick="{! c.closeModel2 }"
+                     alternativeText="close"
+                     variant="bare-inverse"
+                     class="slds-modal__close"/>
+                  <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate email">Change Login Name <span><img src="{!$Resource.bright + '/bright-3.0/images/information.svg'}" alt="information" />Once the Login Name is changed, you will be logged out.</span> </h2>
+               </header>
+               <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                   <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="bodyline">
+                     <h2>Current Login Name</h2>
+                     <h3>319005</h3>
+                     <h4>Login Name</h4>
+                          <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                  <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="8" largeDeviceSize="8">
+                     <div class=" bodyline1">
+                        <lightning:input type="text" name="input3" placeholder="Enter login name"  variant = "label-hidden" />
+                     </div>
+                              </lightning:layoutItem>
+                                  <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                     <div class=" bodyline2">
+                        <lightning:button class="brand" variant="brand" label="Validate" title="Brand action" onclick="{! c.handleClick }" />
+                     </div>
+                              </lightning:layoutItem>
+                      </lightning:layoutItem>
+                          <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                     <div class="bodyline2">
+                        <ul>
+                           <li>min 3 characters and max 25 characters</li>
+                           <li>can contain letters and numbers</li>
+                           <li>only 4 special characters @ or period or space or dash allowed</li>
+                        </ul>
+                              </div></lightning:layoutItem>
+                     </div>
+              
+                  </lightning:layoutItem> 
+               </div>
+               <footer class="slds-modal__footer">
+                  <lightning:button class="brand" variant="brand" label="Submit" title="Brand action" onclick="{! c.handleClick }" />
+                  <lightning:button variant="neutral" 
+                     label="Cancel"
+                     title="Cancel"
+                     class="newCancel"
+                     onclick="{! c.closeModel2 }"/>
+               </footer>
+            </div>
+         </section>
+         <div class="slds-backdrop slds-backdrop_open"></div>
+      </aura:if>
+      <!-- PopUp 2 end -->
+   </div>
+</aura:component>

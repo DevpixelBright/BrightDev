@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Agent__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>The agent who is ordering the product. Lookup to the SF Subscription record. Field is mutually exclusive to Brokerage.</description>
+    <externalId>false</externalId>
+    <label>Agent</label>
+    <lookupFilter>
+        <active>true</active>
+        <booleanFilter>1 OR (2 AND 3)</booleanFilter>
+        <filterItems>
+            <field>Subscriptions__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Active</value>
+        </filterItems>
+        <filterItems>
+            <field>$Source.Status__c</field>
+            <operation>equals</operation>
+            <value>Inactive</value>
+        </filterItems>
+        <filterItems>
+            <field>Subscriptions__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Inactive</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Subscriptions__c</referenceTo>
+    <relationshipLabel>RETS Product Orders</relationshipLabel>
+    <relationshipName>RETS_Product_Orders</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Provisioned_Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Provisioned Status</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Provisioned</fullName>
+                <default>false</default>
+                <label>Provisioned</label>
+            </value>
+            <value>
+                <fullName>Pending Provisioned</fullName>
+                <default>false</default>
+                <label>Pending Provisioned</label>
+            </value>
+            <value>
+                <fullName>Deprovisioned</fullName>
+                <default>false</default>
+                <label>Deprovisioned</label>
+            </value>
+            <value>
+                <fullName>Pending Deprovisioned</fullName>
+                <default>false</default>
+                <label>Pending Deprovisioned</label>
+            </value>
+            <value>
+                <fullName>Error Pending Provisioned</fullName>
+                <default>false</default>
+                <label>Error Pending Provisioned</label>
+            </value>
+            <value>
+                <fullName>Error Pending Deprovisioned</fullName>
+                <default>false</default>
+                <label>Error Pending Deprovisioned</label>
+            </value>
+            <value>
+                <fullName>Error Provisioned</fullName>
+                <default>false</default>
+                <label>Error Provisioned</label>
+            </value>
+            <value>
+                <fullName>Error Deprovisioned</fullName>
+                <default>false</default>
+                <label>Error Deprovisioned</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

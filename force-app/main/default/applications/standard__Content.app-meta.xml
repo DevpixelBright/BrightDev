@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <defaultLandingTab>standard-home</defaultLandingTab>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <tabs>standard-Chatter</tabs>
+    <tabs>standard-Workspace</tabs>
+    <tabs>standard-ContentSearch</tabs>
+    <tabs>standard-ContentSubscriptions</tabs>
+    <tabs>MRIS_Survey__c</tabs>
+    <tabs>Subscription_Service__c</tabs>
+    <tabs>Zuora__ZInvoice__c</tabs>
+    <tabs>Feedback__c</tabs>
+    <tabs>DataCollections__c</tabs>
+    <tabs>agf__ADM_Work_Status__c</tabs>
+    <tabs>MRIS_RealtyTrac_Survey__c</tabs>
+    <tabs>RETS_Product_Order__c</tabs>
+    <tabs>Zuora_Bulk_Process__c</tabs>
+    <tabs>Listing_Transfer_Request__c</tabs>
+    <tabs>EB_ProductOrder__c</tabs>
+    <tabs>Financial_Dashboard</tabs>
+    <tabs>Off_MLS_Evidence__c</tabs>
+    <tabs>Office_Exclusive__c</tabs>
+    <tabs>W_9__c</tabs>
+    <tabs>SMS_CloudCMA_Users__c</tabs>
+    <tabs>MARCOM_Notes__c</tabs>
+    <tabs>Teams__c</tabs>
+    <tabs>Team_Members__c</tabs>
+    <tabs>Integration_Log__c</tabs>
+    <tabs>FoxRoach_Sync_Log__c</tabs>
+    <tabs>Custom_Content__c</tabs>
+    <tabs>Email_Service__c</tabs>
+    <tabs>Zuora__SubscriptionProductCharge__c</tabs>
+</CustomApplication>

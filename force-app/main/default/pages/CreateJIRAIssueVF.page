@@ -1,0 +1,23 @@
+<apex:page standardController="Case">
+        <apex:includeScript value="../../soap/ajax/20.0/connection.js"/>
+    <script>
+    
+
+if({!Case.trigger_jira_integration__c} == false) 
+{ 
+var c = new sforce.SObject("Case"); 
+c.id = "{!Case.Id}"; 
+c.IsEscalated = true; 
+c.trigger_jira_integration__c = true; 
+result = sforce.connection.update([c]); 
+if ( result[0].getBoolean( "success" ) ) 
+{ 
+window.location.reload(); 
+} 
+else 
+{ 
+alert( result[0].errors.message); 
+} 
+}
+        </script>
+        </apex:page>

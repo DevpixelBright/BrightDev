@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Presentation_material_was_very_helpful__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>Please make the appropriate selection on the items listed below in regards to the
+presentation which was delivered by your Client Alliance Manager.- The presentation material was very helpful</inlineHelpText>
+    <label>Presentation material was very helpful</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Strongly Agree</fullName>
+                <default>false</default>
+                <label>Strongly Agree</label>
+            </value>
+            <value>
+                <fullName>Agree</fullName>
+                <default>false</default>
+                <label>Agree</label>
+            </value>
+            <value>
+                <fullName>Undecided</fullName>
+                <default>false</default>
+                <label>Undecided</label>
+            </value>
+            <value>
+                <fullName>Disagree</fullName>
+                <default>false</default>
+                <label>Disagree</label>
+            </value>
+            <value>
+                <fullName>Strongly Disagree</fullName>
+                <default>false</default>
+                <label>Strongly Disagree</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

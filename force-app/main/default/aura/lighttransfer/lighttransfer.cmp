@@ -1,0 +1,186 @@
+<aura:component>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <ltng:require styles="{!$Resource.headerpart }"></ltng:require>
+   <ltng:require styles="{!$Resource.side }"></ltng:require> 
+   <ltng:require styles="{!$Resource.body }"></ltng:require>
+
+   
+   <div class="c-container">
+      <div class="fullpage slds-scope">
+         <div class="slds-grid slds-wrap">
+            <lightning:layout multipleRows="true">
+               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage header-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:header />
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+               <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                   <c:mobilemenu />
+                   <lightning:layout>
+                     <div class="new-containerpage">
+                        <div class="slds-container--x-large new-container">
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <c:sidebarnew />
+                           </lightning:layoutItem>
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                              <div class="page-section page-main">
+                                 <div class="middlebar1">
+                                    <h2>Agent Listing Transfer</h2>
+                                    
+                         </div>
+                                 <div class="dev dev1">
+                                  <h3>Once the request has been submitted</h3>
+                         <ul class="been">
+                         <li> The origination office (the office that owns the listing) will be notified of your request and will have seven days to approve or decline the transfer </li>
+                         <li>If approved, the destination office will be notified of your request and will have seven days to approve or decline the transfer </li>
+                          <li>If declined by either the origination or the destination office, listings will not be transferred </li>
+                             <li>Please contact the appropriate Broker office if you have any questions</li>
+                         </ul>
+           
+                             <div class="reviewpoint">
+                        <h3>Review and Submit<img src="{!$Resource.bright + '/bright-3.0/images/information.svg'}" alt="Bright" /><p>The listings you have requested are shown below for your review. Go back to make any changes or click SUBMIT to finish</p></h3>
+                         
+                         </div> 
+                                    
+                             <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                            <div class="point">
+                           <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                       <div class="point1">
+                         <div class="loc">
+                           <div class="loc1">
+                             <img src="{!$Resource.bright + '/bright-3.0/images/loc.svg'}" alt="Bright" />
+                             </div>
+                             <div class="loc2">
+                             <h2>Origination Office</h2>
+                                 <h3>ADKINS</h3>
+                                 <p>26286 Seaford Rd,<br/>Seaford, DE 199973</p>
+                             </div>
+                           </div>
+                          
+                          </div>
+                                </lightning:layoutItem>
+                                 <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                          <div class=" point2">
+                           <div class="loc">
+                               <img class="cir" src="{!$Resource.bright + '/bright-3.0/images/circle-arrow.svg'}" alt="Bright" />
+                           <div class="loc1">
+                             <img src="{!$Resource.bright + '/bright-3.0/images/loc.svg'}" alt="Bright" />
+                             </div>
+                             <div class="loc2">
+                             <h2>Origination Office</h2>
+                                 <h3>ADKINS</h3>
+                                 <p>26286 Seaford Rd,<br/>Seaford, DE 199973</p>
+                             </div>
+                           </div>
+                                     </div></lightning:layoutItem>
+                      </div>        
+                                    
+                                     </lightning:layoutItem>     
+                                    
+                                    
+                                    <div class="font">
+                                      <h4 class="less">Review Listing</h4>
+                         <div class="table-form">
+                     
+                         <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped newtin">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            
+                                            
+                                           
+                                            
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Opportunity Name">MLS #</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Property Address</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Close Date">Status</div>
+                                            </th>
+                                          
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                     
+                                        <tr class="slds-hint-parent blue">
+                                    
+     <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">1000218012</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">KEY WEST, BEALLSVILLE, MD 20839</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate newgreen" title="4/14/2015">ACTIVE</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                   
+     
+                                          <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">1000218012</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">KEY WEST, BEALLSVILLE, MD 20839</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate newgreen" title="4/14/2015">ACTIVE</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                    
+     
+                                         <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">1000218012</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">KEY WEST, BEALLSVILLE, MD 20839</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate newgreen" title="4/14/2015">ACTIVE</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        
+                                        
+                                        
+                                    </tbody>
+                                </table>
+                                        </div>
+                                      <div class="linelink">
+                      <lightning:button class="brand" variant="brand" label="Back" title="Brand action" onclick="{! c.handleClick }" />
+                         <lightning:button class="brand brand2" variant="brand" label="Submit" title="Brand action" onclick="{! c.handleClick }" />
+                  </div>
+                                     </div>
+                                    
+                                    
+                                  
+                                   
+                                    
+                                 </div>
+                              </div>
+                           </lightning:layoutItem>
+                        </div>
+                     </div>
+                  </lightning:layout>
+               </lightning:layoutItem>
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage footer-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:footer />
+                         
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+            </lightning:layout>
+         </div>
+      </div>
+   
+   </div>
+</aura:component>

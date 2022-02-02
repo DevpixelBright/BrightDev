@@ -1,0 +1,86 @@
+<!-- Case_DistributionTable.cmp  -->
+
+<aura:component controller="CaseController_AC" implements="force:appHostable,flexipage:availableForAllPageTypes">
+<aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+<aura:attribute name="caseList" type="Case[]" />
+<aura:attribute name="paginationList" type="Case[]"/>
+<aura:attribute name="pageSize" type="Integer" default="5" />
+<aura:attribute name="totalSize" type="Integer"/>
+<aura:attribute name="start" type="Integer" />
+<aura:attribute name="end" type="Integer"/>
+
+<aura:attribute name="currentPageNumber" type="Integer" required="false" />
+<aura:attribute name="maxPageNumber" type="Integer" required="false" />    
+    
+    
+<table >
+<tr> 
+<td style="width:10%">Number of Record Per Page:</td>
+<td style="width:7%">
+<ui:inputSelect aura:id="records" change="{!c.onSelectChange}" >
+<ui:inputSelectOption text="5" value="5"/>
+<ui:inputSelectOption text="10" value="10"/>
+<ui:inputSelectOption text="20" value="20"/>
+<ui:inputSelectOption text="30" value="30"/>
+</ui:inputSelect>
+</td>
+<td></td>
+
+<td style="width:7%">Listview</td>
+<td style="width:25%">
+<!-- <ui:inputText aura:id="input1"  change="{!c.searchKeyChange}"   required="true"></ui:inputText>-->
+<ui:inputSelect aura:id="input1" change="{!c.searchKeyChange}">
+<ui:inputSelectOption label="All Records" text=""/>    
+<ui:inputSelectOption label="View 2" text="01012058"/>
+<ui:inputSelectOption label="View 3" text="01032568"/>
+<ui:inputSelectOption label="Accuracy &amp; Policy" text="Completed"/>
+</ui:inputSelect>
+</td>
+</tr>
+</table>
+
+<table class="slds-table slds-table–bordered ">
+
+<thead>
+<tr style="background-color:#6cbcd2;color:white;font-weight:bold">
+<th>Case Number</th>
+<th>Status</th>
+<th>Product</th>
+<th>Owner Name</th>
+<th>Subscription ID</th>
+<th>Contact Name</th>  
+<th>Category</th> 
+<th>Subject</th>
+<th>Date/Time Opened</th>    
+</tr>
+</thead>
+
+<tbody>
+<aura:iteration items="{!v.paginationList}" var="item">
+<tr>
+<!--<td><ui:outputText value="{!item.Id}" /></td> -->
+<td><ui:outputText value="{!item.CaseNumber}" /></td>
+<td><ui:outputText value="{!item.Status}" /></td>  
+<td><ui:outputText value="{!item.ProductId}" /></td>    
+<td><ui:outputText value="{!item.OwnerId}" /></td>
+<td><ui:outputText value="{!item.Subscription_ID__c}" /></td>
+<td><ui:outputText value="{!item.ContactId}" /></td>    
+<td><ui:outputText value="{!item.Category__c}" /></td>    
+<td><ui:outputText value="{!item.Subject}" /></td>
+<td><ui:outputText value="{!item.CreatedDate}" /></td>      
+</tr>
+</aura:iteration>
+
+<lightning:button label="First" disabled="{!v.start == 0}"  onclick="{!c.first}" />
+<lightning:button label="Previous" disabled="{!v.start == 0}"  onclick="{!c.previous}" />
+    
+        <lightning:button class="slds-button slds-button--neutral">
+             {!v.currentPageNumber} / {!v.maxPageNumber} 
+        </lightning:button>    
+    
+<lightning:button label="Next" disabled="{!v.end >= v.totalSize}" onclick="{!c.next}" />
+<lightning:button label="Last" disabled="{!v.end >= v.totalSize}" onclick="{!c.last}" />
+</tbody>
+
+</table>
+</aura:component>

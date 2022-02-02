@@ -1,0 +1,139 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,force:appHostable,lightning:isUrlAddressable" controller="Communities_AppealForm" access="global">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <aura:attribute name="showSuccess" type="boolean" default="false"/>
+    <aura:attribute name="appealFormObj" type="Compliance_Fine__c" default="{'sObjectType':'Compliance_Fine__c'}"/>
+    <aura:attribute name="today" type="Date" />
+    <aura:attribute name="Reason_For_Appeal" type="String" default=""/> 
+    <aura:attribute name="caseId" type="String" default="" />
+    <aura:attribute name="files" type="List" default="[]" />
+    <aura:attribute name="disabled" type="Boolean" default="true" />
+    <aura:attribute name="showspinner" type="Boolean" default="false" />
+    <aura:attribute name="hasError" type="Boolean" default="false"/>
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <lightning:notificationsLibrary aura:id="notifLib"/>
+    <aura:if isTrue="{!v.hasError}" >
+        <c:Communities_ToastNotification errMsg="Something went wrong." hasError="{!v.hasError}"/>
+    </aura:if>
+    <div class="fullpage slds-scope">
+        <div class="slds-grid slds-wrap">
+            <aura:if isTrue="{!!v.showSuccess}">
+                <aura:if isTrue="{!v.showspinner}">
+                    <div style="spin">
+                    	<lightning:spinner alternativeText="Loading" size="large" />
+                    </div>
+                </aura:if>
+                
+                <div class="slds-container--x-large new-container">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                        
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 middlebar">
+                            
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 middlebar1">
+                               
+                            </div>    
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bottombar bottombar1">
+                                <div class="dev dev1">
+                                    <h2>Appeal</h2>
+                                    <form>
+                                        <div class="review">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1"> 
+                                                    <h4>Date</h4>
+                                                    <h5 class="data"> <lightning:input type="date"  name="input3" placeholder="Date" required="true" value="{!v.today}"  variant = "label-hidden" readonly="true"/>
+                                                    </h5>
+                                                </div>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1"> 
+                                                    <h4>I</h4>
+                                                    <h5> <lightning:input type="text" name="input3" placeholder="Agent" required="true" value="{!v.appealFormObj.Agent_Name__r.Name}"  variant = "label-hidden" readonly="true"/>
+                                                    </h5>
+                                                </div>
+                                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part2"> 
+                                                    <h4>Associated With </h4>
+                                                    <h5> <lightning:input type="text" name="input3" placeholder="Office" required="true" value="{!v.appealFormObj.Subscription__r.Related_Location_Broker_Office__r.Account_Name__c + ' - ' + v.appealFormObj.Subscription__r.Related_Location_Broker_Office__r.Name}"  variant = "label-hidden" readonly="true"/>
+                                                    </h5>
+                                                </div>
+                                                
+                                                <p class="test">I believe that I have corrected the violation in accordance with the Rules and Regulations, and Policies of Bright MLS, LLC. I hereby appeal the fines and penalties associated with this violation.</p>
+                                            </div>
+                                        </div>
+                                        <div class="review">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1"> 
+                                                    <h4>MLS Number</h4>
+                                                    <h5><lightning:input type="text" name="input3" placeholder="MLS Number" required="true" value="{!v.appealFormObj.MLS_Number__c}"   variant = "label-hidden" readonly="true"/></h5>
+                                                </div>
+                                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 layer part3"> 
+                                                    <h4>Address</h4>
+                                                    <h5><lightning:input type="text" name="input3" placeholder="Address" value="{!v.appealFormObj.Full_Address__c}"  variant = "label-hidden" readonly="true" class="word-wrap: break-word;"/></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="review">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1"> 
+                                                    <h4>Violation Number</h4>
+                                                    <h5><lightning:input type="text" name="input3" placeholder="Violation Number" required="true" value="{!v.appealFormObj.Name}"   variant = "label-hidden" readonly="true"/></h5>
+                                                </div>
+                                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 layer part3"> 
+                                                    <h4>Violation Type</h4>
+                                                    <h5><lightning:input type="text" name="input3" placeholder="Violation Type" value="{!v.appealFormObj.Violation__c}"  variant = "label-hidden" readonly="true"/></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="review">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 layer part3"> 
+                                                    <h4>Reason for Appeal<span>*</span></h4>
+                                                    <h5><lightning:textarea name="input3" aura:id="reason" label="Textarea field with a placeholder" placeholder="Enter your reason for appeal" value="{!v.Reason_For_Appeal}" variant = "label-hidden" maxlength="32768" required="true" onblur="{!c.validateField}"/></h5>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 layer part1"> 
+                                                    <h4>File to Attach</h4>
+                                                    <h5 class="filemust">(File must be less than 2 MB)<br />(Allowed File Types : gif, jpg, jpeg, png, txt, rtf, html, pdf, doc)</h5>
+                                                </div>
+                                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part2">                                                                                                                                                               
+                        
+                                                    <h4 class="please"><lightning:input aura:id="fuploader" type="file" name="file" multiple="false" onchange="{!c.handleFilesChange}" accept=".gif, .jpg, .jpeg, .png, .rtf, .html, .pdf, .doc, .docx, .txt"/></h4>
+                                                    <aura:if isTrue="{!v.files.length==0}"><h6 class="true">No file chosen</h6></aura:if>
+                                                    <aura:iteration items="{!v.files}" var="file">
+                                                        <p class="file">{!file.name}</p>
+                                                    </aura:iteration>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1"> 
+                                                    <h4>Phone Number</h4>
+                                                    <h5><lightning:input type="text" placeholder="Phone Number" value="{!v.appealFormObj.Subscription__r.Primary_Phone__c}"  variant = "label-hidden" readonly="true" />
+                                                     <!--<img class="edit" src="{!$Resource.bright + '/bright-3.0/images/edit-black.svg'}" alt="edit" />-->
+                                                    </h5>
+                                                </div>
+                                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part2"> 
+                                                    <h4>Email Address</h4>
+                                                    <h5><lightning:input type="text" placeholder="Email Address" value="{!v.appealFormObj.Subscription__r.Private_Email__c}"  variant = "label-hidden" readonly="true" />
+                                                   <!-- <img class="edit" src="{!$Resource.bright + '/bright-3.0/images/edit-black.svg'}" alt="edit" />-->
+                                                    </h5>
+                                                </div>
+                                            </div>
+                                            <lightning:button class="brand" variant="brand " label="Submit" onclick="{!c.saveAppealForm }" disabled="{!v.disabled}" />
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{!v.showSuccess}">
+                <div class="slds-container--x-large new-container">
+                    <c:AppealThankyou subId="{!v.appealFormObj.Subscription_ID__c}"/>
+                </div>
+            </aura:if>
+        </div>
+    </div>
+</aura:component>

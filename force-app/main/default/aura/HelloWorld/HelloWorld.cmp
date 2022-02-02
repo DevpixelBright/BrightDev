@@ -1,0 +1,15 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+	<aura:attribute name="greeting" type="String" default="Hello" access="global" />
+    <aura:attribute name="subject" type="String" default="World" access="global" />
+
+    <div style="box">
+      <span class="greeting">{!v.greeting}</span>, {!v.subject}!
+    </div>
+    <div>
+        <lightning:fileCard fileId="069J0000000lPvnIAE"/>
+        <img src="https://mris--dev--c.cs10.content.force.com/sfc/servlet.shepherd/version/download?file=069J0000000lPvnIAE" />
+        <img src="https://mris--dev--c.cs10.content.force.com/servlet/servlet.FileDownload?file=068J0000000kuAy"/>
+        <img src="https://mris--Dev.cs10.my.salesforce.com/sfc/p/J0000003OJ9o/a/J00000004KvL/uAXSgg34BFPPJYq5zsOTrnL8XuijAVkdTk2OK_ZnYEs"/>
+        
+    </div>
+</aura:component>

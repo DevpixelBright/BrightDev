@@ -1,0 +1,63 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="Communities_Support_Controller" lightningstylesheets="true">
+    <apex:composition template="Communities_Base">
+        
+        <apex:define name="content">
+            <c:Bootstrap_Resources />
+            <style>
+                .jumbotron p {
+                    font-size: 17px;
+                }
+                .jumbotron {
+                                padding-top: 10px;
+                                padding-bottom: 20px;
+                            }           
+            </style>
+            
+            <div class="jumbotron landing_instructions">
+                <p>BRIGHT is committed to helping our customers use our tools and services to their full potential. If you have a question or concern about your MLS subscription or specific MLS products, you’ve come to the right place. We are available to answer your calls 8:00AM – 8:00PM, Monday through Friday, and 9:00AM – 6:00PM Saturday and Sunday.</p>
+                
+            </div>
+            
+            <div class="row action-panels">
+                <apex:outputPanel layout="none" rendered="{!$Label.MRIS_Communities_Enable_ChatterAnswers == 'true' && serviceJurisdiction != 'BRIGHT'}" >
+                    <div class="col-sm-6 col-md-4">
+                        <a href="Communities_Chatter_Answers#!/feedtype=POPULAR&dc=All&criteria=ALLQUESTIONS">
+                            <h4><i class="fa fa-comment-o fa-2x" style="top: -1px;"></i>Chatter Q&amp;A</h4>
+                            <p>Sometimes the most helpful advice can come from your fellow real estate professionals. Post your questions here for other MRIS subscribers to answer.</p>
+                        </a>
+                    </div>
+                </apex:outputPanel>
+                <div class="col-sm-6 col-md-4">
+                    <a href="https://dev-dev-dev.cs10.force.com/CaseManagement/s/">
+                        <h4><i class="fa fa-archive fa-2x"></i>View My Cases</h4>
+                        <p>Have you previously submitted a case and want to check on its status? View your submitted cases here.</p>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <a href="https://dev-dev-dev.cs10.force.com/CaseManagement/s/create-case">
+                        <h4><i class="fa fa-envelope-o fa-2x"></i>Submit New Case</h4>
+                        <p>Do you have a question about your subscription? Experiencing a technical issue with an MLS product? Submit a case to the MLS Support Center.</p>
+                    </a>
+                </div>
+                <!--<div class="col-sm-6 col-md-4">
+                    <a href="Communities_NewCase">
+                        <h4><i class="fa fa-envelope-o fa-2x"></i>Submit New Case from Knowledge</h4>
+                        <p>Do you have a question about your subscription? Experiencing a technical issue with an MLS product? Submit a case to the MLS Support Center.</p>
+                    </a>
+                </div>
+                -->
+              <!--  <apex:outputPanel layout="none" rendered="{!serviceJurisdiction != 'BRIGHT'}">
+                    <div class="col-sm-6 col-md-4">
+                        <a href="Office_Visit_Request">
+                            <h4><i class="fa fa-envelope-o fa-2x"></i>Submit Office Visit Request</h4>
+                            <p>Do you have a question about your Office Visit Request? Experiencing a technical issue with an MLS product? Submit a case to the MLS Support Center.</p>
+                        </a>
+                    </div>
+                </apex:outputPanel>  -->                            
+            </div>
+
+            <script>markOptionPanel("support")</script>
+        </apex:define>
+
+    </apex:composition> 
+</apex:page>

@@ -1,0 +1,37 @@
+<aura:component >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="currentYear" type="string" />
+    <div class="bcomfooter">
+        <footer id="authFooter" class="footer-container authFooter fix-footer-at-bottom">
+            <div class="MuiGrid-root authFooter_container" id="authFooter_container">
+                <div id="footer-main-container">
+                    <ul class="footer-top-menu">
+                        <li id="footer-top-menu_li_id"><a href="{!$Label.c.BCOM_Footer_ContactUs}" target="_blank">Contact Us</a></li>
+                        <li id="footer-top-menu_li_id"><a href="{!$Label.c.BCOM_Footer_Support}" target="_blank">Support</a></li>
+                    </ul>
+                    <hr class="footer-white-line" id="footer_white_line_hr" />
+                    <div class="footer-bottom-section" id="footer_bottom_section_id">
+                        <div class="footer-bottom-first-section" id="footer_bottom_first_section_id">
+                            <ul>
+                                <li id="footer_bottom_first_section_ul_li_0"><a href="{!$Label.c.BCOM_Footer_Facebook}" target="_blank" aria-label="facebook"> <img id="footer-facebook" src="https://images.ctfassets.net/1g8q1frp41ix/35tLMSPCLNql5biAnpgkoz/74b76753c9a736fd230a16bbd3aa7cd0/Ellipse_40.png" alt="facebook" /> </a></li>
+                                <li id="footer_bottom_first_section_ul_li_1"><a href="{!$Label.c.BCOM_Footer_Twitter}" target="_blank" aria-label="twitter" aria-invalid="true"> <img id="footer-twitter" src="https://images.ctfassets.net/1g8q1frp41ix/4MiKmvGin9OQ34aKbjvM8c/ddb93c18c1cbbe5ea75fcf700cec8875/Ellipse_41.png" alt="twitter" /> </a></li>
+                                <li id="footer_bottom_first_section_ul_li_2"><a href="{!$Label.c.BCOM_Footer_Linkedin}" target="_blank" aria-label="linkedin" aria-invalid="true"> <img id="footer-linked-in" src="https://images.ctfassets.net/1g8q1frp41ix/68izYmi8lvmq1X72YynIVz/d5e85d1def7ac9035f2c0fee571533a8/linked_in.png" alt="linked in" /> </a></li>
+                                <li id="footer_bottom_first_section_ul_li_3"><a href="{!$Label.c.BCOM_Footer_YouTube}" target="_blank" aria-label="youtube"> <img id="footer-youtube" src="https://images.ctfassets.net/1g8q1frp41ix/2KO1f3d1Hmln8l8jiHaCeC/521a761fdb66e454c9bcd5698ce3e6db/you_tube.png" alt="youTube" /> </a></li>
+                                <li id="footer_bottom_first_section_ul_li_4"><a href="{!$Label.c.BCOM_Footer_Instagram}" target="_blank" aria-label="instagram" aria-invalid="true"> <img id="footer-inst-a-gram" src="https://images.ctfassets.net/1g8q1frp41ix/6cXhUHG7NsXpSZmafrlzX9/498fc61fc7a993764971f6dcefb8d4f8/insta.png" alt="instAGram" /> </a></li>
+                            </ul>
+                            <div id="footer_bottom_first_section_bright_home"><a href="{!$Label.c.BCOM_Footer_BRIGHTMLSHomes}" target="_blank">BrightMLSHomes.com</a></div>
+                        </div>
+                    </div>
+                    <ul class="footer-bottom-second-section">
+                        <li id="footer_bottom_second_section_ul_li_0"><a href="{!$Label.c.BCOM_Footer_Copyright}" target="_blank">Copyright notice</a></li>
+                        <li id="footer_bottom_second_section_ul_li_1"><a href="{!$Label.c.BCOM_Footer_Terms}" target="_blank">Terms of use</a></li>
+                        <li id="footer_bottom_second_section_ul_li_2"><a href="{!$Label.c.BCOM_Footer_Privacy}" target="_blank">Privacy Policy</a></li>
+                        <li id="footer_bottom_second_section_ul_li_3"><a href="{!$Label.c.BCOM_Footer_Accessibility}" target="_blank">Accessibility</a></li>
+                        <li id="footer_bottom_second_section_ul_li_4"><a href="{!$Label.c.BCOM_Footer_SubscriberAgreement}" target="_blank" aria-invalid="true">Subscriber Agreement</a></li>
+                    </ul>
+                    <div class="footer-copy-right-section" id="footer_copy_right_section"><span id="footer_copy_right_text">&copy;{!v.currentYear} Bright MLS, Inc. All Rights Reserved.</span></div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</aura:component>

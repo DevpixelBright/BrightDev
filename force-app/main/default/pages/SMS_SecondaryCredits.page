@@ -1,0 +1,197 @@
+<apex:page controller="SMS_SecondaryCredits" sidebar="false" lightningstylesheets="true">
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/angular.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/ui-bootstrap-tpls-0.12.0.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.AngularJsTable,'/ng-table.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.AngularJsTable,'/ng-table.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.DataArchive_Library,'js/jquery.min.js')}"/>
+    <c:Bootstrap_Resources />
+    <style>
+        body {
+            font-size:12px;
+        }
+        h2 { 
+            font-size:100%;
+        }
+        .table {
+            margin-bottom:10px;
+        }
+        .nav-tabs>li>a {
+            font-weight:bold;
+        }
+        .btn1-primary {
+          color: #fff;
+          background-color: #337ab7;
+          border-color: #2e6da4;
+        }          
+        .btn1 {
+          display: inline-block;
+          margin-bottom: 0;
+          font-weight: 400;
+          text-align: center;
+          vertical-align: middle;
+          cursor: pointer;
+          background-image: none;
+          border: 1px solid transparent;
+          white-space: nowrap;
+          padding: 4px 10px;
+          font-size: 13px;
+          line-height: 1.42857143;
+          border-radius: 2px;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+        } 
+        .pagination {
+            margin:0px;
+        }   
+        .pull-right {
+            margin-top:5px;
+        }  
+        input[type=checkbox] {
+            margin-top:3px !important;
+        }  
+    </style>
+
+    <apex:form > 
+    
+        <apex:outputPanel id="out3">
+            <script>
+                function confirmRecordsAdjustment(){ 
+                    alert("Request placed successfully. Please sync data from zuora to reflect the credit adjustment results.");
+                    window.location = '';
+                }                 
+            </script>       
+        </apex:outputPanel>        
+      
+        <apex:actionFunction name="SecondaryAdjustments" action="{!test}" status="PaymentStatus" reRender="out3" oncomplete="confirmRecordsAdjustment();">
+            <apex:param name="Parameter" assignTo="{!secondaryCreditsJson}" value="" />
+        </apex:actionFunction>
+        
+        
+        <apex:actionStatus id="PaymentStatus">
+            <apex:facet name="start">
+                <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 1000; background-color: black;">
+                     <div class="alert alert-info" style="width:50%; margin:auto; margin-top:15%; color:black; font-size:16px; font-weight:bold;">
+                         <center>Processing request. Please wait ...<br/>
+                             <img src="{!URLFOR($Resource.AngularLibrary,'/Cursor_Windows_Vista.gif')}" />
+                         </center>
+                     </div>
+                </div>
+
+            </apex:facet>
+            <apex:facet name="stop">
+                 <div class="alert alert-danger" id="status"  style="display:none;">
+                     <center>Credit Balance Adjustment failed for few accounts. Please review the result below. </center>
+                 </div>
+            </apex:facet>                
+        </apex:actionStatus>           
+    </apex:form> 
+
+    <div id="result" ng-app="first" ng-controller="firstcontroller" style="font-size:12px; min-height:480px;">
+        <div class="col-sm-12" style="padding-left:0px; padding-right:0px;">
+            <div class="panel panel-default">                
+                <div class="panel-heading">
+                    <h3 class="panel-title" style="color:#428bca; font-weight:bold; font-size:14px;">
+                        <span class="glyphicon glyphicon-th-list"></span> Secondary Credit Adjustment                       
+                    </h3>                        
+                </div>
+                
+                <div class="panel-body" ng-show="records.length > 0"> 
+                    <div style="margin-bottom:10px;">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="width:70%;">
+                                    <input class="btn1 btn1-primary" type="button" value="Adjust" ng-click="AdjustSecondaryCredits()" />
+                                </td>
+                                <td style="width:25%;">
+                                    <input type="text" class="form-control" placeholder="Search Records" ng-model="search"  />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>     
+                        <table ng-table="tableParams" class='table' id='table'>
+                            <tr ng-repeat="account in $data">
+                                <td header="'ng-table/headers/checkbox.html'"><input type="checkbox" ng-model="account.isSelected" ng-checked="account.isSelected" ng-disabled="!account.isValid" /> </td>
+                                <td data-title="'Secondary Subscription'" sortable="'secondaryId'">{{account.secondaryId}}</td>
+                                <td data-title="'Contact Name'" sortable="'secondaryContact'">{{account.secondaryContact}}</td>
+                                <td data-title="'Status'" sortable="'secondaryStatus'">{{account.secondaryStatus}}</td>
+                                <td data-title="'Credit Balance'" sortable="'credits'">{{account.credits}}</td> 
+                                <td data-title="'Primary Subscription'" sortable="'primaryId'">{{account.primaryId}}</td> 
+                                <td data-title="'Status'" sortable="'primaryStatus'">{{account.primaryStatus}}</td> 
+                                <td data-title="'Contact Name'" sortable="'primaryContact'">{{account.primaryContact}}</td>
+                            </tr>  
+                        </table>
+                        
+                        <script type="text/ng-template" id="ng-table/headers/checkbox.html">
+                            <input ng-click="test()" type="checkbox" ng-model="SelectAll" id="select_all" name="filter-checkbox" />
+                        </script>                        
+                    </div>
+                </div>
+                <div class="panel-body" ng-show="records.length == 0">
+                    <div class="alert alert-warning" role="alert">No secondary subscriptions exist with credit balance.</div>
+                </div>
+            </div>
+        </div>    
+    </div>
+    
+    <script>
+        var app = angular.module('first', ['ngTable']).
+        controller('firstcontroller', function($scope, $filter, NgTableParams) { 
+            $scope.records = {!secondaryCreditsJson}; 
+            var data = {!secondaryCreditsJson};                
+            $scope.tableParams = new NgTableParams({
+                page: 1,            
+                count: 10,
+                sorting: {
+                    name: 'asc'     
+                }
+            }, {
+                total: data.length, // length of data
+                getData: function($defer, params) {   
+                    var searchedData = searchData();
+                    params.total(searchedData.length);                                                                                                                                                                  
+                    var filteredData = params.filter() ? $filter('filter')(searchedData, params.filter()) : searchedData;
+                    var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : searchedData;
+                    params.total(orderedData.length); 
+                    $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                }
+            });          
+                         
+            $scope.$watch("search", function () {
+                $scope.tableParams.reload();
+            });                
+            
+            var searchData = function(){
+                if($scope.search)
+                   return $filter('filter')(data,$scope.search);
+                return data;
+            } 
+            
+            $scope.SelectAll = null;
+            $scope.test = function() {
+                var selectAllRecords = $("#select_all").is(':checked');
+                for(var i=0; i<data.length; i++) {
+                    if(selectAllRecords && data[i].isValid) 
+                        data[i].isSelected = true;
+                    else
+                        data[i].isSelected = false;
+                }
+            }
+            
+            $scope.AdjustSecondaryCredits = function() {
+                $scope.finalList = [];
+                for(var i=0; i<data.length; i++) {
+                    if(data[i].isSelected) {
+                        $scope.finalList.push(data[i])    
+                    }
+                }
+                
+                if($scope.finalList.length > 0) {
+                    SecondaryAdjustments(JSON.stringify($scope.finalList));   
+                }     
+            }                                                  
+        });           
+    </script>
+</apex:page>

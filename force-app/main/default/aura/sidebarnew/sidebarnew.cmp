@@ -1,0 +1,106 @@
+<aura:component >
+	<div class="page-section page-left sidebar">
+                                 <ul class="menuside">
+                                    <li>
+                                       <a href="#">
+                                           <img  src="{!$Resource.bright + '/bright-3.0/images/AccountsHome-black.svg'}" alt="" />
+     
+                                          Accounts Home
+                                       </a>
+                                    </li>
+                                    <li>
+                                       <a class="active" href="#">
+                                            <img  src="{!$Resource.bright + '/bright-3.0/images/Profile-orange.svg'}" alt="" />
+                                          
+                                          Profile
+                                       </a>
+                                    </li>
+                                    <li onclick="{!c.treeMenu}">
+                                       <a>
+                                             <img  src="{!$Resource.bright + '/bright-3.0/images/Brokerage.svg'}" alt="" />
+                          
+                                          Brokerage<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" />
+                                       </a>
+                                       <ul class="submenu submenu1">
+                                          <li><a href="#">Office Roster</a></li>
+                                          <li><a href="#">Office Statement </a></li>
+                                          <li><a href="#">W-9 Forms </a></li>
+                                          <li><a href="#">Office Information </a></li>
+                                          <li><a href="#">Responsible Broker </a></li>
+                                          <li><a href="#">Authorized Signers</a></li>
+                                          <li><a href="#">Office Managers</a></li>
+                                          <li><a href="#">Accuracy Notifications</a></li>
+                                          <li><a href="#">Data Licensing</a></li>
+                                       </ul>
+                                    </li>
+                                    <li onclick="{!c.treeMenu1}">
+                                       <a href="#">
+                                           <img  src="{!$Resource.bright + '/bright-3.0/images/Subscription.svg'}" alt="" />
+                                          
+                                          Subscription<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" />
+                                       </a>
+                                       <ul class="submenu submenu2">
+                                          <li><a href="#">Subscribed Products      </a></li>
+                                          <li><a href="#">License Association MLS</a></li>
+                                          <li><a href="#">Agent Listing Transfer </a></li>
+                                          <li><a href="#">Agent Accuracy Notifications </a></li>
+                                          <li><a href="#">IDX &amp; VOW Licensing Request </a></li>
+                                          <li><a href="#">Office Exclusive Certification</a></li>
+                                          <li><a href="#">Data Licensing</a></li>
+                                       </ul>
+                                    </li>
+                                    <li onclick="{!c.treeMenu2}">
+                                       <a href="#">
+                                             <img  src="{!$Resource.bright + '/bright-3.0/images/Requests.svg'}" alt="" />
+                           
+                                          Requests<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" />
+                                       </a>
+                                       <ul class="submenu submenu3">
+                                          <li><a href="#">New Applications   </a></li>
+                                          <li><a href="#">Agent Transfer Request </a></li>
+                                          <li><a href="#">Listing Transfer Request</a></li>
+                                          <li><a href="#">IDX &amp; VOW Agent Request Forms </a></li>
+                                       </ul>
+                                    </li>
+                                    <li onclick="{!c.treeMenu3}">
+                                       <a href="#">
+                                            <img  src="{!$Resource.bright + '/bright-3.0/images/Finance.svg'}" alt="" />
+                                           Finance<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" />
+                                       </a>
+                                       <ul class="submenu submenu4">
+                                          <li><a href="#">Broker Data Licensing Fees   </a></li>
+                                          <li><a href="#">Brokerage Payment Method </a></li>
+                                          <li><a href="#">Statement of Account </a></li>
+                                          <li><a href="#"> Pay My Balances </a></li>
+                                          <li><a href="#">My Payment Methods </a></li>
+                                       </ul>
+                                    </li>
+                                    <li>
+                                       <a href="#">
+                                           <img  src="{!$Resource.bright + '/bright-3.0/images/Notification-Preferences.svg'}" alt="" />
+                                          
+                                            Notification Preferences
+                                       </a>
+                                    </li>
+                                    <li>
+                                       <a href="#">
+                                            <img  src="{!$Resource.bright + '/bright-3.0/images/Settings-Permissions.svg'}" alt="" />
+                                            Settings &amp; Permissions
+                                       </a>
+                                    </li>
+                                     <li>
+                                       <a href="#">
+                                            <img  src="{!$Resource.bright + '/bright-3.0/images/Settings-Permissions.svg'}" alt="" />
+                                            Support
+                                       </a>
+                                    </li>
+                                    <li class="logout">
+                                       <a href="#">
+                                            <img  src="{!$Resource.bright + '/bright-3.0/images/Logout.svg'}" alt="" />
+                                           
+                                           Logout
+                                       </a>
+                                    </li>
+                                 </ul>
+                              </div>
+</aura:component>

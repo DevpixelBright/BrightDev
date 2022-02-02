@@ -1,0 +1,6 @@
+<apex:component controller="AuthorizedSignerOffices" access="global" >
+    <apex:attribute name="rId" type="Id"  assignTo="{!recordId}" description="Record Id of provision product"/>
+    <apex:repeat value="{!relationships }" var="relationship">
+        {!relationship.Broker_Office__r.Account_Name__c} ( {!relationship.Broker_Office__r.Name})<br/>
+    </apex:repeat>
+</apex:component>

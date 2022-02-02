@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Office_Manager__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Office_Manager</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Office_Manager</inlineHelpText>
+    <label>Office Manager</label>
+    <referenceTo>Subscriptions__c</referenceTo>
+    <relationshipLabel>SMS Compliance Fines (Office_Manager)</relationshipLabel>
+    <relationshipName>Compliance_Fines1</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

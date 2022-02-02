@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Compliance_Violation__c</fullName>
+    <externalId>false</externalId>
+    <label>Compliance Violation</label>
+    <referenceTo>Compliance_Violation__c</referenceTo>
+    <relationshipLabel>SMS Compliance Fines</relationshipLabel>
+    <relationshipName>Compliance_Fines</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>true</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

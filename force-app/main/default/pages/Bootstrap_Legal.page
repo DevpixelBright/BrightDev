@@ -1,0 +1,49 @@
+<apex:page standardStylesheets="false" lightningstylesheets="true">
+    <style>
+        .bootstrap-legal {
+            padding: 10px;
+            background-color: #fff;
+            height: 100%;
+            overflow: auto;
+        }
+
+        .bootstrap-legal h1 {
+            display: block;
+            font-size: 30px;
+            text-align: center;
+        }
+
+        .bootstrap-legal h2 {
+            display: block;
+            font-size: 25px;
+            font-weight: normal;
+        }
+
+        .bootstrap-legal h3 {
+            display: block;
+            font-size: 20px;
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        .bootstrap-legal p {
+            font-size: 12px
+            margin-bottom: 20px;
+        }
+        
+        .bootstrap-legal .confirmation {
+            margin-top: 40px;
+        }
+        
+        .bootstrap-legal .confirmation input[type=text] {
+            text-transform: uppercase;
+        }
+    </style>
+    
+    <div class="bootstrap-legal">    
+        <apex:insert name="terms"/>
+        <div class="confirmation">
+            <apex:insert name="confirmation"/>
+        </div>
+    </div>
+</apex:page>

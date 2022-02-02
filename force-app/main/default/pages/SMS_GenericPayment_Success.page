@@ -1,0 +1,61 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="SMS_GenericPaymentProcess_Controller" lightningstylesheets="true">
+    <apex:composition template="Bootstrap_Framed">        
+        <apex:define name="content">
+            <apex:form >
+                <div class="instructions">
+                    <p>Thank you for your payment to MLS!</p>
+                    <p>Below is confirmation of payment that can be printed for your records by clicking the “Print Receipt” button. If you do not want to print a receipt, click “Continue.”</p>
+                </div>
+
+                <apex:actionFunction action="{!updateAutoPayPaymentMethod}" name="updateAutoPayPaymentMethod" reRender="invoice" />
+                <apex:actionFunction action="{!generateBaselineInvoice}" name="generateBaselineInvoice" reRender="invoice" />
+                <apex:actionFunction action="{!confirmBaselineInvoice}" name="confirmBaselineInvoice" reRender="invoice" />
+
+                <apex:outputPanel id="invoice">
+                    <div><apex:pageMessages /></div>
+                
+                    <apex:outputPanel rendered="{!showLoading}" >
+                        <div class="row">
+                            <div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-5">
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+
+                    <apex:outputPanel rendered="{!showConfirmation}" >
+
+                        <div class="invoice">   
+                            
+                            <c:SMS_GP_InvoiceBlock parentController="{!self}" />
+                            
+                            <div class="row default_gap">
+                                <div class="col-md-4 col-md-offset-4">
+                                    <div class="btn-group btn-group-justified">
+                                        <a href="#" class="btn btn-primary" onclick="parent.generic_payment_complete();">Continue</a>
+                                        <apex:commandLink styleClass="btn btn-default" style="border-radius: 0px 4px 4px 0px;" value="Print Receipt" action="{!printReceipt}" target="_blank"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+
+                    <apex:outputPanel rendered="{!checkForBaselineInvoice}" >
+                        <script>window.setTimeout(confirmBaselineInvoice, 500);</script>
+                    </apex:outputPanel>
+                    
+                </apex:outputPanel>
+
+                <script>
+                    $(function () {
+                        parent.payment_success();
+                        updateAutoPayPaymentMethod();   
+                        generateBaselineInvoice();
+                    });
+                </script>
+            </apex:form>
+        </apex:define>
+
+    </apex:composition> 
+</apex:page>

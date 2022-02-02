@@ -1,0 +1,65 @@
+<aura:component controller="EZJoin_ReinstatementController" implements="force:appHostable,lightning:isUrlAddressable">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    
+    <aura:attribute name="subscriptionId" type="String" default="" />
+    <aura:attribute name="showSpinner" type="Boolean" default="false" />
+    <aura:attribute name="showServerError" type="Boolean" default="false" />
+
+    <!-- Loading spinner container -->
+    <aura:if isTrue="{!v.showSpinner}">
+        <div class="slds-is-relative">
+            <lightning:spinner />
+        </div>
+    </aura:if> 
+
+	<!-- Server Error Prompt -->
+    <aura:if isTrue="{!v.showServerError}">
+        <div class="demo-only">
+            <section role="alertdialog" tabindex="0" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal_prompt" aria-modal="true">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header slds-theme_error slds-theme_alert-texture">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                            <lightning:icon iconName="utility:close"></lightning:icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 class="slds-text-heading_medium" id="prompt-heading-id">Service Unavailable</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="prompt-message-wrapper">
+                        <p>Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam incididunt duis in sint irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit officia tempor esse quis. Cillum sunt ad dolore
+                            quis aute consequat ipsum magna exercitation reprehenderit magna. Tempor cupidatat consequat elit dolor adipisicing.</p>
+                    </div>
+                    <footer class="slds-modal__footer slds-theme_default">
+                        <button class="slds-button slds-button_neutral">Okay</button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>    
+    </aura:if>
+    
+    <div class="fullpage slds-scope">
+        <div class="slds-grid slds-wrap">
+            
+            <c:EZJoin_NewApplicationHeader appConfig="[]" />
+            
+			<div class="slds-container--x-large new-container" id="content-container">
+				<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+					<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_5-of-12 slds-large-size_5-of-12 status">
+                        <h3>Reactivate Your Subscription</h3>
+                        <h5>To reactivate your account, please enter your Subscription ID.</h5>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 full-field-line">
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_9-of-12 slds-large-size_9-of-12 application application1">
+                                <lightning:input type="text" value="{!v.subscriptionId}" name="SubscriptionId" aura:id="SubscriptionId" required="true" placeholder="Enter Subscription ID" onblur="{!c.validateEvtHandler}" />
+                            </div>
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 application">
+                                <button class="slds-button slds-button_brand" onclick="{!c.submitClickEvtHandler}">Continue</button>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+			</div>
+            
+            <c:EZJoin_NewApplicationFooter />
+        </div>
+    </div>    
+</aura:component>

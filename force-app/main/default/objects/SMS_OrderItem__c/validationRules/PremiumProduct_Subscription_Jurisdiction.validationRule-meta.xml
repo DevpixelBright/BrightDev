@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PremiumProduct_Subscription_Jurisdiction</fullName>
+    <active>false</active>
+    <description>Premium product&apos;s jurisdiction should be same as Subscription&apos;s Service Jurisdiction</description>
+    <errorConditionFormula>IF( NOT(IsCore__c) &amp;&amp; (TEXT(Order_Id__r.MRIS_Subscription_Id__r.Service_Jurisdiction__c) !=  TEXT(Product_Service_Jurisdiction__c)), true, false)</errorConditionFormula>
+    <errorMessage>Premium product should be same Subscription&apos;s Service Jurisdiction</errorMessage>
+</ValidationRule>

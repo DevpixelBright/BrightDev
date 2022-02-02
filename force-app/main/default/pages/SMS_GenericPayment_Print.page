@@ -1,0 +1,18 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="SMS_GenericPaymentProcess_Controller">
+    <apex:composition template="Bootstrap_Plain_Single">
+        
+        <apex:define name="instructions">
+            <div style="margin-bottom: 25px; width: 55%; margin-left: 16%; margin-top: 25px;">
+            <img id="logo" src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/img/logo-bright.png')}" height="32" style="background-color:#3c90dd;" /><br/><br/>
+            Thank you for your payment! Please print this receipt for your records. Have a bright day!
+            </div>
+        </apex:define>
+
+        <apex:define name="content">
+            <div class="invoice">
+                <c:SMS_GP_InvoiceBlock parentController="{!self}" />
+            </div>
+        </apex:define>
+
+    </apex:composition> 
+</apex:page>

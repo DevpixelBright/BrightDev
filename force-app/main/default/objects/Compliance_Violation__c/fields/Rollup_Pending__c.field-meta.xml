@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rollup_Pending__c</fullName>
+    <externalId>false</externalId>
+    <label>Rollup Pending</label>
+    <summarizedField>Compliance_Fine__c.Fine_Amount__c</summarizedField>
+    <summaryFilterItems>
+        <field>Compliance_Fine__c.Status__c</field>
+        <operation>equals</operation>
+        <value>Pending, Under Appeal</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Compliance_Fine__c.Compliance_Violation__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

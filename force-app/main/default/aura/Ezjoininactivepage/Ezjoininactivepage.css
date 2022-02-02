@@ -1,0 +1,65 @@
+@font-face {
+    font-family: 'LatoBold';
+    src: url(/customers/resource/LatoBold);
+}
+
+@font-face {
+    font-family: 'LatoRegular';
+    src: url(/customers/resource/LatoRegular);
+}
+.THIS.slds-scope{ background:#fff;}
+.THIS .fullpage { background:#f2f3f7;  margin:0;  padding:0;}
+.THIS .slds-box_x-small{ padding:0; border:none;}
+/*header css start*/
+.THIS .header-part{ display: inline-block; padding:0;line-height: 40px; vertical-align: top;}
+.THIS .header-part .logo img{ width:140px;}
+.THIS .new-container { margin: 0 auto; border: none; width: -webkit-fill-available;width: 100%;}
+.THIS .containerfooter { background:#1f3a93;position:inherit}
+.THIS .new-containerpage { margin: 0 auto;border-bottom:1px solid #ccc; width: -webkit-fill-available;width: 100%;}
+.THIS .header-full{ padding:14px 0;}
+.THIS .header-part .bar h2{ color: #00b0b9;font-size: 20px;font-family:LatoBold;} 
+.THIS .header-part .bar1 h2{ color: #282828;} 
+.THIS .bar-title-box{display: inline-block;}
+.THIS .bar-title{ display:block;line-height: normal;}
+.THIS .bar-title h5{ display:inline-block; color:#333; font-family:LatoRegular; font-size:13px;}
+.THIS .bar-title h6{color:#333; font-family:LatoRegular; font-size:13px; text-align: right;}
+.THIS .call{ margin:0; padding:0;text-align: right;line-height: normal;}
+.THIS .call h4{ color:#333; font-family:LatoRegular; font-size:13px; margin:12px 54px 5px 0;}
+.THIS .call h3{ color:#282828; font-family:LatoRegular; font-size:18px;}
+/*header css end*/
+/*footer css start*/
+.THIS .footerpartdown{ position:relative; width:100%;}
+.THIS .footer-full{ padding:26px 0; margin:0;}
+.THIS .footerbottom{background: #212b3d;width: 100%;}
+.THIS .footer-part{ margin:0; padding:0; display:inline-block;}
+.THIS .footer-part p{color:#a8b3c6; margin:0 ;font-size:14px; font-family:LatoRegular;  display:inline-block; }
+.THIS .footer-part p a{color:#a8b3c6; margin:0 40px 0 0 ;font-size:14px; font-family:LatoRegular;  display:inline-block; }
+.THIS .footer-part p.copy{   text-align: right;    display: block;}
+/*footer css end*/
+/*content css start*/
+.THIS .inactive{ margin:0; padding:0; display:inline-block; vertical-align: top;}
+.THIS .flow1 img{ width:100%;}
+.THIS .inflow{margin:44px auto;}
+.THIS .flow2{ padding:0 0 0 30px;}
+.THIS  .flow2 h2{font-size: 29px;font-family: LatoBold;color: #fe4602; margin: 0 0 10px 0;} 
+.THIS  .flow2 p.flowpoint{margin: 0 0 0 0; padding: 0; color: #000; font-family: 'LatoBold'; font-size: 18px;
+    text-align: left;}
+.THIS  .flow2 p{margin: 0 0 0 0; padding: 0; color: #000; font-family: 'LatoRegular'; font-size: 18px;
+    text-align: left;}
+.THIS .tax h4 a{margin: 0 0 0 0; padding: 0; color: #fe4602; font-family: 'LatoRegular'; font-size: 18px;
+    text-align: left;text-decoration: underline;}
+.THIS .tax{ margin:0; padding:0; display:inline-block}
+.THIS .tax h4{margin: 0 40px 0 0; padding: 0; display: inline-block;}
+.THIS .tax h4 a:hover{text-decoration: none;}
+.THIS .flow2 .slds-button_brand{ border-radius:0; color:#fff;border:1px solid #fe4602;margin:30px 0 40px; font-size:18px; padding:5px 20px; background:#fe4602; font-family:LatoRegular;}
+.THIS .flow2 .slds-button_brand:hover{border:1px solid #fe4602;color:#fe4602;background:#fff;}
+.THIS .flow2 .slds-button_brand:active{border:1px solid #fe4602;color:#fe4602;background:#fff;}
+.THIS .flow2 .slds-button_brand:focus{border:1px solid #fe4602;color:#fe4602;background:#fff;outline: 0; box-shadow: none;}
+/*content css end*/
+
+
+
+@media screen and (min-width: 1400px) {
+   .THIS .footerpartdown{ position:relative;} 
+   .THIS .containerfooter { position:fixed; bottom:0;} 
+}

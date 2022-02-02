@@ -1,0 +1,208 @@
+<apex:page controller="EBOSS_StaffOrder" doctype="html-5.0" standardStylesheets="false" lightningstylesheets="true" title="Elevate BOSS - Staff Order"> 
+    <style>
+        .slds-scope .slds-page-header{ float:left; width:100%;}
+        .new-title{width:100%; margin:30px 0;padding: .5rem .75rem;border-bottom: 1px solid rgb(221, 219, 218);border-radius: .25rem;background: #fff;
+        background-clip: padding-box;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.10); border: 1px solid rgb(221, 219, 218); float:left;}
+        .new-title h1{font-size: 1.125rem;font-weight: 700; line-height: 1.25;display: block;margin: 5px 0 0 10px;float:left;}  
+        .newheader{  min-height: 44px;}  
+        .pbSubsection{ padding-top:0 !important;}
+        .btn-product { float:right;margin: 0 10px 0 0 !important;}
+        .bPageBlock{ box-shadow: none!important; border:none !important;}
+        .btn-rgt{ text-align: center;margin: 0 auto 20px; width: 100%; float: none; display: block;}
+        .btn-rgt .place-order{background-color: rgba(0, 68, 135, 1); border-color: rgba(0, 68, 135, 1); color:#fff;}
+        .btn-rgt .place-order:hover{background-color: rgba(0, 68, 135, 1); border-color: rgba(0, 68, 135, 1); color: rgb(255, 255, 255);}
+        body .bPageBlock .detailList .labelCol{ width:23.5%;}
+        .input-newbox{width: 300px !important;}
+        .home-page-header{ margin:0 0 20px 0;}
+        .products_table table:first-child tr:first-child th:first-child {width:25% !important;}
+        
+        #billing_div .table-form .detailList{ width:100%;}
+        #billing_div .table-form .detailList th:nth-child(1) {width: 92%;}
+        #billing_div .table-form .detailList td:nth-child(1) {width: 8%;padding-right:12px;text-align:right;}
+        #billing_div .table-form .detailList th:nth-child(2) {width: 92%;}
+        #billing_div .table-form .detailList td:nth-child(2) {width: 8%;padding-right:12px;text-align:right;}
+         #billing_div .detailList {width: 100%;}
+        #billing_div .detailList th:nth-child(1) {width: 30%;}
+        #billing_div .detailList th:nth-child(2) {width: 15%;padding-right: 40px;text-align:right; }
+        #billing_div .detailList th:nth-child(3) {width: 10%;}
+        #billing_div .detailList th:nth-child(4) {width: 15%;}
+        #billing_div .detailList th:nth-child(5) {width: 15%;}
+        #billing_div .detailList th:nth-child(6) {width: 15%;text-align:right;}
+        #billing_div .detailList td:nth-child(1) {width: 30%;}
+        #billing_div .detailList td:nth-child(2) {width: 15%;padding-right: 40px;text-align:right;}
+        #billing_div .detailList td:nth-child(3) {width: 10%;}
+        #billing_div .detailList td:nth-child(4) {width: 15%;}
+        #billing_div .detailList td:nth-child(5) {width: 15%;}
+        #billing_div .detailList td:nth-child(6) {width: 15%;text-align:right;}  
+        #current .detailList {width: 100%;}
+        #current .detailList th:nth-child(1) {width: 30%;}
+        #current .detailList th:nth-child(2) {width: 15%; }
+        #current .detailList th:nth-child(3) {width: 15%;}
+        #current .detailList th:nth-child(4) {width: 10%;}
+        #current .detailList th:nth-child(5) {width: 10%;}
+        #current .detailList th:nth-child(6) {width: 10%;}
+        #current .detailList th:nth-child(7) {width: 10%;}
+        #current .detailList td:nth-child(1) {width: 30%;}
+        #current .detailList td:nth-child(2) {width: 15%;}
+        #current .detailList td:nth-child(3) {width: 15%;}
+        #current .detailList td:nth-child(4) {width: 10%;}
+        #current .detailList td:nth-child(5) {width: 10%;}
+        #current .detailList td:nth-child(6) {width: 10%;}  
+        #current .detailList td:nth-child(7) {width: 10%;}
+    </style>
+    <apex:slds />
+    <apex:form styleClass="slds-form" > 
+        
+        <apex:outputPanel id="Messages">
+            <apex:pagemessages ></apex:pagemessages>
+        </apex:outputPanel>
+        
+        <apex:pageBlock mode="edit" >
+            <div class="slds-page-header slds-page-header_record-home home-page-header ">
+                <div class="slds-media">
+                    <div class="slds-media__body">
+                        <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Elevate BOSS - Staff Order">Elevate BOSS - Staff Order</h1>
+                    </div>
+                </div>
+            </div>
+            
+            <apex:pageBlockSection columns="2">       
+                <apex:outputText label="Subscription Id" ><apex:outputLink value="/{!subscription.Id}">
+                    {!subscription.Name}
+                    </apex:outputLink></apex:outputText>                
+                <apex:outputField value="{!subscription.Related_Location_Broker_Office__r.Name}" ></apex:outputField> 
+                <apex:outputField value="{!subscription.Contact_Type__c}" ></apex:outputField> 
+                <apex:outputField value="{!subscription.Subscription_Type__c}"  ></apex:outputField> 
+            </apex:pageBlockSection>
+            
+            
+            <div class="new-title" id="current">
+                <div class="newheader">
+                    <h1>Current Products</h1> 
+                    <apex:commandButton action="{!newProductOrder}" value="New Product" styleClass="btn-product slds-button slds-button_brand"  ></apex:commandButton>
+                </div>
+                
+                <apex:pageBlockSection id="currentProducts" columns="1" rendered="{!hasCoreEB}" >
+                    <apex:pageBlockTable value="{!currentProductTypes}" var="prdType" styleClass="products_table">
+                        <apex:column value="{!prdType}" headerValue="Product Name"/>
+                        <apex:column value="{!IF(prdType == 'Elevate BOSS by Bright MLS' || prdType == 'Elevate BOSS Elite by Bright MLS','CORE', 'Add On')}" headerValue="Product Type"/>
+                        <apex:column value="{!currentProductTypes[prdType].ProductStatus__c}" />
+                        <apex:column value="{!currentProductTypes[prdType].Quantity__c}" />
+                        <apex:column value="{!currentProductTypes[prdType].StartDate__c}"/>
+                        <apex:column >
+                            <apex:commandLink value="Update" action="{!updateProductOrder}" rendered="{!!CONTAINS(prdType, 'Elevate BOSS')}">
+                                <apex:param name="pgupdateProductType" value="{!prdType}" assignTo="{!updateProductType}"/>
+                            </apex:commandLink>
+                        </apex:column><apex:column >
+                        <apex:commandLink value="Terminate" action="{!terminateProductOrder}" >
+                            <apex:param name="pgterminateProductType" value="{!prdType}" assignTo="{!terminateProductType}"/>
+                        </apex:commandLink>
+                        </apex:column>
+                    </apex:pageBlockTable>
+                </apex:pageBlockSection>
+            </div>
+            
+            <apex:outputPanel rendered="{!isOrder}" style="display:block; width:100%; clear:both;">
+                <div class="new-title" id="product_div">
+                    <div class="newheader">
+                        <h1>Product Selection</h1>
+                    </div>
+                    
+                    <apex:pageBlockSection id="productSelection" columns="1">
+                        
+                        <apex:selectList styleClass="input-newbox" id="Onetime" value="{!zOneTimeProductRatePlanId}" size="1" label="One-Time Rate Plan" disabled="{!isUpdate || isTerminate}">
+                            <apex:selectOptions value="{!zOnetimeRatePlans}"/>
+                        </apex:selectList>            
+                        
+                        <apex:selectList id="Recurring" styleClass="input-newbox" value="{!zRecurringProductRatePlanId}" size="1" label="Rate Plan" disabled="{!isUpdate || isTerminate}">
+                            <apex:selectOptions value="{!zProductRatePlans}"/>
+                        </apex:selectList>
+                        
+                        <apex:input rendered="{!hasCOREEB}" label="Quantity" value="{!quantity}" onchange="checkQuantityValue(this.value)" disabled="{!isTerminate}" type="auto" title="For a quantity more than 100, please contact BRIGHT Finance team to setup for billing." html-min="1" html-max="100" html-step="1" styleClass="slds-input input-newbox" />
+                        
+                        <div id="quantity_error" style="display:none; color:red; text-align:center;">
+                           For quantity more than 100, please contact BRIGHT Finance team to setup billing.
+                       </div>
+                    </apex:pageBlockSection>
+                    
+                    <apex:outputPanel styleClass="btn-rgt">         
+                        <apex:commandButton action="{!previewOrder}" value="Continue" styleClass="place-order" /> 
+                        <apex:commandButton action="{!cancel}" value="Cancel"/>        
+                    </apex:outputPanel>
+                </div>
+                <script>
+                location.href = "#product_div";
+                //window.scrollTo(500, 0);
+                function checkQuantityValue(value) {
+                   if(value > 100)
+                       document.getElementById('quantity_error').style.display = 'block';
+                   else
+                       document.getElementById('quantity_error').style.display = 'none';
+               }
+                </script>            
+            </apex:outputPanel>
+            
+            
+            <apex:outputPanel rendered="{!isBilling}" style="display:block; width:100%; clear:both;">
+                <div class="new-title" id="billing_div">
+                    <div class="newheader">
+                        <h1>Billing Details</h1>                  
+                    </div>         
+                    <apex:pageBlockSection title="" id="billingDetails" columns="1">
+                        
+                        <apex:pageBlockTable value="{!invoiceDetails.invoiceItems}" var="invItem">
+                            <apex:column headerValue="Product Rate Plan Name" value="{!invItem.ChargeName}"/>
+                            <!--<apex:column headerValue="Quantity - Description" value="{!invItem.ChargeDescription}"/>-->
+                            <apex:column headerValue="Price per unit">
+                                <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                    <apex:param value="{!invItem.UnitPrice}"/>  
+                                </apex:outputText> 
+                            </apex:column>
+                            <apex:column headerValue="Quantity" value="{!invItem.Quantity}"/>
+                            
+                            <apex:column headerValue="Service Start Date">
+                                <apex:outputText value="{0,date,MM/dd/yy}"> 
+                                    <apex:param value="{!invItem.ServiceStartDate}" /> 
+                                </apex:outputText>
+                            </apex:column>
+                            <apex:column headerValue="Service End Date">
+                                <apex:outputText value="{0,date,MM/dd/yy}"> 
+                                    <apex:param value="{!invItem.ServiceEndDate}" /> 
+                                </apex:outputText>
+                            </apex:column>
+                            <apex:column headerValue="Amount">
+                                <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                    <apex:param value="{!invItem.ChargeAmount}"/>  
+                                </apex:outputText> 
+                            </apex:column>
+                        </apex:pageBlockTable>                       
+                    </apex:pageBlockSection>
+                    
+                    <div class="table-form" style="margin: 10px 0;">
+                        <apex:pageBlockSection columns="1">
+                            <apex:outputText label="Total Amount" value="{0, number, $ ###,###,###,##0.00}" style="text-align: right">  
+                                <apex:param value="{!invoiceDetails.Amount}"/>  
+                            </apex:outputText> 
+                            <apex:outputText label="Tax"  value="{0, number, $ ###,###,###,##0.00}" style="text-align: right">  
+                                <apex:param value="{!invoiceDetails.tax}"/>  
+                            </apex:outputText> 
+                        </apex:pageBlockSection>                        
+                    </div>                   
+                    
+                    <apex:outputPanel styleClass="btn-rgt">         
+                        <apex:commandButton action="{!confirmOrder}" value="Confirm" styleClass="place-order" /> 
+                        <apex:commandButton action="{!cancel}" value="Cancel"/>        
+                    </apex:outputPanel>                   
+                </div>
+                <script>
+                location.href = "#billing_div";
+                //window.scrollTo(500, 0);
+                </script>
+            </apex:outputPanel>
+            
+        </apex:pageBlock>
+        
+        
+    </apex:form>
+    
+</apex:page>

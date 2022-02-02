@@ -1,0 +1,328 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">  
+       <ltng:require styles="{!$Resource.brightcss }"></ltng:require>
+   <ltng:require styles="{!$Resource.sidemenu }"></ltng:require> 
+   <ltng:require styles="{!$Resource.bodycontainer }"></ltng:require> 
+    
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <div class="fullpage slds-scope">
+      <div class="slds-grid slds-wrap">
+         <div class="new-containerpage">
+            <div class="slds-container--x-large new-container">
+               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12  header-full">
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 header-part">
+                     <div class="logo"> 
+                        <img src="{!$Resource.bright + '/bright-3.0/images/brightlogolightning.png'}" alt="Bright" />
+                     </div>
+                  </div>
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 header-part">
+                     <div class="account">
+                        <h3>Accounts &amp; Settings</h3>
+                     </div>
+                  </div>
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 header-part header-part1">
+                     <div class="all">
+                        <h5>AL</h5>
+                     </div>
+                     <div class="call">
+                        <h4>Amanda Lynn </h4>
+                        <h3>Subscriber ID: 8987987 &nbsp;<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" />  | <a href="#">Active</a></h3>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="slds-container--x-large new-container">
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 sidebar">
+                  <ul class="menuside">
+                     <li><a class="active" href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Accounts-Home.svg'}" alt="Accounts Home" />Accounts Home</a></li>
+                     <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                     <li onclick="{!c.treeMenu}">
+                        <a><img src="{!$Resource.bright + '/bright-3.0/images/Brokerage.svg'}" alt="Brokerage" />Brokerage<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                        <ul class="submenu submenu1">
+                           <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                        </ul>
+                     </li>
+                     <li onclick="{!c.treeMenu1}">
+                        <a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Subscription.svg'}" alt="Subscription" />Subscription<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                        <ul class="submenu submenu2">
+                           <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                        </ul>
+                     </li>
+                     <li onclick="{!c.treeMenu2}">
+                        <a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Requests.svg'}" alt="Requests" />Requests<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                        <ul class="submenu submenu3">
+                           <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                        </ul>
+                     </li>
+                     <li onclick="{!c.treeMenu3}">
+                        <a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Finance.svg'}" alt="Finance" />Finance<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                        <ul class="submenu submenu4">
+                           <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                        </ul>
+                     </li>
+                     <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Notification-Preferences.svg'}" alt="Notification" />Notification Preferences</a></li>
+                     <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Settings-Permissions.svg'}" alt="Settings" />Settings &amp; Permissions</a></li>
+                     <li class="logout"><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Logout.svg'}" alt="Logout" />Logout</a></li>
+                  </ul>
+               </div>
+               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_9-of-12 slds-large-size_9-of-12 middlebar">
+                  <h2>Hello <b>Amanda,</b> here is a quick look at what’s happening.</h2>
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 bottombar">
+                     <div class="dev dev1">
+                        <h2><img src="{!$Resource.bright + '/bright-3.0/images/AccountSettingsNotifications.svg'}" alt="Account &amp; Settings Notifications" />Account &amp; Settings Notifications<span>4</span></h2>
+                        <div class="review">
+                           <div class="line-by">
+                              <div class="singleline">
+                                 <h4>Agent Approval Needed</h4>
+                                 <p>Andreas Dias has sent you an agent transfer request</p>
+                              </div>
+                              <div class="singleline1">
+                                 <lightning:button class="brand" variant="brand" label="Review" title="Brand action" onclick="{! c.handleClick }" />
+                              </div>
+                           </div>
+                           <div class="line-by">
+                              <div class="singleline">
+                                 <h4>Agent Approval Needed</h4>
+                                 <p>Andreas Dias has sent you an agent transfer request</p>
+                              </div>
+                              <div class="singleline1">
+                                 <lightning:button class="brand" variant="brand" label="Review" title="Brand action" onclick="{! c.handleClick }" />
+                              </div>
+                           </div>
+                           <div class="line-by">
+                              <div class="singleline">
+                                 <h4>Agent Approval Needed</h4>
+                                 <p>Andreas Dias has sent you an agent transfer request</p>
+                              </div>
+                              <div class="singleline1">
+                                 <lightning:button class="brand" variant="brand" label="View Notice" title="Brand action" onclick="{! c.handleClick }" />
+                              </div>
+                           </div>
+                           <div class="line-by">
+                              <div class="singleline">
+                                 <h4>Agent Approval Needed</h4>
+                                 <p>Andreas Dias has sent you an agent transfer request</p>
+                              </div>
+                              <div class="singleline1">
+                                 <lightning:button class="brand" variant="brand" label="Review" title="Brand action" onclick="{! c.handleClick }" />
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="dev dev1">
+                        <h2><img style="margin-top:2px" src="{!$Resource.bright + '/bright-3.0/images/Cases.svg'}" alt="Cases" />Cases<span>2</span></h2>
+                        <div class="review">
+                           <div class="line-by">
+                           
+                               
+<div class="tabs">
+    <input type="radio" name="tabs" id="tabone" checked="checked"></input>
+  <label class="newtabs" for="tabone"><span>Case ID</span> - Ticket Short Description<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></label>
+  <div class="tab">
+  <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_fixed-layout slds-table_striped">
+  <thead>
+    <tr class="slds-line-height_reset">
+      <th class="" scope="col">
+        <div class="slds-truncate" title="Typical Column Header">Date Opened</div>
+      </th>
+      <th class="" scope="col">
+        <div class="slds-truncate" title="Truncated, no wrap">Subscription ID</div>
+      </th>
+      <th class="" scope="col">
+        <div class="slds-truncate" title="Typical Column Header">Status</div>
+      </th>
+        <th class="" scope="col">
+        <div class="slds-truncate" title="Truncated, no wrap">Department</div>
+      </th>
+      <th class="" scope="col">
+        <div class="slds-truncate" title="Typical Column Header">
+          
+          </div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="slds-hint-parent">
+        <td data-label="Typical Column Header">
+        <div class="slds-truncate" title="Date">October 22, 2020</div>
+      </td>
+      <td class="slds-cell-wrap" data-label="Truncated, no wrap">
+          <div class="slds-truncate" title="number">18354256</div></td>
+      <td data-label="Typical Column Header">
+        <div class="slds-truncate" title="Active">Active</div>
+      </td>
+        <td class="slds-cell-wrap" data-label="Truncated, no wrap">
+        <div class="slds-truncate" title="Support">Support Center</div>
+      </td>
+      <td data-label="Typical Column Header">
+        <div class="slds-truncate" title="Typical cell content">
+          <lightning:button class="brand" variant="brand" label="Manage" title="Brand action" onclick="{! c.handleClick }" />
+          </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+   </div>
+      <input type="radio" name="tabs" id="tabtwo"></input>
+  <label for="tabtwo"><span>Case ID</span> - Ticket Short Description<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></label>
+  <div class="tab">
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_fixed-layout slds-table_striped">
+  <thead>
+    <tr class="slds-line-height_reset">
+      <th class="" scope="col">
+        <div class="slds-truncate" title="Typical Column Header">Date Opened</div>
+      </th>
+      <th class="" scope="col">
+        <div class="slds-truncate" title="Truncated, no wrap">Subscription ID</div>
+      </th>
+      <th class="" scope="col">
+        <div class="slds-truncate" title="Typical Column Header">Status</div>
+      </th>
+        <th class="" scope="col">
+        <div class="slds-truncate" title="Truncated, no wrap">Department</div>
+      </th>
+      <th class="" scope="col">
+        <div class="slds-truncate" title="Typical Column Header">
+          
+          </div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="slds-hint-parent">
+        <td data-label="Typical Column Header">
+        <div class="slds-truncate" title="Date">October 22, 2020</div>
+      </td>
+      <td class="slds-cell-wrap" data-label="Truncated, no wrap">
+          <div class="slds-truncate" title="number">18354256</div></td>
+      <td data-label="Typical Column Header">
+        <div class="slds-truncate" title="Active">Active</div>
+      </td>
+        <td class="slds-cell-wrap" data-label="Truncated, no wrap">
+        <div class="slds-truncate" title="Support">Support Center</div>
+      </td>
+      <td data-label="Typical Column Header">
+        <div class="slds-truncate" title="Typical cell content">
+          <lightning:button class="brand" variant="brand" label="Manage" title="Brand action" onclick="{! c.handleClick }" />
+          </div>
+      </td>
+    </tr>
+  </tbody>
+</table></div>
+      <input type="radio" name="tabs" id="tabthree"></input>
+  <label for="tabthree"><span>Case ID</span> - Ticket Short Description<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></label>
+  <div class="tab">
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_fixed-layout slds-table_striped">
+  <thead>
+    <tr class="slds-line-height_reset">
+      <th class="" scope="col">
+        <div class="slds-truncate" title="Typical Column Header">Date Opened</div>
+      </th>
+      <th class="" scope="col">
+        <div class="slds-truncate" title="Truncated, no wrap">Subscription ID</div>
+      </th>
+      <th class="" scope="col">
+        <div class="slds-truncate" title="Typical Column Header">Status</div>
+      </th>
+        <th class="" scope="col">
+        <div class="slds-truncate" title="Truncated, no wrap">Department</div>
+      </th>
+      <th class="" scope="col">
+        <div class="slds-truncate" title="Typical Column Header">
+          
+          </div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="slds-hint-parent">
+        <td data-label="Typical Column Header">
+        <div class="slds-truncate" title="Date">October 22, 2020</div>
+      </td>
+      <td class="slds-cell-wrap" data-label="Truncated, no wrap">
+          <div class="slds-truncate" title="number">18354256</div></td>
+      <td data-label="Typical Column Header">
+        <div class="slds-truncate" title="Active">Active</div>
+      </td>
+        <td class="slds-cell-wrap" data-label="Truncated, no wrap">
+        <div class="slds-truncate" title="Support">Support Center</div>
+      </td>
+      <td data-label="Typical Column Header">
+        <div class="slds-truncate" title="Typical cell content">
+          <lightning:button class="brand" variant="brand" label="Manage" title="Brand action" onclick="{! c.handleClick }" />
+          </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+</div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 bottombar1">
+                     <div class="dev dev1">
+                        <h2><img src="{!$Resource.bright + '/bright-3.0/images/Account-Balance.svg'}" alt="Account-Balance" /> Account Balance</h2>
+                        <div class="review">
+                           <div class="line-by">
+                              <div class="singleline">
+                                 <h4>Invoice # : INV00105237</h4>
+                                 <p>Date Issued: 09/24/2020</p>
+                              </div>
+                              <div class="singleline1">
+                                 <h5>$370.00</h5>
+                              </div>
+                           </div>
+                           <div class="line-by">
+                              <div class="singleline">
+                                 <h4>Invoice # : INV00105237</h4>
+                                 <p>Date Issued: 09/24/2020</p>
+                              </div>
+                              <div class="singleline1">
+                                 <h5>$370.00</h5>
+                              </div>
+                           </div>
+                           <div class="line-by line-by1">
+                              <div class="singleline">
+                                 <lightning:button class="brand" variant="brand" label="Pay Balance" title="Brand action" onclick="{! c.handleClick }" />
+                              </div>
+                              <div class="singleline1">
+                                 <h5>$370.00</h5>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="dev dev1">
+                        <div class="full">
+                           <div class="fullleft">
+                              <h5>AL</h5>
+                           </div>
+                           <div class="fullright">
+                              <h4>Amanda Lynn</h4>
+                              <p>Broker | Fox &amp; Roach LP Devon, PA amandalynn@foxroach.com (301) 729-3843</p>
+                           </div>
+                           <div class="fullright1">
+                              <img src="{!$Resource.bright + '/bright-3.0/images/Edit.svg'}" alt="Edit" />    
+                           </div>
+                        </div>
+                     </div>
+                     <div class="dev dev1">
+                        <div class="full">
+                           <div class="fullright">
+                              <h4>Amanda Lynn</h4>
+                              <p>Broker | Fox &amp; Roach LP Devon, PA amandalynn@foxroach.com (301) 729-3843</p>
+                           </div>
+                           <div class="fullright1">
+                              <img src="{!$Resource.bright + '/bright-3.0/images/Edit.svg'}" alt="Edit" />    
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</aura:component>

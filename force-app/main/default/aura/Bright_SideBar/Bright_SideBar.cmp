@@ -1,0 +1,50 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+	<ltng:require styles="{!$Resource.sidemenu }"></ltng:require>
+    <div class="sidebar">
+                <ul class="menuside">
+                    <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/AccountsHome-black.svg'}" alt="Accounts Home" />Accounts Home</a></li>
+                    <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                    <li onclick="{!c.treeMenu}"><a><img src="{!$Resource.bright + '/bright-3.0/images/Brokerage.svg'}" alt="Brokerage" />Brokerage<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                      <ul class="submenu submenu1">
+                         <li><a  class="active" href="#">Office Roster</a></li>
+                        <li><a href="#">Office Statement </a></li>
+                        <li><a href="#">W-9 Forms </a></li>
+                        <li><a href="#">Office Information </a></li>
+                        <li><a href="#">Responsible Broker </a></li>
+                         <li><a href="#">Authorized Signers</a></li>
+                        <li><a href="#">Office Managers</a></li>
+                        <li><a href="#">Accuracy Notifications</a></li>
+                        <li><a href="#">Data Licensing</a></li>
+                        </ul>
+                    
+                    </li>
+                    <li onclick="{!c.treeMenu1}"><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Subscription.svg'}" alt="Subscription" />Subscription<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                     <ul class="submenu submenu2">
+                         <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                        </ul>
+                    </li>
+                    <li onclick="{!c.treeMenu2}"><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Requests.svg'}" alt="Requests" />Requests<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                    <ul class="submenu submenu3">
+                         <li><a href="#">Office Roster</a></li>
+                        <li><a href="#">Office Statement </a></li>
+                        <li><a href="#">W-9 Forms </a></li>
+                        <li><a href="#">Office Information </a></li>
+                        <li><a href="#">Responsible Broker </a></li>
+                         <li><a href="#">Authorized Signers</a></li>
+                        <li><a href="#">Office Managers</a></li>
+                        <li><a href="#">Accuracy Notifications</a></li>
+                        <li><a href="#">Data Licensing</a></li>
+                        </ul>
+                    </li>
+                    <li onclick="{!c.treeMenu3}"><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Finance.svg'}" alt="Finance" />Finance<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                    <ul class="submenu submenu4">
+                         <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Notification-Preferences.svg'}" alt="Notification" />Notification Preferences</a></li>
+                    <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Settings-Permissions.svg'}" alt="Settings" />Settings &amp; Permissions</a></li>
+                     <li class="logout"><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Logout.svg'}" alt="Logout" />Logout</a></li>
+                </ul>
+                
+                </div>
+</aura:component>

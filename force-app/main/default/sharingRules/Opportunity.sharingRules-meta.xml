@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingOwnerRules>
+        <fullName>Expansion_Group_Opportunities</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Opportunities are shared across the Expansion group.</description>
+        <label>Expansion Group Opportunities</label>
+        <sharedTo>
+            <group>Expansion</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Expansion</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

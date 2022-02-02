@@ -1,0 +1,546 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">     
+    
+    <aura:attribute name="popup1" type="boolean" default="false"/>
+    <aura:attribute name="popup2" type="boolean" default="false"/>
+    
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <div class="fullpage slds-scope">
+      <div class="slds-grid slds-wrap">
+         <div class="new-containerpage">
+            <div class="slds-container--x-large new-container">
+               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12  header-full">
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 header-part">
+                     <div class="logo"> 
+                        <img src="{!$Resource.bright + '/bright-3.0/images/brightlogolightning.png'}" alt="Bright" />
+                     </div>
+                  </div>
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 header-part">
+                     <div class="account">
+                        <h3>Accounts &amp; Settings</h3>
+                     </div>
+                  </div>
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 header-part header-part1">
+                     <div class="all">
+                        <h5>AL</h5>
+                     </div>
+                     <div class="call">
+                        <h4>Amanda Lynn </h4>
+                        <h3>Subscriber ID: 8987987 &nbsp;<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" />  | <a href="#">Active</a></h3>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="slds-container--x-large new-container">
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 sidebar">
+                  <ul class="menuside">
+                     <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/AccountsHome-black.svg'}" alt="Accounts Home" />Accounts Home</a></li>
+                     <li><a class="active" href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile-orange.svg'}" alt="Profile" />Profile</a></li>
+                     <li onclick="{!c.treeMenu}">
+                        <a><img src="{!$Resource.bright + '/bright-3.0/images/Brokerage.svg'}" alt="Brokerage" />Brokerage<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                        <ul class="submenu submenu1">
+                           <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                        </ul>
+                     </li>
+                     <li onclick="{!c.treeMenu1}">
+                        <a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Subscription.svg'}" alt="Subscription" />Subscription<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                        <ul class="submenu submenu2">
+                           <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                        </ul>
+                     </li>
+                     <li onclick="{!c.treeMenu2}">
+                        <a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Requests.svg'}" alt="Requests" />Requests<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                        <ul class="submenu submenu3">
+                           <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                        </ul>
+                     </li>
+                     <li onclick="{!c.treeMenu3}">
+                        <a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Finance.svg'}" alt="Finance" />Finance<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                        <ul class="submenu submenu4">
+                           <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                        </ul>
+                     </li>
+                     <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Notification-Preferences.svg'}" alt="Notification" />Notification Preferences</a></li>
+                     <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Settings-Permissions.svg'}" alt="Settings" />Settings &amp; Permissions</a></li>
+                     <li class="logout"><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Logout.svg'}" alt="Logout" />Logout</a></li>
+                  </ul>
+               </div>
+               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_9-of-12 slds-large-size_9-of-12 middlebar">
+                 
+                   <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 middlebar1">
+                   <h2><b>Listing Transfer Request</b></h2> 
+                     </div>    
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bottombar bottombar1">
+                     <div class="dev dev1">
+                         <h3>Select Transfer Type</h3>
+                           <div class="review newreview">
+                        <h3><img src="{!$Resource.bright + '/bright-3.0/images/information.svg'}" alt="Bright" /><p>Please select the transfer type: Incoming Requests (transfer listings to your office), or Outgoing Requests (transfer listings from your office). Click the number of listings indicated in blue to review the requested transfers.</p></h3>
+                       
+                         </div>
+                      
+                       <h6></h6>
+                         
+                         
+                         <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 footer-full">
+                              <lightning:tabset>
+        <lightning:tab label="Incoming Requests">
+            <div class="lake1">
+                         <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped newtin newapp1">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            
+                                            
+                                           
+                                            
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Opportunity Name">First Name</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Last Name</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Close Date">Listing Agent</div>
+                                            </th>
+                                          <th class="" scope="col">
+                                                <div class="slds-truncate" title="Opportunity Name">Destination</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Next Deadline</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Close Date">Status</div>
+                                            </th>
+                                             <th class="" scope="col">
+                                                <div class="slds-truncate" title="Close Date">Total</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="slds-hint-parent blue">
+                                   
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Blaine</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Breeding</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">3197760</div>
+                                            </td>
+                                             <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">NEWBR1</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">2020/10/25<br/>(0 days remaining)</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015"><a href="">0 Open</a> 3 Close</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">3</div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                    
+     <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Blaine</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Breeding</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">3197760</div>
+                                            </td>
+                                             <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">NEWBR1</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">2020/10/25<br/>(0 days remaining)</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015"><a href="">0 Open</a> 3 Close</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">3</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                   
+     <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Blaine</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Breeding</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">3197760</div>
+                                            </td>
+                                             <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">NEWBR1</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">2020/10/25<br/>(0 days remaining)</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015"><a href="">0 Open</a> 3 Close</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">3</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                    
+     
+                                         <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Blaine</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Breeding</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">3197760</div>
+                                            </td>
+                                             <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">NEWBR1</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">2020/10/25<br/>(0 days remaining)</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015"><a href="">0 Open</a> 3 Close</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">3</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        
+                                        
+                                        
+                                    </tbody>
+                                </table>
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 layer part1"> 
+                           
+                            
+                                   <h5 class="search1">
+                                 
+                                   </h5>
+                             </div>
+                                                 
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 layer part3"> 
+                             
+                                   <h5 class="onechoose1">           
+                                    <div class="pagination">
+  <a href="#">Previous</a>
+  <a href="#" class="active">1</a>
+  <a href="#" >2</a>
+  
+  <a href="#">Next</a>
+</div>
+                                    </h5>
+                             </div>
+                  
+                        </div>
+                         </div>
+       
+            
+          
+        </lightning:tab>
+        <lightning:tab label="Outgoing Requests" title="2nd tab extended title">
+         <div class="lake1">
+                         <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped newtin newapp1">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            
+                                            
+                                           
+                                            
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Opportunity Name">First Name</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Last Name</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Close Date">Listing Agent</div>
+                                            </th>
+                                          <th class="" scope="col">
+                                                <div class="slds-truncate" title="Opportunity Name">Destination</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Next Deadline</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Close Date">Status</div>
+                                            </th>
+                                             <th class="" scope="col">
+                                                <div class="slds-truncate" title="Close Date">Total</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="slds-hint-parent blue">
+                                   
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Blaine</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Breeding</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">3197760</div>
+                                            </td>
+                                             <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">NEWBR1</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">2020/10/25<br/>(0 days remaining)</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015"><a href="">0 Open</a> 3 Close</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">3</div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                    
+     <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Blaine</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Breeding</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">3197760</div>
+                                            </td>
+                                             <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">NEWBR1</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">2020/10/25<br/>(0 days remaining)</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015"><a href="">0 Open</a> 3 Close</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">3</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                   
+     <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Blaine</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Breeding</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">3197760</div>
+                                            </td>
+                                             <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">NEWBR1</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">2020/10/25<br/>(0 days remaining)</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015"><a href="">0 Open</a> 3 Close</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">3</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                    
+     
+                                         <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Blaine</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Breeding</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">3197760</div>
+                                            </td>
+                                             <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">NEWBR1</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">2020/10/25<br/>(0 days remaining)</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015"><a href="">0 Open</a> 3 Close</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">3</div>
+                                            </td>
+                                            
+                                        </tr>
+                                        
+                                        
+                                        
+                                    </tbody>
+                                </table>
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 layer part1"> 
+                           
+                            
+                                   <h5 class="search1">
+                                 
+                                   </h5>
+                             </div>
+                                                 
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 layer part3"> 
+                             
+                                   <h5 class="onechoose1">           
+                                    <div class="pagination">
+  <a href="#">Previous</a>
+  <a href="#" class="active">1</a>
+  <a href="#" >2</a>
+  
+  <a href="#">Next</a>
+</div>
+                                    </h5>
+                             </div>
+                  
+                        </div>
+                         </div>
+
+       
+            
+             
+        </lightning:tab>
+        
+    </lightning:tabset>
+                        
+                    </div>
+                         
+                        
+                  </div>
+                  
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+       <!-- PopUp 1 start -->
+       <aura:if isTrue="{!v.popup1}">
+           <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- ###### MODAL BOX HEADER Start ######-->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModel }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate email">Change Login Name <span><img src="{!$Resource.bright + '/bright-3.0/images/information.svg'}" alt="information" />Once the Login Name is changed, you will be logged out.</span> </h2>
+                    </header>
+                    <!--###### MODAL BOX BODY Part Start######-->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                       <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodyline">
+                        <h2>Current Login Name</h2>
+                        <h3>319005</h3>
+                        <h4>Login Name</h4>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_4-of-12 slds-medium-size_4-of-12 slds-large-size_8-of-12 bodyline1">
+                           <lightning:input type="text" name="input3" placeholder="Enter login name"  variant = "label-hidden" />
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_8-of-12 slds-medium-size_8-of-12 slds-large-size_4-of-12 bodyline2">
+                            <lightning:button class="brand" variant="brand" label="Validate" title="Brand action" onclick="{! c.handleClick }" />
+          
+                        </div>
+                  
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_8-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 bodyline2">
+                            <ul>
+                            <li>min 3 characters and max 25 characters</li>
+                            <li>can contain letters and numbers</li>
+                            <li>only 4 special characters @ or period or space or dash allowed</li>    
+                            </ul>
+                        </div>
+                        
+                        
+                    </div> 
+                    </div>
+                    <!--###### MODAL BOX FOOTER Part Start ######-->
+                    <footer class="slds-modal__footer">
+                         <lightning:button class="brand" variant="brand" label="Submit" title="Brand action" onclick="{! c.handleClick }" />
+                       
+                        <lightning:button variant="neutral" 
+                                          label="Cancel"
+                                          title="Cancel"
+                                           class="newCancel"
+                                          onclick="{! c.closeModel }"/>
+                        
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+       </aura:if>
+       <!-- PopUp 1 end -->
+       
+       <!-- PopUp 2 start -->
+        <aura:if isTrue="{!v.popup2}">
+           <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModel2 }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate email">Change Login Name <span><img src="{!$Resource.bright + '/bright-3.0/images/information.svg'}" alt="information" />Once the Login Name is changed, you will be logged out.</span> </h2>
+                    </header>
+                    
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                 <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodyline">
+                        <h2>Current Login Name</h2>
+                        <h3>319005</h3>
+                        <h4>Login Name</h4>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_4-of-12 slds-medium-size_4-of-12 slds-large-size_8-of-12 bodyline1">
+                           <lightning:input type="text" name="input3" placeholder="Enter login name"  variant = "label-hidden" />
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_8-of-12 slds-medium-size_8-of-12 slds-large-size_4-of-12 bodyline2">
+                            <lightning:button class="brand" variant="brand" label="Validate" title="Brand action" onclick="{! c.handleClick }" />
+          
+                        </div>
+                  
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_8-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 bodyline2">
+                            <ul>
+                            <li>min 3 characters and max 25 characters</li>
+                            <li>can contain letters and numbers</li>
+                            <li>only 4 special characters @ or period or space or dash allowed</li>    
+                            </ul>
+                        </div>
+                        
+                        
+                    </div> 
+                        
+                    </div>
+                    
+                    <footer class="slds-modal__footer">
+                        
+                         <lightning:button class="brand" variant="brand" label="Submit" title="Brand action" onclick="{! c.handleClick }" />
+                        <lightning:button variant="neutral" 
+                                          label="Cancel"
+                                          title="Cancel"
+                                          class="newCancel"
+                                          onclick="{! c.closeModel2 }"/>
+                        
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>          
+       </aura:if>
+       <!-- PopUp 2 end -->
+    </div>
+</aura:component>

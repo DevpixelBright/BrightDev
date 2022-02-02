@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Team_Lead_Request_to_setup_a_Team_Approved_by_BOR_AS_Email_Alert</fullName>
+        <description>Team Lead Request to setup a Team - Approved by BOR/AS Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Team_Lead_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>no-reply@brightmls.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Team_Lead_Request_to_setup_a_Team_Approved_by_BOR_AS</template>
+    </alerts>
+    <alerts>
+        <fullName>Team_Lead_Request_to_setup_a_Team_Approved_by_BOR_AS_Email_Alert_to_SF</fullName>
+        <ccEmails>emailtosalesforce@z-lh9dypma9adpo2pq0q6zgoeut46ejmjs7k17uk5g001ihkri0.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>Team Lead Request to setup a Team - Approved by BOR/AS Email Alert to SF</description>
+        <protected>false</protected>
+        <senderAddress>no-reply@brightmls.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Team_Lead_Request_to_setup_a_Team_Approved_by_BOR_AS</template>
+    </alerts>
+    <alerts>
+        <fullName>Team_Lead_Requests_to_setup_a_team_Declined_by_BOR_AS_Email_Alert</fullName>
+        <description>Team Lead Requests to setup a team- Declined by BOR/AS Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Team_Lead_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>no-reply@brightmls.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Team_Lead_Requests_to_setup_a_team_Declined_by_BOR_AS</template>
+    </alerts>
+    <alerts>
+        <fullName>Team_Lead_Requests_to_setup_a_team_Declined_by_BOR_AS_Email_Alert_to_SF</fullName>
+        <ccEmails>emailtosalesforce@z-lh9dypma9adpo2pq0q6zgoeut46ejmjs7k17uk5g001ihkri0.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>Team Lead Requests to setup a team- Declined by BOR/AS Email Alert to SF</description>
+        <protected>false</protected>
+        <senderAddress>no-reply@brightmls.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Team_Lead_Requests_to_setup_a_team_Declined_by_BOR_AS</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Eleven_Day_Reminder</fullName>
+        <field>Remainder_Email__c</field>
+        <literalValue>11 Day Reminder</literalValue>
+        <name>Eleven Day Reminder</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_LastModifiedDateforRequested</fullName>
+        <field>Last_Modified_Date_for_Requested__c</field>
+        <formula>LastModifiedDate</formula>
+        <name>Update LastModifiedDateforRequested</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Remainder_Email_to_7_Days</fullName>
+        <field>Remainder_Email__c</field>
+        <literalValue>7 Day Remainder</literalValue>
+        <name>Update Remainder Email to 7 Days</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Reminder_Email_to_7_Days</fullName>
+        <field>Remainder_Email__c</field>
+        <literalValue>7 Day Reminder</literalValue>
+        <name>Update Reminder Email to 7 Days</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <outboundMessages>
+        <fullName>SFDC_Team</fullName>
+        <apiVersion>52.0</apiVersion>
+        <endpointUrl>https://sfdcservices.dev.brightmls.com/team</endpointUrl>
+        <fields>Id</fields>
+        <fields>SystemModstamp</fields>
+        <includeSessionId>true</includeSessionId>
+        <integrationUser>mris_sf_api@mris.net</integrationUser>
+        <name>SFDC Team</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <outboundMessages>
+        <fullName>TeamUpdate</fullName>
+        <apiVersion>51.0</apiVersion>
+        <endpointUrl>http://talend.dev.brightmls.com/services/SFTeam</endpointUrl>
+        <fields>Id</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>mris_sf_api@mris.net</integrationUser>
+        <name>TeamUpdate</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>TeamUpdated</fullName>
+        <actions>
+            <name>SFDC_Team</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Teams__c.Invitation_Status__c</field>
+            <operation>equals</operation>
+            <value>Approved</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update LastModifiedDateforRequested</fullName>
+        <actions>
+            <name>Update_LastModifiedDateforRequested</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Teams__c.Invitation_Status__c</field>
+            <operation>equals</operation>
+            <value>Requested</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Eleven_Day_Reminder</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Teams__c.Last_Modified_Date_for_Requested__c</offsetFromField>
+            <timeLength>2</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Update_Reminder_Email_to_7_Days</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Teams__c.Last_Modified_Date_for_Requested__c</offsetFromField>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+</Workflow>

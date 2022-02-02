@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="7.9" height="4.991" viewBox="0 0 7.9 4.991">
+  <defs>
+    <clipPath id="clip-Custom_Size_1">
+      <rect width="7.9" height="4.991"/>
+    </clipPath>
+  </defs>
+  <g id="Custom_Size_1" data-name="Custom Size – 1" clip-path="url(#clip-Custom_Size_1)">
+    <path id="Icon_awesome-sort" data-name="Icon awesome-sort" d="M8.895,7.484,5.609,4.2a.66.66,0,0,0-.936,0L1.386,7.484a.663.663,0,0,0,.469,1.132h6.57A.663.663,0,0,0,8.895,7.484Z" transform="translate(-1.191 -4.004)" fill="#ccc"/>
+  </g>
+</svg>

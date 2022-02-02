@@ -1,0 +1,392 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="Communities_Subscription_Controller" lightningstylesheets="true">
+    <apex:composition template="Communities_Base">
+        
+        <apex:define name="content">
+            <apex:form id="portal">
+                <apex:actionFunction action="{!loadSubscriptions}" name="loadSubscriptions" reRender="portal" />
+
+                <c:Bootstrap_Resources />
+                
+                <div class="row" id="loading-block">
+                    <div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-5">
+                        <div class="progress progress-striped active">
+                            <div class="progress-bar" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    var loading_block = $("#loading-block");
+                </script>
+                
+                <apex:outputPanel layout="none" rendered="{!initialLoad}" >
+                    <script>$(loadSubscriptions)</script>
+                </apex:outputPanel>
+
+                <apex:outputPanel layout="none" rendered="{!!initialLoad && hasError}" >
+                    <div id="error-block" style="display: none;">
+                        <div class="alert alert-danger">
+                            <apex:outputPanel layout="none" rendered="{!isInactive}" >
+                            <p>We’re sorry, you are unable to access this page in Account &amp; Settings at this time.</p>
+                            <p>Please contact our Customer Support Center for assistance at 1-844-55-BRIGHT (1-844-552-7444) or via email at <a href="mailto:support@brightmls.com">support@brightmls.com</a>.</p>
+                             </apex:outputPanel>  
+                              <apex:outputPanel layout="none" rendered="{!!isInactive}" > 
+                               <p>An error has occurred when attempting to access this page</p>
+                            <p>If this issue persists, please contact the Customer Support Center for assistance at 1-844-55-BRIGHT (1-844-552-7444) or via email at <a href="mailto:support@brightmls.com">support@brightmls.com</a>.</p>                                                                                                      
+                               </apex:outputPanel>                                                                                                      
+                            <apex:outputPanel layout="none" rendered="{!debugMode}" >
+                                <div><apex:pageMessages /></div>
+                            </apex:outputPanel>
+                        </div>
+                        <div class="row" style="margin-top: 30px;">
+                            <div class="col-md-2 col-md-offset-5">
+                               <apex:outputPanel layout="none" rendered="{!isInactive}" >
+                                <div class="btn-group btn-group-justified">
+                                <a href="{!'/customers/apex/Communities_Inactives?id='+subPrimaryId}" class="btn btn-primary" role="button">Back</a>
+                                </div>
+                                </apex:outputPanel> 
+                                <apex:outputPanel layout="none" rendered="{!!isInactive}" >
+                                <div class="btn-group btn-group-justified">
+                                    <a href="{!cancelUrl}" class="btn btn-primary" role="button">Back</a>
+                                </div>
+                                </apex:outputPanel>
+                            </div>
+                        </div>
+                        
+                        <script>
+                            loading_block.hide();
+                            $("#error-block").show();
+                        </script>
+                    </div>
+                </apex:outputPanel>
+                
+                <apex:outputPanel layout="none" rendered="{!!initialLoad && !hasError}" >
+                    <style>
+                        #subscription-option-modal .dropdown {
+                            padding-top: 20px;
+                        }
+                        
+                            #subscription-option-modal .dropdown > button {
+                                width: 100%;
+                            }
+
+                            #subscription-option-modal .dropdown > ul {
+                                width: 100%;
+                            }
+
+                                #subscription-option-modal .dropdown > ul > li {
+                                    text-align: center;
+                                }
+                            .jumbotron p {
+                                font-size: 17px;
+                            }
+                            .jumbotron {
+                                padding-top: 10px;
+                                padding-bottom: 20px;
+                            }
+                    </style>
+                
+                    <div id="content-block" style="display: none;">
+                        <apex:outputPanel rendered="{!!isLimited}">
+                        <div class="jumbotron landing_instructions">
+                            <p>Want to change your contact information or add, edit or remove a payment method? Need to pay a current invoice or view your Statement of Account? Can’t recall all of the products to which you’re currently subscribed? You’ve come to the right place!</p>
+                            <p>Manage your MLS account by selecting from the options below.</p>
+                            <apex:outputPanel layout="none" rendered="{!debugMode}" >
+                                <div><apex:pageMessages /></div>
+                            </apex:outputPanel>
+                        </div>
+                            </apex:outputPanel>
+                        
+                        <apex:outputPanel rendered="{!isLimited}">
+                        <div class="jumbotron landing_instructions">
+                            <p>Want to update your contact or license information? You’ve come to the right place!</p>
+                            <apex:outputPanel layout="none" rendered="{!debugMode}" >
+                                <div><apex:pageMessages /></div>
+                            </apex:outputPanel>
+                        </div>
+                            </apex:outputPanel>
+                        
+                        <div class="row action-panels"></div>
+                        <div class="modal fade" id="subscription-option-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="modal-label"></h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Please select the Subscription ID you wish to review.</p>
+                                        <select class="form-control"></select>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-primary" onclick="openSubscription();">Continue</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->                      
+
+                        <script>
+                            markOptionPanel("subscription");
+                            
+                            var debug_ids = [
+                                "3051894",
+                                "3051893",
+                                "3051891"
+                            ];
+                                    
+                            var options = {
+                                contact_information: {
+                                    icon: "pencil-square-o",
+                                    text: "Contact Information",
+                                    description: "Have your contact details recently changed? Update the contact information for your MLS Subscription.",
+                                    ids: [],
+                                    url: "Communities_MyAccount"
+                                },
+                                view_invoices: {
+                                    icon: "inbox",
+                                    text: "Statement of Account",
+                                    description: "Curious about an invoice, payment or credit? You can view your MLS Statement of Account anytime.",
+                                    ids: [],
+                                    url: "Communities_SOA"
+                                },
+                                pay_my_balances: {
+                                    icon: "money",
+                                    text: "Pay My Balances",
+                                    description: "Time to pay your quarterly fees? Pay your fees and any outstanding balances.",
+                                    ids: [],
+                                    url: "Communities_PayMyBalances"
+                                },
+                                my_payment_methods: {
+                                    icon: "credit-card",
+                                    text: "My Payment Methods",
+                                    description: "Is your card expiring soon or do you have a new card you’d like to use? Manage your payment methods.",
+                                    ids: [],
+                                    url: "Communities_MyPaymentMethods"
+                                },
+                                subscribed_products: {
+                                    icon: "search",
+                                    text: "Subscribed Products",
+                                    description: "When are your subscriptions going to renew? View a list of all products you’re subscribed to and their renewal dates.",
+                                    ids: [],
+                                    url: "Communities_SubscribedProducts"
+                                },
+                                license_associations: {
+                                    icon: "home",
+                                    text: "License Associations MLS",
+                                    description: "Need to update your license expiration date, Associations you belong to, or provide the MLSs you subscribe to in addition to Bright? Make those changes here.",
+									ids: [],
+                                    url: "Communities_LicenseAssociations"
+                                },
+                                agent_transfer: {
+                                    icon: "arrow-right",
+                                    text: "Agent Transfer",
+                                    description: "This is your request to transfer Broker office.",
+                                    ids: [],
+                                    url: "Communities_AgentTransferRequest"
+                                },
+                                communication_preferences: {
+                                    icon: "envelope",
+                                    text: "Communication Preferences",
+                                    description: "Manage the emails you receive from Bright.",
+                                    ids: [],
+                                    url: "Communities_CommunicationPreferences"
+                                },
+                                mls_settings: {
+                                    icon: "cogs",
+                                    text: "MLS Settings",
+                                    description: "Want to customize your Client Portal, report headers, email signature, custom exports, and displays?",
+                                    ids: [],
+                                    url: "{!$Label.Communities_MLS_Settings_URL}"                               
+                                },
+                                manage_Act_as: {
+                                    icon: "users",
+                                    text: "Manage Act As",
+                                    description: "Do you want to allow others to manage your listings and clients?",
+                                    ids: [],
+                                    url: "{!$Label.Communities_Manage_Act_URL}"                              
+                                } ,
+                                 permissions: {
+                                    icon: "lock",
+                                    text: "Permissions",
+                                    description: "Check your permissions settings.",
+                                    ids: [],
+                                    url:"{!$Label.Communities_Permissions_URL}"                             
+                                },
+                                RETS_Products: {
+                                    icon: "briefcase",
+                                    text: "Data Licensing",
+                                    description: "View details on any data license(s) to which you’re currently subscribed or have subscribed to in the past.",
+                                    ids: [],
+                                    url:"Communities_RETS_Product_VF"                             
+                                },
+                                Listing_Transfer: {
+                                    icon: "arrow-right",
+                                    text: "Agent Listing Transfer",
+                                    description: "Request to transfer your previous listings.",
+                                    ids: [],
+                                    url:"Communities_AgentListings"                             
+                                },
+                                Agent_Accuracy_Notifications: {
+                                    icon: "arrow-right",
+                                    text: "Agent Accuracy Notifications",
+                                    description: "View Details of all violations and fines.",
+                                    ids: [],
+                                    url:"Communities_AgentAccuracy"                             
+                                },
+                                
+                                Broker_Authorization_Request: {
+                                    icon: "arrow-right",
+                                    text: "IDX and VOW Licensing Request",
+                                    description: "Would you like to add IDX or VOW data feeds from an approved vendor to your website?",
+                                    ids: [],
+                                    url:"Communities_BrokerAuthorizationRequest"
+                                },
+                                 Office_Exclusive_Certification: {
+                                    icon: "home",
+                                    text: "Office Exclusive Certification",
+                                    description: "Confirm your property will not be entered in Bright and submit your Office Exclusive form signed by the Seller/Landlord.",
+                                    ids: [],
+                                    url: "Communities_OfficeExclusive"
+                                },
+                                Office_Exclusive: {
+                                    icon: "user",
+                                    text: "Office Exclusives",
+                                    description: "View Office Exclusives you have submitted to Bright.",
+                                    ids: [],
+                                    url: "Communities_OE_Subscription"
+                                },
+                                
+                            };
+                            var optionNames = [];
+                        </script>
+
+                        <apex:repeat value="{!Subscriptions}" var="s">
+                            <script>
+                                options["{!s.Category}"].ids.push("{!s.Id}");
+                                optionNames["{!s.Id}"] = "{!s.displayText}";
+                            </script>
+                        </apex:repeat>
+                            
+                        <script>
+                            var isLimited = "{!isLimited}";
+                            var isTrendLogin = "{!isTrendLogin}";
+                            var isBrightLogin = "{!isBrightLogin}";
+                            var panels = $(".action-panels");
+
+                            panels.empty();
+                            
+                            for (i in options) {
+                                var option = options[i];
+                                console.log(option.text);
+                                if(isTrendLogin == 'true' && option.text == 'Agent Transfer')
+                                    continue;
+                                
+                                console.log('-option.text-->'+option.text);
+                                
+                                if(isBrightLogin == 'false' && (option.text == 'MLS Settings' || option.text == 'Communication Preferences' || option.text == 'Manage Act As' || option.text == 'Permissions'))
+                                    continue;
+                                else if(isLimited == 'true'
+                                        && (option.text == 'Agent Transfer' 
+                                            || option.text == 'Agent Listing Transfer'
+                                            || option.text == 'Agent Accuracy Notifications'
+                                            || option.text == 'MLS Settings' 
+                                            || option.text == 'Communication Preferences'
+                                            || option.text == 'Manage Act As'
+                                            || option.text == 'Permissions'
+                                            || option.text == 'IDX and VOW Licensing Request' 
+                                            || option.text == 'Data Licensing'
+                                            || option.text == 'My Payment Methods'
+                                            || option.text == 'Subscribed Products'
+                                            || option.text == 'Pay My Balances'
+                                            || option.text == 'Statement of Account'
+                                           || option.text == 'Office Exclusive Certification'
+                                           || option.text == 'Office Exclusives')){
+                                    console.log('--isLimited-->'+isLimited+'---'+option.text);
+                                    continue;
+                                }
+                                else if(isBrightLogin == 'true' && (option.text == 'MLS Settings' || option.text == 'Manage Act As' || option.text == 'Permissions')) {
+                                    console.log('--option.text-->'+option.text);
+                                    panels.append(String.format('<div class="col-sm-6 col-md-4"><a href="{0}" target="_blank"><h4><i class="fa fa-{1} fa-2x"></i>{2}</h4><p>{3}</p></a></div>',
+                                        option.url,
+                                        option.icon,
+                                        option.text,
+                                        option.description
+                                    ));
+                                    continue;
+                                }
+                                     
+                                panels.append(String.format('<div class="col-sm-6 col-md-4"><a href="#" onclick="selectOption(\'{0}\'); return false;"><h4><i class="fa fa-{1} fa-2x"></i>{2}</h4><p>{3}</p></a></div>',
+                                    i,
+                                    option.icon,
+                                    option.text,
+                                    option.description
+                                ));                                
+                            }
+
+                            loading_block.hide();
+                            $("#content-block").show();
+                            init_action_panels();
+
+                            var modal = $("#subscription-option-modal");
+                            
+                            function selectOption(option) {
+                                modal.find("#modal-label").text(options[option].text);
+                                
+                                modal.find("button.btn-primary")
+                                    .attr("option-target", option)
+                                    .attr("disabled", "disabled");
+                                
+                                var dropdown = modal.find("select");
+                                
+                                dropdown.empty();
+                                
+                                dropdown.append('<option>Select a Subscription</option>');
+                                
+                                var ids = options[option].ids;
+                                for (i in ids)
+                                    dropdown.append(String.format('<option subscription-target="{0}">{1}</option>',
+                                        ids[i],
+                                        optionNames[ids[i]]
+                                    ));
+
+                                if (ids.length == 1) {
+                                    dropdown.find("option[subscription-target]").attr("selected", "selected");
+                                    openSubscription();
+                                }
+                                else
+                                    modal.modal("show");
+                            }
+                            
+                            function selectSubscription() {
+                                var selected = modal.find("select option:selected");
+                                
+                                if (selected.length != 1 || selected.attr("subscription-target") == null)
+                                    modal.find("button.btn-primary").attr("disabled", "disabled");
+                                else
+                                    modal.find("button.btn-primary").removeAttr("disabled");
+                            }
+                            
+                            modal.find("select").change(selectSubscription);
+                            
+                            function openSubscription() {
+                                modal.modal("hide");
+
+                                var option = modal.find("button.btn-primary").attr("option-target");
+                                var selected = modal.find("select option:selected");
+                                var url = options[option].url;
+                                
+                                if(url == 'Communities_LicenseAssociations')
+                                	window.location.href = options[option].url + "?sid=" + selected.attr("subscription-target");
+                                else
+                                    window.location.href = options[option].url + "?id=" + selected.attr("subscription-target");
+                            }
+                        </script>
+
+                    </div>
+                </apex:outputPanel>
+            </apex:form>
+        </apex:define>
+
+    </apex:composition> 
+</apex:page>

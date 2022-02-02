@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OnActivationBrokerofRecord__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Upon activation, for either agent or brokerage order, the the Subscriber who represents the either the agent&apos;s BOR for the Brokerage or the Brokerage&apos;s BOR.</description>
+    <externalId>false</externalId>
+    <label>On Activation Broker of Record</label>
+    <referenceTo>Subscriptions__c</referenceTo>
+    <relationshipLabel>RETS Product Orders (On Activation Broker of Record)</relationshipLabel>
+    <relationshipName>RETS_Product_Orders1</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

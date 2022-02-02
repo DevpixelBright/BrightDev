@@ -1,0 +1,53 @@
+<apex:page standardStylesheets="false"  lightningstylesheets="true">
+<html>
+<head>
+    <link rel="shortcut icon" href="{!URLFOR($Resource.Bootstrap_Layout_Library, '/img/favicon.ico')}" type="image/vnd.microsoft.icon" />
+    <c:Bootstrap_Resources />
+</head>
+
+<body>
+    <apex:insert name="header"/>
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <apex:form id="Form">
+                    <apex:insert name="layout"/>
+                </apex:form>
+            </div>
+        </div>
+    </article>
+    <div id="footer-reference"></div>
+    
+    <apex:insert name="footer"/>
+    
+    <script>
+        var reference = $("#footer-reference");
+        var footer = $("footer");
+        var fixed = true;
+        
+        function repositionFooter() {
+            var r_top = Math.round(reference.offset().top);
+            var f_top = Math.round(footer.offset().top);
+
+            if ((r_top < f_top || $(document).height() > (f_top + footer.height())) && !fixed) {
+                footer.css("position", "fixed");
+                fixed = true;
+                return;
+            }
+
+            if (r_top > f_top && fixed) {
+                footer.css("position", "relative");
+                fixed = false;
+                return;
+            }
+        }
+        
+        if (footer) {
+            window.setInterval(repositionFooter, 100);
+        }
+    </script>
+    <apex:insert name="scripts"/>
+</body>
+</html>    
+</apex:page>

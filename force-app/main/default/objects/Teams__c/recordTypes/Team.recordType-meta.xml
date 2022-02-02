@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Team</fullName>
+    <active>true</active>
+    <compactLayoutAssignment>Team_Compact_Layout</compactLayoutAssignment>
+    <label>Team</label>
+    <picklistValues>
+        <picklist>Invitation_Status__c</picklist>
+        <values>
+            <fullName>Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rejected</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Requested</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Remainder_Email__c</picklist>
+        <values>
+            <fullName>11 Day Reminder</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>7 Day Reminder</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status_Reason__c</picklist>
+        <values>
+            <fullName>Broker Disband</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>System Disband</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Active</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inactive</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Team_Option__c</picklist>
+        <values>
+            <fullName>Basic</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Premium</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

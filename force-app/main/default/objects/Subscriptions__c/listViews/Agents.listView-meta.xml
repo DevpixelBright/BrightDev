@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Agents</fullName>
+    <columns>Related_Location_Broker_Office__c</columns>
+    <columns>NAME</columns>
+    <columns>Contact_Type__c</columns>
+    <columns>Subscription_Type__c</columns>
+    <columns>Contact__c</columns>
+    <columns>Billing_Jurisdiction__c</columns>
+    <columns>BRIGHT_ConversionSourceMLS__c</columns>
+    <columns>BRIGHT_ConversionIsInPreview__c</columns>
+    <columns>License__c</columns>
+    <columns>Mobile_Phone__c</columns>
+    <columns>Nickname__c</columns>
+    <columns>BRIGHT_ConversionDeploymentGroup__c</columns>
+    <columns>Private_Email__c</columns>
+    <columns>Public_Email__c</columns>
+    <columns>Import_Source_Status__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Contact_Type__c</field>
+        <operation>equals</operation>
+        <value>Agent</value>
+    </filters>
+    <filters>
+        <field>Service_Jurisdiction__c</field>
+        <operation>equals</operation>
+        <value>BRIGHT</value>
+    </filters>
+    <label>Agents</label>
+</ListView>

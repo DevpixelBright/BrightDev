@@ -1,0 +1,448 @@
+<apex:component layout="none" controller="SMS_GP_InvoiceBlock_Controller">
+    <apex:attribute name="parentController" type="SMS_GenericPaymentProcess_Controller" assignTo="{!parent}" description="Main page Controller"/>
+    
+    <apex:outputPanel rendered="{!!Invoice.PayBalanceDueOnly}" >
+        <div class="row invoice-header hidden-xs hidden-sm">
+            <div class="col-md-7 col-md-offset-2 product">                
+                Product
+            </div>
+            <div class="col-md-1 amount">                
+                Amount
+            </div>
+        </div>
+
+        <apex:variable var="first_entry" value="{!0}" /> 
+        <apex:repeat value="{!Invoice.Additions}" var="b">
+
+            <apex:outputPanel rendered="{!first_entry != 0}" >
+                <div class="row invoice-row visible-xs visible-sm">&nbsp;</div>
+                <apex:variable var="first_entry" value="{!first_entry + 1}" /> 
+            </apex:outputPanel>
+
+            <apex:outputPanel rendered="{!b.IsBundle}">
+                <div class="row invoice-row hidden-xs hidden-sm">
+                    <div class="col-md-7 col-md-offset-2 product">                
+                        <span class="add">+</span>{!b.Name}
+                    </div>
+                    <div class="col-md-1 amount">                
+                        <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                            <apex:param value="{!b.Amount}"/>  
+                        </apex:outputText>                  
+                    </div>
+                </div>
+                <apex:repeat value="{!b.Contents}" var="p">
+                    <div class="row invoice-row-2 hidden-xs hidden-sm">
+                        <div class="col-md-7 col-md-offset-2 product">                
+                            {!p.Recurring.Name}
+                        </div>
+                        <div class="col-md-1">&nbsp;</div>
+                    </div>
+                    <apex:variable var="sub_count" value="{!0}" /> 
+                    <apex:repeat value="{!p.Preview}" var="c">
+                        <apex:variable var="sub_count" value="{!sub_count + 1}" /> 
+                        <div class="row invoice-row-3 hidden-xs hidden-sm">
+                            <div class="row sub-details">
+                                <div class="col-md-1 col-md-offset-2 sub-indicator"><span>{!sub_count}</span></div>
+                                <div class="col-md-1 sub-amount">
+                                    <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                        <apex:param value="{!c.Amount}"/>  
+                                    </apex:outputText>
+                                </div>
+                                <div class="col-md-5 sub-description">{!c.Name}</div>
+                                <div class="col-md-1">&nbsp;</div>
+                            </div>
+                        </div>
+                    </apex:repeat>
+                </apex:repeat>
+                
+                <div class="row invoice-row visible-xs visible-sm">
+                    <div class="col-xs-3 col-sm-3 label-xs">                
+                        Add
+                    </div>
+                    <div class="col-xs-3 value-xs">                
+                        {!b.Name}
+                    </div>
+                    <div class="col-xs-6 col-sm-7">                
+                        &nbsp;
+                    </div>
+                    <div class="col-xs-3 col-sm-3 label-xs">                
+                        Amount
+                    </div>
+                    <div class="col-xs-3 value-xs">                
+                        <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                            <apex:param value="{!b.Amount}"/>  
+                        </apex:outputText>                  
+                    </div>
+                    <div class="col-xs-6 col-sm-7">                
+                        &nbsp;
+                    </div>
+                </div>                                          
+                <apex:repeat value="{!b.Contents}" var="p">
+                    <div class="row invoice-row-2 visible-xs visible-sm">
+                        <div class="col-xs-3 col-sm-3 label-xs">                
+                            &nbsp;
+                        </div>
+                        <div class="col-xs-9 col-sm-9">                
+                            {!p.Recurring.Name}
+                        </div>
+                    </div>
+                    <apex:variable var="sub_count" value="{!0}" /> 
+                    <apex:repeat value="{!p.Preview}" var="c">
+                        <apex:variable var="sub_count" value="{!sub_count + 1}" /> 
+                        <div class="row invoice-row-3 visible-xs visible-sm">
+                            <div class="row sub-details">
+                                <div class="col-xs-3 col-sm-3 sub-indicator"><span>{!sub_count}</span></div>
+                                <div class="col-xs-3 sub-amount">
+                                    <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                        <apex:param value="{!c.Amount}"/>  
+                                    </apex:outputText>
+                                </div>
+                                <div class="col-xs-6 col-sm-8 sub-description">{!c.Name}</div>
+                            </div>
+                        </div>
+                    </apex:repeat>
+                </apex:repeat>
+            </apex:outputPanel>
+            
+            <apex:outputPanel rendered="{!!b.IsBundle}">
+                <apex:repeat value="{!b.Contents}" var="p">
+                    <div class="row invoice-row hidden-xs hidden-sm">
+                        <div class="col-md-7 col-md-offset-2 product">                
+                            <span class="add">+</span>{!p.Recurring.Name}
+                        </div>
+                        <div class="col-md-1 amount">                
+                            <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                <apex:param value="{!p.Amount}"/>  
+                            </apex:outputText>                  
+                        </div>
+                    </div>
+                    <apex:variable var="sub_count" value="{!0}" /> 
+                    <apex:repeat value="{!p.Preview}" var="c">
+                        <apex:variable var="sub_count" value="{!sub_count + 1}" /> 
+                        <div class="row invoice-row-3 hidden-xs hidden-sm">
+                            <div class="row sub-details">
+                                <div class="col-md-1 col-md-offset-2 sub-indicator"><span>{!sub_count}</span></div>
+                                <div class="col-md-1 sub-amount">
+                                    <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                        <apex:param value="{!c.Amount}"/>  
+                                    </apex:outputText>
+                                </div>
+                                <div class="col-md-6 sub-description">{!c.Name}</div>
+                            </div>
+                        </div>
+                    </apex:repeat>
+                    
+                    <div class="row invoice-row visible-xs visible-sm">
+                        <div class="col-xs-3 col-sm-3 label-xs">                
+                            Add
+                        </div>
+                        <div class="col-xs-3 value-xs">                
+                            {!p.Recurring.Name}
+                        </div>
+                        <div class="col-xs-6 col-sm-7">                
+                            &nbsp;
+                        </div>
+                        <div class="col-xs-3 col-sm-3 label-xs">                
+                            Amount
+                        </div>
+                        <div class="col-xs-3 value-xs">                
+                            <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                <apex:param value="{!p.Amount}"/>  
+                            </apex:outputText>                  
+                        </div>
+                        <div class="col-xs-6 col-sm-7">                
+                            &nbsp;
+                        </div>
+                    </div>                                          
+                    <apex:variable var="sub_count" value="{!0}" /> 
+                    <apex:repeat value="{!p.Preview}" var="c">
+                        <apex:variable var="sub_count" value="{!sub_count + 1}" /> 
+                        <div class="row invoice-row-3 visible-xs visible-sm">
+                            <div class="row sub-details">
+                                <div class="col-xs-3 col-sm-3 sub-indicator"><span>{!sub_count}</span></div>
+                                <div class="col-xs-3 sub-amount">
+                                    <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                        <apex:param value="{!c.Amount}"/>  
+                                    </apex:outputText>
+                                </div>
+                                <div class="col-xs-6 col-sm-8 sub-description">{!c.Name}</div>
+                            </div>
+                        </div>
+                    </apex:repeat>
+                </apex:repeat>
+            </apex:outputPanel>
+            
+        </apex:repeat>
+
+        <apex:repeat value="{!Invoice.Removals}" var="b">
+            <apex:repeat value="{!b.Contents}" var="p">
+                <apex:outputPanel rendered="{!!p.IsFutureSubscription}">
+
+                    <apex:outputPanel rendered="{!first_entry != 0}" >
+                        <div class="row invoice-row visible-xs visible-sm">&nbsp;</div>
+                        <apex:variable var="first_entry" value="{!first_entry + 1}" /> 
+                    </apex:outputPanel>
+
+                    <div class="row invoice-row hidden-xs hidden-sm">
+                        <div class="col-md-7 col-md-offset-2 product">                
+                            <span class="add">-</span>{!p.Name}
+                        </div>
+                        <div class="col-md-1 amount">                
+                            <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                <apex:param value="{!p.Amount}"/>  
+                            </apex:outputText>                  
+                        </div>
+                    </div>
+
+                    <div class="row invoice-row visible-xs visible-sm">
+                        <div class="col-xs-3 col-sm-3 label-xs">                
+                            Remove
+                        </div>
+                        <div class="col-xs-3 value-xs">                
+                            {!p.Name}
+                        </div>
+                        <div class="col-xs-6 col-sm-7">                
+                            &nbsp;
+                        </div>
+                        <div class="col-xs-3 col-sm-3 label-xs">                
+                            Amount
+                        </div>
+                        <div class="col-xs-3 value-xs">                
+                            <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                <apex:param value="{!p.Amount}"/>  
+                            </apex:outputText>                  
+                        </div>
+                        <div class="col-xs-6 col-sm-7">                
+                            &nbsp;
+                        </div>
+                    </div>                                          
+                </apex:outputPanel>
+            </apex:repeat>
+        </apex:repeat>
+
+        <div class="row invoice-footer">
+            <div class="col-xs-9 col-sm-10 col-md-7 col-md-offset-2 total">                
+                Total
+            </div>
+            <div class="col-xs-3 col-sm-2 col-md-1 amount">
+                <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                    <apex:param value="{!Invoice.InvoiceBalance}"/>  
+                </apex:outputText>                  
+            </div>
+        </div>
+        
+        <div class="row invoice-footer">
+            <div class="col-xs-9 col-sm-10 col-md-7 col-md-offset-2 total">                
+                Tax
+            </div>
+            <div class="col-xs-3 col-sm-2 col-md-1 amount">
+                <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                    <apex:param value="{!Invoice.TaxBalance}"/>  
+                </apex:outputText>                  
+            </div>
+        </div>
+        
+        <apex:outputPanel layout="none" rendered="{!showPreview}">
+            <apex:outputPanel layout="none" rendered="{!Invoice.ExistingBalance != 0}">
+                <div class="row invoice-footer">
+                    <div class="col-xs-9 col-sm-10 col-md-7 col-md-offset-2 total">                
+                        Existing Balance On Account
+                    </div>
+                    <div class="col-xs-3 col-sm-2 col-md-1 amount">
+                        <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                            <apex:param value="{!Invoice.ExistingBalance}"/>  
+                        </apex:outputText>                  
+                    </div>
+                </div>
+            </apex:outputPanel>
+            
+            <div class="row invoice-footer">
+                <div class="col-xs-9 col-sm-10 col-md-7 col-md-offset-2 total">                
+                    Amount Due Today
+                </div>
+                <div class="col-xs-3 col-sm-2 col-md-1 amount">
+                    <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                        <apex:param value="{!Invoice.BalanceDue}"/>  
+                    </apex:outputText>                  
+                </div>
+            </div>
+        </apex:outputPanel>
+    </apex:outputPanel>
+
+    <apex:outputPanel rendered="{!Invoice.PayBalanceDueOnly}" >
+        <div class="row invoice-header hidden-xs hidden-sm">
+            <div class="col-md-5 col-md-offset-2 col-lg-6 col-lg-offset-2 invoice_number">                
+                Invoice Number
+            </div>
+            <div class="col-md-2 col-lg-1 posted_date">                
+                Post Date
+            </div>
+            <div class="col-md-1 col-lg-1 amount">                
+                Balance
+            </div>
+        </div>
+
+        <apex:variable var="first_invoice" value="{!0}" /> 
+        <apex:repeat value="{!Invoice.ExistingInvoices}" var="ei">
+            <div class="row invoice-row hidden-xs hidden-sm">
+                <div class="col-md-5 col-md-offset-2 col-lg-6 col-lg-offset-2 invoice_number">                
+                    {!ei.InvoiceNumber}
+                </div>
+                <div class="col-md-2 col-lg-1 posted_date">                
+                    {!ei.PostedDate}
+                </div>
+                <div class="col-md-1 amount">                
+                    <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                        <apex:param value="{!ei.Balance}"/>  
+                    </apex:outputText>                  
+                </div>
+            </div>
+            <apex:variable var="sub_count" value="{!0}" /> 
+            <apex:repeat value="{!ei.Items}" var="eii">
+                <apex:variable var="sub_count" value="{!sub_count + 1}" /> 
+                <div class="row invoice-row-3 hidden-xs hidden-sm">
+                    <div class="row sub-details">
+                        <div class="col-md-1 col-md-offset-2 sub-indicator"><span>{!sub_count}</span></div>
+                        <div class="col-md-1 sub-amount">
+                            <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                <apex:param value="{!eii.Amount}"/>  
+                            </apex:outputText>
+                        </div>
+                        <div class="col-md-5 sub-description">{!eii.Description}</div>
+                        <div class="col-md-1">&nbsp;</div>
+                    </div>
+                </div>
+            </apex:repeat>
+            <apex:outputPanel layout="none" rendered="{!ei.Tax != 0}">
+                <div class="row invoice-row-3 hidden-xs hidden-sm">
+                    <div class="row sub-details">
+                        <div class="col-md-1 col-md-offset-2 sub-indicator"><span>T</span></div>
+                        <div class="col-md-1 sub-amount">
+                            <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                <apex:param value="{!ei.Tax}"/>  
+                            </apex:outputText>
+                        </div>
+                        <div class="col-md-5 sub-description">Tax</div>
+                        <div class="col-md-1">&nbsp;</div>
+                    </div>
+                </div>
+            </apex:outputPanel>
+
+            <apex:outputPanel rendered="{!first_invoice != 0}" >
+                <div class="row invoice-row visible-xs visible-sm">&nbsp;</div>
+                <apex:variable var="first_invoice" value="{!first_invoice + 1}" /> 
+            </apex:outputPanel>
+            
+            <div class="row invoice-row visible-xs visible-sm">
+                <div class="col-xs-4 col-sm-3 label-xs">                
+                    Invoice Number
+                </div>
+                <div class="col-xs-2 value-xs">                
+                    {!ei.InvoiceNumber}
+                </div>
+                <div class="col-xs-6 col-sm-7">                
+                    &nbsp;
+                </div>
+                <div class="col-xs-4 col-sm-3 label-xs">                
+                    Post Date
+                </div>
+                <div class="col-xs-2 value-xs">                
+                    {!ei.PostedDate}
+                </div>
+                <div class="col-xs-6 col-sm-7">                
+                    &nbsp;
+                </div>
+                <div class="col-xs-4 col-sm-3 label-xs">                
+                    Balance
+                </div>
+                <div class="col-xs-2 value-xs">                
+                    <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                        <apex:param value="{!ei.Balance}"/>  
+                    </apex:outputText>                  
+                </div>
+                <div class="col-xs-6 col-sm-7">                
+                    &nbsp;
+                </div>
+            </div>
+            <apex:variable var="sub_count" value="{!0}" /> 
+            <apex:repeat value="{!ei.Items}" var="eii">
+                <apex:variable var="sub_count" value="{!sub_count + 1}" /> 
+                <div class="row invoice-row-3 visible-xs visible-sm">
+                    <div class="row sub-details">
+                        <div class="col-xs-4 col-sm-3 sub-indicator"><span>{!sub_count}</span></div>
+                        <div class="col-xs-2 sub-amount">
+                            <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                <apex:param value="{!eii.Amount}"/>  
+                            </apex:outputText>
+                        </div>
+                        <div class="col-xs-6 col-sm-7 sub-description">{!eii.Description}</div>
+                    </div>
+                </div>
+            </apex:repeat>
+            <apex:outputPanel layout="none" rendered="{!ei.Tax != 0}">
+                <div class="row invoice-row-3 visible-xs visible-sm">
+                    <div class="row sub-details">
+                        <div class="col-xs-4 col-sm-3 sub-indicator"><span>T</span></div>
+                        <div class="col-xs-2 sub-amount">
+                            <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                <apex:param value="{!ei.Tax}"/>  
+                            </apex:outputText>
+                        </div>
+                        <div class="col-xs-6 col-sm-7 sub-description">Tax</div>
+                    </div>
+                </div>
+            </apex:outputPanel>
+        </apex:repeat>
+
+        <div class="row invoice-footer">
+            <div class="col-xs-9 col-sm-10 col-md-7 col-md-offset-2 total">                
+                <apex:outputText rendered="{!showPreview}" value="Total" />
+                <apex:outputText rendered="{!showConfirmation}" value="Previous" />
+                Balance On Account
+            </div>
+            <div class="col-xs-3 col-sm-2 col-md-1 amount">
+                <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                    <apex:param value="{!Invoice.ExistingBalance}"/>  
+                </apex:outputText>                  
+            </div>
+        </div>
+
+        <script>
+            $(".sub-description").each(function () {
+                var e = $(this);
+                var t = e.text();
+
+                t = t.replace(/\/\//g, "<br/>");
+                t = t.replace(/:<br\/>/g, "://");
+
+                e.html(t);
+            });
+        </script>
+    </apex:outputPanel>
+
+    <apex:outputPanel layout="none" rendered="{!showConfirmation}">
+        <apex:outputPanel rendered="{!Invoice.ExistingBalance != 0 || (Invoice.BalanceDue - Invoice.AmountPaid) != 0}">
+            <div class="row invoice-footer">
+                <div class="col-xs-9 col-sm-10 col-md-7 col-md-offset-2 total">                
+                    Current Balance On Account
+                </div>
+                <div class="col-xs-3 col-sm-2 col-md-1 amount">
+                    <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                        <apex:param value="{!Invoice.BalanceDue - Invoice.AmountPaid}"/>  
+                    </apex:outputText>                  
+                </div>
+            </div>
+        </apex:outputPanel>
+
+        <div class="row invoice-footer">
+            <div class="col-xs-9 col-sm-10 col-md-7 col-md-offset-2 total">                
+                Amount Paid Today
+            </div>
+            <div class="col-xs-3 col-sm-2 col-md-1 amount">
+                <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                    <apex:param value="{!Invoice.AmountPaid}"/>  
+                </apex:outputText>                  
+            </div>
+        </div>
+    </apex:outputPanel>
+</apex:component>

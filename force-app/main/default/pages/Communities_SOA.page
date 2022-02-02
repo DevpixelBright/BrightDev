@@ -1,0 +1,961 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="Communities_SOA_Controller" lightningstylesheets="true">
+    <apex:composition template="Communities_Base">
+        
+        <apex:define name="content">
+            <style>
+                html, body {
+                    min-width: 700px;
+                }
+            </style>
+            
+            <apex:form id="portal">
+                <apex:actionFunction action="{!initSOAPortal}" name="initSOAPortal" reRender="portal" />
+                
+                <apex:actionFunction action="{!setYearFilter}" name="setYearFilter" reRender="portal">
+                    <apex:param name="yearOption" value="" />
+                </apex:actionFunction>
+                
+                <apex:actionFunction action="{!getSOAInvoiceSummary}" name="getSOAInvoiceSummary" reRender="invoice-details-content">
+                    <apex:param name="invoiceId" value="" />
+                </apex:actionFunction>
+
+                <apex:actionFunction action="{!getSOAPaymentSummary}" name="getSOAPaymentSummary" reRender="payment-details-content">
+                    <apex:param name="paymentId" value="" />
+                </apex:actionFunction>
+
+                <c:Bootstrap_Resources />
+
+                <div class="row">
+                    <c:Communities_Definition pageTitle="Statement of Account" pageTitleClass="fa fa-inbox fa-2x" hasDefinitions="false">
+                        <p><b class="term">Term</b> Definition goes here.</p>
+                    </c:Communities_Definition>
+                </div>
+
+                <div class="row" id="loading-block">
+                    <div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-5">
+                        <div class="progress progress-striped active">
+                            <div class="progress-bar" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    var loading_block = $("#loading-block");
+                </script>
+                
+                <apex:outputPanel layout="none" rendered="{!initialLoad}" >
+                    <script>$(initSOAPortal);</script>
+                </apex:outputPanel>
+
+                <apex:outputPanel layout="none" rendered="{!!initialLoad && hasError}" >
+                    <div id="error-block" style="display: none;">
+                        <div class="alert alert-danger">
+                            <!--  <p>We’re sorry. The connection has timed out.</p>
+                            <p>If this issue persists, please contact the Customer Support Center for assistance at 1-844-55-BRIGHT (1-844-552-7444) or via email at <a href="mailto:support@brightmls.com">support@brightmls.com</a>.</p>
+                            -->
+                            <p>We’re sorry an unexpected error occurred.</p>
+                            <p>Please contact the Bright Support Center at If you need any assistance, please contact the Customer Support Center at 1-844-55-BRIGHT (1-844-552-7444).</p>
+                            <div><apex:pageMessages /></div>
+                            <apex:outputPanel layout="none" rendered="{!debugMode}" >
+                                <div><apex:pageMessages /></div>
+                            </apex:outputPanel>
+                        </div>
+                        <div class="row" style="margin-top: 30px;">
+                            <div class="col-md-2 col-md-offset-5">
+                                <div class="btn-group btn-group-justified">
+                                    <a href="{!cancelUrl}" class="btn btn-primary" role="button">Back</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <script>
+                            loading_block.hide();
+                            $("#error-block").show();
+                        </script>
+                    </div>
+                </apex:outputPanel>
+                
+                <apex:outputPanel layout="none" rendered="{!!initialLoad && !hasError}" >
+                    <style>
+                        .soa {
+                            margin-top: 50px;
+                        }
+
+                            .soa .info {
+                            }
+                            
+                            .soa .info h4 {
+                                margin-top: 0px;
+                            }
+                            
+                            .soa .info h2 {
+                                margin-top: 0px;
+                                font-weight: bold;
+                            }
+                            
+                            .soa .account-balance {
+                                padding-right: 0px;
+                            }
+                            
+                            .soa .account-balance-block {
+                                color: #fff;
+                                background-color: #388EDD;
+                                padding: 0px;
+                                border-radius: 4px 4px 0px 0px;
+                            }
+
+                            .soa .account-balance-label {
+                                text-align: center;
+                                padding: 10px;
+                                font-weight: bold;
+                                letter-spacing: 1px;
+                            }
+
+                            .soa .account-balance-amount {
+                                float: right;
+                                text-align: right;
+                                padding: 15px;
+                            }
+
+                            .soa .account-balance-amount b {
+                                padding: 0px 5px;
+                                letter-spacing: 2px;
+                                font-size: 80px;
+                                line-height: 30px;
+                            }
+                            
+                            .soa .account-balance-amount span {
+                                position: relative;
+                                top: -33px;
+                                font-size: 30px;
+                                line-height: 30px;
+                            }
+                            
+                            .soa .summary {
+                                float: left;
+                                text-align: right;
+                                border-radius: 4px;
+                                margin-right: -15px;
+                                line-height: 32px;
+                                background-color: #5CB85C;
+                                border: 1px solid #5CB85C;
+                                overflow: hidden;
+                            }
+                            
+                            .soa .summary-row {
+                            }
+
+                            .soa .summary-row + .summary-row {
+                                border-top: 1px solid #99D899;
+                            }
+
+                            .soa .summary-row .text {
+                                display: inline-block;
+                                padding-left: 20px;
+                                padding-right: 10px;
+                                color: #FFF;
+                            }
+
+                            .soa .summary-row .value {
+                                display: inline-block;
+                                width: 100px;
+                                padding-right: 10px;
+                                color: #222;
+                                background-color: #fff;
+                            }
+
+                            .soa .filter {
+                                border-top: 1px solid #388EDD;
+                                border-bottom: 1px solid #388EDD;
+                                padding: 20px;
+                            }
+                            
+                            .soa .list {
+                                margin-top: 50px;
+                            }
+
+                                .soa .list .emphasised {
+                                    font-weight: bold;
+                                }
+                            
+                                .soa .list .row {
+                                    border-radius: 4px;
+                                    display: table;
+                                    width: 100%;
+                                    margin-left: 0px;
+                                    margin-right: 0px;
+                                }
+                                
+                                .soa .list .row:nth-child(even) {
+                                    background-color: #eee;
+                                }
+                                
+                                .soa .list .row + .row {
+                                    border-top: 1px solid #eee;
+                                }
+
+                                .soa .list .row > div {
+                                    display: table-cell;
+                                    float: none;
+                                    vertical-align: middle;
+                                    padding: 10px 15px;
+                                }
+                                
+                                .soa .list .row > div + div {
+                                    border-left: 1px solid #fff;
+                                }
+                                
+                                .soa .list .date {
+                                    text-align: center;
+                                }
+                                
+                                .soa .list .id {
+                                }
+                                
+                                .soa .list .description {
+                                }
+                                
+                                .soa .list .amount {
+                                    text-align: right;
+                                }
+                                
+                                .invoice-details-line.extra-margin {
+                                    margin-top: 20px;
+                                }
+                                
+                                .invoice-details-line .invoice-details-label {
+                                    display: inline-block;
+                                    width: 150px;
+                                    font-weight: bold;
+                                    text-align: right;
+                                    margin-right: 10px;
+                                }
+                                
+                                .invoice-details-line .invoice-details-value {
+                                    display: inline-block;
+                                    vertical-align: top;
+                                }
+                                
+                                .invoice-item-line.header {
+                                    margin-top: 20px;
+                                }
+
+                                .invoice-item-line > div {
+                                    padding: 10px 0px;
+                                }
+
+                                .invoice-item-line.header > div {
+                                    font-weight: bold;
+                                }
+                                
+                                .invoice-item-line.footer > div {
+                                    font-weight: bold;
+                                    text-align: right;
+                                }
+
+                                .invoice-item-line .invoice-item-details {
+                                    float: left;
+                                    width: 75%;
+                                    margin-left: 4%;
+                                    padding-right: 10px;
+                                    border-right: 1px solid #ddd;
+                                }
+
+                                .invoice-item-line .invoice-item-details > i {
+                                    color: #777;
+                                }
+                                
+                                .invoice-item-line .invoice-item-cost {
+                                    float: left;
+                                    width: 15%;
+                                    margin-right: 4%;
+                                    text-align: right;
+                                }
+
+                                .invoice-item-line + .invoice-item-line {
+                                    border-top: 1px solid #ddd;
+                                }
+                                
+                                .invoice-item-line:before {
+                                    display: table;
+                                    content: " ";
+                                }
+
+                                .invoice-item-line:after {
+                                    display: table;
+                                    content: " ";
+                                    clear: both;
+                                }
+                    </style>
+                    
+                    <div id="content-block" style="display: none;">
+                        <div class="row">
+                            <div class="col-xs-12 instructions">
+                                <p>The following statement lists the invoices, payments and credits (if applicable) relating to your MLS account for the calendar year you have selected. These totals are shown below.</p>
+                                <p>If you are using this statement of accounts for tax reporting purposes and a tax professional will be assisting you, you may want to share this information with them.</p>
+                                <p>For a printer-friendly copy, click the Download to PDF button.</p>            
+                                <apex:outputPanel layout="none" rendered="{!debugMode}" >
+                                    <div><apex:pageMessages /></div>
+                                </apex:outputPanel>
+                            </div>
+                        </div>
+
+                        <div class="soa">
+                            <div class="row">
+                                <div class="info col-xs-6">
+                                    <h4>{!mySOAHeader.TodayDateString}</h4>
+                                    <h2>{!mySOAHeader.CustomerName}</h2>
+                                    <apex:outputText value="{!mySOAHeader.AddressString}" escape="false" />
+                                </div>
+                                <div class="account-balance col-xs-6">
+                                    <div class="account-balance-block pull-right">
+                                        <div class="account-balance-label">Current Balance</div>
+                                        <div class="account-balance-amount">
+                                            <apex:outputText value="{0, number, ###,###,###,##0.00}">  
+                                                <apex:param value="{!mySOALineItemData.BalanceFromAccount}"/>  
+                                            </apex:outputText> 
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        
+                                        <script>
+                                            var aba = $(".account-balance-amount");
+                                            var v = aba.text().split(".");
+                                            
+                                            aba.html(String.format("<span>$</span><b>{0}</b><span>{1}</span>", v[0], v[1]));
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row filter">
+                                <div class="col-xs-4 col-md-1 col-md-offset-3">
+                                    <div class="btn-group-vertical pull-right">
+                                        <apex:variable var="i" value="{!0}" />
+                                        <apex:repeat value="{!yearOptions}" var="yo">
+                                            <a class="btn btn-default year-option" role="button" onclick="selectSOAYear({!i}); return false;" current="{!dateLimits.maxYear}">{!yo}</a>
+                                            <apex:variable var="i" value="{!i + 1}"/>
+                                        </apex:repeat>
+                                        <apex:commandLink styleClass="btn btn-primary" value="Download as PDF" action="{!getSOAPDF}" target="_blank"/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-8 col-md-5 col-md-offset-1">
+                                    <div class="summary">
+                                        <div class="summary-row">
+                                            <span class="text">{!dateLimits.maxYear} Total Subscription Fees</span>
+                                            <span class="value">
+                                                <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                                    <apex:param value="{!mySOALineItemData.TotalSubscriptionFees}"/>  
+                                                </apex:outputText> 
+                                            </span>
+                                        </div>
+                                        <div class="summary-row">
+                                            <span class="text">{!dateLimits.maxYear} Total Credits Applied</span>
+                                            <span class="value">
+                                                <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                                    <apex:param value="{!mySOALineItemData.TotalCreditsApplied}"/>  
+                                                </apex:outputText> 
+                                            </span>
+                                        </div>
+                                        <div class="summary-row">
+                                            <span class="text">{!dateLimits.maxYear} Total Payments Received</span>
+                                            <span class="value">
+                                                <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                                    <apex:param value="{!mySOALineItemData.TotalPaymentsReceived}"/>  
+                                                </apex:outputText> 
+                                            </span>
+                                        </div>
+                                        <div class="summary-row">
+                                            <span class="text">{!dateLimits.maxYear} Total Balance Outstanding</span>
+                                            <span class="value" style="color: #A94442;"><b>
+                                                <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                                    <apex:param value="{!mySOALineItemData.BalanceDue}"/>  
+                                                </apex:outputText></b>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <script>
+                                $(".year-option").each(function () {
+                                    var $this = $(this);
+                                    var selected = $this.text() == $this.attr("current");
+                                    
+                                    if (!selected) return;
+                                    
+                                    $this
+                                        .removeClass("btn-default")
+                                        .addClass("btn-success")
+                                        .removeAttr("onclick")
+                                        .css({
+                                            "cursor": "not-allowed",
+                                            "pointer-events": "none"
+                                        });
+                                });
+                            </script>
+                            
+                            <div class="row list">
+                                <div class="row emphasised">
+                                    <div class="col-xs-3 col-sm-2 col-lg-1 date">Date</div>
+                                    <div class="col-xs-3 col-sm-2 id">Transaction ID</div>
+                                    <div class="col-xs-3 col-sm-6 col-lg-8 description">Description</div>
+                                    <div class="col-xs-3 col-sm-2 col-lg-1 amount">Amount</div>
+                                </div>
+                                
+                                <apex:variable var="lineItemCount" value="{!0}"/>
+                                <apex:repeat value="{!mySOALineItemData.LineItems}" var="lineItem">
+                                    <apex:outputPanel layout="none" rendered="{!lineItem.ToDisplay}">
+                                        <apex:variable var="lineItemCount" value="{!lineItemCount + 1}"/>
+                                        <div class="row line-item" date="{!lineItem.EffectiveDateTimeString}">
+                                            <div class="col-xs-3 col-sm-2 col-lg-1 date">{!lineItem.EffectiveDateTimeString}</div>
+                                            <div class="col-xs-3 col-sm-2 id">
+                                                <apex:outputPanel layout="none" rendered="{!lineItem.LineTypeString == 'SOAInvoice' || lineItem.LineTypeString == 'SOAPayment'}">
+                                                    <a href="#" line-type="{!lineItem.LineTypeString}" id="{!lineItem.Id}" onclick="showDetails(this); return false;">{!lineItem.TransactionId}</a>
+                                                </apex:outputPanel>
+                                                <apex:outputPanel layout="none" rendered="{!lineItem.LineTypeString != 'SOAInvoice' && lineItem.LineTypeString != 'SOAPayment'}">
+                                                    {!lineItem.TransactionId}
+                                                </apex:outputPanel>
+                                            </div>
+                                            <div class="col-xs-3 col-sm-6 col-lg-8 description">{!lineItem.ItemDescription}</div>
+                                            <div class="col-xs-3 col-sm-2 col-lg-1 amount">
+                                                <apex:outputText value="{0, number, ###,###,###,##0.00}">  
+                                                    <apex:param value="{!lineItem.Amount}"/>  
+                                                </apex:outputText> 
+                                            </div>
+                                        </div>
+                                    </apex:outputPanel> 
+                                </apex:repeat>
+                                
+                                <apex:outputPanel layout="none" rendered="{!lineItemCount == 0}">
+                                    <div class="alert alert-warning" style="text-align: center; margin-top: 20px;">
+                                        No activities found on record
+                                    </div>
+                                </apex:outputPanel>
+
+                                <apex:outputPanel layout="none" rendered="{!currentYearTruncated}">
+                                    <div class="alert alert-warning" style="text-align: center; margin-top: 20px;">
+                                        Activities before
+                                        <b><apex:outputText value="{0, date, MMMM', 'yyyy}">
+                                            <apex:param value="{!truncationDate}" />
+                                        </apex:outputText></b>
+                                        are no longer available
+                                    </div>
+                                </apex:outputPanel>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="SOAInvoice-details-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="modal-label">Invoice Details</h4>
+                                </div>
+                                <apex:outputPanel layout="block" styleClass="modal-body" id="invoice-details-content">
+                                    <apex:outputPanel layout="none" rendered="{!debugMode}" >
+                                        <div><apex:pageMessages /></div>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{!!hasInvoiceError}" >
+                                        <apex:variable var="is" value="{!outputInvoiceSummary.invoiceSummaryBySubId}" />
+                                        <div class="invoice-details-line">
+                                            <span class="invoice-details-label">Invoice Number</span>
+                                            {!is.InvoiceNumber}
+                                        </div>
+                                        <div class="invoice-details-line">
+                                            <span class="invoice-details-label">Invoice Date</span>
+                                            {!is.InvoiceDateString}
+                                        </div>
+                                        <div class="invoice-details-line">
+                                            <!--<span class="invoice-details-label">{!if(is.isTrend, 'TREND Login Name', 'MRIS ID')}</span>-->
+                                            <span class="invoice-details-label">{!if(is.isTrend, 'TREND Login Name', 'MLS ID')}</span>
+                                            {!is.MRIS_ID}
+                                        </div>
+                                        <div class="invoice-details-line">
+                                            <span class="invoice-details-label">{!if(is.isTrend, 'Account Name', 'Office ID')}</span>
+                                            {!is.Office_ID}
+                                        </div>
+                                        <div class="invoice-details-line extra-margin">
+                                            <span class="invoice-details-label">Bill To</span>
+                                            {!is.BillTo}
+                                        </div>
+                                        <div class="invoice-details-line">
+                                            <span class="invoice-details-label">Email</span>
+                                            {!is.Email}
+                                        </div>
+                                        <apex:outputPanel rendered="{!if(isRets == true, true, false)}">
+                                        <div class="invoice-details-line extra-margin">
+                                            <div class="invoice-item-details">
+                                            </div>
+                                        </div>
+                                        </apex:outputPanel>
+                                        <div class="invoice-item-line header">
+                                            <div class="invoice-item-details">
+                                                Product
+                                            </div>
+                                            <div class="invoice-item-cost">
+                                                Amount
+                                            </div>
+                                        </div>
+                                        <apex:repeat value="{!outputInvoiceSummary.invoiceSummaryBySubIdSortOrder}" var="isk">
+                                            <div class="invoice-item-line">
+                                                <div class="invoice-item-details">
+                                                    <style>
+                                                        .product-label {
+                                                            display: inline-block;
+                                                            width: 50px;
+                                                            text-align: right;
+                                                            margin-right: 10px;
+                                                            color: #777;
+                                                        }
+
+                                                        .summary-date {
+                                                            //font-style: italic;
+                                                        }
+
+                                                        .summary-comment {
+                                                            position: relative;
+                                                            margin-top: 20px;
+                                                            border: 1px dotted #ccc;
+                                                            border-width: 1px 0px;
+                                                        }
+
+                                                        .summary-comment:after {
+                                                            content: "";
+                                                            display: block;
+                                                            clear: both;
+                                                        }
+
+                                                        .summary-comment + .summary-comment {
+                                                            margin-top: 0px;
+                                                            border-top: 0px;
+                                                        }
+
+                                                        .summary-comment.heading {
+                                                            padding: 15px 10px;
+                                                            font-weight: 500;
+                                                        }
+
+                                                        .summary-comment.cost {
+                                                            //background-color: #fdd;
+                                                            //color: #f00;
+                                                        }
+
+                                                        .summary-comment.credit {
+                                                            background-color: #dff0d8;
+                                                            //color: #0e9a0e;
+                                                        }
+
+                                                        .summary-comment.total {
+                                                            background-color: #eee;
+                                                            font-weight: 500;
+                                                        }
+
+                                                        .summary-comment-text {
+                                                            clear: both;
+                                                            float: left;
+                                                            width: 75%;
+                                                            border-right: 1px solid #fff;
+                                                            padding: 15px 10px;
+                                                        }
+
+                                                        .summary-comment.total .summary-comment-text {
+                                                            text-align: right;
+                                                        }
+
+                                                        .summary-comment-price {
+                                                            float: left;
+                                                            width: 25%;
+                                                            text-align: right;
+                                                            padding: 15px 10px;
+                                                        }
+
+                                                        .summary-comment.credit .summary-comment-price {
+                                                            //color: #0e9a0e;
+                                                        }
+                                                    </style>
+
+                                                    <apex:variable value="{!is.invoiceItemSummariesBySubIdByInvoiceId[isk]}" var="x"/>
+                                                    <apex:variable value="{!x.KeyInvoice}" var="k"/>
+
+                                                    <span class="product-label">Product</span><b>{!k.ProductName}</b><apex:outputText escape="false" value=" (Removal)" rendered="{!!x.IsActive}"/><br/>
+                                                    
+                                                    <apex:outputPanel layout="none" rendered="{!k.ProductName == 'Data Licensing'}">
+                                                        <div class="summary-date">
+                                                            <apex:outputPanel layout="none" rendered="{!k.StartDateString != k.EndDateString}">
+                                                                <span class="product-label">Period</span>{!k.StartDateString} ・・・ {!k.EndDateString}
+                                                            </apex:outputPanel>
+                                                            <apex:outputPanel layout="none" rendered="{!k.StartDateString == k.EndDateString}">
+                                                                <span class="product-label">Date</span>{!k.StartDateString}
+                                                            </apex:outputPanel>
+                                                        </div>
+                                                        <br/>
+                                                        <i style="font-size: 80%;">For Data Licensing products, proration can apply to quantity changes.<br/>
+                                                        <apex:outputLink value="{!$Label.RetsProductUrl}{!$CurrentPage.parameters.id}" Target="_blank"><b>See here</b></apex:outputLink> for further explanation and full details.</i><br/>
+
+                                                        <div class="summary-comment heading">
+                                                            Amount Breakdown
+                                                        </div>
+                                                        
+                                                        <apex:repeat value="{!x.invoiceItemSummaries}" var="iis">
+                                                        <apex:outputPanel layout="none" rendered="{!iis.Price >= 0}">
+                                                            <div class="summary-comment cost">
+                                                                <div class="summary-comment-text">
+                                                                    <b>Charge</b><br/>
+                                                                    <apex:outputText escape="false" value="{!iis.Comments}"/>
+                                                                </div>
+                                                                <div class="summary-comment-price">
+                                                                    <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                                                        <apex:param value="{!iis.Price}"/>  
+                                                                    </apex:outputText>
+                                                                </div>
+                                                            </div>
+                                                        </apex:outputPanel>
+                                                        </apex:repeat>
+                                                        
+                                                        <apex:repeat value="{!x.invoiceItemSummaries}" var="iis">
+                                                        <apex:outputPanel layout="none" rendered="{!iis.Price < 0}">
+                                                            <div class="summary-comment credit">
+                                                                <div class="summary-comment-text">
+                                                                    <b>Adjustment</b><br/>
+                                                                    <apex:outputText escape="false" value="{!iis.Comments}"/>
+                                                                </div>
+                                                                <div class="summary-comment-price">
+                                                                    <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                                                        <apex:param value="{!iis.Price}"/>  
+                                                                    </apex:outputText>
+                                                                </div>
+                                                            </div>
+                                                        </apex:outputPanel>
+                                                        </apex:repeat>
+
+                                                        <div class="summary-comment total">
+                                                            <div class="summary-comment-text">
+                                                                Net amount for this period
+                                                            </div>
+                                                            <div class="summary-comment-price">
+                                                                <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                                                    <apex:param value="{!x.NetPrice}"/>  
+                                                                </apex:outputText>
+                                                            </div>
+                                                        </div>
+                                                    </apex:outputPanel>
+
+                                                    <apex:outputPanel layout="none" rendered="{!k.ProductName != 'Data Licensing'}">
+                                                        <apex:outputPanel layout="none" rendered="{!x.lengthOfSummaries == 1}">
+                                                            <div class="summary-date">
+                                                                <apex:outputPanel layout="none" rendered="{!k.StartDateString != k.EndDateString}">
+                                                                    <span class="product-label">Period</span>{!k.StartDateString} ・・・ {!k.EndDateString}
+                                                                </apex:outputPanel>
+                                                                <apex:outputPanel layout="none" rendered="{!k.StartDateString == k.EndDateString}">
+                                                                    <span class="product-label">Date</span>{!k.StartDateString}
+                                                                </apex:outputPanel>
+                                                            </div>
+                                                            <div class="summary-comment">
+                                                                <apex:outputText escape="false" value="{!k.Comments}"/>
+                                                            </div>
+                                                        </apex:outputPanel>
+
+                                                        <apex:outputPanel layout="none" rendered="{!x.lengthOfSummaries > 1}">
+                                                            <div class="summary-comment heading">
+                                                                Amount Breakdown
+                                                            </div>   
+
+                                                            <apex:repeat value="{!x.invoiceItemSummaries}" var="iis">
+                                                            <apex:outputPanel layout="none" rendered="{!iis.Price >= 0}">
+                                                                <div class="summary-comment cost">
+                                                                    <div class="summary-comment-text">
+                                                                        <b>Charge</b><br/>
+                                                                        <apex:outputText escape="false" value="{!iis.Comments}"/>
+                                                                        <div class="summary-date">
+                                                                            <apex:outputPanel layout="none" rendered="{!iis.StartDateString != iis.EndDateString}">
+                                                                                <span class="product-label">Period</span>{!iis.StartDateString} ・・・ {!iis.EndDateString}
+                                                                            </apex:outputPanel>
+                                                                            <apex:outputPanel layout="none" rendered="{!iis.StartDateString == iis.EndDateString}">
+                                                                                <span class="product-label">Date</span>{!iis.StartDateString}
+                                                                            </apex:outputPanel>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="summary-comment-price">
+                                                                        <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                                                            <apex:param value="{!iis.Price}"/>  
+                                                                        </apex:outputText>
+                                                                    </div>
+                                                                </div>
+                                                            </apex:outputPanel>
+                                                            </apex:repeat>
+                                                            
+                                                            <apex:repeat value="{!x.invoiceItemSummaries}" var="iis">
+                                                            <apex:outputPanel layout="none" rendered="{!iis.Price < 0}">
+                                                                <div class="summary-comment credit">
+                                                                    <div class="summary-comment-text">
+                                                                        <b>Adjustment</b><br/>
+                                                                        <apex:outputText escape="false" value="{!iis.Comments}"/>
+                                                                        <div class="summary-date">
+                                                                            <apex:outputPanel layout="none" rendered="{!iis.StartDateString != iis.EndDateString}">
+                                                                                <span class="product-label">Period</span>{!iis.StartDateString} ・・・ {!iis.EndDateString}
+                                                                            </apex:outputPanel>
+                                                                            <apex:outputPanel layout="none" rendered="{!iis.StartDateString == iis.EndDateString}">
+                                                                                <span class="product-label">Date</span>{!iis.StartDateString}
+                                                                            </apex:outputPanel>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="summary-comment-price">
+                                                                        <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                                                            <apex:param value="{!iis.Price}"/>  
+                                                                        </apex:outputText>
+                                                                    </div>
+                                                                </div>
+                                                            </apex:outputPanel>
+                                                            </apex:repeat>
+
+                                                            <div class="summary-comment total">
+                                                                <div class="summary-comment-text">
+                                                                    Net amount for this period
+                                                                </div>
+                                                                <div class="summary-comment-price">
+                                                                    <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                                                        <apex:param value="{!x.NetPrice}"/>  
+                                                                    </apex:outputText>
+                                                                </div>
+                                                            </div>
+                                                        </apex:outputPanel>
+                                                    </apex:outputPanel>
+                                                </div>
+                                                <div class="invoice-item-cost">
+                                                    <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                                        <apex:param value="{!x.NetPrice}"/>  
+                                                    </apex:outputText>
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                        </apex:repeat>
+                                        <div class="invoice-item-line footer">
+                                            <div class="invoice-item-details">
+                                                Subtotal
+                                            </div>
+                                            <div class="invoice-item-cost">
+                                                <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                                    <apex:param value="{!is.SubTotal}"/>  
+                                                </apex:outputText>
+                                            </div>
+                                        </div>
+                                        <div class="invoice-item-line footer">
+                                            <div class="invoice-item-details">
+                                                Tax
+                                            </div>
+                                            <div class="invoice-item-cost">
+                                                <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                                    <apex:param value="{!is.TaxAmount}"/>  
+                                                </apex:outputText>
+                                            </div>
+                                        </div>
+                                        <div class="invoice-item-line footer">
+                                            <div class="invoice-item-details">
+                                                Total
+                                            </div>
+                                            <div class="invoice-item-cost">
+                                                <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                                    <apex:param value="{!is.Total}"/>  
+                                                </apex:outputText>
+                                            </div>
+                                        </div>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <div class="modal-footer">
+                                    <div class="btn-group">
+                                        <apex:commandLink styleClass="btn btn-default" value="Download as PDF" action="{!getInvoicePDF}" target="_blank"/>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->   
+                    
+                    <div class="modal fade" id="SOAPayment-details-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="modal-label">Payment Details</h4>
+                                </div>
+                                <apex:outputPanel layout="block" styleClass="modal-body" id="payment-details-content">
+                                    <apex:outputPanel layout="none" rendered="{!debugMode}" >
+                                        <div><apex:pageMessages /></div>
+                                    </apex:outputPanel>
+                                    
+                                    <apex:variable var="ps" value="{!outputPaymentSummary.paymentSummary}" />
+                                    <div class="invoice-details-line">
+                                        <span class="invoice-details-label">Amount</span>
+                                        <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                            <apex:param value="{!ps.Amount}"/>  
+                                        </apex:outputText> 
+                                    </div>
+                                    <div class="invoice-details-line">
+                                        <span class="invoice-details-label">Date Posted</span>
+                                        <apex:outputText value="{0, date, MM'/'dd'/'yyyy}">
+                                            <apex:param value="{!ps.EffectiveDate}" /> 
+                                        </apex:outputText>
+                                    </div>
+                                    
+                                    <apex:outputPanel layout="none" rendered="{!hasPaymentError}" >
+                                        <div class="invoice-details-line extra-margin">
+                                            Your payment information is not available. You have elected to either not store the payment method or have deleted it.
+                                        </div>
+                                    </apex:outputPanel>  
+                                    
+                                    <apex:outputPanel layout="none" rendered="{!!hasPaymentError}" >
+                                        
+                                        <apex:outputPanel layout="none" rendered="{!ps.Type == 'CreditCard'}">
+                                            <div class="invoice-details-line extra-margin">
+                                                <span class="invoice-details-label">Card Type</span>
+                                                {!ps.CreditCardType}
+                                            </div>
+                                            <div class="invoice-details-line">
+                                                <span class="invoice-details-label">Card Number</span>
+                                                {!ps.CreditCardMaskNumber}
+                                            </div>
+                                            <div class="invoice-details-line">
+                                                <span class="invoice-details-label">Expiration Date</span>
+                                                <apex:outputText value="{0, date, MM'/'dd'/'yyyy}">
+                                                    <apex:param value="{!ps.CreditCardExpiration}" /> 
+                                                </apex:outputText>
+                                            </div>
+                                            <div class="invoice-details-line extra-margin">
+                                                <span class="invoice-details-label">Cardholder Name</span>
+                                                {!ps.CreditCardHolderName}
+                                            </div>
+                                            <div class="invoice-details-line">
+                                                <span class="invoice-details-label">Address</span>
+                                                <span class="invoice-details-value" id="invoice-details-address"></span>
+                                                <script>
+                                                    var address = [];
+                                                    var jurisdiction = [];
+                                                    var x;
+                                                    
+                                                    x = "{!ps.CreditCardAddress1}".trim();
+                                                    if (x != "") address.push(x);
+
+                                                    x = "{!ps.CreditCardAddress2}".trim();
+                                                    if (x != "") address.push(x);
+
+                                                    x = "{!ps.CreditCardCity}".trim();
+                                                    if (x != "") jurisdiction.push(x);
+
+                                                    x = "{!ps.CreditCardState}".trim();
+                                                    if (x != "") jurisdiction.push(x);
+
+                                                    x = "{!ps.CreditCardPostalCode}".trim();
+                                                    if (x != "") jurisdiction.push(x);
+
+                                                    if (jurisdiction.length > 1) jurisdiction[0] += ",";
+                                                    
+                                                    if (jurisdiction.length > 0) address.push(jurisdiction.join(" "));
+                                                    
+                                                    $("#invoice-details-address").html(address.join("<br />"));
+                                                </script>
+                                            </div>
+                                        </apex:outputPanel>
+                                        
+                                        <apex:outputPanel layout="none" rendered="{!ps.Type == 'ACH'}">
+                                            <div class="invoice-details-line extra-margin">
+                                                <span class="invoice-details-label">Account</span>
+                                                {!ps.AchAccountName}
+                                            </div>
+                                            <div class="invoice-details-line extra-margin">
+                                                <span class="invoice-details-label">Bank Name</span>
+                                                {!ps.AchBankName}
+                                            </div>
+                                            <div class="invoice-details-line">
+                                                <span class="invoice-details-label">Routing Number</span>
+                                                {!ps.AchAbaCode}
+                                            </div>
+                                            <div class="invoice-details-line">
+                                                <span class="invoice-details-label">Account Number</span>
+                                                {!ps.AchAccountNumberMask}
+                                            </div>
+                                            <div class="invoice-details-line">
+                                                <span class="invoice-details-label">Type</span>
+                                                {!ps.AchAccountType}
+                                        </div>  
+                                        </apex:outputPanel>
+
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->                      
+
+                    <script>
+                        loading_block.hide();
+                        $("#content-block").show();
+                        //init_action_panels();
+                        
+                        function updateLoadingText(body) {
+                            var loading = body.find(".loading");
+                            
+                            if (loading.size == 0) return;
+                            
+                            var count = (parseInt(loading.attr("count")) + 1) % 4;
+                            
+                            loading.attr("count", count);
+                            
+                            var text = "Loading";
+                            
+                            for (var i = 1; i <= count; i++)
+                                text += " .";
+                            
+                            loading.text(text);
+                            
+                            window.setTimeout(function () {
+                                updateLoadingText(body);
+                            }, 500);
+                        }
+                            
+                        function showDetails(element) {
+                            var element = $(element);
+                            var type = element.attr("line-type");
+                            var id = element.attr("id");
+                            
+                            var modal = $("#" + type + "-details-modal");
+                            var body = modal.find(".modal-body");
+                            
+                            body
+                                .empty()
+                                .append("<div class='loading' count='0'></div>");
+                            
+                            updateLoadingText(body);
+                            
+                            modal.modal("show");
+                            
+                            var target = window["get" + type + "Summary"];
+                            
+                            if (target) target(id);
+                            
+                            return false;
+                        }
+                        
+                        function selectSOAYear(option) {
+                            loading_block.show();
+                            $("#content-block").hide();
+                            
+                            setYearFilter(option);
+                            
+                            return false;
+                        }
+                    </script>
+                </apex:outputPanel>
+        
+                <script>
+                    markUserId("{!displayName}");
+                    markOptionPanel("subscription");
+                </script>
+            </apex:form>
+        </apex:define>
+
+    </apex:composition> 
+</apex:page>

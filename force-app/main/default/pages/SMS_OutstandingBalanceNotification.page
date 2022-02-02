@@ -1,0 +1,42 @@
+<apex:page controller="SMS_OutstandingNotification_Controller" standardStylesheets="false" action="{!invoiceResult}" lightningstylesheets="true"> 
+        
+        <apex:pagemessages ></apex:pagemessages> <br/>
+        
+        <apex:form >
+            <apex:pageBlock title="Subscription Details" mode="edit" >
+                <apex:pageBlockSection columns="2">       
+                    
+                    <apex:outputText label="MRIS Subscription Id">
+                        <apex:outputLink value="/{!zAcct.MRIS_Subscription_Record__c}">
+                            {!zAcct.SubscriptionID__c}
+                        </apex:outputLink>
+                    </apex:outputText> 
+
+                    <apex:outputText label="Outstanding Balance">
+                        $ {!zAcct.Zuora__Balance__c}
+                    </apex:outputText>
+                                   
+                </apex:pageBlockSection>
+                
+                <div class="labelCol" style="text-align:left; margin-left:11.5%; margin-top:10px;">
+                    Notification email will be send to below email address. If needed, email address can be changed.
+                </div>
+                
+                <apex:pageBlockSection columns="1">
+                    <apex:inputText id="Email" value="{!zAcct.Private_Email__c}" label="Private Email" style="width:50%;" />
+                </apex:pageBlockSection>
+                
+                <apex:pageBlockButtons location="bottom">
+                        <apex:commandButton action="{!sendInvoiceSummary}" value="Send Outstanding Balance Notification" rendered="{!showSendButton }" />
+                </apex:pageBlockButtons>            
+                
+            </apex:pageBlock>    
+        </apex:form>
+        
+        <apex:pageBlock title="Statement Preview" mode="edit" rendered="{!showSendButton}">
+            <div style="width:80%; margin:auto; margin-top:10px;">
+                <c:SMS_InvoiceSummaryPDF rId="{!zAcct.Id}"></c:SMS_InvoiceSummaryPDF>
+            </div>
+        </apex:pageBlock>
+                 
+</apex:page>

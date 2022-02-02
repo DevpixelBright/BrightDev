@@ -1,0 +1,288 @@
+<aura:component>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <ltng:require styles="{!$Resource.headeras }"></ltng:require>
+  <ltng:require styles="{!$Resource.bodyas }"></ltng:require>
+    
+     <aura:attribute name="value1" type="List" default=""/> 
+    <aura:attribute name="options1" type="List" default="[
+    {'label': 'URL', 'value': 'option1'},                                               
+    ]"/>
+    <aura:attribute name="value2" type="List" default=""/> 
+    <aura:attribute name="options2" type="List" default="[
+    {'label': 'Builder URL', 'value': 'option2'},                                               
+    ]"/>
+    <aura:attribute name="value3" type="List" default=""/> 
+    <aura:attribute name="options3" type="List" default="[
+    {'label': 'Builder Contact Information', 'value': 'option3'},                                               
+    ]"/>
+    <aura:attribute name="value4" type="List" default=""/> 
+    <aura:attribute name="options4" type="List" default="[
+    {'label': 'Builder Contact Information', 'value': 'option4'},                                               
+    ]"/>
+    
+    
+  <div class="c-container">
+    <div class="fullpage slds-scope">
+      <div class="slds-grid slds-wrap">
+        <lightning:layout multipleRows="true">
+          <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+            <div class="new-containerpage header-new-containerpage">
+              <div class="slds-container--x-large new-container">
+                <c:headeras />
+              </div>
+            </div>
+          </lightning:layoutItem>
+          <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+            <lightning:layout>
+              <div class="new-containerpage">
+                <div class="slds-container--x-large new-container">
+                  <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                    <div class="page-section page-main">
+                      <div class="dev">
+                        <h2>Building Name request</h2>
+                        <div class="view"></div>
+                        <p class="recent">Complete the requested Subdivision information below for Bright Staff to validate. Required fields are indicated with a red asterisk.</p>
+                        <div class="part0">
+                          <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                              <div class="layer part1">
+                                <h4>Subdivision Name <span class="star">*</span></h4>
+                                <h5>
+                                  <lightning:input type="text" name="input3" placeholder="Enter the subdivision name"  variant = "label-hidden" />
+                                </h5>
+                              </div>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                              <div class="layer part1">
+                                <h4>County <span class="star">*</span></h4>
+                                <h5>
+                                  <lightning:input type="text"  name="input3" placeholder="Enter the county"  variant = "label-hidden" />
+                                </h5>
+                              </div>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                              <div class="layer part2">
+                                <h4>State <span class="star">*</span></h4>
+                                <h5>
+                                    <lightning:select name="select1" label="" required="false" variant = "label-hidden">
+                                                   <option value="">choose one...</option>
+                                                   <option value="1">one</option>
+                                                   <option value="2">two</option>
+                                                   <option value="3">three</option>
+                                                </lightning:select></h5>
+                              </div>
+                            </lightning:layoutItem>
+                          </lightning:layoutItem>
+                          <div class="view"></div>
+                          <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                              <div class="layer part2">
+                                <h4>Validation Source <span class="star">*</span></h4>
+                                <p class="recent">Please select at least one of the following validation sources and enter the information requested. You may also attach additional supporting documentation files (County record, marketing brochure, etc.)</p>
+                              </div>
+                            </lightning:layoutItem>
+                          </lightning:layoutItem>
+                          <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                              <div class="layer part1 ">
+                               <!-- <h4>
+                                  <div class="slds-form-element">
+                                    <div class="slds-form-element__control">
+                                      <div class="slds-checkbox">
+                                        <input type="checkbox" name="options" id="checkbox-unique-id-73" value="checkbox-unique-id-73" checked="" />
+                                        <label class="slds-checkbox__label" for="checkbox-unique-id-73">
+                                        <span class="slds-checkbox_faux"></span>
+                                        <span class="slds-form-element__label">URL</span>
+                                        </label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </h4>-->
+                                  <h4>
+
+    <lightning:checkboxGroup name="Checkbox Group"
+                           
+                             options="{! v.options1 }"
+                             value="{! v.value1 }"
+                             />
+
+                                </h4>
+                                <h5>
+                                  <lightning:input type="text"  name="input3" placeholder="Enter URL (e.g.- www.brightmls.com)"  variant = "label-hidden" />
+                                </h5>
+                              </div>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                              <div class="layer part1">
+                               <!-- <h4>
+                                  <div class="slds-form-element">
+                                    <div class="slds-form-element__control">
+                                      <div class="slds-checkbox">
+                                        <input type="checkbox" name="options" id="checkbox-unique-id-74" value="checkbox-unique-id-74" checked="" />
+                                        <label class="slds-checkbox__label" for="checkbox-unique-id-74">
+                                        <span class="slds-checkbox_faux"></span>
+                                        <span class="slds-form-element__label">Builder URL</span>
+                                        </label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </h4>-->
+                                  <h4>
+
+    <lightning:checkboxGroup name="Checkbox Group"
+                           
+                             options="{! v.options2 }"
+                             value="{! v.value2 }"
+                             />
+
+                                </h4>
+                                <h5>
+                                  <lightning:input type="text"  name="input3" placeholder="Enter URL (e.g.- www.brightmls.com)"  variant = "label-hidden" />
+                                </h5>
+                              </div>
+                            </lightning:layoutItem>
+                          </lightning:layoutItem>
+                          <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                              <div class="layer part2 part3">
+                                <!--<h4>
+                                  <div class="slds-form-element">
+                                    <div class="slds-form-element__control">
+                                      <div class="slds-checkbox">
+                                        <input type="checkbox" name="options" id="checkbox-unique-id-75" value="checkbox-unique-id-75" checked="" />
+                                        <label class="slds-checkbox__label" for="checkbox-unique-id-75">
+                                        <span class="slds-checkbox_faux"></span>
+                                        <span class="slds-form-element__label">Builder Contact Information</span>
+                                        </label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </h4>-->
+                                  <h4>
+
+    <lightning:checkboxGroup name="Checkbox Group"
+                           
+                             options="{! v.options3 }"
+                             value="{! v.value3 }"
+                             />
+
+                                </h4>
+                              </div>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                              <div class="inform">
+                                <p class="recent">Enter the Builder’s name and contact information (phone and/or email).</p>
+                                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                  <div class="layer part1 ">
+                                    <h4>Builder Name</h4>
+                                    <h5>
+                                      <lightning:input type="text" name="input3" placeholder="Enter Builder Name"  variant = "label-hidden" />
+                                    </h5>
+                                  </div>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                  <div class="layer part1 ">
+                                    <h4>Builder Phone Number</h4>
+                                    <h5>
+                                      <lightning:input type="text"  name="input3" placeholder="Enter Builder Phone Number"  variant = "label-hidden" />
+                                    </h5>
+                                  </div>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                  <div class="layer part2 ">
+                                    <h4>Builder Email Address</h4>
+                                    <h5>
+                                      <lightning:input type="text" name="input3" placeholder="Enter Builder Email Address"  variant = "label-hidden" />
+                                    </h5>
+                                  </div>
+                                </lightning:layoutItem>
+                              </div>
+                            </lightning:layoutItem>
+                          </lightning:layoutItem>
+                          <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                              <div class="layer part2 part3">
+                               <!-- <h4>
+                                  <div class="slds-form-element">
+                                    <div class="slds-form-element__control">
+                                      <div class="slds-checkbox">
+                                        <input type="checkbox" name="options" id="checkbox-unique-id-76" value="checkbox-unique-id-76" checked="" />
+                                        <label class="slds-checkbox__label" for="checkbox-unique-id-76">
+                                        <span class="slds-checkbox_faux"></span>
+                                        <span class="slds-form-element__label">Builder Contact Information</span>
+                                        </label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </h4>-->
+                                  <h4>
+
+    <lightning:checkboxGroup name="Checkbox Group"
+                           
+                             options="{! v.options4 }"
+                             value="{! v.value4 }"
+                             />
+
+                                </h4>
+                              </div>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                              <div class="inform">
+                                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                  <div class="layer part2 part4">
+                                    <h4>Other</h4>
+                                    <h5>
+                                      <lightning:textarea name="input3" label="Textarea field with a placeholder" placeholder="Why is this a new Subdivision request and where can Bright Staff validate the information?" variant = "label-hidden" /> </h5>
+                                  </div>
+                                </lightning:layoutItem>
+                              </div>
+                            </lightning:layoutItem>
+                          </lightning:layoutItem>
+                   <div class="view"></div>
+                          <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                            <div class="inform">
+                              <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="2" largeDeviceSize="2">
+                              <div class="layer part1">
+                                <h4>Add Attachment(s) </h4>
+                                <p class="addr">(Maximum file size: 4 MB)</p>
+                              </div>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                              <div class="layer part2">
+                                <h4></h4>
+                                <h5>
+                                  <div class="file"><a href=""><span>Choose File</span> No file chosen</a></div>
+                                </h5>
+                              </div>
+                            </lightning:layoutItem>
+                              </div>
+                          </lightning:layoutItem>
+                             <div class="view"></div>
+                             <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                           <div class="line">
+                                <lightning:button class="brand cancel" variant="brand " label="Cancel" title="Brand action"  />
+                        
+                                 <lightning:button class="brand" variant="brand " label="Submit" title="Brand action"  />
+                           
+                                 </div>
+                                 </lightning:layoutItem>
+                            </div>
+                      </div>
+                    </div>
+                  </lightning:layoutItem>
+                </div>
+              </div>
+            </lightning:layout>
+          </lightning:layoutItem>
+          <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+            <div class="new-containerpage footer-new-containerpage">
+              <div class="slds-container--x-large new-container">
+                <c:footeras />
+              </div>
+            </div>
+          </lightning:layoutItem>
+        </lightning:layout>
+      </div>
+    </div>
+  </div>
+</aura:component>

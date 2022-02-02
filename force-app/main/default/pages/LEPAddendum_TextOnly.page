@@ -1,0 +1,17 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" lightningstylesheets="true">
+<html>
+
+<head>
+    <c:Bootstrap_Resources />
+</head>
+
+<body>
+    <apex:composition template="Bootstrap_Legal">
+        <apex:define name="terms">
+            <c:LEPAddendum />
+        </apex:define>
+    </apex:composition>
+</body>
+
+</html>
+</apex:page>

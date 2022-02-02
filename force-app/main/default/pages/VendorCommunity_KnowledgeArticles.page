@@ -1,0 +1,160 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="VendorCommunity_KnowledgeArticles">
+	<apex:composition template="VendorCommunity_Base">
+		<apex:define name="content">
+			<apex:form id="portal">
+				<c:Bootstrap_Resources />
+				<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"></link>
+				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+				<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+				
+				<apex:stylesheet value="{!URLFOR($Resource.Communities_Ideas,'/ideas_css.css')}" />
+				<style>
+					.activeDept {
+						background-color:#e2e2e2;
+					}
+					.activeStatus {
+						background-color:#e2e2e2;
+					}
+					.inactive {
+						background-color:#ffffff;
+					}
+					.close_progress {
+						font-size: 13px;
+						line-height: 1;
+						color: #fff;
+						text-shadow: 0 1px 0 #fff;
+						cursor:pointer;
+						text-decoration:none;
+					}
+				</style>
+				
+				 <script>      
+                /* Function to slide department and status section */
+                function SlideList(divid,tabname) {                        
+                    var currentclass = jQuery(divid).children().attr('class');
+                    if(currentclass == 'pull-right small glyphicon glyphicon-chevron-right') {
+                        var newclass = 'pull-right small glyphicon glyphicon-chevron-down';
+                    } else {
+                        var newclass = 'pull-right small glyphicon glyphicon-chevron-right';
+                    }
+                    jQuery(divid).children().removeClass(currentclass).addClass(newclass);                                     
+                    jQuery("."+tabname).slideToggle();
+                }
+                </script>
+
+				<div class="container">     
+                    <div class="ideas-content-area row">
+                        <!-- Left Panel -->
+                        <div class="col-md-3">
+                            <div class="my_sidebar"> 
+                                <apex:outputPanel layout="block" id="filters" >
+                                    
+                                    <apex:outputPanel layout="block" styleClass="active2">
+                                      <h4><apex:outputLink value="/apex/Communities_Cases_View">All Articles</apex:outputLink></h4>
+                                    </apex:outputPanel>            
+                            
+                                    <apex:outputpanel layout="block" styleClass="inactive">           
+                                        <h4 class="heading"  onclick="SlideList(this,'categories')" style="cursor:pointer;">Departments <span class="pull-right small glyphicon glyphicon-chevron-{! if(filterType == 'department','down','right')}" style="line-height:20px; color:black; cursor:pointer;"></span></h4>
+                                            <ul class="list-unstyled categories" style="margin:bottom:10px; display:{! if(filterType == 'department','block','none')};">
+                                                <apex:repeat value="{!departments}" var="dept">
+                                                    <li>
+                                                        <input type="checkbox" class="deptCheckbox" style="margin-right:3px; margin-top:5px;" checked="" value="{!dept}" onclick="SelectListItem()" /> {!dept}
+                                                    </li>
+                                                </apex:repeat>
+                                            </ul>
+                                    </apex:outputpanel> 
+                                     
+                                </apex:outputpanel> 
+                            </div>
+                        </div>            
+                        <!-- End of left panel -->
+            
+                        <div class="ideas-main-list col-md-9">  
+                            
+                            <div id="progress">
+                            </div>
+                            
+                            <apex:outputPanel id="cases">
+                                <apex:pageMessages ></apex:pageMessages>
+                                <div style="border: 1px solid #E0E0E0 !important; margin-bottom: 10px; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; overflow:hidden;">
+                                 	
+<!--                                  	<apex:pageBlock title="Search"> -->
+                                 	<div class="container">
+										<apex:inputText value="{!searchstring}" id="theSearchstring" maxlength="100" size="110" style="width:50%"/> &nbsp;
+										<apex:commandButton value="Go" id="submitButton" style="width:30" reRender="theSearchResults" />
+									</div>
+<!-- 									</apex:pageBlock> -->
+									<div style="padding-top:5px;">
+									<apex:panelGroup id="theSearchResults">
+										<apex:panelGrid width="100%">
+
+											<knowledge:articleList articleVar="article" pageNumber="{!currentPageNumber}" Keyword="{!searchstring}" hasMoreVar="false" pageSize="10">
+												<div class="container">
+													<div class="card">
+														<div class="card-header">{!article.title}</div>
+														<div class="card-body">{!article.abstract}</div>
+													</div>
+												</div>
+												<br />
+												<br />
+											</knowledge:articleList>
+										</apex:panelGrid>
+										<apex:panelGrid columns="2">
+											<apex:commandLink action="{!previous}" value="Previous" style="{!IF(prevRequired = true,'display:block','display:none')}" reRender="theSearchResults" />
+											<apex:commandLink action="{!next}" value="Next" style="{!IF(nextRequired = true,'display:block','display:none')}" reRender="theSearchResults" />
+										</apex:panelGrid>
+									</apex:panelGroup>
+                                </div>
+                                </div>
+
+                                <!-- <apex:outputPanel rendered="{!resultSize > 10}">
+                                    <div>
+                                        <ul class="pager">
+                                        <li> <apex:commandLink value="first" action="{!first}" title="First Page" reRender="cases" style="pointer-events: {! if(pageNumber == 1, 'none', 'auto')}; cursor: {! if(pageNumber == 1, 'default', 'pointer')}; color: {! if(pageNumber == 1, '#ddd', '#428bca')};" /></li>
+                                        <li  ><apex:commandLink value="previous" action="{!previous}" title="Previous Page" reRender="cases" style="pointer-events: {! if(pageNumber == 1, 'none', 'auto')}; cursor: {! if(pageNumber == 1, 'default', 'pointer')}; color: {! if(pageNumber == 1, '#ddd', '#428bca')};" /></li>
+                                        <li  ><apex:commandLink value="next" action="{!next}" title="Next Page" reRender="cases" style="pointer-events: {! if(pageNumber == totalPages, 'none', 'auto')}; cursor: {! if(pageNumber == totalPages, 'default', 'pointer')}; color: {! if(pageNumber == totalPages, '#ddd', '#428bca')};" /></li>
+                                        <li> <apex:commandLink value="last" action="{!last}" title="Last Page" reRender="cases" style="pointer-events: {! if(pageNumber == totalPages, 'none', 'auto')}; cursor: {! if(pageNumber == totalPages, 'default', 'pointer')}; color: {! if(pageNumber == totalPages, '#ddd', '#428bca')};" /></li>                         
+                                        </ul>
+                                        <div class="text-center"><apex:outputText >{!pageNumber} of {!totalPages}</apex:outputText></div>            
+                                    </div>
+                                </apex:outputPanel>
+                                -->
+                            </apex:outputPanel>
+                        </div>
+                    </div>
+                </div>
+                <!-- 
+				<apex:pageBlock title="Search">
+					<apex:inputText value="{!searchstring}" id="theSearchstring" maxlength="100" size="110" /> &nbsp;
+					<apex:commandButton value="Go" id="submitButton" style="width:30" reRender="theSearchResults" />
+				</apex:pageBlock>
+				<apex:messages />
+				<apex:pageBlock>
+
+					<apex:panelGroup id="theSearchResults">
+						<apex:panelGrid width="100%">
+
+							<knowledge:articleList articleVar="article" pageNumber="{!currentPageNumber}" Keyword="{!searchstring}" hasMoreVar="false" pageSize="2">
+								<div class="container">
+									<div class="card">
+										<div class="card-header">{!article.title}</div>
+										<div class="card-body">{!article.abstract}</div>
+									</div>
+								</div>
+								<br />
+								<br />
+							</knowledge:articleList>
+						</apex:panelGrid>
+						<apex:panelGrid columns="2">
+							<apex:commandLink action="{!previous}" value="Previous" style="{!IF(prevRequired = true,'display:block','display:none')}" reRender="theSearchResults" />
+							<apex:commandLink action="{!next}" value="Next" style="{!IF(nextRequired = true,'display:block','display:none')}" reRender="theSearchResults" />
+						</apex:panelGrid>
+					</apex:panelGroup>
+				</apex:pageBlock>
+				 -->
+
+			</apex:form>
+		</apex:define>
+	</apex:composition>
+</apex:page>

@@ -1,0 +1,18 @@
+<apex:page controller="SMS_OutstandingInvoices_Controller" lightningstylesheets="true">
+    <apex:form >
+        <apex:pageMessages ></apex:pageMessages>
+        <apex:pageBlock >
+            <div style="font-size:15px; font-weight:bold;">
+               Number of Accounts with an Outstanding Balance: {!outstandingCount}
+            </div>
+            <br/><br/>
+            <apex:repeat value="{!outstandingAccounts}" var="Id">
+                {!Id}<br/>
+            </apex:repeat>
+            
+            <apex:pageBlockButtons location="bottom" rendered="{!showButton}">
+                <apex:commandButton action="{!generateInvoicePdfs}" value="Generate and Send Invoice PDFs"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form> 
+</apex:page>

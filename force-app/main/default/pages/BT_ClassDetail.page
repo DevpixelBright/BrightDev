@@ -1,0 +1,257 @@
+<apex:page id="thePage" sidebar="false" showheader="false" controller="BT_ClassDetailController"  lightningstylesheets="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/angular.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/ui-bootstrap-tpls-0.12.0.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.AngularJsTable,'/ng-table.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.AngularJsTable,'/ng-table.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.DataArchive_Library,'js/jquery.min.js')}"/>
+    <c:Bootstrap_Resources />
+    <apex:stylesheet value="{!URLFOR($Resource.BT_Styling,'style.css')}"/>
+    <apex:form id="fm"> 
+    <div class="courses" ng-app="first" ng-controller="firstcontroller" id="maindiv">
+    
+        <div class="downcourse ng-cloak"> 
+            <div class="middlecourse">
+                <div class="innercourse">
+                    <div class="innercoursebox2" style="border-bottom: none;">
+                        <div class="inner-text1">
+                            <h3 >{{classDetails.btClass.Title__c}}</h3>
+                            <h6>{{classDetails.btClass.DeliveryMethod__c}} 
+                                <span style="padding-left: 5px;">
+                                <img src="{!URLFOR($Resource.BT_Styling,'/images/dott.jpg')}"/>
+                                </span> {{classDetails.durationinhours}}
+                            </h6>
+                            <div class="full-view-width">
+                                <p class="capture" >{{classDetails.btClass.AdditionalDescription__c}}</p>
+                            </div>
+                            
+                        </div>
+                        <div class="inner-boximgreg" style="text-align: center;" ng-show="!classDetails.isWatchitAgain">
+                            <a href="" style="cursor:pointer;" ng-show="classDetails.isRegistration && classDetails.isAvailable" ng-click="register('reg')" >Register</a> 
+                            <a href="" style="cursor:pointer;" ng-show="classDetails.isCancelation" ng-click="cancelRegistration()" >Cancel</a>
+                            <a href="" style="cursor:pointer;" ng-show="classDetails.isAddtoClasses && classDetails.isAvailable" ng-click="register('addcls')" >Add to My Courses</a>
+                        </div>
+                        
+                        <div class="inner-boximgreg" style="text-align: center;" ng-show="classDetails.isWatchitAgain">
+                            <a href="{{classDetails.btClass.PostDeliveryRecording__c}}" style="cursor:pointer;">Watch it again</a>
+                        </div>
+                    </div>
+                    <div class="innercoursebox2" style="border-top: 2px solid #e9e9e9;">
+                        <div class="inner-text3">
+                            
+                            <h6>More Details</h6>
+                            <ul class="indiviual-point1">
+                                <li class="delivery1"><label>Instructor: </label>
+                                    <p>{{classDetails.btClass.Instructor__r.Contact__r.Name}} </p>
+                                </li>
+                                <li class="delivery1"><label>Date: </label>
+                                    <p>{{classDetails.classDate}}</p>
+                                </li>
+                                <li class="delivery1"><label style="width: 40%;">Start Time: </label>
+                                    <p style="width: 60%;">{{classDetails.classStartTime}}</p>
+                                </li>
+                                <li class="delivery1"><label style="width: 45%;">Seats Available: </label>
+                                    <p style="width: 55%;">{{classDetails.btClass.SeatsRemaining__c}}</p>
+                                </li>
+                                
+                            </ul>
+                            <ul style=" margin-bottom:0px;" class="indiviual-point"> 
+                              <li class="delivery"><label style="width:15%">Duration: </label>
+                                    <p style="margin-top:1px;"> {{classDetails.classDate}}, {{classDetails.classStartTime}}   -   {{classDetails.classDate}}, {{classDetails.classEndTime}}</p>
+                                </li>
+                            </ul> 
+                        </div>
+                    </div>
+                    
+                    <div style="border:none;" class="innercoursebox2" ng-show="!classDetails.isWatchitAgain && (classDetails.btClass.DeliveryMethod__c != 'Live' && classDetails.btClass.DeliveryMethod__c != 'Webinar' 
+                                                                               && classDetails.btClass.DeliveryMethod__c != 'Simulcast' && classDetails.btClass.DeliveryMethod__c != 'Streaming')">
+                        <div class="inner-text1 inner-textget" style="width:80%;">
+                            <ul class="indiviual-point" style="margin:0"> 
+                                <li class="delivery"><label style="width:17%">Location: </label>
+                                <p >{{classDetails.btClass.Venue__r.Street_Number__c}} {{classDetails.btClass.Venue__r.Street__c}} {{classDetails.btClass.Venue__r.Street_Type__c}}, {{classDetails.btClass.Venue__r.City__c}}, {{classDetails.btClass.Venue__r.State__c}} {{classDetails.btClass.Venue__r.ZipCode__c}}-{{classDetails.btClass.Venue__r.Zip_4__c}}</p> 
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="inner-boximgdir" style="text-align: center; height: auto;" ng-show="(classDetails.btClass.DeliveryMethod__c != 'Live' && classDetails.btClass.DeliveryMethod__c != 'Webinar' 
+                                                                               && classDetails.btClass.DeliveryMethod__c != 'Simulcast' && classDetails.btClass.DeliveryMethod__c != 'Streaming')">
+                            <a class="reg1" href="#"> Get Directions</a>
+                        </div>
+                    </div>
+                    <div class="pointer-class" ng-show="!classDetails.isWatchitAgain && (classDetails.btClass.DeliveryMethod__c != 'Live' && classDetails.btClass.DeliveryMethod__c != 'Webinar' 
+                                                                               && classDetails.btClass.DeliveryMethod__c != 'Simulcast' && classDetails.btClass.DeliveryMethod__c != 'Streaming' )">
+                       <!-- <apex:map width="100%" height="250px" mapType="roadmap" zoomLevel="8" center="{{classDetails.btClass.Venue__r.Street__c}}, {{classDetails.btClass.Venue__r.City__c}}, {{classDetails.btClass.Venue__r.State__c}}">
+                            <apex:mapMarker position="{{classDetails.btClass.Venue__r.Street_Number__c}},{{classDetails.btClass.Venue__r.Street__c}},{{classDetails.btClass.Venue__r.Street_Type__c}},{{classDetails.btClass.Venue__r.City__c}},{{classDetails.btClass.Venue__r.State__c}},{{classDetails.btClass.Venue__r.ZipCode__c}},{{classDetails.btClass.Venue__r.Zip_4__c}}" />
+                        </apex:map>  -->
+                        <apex:map width="100%" height="250px" mapType="roadmap" zoomLevel="8" center="{!street},{!city},{!state}">
+                            <apex:mapMarker position="{!street},{!city},{!state}" />
+                        </apex:map>
+                       <!--
+                        <apex:map width="100%" height="250px" center="{!objVen.BillingStreet}, {!objVen.BillingCity}, {!objVen.BillingState }" mapType="roadmap" showOnlyActiveInfoWindow="true" zoomLevel="6" rendered="true">
+                            <apex:mapMarker position="{!objVen.BillingStreet}, {!objVen.BillingCity}, {!objVen.BillingState}" />
+                        </apex:map> -->
+                    </div>
+                </div>
+            </div>
+            
+            
+            <center>
+                                      
+                <div id="registerConfirmId" class="cancelConfirmPopup" ng-show="cancelConf" >
+                    <div class="newpopup">
+                        <div class="alert alert-info" >
+                            <div style="display:block;">
+                                <img src="{!URLFOR($Resource.BT_Styling,'/images/mask.png')}" width="35" height="35" alt=""/>
+                                <label>Are you sure you want to cancel your registration?</label>
+                            </div>
+                            <div style="clear:both;"></div>
+                            <div style="display:block;">                            
+                                <a class="btn keepyes" ng-click="closeCancelConfirm()" >No, Keep me registered</a>
+                                <a style="width:182px;" class="btn keepcancel" ng-click="cancelConfirmed()">Yes, I want to cancel</a>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="successCancelId" class="cancelConfirmPopup" ng-show="successCancel">
+                    <div>
+                        <img src="{!URLFOR($Resource.BT_Styling,'/images/mask2.png')}" width="50" height="50" alt=""/>
+                        <label ng-show="cancelMsg">Your registration has been cancelled</label>
+                        <label ng-show="succMsg">You registered successfully</label>
+                    </div>
+                    
+                    <div>
+                        <a class="btn keepok" ng-click="successCancel = false;" >Ok</a>
+                    </div>
+                </div>
+                
+                
+                <!-- Registration button pop ups -->
+                <div id="registerConfirmId" class="cancelConfirmPopup" ng-show="registrationConf" >
+                    <div class="newpopup">
+                        <div class="alert alert-info" >
+                            <div style="display:block;">
+                                <img src="{!URLFOR($Resource.BT_Styling,'/images/mask.png')}" width="35" height="35" alt=""/>
+                                <label ng-show="regConfirmMsg">Are you sure you want to register?</label>
+                                <label ng-show="!regConfirmMsg">Are you sure you want to add this Class?</label>
+                            </div>
+                            <div style="clear:both;"></div>
+                            <div style="display:block;">                            
+                                <a class="btn keepyes" ng-click="closeRegistrationConfirm()" >No, don't register</a>
+                                <a style="width:182px;" class="btn keepcancel" ng-show="regConfirmMsg" ng-click="registrationConfirmed()">Yes, I want to register</a>
+                                <a style="width:182px;" class="btn keepcancel" ng-show="!regConfirmMsg" ng-click="registrationConfirmed()">Yes, I want to add</a>
+                            </div> 
+                            <div style="clear:both;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="successCancelId" class="cancelConfirmPopup" ng-show="successRegistration">
+                    <div>
+                        <img src="{!URLFOR($Resource.BT_Styling,'/images/mask2.png')}" width="50" height="50" alt=""/>
+                        <label >You registered successfully</label>
+                    </div>
+                    <div>
+                        <a class="btn keepok" ng-click="successRegistration = false;" >Ok</a>
+                    </div>
+                </div>
+                
+            </center>
+        </div>
+        
+    </div>
+       <apex:actionFunction name="callRegister" action="{!registerClass}" oncomplete="refreshCourseDetails()"/>
+       <apex:actionFunction name="callCancel" action="{!cancelClass}" oncomplete="refreshCourseDetails()"/> 
+    </apex:form>    
+    <script>
+            var app = angular.module('first', ['ngTable']).
+            controller('firstcontroller', function($scope, $filter, NgTableParams) {
+               
+                $scope.errorMsg = false;
+                $scope.classDetails = JSON.parse('{!classDetails}');
+                console.log('---$scope.classDetail', $scope.classDetails);
+                $scope.isAuthenticatedUser = '{!isAuthenticatedUser}';
+                
+                $scope.cancelConf = false;
+                $scope.successCancel = false;
+                $scope.registrationConf = false;
+                $scope.successRegistration = false;
+                
+                $scope.subscriptionId = '{!subscriptionId}';
+                
+                // cancellation functions
+                $scope.cancelRegistration = function(){
+                    console.log('---cancel--'+$scope.isAuthenticatedUser);
+                    if($scope.isAuthenticatedUser == 'true'){
+                        $scope.cancelConf = true;
+                        freezePopup();
+                    }
+                    else{
+                        window.top.location.href = '{!$Label.CSODLogin_Redirection_URL}';
+                    }
+                }
+                $scope.cancelConfirmed = function(){
+                    callCancel();
+                }
+                $scope.closeCancelConfirm = function(){
+                    $scope.cancelConf = false;
+                    releasePopup();
+                }
+                
+                // registration functions
+                $scope.register = function(regbutton){
+                    console.log('---regbutton---'+regbutton+'---$scope.isAuthenticatedUser ---'+$scope.isAuthenticatedUser );
+                    if($scope.isAuthenticatedUser == 'true'){
+                        $scope.registrationConf = true;
+                        freezePopup();
+                        if(regbutton == 'reg')
+                            $scope.regConfirmMsg = true;
+                        else
+                            $scope.regConfirmMsg = false;
+                    }
+                    else{
+                        window.top.location.href = '{!$Label.CSODLogin_Redirection_URL}';
+                    }
+                }
+                
+                $scope.registrationConfirmed = function(){
+                    callRegister();
+                }
+                $scope.closeRegistrationConfirm = function(){
+                    $scope.registrationConf = false;
+                    releasePopup();
+                }
+                
+                $scope.watchItAgain = function (){
+                    window.top.location.href = $scope.classDetails.btClass.PostDeliveryRecording__c;
+                }
+                
+                adjustContainer();
+            });
+            
+            function freezePopup() {
+                window.parent.scrollTo(0, 0);
+                $('body', window.parent.document).css('height', '100%');
+                $('body', window.parent.document).css('overflow', 'hidden');
+                $('#popup_header_background', window.parent.document).show();             
+             }
+             
+             function releasePopup() {
+                window.parent.scrollTo(0, 0);
+                $('body', window.parent.document).css('height', '');
+                $('body', window.parent.document).css('overflow', '');
+                $('#popup_header_background', window.parent.document).hide();             
+             }   
+            
+            function adjustContainer() {
+                setTimeout(function() { 
+                    console.log('**** current height', document.getElementById('maindiv').scrollHeight); 
+                    $('iframe', window.parent.document).height(document.getElementById('maindiv').scrollHeight + 'px');
+                }, 1000);
+            }
+            function refreshCourseDetails() {
+                window.top.location.reload();
+            }
+    </script>
+    
+</apex:page>

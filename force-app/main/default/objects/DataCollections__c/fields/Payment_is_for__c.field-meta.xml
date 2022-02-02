@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Payment_is_for__c</fullName>
+    <externalId>false</externalId>
+    <label>Payment is for</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Aux</fullName>
+                <default>false</default>
+                <label>Aux</label>
+            </value>
+            <value>
+                <fullName>CAMA</fullName>
+                <default>false</default>
+                <label>CAMA</label>
+            </value>
+            <value>
+                <fullName>Core – Final</fullName>
+                <default>false</default>
+                <label>Core – Final</label>
+            </value>
+            <value>
+                <fullName>Core – Prelim</fullName>
+                <default>false</default>
+                <label>Core – Prelim</label>
+            </value>
+            <value>
+                <fullName>Deed</fullName>
+                <default>false</default>
+                <label>Deed</label>
+            </value>
+            <value>
+                <fullName>Tax Rates</fullName>
+                <default>false</default>
+                <label>Tax Rates</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>3</visibleLines>
+</CustomField>

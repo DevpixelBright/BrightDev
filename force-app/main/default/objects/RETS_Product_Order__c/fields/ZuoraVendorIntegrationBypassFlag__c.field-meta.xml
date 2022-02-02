@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ZuoraVendorIntegrationBypassFlag__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Flag to bypass integration on activation or inactivation for Vendor Product</description>
+    <externalId>false</externalId>
+    <label>Zuora Vendor Integration Bypass Flag</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

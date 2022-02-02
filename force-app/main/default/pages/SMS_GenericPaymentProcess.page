@@ -1,0 +1,116 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="SMS_GenericPaymentProcess_Controller" lightningstylesheets="true">
+    <apex:composition template="Bootstrap_Framed">
+        
+        <apex:define name="content">
+            <apex:form >
+                <div class="instructions">
+                    
+                    <apex:outputPanel rendered="{!if($CurrentPage.parameters.type == 'vendor', false, true)}">
+                    <p>Review your current bill to ensure you recognize all charges listed. Each charge is itemized for ease of understanding. For Data Access products, proration can apply to quantity changes. 
+                                            
+                            See 
+                        <apex:outputPanel rendered="{!if($CurrentPage.parameters.type == 'brokerage', true, false)}">
+                            <apex:outputLink value="{!$Label.RetsBrokerageProducts}{!$CurrentPage.parameters.id}" Target="_blank"><strong> here</strong> </apex:outputLink> 
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!if($CurrentPage.parameters.type == 'brokerage', false, true)}">
+                            <apex:outputLink value="{!$Label.RetsProductUrl}{!$CurrentPage.parameters.id}" Target="_blank"><strong> here</strong> </apex:outputLink> 
+                        </apex:outputPanel>
+                        
+                        for further explanation and full details on each order.
+                       
+                    </p>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!if($CurrentPage.parameters.type == 'vendor', true, false)}">
+                        To start the online payment process, click the Continue button. If you prefer to pay by mail, click 
+                        <apex:outputLink value="{!$Label.VendorCommunitySoaURL}{!$CurrentPage.parameters.id}" Target="_black"><strong> here</strong> </apex:outputLink> 
+                    </apex:outputPanel>
+                    <!--
+                    <p><i>If you have questions about your bill, please contact the MRIS Support Center at (301) 838-7200 or (888) 838-8200 or via email at <a href="mailto:helpdesk@mris.net">helpdesk@mris.net</a>.</i></p>
+                    -->
+                </div>
+                <script>$(".container .instructions").hide()</script>
+    
+                <apex:actionFunction action="{!previewInvoice}" name="previewInvoice" reRender="process" />
+                <apex:actionFunction action="{!loadPaymentPage}" name="loadPaymentPage" />
+    
+                <apex:outputPanel id="process">
+                    <div><apex:pageMessages /></div>
+    
+                    <div class="row" id="loadingBlock" style="display: none">
+                        <div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-5">
+                            <div class="progress progress-striped active">
+                                <div class="progress-bar" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <apex:outputPanel rendered="{!showLoading}" >
+                        <script>$("#loadingBlock").show();</script>
+                    </apex:outputPanel>
+    
+                    <apex:outputPanel rendered="{!showPreview}" >
+                        <script>$("#loadingBlock").hide();</script>
+
+                        <div class="invoice" id="previewBlock">   
+                            
+                            <apex:outputPanel rendered="{!!Invoice.PayBalanceDueOnly || Invoice.HasOutstandingInvoices}" >
+                                <script>$(".container .instructions").show()</script>
+    
+                                <c:SMS_GP_InvoiceBlock parentController="{!self}" />
+    
+                                <apex:outputPanel rendered="{!previewOnlyMode}" >
+                                    <div class="alert alert-danger default_gap" style="line-height: 20px">We are unable to process your request at this time due to system maintenance. Please try again later. We apologize for any inconvenience.</div>
+                                    <div class="row default_gap">
+                                        <div class="full-screen-buttons col-md-8 col-md-offset-2">
+                                            <div class="btn-group pull-right">
+                                                <a href="#" class="btn btn-default" onclick="parent.generic_payment_cancel();">Back</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </apex:outputPanel>
+                                
+                                <apex:outputPanel rendered="{!!previewOnlyMode}" >
+                                    <div class="row default_gap">
+                                        <div class="full-screen-buttons col-md-8 col-md-offset-2">
+                                            <div class="btn-group pull-right">
+                                                <a href="#" class="btn btn-default" onclick="parent.generic_payment_cancel();">Cancel</a>
+                                                <a href="#" class="btn btn-primary" onclick="return proceedToPayment();">Continue</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </apex:outputPanel>
+
+                            </apex:outputPanel>
+                            
+                            <apex:outputPanel rendered="{!Invoice.PayBalanceDueOnly && !Invoice.HasOutstandingInvoices}" >
+                                <div class="alert alert-success" style="line-height: 20px">There are no outstanding balances due for this MRIS subscription.</div>
+                                <div class="row default_gap">
+                                    <div class="full-screen-buttons col-md-8 col-md-offset-2">
+                                        <div class="btn-group pull-right">
+                                            <a href="#" class="btn btn-primary" onclick="parent.generic_payment_complete();">Back</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </apex:outputPanel>
+                        </div>
+                    </apex:outputPanel>
+    
+                </apex:outputPanel>
+                
+                <script>
+                    function proceedToPayment() {
+                        $("#loadingBlock").show();
+                        $("#previewBlock").hide();
+    
+                        loadPaymentPage();
+                    }
+                    
+                    $(function () {
+                        previewInvoice();
+                    });
+                </script>
+            </apex:form>
+        </apex:define>
+
+    </apex:composition> 
+</apex:page>

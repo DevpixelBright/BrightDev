@@ -1,0 +1,16 @@
+<svg id="_Radio_State" data-name="🔘 Radio State" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+  <defs>
+    <clipPath id="clip-path">
+      <circle id="Focus_State" data-name="Focus State" cx="8" cy="8" r="8" fill="#fff" stroke="#dddbda" stroke-miterlimit="10" stroke-width="1"/>
+    </clipPath>
+  </defs>
+  <g id="Group_94" data-name="Group 94">
+    <g id="Focus_State-2" data-name="Focus State" fill="#fff" stroke="#dddbda" stroke-miterlimit="10" stroke-width="1">
+      <circle cx="8" cy="8" r="8" stroke="none"/>
+      <circle cx="8" cy="8" r="7.5" fill="none"/>
+    </g>
+    <g id="Mask_Group_94" data-name="Mask Group 94" clip-path="url(#clip-path)">
+      <circle id="Checked" cx="4" cy="4" r="4" transform="translate(4 4)" fill="#0070d2"/>
+    </g>
+  </g>
+</svg>

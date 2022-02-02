@@ -1,0 +1,68 @@
+<apex:page renderAs="pdf" controller="Communities_OfficeAccuracy_Print" applyHtmlTag="false"
+           showHeader="false" docType="html-5.0" standardStylesheets="false" readOnly="true" lightningstylesheets="true">  
+    <apex:composition template="Communities_Base_PDF">  </apex:composition> 
+    <div class="col-xs-12 instructions" style="padding-top:20px; padding-bottom:20px;">
+        <div class="col-xs-9">
+            <p>Please find below the violation notices for your listings. The information will reflect violation notices and fine notices sent where a listing violated one of the Bright MLS Rules and Regulations. Fine Notices listed here with a status of Pending will not be Billed until after appeal timeframe has expired. Fine notices are listed here with a status Billed will appear on the Statement of Account.</p>
+        </div>
+    </div>
+    <table style="font-size:11px; width:100%">
+        <thead>
+            <tr>
+                <th style="text-align:left">Agent</th>
+                <th style="text-align:left">subscription Id</th>
+                <th style="text-align:left">Office Id</th>
+                <th style="text-align:left">MLS No</th>
+                <th style="text-align:left">Violation Type</th>
+                <th style="text-align:left">Violation No</th>
+                <th style="text-align:left">Notification Type</th>
+                <th style="text-align:left">Notification Date</th>
+                <th style="text-align:left">Fine Amount</th>
+                <th style="text-align:left">Status</th>
+                <th style="text-align:left">Last Day To Appeal</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <apex:repeat value="{!result}" var="Cfines" id="LstcomplianceFinesWrapper">
+                <tr>
+                    <td style="text-align:left">{!Cfines.agent}</td>
+                    <td style="text-align:left">{!Cfines.subscriptionId}</td>
+                    <td style="text-align:left">{!Cfines.officeId}</td>
+                    <td style="text-align:left">{!Cfines.mlsNumber}</td>
+                    <td style="text-align:left">{!Cfines.violationType}</td>
+                    <td style="text-align:left">{!Cfines.violationNo}</td>
+                    <td style="text-align:left">{!Cfines.notificationType}</td>
+                    <td style="text-align:left">
+                        <apex:outputText value="{0,date,MM/dd/yyyy}"> <apex:param value="{!Cfines.notificationDate}" /> </apex:outputText>
+                    </td>
+                    <td style="text-align:left">{!Cfines.fineAmount}</td>
+                    <td style="text-align:left">{!Cfines.status}</td>
+                    <td style="text-align:left">
+                        <apex:outputText value="{0,date,MM/dd/yyyy}"> <apex:param value="{!Cfines.lastDayToAppeal}" /> </apex:outputText>
+                    </td>
+                </tr>
+                <apex:repeat value="{!Cfines.childViolations}" var="fine">
+                    <tr>
+                        <td style="text-align:left">{!fine.Subscription__r.Contact__r.Name}</td>
+                        <td style="text-align:left">{!fine.Subscription__r.Name}</td>
+                        <td style="text-align:left">{!fine.Subscription__r.Related_Location_Broker_Office__r.Name}</td>
+                        <td style="text-align:left">{!fine.MLS_Number__c}</td>
+                        <td style="text-align:left">{!fine.Violation__c}</td>
+                        <td style="text-align:left">{!fine.Compliance_Violation__r.Name}</td>
+                        <td style="text-align:left">{!fine.Notification_Type__c}</td>
+                        <td style="text-align:left">
+                            <apex:outputText value="{0,date,MM/dd/yyyy}"> <apex:param value="{!fine.Date_of_Fine__c}" /> </apex:outputText>
+                        </td>
+                        <td style="text-align:left">{!fine.Fine_Amount__c}</td>
+                        <td style="text-align:left">{!fine.Status__c}</td>
+                        <td style="text-align:left">
+                            <apex:outputText value="{0,date,MM/dd/yyyy}"> <apex:param value="{!fine.Last_Date_to_Appeal__c}" /> </apex:outputText>
+                        </td>
+                    </tr>
+                </apex:repeat>
+            </apex:repeat>                                                                                       
+        </tbody>                                        
+    </table>  
+    
+</apex:page>

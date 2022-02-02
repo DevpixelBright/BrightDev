@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_Change_Reason__c</fullName>
+    <externalId>false</externalId>
+    <label>Status Change Reason</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Reinstate</fullName>
+                <default>false</default>
+                <label>Reinstate</label>
+            </value>
+            <value>
+                <fullName>Terminated</fullName>
+                <default>false</default>
+                <label>Terminated</label>
+            </value>
+            <value>
+                <fullName>Suspended</fullName>
+                <default>false</default>
+                <label>Suspended</label>
+            </value>
+            <value>
+                <fullName>Subscriber Requested</fullName>
+                <default>false</default>
+                <label>Subscriber Requested</label>
+            </value>
+            <value>
+                <fullName>Broker Requested</fullName>
+                <default>false</default>
+                <label>Broker Requested</label>
+            </value>
+            <value>
+                <fullName>Waived - Coastal</fullName>
+                <default>false</default>
+                <label>Waived - Coastal</label>
+            </value>
+            <value>
+                <fullName>Waived - Cumberland, NJ</fullName>
+                <default>false</default>
+                <label>Waived - Cumberland, NJ</label>
+            </value>
+            <value>
+                <fullName>Waived - Harrisburg</fullName>
+                <default>false</default>
+                <label>Waived - Harrisburg</label>
+            </value>
+            <value>
+                <fullName>Waived - Lancaster</fullName>
+                <default>false</default>
+                <label>Waived - Lancaster</label>
+            </value>
+            <value>
+                <fullName>Waived - Lebanon</fullName>
+                <default>false</default>
+                <label>Waived - Lebanon</label>
+            </value>
+            <value>
+                <fullName>Waived - RAYAC</fullName>
+                <default>false</default>
+                <label>Waived - RAYAC</label>
+            </value>
+            <value>
+                <fullName>Waived - Sussex</fullName>
+                <default>false</default>
+                <label>Waived - Sussex</label>
+            </value>
+            <value>
+                <fullName>Waived - TREND</fullName>
+                <default>false</default>
+                <label>Waived - TREND</label>
+            </value>
+            <value>
+                <fullName>Compliance Related</fullName>
+                <default>false</default>
+                <label>Compliance Related</label>
+            </value>
+            <value>
+                <fullName>Promotional</fullName>
+                <default>false</default>
+                <label>Promotional</label>
+            </value>
+            <value>
+                <fullName>Board Provided</fullName>
+                <default>false</default>
+                <label>Board Provided</label>
+            </value>
+            <value>
+                <fullName>Late</fullName>
+                <default>false</default>
+                <label>Late</label>
+            </value>
+            <value>
+                <fullName>Write Off</fullName>
+                <default>false</default>
+                <label>Write Off</label>
+            </value>
+            <value>
+                <fullName>Bill Broker</fullName>
+                <default>false</default>
+                <label>Bill Broker</label>
+            </value>
+            <value>
+                <fullName>Deceased</fullName>
+                <default>false</default>
+                <label>Deceased</label>
+            </value>
+            <value>
+                <fullName>Waived</fullName>
+                <default>false</default>
+                <label>Waived</label>
+            </value>
+            <value>
+                <fullName>Commission Provided</fullName>
+                <default>false</default>
+                <label>Commission Provided</label>
+            </value>
+            <value>
+                <fullName>Invalid License</fullName>
+                <default>false</default>
+                <label>Invalid License</label>
+            </value>
+            <value>
+                <fullName>Broker Paid</fullName>
+                <default>false</default>
+                <label>Broker Paid</label>
+            </value>
+            <value>
+                <fullName>Inactive Broker</fullName>
+                <default>false</default>
+                <label>Inactive Broker</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

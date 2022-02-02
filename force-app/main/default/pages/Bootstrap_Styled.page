@@ -1,0 +1,90 @@
+<apex:page standardStylesheets="false" lightningstylesheets="true">
+    <apex:composition template="Bootstrap_Base">
+        
+        <apex:define name="header">
+            <style>
+                #logo-panel {
+                    width: 100%;
+                    margin-bottom: 0px;
+                    padding-bottom: 15px;
+                    box-shadow: none;
+                    border: 0px !important;
+                }
+                
+                header nav h3.logo {
+                    margin-top: 20px;
+                    margin-bottom: 0px;
+                }
+                
+                    header nav h3.logo img {
+                        height: 25px;
+                        position: relative;
+                        top: -3px
+                    }
+
+                    header nav h3.logo .logo-bar {
+                        display: inline-block;
+                        margin: auto 10px;
+                        position: relative;
+                        top: -3px
+                    }
+                    
+                header nav .navbar-nav.default {
+                    margin-left: -15px;
+                }
+
+                .ie8 header nav .navbar-nav.navbar-right {
+                    margin-right: -15px;
+                }
+
+                @media (max-width: 767px) {
+                    #logo-panel {
+                        padding-bottom: 0px;
+                    }
+                    
+                    header nav h3.logo {
+                        margin-top: 12px;
+                        margin-bottom: 0px;
+                    }
+                }
+            </style>
+                    
+            <header>
+                <div class="underlay"></div>
+                <div class="container content">
+                    <div class="row">
+                        <nav class="hidden-xs navbar navbar-default navbar-static-top" id="logo-panel">
+                            <div class="navbar-header">
+                                <h3 class="logo"><a href="#"><img src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/img/logo.png')}" height="26" /></a><span class="logo-bar">|</span><a href="#"><apex:insert name="title"/></a></h3>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+        </apex:define>
+
+        <apex:define name="footer">
+            <footer>
+                <div class="container">
+                    <div class="fade-buffer"></div>
+                    <ul>
+                        <li><a href="http://www.mris.com/sitemap" target="_top">Site Map</a></li>
+                        <li><a href="http://www.mris.com/mris-feedback" target="_top">Feedback</a></li>
+                        <li><a href="http://www.mris.com/privacy-policy" target="_top">Privacy Policy</a></li>
+                        <li><a href="http://www.mris.com/terms-of-use" target="_top">Terms of Use</a></li>
+                        <li><a href="http://www.mris.com/copyright-notice" target="_top">Copyright Notice</a></li>
+                        <li><a href="http://www.mris.com/disclaimer" target="_top">Disclaimer</a></li>
+                        <li class="copyright">
+                            Copyright © 
+                            <apex:outputText value="{0, date, yyyy}">
+                                <apex:param value="{!NOW()}" />
+                            </apex:outputText> 
+                            Metropolitan Regional Information Systems, Inc.
+                        </li>
+                    </ul>
+                </div>
+            </footer>
+        </apex:define>
+        
+    </apex:composition>
+</apex:page>

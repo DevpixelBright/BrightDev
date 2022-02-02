@@ -1,0 +1,346 @@
+<apex:page standardController="Case" extensions="Communities_Case_Controller" recordSetVar="ca" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0" applyBodyTag="false" lightningstylesheets="true">
+    <apex:composition template="Communities_Base">  
+        <apex:define name="content">
+        
+            <script>
+                markOptionPanel("support");
+            </script>
+            
+            <c:Bootstrap_Resources />
+
+            <c:Communities_Definition pageTitle="View My Cases" pageTitleClass="fa fa-archive fa-2x" hasDefinitions="true">
+                <p><b class="term">Denied</b> Refers to an appeal request that has been denied.</p>
+                <p><b class="term">Deferred</b> Refers to an appeal request that has been deferred pending additional information.</p>
+                <p><b class="term">Under Staff Review</b> The appeal has been received and staff will investigate and review the appeal. Appeal waivers and denial are granted based on guidelines provided by the Compliance Committee and the Board of Directors.</p>
+                <p><b class="term">Under Panel Review</b> The subscriber has requested that the Sanction Appeal Panel review staff assessment of the appeal and is pending the Sanction Appeal Panel’s decision.</p>
+                <p><b class="term">Under Committee Review</b> The subscriber has requested that the Sanction Review Board review the Sanction Appeal Panel’s decision. The Sanction Review Board convenes only when there is a claimed procedural violation or if there is a claim that any of the MRIS Rules and Regulations giving rise to the sanction has been misapplied to the facts.</p>
+                <p><b class="term">Waived</b> Indicates that all or a portion of the fines assessed have been waived.</p>
+                <p><b class="term">Balance Due</b> Indicates that there is a fine amount due.</p>
+                <p><b class="term">Appeal Expired</b> Request to appeal a fine has been denied since the time frame to appeal a fine has expired.</p>
+                <p><b class="term">In Research</b> Staff is researching the information provided in the appeal.</p>
+            </c:Communities_Definition>
+
+            <apex:stylesheet value="{!URLFOR($Resource.Communities_Ideas,'/ideas_css.css')}" />
+            <style>
+                .activeDept {
+                    background-color:#e2e2e2;
+                }
+                .activeStatus {
+                    background-color:#e2e2e2;
+                }
+                .inactive {
+                    background-color:#ffffff;
+                }
+                .close_progress {
+                    font-size: 13px;
+                    line-height: 1;
+                    color: #fff;
+                    text-shadow: 0 1px 0 #fff;
+                    cursor:pointer;
+                    text-decoration:none;
+                }
+            </style>
+            
+            <script>      
+                /* Function to slide department and status section */
+                function SlideList(divid,tabname) {                        
+                    var currentclass = jQuery(divid).children().attr('class');
+                    if(currentclass == 'pull-right small glyphicon glyphicon-chevron-right') {
+                        var newclass = 'pull-right small glyphicon glyphicon-chevron-down';
+                    } else {
+                        var newclass = 'pull-right small glyphicon glyphicon-chevron-right';
+                    }
+                    jQuery(divid).children().removeClass(currentclass).addClass(newclass);                                     
+                    jQuery("."+tabname).slideToggle();
+                }
+                
+                /* Function called when user close the progress item on top of cases view list */
+                function closeProgressItem(id) {
+                    $(".deptCheckbox").each(function() {
+                        if(jQuery(this).val() == id) {
+                           jQuery(this).prop('checked', false);
+                        }
+                    });
+                    
+                    $(".statusCheckbox").each(function() {
+                        if(jQuery(this).val() == id) {
+                           jQuery(this).prop('checked', false);
+                        }
+                    });
+                    /* Refresh list items */
+                    SelectListItem();            
+                }
+                
+                /* Function called when user selected the checkbox */
+                var progressHtml;
+                function SelectListItem() {
+                    
+                    jQuery(".active2").removeClass('active2').css('background-color', '#ffffff');
+                    
+                    /* Framing html ti update progress bar items */
+                    progressHtml = '<div>Department: '; 
+                    var deptOptions = '';
+                    $(".deptCheckbox").each(function() {
+                        if(jQuery(this).prop('checked')) {
+                            deptOptions = deptOptions + $(this).val() + ",";
+                            progressHtml = progressHtml + "<span class='badge'>" + $(this).val() + " <a class='close_progress' id='" + $(this).val() + "' onclick='closeProgressItem(this.id)'>x</a></span>";
+                        }
+                    });
+                    progressHtml = progressHtml + "</div><div style='margin-top:7px; margin-bottom:7px;'>Status: ";
+                    
+                    var statusOptions = '';
+                    $(".statusCheckbox").each(function() {
+                        if(jQuery(this).prop('checked')) {
+                            statusOptions = statusOptions + $(this).val() + ",";
+                            progressHtml = progressHtml + "<span class='badge'>" + $(this).val() + " <a class='close_progress' id='" + $(this).val() + "' onclick='closeProgressItem(this.id)'>x</a></span>";
+                        }
+                    });
+                    
+                  
+                    /* Collect selected department and status options to reload cases */
+                    statusOptions = statusOptions.substring(0, statusOptions.length-1);
+                    deptOptions = deptOptions.substring(0, deptOptions.length-1);
+                    
+                    /* Trigger action function and pass values as parameters */
+                    if(deptOptions != '' || statusOptions != '') {
+                        jQuery("#progress").html('<div class="row" id="loading-block"><div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-5"><div class="progress progress-striped active"><div class="progress-bar" style="width: 100%"></div></div></div></div><br>');
+                        reloadCases(deptOptions, statusOptions);
+                    }
+                    else
+                        window.location = 'Communities_Cases_View';
+                        
+                }
+                
+                /* Function to slide the details of selected case */
+                var previousOpened = '';
+                var previousColor = '';
+                function SlideDetails(id) {
+                    
+                    var hidden = jQuery("#div_"+id).is(":hidden");
+                    if(previousOpened != '' && previousOpened != id) {
+                        jQuery("#list_"+previousOpened).css("background-color", previousColor);
+                        jQuery("#div_"+previousOpened).hide();  
+                    }
+                    
+                    if(previousOpened != id) {
+                        jQuery("#a_"+previousOpened).html('View More <i style="line-height:10px; color:#000000; cursor:pointer; margin-left:5px;" class="fa fa-angle-double-down fa-2"></i>');
+                        jQuery("#a_"+id).html('View Less <i style="line-height:10px; color:#000000; cursor:pointer; margin-left:7px;" class="fa fa-angle-double-up fa-2"></i>');
+                        previousOpened = id;
+                        previousColor = jQuery("#list_"+id).css("background-color"); 
+                        jQuery("#div_"+id).slideToggle('slow');
+                        jQuery("#"+id).css("border-top", "none");
+                        jQuery("#"+id).css("border", "none");
+                    }
+                    else {
+                        jQuery("#div_"+id).slideToggle('slow');
+                        if(hidden)
+                            jQuery("#a_" + id).html('View Less <i style="line-height:10px; color:#000000; cursor:pointer; margin-left:7px;" class="fa fa-angle-double-up fa-2"></i>'); 
+                        else
+                            jQuery("#a_" + id).html('View More <i style="line-height:10px; color:#000000; cursor:pointer; margin-left:5px;" class="fa fa-angle-double-down fa-2"></i>');        
+                    }
+
+                    if(!hidden) {
+                        setTimeout(function () {
+                            jQuery("#"+id).prev().css("background-color", previousColor);
+                        }, 700);                      
+                    }
+                    else 
+                        jQuery("#"+id).prev().css("background-color", "#afd2f1");           
+                }
+                
+                /* Function to open support */
+                function support(){
+                    var modal = $("#subscription-option-modal");
+                    modal.modal("show");        
+                }  
+                
+                /* Function update status bar after completing reloadCases action function */
+                function updateProgressBar(){
+                    jQuery("#progress").html(progressHtml + "</div>"); 
+                }                                                         
+            </script>
+
+            <apex:form >
+                <!-- Action function that reload the cases -->
+                <apex:actionFunction action="{!refresh}" name="reloadCases" rerender="cases" oncomplete="updateProgressBar()">
+                    <apex:param name="one" assignTo="{!filterValue1}" value="" />
+                    <apex:param name="two" assignTo="{!filterValue}" value="" />
+                </apex:actionFunction>
+                
+                <!-- MRIS support center modal popup -->
+                <!---<div class="modal fade" id="subscription-option-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="modal-label">Bright MLS Support Center</h4>
+                            </div>
+                            <div class="modal-body">
+                                <ul>
+                                    <li>
+                                        For phone or email assistance, please contact the Bright MLS Support Center at (844) 55-BRIGHT or email support@brightmls.com.  You may also reach us via online chat <a href="https://home-c19.incontact.com/incontact/chatclient/chatclient.aspx?poc=c343e795-8f26-47b3-a943-fd738461a4fa&bu=4596079">here</a>.
+                                        <br/><br/>
+                                    </li>
+                                    <li>
+                                        Support Center hours are
+                                        <ul style='list-style-type: circle;'>
+                                            <li>Monday – Friday 8:00 AM to 8:00 PM</li>
+                                            <li>Saturday – Sunday 9:00 AM to 6:00 PM</li>
+                                        </ul>
+                                        <br/>
+                                    </li>
+                                   <!--  <li>
+                                        MRIS offers additional support hours via Chat. Click here to access our <a href="http://www.gotoassist.com/sb/mris-sb">Online Chat Service</a>.
+                                        <br/><br/>
+                                    </li>
+                                    <li>
+                                        Support Center Chat hours are 
+                                        <ul style='list-style-type: square;'>
+                                            <li>Monday – Friday 9:00 AM to 9:00 PM</li>
+                                            <li>Saturday – Sunday 9:00 AM to 5:00 PM</li>
+                                        </ul> ​
+                                    </li> -->
+                            <!--    </ul>                        
+                            </div>
+                        </div>
+                    </div>
+                </div>   --> 
+            
+                <div class="container">     
+                    <div class="ideas-content-area row">
+                        <!-- Left Panel -->
+                        <div class="col-md-3">
+                            <div class="my_sidebar"> 
+                                <apex:outputPanel layout="block" id="filters" >
+                                    
+                                    <apex:outputPanel layout="block" styleClass="active2">
+                                      <h4><apex:outputLink value="/apex/Communities_Cases_View">All Cases</apex:outputLink></h4>
+                                    </apex:outputPanel>            
+                            
+                                    <apex:outputpanel layout="block" styleClass="inactive">           
+                                        <h4 class="heading"  onclick="SlideList(this,'categories')" style="cursor:pointer;">Departments <span class="pull-right small glyphicon glyphicon-chevron-{! if(filterType == 'department','down','right')}" style="line-height:20px; color:black; cursor:pointer;"></span></h4>
+                                            <ul class="list-unstyled categories" style="margin:bottom:10px; display:{! if(filterType == 'department','block','none')};">
+                                                <apex:repeat value="{!departments}" var="dept">
+                                                    <li>
+                                                        <input type="checkbox" class="deptCheckbox" style="margin-right:3px; margin-top:5px;" checked="" value="{!dept}" onclick="SelectListItem()" /> {!dept}
+                                                    </li>
+                                                </apex:repeat>
+                                            </ul>
+                                    </apex:outputpanel> 
+
+                                    <apex:outputpanel layout="block" styleClass="inactive"> 
+                                        <h4 class="heading"  onclick="SlideList(this,'status')" style="cursor:pointer;">Status <span class="pull-right small glyphicon glyphicon-chevron-{! if(filterType == 'status','down','right')}" style="line-height:20px; color:black; cursor:pointer;"></span></h4>
+                                        <ul class="list-unstyled status" style="margin:bottom:10px; display:{! if(filterType == 'status','block','none')};">                                                           
+                                            <apex:repeat value="{!status}" var="cs">
+                                                <li class="list-item-status"> 
+                                                     <input type="checkbox"  class="statusCheckbox" value="{!cs}" onclick="SelectListItem()" /> {!cs}
+                                                </li>
+                                            </apex:repeat>
+                                        </ul>
+                                    </apex:outputPanel> 
+                                    
+                                </apex:outputpanel> 
+                            </div>
+
+                            <div class="btn-group btn-group-justified">  
+                                <a class="btn btn-info" href="http://support.brightmls.com">Need Help?</a>   
+                                <apex:outputLink styleClass="btn btn-success" value="/apex/Communities_Cases_Create">Submit a Case</apex:outputLink>
+                            </div>
+                        </div>            
+                        <!-- End of left panel -->
+            
+                        <div class="ideas-main-list col-md-9">  
+                            
+                            <div id="progress">
+                            </div>
+                            
+                            <apex:outputPanel id="cases">
+                                <apex:pageMessages ></apex:pageMessages>
+                                <div style="border: 1px solid #E0E0E0 !important; margin-bottom: 10px; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; overflow:hidden;"> 
+                                    <table width="100%" style="min-width:700px;">
+                                        <tr style="color:#428bca; background-color:#f7f7f7;">
+                                            <th  style="padding:10px;">Case ID</th>
+                                            <th>Subscription ID</th>
+                                            <th>Status</th>
+                                            <th>Department</th>
+                                            <th>Date Opened</th>
+                                            <th></th>
+                                        </tr>
+                                        <apex:variable value="{!1}" var="rowNum" />
+                                        <apex:repeat value="{!subscriberCases}" var="c">
+                                            <tr id="list_{!c.CaseNumber}" style="border-top:1px solid #E0E0E0; background-color:{! if(Mod(rowNum,2) == 0,'#f7f7f7', '#ffffff')};">
+                                                <td style="padding:10px;"><apex:outputText value="{!c.CaseNumber}"/></td>
+                                                <td><apex:outputText value="{!c.Subscription_ID__r.Name}"/></td>
+                                                <td><apex:outputText value="{!c.Status}"/></td>
+                                                <td><apex:outputText value="{!c.Department__c}"/></td>
+                                                <td><apex:outputText value=" {!c.CreatedDate}"/></td>
+                                                <td style="width:120px;">
+                                                    <a id="a_{!c.CaseNumber}" style="color:#428bca; cursor:pointer;" onclick="SlideDetails('{!c.CaseNumber}')">View More <i style="line-height:10px; color:#000000; cursor:pointer; margin-left:5px;" class="fa fa-angle-double-down fa-2"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr id="{!c.CaseNumber}" class="case_details"> 
+                                                <td colspan="6" style="background-color:#afd2f1;">
+                                                    <div id="div_{!c.CaseNumber}" style="display:none;padding:10px; margin:1%; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; background-color:white;">
+                                                        <apex:image style="margin-left: 49%;margin-top: -52px;" value="{!URLFOR($Resource.Communities_Ideas,'/arrow_white.png')}"/>
+                                                        <table style="margin:auto; line-height:16px;" cellspacing="10" width="80%">
+                                                            <tr>
+                                                                <td width="15%" style="padding:10px; padding-right:0px; color:#0b86f4; text-align:right;">Office ID</td>
+                                                                <td width="1%"> : </td>
+                                                                <td width="15%"><apex:outputText value="{!c.Account.Name}"/></td>
+                                                                <td width="2%"></td>
+                                                                <td width="15%" style="padding:10px; padding-right:0px; color:#0b86f4; text-align:right;">Contact Name</td>
+                                                                <td width="1%"> : </td>
+                                                                <td width="30%"><apex:outputText value="{!c.Contact.Name}"/></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="padding:10px; padding-right:0px; color:#0b86f4; text-align:right;">Contact Phone</td>
+                                                                <td> : </td>
+                                                                <td><apex:outputText value="{!c.Contact.Phone}"/></td>
+                                                                <td width="2%"></td>
+                                                                <td style="padding:10px; padding-right:0px; color:#0b86f4; text-align:right;">Contact Email</td>
+                                                                <td> : </td>
+                                                                <td><apex:outputText value="{!c.Contact.Email}"/></td>
+                                                            </tr>                                              
+                                                            <tr>
+                                                                <td style="padding:10px; padding-right:0px; color:#0b86f4; text-align:right;">Origin</td>
+                                                                <td> : </td>
+                                                                <td><apex:outputText value="{!c.Origin}"/></td>
+                                                                <td width="2%"></td>
+                                                                <td style="padding:10px; padding-right:0px; color:#0b86f4; text-align:right;">MLS #</td>
+                                                                <td> : </td>
+                                                                <td><apex:outputText value="{!c.MLS_Number__c}"/></td>
+                                                            </tr> 
+                                                            <tr>
+                                                                <td style="padding:10px; padding-right:0px; color:#0b86f4; text-align:right;">Description</td>
+                                                                <td> : </td>
+                                                                <td colspan="5"><apex:outputText value="{!c.MRIS_Connect_Description__c}"/></td>
+                                                               
+                                                            </tr>                                                                                                                                                                                    
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <apex:variable var="rowNum" value="{!rowNum + 1}"/>                                
+                                        </apex:repeat> 
+                                    </table>                                                                    
+                                </div>
+
+                                <apex:outputPanel rendered="{!resultSize > 10}">
+                                    <div>
+                                        <ul class="pager">
+                                        <li> <apex:commandLink value="first" action="{!first}" title="First Page" reRender="cases" style="pointer-events: {! if(pageNumber == 1, 'none', 'auto')}; cursor: {! if(pageNumber == 1, 'default', 'pointer')}; color: {! if(pageNumber == 1, '#ddd', '#428bca')};" /></li>
+                                        <li  ><apex:commandLink value="previous" action="{!previous}" title="Previous Page" reRender="cases" style="pointer-events: {! if(pageNumber == 1, 'none', 'auto')}; cursor: {! if(pageNumber == 1, 'default', 'pointer')}; color: {! if(pageNumber == 1, '#ddd', '#428bca')};" /></li>
+                                        <li  ><apex:commandLink value="next" action="{!next}" title="Next Page" reRender="cases" style="pointer-events: {! if(pageNumber == totalPages, 'none', 'auto')}; cursor: {! if(pageNumber == totalPages, 'default', 'pointer')}; color: {! if(pageNumber == totalPages, '#ddd', '#428bca')};" /></li>
+                                        <li> <apex:commandLink value="last" action="{!last}" title="Last Page" reRender="cases" style="pointer-events: {! if(pageNumber == totalPages, 'none', 'auto')}; cursor: {! if(pageNumber == totalPages, 'default', 'pointer')}; color: {! if(pageNumber == totalPages, '#ddd', '#428bca')};" /></li>                         
+                                        </ul>
+                                        <div class="text-center"><apex:outputText >{!pageNumber} of {!totalPages}</apex:outputText></div>            
+                                    </div>
+                                </apex:outputPanel>
+                            </apex:outputPanel>
+                        </div>
+                    </div>
+                </div>
+            </apex:form>
+        </apex:define>    
+    </apex:composition>  
+</apex:page>

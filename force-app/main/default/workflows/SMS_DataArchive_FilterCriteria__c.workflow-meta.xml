@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Data_Archive_Schedule_Reminder</fullName>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <description>Data Archive Schedule Reminder</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>API_Names/Data_Archive_Schedule_Reminder</template>
+    </alerts>
+    <rules>
+        <fullName>Data Archive Schedule Reminder</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>SMS_DataArchive_FilterCriteria__c.Next_Fire_Time__c</field>
+            <operation>greaterThan</operation>
+            <value>TODAY</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Data_Archive_Schedule_Reminder</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>SMS_DataArchive_FilterCriteria__c.Next_Fire_Time__c</offsetFromField>
+            <timeLength>-1</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+</Workflow>

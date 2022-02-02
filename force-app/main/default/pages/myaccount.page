@@ -1,0 +1,749 @@
+<apex:page controller="myAccController" showHeader="false" lightningstylesheets="true">
+    <title>MRIS Portal App</title>
+    <!--
+    <link href="http://testweb.mris.com/_res/css/portal.css" rel="stylesheet" type="text/css" />
+    <link href="http://testweb.mris.com/_res/css/portal_internal.css" rel="stylesheet" type="text/css" />
+-->
+    <link href="{!$Label.MRIS_CSS_PORTAL_URL}" rel="stylesheet" type="text/css" />
+    <link href="{!$Label.MRIS_CSS_PORTAL_INTERNAL_URL}" rel="stylesheet" type="text/css" />
+    <script>
+        //This code logs out the user after a specific period of time
+        window.setTimeout(function () {
+            window.top.location.href = "/secur/logout.jsp";
+        }, 600000);
+    </script>
+
+
+    <div id="wrapper">
+        <div id="headerwrapper">
+            <a class="logo" target="_top" href="{!$Label.MRIS_SSO_requestauth_Url}" title="MRIS - Real Estate in Real Time"></a>
+            <a class="return" target="_top" href="{!$Label.MRIS_SSO_requestauth_Url}" title="Return to MRIS.com"></a>
+            <p><span class="portal">My Account</span></p>
+        </div> <!-- End Header/Nav -->
+    
+        <div id="crumbs-sf">
+            <a target="_top" href="{!$Label.MRIS_SSO_requestauth_Url}">Home</a> | My Account
+        </div>
+    
+        <div id="innerwrapper">
+            <div id="sidenav-sf">
+                <!-- Embedded Component - E6 (Local Navigation) -->
+                <div id="navLocal">
+                  <div id="headingleftnav">
+                    <a href="#"><span>My Account</span></a>
+                  </div><!--close headingleftnav-->
+                  <div class="body">
+                    <ul id="nav-sub">
+                        
+                    </ul>
+                  </div><!--close body-->
+                </div><!--close navLocal-->
+                <!-- /Embedded Component - E6 (Local Navigation) -->
+            </div><!--close sidenav-->
+            
+            <div id="content" class="wide">
+            <!--  
+                <h1 class="TitleClassHeader">Update My Contact Information</h1>
+                -->
+                <p>
+                
+<apex:form style="width:730PX;">
+<style>
+    
+    input:not([type]), input[type="text"]
+    {
+     
+    webkit-border-radius: 2px;
+    -moz-border-radius: 3px;
+    border-radius: 3px; 
+    border: solid 1px #ADA9A5;
+    display: inline-block;
+    background-color: white;
+    
+    }
+   select
+    {
+       border: solid 1px #ADA9A5;
+       display: inline-block;
+       background-color: white;
+       width:128px;
+    }
+   h2
+    {
+        overflow:hidden;
+        text-overflow:ellipsis;
+        -o-text-overflow:ellipsis;-ms-text-overflow:ellipsis;
+        -moz-binding:url("/sync/ellipsis.xml#ellipsis"); 
+        width:735px;
+    }
+    .output-cell {
+        border: 1px solid #ADA9A5;
+    }     
+</style>
+        
+    <apex:pageBlock title="Subscription ID - {!sub.name}" mode="edit">   
+    <div class="pbBody subID">
+         <apex:outputText value="All Subscriptions for Account {!contact.name}:"  style="padding-left:2%;"></apex:outputText>
+    
+    <apex:repeat value="{!AllSubs}" var="s"> 
+        <span class="subID"><a href="accountsub?contact={!contactID}&subscription={!s.name}">{!s.name}</a></span> 
+    </apex:repeat>
+    </div>
+    </apex:pageBlock>
+    
+    
+    <apex:pageMessages id="msgID"/>
+
+    <apex:pageBlock title="TELEPHONE AND CONTACT INFORMATION">
+        <apex:facet name="header"><apex:outputText value="TELEPHONE AND CONTACT INFORMATION" style="color:blue;font-size:20px;"/></apex:facet>
+    Please enter the telephone number with area code first. (xxx)xxx-xxxx format.<br/>
+
+    <apex:pageBlockSection columns="1">
+    
+    <apex:pageBlockSectionItem >
+    <apex:outputLabel >Contact Phone<apex:outputText value="*" style="color:red"  /></apex:outputLabel>
+    <apex:inputField value="{!sub.Primary_Phone__c}" styleClass="output-cell"/>
+    </apex:pageBlockSectionItem>
+
+    <apex:inputField value="{!sub.Voicemail__c}" styleClass="output-cell"/>
+    <apex:pageBlockSectionItem >
+    <apex:outputLabel >Voice Mail Extension</apex:outputLabel>
+    <apex:inputField value="{!sub.VM_Ext__c}" styleClass="output-cell"/>
+    </apex:pageBlockSectionItem>
+    
+    
+    <apex:pageBlockSectionItem >
+    <apex:outputLabel >Mobile<apex:outputText value="*" style="color:red"  /></apex:outputLabel>
+    <apex:inputField value="{!sub.Mobile_Phone__c}" styleClass="output-cell"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:inputField value="{!sub.Home_Fax__c}" styleClass="output-cell"/>
+    <apex:inputField value="{!sub.Pager__c}" styleClass="output-cell"/>
+    <apex:inputField value="{!sub.Agent_Office_Phone__c}" styleClass="output-cell"/>
+    <apex:inputField value="{!sub.Fax__c}" styleClass="output-cell"/>
+    <br/>
+    This information WILL appear in your listings.
+    <apex:inputField value="{!sub.Website__c}" styleClass="output-cell"/>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Public Email<apex:outputText value="*" style="color:red"  /></apex:outputLabel>
+        <apex:inputField style="width:555px" value="{!sub.Public_Email__c}" styleClass="output-cell"/>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+            <apex:outputLabel >This information WILL NOT appear in your listings.</apex:outputLabel>
+        </apex:pageBlockSectionItem>
+   
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Private Email<apex:outputText value="*" style="color:red"  /></apex:outputLabel>
+        <apex:inputField style="width:555px" value="{!sub.Private_Email__c}" styleClass="output-cell"/>
+    </apex:pageBlockSectionItem>
+
+    <apex:inputField value="{!sub.NRDS_ID__c}" styleClass="output-cell"/> 
+    <apex:outputLink target="NRIS" style="padding-left:125px; color:orange;"  value="https://reg.realtor.org/roreg.nsf/retrieveID?OpenForm">Find my NRDS ID</apex:outputLink>
+    
+    The NRID ID# is your identification number from the National Realtors Database System.It is located on your NAR Membership Card.
+    </apex:pageBlockSection>
+
+    </apex:pageBlock>
+    
+        <apex:pageBlock title="MAILING ADDRESS">
+        
+ <!-- QASTypedown Javascript -->
+        
+        <apex:includeScript value="/soap/ajax/25.0/connection.js" />
+        <apex:includeScript value="/soap/ajax/25.0/apex.js" />
+        <script src="https://online.qas.com/SalesForceV3/Scripts/all_sf_with_jQuery-2.0.min.js"> </script>
+        
+      <script>
+        
+        QASNA.typedown.sfdc._isEditMode = function _isEditMode() { return true; };  //Override the isEditMode function to always return false
+         
+        jQuery.noConflict();
+
+        jQuery(document).ready(function () { //Make sure that the DOM is loaded
+       
+        var sys = QASNA.system;
+        var td = QASNA.typedown;
+        var xd = QASNA.typedown.XD;
+        var sfdc = QASNA.typedown.sfdc;
+        
+        td.jQuery = jQuery; //Tell typedown which jQuery to use.
+        
+        sforce.connection.sessionId = '{!$Api.Session_ID}'; //Initialize the sforce connection session
+        
+        var settings = {};
+        
+        settings[xd.Proxy.ProxyUrlParameterKey] = "https://mris--c.na12.visual.force.com/apex/QASTypedownProxy"; //Url to the Salesforce proxy page.
+        settings[xd.PostMessage.TargetDomainParameterKey] = "https://mris--c.na12.visual.force.com";
+        
+        // packagePrefix: "QAS_NA",
+       
+        settings[xd.ISDTP] = "mn"; //Tell Typedown to load the proxy page without home page components on the left.
+       
+        var configurations = getConfigurations(); //Create configuration.
+        
+        window.typedownClient = new sfdc.Client(configurations, settings); //Create and initialize the typedown object.
+        window.typedownClient.initialize(true);
+         
+         jQuery('iframe#qasPage').load(function() {alert('focus() called.');});
+               
+                td.jQuery('.btn').each(function () {        
+                    if(this.value !== 'Continue' && jQuery.trim(this.value) !== 'Continue') { return; };
+               
+                    td.jQuery(this).click(function (event) {
+                        if(!sys.isNull(typedownClient)) { window.typedownClient.fixValidationStatus(); };
+                        
+                    });
+                });
+        });
+       
+        function getConfigurations() {
+        
+        var td = QASNA.typedown;
+        var config = new td.Configuration();
+                
+        config.isUpperCase = false;
+        config.defaultCountry = 'USA';
+        config.addressValidationKey = "{!QASTypedownSessionToken}"; //You have to supply this parameter from your controller.
+               
+        var StreetNumber = jQuery('input[id$="StreetNumber"]').attr('id');
+        <!--var StreetNumberSuffix = jQuery('input[id$="StreetNumberSuffix"]').attr('id');-->
+        var StreetName = jQuery('input[id$="StreetName"]').attr('id');
+        var StreetType = jQuery('input[id$="StreetType"]').attr('id');
+        var StreetDirection = jQuery('input[id$="StreetDirection"]').attr('id');
+        var UnitType = jQuery('input[id$="UnitType"]').attr('id');
+        var Unit = jQuery('input[id$="Unit"]').attr('id');
+        var City = jQuery('input[id$="City"]').attr('id');
+        var County = jQuery('input[id$="County"]').attr('id');
+        var StateProvince = jQuery('select[id$="StateProvince"]').attr('id');  
+        var Country = jQuery('input[id$="Country"]').attr('id');
+        var Zip = jQuery('input[id$="Zip"]').attr('id');
+        var PlusFour = jQuery('input[id$="Plusfour"]').attr('id');
+        var ValidationStatus = jQuery('input[id$="ValidationStatus"]').attr('id')
+        var ValidationTimestamp = jQuery('input[id$="ValidationTimestamp"]').attr('id');
+        var AddlDispName = jQuery('input[id$="AddlDispName"]').attr('id');
+        var POBox = jQuery('input[id$="POBox"]').attr('id');
+        var RType = jQuery('input[id$="RType"]').attr('id');        
+        var BStreetNumber = jQuery('input[id$="BStreetNumber"]').attr('id');
+        <!--var BStreetNumberSuffix = jQuery('input[id$="BStreetNumberSuffix"]').attr('id');-->       
+        var BStreetName = jQuery('input[id$="BStreetName"]').attr('id');
+        var BStreetType = jQuery('input[id$="BStreetType"]').attr('id');
+        var BStreetDirection = jQuery('input[id$="BStreetDirection"]').attr('id');
+        var BUnitType = jQuery('input[id$="BUnitType"]').attr('id');
+        var BUnit = jQuery('input[id$="BUnit"]').attr('id');
+        var BCity = jQuery('input[id$="BCity"]').attr('id');
+        var BCounty = jQuery('input[id$="BCounty"]').attr('id');
+        var BStateProvince = jQuery('select[id$="BStateProvince"]').attr('id');
+        var BCountry = jQuery('input[id$="BCountry"]').attr('id');  
+        var BZip = jQuery('input[id$="BZip"]').attr('id');
+        var BPlusFour = jQuery('input[id$="BPlusfour"]').attr('id');
+        var BPOBox = jQuery('input[id%="BPOBox"]').attr('id'); 
+        var BValidationStatus = jQuery('input[id$="BValidationStatus"]').attr('id');
+        var BValidationTimestamp = jQuery('input[id%="BValidationTimestamp"]').attr('id');
+        var BAddlDispName = jQuery('input[id$="BAddlDispName"]').attr('id');
+        var BRType = jQuery('input[id$="BRType"]').attr('id');
+         
+        config.addOutputMapping(StreetNumber, td.PrimaryNumber);
+        <!--config.addOutputMapping(StreeNumberSuffix, td.UnitTextualId);-->     
+        config.addOutputMapping(StreetName, td.PreDirectional);
+        config.addOutputMapping(StreetName, td.StreetName);        
+        config.addOutputMapping(StreetType, td.StreetSuffix);
+        config.addOutputMapping(StreetDirection, td.PostDirectional);
+        config.addOutputMapping(UnitType, td.SecondaryName);
+        config.addOutputMapping(Unit, td.SecondaryNumber);
+        config.addOutputMapping(City, td.City);
+        config.addOutputMapping(County, td.CountyName);
+        config.addOutputMapping(Country, td.ThreecharacterISOcountrycode);
+        config.addOutputMapping(StateProvince, td.StateOrProvince);
+        config.addOutputMapping(Zip, td.ZIPOrPostalCode);
+        config.addOutputMapping(PlusFour, td.ZipAddon);
+        config.addOutputMapping(ValidationStatus, td.ValidationStatus);
+        config.addOutputMapping(ValidationTimestamp, td.LastValidated);
+        config.addOutputMapping(AddlDispName, td.DeliveryLine1); 
+        config.addOutputMapping(POBox, td.DeliveryLine1);
+        config.addOutputMapping(RType, td.RecType);               
+        
+        var billconfig = new td.Configuration();
+               
+        billconfig.isUpperCase = false;
+        billconfig.defaultCountry = 'USA';
+        billconfig.addressValidationKey = "{!QASTypedownSessionToken}"; //You have to supply this parameter from your controller.
+
+        billconfig.addOutputMapping(BStreetNumber, td.PrimaryNumber);
+        billconfig.addOutputMapping(BStreetName, td.StreetName);        
+        <!--billconfig.addOutputMapping(BStreeNumberSuffix, td.UnitTextualId);-->
+        billconfig.addOutputMapping(BStreetType, td.StreetSuffix);
+        billconfig.addOutputMapping(BStreetDirection, td.PostDirectional);
+        billconfig.addOutputMapping(BUnitType, td.SecondaryName);
+        billconfig.addOutputMapping(BUnit, td.SecondaryNumber);
+        billconfig.addOutputMapping(BCity, td.City);
+        billconfig.addOutputMapping(BCounty, td.CountyName);
+        billconfig.addOutputMapping(BStateProvince, td.StateOrProvince);
+        billconfig.addOutputMapping(BCountry, td.ThreecharacterISOcountrycode);
+        billconfig.addOutputMapping(BZip, td.ZIPOrPostalCode);
+        billconfig.addOutputMapping(BPlusFour, td.ZipAddon);
+        billconfig.addOutputMapping(BValidationStatus, td.ValidationStatus);
+        billconfig.addOutputMapping(BValidationTimestamp, td.LastValidated);
+        billconfig.addOutputMapping(BAddlDispName, td.DeliveryLine1);
+        billconfig.addOutputMapping(BPOBox, td.DeliveryLine1);
+        billconfig.addOutputMapping(BRType, td.RecType);        
+        
+        return [config, billconfig];
+//        return [config];
+        }
+       
+        //End of QASTypredownAPI
+    </script>
+
+    <apex:facet name="header"><apex:outputText value="MAILING ADDRESS" style="color:blue;font-size:20px;"/></apex:facet>
+<!--
+    <apex:pageBlockSection columns="2">
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Street Number</apex:outputLabel>
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Street Name</apex:outputLabel>
+    </apex:pageBlockSection>
+-->
+    <apex:pageBlockSection columns="2">
+    <apex:pageBlockSectionItem >    
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Street Number</apex:outputLabel>
+    <apex:inputField value="{!sub.Street_Number__c}" id="StreetNumber" styleClass="output-cell"/>
+    </apex:pageBlockSectionItem>
+    <!--<apex:pageBlockSectionItem >    
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Street Number Suffix</apex:outputLabel>
+    <apex:inputField value="{!sub.Street_Number_Suffix__c}" id="StreetNumberSuffix"/>
+    </apex:pageBlockSectionItem>-->
+    <apex:pageBlockSectionItem >        
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Street Name</apex:outputLabel>
+    <apex:inputField value="{!sub.Street_Name__c}" id="StreetName" styleClass="output-cell"/>
+    </apex:pageBlockSectionItem>    
+    </apex:pageBlockSection>
+<!--
+    <apex:pageBlockSection columns="4">
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">QStreet Type</apex:outputLabel>
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Street Type</apex:outputLabel>
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">QStreet Direction</apex:outputLabel>
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Street Direction</apex:outputLabel>
+    </apex:pageBlockSection>
+-->
+<apex:pageBlockSection columns="1">
+   <apex:pageBlockSectionItem />    
+    </apex:pageBlockSection>
+    
+    <apex:pageBlockSection columns="2">
+    <apex:pageBlockSectionItem >    
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Street Type</apex:outputLabel>
+    <apex:inputField value="{!sub.QAS_Mailing_Street_Type__c}" id="StreetType" styleClass="output-cell"/>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >        
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Street Direction</apex:outputLabel>
+    <apex:inputField value="{!sub.QAS_Mailing_Street_Direction__c}" id="StreetDirection" styleClass="output-cell"/>
+    </apex:pageBlockSectionItem> 
+        
+    </apex:pageBlockSection>
+<!--
+    <apex:pageBlockSection columns="3">
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Unit Type</apex:outputLabel>
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">         </apex:outputLabel>
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Unit Number</apex:outputLabel>
+    </apex:pageBlockSection>
+-->
+<apex:pageBlockSection columns="1">
+   <apex:pageBlockSectionItem />    
+    </apex:pageBlockSection>
+    
+    <apex:pageBlockSection columns="2">
+    <apex:pageBlockSectionItem >    
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Unit Type</apex:outputLabel>
+    <apex:inputField value="{!sub.QAS_Mailing_Unit_Type__c}" id="UnitType" styleClass="output-cell"/>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >        
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Unit Number</apex:outputLabel>
+    <apex:inputField value="{!sub.Unit__c}" id="Unit" styleClass="output-cell"/>
+    </apex:pageBlockSectionItem>    
+    </apex:pageBlockSection>
+
+<apex:pageBlockSection columns="1">
+   <apex:pageBlockSectionItem />    
+    </apex:pageBlockSection>
+    <!--
+    <apex:pageBlockSection columns="1">
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Additional Display Name</apex:outputLabel>
+    </apex:pageBlockSection>
+-->
+    <apex:pageBlockSection columns="1">
+    <apex:pageBlockSectionItem >    
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Additional Display Name</apex:outputLabel>
+    <apex:inputField value="{!sub.Addl_Display_Name__c}" id="AddlDispName" styleClass="output-cell"/>
+    </apex:pageBlockSectionItem>
+    <!--
+    <apex:pageBlockSectionItem >    
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black"></apex:outputLabel>
+    <apex:inputField value="{!sub.QAS_Mailing_POBox__c}" id="POBox" rendered="false"/>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >    
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black"></apex:outputLabel>
+    <apex:inputField value="{!sub.QAS_Mailing_Record_Type__c}" id="RType" rendered="false"/>
+    </apex:pageBlockSectionItem>
+    -->
+    </apex:pageBlockSection>
+
+<!--
+    <apex:pageBlockSection columns="4">
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">City<apex:outputText value="*" style="color:red"  /></apex:outputLabel>
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">County<apex:outputText value="*" style="color:red"  /></apex:outputLabel>
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">     </apex:outputLabel>
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">State<apex:outputText value="*" style="color:red"  /></apex:outputLabel>    
+    </apex:pageBlockSection>
+-->
+   <!--  <apex:pageBlockSection columns="3">
+    <apex:pageBlockSectionItem >    
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">City<apex:outputText value="*" style="color:red"  /></apex:outputLabel>
+    <apex:inputField value="{!sub.City__c}" id="City"/>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >    
+        <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">County<apex:outputText value="*" style="color:red"  /></apex:outputLabel>
+    <apex:inputField value="{!sub.QAS_Mailing_County__c}" id="County"/>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >    
+        <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">State<apex:outputText value="*" style="color:red"  /></apex:outputLabel>
+    <apex:inputField value="{!sub.State__c}" id="StateProvince"/>
+    </apex:pageBlockSectionItem>        
+    </apex:pageBlockSection>
+
+    <apex:pageBlockSection columns="3">
+
+    <apex:pageBlockSectionItem >   
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Zip<apex:outputText value="*" style="color:red"  /></apex:outputLabel> 
+    <apex:inputField value="{!sub.Zip__c}" id="Zip" />
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >      
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Zip-4<apex:outputText value="*" style="color:red"  /></apex:outputLabel>
+    <apex:inputField value="{!sub.Zip_4__c}" id="Plusfour"/>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >    
+        <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Country<apex:outputText value="*" style="color:red"  /></apex:outputLabel>
+    <apex:inputField value="{!sub.QAS_Mailing_Country__c}" id="Country"/>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >    
+        <apex:outputLabel style="font-size:12px;font-weight:bold;color:black"></apex:outputLabel>
+    <apex:inputField value="{!sub.Country__c}" rendered="false"/>
+    </apex:pageBlockSectionItem> 
+    </apex:pageBlockSection>-->
+    <table>
+        <tr>
+            <td height="35" width="12%" align="center">
+                <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">City<apex:outputText value="*" style="color:red"  /></apex:outputLabel>
+            </td>           
+            <td height="35" width="12%" align="left">
+                <apex:inputField value="{!sub.City__c}" id="City" styleClass="output-cell"/>
+            </td>
+            <td height="35" width="12%" align="left">
+            &nbsp;
+            </td>
+            <td height="35" width="12%" align="center">
+                <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">County<apex:outputText value="*" style="color:red"  /></apex:outputLabel>
+            </td>
+            <td height="35" width="12%" align="left">
+                <apex:inputField value="{!sub.QAS_Mailing_County__c}" style="width:150px;" styleClass="output-cell" id="County"/>
+            </td>
+            <td height="30" width="12%" align="left">
+            &nbsp;
+            </td>
+            <td height="30" width="12%" align="center">
+                <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">State<apex:outputText value="*" style="color:red"  /></apex:outputLabel>
+            </td>
+            <td height="35" width="12%" align="left">
+                <apex:inputField value="{!sub.State__c}" id="StateProvince" styleClass="output-cell"/>
+            </td>
+        </tr>       
+        <tr>
+            <td height="35" width="12%" align="center">
+                <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Zip<apex:outputText value="*" style="color:red"  /></apex:outputLabel>
+            </td>           
+            <td height="35" width="12%" align="left">
+                <apex:inputField value="{!sub.Zip__c}" id="Zip" styleClass="output-cell" />
+            </td>
+            <td height="35" width="12%" align="left">
+            &nbsp;
+            </td>
+            <td height="35" width="12%" align="center">
+                <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Zip-4 </apex:outputLabel>
+            </td>
+            <td height="35" width="12%" align="left">
+                <apex:inputField value="{!sub.Zip_4__c}" id="Plusfour" styleClass="output-cell"/>
+            </td>
+            <td height="35" width="12%" align="left">
+            &nbsp;
+            </td>
+            <td height="35" width="12%" align="center">
+                <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Country<apex:outputText value="*" style="color:red"  /></apex:outputLabel>
+            </td>
+            <td height="35" width="12%" align="left">
+                <apex:inputField value="{!sub.QAS_Mailing_Country__c}" id="Country" styleClass="output-cell"/>
+                <apex:outputLabel style="font-size:12px;font-weight:bold;color:black"></apex:outputLabel>
+                <apex:inputField value="{!sub.Country__c}" rendered="false"/>
+            </td>
+        </tr>
+    </table>
+
+        
+    </apex:pageBlock>
+    
+    
+    <apex:pageBlock >
+    <apex:pageBlockSection >
+    <apex:pageBlockSectionItem >
+    <apex:outputLabel >Copy Address to Billing</apex:outputLabel>
+    <apex:inputField value="{!sub.Copy_Address_to_Billing__c}" styleClass="output-cell"/>
+    </apex:pageBlockSectionItem>
+    </apex:pageBlockSection>
+    </apex:pageBlock>
+    
+  
+    
+    <apex:pageBlock title="BILLING ADDRESS">
+    <apex:facet name="header"><apex:outputText value="BILLING ADDRESS" style="color:blue;font-size:20px;"/></apex:facet>
+
+<!--
+    <apex:pageBlockSection columns="2">
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Street Number</apex:outputLabel>
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Street Name</apex:outputLabel>
+    </apex:pageBlockSection>
+-->
+    <apex:pageBlockSection columns="2">
+    <apex:pageBlockSectionItem >    
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Street Number</apex:outputLabel>
+    <apex:inputField value="{!sub.Billing_Street_Number__c}" id="BStreetNumber" styleClass="output-cell"/>
+    </apex:pageBlockSectionItem>
+    <!--<apex:pageBlockSectionItem >    
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Street Number Suffix</apex:outputLabel>
+    <apex:inputField value="{!sub.Billing_Street_Suffix__c}" id="BStreetNumberSuffix"/>
+    </apex:pageBlockSectionItem>-->
+    <apex:pageBlockSectionItem >        
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Street Name</apex:outputLabel>
+    <apex:inputField value="{!sub.Billing_Street_Name__c}" id="BStreetName" styleClass="output-cell"/>
+    </apex:pageBlockSectionItem>    
+    </apex:pageBlockSection>
+
+<!--
+    <apex:pageBlockSection columns="2">
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Street Type</apex:outputLabel>
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Street Direction</apex:outputLabel>
+    </apex:pageBlockSection>
+-->
+<apex:pageBlockSection columns="1">
+   <apex:pageBlockSectionItem />    
+    </apex:pageBlockSection>
+    <apex:pageBlockSection columns="2">
+    <apex:pageBlockSectionItem >    
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Street Type</apex:outputLabel>
+    <apex:inputField value="{!sub.QAS_Billing_Street_Type__c}" id="BStreetType" styleClass="output-cell"/>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >        
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Street Direction</apex:outputLabel>
+    <apex:inputField value="{!sub.QAS_Billing_Street_Direction__c}" id="BStreetDirection" styleClass="output-cell"/>
+    </apex:pageBlockSectionItem>    
+    </apex:pageBlockSection>
+
+<!--
+    <apex:pageBlockSection columns="2">
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Unit Type</apex:outputLabel>
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Unit Number</apex:outputLabel>
+    </apex:pageBlockSection>
+-->
+    <apex:pageBlockSection columns="1">
+   <apex:pageBlockSectionItem />    
+    </apex:pageBlockSection>
+    <apex:pageBlockSection columns="2">
+    <apex:pageBlockSectionItem >    
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Unit Type</apex:outputLabel>
+    <apex:inputField value="{!sub.QAS_Billing_Unit_Type__c}" id="BUnitType" styleClass="output-cell"/>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >        
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Unit Number</apex:outputLabel>
+    <apex:inputField value="{!sub.Billing_Unit_Number__c}" id="BUnit" styleClass="output-cell"/>
+    </apex:pageBlockSectionItem>    
+    </apex:pageBlockSection>
+<!--
+    <apex:pageBlockSection columns="1">
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Additional Display Name</apex:outputLabel>
+    </apex:pageBlockSection>
+-->
+
+    <apex:pageBlockSection columns="1">
+   <apex:pageBlockSectionItem />    
+    </apex:pageBlockSection>
+    <apex:pageBlockSection columns="1">
+    <apex:pageBlockSectionItem >    
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Additional Display Name</apex:outputLabel>
+    <apex:inputField value="{!sub.Billing_Addl_Display_Name__c}" id="BAddlDispName" styleClass="output-cell"/>
+    </apex:pageBlockSectionItem>
+    <!--
+    <apex:pageBlockSectionItem >    
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black"></apex:outputLabel>
+    <apex:inputField value="{!sub.QAS_Billing_POBox__c}" id="BPOBox" rendered="false"/>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >    
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black"></apex:outputLabel>
+    <apex:inputField value="{!sub.QAS_Billing_Record_Type__c}" id="BRType" rendered="false"/>
+    </apex:pageBlockSectionItem>
+    -->
+    </apex:pageBlockSection>
+
+<!--
+    <apex:pageBlockSection columns="3">
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">City<apex:outputText value="*" style="color:red"  /></apex:outputLabel>
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">County<apex:outputText value="*" style="color:red"  /></apex:outputLabel>
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">State<apex:outputText value="*" style="color:red"  /></apex:outputLabel>    
+    </apex:pageBlockSection>
+-->
+    
+   <!--  <apex:pageBlockSection columns="3">
+    <apex:pageBlockSectionItem >    
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">City<apex:outputText value="*" style="color:red"  /></apex:outputLabel>
+    <apex:inputField value="{!sub.Billing_City__c}" id="BCity"/>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >    
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">County<apex:outputText value="*" style="color:red"  /></apex:outputLabel>
+    <apex:inputField value="{!sub.QAS_Billing_County__c}" id="BCounty"/>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >  
+        <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">State<apex:outputText value="*" style="color:red;width:132px;"  /></apex:outputLabel>      
+    <apex:inputField value="{!sub.Billing_State__c}" id="BStateProvince"/>
+    </apex:pageBlockSectionItem>        
+    </apex:pageBlockSection>-->
+        
+       <table>
+        <tr>
+            <td height="35" width="12%" align="center">
+                <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">City<apex:outputText value="*" style="color:red"  /></apex:outputLabel>
+            </td>           
+            <td height="35" width="12%" align="left">
+                <apex:inputField value="{!sub.Billing_City__c}" id="BCity" styleClass="output-cell"/>
+            </td>
+            <td height="35" width="12%" align="left">
+            &nbsp;
+            </td>
+            <td height="35" width="12%" align="center">
+                <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">County<apex:outputText value="*" style="color:red"  /></apex:outputLabel>
+            </td>
+            <td height="35" width="12%" align="left">
+                <apex:inputField value="{!sub.QAS_Billing_County__c}" style="width:150px;" styleClass="output-cell" id="BCounty"/>
+            </td>
+            <td height="30" width="12%" align="left">
+            &nbsp;
+            </td>
+            <td height="35" width="12%" align="center">
+                 <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">State<apex:outputText value="*" style="color:red;width:132px;"  /></apex:outputLabel>
+            </td>
+            <td height="35" width="12%" align="left">
+                 <apex:inputField value="{!sub.Billing_State__c}" id="BStateProvince" styleClass="output-cell"/>
+            </td>
+        </tr>       
+        <tr>
+            <td height="35" width="12%" align="center">
+                <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Zip<apex:outputText value="*" style="color:red"  /></apex:outputLabel>
+            </td>           
+            <td height="35" width="12%" align="left">
+                <apex:inputField value="{!sub.Billing_Zip__c}" id="BZip" styleClass="output-cell"/>
+            </td>
+            <td height="35" width="12%" align="left">
+            &nbsp;
+            </td>
+            <td height="35" width="12%" align="center">
+                <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Zip-4 </apex:outputLabel>
+            </td>
+            <td height="35" width="12%" align="left">
+                <apex:inputField value="{!sub.Billing_Zip_4__c}" id="BPlusfour" styleClass="output-cell"/>
+            </td>
+            <td height="35" width="12%" align="left">
+            &nbsp;
+            </td>
+            <td height="35" width="12%" align="center">
+                 <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Country<apex:outputText value="*" style="color:red" /></apex:outputLabel>
+            </td>
+            <td height="35" width="12%" align="left">
+                 <apex:inputField value="{!sub.QAS_Billing_Country__c}" id="BCountry" styleClass="output-cell"/>
+                 <apex:outputLabel style="font-size:12px;font-weight:bold;color:black"></apex:outputLabel>
+                 <apex:inputField value="{!sub.Billing_Country__c}" rendered="false"/>
+            </td>
+        </tr>
+    </table>
+<!--
+    <apex:pageBlockSection columns="5">
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Zip-4</apex:outputLabel>
+    </apex:pageBlockSection>
+-->
+<!-- <apex:pageBlockSection columns="3">
+
+    <apex:pageBlockSectionItem >   
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Zip<apex:outputText value="*" style="color:red"  /></apex:outputLabel> 
+    <apex:inputField value="{!sub.Billing_Zip__c}" id="BZip"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >      
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Zip-4<apex:outputText value="*" style="color:red"  /></apex:outputLabel>
+    <apex:inputField value="{!sub.Billing_Zip_4__c}" id="BPlusfour"/>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black">Country<apex:outputText value="*" style="color:red" /></apex:outputLabel>
+    <apex:inputField value="{!sub.QAS_Billing_Country__c}" id="BCountry"/>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+    <apex:outputLabel style="font-size:12px;font-weight:bold;color:black"></apex:outputLabel>
+    <apex:inputField value="{!sub.Billing_Country__c}" rendered="false"/>
+    </apex:pageBlockSectionItem>
+    </apex:pageBlockSection>
+    
+   -->
+    
+    </apex:pageBlock>
+
+    <apex:pageBlock >
+
+
+    <apex:pageBlockSection columns="3">
+    
+      <apex:pageblockSectionItem >
+    <apex:outputLabel ></apex:outputLabel>
+    </apex:pageblockSectionItem>
+    
+    <apex:pageblockSectionItem >
+    <apex:commandButton value="Save" action="{!save}"/>
+    <apex:commandButton action="{!reset}" value="Reset"/>
+    </apex:pageblockSectionItem>
+    <apex:pageBlockSectionItem />
+    <apex:pageblockSectionItem >
+    <apex:outputLabel ></apex:outputLabel>
+    </apex:pageblockSectionItem>
+    <apex:pageblockSectionItem >
+    <apex:outputText value="Version 1.0" style="padding-left:25%;"></apex:outputText>
+    </apex:pageblockSectionItem>
+    <apex:pageBlockSectionItem />
+    </apex:pageBlockSection>
+        
+    </apex:pageBlock>
+    </apex:form>
+ </p>
+                <p></p>
+                <p>&nbsp;</p>
+            </div><!--close content-->
+            <div id="right-sf" class="forwide">
+                <div id="rightwrap">
+                </div><!--close rightwrap-->
+            </div><!--close right-->
+            <div id="base"></div>
+        </div><!--close innerwrapper-->
+    </div> <!--end wrapper -->
+    <div id="footer-sf">
+        <ul>
+            <li><a target="_top" href="{!$Label.MRIS_SiteMap_URL}">Site Map</a></li>
+            <li><a target="_top" href="{!$Label.MRIS_Feedback_URL}">Feedback</a></li>
+            <li class="nav-privacy-policy"><a target="_top" href="{!$Label.MRIS_PrivacyPolicy_URL}">Privacy Policy</a></li>
+            <li class="nav-terms-of-use"><a target="_top" href="{!$Label.MRIS_TermsOfUse_URL}">Terms of Use</a></li>
+            <li class="nav-copyright-notice last"><a target="_top" href="{!$Label.MRIS_CopyrightNotice_URL}">Copyright Notice</a></li>
+        </ul>
+        Copyright &copy; 2012 Metropolitan Regional Information Systems, Inc.
+    </div>
+
+</apex:page>

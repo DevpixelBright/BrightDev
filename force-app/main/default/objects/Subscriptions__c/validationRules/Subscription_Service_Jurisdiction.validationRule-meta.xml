@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Subscription_Service_Jurisdiction</fullName>
+    <active>true</active>
+    <description>Service Jurisdiction should match of Account&apos;s Service Jurisdiction</description>
+    <errorConditionFormula>IF(TEXT(Service_Jurisdiction__c) == BLANKVALUE(TEXT(Related_Location_Broker_Office__r.Primary_Service_Jurisdiction__c),&apos;MRIS&apos;), false, true) &amp;&amp; 
+IF(TEXT(Service_Jurisdiction__c) == TEXT(Related_Location_Broker_Office__r.Secondary_Service_Jurisdiction__c), false, true)</errorConditionFormula>
+    <errorMessage>Subscription&apos;s service jurisdiction should belong to Broker Office&apos;s either primary service jurisdiction or secondary jurisdiction</errorMessage>
+</ValidationRule>

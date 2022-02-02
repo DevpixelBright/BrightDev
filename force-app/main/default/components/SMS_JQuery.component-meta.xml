@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexComponent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>27.0</apiVersion>
+    <description>JQuery and JQueryUI javascript libraries</description>
+    <label>SMS_JQuery</label>
+    <packageVersions>
+        <majorNumber>2</majorNumber>
+        <minorNumber>61</minorNumber>
+        <namespace>Zuora</namespace>
+    </packageVersions>
+</ApexComponent>

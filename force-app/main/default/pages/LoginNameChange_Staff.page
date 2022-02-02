@@ -1,0 +1,138 @@
+<apex:page controller="LoginNameChange_Staff" sidebar="false"  lightningstylesheets="true">
+<head>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/jquery.min.js')}"></script>
+        <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/bootstrap.min.js')}"></script>  
+        <apex:stylesheet value="{!URLFOR($Resource.Bootstrap_Layout_Library, '/css/bootstrap.min.css')}"/>
+        
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <apex:stylesheet value="{!URLFOR($Resource.wholestyle, '/fonts/style.css')}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.wholestyle, '/fonts/fonts-style.css')}"/>
+                
+    </head>
+<style>
+    input[disabled] { background:#ccc !important; }
+        .tableStyle tr td{ line-height:32px; width:25%; }
+        .menu-header h3 table {     margin-left: 26px;}
+        labal{ font-weight: normal;font-family: MontserratRegular; font-size: 14px;  }
+        #accordion .panel-default {box-shadow: 0 0 30px rgba(0, 0, 0, 0.40);}
+        .body_content {     font-family: MontserratLight;font-size:14px;    line-height: 1.42857143;}
+        .innermsg{ margin:0; padding:0;}
+        .innermsg h2{ color: #fc7f4e;font-family: MontserratBold; font-size:17px;}
+        .innermsg p{ color: #666666;font-family: 'MontserratRegular';font-size: 14px;}
+        .insidemsg { margin:0 0 10px; padding:0;  clear: both;  float: left;    width: 100%;}
+        .firstmsg { margin:0 30px 0 0; padding:0; float:left;display: inline-flex;}
+         .firstmsg input[type="text"] {display: block;width: 100%;height: 40x;padding: 10px 12px; font-size: 14px; line-height: 1.42857143; color: #000; background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+}
+            .firstmsg input[type="text"]::placeholder{ color:#ccc;}
+.innermsg h4{border:1px solid #75af68; border-radius:4px;background:#e1fbdc; color:#75af68; font-size:12px; padding:10px;clear:both; width:46%; margin:10px 0 0 0;}
+.firstmsg input[type="text"]:focus,  .firstmsg input[type="text"]:hover { outline:none;}
+
+.firstmsg input[type="submit"]{padding: 10px 20px 10px 20px; background:#5ba0e5; color:#fff; font-size:12px;    border: none;font-family:MontserratRegular;  }
+.secondmsg{ margin:0; padding:0; float:left}
+ .secondmsg ul{ margin:0; padding:0;}  
+ .secondmsg ul li{ margin:0; padding:0;font-size:10px;}
+ .thirdtmsg{ margin:0; padding:0; float:right}  
+.thirdtmsg input[type="submit"]{padding: 10px 30px 10px 30px; background:#5ba0e5; color:#fff; font-size:12px;font-family:MontserratRegular;    border: none; border-radius:5px;}
+.comment {
+    margin: 10px 0px 10px 0px;
+    font-size: 12px;
+}
+.comment img {
+    margin: 0 10px 0 0;
+    padding: 0;
+    float: left;
+}
+.comment p {
+    //color : #00afd3;
+    //float : left;
+    margin: 3px 0 0 0;
+    padding: 0 0;
+    font-size: 12px;
+}
+    </style>
+<apex:form >
+    <div id="messages">
+                <apex:pagemessages id="page_message"></apex:pagemessages>
+    </div>
+    <div class="body_content col-sm-12">   
+                
+    <apex:outputPanel id="LoginName" rendered="{!subscription.Service_Jurisdiction__c == 'TREND' || subscription.Service_Jurisdiction__c == 'BRIGHT'}">
+                         
+            <div class="col-sm-12" style="padding: 0px 35px;">
+                <div class="innermsg" style="margin-top:30px;">
+                    <h2>Change Login Name</h2>
+                    <div class="comment">
+                        <img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/info.jpg')}" alt="info" title="info"/>
+                        <p>To complete the subscribers login name change, the subscriber will need to log out and back into their account. It may take a few seconds for the new login name to populate all the way through. If it is taking more than 2 minutes to process, please escalate the issue.</p>
+                    </div>                             
+                    <p>
+                        <apex:outputLabel value="Current Login Name: "> </apex:outputLabel>
+                        <apex:outputText value=" {!oldLoginName}" label="Current Login Name" style="width:250px;" />
+                    </p>
+                    
+                    <div class="insidemsg">
+                        <div class="firstmsg">
+                            <apex:inputText id="ipt" value="{!newLoginName}" label="Login Name" style="width:300px;">
+                                 <!--<apex:actionSupport event="onmouseout" action="{!validateLoginName}" reRender="LoginName"  />-->
+                            </apex:inputText>
+                            <apex:commandButton action="{!validateLoginName}" value="Validate" reRender="LoginName" style="left: 278px;border: none;margin:0;background: #2b85c0;border-radius: 0;padding: 0 10px;color: #fff;"/>
+                        </div>
+                        <div class="secondmsg">
+                            <ul>
+                            <li>min 3 characters and max 25 characters</li>
+                            <li>can contain letters and numbers</li>
+                            <li>only 4 special characters @ or period or space or dash allowed</li>
+                            </ul>
+                        </div>
+                    </div> 
+                    <div style="clear:both;"></div>
+                    <apex:outputText style="display:block; width: 55%; padding: 10px; border-radius: 3px;" rendered="{!isLoginNameAvailable}" styleClass="alert-success" value="Login Name is valid, please proceed to confirm"></apex:outputText>                                      
+                    <apex:outputText style="display:block; width: 55%; padding: 10px; border-radius: 3px;" rendered="{!!isLoginNameAvailable}" styleClass="alert-danger" value="{!loginErrorMessage}"></apex:outputText> 
+                    
+                    </div>
+                    </div>                 
+                    
+                    <apex:outputPanel rendered="{!!isLoginNameAvailable}"> 
+                        <apex:commandButton disabled="{!!isLoginNameAvailable}" action="{!saveLoginName}" value="Save"  styleClass="ezjoinbutton" onclick="$(this).css('pointer-events', 'none');" style="margin:10px 10px; font-family: 'MontserratRegular' !important;" />                        
+                    </apex:outputPanel> 
+                    <apex:outputPanel rendered="{!isLoginNameAvailable}"> 
+                        <apex:commandButton id="Savebutton" disabled="{!!isLoginNameAvailable}" action="{!saveLoginName}" value="Save"  styleClass="ezjoinbutton" onclick="$(this).css('pointer-events', 'none');" style="margin:10px 10px; font-family: 'MontserratRegular' !important;" />                        
+                    </apex:outputPanel>
+                    <apex:commandButton action="{!cancel}" value="Cancel"  styleClass="ezjoinbutton" onclick="$(this).css('pointer-events', 'none');" style="margin:10px 0px; font-family: 'MontserratRegular' !important;" />
+                    
+                    <script>
+								  
+						$(document).ready(function(){
+                            var typingTimer;                //timer identifier
+                            var doneTypingInterval = 500;  //time in ms, 5 second for example
+                            
+                            //on keyup, start the countdown
+                            $("[id$=ipt]").on('keyup', function () {
+                                $("[id$=Savebutton]").attr("disabled", "disabled");
+                                clearTimeout(typingTimer);
+                                typingTimer = setTimeout(doneTyping, doneTypingInterval);
+                                console.log('---key up--');
+                            });
+                            
+                            //on keydown, clear the countdown 
+                            $("[id$=ipt]").on('keydown', function () {
+                                console.log('--key down--');
+                                clearTimeout(typingTimer);
+                            });
+                                
+                        });
+                              
+						function doneTyping () {
+                            console.log('done typing');
+                        }
+                              
+					</script>
+   </apex:outputPanel>
+  </div> 
+</apex:form> 
+</apex:page>

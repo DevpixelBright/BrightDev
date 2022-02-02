@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Staff_Initiated_Order</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Staff Initiated Order</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>window.location=&apos;/apex/SMS_StaffOrder_Preview?id={!Subscriptions__c.Id}&amp;iframeDomain=https://dev-mrisonboarding.cs10.force.com&apos;;</url>
+</WebLink>

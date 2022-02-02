@@ -1,0 +1,192 @@
+<apex:page controller="SMS_CreditBalance_Controller" sidebar="true" standardStylesheets="false" docType="html-5.0" applyBodyTag="false" lightningstylesheets="true">
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/angular.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/ui-bootstrap-tpls-0.12.0.js')}"/>  
+    <c:Bootstrap_Resources />    
+    
+    <style>
+        body { font-size:12px; }
+        h2 { 
+            font-size:100%;
+        }    
+        .cbtn {
+          background: #3498db;
+          background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+          background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+          background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+          background-image: -o-linear-gradient(top, #3498db, #2980b9);
+          background-image: linear-gradient(to bottom, #3498db, #2980b9);
+          -webkit-border-radius: 3;
+          -moz-border-radius: 3;
+          border-radius: 3px;
+          font-family: Arial;
+          color: #ffffff;
+          font-size: 16px;
+          padding: 5px 20px 5px 20px;
+          text-decoration: none;
+        }
+        
+        .cbtn:hover {
+          background: #3cb0fd;
+          background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+          background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+          background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+          background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+          background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+          text-decoration: none;
+        }    
+    </style>
+    
+    <script> 
+        var batches = 0;
+        var batchesProcessed = 0;
+        var hasFailedAccounts = false;
+        var first = angular.module("first",['ui.bootstrap']);
+
+        first.controller("firstcontroller", function ($scope) {
+            $scope.accounts = {!zAccountsList}; 
+            $scope.ApplyCreditBalance= function(){
+                $scope.search = 'true';
+                var accountStr = '';
+                var j = 1;
+                for(var i=0; i<$scope.accounts.length;i++) {
+                    if($scope.accounts[i].selected) {
+                        $("#" + $scope.accounts[i].accountId + "_status").html("<span class='glyphicon glyphicon-refresh'></span>");
+                        if(j%20 == 0) {
+                            batches++;
+                            applyAdjustment(accountStr);
+                            accountStr = '';                          
+                        }
+                        accountStr = accountStr + $scope.accounts[i].accountId + ','; 
+                        j++;
+                    }  
+                }
+                if(accountStr != '') {
+                    batches++;
+                    applyAdjustment(accountStr);
+                }
+                else {
+                    alert("Please select accounts to adjust credit balance");
+                    $scope.search = '';
+                }
+            } 
+            $scope.SelectAllAccounts = function(){
+                if($scope.selectAll) {
+                    for(var i=0; i<$scope.accounts.length;i++)
+                        $scope.accounts[i].selected = true;
+                }
+                else {
+                    for(var i=0; i<$scope.accounts.length;i++)
+                        $scope.accounts[i].selected = false;               
+                }
+            }    
+        }); 
+    </script>
+                    
+    <apex:form >  
+    
+        <apex:actionFunction name="applyAdjustment" action="{!applyCreditBalance}" reRender="out" status="myStatus" oncomplete="confirmProceed()">
+            <apex:param name="firstParam" assignTo="{!zAccountsSelected}" value="" />
+        </apex:actionFunction>
+
+         <apex:actionFunction name="convertNegativeInvoices" action="{!convertNegativeInvoices}">
+        </apex:actionFunction>
+    
+        <apex:outputPanel id="out"> 
+        
+            <script>
+                function confirmProceed(){
+                    batchesProcessed++;
+                    var result = "{!zAccountsCompleted}";
+                    var acctsCompleted = result.split(",");
+                    for(var i=0; i<acctsCompleted.length; i++)
+                        $("#" + acctsCompleted[i] + "_status").html("<span style='color:green;' class='glyphicon glyphicon-ok'></span>");  
+                    
+                    var failedResult = "{!zAccountsFailed}";
+                    if(failedResult != '') {
+                        var acctsFailed = failedResult.split(",");                   
+                        for(var i=0; i<acctsFailed.length; i++) {
+                            $("#" + acctsFailed[i] + "_status").html("<span style='color:red;' class='glyphicon glyphicon-remove'></span>");  
+                        }
+                        hasFailedAccounts = true;                
+                    }
+                    
+                    if(batchesProcessed == batches) {
+                        if(hasFailedAccounts)
+                            $("#status").show();
+                        else {
+                            window.location = '';
+                        }
+                    }
+                }
+            </script>         
+              
+            <apex:actionStatus id="myStatus">
+                <apex:facet name="start">
+                    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 1000; background-color: black;">
+                         <div class="alert alert-info" style="width:50%; margin:auto; margin-top:10%; color:black; font-size:16px; font-weight:bold;">
+                             <center>Credit Balance Adjustments in process. Please wait ...<br/>
+                                 <img src="{!URLFOR($Resource.AngularLibrary,'/Cursor_Windows_Vista.gif')}" />
+                             </center>
+                         </div>
+                    </div>
+
+                </apex:facet>
+                <apex:facet name="stop">
+                     <div class="alert alert-danger" id="status"  style="display:none;">
+                         <center>Credit Balance Adjustment failed for few accounts. Please review the result below. </center>
+                     </div>
+                </apex:facet>                
+            </apex:actionStatus>      
+        </apex:outputPanel>       
+        
+         
+    
+        <div id="resultPanel" ng-app="first" ng-controller="firstcontroller" style="font-size:14px;">
+            
+            <table width="100%">
+                <tr>
+                    
+                    <td width="23%">
+                         <input type="button"  class="cbtn" value="Convert Negative Invoices" onClick="convertNegativeInvoices();" />
+                    </td>
+                    <td width="27%">
+                        <input type="button" ng-click="ApplyCreditBalance()" class="cbtn" value="Adjust Credit Balance" />
+                    </td>
+                    <td width="50%">
+                        <input type="text" ng-model="search" class="form-control" placeholder="Search Accounts" style="float:right;width:80%; margin-bottom:10px;" />
+                    </td>
+                </tr>
+            </table> 
+            
+            <div class="alert alert-danger" role="alert" ng-show="(accounts | filter:search).length == 0" style="margin:2%;">
+                <span class="glyphicon glyphicon-info-sign"></span> No Results Available
+            </div>            
+    
+            <table class='table' id='table' ng-show="(accounts | filter:search).length > 0" style="border:none;">
+                <thead>
+                    <tr style="color:#428bca; background-color:#F2F2F2;">
+                        <th><input type="checkbox" ng-model="selectAll" ng-click="SelectAllAccounts()" /></th>
+                        <th>Zuora Account Id</th>
+                        <th >Account Name</th>
+                        <th >MRIS Subscription</th>
+                        <th >Credit Balance</th>            
+                        <th >Total Invoice Balance</th>
+                        <th></th>
+                    </tr>
+                </thead> 
+                <tbody>
+                    <tr ng-repeat="account in accounts | filter:search">
+                        <td><input type="checkbox" ng-model="account.selected" value="{{account.accountId}}" /></td>
+                        <td>{{account.accountId}}</td>
+                        <td>{{account.accountName}}</td>
+                        <td>{{account.Subscription}}</td>
+                        <td>$ {{account.CreditBalance}}</td>
+                        <td>$ {{account.TotalInvoiceBalance}}</td> 
+                        <td id="{{account.accountId}}_status"></td>               
+                    </tr>
+                </tbody>       
+            </table>
+        </div>
+        
+    </apex:form>     
+</apex:page>

@@ -1,0 +1,1587 @@
+<apex:page id="MyAccPageId" controller="Communities_MyAccount_Controller" docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" lightningstylesheets="true">
+    <apex:composition template="Communities_Base">
+        <apex:define name="content">
+            
+            <apex:form id="fm">
+                <c:Bootstrap_Resources />   
+                <script>
+                markUserId("{!displayName}");
+                markOptionPanel("subscription");
+                </script>
+                
+                <apex:pageBlock title="Subscription Id - {!subscription.Name}" id="details" >
+                    <apex:includeScript value="/soap/ajax/49.0/connection.js" />
+                    <apex:includeScript value="/soap/ajax/49.0/apex.js" />
+                    
+                    <style>
+                        .modal-header .close span:focus, .modal-header .close:focus, .filetime:focus{    outline: none !important;} 
+                        .filetime {    
+                        border: none !important;
+                        box-shadow: none !important;
+                        background: none !important;}
+                        .form-group {display: flex; width: 100%;}
+                        .form-horizontal .form-group { margin-left: -15px; margin-right: -15px;}
+                        .modal-body{ overflow:hidden;}
+                        .form-control {
+                        display: block;
+                        width: 100%;
+                        height: 34px;
+                        padding: 6px 12px;
+                        font-size: 14px;
+                        line-height: 1.42857143;
+                        color: #555;
+                        background-color: #fff;
+                        background-image: none;
+                        border: 1px solid #ccc;
+                        border-radius: 4px;
+                        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+                        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+                        -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+                        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+                        }
+                        .form-control {
+                        height: 32px;
+                        border-radius: inherit;
+                        }
+                        .modal-footer .btn { padding: 6px 60px;}
+                        .modal-footer .okmodel { padding:6px 40px;}
+                        .modal-footer .okmodel:focus{outline:none;}
+                        .modal-footer {text-align: left;
+                        padding: 0 20px 40px 30px;
+                        border-top: none;
+                        margin-top: 0px;
+                        background: whitesmoke;
+                        }
+                        #simplemodal-overlay{ background:#000;}
+                        .pbHeader {
+                        display: none;
+                        }
+                        
+                        .pbBody {
+                        position: relative;
+                        }
+                        
+                        .for_inputs {
+                        position: relative;
+                        }
+                        
+                        .action_buttons {
+                        position: absolute;
+                        top: 7px;
+                        right: 0px;
+                        }
+                        
+                        .action_buttons input {
+                        width: auto;
+                        margin-right: 0px !important;
+                        }
+                        
+                        .action_buttons input + input {
+                        margin-left: 10px;
+                        }
+                        
+                        .info-group {
+                        padding-left: 15px;
+                        padding-right: 15px;
+                        }
+                        
+                        .info-group + .info-group {
+                        margin-top: 40px;
+                        }
+                        
+                        .info-group h4 {
+                        margin-bottom: 20px;
+                        color: #00A7B0;
+                        }
+                        
+                        .info-group .form-group.required label:after {
+                        content: "*";
+                        color: #F00;
+                        font-weight: 700;
+                        }
+                        
+                        .info-group .form-group span {
+                        display: inline-block;
+                        padding-top: 7px;
+                        }
+                        
+                        .info-group .form-group input {
+                        border-radius: 0px;
+                        border-color: #E1E2E3;
+                        box-shadow: none;
+                        }
+                        
+                        .info-group .well {
+                        border: none;
+                        border-radius: 0px;
+                        box-shadow: none;
+                        padding: 20px 0px;
+                        }
+                        
+                        .info-group .well.public {
+                        background-color: #FFBE9F;
+                        }
+                        
+                        .info-group .well.private {
+                        background-color: #B1E4E3;
+                        }
+                        
+                        .info-group .well .instructions {
+                        margin: 10px 15px 15px 30px;
+                        }
+                        
+                        .info-group .well a {
+                        color: #212B3D;
+                        }
+                        
+                        .info-group .well a:hover {
+                        text-decoration: none;
+                        }
+                        
+                        .info-group .well .form-group input {
+                        border: none;
+                        }
+                        
+                        .nrds-lookup {
+                        display: inline-block;
+                        color: #FFFFFF !important;
+                        border: 1px solid #FFFFFF;
+                        padding: 5px 10px;
+                        font-weight: 500;
+                        }
+                        
+                        .nrds-lookup:hover {
+                        background-color: #FE4602 !important;
+                        }
+                        
+                        span + .nrds-lookup {
+                        margin-left: 20px;
+                        }
+                        
+                        @media (max-width: 767px) {
+                        .action_buttons {
+                        position: fixed;
+                        top: 50%;
+                        right: -1px;
+                        z-index: 100;
+                        }
+                        
+                        .action_buttons input {
+                        float: right;
+                        clear: both;
+                        width: 100px;
+                        height: 75px;
+                        border: 1px solid rgba(254, 70, 2, 0.7);
+                        }
+                        
+                        .action_buttons input.btn-default {
+                        background-color: rgba(245, 245, 245, 0.3);
+                        }
+                        
+                        .action_buttons input.btn-default[disabled] {
+                        border-color: rgba(227, 227, 227, 0.7);
+                        color: rgba(227, 227, 227, 1);
+                        }
+                        
+                        .action_buttons input.btn-primary {
+                        background-color: rgba(254, 70, 2, 0.7);
+                        }
+                        
+                        .action_buttons input.btn-primary[disabled] {
+                        border-color: rgba(227, 227, 227, 0.7);
+                        background-color: rgba(227, 227, 227, 0.7);
+                        }
+                        
+                        .info-group .form-group input {
+                        margin-top: 10px;
+                        }
+                        
+                        .info-group .well {
+                        margin-left: -15px;
+                        margin-right: -15px;
+                        padding: 15px;
+                        }
+                        
+                        .info-group .well .instructions {
+                        margin: 10px 0px 15px 0px;
+                        }
+                        
+                        .nrds-lookup {
+                        margin-top: 10px;
+                        }
+                        }
+                        //.field-error {color:red; font-size:12px; display:none;}
+                        .changeLoginStyle{
+                        text-decoration: underline;
+                        font-weight: bold;
+                        font-size: 12px;
+                        color: #EA4A0F;
+                        }
+                        
+                        #FormAlert2 {position: absolute;    top: -1%;    left: 27%; border: none;    font-weight: bold; /* clear: both; */  padding: 5px 15px;   color: #274104;    width: 39%;    margin: 0 auto;    font-size: 13px;    background-color: #abd373;}
+                        #FormAlert2 img{vertical-align: text-top;    margin: 0 5px 0 0;}
+                        
+                        .wrapWithWordBreak span{ 
+                        word-break: break-all;
+                        }
+                    </style>  
+                    
+                    <script>
+                    $(document).ready(function(){
+                        
+                        $("form").addClass("form-horizontal");
+                        $("label").addClass("col-sm-3 control-label");
+                        $(".for_inputs input").addClass("form-control");
+                        $("select").addClass("form-control");
+                        $(".errorM3").addClass("alert alert-danger");
+                        $(".infoM3").addClass("alert alert-info");
+                        $(".confirmM3").addClass("alert alert-success");
+                        
+                        $(".PreferredName_Element").change(function() {
+                            var preferredNameTxt = '';
+                            if($(this).attr("Id") == 'PN_FirstName')                         
+                                $("#PN_NickName").val('NONE');
+                            if($(this).attr("Id") == 'PN_NickName')                         
+                                $("#PN_FirstName").val('NONE');
+                            
+                            $(".PreferredName_Element").each(function() {
+                                if($(this).val() != "NONE")
+                                    preferredNameTxt += $(this).val() + ' ';
+                            });                            
+                            
+                            $("#PreferredName_Label").html(preferredNameTxt + '<br/>'); 
+                            $('[id$=PreferredName]').val(preferredNameTxt); 
+                            
+                            var preferredFirstName = '';
+                            if($("#PN_FirstName").val() != 'NONE')
+                                preferredFirstName += $("#PN_FirstName").val() + ' ';
+                            if($("#PN_NickName").val() != 'NONE')
+                                preferredFirstName += $("#PN_NickName").val()+ ' ';
+                            if($("#PN_MiddleInitial").val() != 'NONE')
+                                preferredFirstName += $("#PN_MiddleInitial").val();
+                            
+                            $('[id$=PreferredFirstName]').val(preferredFirstName);
+                            
+                            var preferredLastName = '';
+                            if($("#PN_LastName").val() != 'NONE')
+                                preferredLastName += $("#PN_LastName").val() + ' ';
+                            if($("#PN_Suffix").val() != 'NONE')
+                                preferredLastName += $("#PN_Suffix").val();
+                            
+                            $('[id$=PreferredLastName]').val(preferredLastName);                                                                        
+                        });
+                        
+                        //setup before functions
+                        var typingTimer;                //timer identifier
+                        var doneTypingInterval = 500;  //time in ms, 5 second for example
+                        
+                        //on keyup, start the countdown
+                        $("[id$=ipt]").on('keyup', function () {
+                            $("[id$=SaveButton]").attr("disabled", "disabled");
+                            clearTimeout(typingTimer);
+                            typingTimer = setTimeout(doneTyping, doneTypingInterval);
+                        });
+                        
+                        //on keydown, clear the countdown 
+                        $("[id$=ipt]").on('keydown', function () {
+                            
+                            clearTimeout(typingTimer);
+                        });                 
+                        
+                    });
+                    function doneTyping () {
+                        console.log('done typing');
+                        $("#loginAvailable").hide();
+                        validate();
+                    }
+                    
+                    function submitForm(button){
+                        $('#FormAlert').html('');
+                        $('#FormAlert').hide();
+                        
+                        let firstName = $('[id$=FirstNameModal]').val().trim();
+                        let lastName = $('[id$=LastNameModal]').val().trim();
+                        let middleName = $('[id$=MiddleNameModal]').val().trim();
+                        
+                        var valid = true;
+                        if(firstName == '' || lastName == '') {
+                            valid = false;
+                            $('#FormAlert').html('Please fill all required fields.');
+                            $('#FormAlert').show();
+                            return false;
+                        }
+                        if(document.getElementById('1').files.length == 0) {
+                            valid = false;
+                            $('#FormAlert').html('Please attach license copy for Name Change Request.');
+                            $('#FormAlert').show();
+                            return false;                    
+                        }
+                        if (document.getElementById('1').files[0].size > 4000000) {
+                            valid = false;
+                            $('#FormAlert').html('Maximum allowed size of attachment should be less than 4 MB');
+                            $('#FormAlert').show();
+                            return false;                     
+                        }
+                        
+                        if(valid) {
+                            button.disabled = true;
+                            Visualforce.remoting.Manager.invokeAction(
+                                '{!$RemoteAction.Communities_MyAccount_Controller.saveCaseDataForm}',
+                                firstName,lastName,middleName,
+                                function(result, event){
+                                    if(event.type != 'exception') {
+                                        w9Id = result;
+                                        prepareFileUploads('1');
+                                        $('#FormAlert2').show();
+                                        setTimeout(function() { $('#FormAlert2').fadeOut(); }, 10000);
+                                    }
+                                    else {
+                                        $('#FormAlert').html('Failed to Submit Case');
+                                        $('#FormAlert').show();
+                                    }
+                                }
+                            );
+                        }
+                        return false;
+                    }
+                    
+                    var w9Id = null;
+                    var byteChunkArray;
+                    var fileId = 1;
+                    var files;
+                    var currentFile;
+                    var $upload;
+                    var CHUNK_SIZE = 180000; //Must be evenly divisible by 3, if not, data corruption will occur
+                    var VIEW_URL = '/servlet/servlet.FileDownload?file=';
+                    
+                    /* Executes when start Upload button is selected */
+                    function prepareFileUploads(id) {
+                        debugger;
+                        /* Checking if atachment id exists or not */
+                        if (document.getElementById(id) != null) {
+                            /* Get the file(s) from the input field */
+                            files = document.getElementById(id).files;
+                            
+                            /* Only proceed if there are files selected and if null it would be end of attachments */
+                            if (files.length == 0) {
+                                //window.location = 'Communities_Subscription';
+                                $('.loadingText').hide();
+                                dummy();
+                                return;
+                            }
+                            
+                            /* Updating status to processing file in file listing */
+                            $("#status_" + id).html('Processing');
+                            
+                            /* Once elements have been added to the page representing the uploads, start the actual upload process */
+                            checkForUploads();
+                        }
+                        else {
+                            /* If not process next attachment */
+                            fileId = parseInt(fileId) + 1;
+                            prepareFileUploads(fileId);
+                        }
+                    }
+                    
+                    function checkForUploads() {
+                        /* Based on index of the div, get correct file from files array */
+                        currentFile = files[0];
+                        
+                        /* 
+                                    Build the byteChunkArray array for the current file we are processing. This array is formatted as:
+                                    ['0-179999','180000-359999',etc] and represents the chunks of bytes that will be uploaded individually.
+                                */
+                        
+                        byteChunkArray = new Array();
+                        
+                        /* First check to see if file size is less than the chunk size, if so first and only chunk is entire size of file */
+                        if (currentFile.size <= CHUNK_SIZE) {
+                            byteChunkArray[0] = '0-' + (currentFile.size - 1);
+                        } else {
+                            /* Determine how many whole byte chunks make up the file */
+                            var numOfFullChunks = Math.floor(currentFile.size / CHUNK_SIZE); // i.e. 1.2MB file would be 1000000 / CHUNK_SIZE
+                            var remainderBytes = currentFile.size % CHUNK_SIZE; // would determine remainder of 1200000 bytes that is not a full chunk
+                            var startByte = 0;
+                            var endByte = CHUNK_SIZE - 1;
+                            
+                            /* Loop through the number of full chunks and build the byteChunkArray array */
+                            for (i = 0; i < numOfFullChunks; i++) {
+                                byteChunkArray[i] = startByte + '-' + endByte;
+                                
+                                /* Set new start and stop bytes for next iteration of loop */
+                                startByte = endByte + 1;
+                                endByte += CHUNK_SIZE;
+                            }
+                            
+                            /* Add the last chunk of remaining bytes to the byteChunkArray */
+                            startByte = currentFile.size - remainderBytes;
+                            endByte = currentFile.size;
+                            byteChunkArray.push(startByte + '-' + endByte);
+                        }
+                        
+                        /* 
+                                    Start processing the byteChunkArray for the current file, parameter is '' because this is the first chunk 
+                                    being uploaded and there is no attachment Id
+                                */
+                        
+                        processByteChunkArray('');
+                        
+                        
+                    }
+                    
+                    /* Uploads a chunk of bytes, if attachmentId is passed in it will attach the bytes to an existing attachment record */
+                    function processByteChunkArray(attachmentId) {
+                        
+                        /* Proceed if there are still values in the byteChunkArray, if none, all piece of the file have been uploaded */
+                        if (byteChunkArray.length > 0) {
+                            
+                            /* Determine the byte range that needs to uploaded, if byteChunkArray is like... ['0-179999','180000-359999'] */
+                            var indexes = byteChunkArray[0].split('-'); //... get the first index range '0-179999' -> ['0','179999']
+                            var startByte = parseInt(indexes[0]);       //0
+                            var stopByte = parseInt(indexes[1]);        //179999
+                            
+                            /* Slice the part of the file we want to upload, currentFile variable is set in checkForUploads() method that is called before this method */
+                            if (currentFile.webkitSlice) {
+                                var blobChunk = currentFile.webkitSlice(startByte, stopByte + 1);
+                            } else if (currentFile.mozSlice) {
+                                var blobChunk = currentFile.mozSlice(startByte, stopByte + 1);
+                            } else if (currentFile.slice) {
+                                var blobChunk = currentFile.slice(startByte, stopByte + 1);
+                            }
+                            
+                            /* Create a new reader object, part of HTML5 File API */
+                            var reader = new FileReader();
+                            
+                            /* Read the blobChunk as a binary string, reader.onloadend function below is automatically called after this line */
+                            reader.readAsArrayBuffer(blobChunk);
+                            
+                            /* Create a reader.onload function, this will execute immediately after reader.readAsBinaryString() function above; */
+                            reader.onloadend = function (evt) {
+                                if (evt.target.readyState == FileReader.DONE) {
+                                    /*
+                              Make sure read was successful, DONE == 2
+                              Base 64 encode the data for transmission to the server with JS remoting, window.btoa currently on support by some browsers
+                            */
+                                    
+                                    var binary = "";
+                                    var bytes = new Uint8Array(evt.target.result);
+                                    var length = bytes.byteLength;
+                                    
+                                    for (var i = 0; i < length; i++) {
+                                        binary += String.fromCharCode(bytes[i]);
+                                    }
+                                    
+                                    /* Remote function call to start uploading process */
+                                    Communities_MyAccount_Controller.attachFile(w9Id, attachmentId, currentFile.name, currentFile.type, window.btoa(binary), function (result, event) {
+                                        console.log('test1');
+                                        if (event.status == true) {
+                                            console.log('test2');
+                                            /* Calculate percent uploaded and updating in files listing */
+                                            var percentComplete = Math.round((stopByte / currentFile.size) * 100);
+                                            $("#status_" + fileId).html(percentComplete + '%');
+                                            console.log('test3');
+                                            /* Remove the index information from the byteChunkArray array for the piece just uploaded. */
+                                            byteChunkArray.shift(); //removes 0 index
+                                            console.log('test4');
+                                            /* Set the attachmentId of the file we are now processing */
+                                            attachmentId = result;
+                                            
+                                            /* Call process byteChunkArray to upload the next piece of the file */
+                                            processByteChunkArray(attachmentId);
+                                            
+                                            /* Update final status and start process next attachment */
+                                            if (processByteChunkArray.length <= 0) {
+                                                console.log('test5');
+                                                $("#status_" + fileId).html("Completed");
+                                                fileId = parseInt(fileId) + 1;
+                                                //prepareFileUploads(fileId);
+                                                $('#FormAlert2').show();
+                                                $('#submit-form-modal').modal('hide');
+                                                resetDefaults();
+                                                setTimeout(function() { $('#FormAlert2').fadeOut(); }, 10000);
+                                                //window.location = '';
+                                                reloadExistingRecords();
+                                            }
+                                        }
+                                        else {
+                                            /* Update failed status and start processing next attachment */
+                                            $("#status_" + fileId).html("<span style='color:red;'>Failed: " + event.message + "</span>");
+                                            fileId = parseInt(fileId) + 1;
+                                            console.log('test6');
+                                            //prepareFileUploads(fileId);
+                                        }
+                                    });
+                                }
+                                else {
+                                    /* Error handling for bad read */
+                                    alert('Could not read file');
+                                    console.log('test7');
+                                }
+                            };
+                            
+                        } else {
+                            /* Update status for completed file and start processing next file */
+                            //alert('Success');
+                            $('#FormAlert2').show();
+                            $('#submit-form-modal').modal('hide');
+                            resetDefaults();
+                            setTimeout(function() { $('#FormAlert2').fadeOut(); }, 10000);
+                            //window.location = '';
+                            reloadExistingRecords();
+                            $("#status_" + fileId).html("Completed");
+                            //fileId = parseInt(fileId) + 1;
+                            //prepareFileUploads(fileId);
+                        }
+                    }
+                    
+                    </script>
+                    <script src="https://online.qas.com/SalesForceV3/Scripts/all_sf_with_jQuery-2.0.min.js"> </script>
+                    
+                    <div class="action_buttons">                
+                        <apex:commandButton styleClass="btn btn-default my_cancel" value="Cancel" action="{!cancel}" rendered="{!isEdit}"   immediate="true" />
+                            <apex:commandButton styleClass="btn btn-default my_reset" value="Reset" action="{!reset}" rendered="{!isEdit}" immediate="true"/>
+                                <apex:commandButton styleClass="btn btn-primary my_save" id="SaveButton" value="Save" action="{!save}" rendered="{!isEdit}" />             
+                                    <apex:commandButton styleClass="btn btn-primary my_edit" value="Edit"  action="{!Edit}" rendered="{!!isEdit}" />
+                                        
+                                        <apex:actionFunction name="validateLoginName" action="{!validateLoginName}" onComplete="displaymsg();" reRender="MyaccPanel">
+                                            <apex:param name="newLoginName" value=""/> 
+                                                </apex:actionFunction>
+                                            
+                                            </div> 
+                                            <script>
+                                                function validate() {
+                                                var oldValue = "{!newLoginName}";
+                                                var newValue = $("[id$=ipt]").val();
+                                                //$(".field-error").css('color', 'red');
+                                                if(oldValue != newValue) {
+                                                    $("[id$=SaveButton]").attr("disabled", "disabled");
+                                                    $("#loginAvailable").html("");
+                                                    $("#loadingImage").show();
+                                                    validateLoginName(newValue);
+                                                } 
+                                                else {
+                                                    $("[id$=SaveButton]").removeAttr("disabled");
+                                                    $("#loginAvailable").html('');
+                                                }               
+                                            }                
+                                            </script>
+                    <!-- Alert to display success message -->
+                    <div class="alert alert-success alert-dismissible" id="FormAlert2" style="display:none; clear:both;">
+                        <img src="{!$Resource.checkw}" /> Thank you. Your Case has been Successfully Submitted.
+                    </div>
+                    
+                    
+                    <div class="row">
+                        <c:Communities_Definition pageTitle="Contact Information" pageTitleClass="fa fa-pencil-square-o fa-2x" hasDefinitions="false">
+                            <p><b class="term">Term</b> Definition goes here.</p>
+                        </c:Communities_Definition>
+                        
+                        <div class="col-xs-12 instructions">
+                            <apex:outputPanel rendered="{!subscription.Service_Jurisdiction__c != 'TREND'}">
+                                <p>Have your contact details recently changed? Update the contact information for your MLS Subscription.
+                                    <br>NOTE: If the Save button is grayed out, please scroll to the bottom of this page and verify your addresses. This step is required in order to save your updated Contact Information</br></p>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!subscription.Service_Jurisdiction__c == 'TREND'}">
+                        <p>Have your contact details recently changed? Update the contact information for your TREND Subscription.?
+                            <br>NOTE: If the Save button is grayed out, please scroll to the bottom of this page and verify your addresses. This step is required in order to save your updated Contact Information</br></p>
+            </apex:outputPanel>                    
+        </div>
+    </div>
+    
+    <div id="messages">
+        <apex:pagemessages ></apex:pagemessages>
+    </div>
+    
+    <div class="row for_inputs">
+        <apex:outputPanel id="eidtPanel" rendered="{!IF(OR(subscription.Service_Jurisdiction__c == 'TREND',subscription.Service_Jurisdiction__c == 'BRIGHT'),TRUE,FALSE)}">
+            <div class="info-group">
+                
+                <h4>Personal Information</h4>
+                
+                <apex:outputPanel rendered="{!!isEdit}">                                       
+                    <div class="form-group"> 
+                        <apex:outputLabel value="Title"/>
+                        <div class="col-sm-7">
+                            <apex:outputField value="{!subscription.Contact__r.Title}" id="Title"/>
+                        </div>
+                    </div>                   
+                    
+                    <apex:outputPanel rendered="{!subscription.Service_Jurisdiction__c == 'TREND'}" >        
+                        <div class="form-group" style="margin-bottom:5px;"> 
+                            <apex:outputLabel value="Login Name"/>
+                            <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.TREND_Login_Name__c}" id="LoginName"/>
+                            </div>
+                        </div>
+                    </apex:outputPanel>       
+                    
+                    <apex:outputPanel rendered="{!subscription.Service_Jurisdiction__c == 'BRIGHT'}" >  
+                        <div class="form-group" style="margin-bottom:5px;"> 
+                            <apex:outputLabel value="Login Name"/>
+                            <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.BRIGHT_LoginName__c}" id="BLoginName"/>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+                    
+                    <apex:outputPanel >
+                        <div class="form-group" style="margin-bottom:8px;">
+                            <apex:outputLabel />
+                            <div class="col-sm-7">
+                                <apex:commandLink value="Change Login Name" styleClass="changeLoginStyle" action="{!$Site.CurrentSiteUrl}Communities_LoginNameChange?id={!subscriptionId}"/>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+                    
+                    <apex:outputPanel rendered="{!subscription.Service_Jurisdiction__c == 'BRIGHT'}">  
+                        <div class="form-group"> 
+                            <apex:outputLabel value="Job Title"/>
+                            <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.JobTitle__c}" id="BJobTitle"/>
+                            </div>
+                        </div>    
+                    </apex:outputPanel>                   
+                    
+                    <div class="form-group">
+                        <apex:outputLabel value="First Name"/>
+                        <div class="col-sm-7">
+                            <apex:outputField value="{!subscription.Contact__r.FirstName}" id="FirstName"/>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom:8px;">
+                        <apex:outputLabel />
+                        <div class="col-sm-7">
+                            <apex:commandLink value="Name Change Request" reRender="caseform" styleClass="changeLoginStyle" oncomplete="$('#submit-form-modal').modal('show');" action="{!fetchCases}"/>
+                        </div>
+                    </div> 
+                    
+                    <apex:actionFunction action="{!brokerSubmittedForms}" name="reloadExistingRecords"/>
+                    
+                    <div class="form-group">
+                        <apex:outputLabel value="Middle Initial"/>
+                        <div class="col-sm-7">
+                            <apex:outputField value="{!subscription.Contact__r.Middle_Name__c}" id="MiddleName"/>
+                        </div>
+                    </div>                             
+                    
+                    <div class="form-group">    
+                        <apex:outputLabel value="Last Name"/>
+                        <div class="col-sm-7">
+                            <apex:outputField value="{!subscription.Contact__r.LastName}" id="LastName"/>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">    
+                        <apex:outputLabel value="Generation/Suffix"/>
+                        <div class="col-sm-7">
+                            <apex:outputField value="{!subscription.Contact__r.Suffix__c}" id="Suffix"/>
+                        </div>
+                    </div>                          
+                    
+                    <div class="form-group">    
+                        <apex:outputLabel value="Nickname"/>
+                        <div class="col-sm-7">
+                            <apex:outputField value="{!subscription.Contact__r.Nickname__c}" id="NickName"/>
+                        </div>
+                    </div>
+                    
+                    <apex:outputPanel rendered="{!subscription.Service_Jurisdiction__c == 'BRIGHT'}" >
+                        <div class="form-group" >    
+                            <apex:outputLabel value="Preferred Name"/>
+                            <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.Contact__r.PreferredName__c}" id="PreferredName1" rendered="{!subscription.Contact__r.PreferredName__c != null}" />
+                                <apex:outputField value="{!subscription.Contact__r.Nickname__c}" id="PreferredName2" rendered="{!subscription.Contact__r.PreferredName__c == null}" />
+                                <apex:outputField value="{!subscription.Contact__r.LastName}" id="PreferredName3" rendered="{!subscription.Contact__r.PreferredName__c == null}" />
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+                    
+                    <div class="form-group">    
+                        <apex:outputLabel value="Website"/>
+                        <div class="col-sm-7">
+                            <apex:outputField value="{!subscription.Contact__r.Website__c}" id="Website"/>
+                        </div>
+                    </div>  
+                </apex:outputPanel>
+                
+                <apex:outputPanel rendered="{!isEdit}">                           
+                    
+                    <div class="form-group">
+                        <apex:outputLabel value="Title"/>
+                        <div class="col-sm-7">
+                            <apex:inputField value="{!subscription.Contact__r.Title}" />
+                        </div>
+                    </div>
+                    
+                    <apex:outputPanel id="MyaccPanel" rendered="{!isEdit}"> 
+                        <script>
+                        $("label").addClass("col-sm-3 control-label");
+                        $(".for_inputs input").addClass("form-control");
+                        
+                        
+                        function displaymsg() {
+                            var bool = '{!isLoginNameAvailable}';
+                            var loginNameError = '{!loginErrorMessage}';
+                            
+                            console.log('---bool in displaymsg---'+bool);
+                            console.log('---isLoginNameAvailable in displaymsg---'+bool);
+                            console.log('---loginNameError in displaymsg---'+ loginNameError);
+                            var oldValue = "{!newLoginName}";
+                            
+                            var serviceJurisdiction = '{!subscription.Service_Jurisdiction__c}';
+                            var loginName = '';
+                            if(serviceJurisdiction == 'BRIGHT')
+                                loginName = '{!subscription.BRIGHT_LoginName__c}';
+                            else if(serviceJurisdiction == 'TREND')
+                                loginName = '{!subscription.TREND_Login_Name__c}';
+                            
+                            
+                            if(oldValue != loginName){
+                                if(bool == 'true') {                                                
+                                    $("#loginAvailable").html(loginNameError);
+                                    $("#loginAvailable").removeClass("alert-danger");
+                                    $("#loginAvailable").addClass("alert-success");
+                                    
+                                    $("#loginAvailable").show();
+                                    $("[id$=SaveButton]").removeAttr("disabled");                                                
+                                }
+                                else {
+                                    
+                                    $("#loginAvailable").html(loginNameError);
+                                    $("#loginAvailable").removeClass("alert-success");
+                                    $("#loginAvailable").addClass("alert-danger");
+                                    
+                                    $("#loginAvailable").show();
+                                }
+                                $("#loadingImage").hide();
+                            }
+                            else{
+                                $("#loadingImage").hide();
+                            }
+                        }
+                        
+                        function resetLoginName(){
+                            var serviceJurisdiction = '{!subscription.Service_Jurisdiction__c}';
+                            var loginName = '';
+                            if(serviceJurisdiction == 'BRIGHT')
+                                loginName = '{!subscription.BRIGHT_LoginName__c}';
+                            else if(serviceJurisdiction == 'BRIGHT')
+                                loginName = '{!subscription.TREND_Login_Name__c}';
+                            console.log('---loginName--'+loginName);
+                            $('[id$=ipt]').val(loginName);
+                            
+                        }
+                        
+                        </script>
+                        
+                    </apex:outputPanel>
+                    <div  class="form-group required"> 
+                        <apex:outputLabel value="Login Name" ></apex:outputLabel>
+                        <div id="newValId" class="col-sm-7">
+                            <apex:inputText id="ipt" value="{!newLoginName}" disabled="true"/>
+                            <img id="loadingImage" src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/Loading_icon.gif')}" style="width:30px; display:none;" />
+                            <span class="alert-danger" style="width:100%; padding: 10px;border-radius: 3px; display:none;" id="loginAvailable" ></span>
+                        </div>
+                        
+                        <div class="col-sm-2" style="padding-top: 5px;">
+                            <apex:commandLink value="Change Login Name" styleClass="changeLoginStyle" style="font-size: 13px;" action="{!$Site.CurrentSiteUrl}Communities_LoginNameChange?id={!subscriptionId}"/>
+                        </div>
+                    </div>                   
+                    <!--
+<apex:outputPanel rendered="{!subscription.Service_Jurisdiction__c == 'TREND'}">   
+<div class="form-group required">
+<apex:outputLabel value="Login Name"/>
+<div class="col-sm-7">
+<apex:inputField value="{!subscription.TREND_Login_Name__c}" />
+</div>
+</div>   
+</apex:outputPanel>
+
+<apex:outputPanel rendered="{!subscription.Service_Jurisdiction__c == 'BRIGHT'}">   
+<div class="form-group required">
+<apex:outputLabel value="Login"/>
+<div class="col-sm-7">
+<apex:inputField value="{!subscription.BRIGHT_LoginName__c}" html-disabled="true" />
+</div>
+</div>   
+</apex:outputPanel>
+-->
+                    
+                    <apex:outputPanel rendered="{!subscription.Service_Jurisdiction__c == 'BRIGHT'}">   
+                        <div class="form-group">
+                            <apex:outputLabel value="Job Title">
+                            </apex:outputLabel>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.JobTitle__c}" />
+                            </div>
+                        </div>   
+                    </apex:outputPanel>                             
+                    
+                    <div class="form-group required">
+                        <apex:outputLabel value="First Name"/>
+                        <div class="col-sm-7">
+                            <apex:inputField id="C_FirstName" value="{!subscription.Contact__r.FirstName}" html-disabled="true"/>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    <div class="form-group">
+                        <apex:outputLabel value="Middle Initial">
+                        </apex:outputLabel>
+                        <div class="col-sm-7">
+                            <apex:inputField id="C_MiddleInitital" value="{!subscription.Contact__r.Middle_Name__c}" />
+                        </div>
+                    </div>                          
+                    
+                    <div class="form-group required">
+                        <apex:outputLabel value="Last Name"/>
+                        <div class="col-sm-7" >
+                            <apex:inputField id="C_LastName" value="{!subscription.Contact__r.LastName}" html-disabled="true"/>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <apex:outputLabel value="Generation/Suffix">
+                        </apex:outputLabel>
+                        <div class="col-sm-7">
+                            <apex:inputField id="C_Suffix" value="{!subscription.Contact__r.Suffix__c}" />
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <apex:outputLabel value="Nickname">
+                        </apex:outputLabel>
+                        <div class="col-sm-7">
+                            <apex:inputField id="C_NickName" value="{!subscription.Contact__r.Nickname__c}" />
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" rendered="{!subscription.Service_Jurisdiction__c == 'BRIGHT'}">
+                        <style>
+                            .preferred-name-element { display:inline; width:19%; }
+                            #PreferredName_Label { padding-top:7px; padding-bottom:5px; display:block; }
+                        </style>
+                        <script>
+                        function formatPreferredName() {
+                            var preferredNameTxt = '';
+                            var preferredFirstName = '';
+                            var preferredLastName = '';
+                            
+                            if($("#PN_Prefix").val() != 'NONE') {
+                                preferredNameTxt += $("#PN_Prefix").val() + ' ';
+                                preferredFirstName += $("#PN_Prefix").val() + ' ';
+                            }
+                            if($("#PN_FirstName").val() != 'NONE') {
+                                preferredNameTxt += $("#PN_FirstName").val() + ' ';
+                                preferredFirstName += $("#PN_FirstName").val()+ ' ';
+                            }
+                            if($("#PN_MiddleInitial").val() != 'NONE') {
+                                preferredNameTxt += $("#PN_MiddleInitial").val() + ' ';
+                                preferredFirstName += $("#PN_MiddleInitial").val();
+                            }
+                            if($("#PN_LastName").val() != 'NONE') {
+                                preferredNameTxt += $("#PN_LastName").val() + ' ';                                            
+                                preferredLastName += $("#PN_LastName").val() + ' ';
+                            }
+                            if($("#PN_Suffix").val() != 'NONE') {
+                                preferredNameTxt += $("#PN_Suffix").val() + ' ';                                             
+                                preferredLastName += $("#PN_Suffix").val();                                                                       
+                            }
+                            
+                            $("#PreferredName_Label").html(preferredNameTxt);
+                            $("#PreferredName_Label").show();
+                            $("#PreferredName_Label").append('<br/>'); 
+                            $('[id$=PreferredName]').val(preferredNameTxt);                                                                                       
+                            $('[id$=PreferredFirstName]').val(preferredFirstName);                                                                                                                                    
+                            $('[id$=PreferredLastName]').val(preferredLastName);                                     
+                        }                                
+                        $(document).ready(function() {
+                            
+                            $(".preferred-name-element").change(function() {                                            
+                                formatPreferredName();                             
+                            });
+                            $("[id$=C_MiddleInitital]").change(function() {
+                                $("#PN_MiddleInitial").html('<option value="NONE">--Middle Initial--</option><option value="' + $("[id$=C_MiddleInitital]").val() + '">' + $("[id$=C_MiddleInitital]").val() + '</option>');
+                                if($("[id$=C_MiddleInitital]").val() == '')
+                                    $("#PN_MiddleInitial").hide();
+                                else
+                                    $("#PN_MiddleInitial").show();                                                    
+                            });
+                            $("[id$=C_LastName]").change(function() {
+                                $("#PN_LastName").html('<option value="NONE">--Last Name--</option><option value="' + $("[id$=C_LastName]").val() + '">' + $("[id$=C_LastName]").val() + '</option>');
+                            });
+                            $("[id$=C_Suffix]").change(function() {
+                                $("#PN_Suffix").html('<option value="NONE">--Suffix--</option><option value="' + $("[id$=C_Suffix]").val() + '">' + $("[id$=C_Suffix]").val() + '</option>');
+                                if($("[id$=C_Suffix]").val() == '')
+                                    $("#PN_Suffix").hide();
+                                else
+                                    $("#PN_Suffix").show();    
+                            });
+                            $("[id$=C_FirstName]").change(function() {
+                                var htmlStr  = '<option value="NONE">--First Name--</option>';
+                                htmlStr += '<option value="' + $("[id$=C_FirstName]").val() + '">' + $("[id$=C_FirstName]").val() + '</option>'
+                                if($("[id$=C_NickName]").val() != '' && $("[id$=C_NickName]").val() != $("[id$=C_FirstName]").val())
+                                    htmlStr += '<option value="' + $("[id$=C_NickName]").val() + '">' + $("[id$=C_NickName]").val() + '</option>'    
+                                    
+                                    $("#PN_FirstName").html(htmlStr);
+                            });
+                            
+                            $("[id$=C_NickName]").change(function() {
+                                var htmlStr  = '<option value="NONE">--First Name--</option>';
+                                
+                                if($("[id$=C_FirstName]").val() != '' && $("[id$=C_FirstName]").val() != $("[id$=C_NickName]").val())
+                                    htmlStr += '<option value="' + $("[id$=C_FirstName]").val() + '">' + $("[id$=C_FirstName]").val() + '</option>'    
+                                    
+                                    htmlStr += '<option value="' + $("[id$=C_NickName]").val() + '">' + $("[id$=C_NickName]").val() + '</option>'
+                                    
+                                    $("#PN_FirstName").html(htmlStr);
+                            });                                                                                 
+                            
+                            var existing = "{!subscription.Contact__r.PreferredName__c}"; 
+                            if(existing == '')
+                                formatPreferredName();                                                                                   
+                        }); 
+                        
+                        </script>
+                        <apex:outputLabel value="Preferred Name"> </apex:outputLabel>
+                        <div class="col-sm-7">
+                            <!-- <apex:inputField value="{!subscription.Contact__r.PreferredName__c}" /> -->
+                            <apex:inputHidden id="PreferredName" value="{!subscription.Contact__r.PreferredName__c}" />
+                            <apex:inputHidden id="PreferredFirstName" value="{!subscription.Contact__r.PreferredFirstName__c}" />
+                            <apex:inputHidden id="PreferredLastName" value="{!subscription.Contact__r.PreferredLastName__c}" />                                                                  
+                            
+                            <span id="PreferredName_Label" style="{!if(subscription.Contact__r.PreferredName__c == null, 'display:none;', 'word-break:normal;')}">
+                                {!subscription.Contact__r.PreferredName__c}   
+                            </span>
+                            
+                            <select class="preferred-name-element" id="PN_Prefix">
+                                <option value="NONE">-- Prefix --</option> 
+                                <option value="Mr.">Mr.</option>
+                                <option value="Ms.">Ms.</option>
+                                <option value="Mrs.">Mrs.</option>
+                                <option value="Dr.">Dr.</option>
+                            </select>
+                            
+                            <select class="preferred-name-element" id="PN_FirstName">
+                                <apex:outputPanel rendered="{!(subscription.Contact__r.Nickname__c != null && subscription.Contact__r.FirstName != null && subscription.Contact__r.FirstName != subscription.Contact__r.Nickname__c) || subscription.Contact__r.PreferredFirstName__c != null}">                                        
+                                    <option value="NONE">-- First Name --</option>
+                                </apex:outputPanel> 
+                                <apex:outputPanel rendered="{!subscription.Contact__r.FirstName != null}">                                        
+                                    <option value="{!subscription.Contact__r.FirstName}">{!subscription.Contact__r.FirstName}</option>                                
+                                </apex:outputPanel>                                                                                                                   
+                                <apex:outputPanel rendered="{!subscription.Contact__r.Nickname__c != null && subscription.Contact__r.FirstName != subscription.Contact__r.Nickname__c}">                                        
+                                    <option value="{!subscription.Contact__r.Nickname__c}">{!subscription.Contact__r.Nickname__c}</option>                                
+                                </apex:outputPanel>
+                            </select>
+                            
+                            <select class="preferred-name-element" id="PN_MiddleInitial" style="{!if(subscription.Contact__r.Middle_Name__c == null, 'display:none;', '')}">
+                                <option value="NONE">-- Middle Initial --</option> 
+                                <option value="{!subscription.Contact__r.Middle_Name__c}">{!subscription.Contact__r.Middle_Name__c}</option>                               
+                            </select> 
+                            
+                            <select class="preferred-name-element" id="PN_LastName">
+                                <apex:outputPanel rendered="{!subscription.Contact__r.PreferredLastName__c != null}">                                        
+                                    <option value="NONE">-- Last Name --</option>
+                                </apex:outputPanel>                                     
+                                <option value="{!subscription.Contact__r.LastName}">{!subscription.Contact__r.LastName}</option>
+                            </select>
+                            
+                            <select class="preferred-name-element" id="PN_Suffix" style="{!if(subscription.Contact__r.Suffix__c == null, 'display:none;', '')}">
+                                <option value="NONE">-- Suffix --</option>
+                                <option value="{!subscription.Contact__r.Suffix__c}">{!subscription.Contact__r.Suffix__c}</option>
+                            </select>
+                            
+                            <br/>
+                            <span style="font-size:12px;"><b>NOTE:</b>  the last name plus any suffix.    
+                                Please make sure that your preferred name complies with your jurisdiction real estate licensing requirements and regulations.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <apex:outputLabel value="Website">
+                        </apex:outputLabel>
+                        <div class="col-sm-7">
+                            <apex:inputField value="{!subscription.Contact__r.Website__c}" />
+                        </div>
+                    </div>
+                </apex:outputPanel>                 
+                
+            </div>
+        </apex:outputPanel>
+        
+        <div class="info-group">
+            <h4>Telephone and Contact Information</h4>
+            
+            <apex:outputPanel rendered="{!!isEdit}"> 
+                <apex:outputPanel rendered="{!(subscription.Service_Jurisdiction__c == 'BRIGHT')}">
+                    <div class="form-group">
+                        <apex:outputLabel value="Preferred Phone"/>
+                        <div class="col-sm-7">
+                            <apex:outputField value="{!subscription.Primary_Phone__c}" id="b_primary"/>
+                        </div>
+                    </div>
+                </apex:outputPanel>
+                
+                <apex:outputPanel rendered="{!(subscription.Service_Jurisdiction__c != 'BRIGHT')}">
+                    <div class="form-group">
+                        <apex:outputLabel value="Contact Phone"/>
+                        <div class="col-sm-7">
+                            <apex:outputField value="{!subscription.Primary_Phone__c}" id="primary"/>
+                        </div>
+                    </div>
+                </apex:outputPanel>
+                
+                <apex:outputPanel rendered="{!IF(AND(subscription.Service_Jurisdiction__c != 'TREND',subscription.Service_Jurisdiction__c != 'BRIGHT'),TRUE,FALSE)}">    
+                    <div class="form-group">    
+                        <apex:outputLabel value="Voicemail"/>
+                        <div class="col-sm-7">
+                            <apex:outputField value="{!subscription.Voicemail__c}"/>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group"> 
+                        <apex:outputLabel value="Voice Mail Extension"/>
+                        <div class="col-sm-7">
+                            <apex:outputField value="{!subscription.VM_Ext__c}"/>
+                        </div>
+                    </div>  
+                </apex:outputPanel>  
+                
+                <div class="form-group">
+                    <apex:outputLabel value="Mobile"/>
+                    <div class="col-sm-7">
+                        <apex:outputField value="{!subscription.Mobile_Phone__c}"/>
+                    </div>
+                </div> 
+                
+                <apex:outputPanel rendered="{!subscription.Service_Jurisdiction__c == 'BRIGHT'}">  
+                    <div class="form-group">
+                        <apex:outputLabel value="Home Phone"/>
+                        <div class="col-sm-7">
+                            <apex:outputField value="{!subscription.Home_Phone__c}"/>
+                        </div>
+                    </div>
+                </apex:outputPanel>
+                
+                <div class="form-group">
+                    <apex:outputLabel value="Home Fax"/>
+                    <div class="col-sm-7">
+                        <apex:outputField value="{!subscription.Home_Fax__c}"/>
+                    </div>
+                </div>
+                
+                <apex:outputPanel rendered="{!IF(AND(subscription.Service_Jurisdiction__c != 'TREND',subscription.Service_Jurisdiction__c != 'BRIGHT'),TRUE,FALSE)}"> 
+                    <div class="form-group">
+                        <apex:outputLabel value="Pager"/>
+                        <div class="col-sm-7">
+                            <apex:outputField value="{!subscription.Pager__c}"/>
+                        </div>
+                    </div> 
+                </apex:outputPanel>
+                
+                <div class="form-group">
+                    <apex:outputLabel value="Agent Office Phone"/>
+                    <div class="col-sm-7">
+                        <apex:outputField value="{!subscription.Agent_Office_Phone__c}"/>
+                    </div>
+                </div> 
+                
+                <apex:outputPanel rendered="{!(subscription.Service_Jurisdiction__c != 'BRIGHT')}">
+                    <div class="form-group">
+                        <apex:outputLabel value="Agent Office Fax"/>
+                        <div class="col-sm-7">
+                            <apex:outputField value="{!subscription.Fax__c}"/>
+                        </div>
+                    </div>
+                </apex:outputpanel>
+                
+                <div class="well public">
+                    <div class="instructions">This information <strong>WILL</strong> appear in your listings</div>
+                    
+                    <apex:outputPanel rendered="{!NOT(IF(OR(subscription.Service_Jurisdiction__c == 'TREND',subscription.Service_Jurisdiction__c == 'BRIGHT'),TRUE,FALSE))}">
+                        <div class="form-group">                              
+                            <apex:outputLabel value="Website"/>
+                            <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.Website__c}"/>
+                            </div>
+                        </div> 
+                    </apex:outputPanel>
+                    
+                    <div class="form-group">
+                        <apex:outputLabel value="Public Email"/>
+                        <div class="col-sm-7">
+                            <apex:outputField value="{!subscription.Public_Email__c}"/>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="well private">
+                    <div class="instructions">This information <strong>WILL NOT</strong> appear in your listings</div>
+                    
+                    <div class="form-group">                           
+                        <apex:outputLabel value="Private Email"/>
+                        <div class="col-sm-7">
+                            <apex:outputField value="{!subscription.Private_Email__c}"/>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <apex:outputLabel value="Alternate Private Email"/>
+                        <div class="col-sm-7">
+                            <apex:outputField value="{!subscription.Alternate_Private_Email__c}"/>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group"> 
+                        <apex:outputLabel value="NRDS ID"/>
+                        <div class="col-sm-7">
+                            <apex:outputField value="{!subscription.NRDS_ID__c}" rendered="{!NOT(ISBLANK(subscription.NRDS_ID__c))}"/>
+                            <apex:outputLink target="NRDS" value="https://reg.realtor.org/roreg.nsf/retrieveID?OpenForm" styleClass="nrds-lookup">Find my NRDS ID</apex:outputLink>                              
+                        </div>
+                    </div>
+                </div>
+            </apex:outputPanel>
+            
+            <apex:outputPanel rendered="{!isEdit}">   
+                
+                <apex:outputPanel rendered="{!(subscription.Service_Jurisdiction__c == 'BRIGHT')}">
+                    <div class="form-group required">
+                        <apex:outputLabel value="Preferred Phone"/>
+                        <div class="col-sm-7">
+                            <apex:inputField value="{!subscription.Primary_Phone__c}" />
+                        </div>
+                    </div>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!(subscription.Service_Jurisdiction__c != 'BRIGHT')}">
+                    <div class="form-group required">
+                        <apex:outputLabel value="Contact Phone"/>
+                        <div class="col-sm-7">
+                            <apex:inputField value="{!subscription.Primary_Phone__c}" />
+                        </div>
+                    </div>
+                </apex:outputPanel>
+                
+                
+                
+                
+                <apex:outputPanel rendered="{!IF(AND(subscription.Service_Jurisdiction__c != 'TREND',subscription.Service_Jurisdiction__c != 'BRIGHT'),TRUE,FALSE)}">
+                    <div class="form-group">
+                        <apex:outputLabel value="Voicemail"/>
+                        <div class="col-sm-7">
+                            <apex:inputField value="{!subscription.Voicemail__c}"/>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group"> 
+                        <apex:outputLabel value="Voice Mail Extension"/>
+                        <div class="col-sm-7">
+                            <apex:inputField value="{!subscription.VM_Ext__c}"/>
+                        </div>
+                    </div>
+                </apex:outputPanel>
+                
+                <div class="form-group required"> 
+                    <apex:outputLabel value="Mobile"/>
+                    <div class="col-sm-7">
+                        <apex:inputField value="{!subscription.Mobile_Phone__c}" />
+                    </div>
+                </div>
+                
+                <apex:outputPanel rendered="{!subscription.Service_Jurisdiction__c == 'BRIGHT'}"> 
+                    <div class="form-group"> 
+                        <apex:outputLabel value="Home Phone">
+                        </apex:outputLabel>
+                        <div class="col-sm-7">
+                            <apex:inputField value="{!subscription.Home_Phone__c}" />
+                        </div>
+                    </div>
+                </apex:outputPanel>
+                
+                <div class="form-group"> 
+                    <apex:outputLabel value="Home Fax"/>
+                    <div class="col-sm-7">
+                        <apex:inputField value="{!subscription.Home_Fax__c}"/>
+                    </div>
+                </div>
+                
+                <apex:outputPanel rendered="{!NOT(IF(OR(subscription.Service_Jurisdiction__c == 'TREND',subscription.Service_Jurisdiction__c == 'BRIGHT'),TRUE,FALSE))}"> 
+                    <div class="form-group"> 
+                        <apex:outputLabel value="Pager"/>
+                        <div class="col-sm-7">
+                            <apex:inputField value="{!subscription.Pager__c}"/>
+                        </div>
+                    </div>
+                </apex:outputPanel>
+                
+                <div class="form-group">   
+                    <apex:outputLabel value="Agent Office Phone"/>
+                    <div class="col-sm-7">
+                        <apex:inputField value="{!subscription.Agent_Office_Phone__c}"/>
+                    </div>
+                </div>
+                
+                <apex:outputPanel rendered="{!(subscription.Service_Jurisdiction__c != 'BRIGHT')}">
+                    <div class="form-group">  
+                        <apex:outputLabel value="Agent Office Fax"/>
+                        <div class="col-sm-7">
+                            <apex:inputField value="{!subscription.Fax__c}"/>
+                        </div>
+                    </div>
+                </apex:outputPanel>
+                
+                <div class="well public">
+                    <div class="instructions">This information <strong>WILL</strong> appear in your listings</div>
+                    
+                    <apex:outputPanel rendered="{!NOT(IF(OR(subscription.Service_Jurisdiction__c == 'TREND',subscription.Service_Jurisdiction__c == 'BRIGHT'),TRUE,FALSE))}"> 
+                        <div class="form-group">  
+                            <apex:outputLabel value="Website"/>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.Website__c}"/>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+                    
+                    <div class="form-group required">  
+                        <apex:outputLabel value="Public Email"/>
+                        <div class="col-sm-7">
+                            <apex:inputField value="{!subscription.Public_Email__c}" />
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="well private">
+                    <div class="instructions">This information <strong>WILL NOT</strong> appear in your listings</div>
+                    
+                    <div class="form-group required">                             
+                        <apex:outputLabel value="Private Email"/> 
+                        <div class="col-sm-7">
+                            <apex:inputField value="{!subscription.Private_Email__c}"  />
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">                        
+                        <apex:outputLabel value="Alternate Private Email"/> 
+                        <div class="col-sm-7">
+                            <apex:inputField value="{!subscription.Alternate_Private_Email__c}"  />
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <apex:outputLabel value="NRDS ID"/>
+                        <div class="col-sm-5">
+                            <apex:inputField value="{!subscription.NRDS_ID__c}"/>
+                        </div>
+                        <div class="col-sm-2">  
+                            <apex:outputLink target="NRDS" value="https://reg.realtor.org/roreg.nsf/retrieveID?OpenForm" styleClass="nrds-lookup">Find my NRDS ID</apex:outputLink>
+                        </div>
+                    </div>
+                </div>
+            </apex:outputPanel> 
+        </div>
+        
+        
+        <!-- Submit form popup -->
+        <apex:outputPanel id="caseform">
+            <div class="modal fade in" id="submit-form-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="resetDefaults()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="modal-label"><i class="fa fa-file-text"></i> &nbsp; Name Change Request</h4>
+                        </div>
+                        
+                        <!-- Modal Body -->
+                        <div class="modal-body">
+                            <apex:outputPanel rendered="{!!ifCaseExists}">
+                                <div class="col-md-12" style="margin-bottom:20px; border-bottom: 1px solid #cccccc3d; padding-bottom: 10px;">
+                                    Please provide copy of the license that the new name appears to Bright MLS for the change request to be processed.
+                                </div>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!ifCaseExists}">
+                                <div class="col-md-12" style="margin-bottom:20px; border-bottom: 1px solid #cccccc3d; padding-bottom: 10px;">
+                                    A request for name change already exists with the following details (Ref. Case Number {!caseNumber}).
+                                </div>
+                            </apex:outputPanel>
+                            
+                            <!-- Alert to display errors -->
+                            <div class="alert alert-danger alert-dismissible" id="FormAlert" style="display:none; clear:both;">
+                                This alert box could indicate a dangerous or potentially negative action.
+                            </div>                                                               
+                            
+                            <apex:outputPanel rendered="{!!ifCaseExists}">
+                                <div class="form-group">
+                                    <span class="col-sm-4 control-label"><b>First Name</b><span style="color:red;">*</span></span>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" id="FirstNameModal" placeholder="Enter First Name" autocomplete="off" maxlength="40"/>
+                                    </div>
+                                </div>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!ifCaseExists}">
+                                <div class="form-group">
+                                    <span class="col-sm-4 control-label"><b>First Name</b></span>
+                                    <div class="col-sm-7 wrapWithWordBreak">
+                                        <apex:outputText value="{!firstName}" id="frstName"/>
+                                    </div>
+                                </div>
+                            </apex:outputPanel>
+                            
+                            <apex:outputPanel rendered="{!!ifCaseExists}">
+                                <div class="form-group">
+                                    <span class="col-sm-4 control-label"><b>Middle Name</b></span>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" id="MiddleNameModal" placeholder="Enter Middle Name" autocomplete="off" maxlength="40" />
+                                    </div>
+                                </div> 
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!ifCaseExists}">
+                                <div class="form-group">
+                                    <span class="col-sm-4 control-label "><b>Middle Name</b></span>
+                                    <div class="col-sm-7 wrapWithWordBreak">
+                                        <apex:outputText value="{!middleName}" id="midlName"/>
+                                    </div>
+                                </div>
+                            </apex:outputPanel>
+                            
+                            <apex:outputPanel rendered="{!!ifCaseExists}">
+                                <div class="form-group">
+                                    <span class="col-sm-4 control-label"><b>Last Name</b><span style="color:red;">*</span></span>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" id="LastNameModal" placeholder="Enter Last Name" autocomplete="off" maxlength="40" />
+                                    </div>                                  
+                                </div>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!ifCaseExists}">
+                                <div class="form-group">
+                                    <span class="col-sm-4 control-label"><b>Last Name</b></span>
+                                    <div class="col-sm-7 wrapWithWordBreak">
+                                        <apex:outputText value="{!lastName}" id="lstName"/>
+                                    </div>
+                                </div>
+                            </apex:outputPanel>
+                            
+                            <apex:outputPanel rendered="{!!ifCaseExists}">
+                                <div class="col-md-12" style="margin-top:20px; padding-bottom: 10px;">
+                                    Please attach license copy for the name change request to be processed:
+                                </div>
+                            </apex:outputPanel>
+                            
+                            <apex:outputPanel rendered="{!!ifCaseExists}">
+                                <div class="form-group">
+                                    <span class="col-sm-4 control-label"><b>Add Attachment</b><span style="color:red;">*</span></span>
+                                    <div class="col-sm-5">
+                                        <input type="file" id="1" name="file" style="margin-top:5px;" class="filetime"/>
+                                        <input class="form-control" type="hidden" name="filecount" id="filecount" value="1"/>
+                                    </div>
+                                </div> 
+                            </apex:outputPanel>
+                        </div>
+                        
+                        <!-- Modal Footer -->
+                        <apex:outputPanel rendered="{!!ifCaseExists}">
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary" onclick="submitForm(this)" html-data-dismiss="modal">Submit</button>
+                            </div>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!ifCaseExists}">
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary okmodel" onclick="closeForm(this)" html-data-dismiss="modal">Ok</button>
+                            </div>
+                        </apex:outputPanel>
+                    </div>
+                </div>
+            </div>
+        </apex:outputPanel>
+        
+        
+        
+        
+        <div class="info-group">
+            <c:Communities_AddressValidation />
+            
+            <h4>Address(es)</h4>
+            
+            <script>
+            var mailing_address = AddressValidation.standardize({
+                Street_Number__c          : "{!subscription.Street_Number__c}",
+                Street_Number_Suffix__c   : "{!subscription.Street_Number_Suffix__c}",
+                Street_Name__c            : "{!subscription.Street_Name__c}",
+                Street_Type__c            : "{!subscription.QAS_Mailing_Street_Type__c}",
+                Street_Direction__c       : "{!subscription.QAS_Mailing_Street_Direction__c}",
+                Unit_Type__c              : "{!subscription.QAS_Mailing_Unit_Type__c}",
+                Unit__c                   : "{!subscription.Unit__c}",
+                City__c                   : "{!subscription.City__c}",
+                State__c                  : "{!subscription.State__c}",
+                Zip__c                    : "{!subscription.Zip__c}",
+                Zip_4__c                  : "{!subscription.Zip_4__c}",
+                Country__c                : "{!subscription.Country__c}",
+                POBox__c                  : "{!subscription.QAS_Mailing_POBox__c}",
+                County__c                 : "{!subscription.County__c}",
+            });
+            
+            function resetDefaults() {
+                $('[id$=FirstName]').val('');
+                $('[id$=MiddleName]').val('');
+                $('[id$=LastName]').val('');
+                $('#submit-form-modal').hide();
+                $('#simplemodal-overlay').hide();
+                $('#simplemodal-container').hide();
+                window.location.reload();
+            }
+            
+            function closeForm(){
+                $('#submit-form-modal').hide();
+                $('#simplemodal-overlay').hide();
+                $('#simplemodal-container').hide();
+                window.location.reload();
+            }
+            
+            </script>
+            
+            <apex:outputPanel rendered="{!!isEdit}">
+                <div id="mailing-address">
+                    <div class="form-group">
+                        <apex:outputLabel value="Mailing Address"/>
+                        <div class="col-sm-7">
+                            <span class="full-address"></span>
+                        </div>
+                    </div>
+                    <script>
+                    $("#mailing-address span.full-address").html(mailing_address.render.html);
+                    </script>
+                </div>  
+            </apex:outputPanel>
+            
+            <apex:outputPanel rendered="{!isEdit}">
+                <div id="mailing-address-edit" class="address-edit">
+                    <div class="sf-fields">
+                        <apex:inputField value="{!subscription.Street_Number__c}"                 html-data-bind="Street_Number__c"/>
+                        <apex:inputField value="{!subscription.Street_Number_Suffix__c}"          html-data-bind="Street_Number_Suffix__c"/> 
+                        <apex:inputField value="{!subscription.Street_Name__c}"                   html-data-bind="Street_Name__c"/> 
+                        <apex:inputField value="{!subscription.QAS_Mailing_Street_Type__c}"       html-data-bind="Street_Type__c"/>
+                        <apex:inputField value="{!subscription.QAS_Mailing_Street_Direction__c}"  html-data-bind="Street_Direction__c"/>
+                        <apex:inputField value="{!subscription.QAS_Mailing_Unit_Type__c}"         html-data-bind="Unit_Type__c"/>
+                        <apex:inputField value="{!subscription.Unit__c}"                          html-data-bind="Unit__c"/>
+                        <apex:inputField value="{!subscription.City__c}"                          html-data-bind="City__c"/>
+                        <apex:inputField value="{!subscription.State__c}"                         html-data-bind="State__c"/>
+                        <apex:inputField value="{!subscription.Zip__c}"                           html-data-bind="Zip__c"/>
+                        <apex:inputField value="{!subscription.Zip_4__c}"                         html-data-bind="Zip_4__c"/>
+                        <apex:inputField value="{!subscription.Country__c}"                       html-data-bind="Country__c"/>
+                        <apex:inputField value="{!subscription.QAS_Mailing_POBox__c}"             html-data-bind="POBox__c"/>
+                        <apex:inputField value="{!subscription.QAS_Mailing_County__c}"            html-data-bind="County__c"/>
+                    </div>
+                    <div class="form-group address-input">
+                        <apex:outputLabel value="Mailing Address"/>
+                        <div class="col-sm-7">
+                            <input class="full-address" type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-group alerts">
+                        <apex:outputLabel value=""/>
+                        <div class="col-sm-7">
+                            <div class="alert"></div>
+                        </div>
+                    </div>
+                    <div class="form-group options">
+                        <apex:outputLabel value=""/>
+                        <div class="col-sm-7">
+                            <ul></ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <script>
+                jQuery("#mailing-address-edit input").val(mailing_address.render.text);
+                new AddressValidation.bind("#mailing-address-edit", "input.my_save");
+                </script>
+            </apex:outputPanel> 
+            
+            <apex:outputPanel rendered="{!IF(OR(subscription.Service_Jurisdiction__c == 'TREND',subscription.Service_Jurisdiction__c == 'BRIGHT'),TRUE,FALSE)}">
+                <script>
+                var home_address = AddressValidation.standardize({
+                    Street_Number__c          : "{!subscription.Billing_Street_Number__c}",
+                    Street_Number_Suffix__c   : "{!subscription.Billing_Street_Suffix__c}",
+                    Street_Name__c            : "{!subscription.Billing_Street_Name__c}",
+                    Street_Type__c            : "{!subscription.QAS_Billing_Street_Type__c}",
+                    Street_Direction__c       : "{!subscription.QAS_Billing_Street_Direction__c}",
+                    Unit_Type__c              : "{!subscription.QAS_Billing_Unit_Type__c}",
+                    Unit__c                   : "{!subscription.Billing_Unit_Number__c}",
+                    City__c                   : "{!subscription.Billing_City__c}",
+                    State__c                  : "{!subscription.Billing_State__c}",
+                    Zip__c                    : "{!subscription.Billing_Zip__c}",
+                    Zip_4__c                  : "{!subscription.Billing_Zip_4__c}",
+                    Country__c                : "{!subscription.Billing_Country__c}",
+                    POBox__c                  : "{!subscription.Billing_Box__c}",
+                    County__c                 : "{!subscription.QAS_Billing_County__c}",
+                }); 
+                </script>
+                
+                <apex:outputPanel rendered="{!!isEdit}">
+                    <div id="home-address">
+                        <div class="form-group">
+                            <apex:outputLabel value="Home Address"/>
+                            <div class="col-sm-7">
+                                <span class="full-address"></span>
+                            </div>
+                        </div>
+                        <script>
+                        $("#home-address span.full-address").html(home_address.render.html);
+                        </script>
+                    </div>  
+                </apex:outputPanel>
+                
+                <apex:outputPanel rendered="{!isEdit}">
+                    <div id="home-address-edit" class="address-edit">
+                        <div class="sf-fields">
+                            <apex:inputField value="{!subscription.Billing_Street_Number__c}"         html-data-bind="Street_Number__c"/>
+                            <apex:inputField value="{!subscription.Billing_Street_Suffix__c}"         html-data-bind="Street_Number_Suffix__c"/> 
+                            <apex:inputField value="{!subscription.Billing_Street_Name__c}"           html-data-bind="Street_Name__c"/> 
+                            <apex:inputField value="{!subscription.QAS_Billing_Street_Type__c}"       html-data-bind="Street_Type__c"/>
+                            <apex:inputField value="{!subscription.QAS_Billing_Street_Direction__c}"  html-data-bind="Street_Direction__c"/>
+                            <apex:inputField value="{!subscription.QAS_Billing_Unit_Type__c}"         html-data-bind="Unit_Type__c"/>
+                            <apex:inputField value="{!subscription.Billing_Unit_Number__c}"           html-data-bind="Unit__c"/>
+                            <apex:inputField value="{!subscription.Billing_City__c}"                  html-data-bind="City__c"/>
+                            <apex:inputField value="{!subscription.Billing_State__c}"                 html-data-bind="State__c"/>
+                            <apex:inputField value="{!subscription.Billing_Zip__c}"                   html-data-bind="Zip__c"/>
+                            <apex:inputField value="{!subscription.Billing_Zip_4__c}"                 html-data-bind="Zip_4__c"/>
+                            <apex:inputField value="{!subscription.Billing_Country__c}"               html-data-bind="Country__c"/>
+                            <apex:inputField value="{!subscription.Billing_Box__c}"                   html-data-bind="POBox__c"/>
+                            <apex:inputField value="{!subscription.QAS_Billing_County__c}"            html-data-bind="County__c"/>
+                        </div>
+                        <div class="form-group address-input">
+                            <apex:outputLabel value="Home Address"/>
+                            <div class="col-sm-7">
+                                <input class="full-address" type="text"></input>
+                        </div>
+                    </div>
+                    <div class="form-group alerts">
+                        <apex:outputLabel value=""/>
+                        <div class="col-sm-7">
+                            <div class="alert"></div>
+                        </div>
+                    </div>
+                    <div class="form-group options">
+                        <apex:outputLabel value=""/>
+                        <div class="col-sm-7">
+                            <ul></ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <script>
+                jQuery("#home-address-edit input").val(home_address.render.text);
+                new AddressValidation.bind("#home-address-edit", "input.my_save");
+                </script>
+            </apex:outputPanel> 
+        </apex:outputPanel> 
+    </div>
+</div>
+</apex:pageBlock>           
+</apex:form>
+</apex:define>       
+</apex:composition>     
+</apex:page>

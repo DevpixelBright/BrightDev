@@ -1,0 +1,834 @@
+<apex:page controller="Communities_OfficeBillingInformation" docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" lightningstylesheets="true">
+    <apex:composition template="Communities_Base">
+        <apex:define name="content">
+            <apex:form >
+                
+                <c:Bootstrap_Resources />
+                
+                <script>
+                    markOptionPanel("brokerage");                  
+                </script>
+                
+                <link href="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/font-awesome.min.css')}" rel="stylesheet" type="text/css" />
+                <apex:pageBlock title="" id="details">                    
+                    <style>
+                        .two_buttons{text-align:right; margin-bottom:-44px; margin-top:40px;}
+                        h2{font-size:22px !important; margin:5px 0px !important;}
+                        .tertiaryPalette{display:none !important;}
+                        .for_inputs h4{border-bottom: 1px solid #69A61F; padding-bottom: 10px;}
+                        h2{display:none;}
+                        label{padding-top:0px !important;}
+                        .margin{margin:20px 0 10px 0;}
+                        #content-container{margin-top:0px !important;}
+                        @media(min-width:400px){
+                        .detailList th{width:30% !important;}
+                        .mandatory{color:red; font-weight:bold; font-size:18px;}
+                        }
+                        i.fa {margin: auto 20px;
+                        position: relative;
+                        top: 0px;}
+                        .fa-2x {
+                        font-size: 2em;
+                        }
+                        .fa {
+                        display: inline-block;
+                        font-family: FontAwesome;
+                        font-style: normal;
+                        font-weight: normal;
+                        line-height: 1;
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        }
+                        .form-horizontal .form-group { margin:0px; }                       
+                        .terminateReason {
+                        margin:0px;
+                        height:28px;
+                        font-size:12px;
+                        }
+                        #terminateButtonGroup { display:none; }
+                        input[type=checkbox] { margin-top: 4px !important; }
+                        .table>tbody>tr>td { border-top:none; padding: 10px 15px; }
+                        .table>thead>tr>th { border-bottom:none; padding: 10px 15px; }
+                        .amount-type {text-align:right;}
+                        .dataTables_filter{text-align:left; padding-left:0px; margin-top:25px; padding-right:0px;}
+                        .dataTables_filter input { width:100% !important; height:35px !important; margin-left:0px !important;}
+                        .dataTables_info {text-align:right; padding-right:0px; color:#ccc; font-size:12px;}
+                        #Subscribers_length { padding-top:3px; padding-left:0px; }
+                        #Subscribers_paginate { padding-right:0px;}
+                        .search_help {color:#ccc; font-size:12px;}
+                        .top {margin-bottom:10px; border-bottom: 1px solid #388EDD; padding-bottom:20px; }
+                        .bottom{margin-top:10px; border-top: 1px solid #388EDD; padding-top:20px; }
+                        input[type=search] {width:100%;}
+                        .table-bordered {border: 1px solid #fff;}
+                        .dropdowns { text-align:right; text-align:right; border-bottom: 1px solid #69A61F; padding-bottom:5px; padding-right:0px; padding-top:16px; }
+                        .dropdowns select {width:100px; display:inline;}
+                        .table-striped>tbody>tr:nth-child(odd)>td, .table-striped>tbody>tr:nth-child(odd)>th {
+                        background-color: #eee;
+                        }
+                        .table-bordered>thead>tr>th, .table-bordered>tbody>tr>td {border:1px solid #fff;}
+                        /* enable absolute positioning */
+                        .inner-addon {
+                        position: relative;
+                        width:70%;
+                        margin:auto;
+                        }
+                        
+                        /* style glyph */
+                        .inner-addon .glyphicon {
+                        position: absolute;
+                        padding: 10px;
+                        pointer-events: none;
+                        }
+                        
+                        /* align glyph */
+                        .left-addon .glyphicon  { left:  0px;}
+                        .right-addon .glyphicon { right: 0px;}
+                        
+                        /* add padding  */
+                        .left-addon input  { padding-left:  30px; }
+                        .right-addon input { padding-right: 30px; } 
+                        .content-block { display:none;} 
+                        .alertPanel{margin-top:20px;}
+                        .subscribers_listing {padding-right:0px;}
+                        .left_panel {padding-right:0px;}                       
+                    </style>
+                    
+                    <!-- apex action functions start -->
+                    <apex:actionFunction name="getSubscriptions" action="{!subscriptions}" reRender="contentPanel" status="Status" oncomplete="hideTabs()">
+                        <apex:param name="Parameter" assignTo="{!officeId}" value="" />
+                        <apex:param name="Parameter1" assignTo="{!displayType}" value="" />
+                    </apex:actionFunction>
+                    
+                    <apex:actionFunction name="generatePdf" action="{!getSOAPDF}" reRender="contentPanel" status="Status">
+                        <apex:param name="Parameter" assignTo="{!test}" value="" />
+                    </apex:actionFunction>
+                    
+                    <apex:actionFunction name="proceedToPayment" action="{!proceedToPayment}" reRender="payment_block, emsg, messages" status="Status" oncomplete="func()"/> 
+                    <apex:actionFunction name="showExistingPaymentMethods" action="{!showExistingPaymentMethods}" reRender="paymentSelection" status="Status" />
+                    <apex:actionFunction name="showNewPaymentMethod" action="{!showNewPaymentMethod}" reRender="paymentSelection" status="Status" />                        
+
+                    <apex:actionFunction action="{!selectPaymentMethod}" name="selectPaymentMethod" reRender="paymentDetails">
+                        <apex:param name="pmid" value="" />
+                    </apex:actionFunction>
+
+                    <apex:actionFunction name="createPayment" action="{!agentPayments}" status="Status" >
+                    </apex:actionFunction> 
+                   
+                    
+                    <apex:actionFunction action="{!paymentMethodFailed}" name="paymentMethodFailed" status="Status" reRender="hpm"> 
+    
+                    </apex:actionFunction>
+                   
+                    <!--<apex:actionFunction name="advanceSearch" status="status" action="{!advSearchResults}" rerender="contentPanel">
+                        <apex:param name="Parameter" assignTo="{!advSerchStr}" value="" />
+                    </apex:actionFunction>
+                    -->
+      
+                    
+                    <!-- Default loading -->
+                    <div class="row" id="loading-block">
+                        <div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-5">
+                            <div class="progress progress-striped active">
+                                <div class="progress-bar" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div> 
+                    
+                    <!-- Loading status of apex action functions -->
+                    <apex:actionStatus id="Status">
+                        <apex:facet name="start">
+                            <div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-5">
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </apex:facet>
+                        <apex:facet name="stop">
+                            <div class="alert alert-danger" id="status"  style="display:none;">
+                                <center>Failed</center>
+                            </div>
+                        </apex:facet>                
+                    </apex:actionStatus>  
+                    
+                    <script>
+                    
+                        var terminateSubs = [];
+                    
+                        $(document).ready(function(){
+                            $('#officeDropDown').multiselect({
+                                includeSelectAllOption: true,
+                                allSelectedText: 'All Selected',
+                                onChange: function(element, checked, select) {
+                                    var values = $('#officeDropDown option:selected');
+                                    var selected = [];
+                                    $(values).each(function(index, values ){
+                                        selected.push([$(this).val()]);
+                                    });
+                                    $('.listing-block').hide();
+                                    getSubscriptions(selected.toString(), $('#displayType').val());
+                                    
+                                }                            
+                            });
+                            
+                            $('#displayType').change(function() {
+                                var values = $('#officeDropDown option:selected');
+                                var selected = [];
+                                $(values).each(function(index, values ){
+                                    selected.push([$(this).val()]);
+                                });
+                                $('.listing-block').hide();
+                                getSubscriptions(selected.toString(), $('#displayType').val());                                                                 
+                            });
+                            
+                            $('.multiselect-all').find(':checkbox').click(function() {
+                                $('.listing-block').hide();
+                                if($(this).is(':checked')) 
+                                    getSubscriptions('All', $('#displayType').val());                                                   
+                                else
+                                    getSubscriptions('None', $('#displayType').val());                                                                         
+                            });
+
+                            $("#officeDropDown").multiselect('selectAll', false);
+                            $("#officeDropDown").multiselect('updateButtonText');
+                        });
+                        
+                        function hideTabs() {
+                            if($('#displayType').val() == 'Unpaid')
+                                $("#myTab").show();
+                            else
+                                $("#myTab").hide();    
+                        }                    
+                    </script>                     
+                    
+                    <!-- Top container which holds title and offices selection -->
+                    <div class="row content-block">
+                        <div class="col-sm-12">
+                            <div class="col-sm-6" style="padding-right:0px; padding-left:0px;">
+                                <c:Communities_Definition pageTitle="Office Statement" pageTitleClass="fa fa-money fa-2x" hasDefinitions="false">
+                                    <p><b class="term">Term</b> Definition goes here.</p>
+                                </c:Communities_Definition>
+                            </div>
+                            <div class="col-sm-6 dropdowns">
+                                <select id="officeDropDown" multiple="multiple">
+                                    <apex:repeat value="{!officeIds}" var="officeId" id="OfficeIds">
+                                        <option value="{!officeId}">{!officeIds[officeId]}</option>
+                                    </apex:repeat>
+                                </select>
+                                
+                                <select id="displayType">
+                                    <option value="Unpaid">Unpaid</option>
+                                    <option value="Paid">Paid</option>
+                                </select>                            
+                            </div>                                                   
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-12 instructions">
+                        <p>The Office Billing Statement Information will indicate by Subscription and Office any balance due and oldest invoice date.</p>
+                    </div>
+                    <div style="clear:both;" />
+                 <div id="messages" >
+                       <!--<apex:outputPanel id="messages"> </apex:outputPanel> -->            
+                            
+                                             <apex:pagemessages ></apex:pagemessages>
+                           </div>                            
+                    
+                    <!-- Bootstrap tabs -->
+                    <div  role="tabpanel" data-example-id="togglable-tabs">
+                       
+                        <!-- Tab containers -->
+                        <div class="row content-block listing-block col-sm-12" style="padding-left:0px; padding-right:0px;">
+                            
+                           
+                            
+                            <!-- Subscribers result panel -->
+                            <div class="col-sm-12 left_panel">
+                               
+                                <div class="col-sm-12 subscribers_listing">
+                                    <apex:outputPanel id="contentPanel">
+                                    
+                                        <!-- Tabs -->
+                                        <ul id="myTab" class="nav nav-tabs" role="tablist">
+                                            <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Subscribers <span class="label label-info" id="activeSubscribersCount">{!billingAccounts.size}</span></a></li>
+                                            <li role="presentation" class=""><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Selected Subscribers <span class="label label-primary" id="selectedSubscribersCount">0</span></a></li>
+                                        </ul>                                     
+                                                                           
+                                        <script>
+                                            var activeTable;
+                                            var selectedTable;
+                                            $(document).ready(function() {                                
+                                                $("form").addClass("form-horizontal");
+                                                $("label").addClass("col-sm-3 control-label");
+                                                $(".for_inputs input").addClass("form-control");
+                                                $("select").addClass("form-control");
+                                                $(".errorM3").addClass("alert alert-danger");
+                                                $(".infoM3").addClass("alert alert-info");
+                                                $(".confirmM3").addClass("alert alert-success");
+
+                                                activeTable = $('#Subscribers').DataTable({
+                                                    "columnDefs": [ 
+                                                        {"targets": [0], "orderable": false}                                        
+                                                    ],  
+                                                    "dom": '<"top"fi>rt<"bottom"lp><"clear">',
+                                                    "order": [[ 1, "asc" ]]                                   
+                                                });
+                                                
+                                                selectedTable = $('#selectedSubscribers').DataTable({
+                                                    "columnDefs": [ 
+                                                        {"targets": [6], "orderable": false}  
+                                                    ],  
+                                                    "dom": '<"top"fi>rt<"bottom"lp><"clear">',
+                                                    "order": [[ 4, "desc" ]]                                   
+                                                });
+                                                                                              
+                                                getOutstandingAmount();
+                                                
+
+                                                 
+                                                 $("#makePaymentButton").attr("disabled", "disabled");
+                                                  
+                                                $('#Subscribers_filter').addClass('col-sm-12');
+                                                $('#Subscribers_info').addClass('col-sm-12');
+                                                $("#Subscribers_info").after( "<div style='clear:both;'></div>" );
+                                                $('#Subscribers_length').addClass('col-sm-6');
+                                                $('#Subscribers_paginate').addClass('col-sm-6');
+                                                $("#Subscribers_paginate").after( "<div style='clear:both;'></div>" );
+
+                                                $('#selectedSubscribers_filter').addClass('col-sm-12');
+                                                $('#selectedSubscribers_info').addClass('col-sm-12');
+                                                $("#selectedSubscribers_info").after( "<div style='clear:both;'></div>" );
+                                                $('#selectedSubscribers_length').addClass('col-sm-6');
+                                                $('#selectedSubscribers_paginate').addClass('col-sm-6');
+                                                $("#selectedSubscribers_paginate").after( "<div style='clear:both;'></div>" );
+
+                                                $("input[type=search]").attr('placeholder', 'Type in your search terms here...');
+                                                $("input[type=search]").attr('id', 'searchId');
+                                                
+                                                $("#loading-block").hide();                               
+                                                $(".content-block").show();
+
+                                                $("#CheckAllSubscribers").click(function() {
+                                                    var cells = activeTable.cells( ).nodes();
+                                                    $( cells ).find(':checkbox').prop('checked', $(this).is(':checked')); 
+                                                    addSelected();
+                                                });
+                                                
+                                                $("#CheckAllSelectedSubscribers").click(function() {
+                                                    var cells = selectedTable.cells( ).nodes();
+                                                    $( cells ).find(':checkbox').prop('checked', $(this).is(':checked')); 
+                                                });
+
+                                                $("#Subscribers").on('click', 'input.subCheckBox', function(){ 
+                                                    //alert("ok");
+                                                    setTimeout(addSelected, 200);  
+                                                });
+                                            });  
+
+                                            function addSelected() {                                               
+                                                if('{!displayType}' == 'Unpaid') {
+                                                    var cells = activeTable.cells('.action_td').nodes();                                                    
+                                                    var selectedSubscribers = [];
+                                                    var TotalAmount = 0;
+                                                    var i = 1;
+                                                    $( cells ).find(':checkbox').each(function() {                                                       
+                                                        if($(this).is(':checked')) {
+                                                            
+                                                            $(this).parent().parent().removeClass('unselected'); 
+                                                            $(this).parent().parent().addClass('selected'); 
+
+                                                            var data = activeTable.rows('.selected').data();
+                                                            data.each(function (value, index) {                                                 
+                                                                var rowNode = selectedTable.row.add([value[1],value[2],value[3],value[4],value[5],value[6],"<span class='remove'><span class='glyphicon glyphicon-remove' onClick='removeSelected(this);' style='cursor:pointer; color:red;' /></span>"]).draw().node();
+                                                                $( rowNode ).find('td').eq(3).addClass('amount-type');
+                                                            });
+
+                                                            activeTable.rows('.selected').remove().draw( false );  
+                                                            getTotalAmount();
+                                                            
+                                                            $("#activeSubscribersCount").html(activeTable.rows().count());
+                                                            $("#selectedSubscribersCount").html(selectedTable.rows().count());
+                                                            $("#selectedSubscribersCount").css('background-color', 'red').css('font-size','85%');
+                                                            setTimeout(function() { $("#selectedSubscribersCount").css('background-color', '#428bca').css('font-size','75%'); }, 200);                                                              
+                                                        }
+                                                        i++;
+                                                    });    
+                                                }
+                                            }
+                                            
+                                            function removeSelected(ele) {
+                                                var row = selectedTable.row( $(ele).parents('tr') );                                                                                             
+                                                var data = row.data();                                                   
+                                                var rowNode = activeTable.row.add([' <input type="checkbox" class="subCheckBox" />', data[0], data[1], data[2], '$' + data[3], data[4], data[5]]).draw().node();
+                                                $( rowNode ).find('td').eq(0).addClass('action_td');
+                                                $( rowNode ).find('td').eq(4).addClass('amount-type');
+                                                selectedTable.row( $(ele).parents('tr') ).remove();                                               
+                                                selectedTable.draw();
+                                                activeTable.draw();
+                                                getTotalAmount();
+                                                $("#activeSubscribersCount").html(activeTable.rows().count());
+                                                $("#selectedSubscribersCount").html(selectedTable.rows().count());
+                                                 $("[id$='emsg']").hide();
+                                            }
+                                          
+                                            function addtoSelectedList() {                                               
+                                                var row_id = $(this).closest('tr').index();
+                                                var data = activeTable.rows(row_id).data();
+                                                data.each(function (value, index) {                                                      
+                                                    selectedTable.row.add([value[1],value[2],value[3],value[4],value[5],"<span class='remove'><span class='glyphicon glyphicon-remove' onClick='removeSelected(this);' style='cursor:pointer; color:red;' /></span>"]).draw(true);
+                                                }); 
+                                                activeTable.rows(row_id).remove().draw( true ); 
+                                                getTotalAmount();
+                                            }
+
+                                            function confirmPayment(pmid, isDefault) {                                             
+                                                if($("[id$='htotalAmount']").val()>0) {
+                                                    var subsIds = [] ; 
+                                                    var sdata = selectedTable.rows().data(); 
+
+                                                    sdata.each(function (value, index) {
+                                                        subsIds.push(value[1]);
+                                                    });
+                                                    
+                                                    $("[id$='hSubsId']").val(subsIds.toString());
+                                                    $("[id$='hsavepayment']").val(isDefault);
+                                                    createPayment();
+                                                }
+                                                else{
+                                                    alert('Payable amount should be greater than zero');
+                                                }
+                                            }
+                                           
+      
+                                            function getTotalAmount(){
+                                                var TotalAmount = 0;
+                                                var sdata = selectedTable.rows().data();
+                                                sdata.each(function (value, index) {
+                                                    value[3] = value[3].replace('$', '');                                                
+                                                    TotalAmount = TotalAmount + parseFloat(value[3]);
+                                                });
+                                                
+                                                $("#totalAmount").val("Total Amount : $" + TotalAmount.toFixed(2));
+                                                $("[id$='htotalAmount']").val(TotalAmount.toFixed(2)); 
+                                                
+                                                // $("#totalAmount").val("Total Amount : $" + 200000);
+                                                //$("[id$='htotalAmount']").val(200000);
+                                                
+                                                if(selectedTable.rows().count() > 0){
+                                                    $("#makePaymentButton").removeAttr("disabled");
+                                                    $("[id$='emsg']").hide();
+                                                }else{
+                                                    $("#makePaymentButton").attr("disabled", "disabled");
+                                                }
+                                            }
+                                        
+                                        function getOutstandingAmount(){
+                                                var outstandingAmount = 0;
+                                                var sdata = activeTable.rows().data();
+                                                sdata.each(function (value, index) {
+                                                    value[4] = value[4].replace('$ ', '');                                                
+                                                    outstandingAmount = outstandingAmount + parseFloat(value[4]);
+                                                });
+                                            $("#totalOutstandingAmount").val("Outstanding Balance : $" + outstandingAmount.toFixed(2));
+                                            }
+                                        
+                                       function removeAllSelected(){ 
+                                                $("[id$='emsg']").hide();
+
+                                                var data = selectedTable.rows().data();  
+                                           data.each(function (value, index) {
+                                               var rowNode = activeTable.row.add([' <input type="checkbox" class="subCheckBox" />', value[0], value[1], value[2], '$' + value[3], value[4], value[5]]).draw().node();
+                                               $( rowNode ).find('td').eq(0).addClass('action_td');
+                                               $( rowNode ).find('td').eq(4).addClass('amount-type');
+                                               });
+                                               
+                                                selectedTable.rows().remove();                                               
+                                                selectedTable.draw();
+                                                activeTable.draw();
+                                                getTotalAmount();
+                                                $("#activeSubscribersCount").html(activeTable.rows().count());
+                                                $("#selectedSubscribersCount").html(selectedTable.rows().count());
+                                           }
+                                          
+                                        function paymentCheck(){
+                                            if( $("[id$='htotalAmount']").val()>= 100000){
+                                                   alert('Total amount selected is greater than maximum amount allowed : $100000 ')
+                                                }
+                                            else{
+                                                var subsIds = [] ; 
+                                                var sdata = selectedTable.rows().data(); 
+                                                
+                                                sdata.each(function (value, index) {
+                                                    subsIds.push(value[1]);
+                                                });
+                                                
+                                                $("[id$='hSubsId']").val(subsIds.toString());
+                                                console.log('---hSubsId--'+$("[id$='hSubsId']").val());
+                                                proceedToPayment();
+                                                }
+                                            }
+                                        
+                                         /*
+                                            function advSearch(){
+                                               
+                                                var advSerchStr = $("#searchId").val();
+                                                
+                                                console.log('--searchStr-->'+advSerchStr);
+                                                
+                                                if(advSerchStr != null && advSerchStr != ''){
+                                                    var cells = activeTable.cells('.action_td').nodes();
+                                                    var selected = 0;
+                                                    
+                                                    $( cells ).find(':checkbox').each(function() { 
+                                                        if($(this).is(':checked')){
+                                                            //terminateSubs.push($(this).val());
+                                                        }
+                                                        else 
+                                                            $(this).parent().parent().addClass('selected');                                          
+                                                    });
+                                                    
+                                                                                                       
+                                                    var data = selectedTable.rows().data();  
+                                                    data.each(function (value, index) {
+                                                        console.log('---inside loop--'+value);
+                                                        terminateSubs.push(value);
+                                                    });
+                                                    
+                                                    console.log('---terminateSubs--'+terminateSubs);
+                                                    
+                                                    advanceSearch();
+                                                }
+                                                else{
+                                                    alert('Please enter key to search');
+                                                    return false;
+                                                }
+                                            }
+                                            function test(){
+                                                alert('Hi');
+                                                //var row_id = $(this).closest('tr').index();
+                                                //var data = activeTable.rows(row_id).data();
+                                                terminateSubs.each(function (value, index) {                                                      
+                                                    selectedTable.row.add([value[1],value[2],value[3],value[4],value[5],"<span class='remove'><span class='glyphicon glyphicon-remove' onClick='removeSelected(this);' style='cursor:pointer; color:red;' /></span>"]).draw(true);
+                                                }); 
+                                                //activeTable.rows(row_id).remove().draw( true ); 
+                                                getTotalAmount();
+                                                
+                                            }*/
+                                        </script>
+                                        
+                                        <div id="myTabContent" class="tab-content"> 
+                                           
+                                            <!-- Results display panel -->  
+                                            <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab" style="min-height:250px;">
+                                                <apex:outputPanel id="subscriberResults" rendered="{!billingAccounts.size > 0}"> 
+                                                    <div>  
+                                                         <apex:outputPanel >
+                                                             <input type="text" class="btn1 btn1-primary" id="totalOutstandingAmount" value="Outstanding Amount : 0"  style="margin-top:70px; color:#388EDD; font-weight:bold; position:absolute; background-color:#fff; border:none;" disabled="disabled" />
+                                                        </apex:outputPanel>
+                                                        
+                                                        <div style="position: absolute; left:87%; z-index:1; padding-top: 25px;">
+                                                            <!--<apex:commandLink styleclass="" value="Previous" rendered="{!if(billingAccounts.size > 500, false, true)}" action="{!advSearchPreviousResults}" rerender="contentPanel"/>-->
+                                                            <apex:commandLink styleclass="btn btn-link" value="Next Search" rendered="{!if(totalCount > 500 && billingAccounts.size >= 500, true, false)}" action="{!advSearchNextResults}" rerender="contentPanel"/><!--onclick="return advSearch(); return false;"-->
+                                                        </div>
+                                                        
+                                                        <table class="table table-striped table-bordered" id="Subscribers">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th><input type="checkbox" id="CheckAllSubscribers" /></th>
+                                                                    <th>Name</th>
+                                                                    <th>Subscription Id</th>
+                                                                    <th>Office Id</th>
+                                                                    <th>Balance Due</th>
+                                                                    <th>Oldest Invoice Date</th>
+                                                                    <th>Next Renewal Date</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>                                
+                                                                <apex:repeat value="{!billingAccounts}" var="billingAccount">
+                                                                    <tr>
+                                                                        <td class='action_td'>
+                                                                            <apex:inputCheckbox styleClass="subCheckBox" id="ActiveSubsCheckBox"/>
+                                                                        </td>
+                                                                        <td>{!billingAccount.Subscription__r.Contact__r.Name}</td>
+                                                                        <td>{!billingAccount.Subscription__r.Name}</td>
+                                                                        <td>{!billingAccount.Subscription__r.Related_Location_Broker_Office__r.Name}</td>
+                                                                        <td class="amount-type">
+                                                                            <apex:outputText value="{0, number, 00.00}">
+                                                                                <apex:param value="{!billingAccount.Zuora__Balance__c}" />
+                                                                            </apex:outputText>                                                                                                                                                    
+                                                                        </td>
+                                                                        <td>  
+                                                                            <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                                                                                <apex:param value="{!billingAccount.Oldest_Invoice_Due__c}"/>
+                                                                            </apex:outputText>                                                
+                                                                        </td>
+                                                                        <td>
+                                                                            <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                                                                                <apex:param value="{!subNextRenewalDateMap[billingAccount.Subscription__r.Name].Zuora__NextRenewalDate__c}"/>
+                                                                            </apex:outputText>
+																			
+                                                                        </td>
+                                                                    </tr>
+                                                                </apex:repeat>
+                                                            </tbody>
+                                                        </table>                                            
+                                                    </div>
+                                                </apex:outputPanel>
+                                                
+                                                <!-- No results available panel -->
+                                                <apex:outputPanel id="noSubscriberResults" rendered="{!billingAccounts.size == 0}">
+                                                    <div class="alert alert-warning alertPanel" role="alert">
+                                                        No data available
+                                                    </div>
+                                                </apex:outputPanel>    
+                                            </div>
+                                            
+                                            <!-- Results display panel -->  
+                                            <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab" style="min-height:250px;">
+                                                <apex:outputPanel id="selectedSubscriberResults" rendered="{!billingAccounts.size > 0}"> 
+                                                    <div>  
+                                                        <apex:outputPanel >
+                                                             <input type="text" class="btn1 btn1-primary" id="totalAmount" value="Total Amount : {!totalAmountPayable}"  style="margin-top:70px; color:#388EDD; font-weight:bold; position:absolute; background-color:#fff; border:none;" disabled="disabled" />
+                                                              <apex:inputHidden id="htotalAmount" value="{!totalAmountPayable}"/> 
+                                                             <apex:inputHidden id="hSubsId" value="{!selectedSubids}"/> 
+                                                             <apex:inputHidden id="herrorId" value="{!error}"/> 
+                                                            <apex:inputHidden id="hpaymethodId" value="{!paymentMethodId}"/> 
+                                                            <apex:inputHidden id="hsavepayment" value="{!isSavePaymentMethod}"/> 
+                                                            
+                                                        </apex:outputPanel> 
+                                                                                                                                                            
+                                                        <table class="table table-striped table-bordered" id="selectedSubscribers">
+                                                            <thead>
+                                                                <tr>
+                                                                    <!--   <th>
+                                                                    <input type="checkbox" id="CheckAllSelectedSubscribers" />
+                                                                    </th> -->
+                                                                    <th>Name</th>
+                                                                    <th>Subscription Id</th>
+                                                                    <th>Office Id</th>
+                                                                    <th>Balance Due</th>
+                                                                    <th>Oldest Invoice Date</th>
+                                                                    <th>Next Renewal Date</th>
+                                                                    <th><a href="" onclick="removeAllSelected()">Clear All</a></th>
+                                                                   
+                                                                </tr>
+                                                            </thead>                                                         
+                                                        </table>  
+                                                      
+                                                        
+                                                        <div class="col-sm-12 button_groups">
+                                                            <input type="button" id="makePaymentButton" class="btn btn-primary my_cancel" value="Make Payment" onclick="paymentCheck()"/> 
+                                                            <apex:outputPanel id="emsg">
+                                                                {!errorMesg}
+                                                            </apex:outputPanel>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    
+                                                    <script>
+                                                        var loading_block = $("#loadingBlock");
+                                                    </script>
+                                                    
+                                                    <apex:outputPanel id="payment_block">
+                                                        <apex:outputPanel rendered="{!showPaymentOptions || showNewPayment}">
+                                                            <script>
+                                                                $("#create-modal").modal('show');
+                                                            </script>
+                                                        </apex:outputPanel> 
+                                                        
+                                                        
+                                                        <div class="modal fade" id="create-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                                        <h4 class="modal-title" id="modal-label">New Payment Method</h4>
+                                                                    </div>
+                                                                    <style>
+                                                                        
+                                                                    </style>
+                                                                    <div class="modal-body">                                                                                                                                               
+                                                                        <apex:outputPanel id="paymentSelection">
+                                                                            <apex:outputPanel rendered="{!showPaymentOptions}">
+                                                                                <div id="payment-options-block">
+                                                                                    <button id="existingPaymentMethodButton" class="btn btn-default btn-block" value="existing" onclick="showExistingPaymentMethods(); return false;">Use an existing payment method</button>
+                                                                                    <button id="newPaymentMethodButton" class="btn btn-default btn-block" value="new" onclick="showNewPaymentMethod(); return false;">Enter a new payment method</button>
+                                                                                </div>
+                                                                            </apex:outputPanel>                                                                        
+                                                                        
+                                                                            <!-- New payment method block -->
+                                                                            <apex:outputPanel rendered="{!showNewPayment}">
+                                                                                <script>
+                                                                                    $("#newPaymentMethodButton")
+                                                                                        .attr("disabled", "disabled")
+                                                                                        .removeClass("btn-default")
+                                                                                        .addClass("btn-primary");
+                                                                                </script>                                                                            
+                                                                            
+                                                                                <br/><br/>
+                                                                                <div class="payment-page">
+                                                                                    <apex:outputPanel id="hpm">
+                                                                                        <p>Please enter the necessary information below and press "Submit" when done.</p>
+                                                                                       <apex:outputPanel rendered="{!error !=null }">
+                                                                                        <div class="alert alert-danger">
+                                                                                        <apex:outputText >{!getError}</apex:outputText>
+                                                                                        </div>
+                                                                                           </apex:outputPanel>
+                                                                                        
+                                                                                        <apex:outputPanel layout="none">
+                                                                                            <apex:outputPanel id="hpm_iframe">
+                                                                                                <div class="hpm-container">
+                                                                                                    <iframe id="z_hppm_iframe" name="z_hppm_iframe" style="width: 100%; height:550px; margin-bottom: -5px;" src="{!iframeUrl}" frameborder="0">
+        
+                                                                                                    </iframe>
+                                                                                                </div>
+                                                                                            </apex:outputPanel>
+                                                                                        </apex:outputPanel>
+                                                                                        
+                                                                                        <div class="input-group">
+                                                                                            <span class="input-group-addon">
+                                                                                                <input type="checkbox" id="save-payment-method" />
+                                                                                            </span>
+                                                                                            <span class="form-control">Save this payment method</span>
+                                                                                        </div>
+                                                                                        <div style="margin-top:10px; text-align:right;">
+                                                                                            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="removeHPM();">Cancel</button>
+                                                                                            <button type="button" class="btn btn-primary" onclick="submitPaymentMethod();">Submit</button>
+                                                                                        </div>                                                                                        
+                                                                                    </apex:outputPanel>
+                                                                                </div>
+                                                                            </apex:outputPanel>
+                                                                                                                                                        
+                                                                            <!-- Existing payment method block -->
+                                                                            <apex:outputPanel id="existing-pms" rendered="{!showExistingPayment}" >
+                                                                                <script>
+                                                                                    $("#existingPaymentMethodButton")
+                                                                                        .attr("disabled", "disabled")
+                                                                                        .removeClass("btn-default")
+                                                                                        .addClass("btn-primary");
+                                                                                </script>
+                                                                                <br/><br/>
+                                                                                <div class="panel-footer">
+                                                                                    <select class="form-control" id="payment-method-select" onchange="paymentMethodChanged(this.value)">
+                                                                                        <option value="NONE">Select an existing payment method</option>
+                                                                                        <apex:repeat value="{!paymentMethods}" var="m">
+                                                                                            <option value="{!m.Id}">{!m.NameOnCard}-{!m.Type}:{!RIGHT(m.LastFourDigits,4)}</option>
+                                                                                        </apex:repeat>                                                                                       
+                                                                                    </select>
+                                                                                    
+                                                                                    <apex:outputPanel id="paymentDetails">
+                                                                                        <apex:outputPanel rendered="{!showExistingPayment && selectedPaymentMethod != null}">
+                                                                                            <ul class="list-group default_gap">
+                                                                                                <li class="list-group-item"><span class="info_label">Card Type</span>{!selectedPaymentMethod.Type}</li>
+                                                                                                <li class="list-group-item"><span class="info_label">Name on Card</span>{!selectedPaymentMethod.NameOnCard}</li>
+                                                                                                <li class="list-group-item"><span class="info_label">Card Number</span>********{!selectedPaymentMethod.LastFourDigits}</li>
+                                                                                            </ul>                                       
+                                                                                            
+                                                                                            <div class="btn-group btn-group-justified">
+                                                                                                <a href="#" class="btn btn-primary" onclick='createPayment1("{!selectedPaymentMethod.Id}", false); return false;'>Use this payment method</a>
+                                                                                            </div>                                  
+                                                                                        </apex:outputPanel>
+                                                                                    </apex:outputPanel>                                                                                                                                                                                                                                                
+                                                                                </div>
+                                                                            </apex:outputPanel>                                                                             
+                                                                            
+                                                                        </apex:outputPanel>
+                                                                        
+                                                                    </div>
+                                                                    <div class="modal-footer payment-page">
+
+                                                                    </div>
+                                                                </div><!-- /.modal-content -->
+                                                            </div><!-- /.modal-dialog -->
+                                                        </div><!-- /.modal -->                                                  
+                                                    </apex:outputPanel>
+                                                    
+                                                    <script>
+                                                    $("[id$='emsg']").hide();
+                                                        function paymentOptionChanged(source) {
+                                                            $("#errorMessage").hide();
+                                                            
+                                                            source = $(source);
+                                                            var siblings = source.siblings();
+                                                            
+                                                            source
+                                                                .attr("disabled", "disabled")
+                                                                .removeClass("btn-default")
+                                                                .addClass("btn-primary");
+                                                                
+                                                            siblings
+                                                                .removeAttr("disabled")
+                                                                .removeClass("btn-primary")
+                                                                .addClass("btn-default");
+                                                                
+                                                            var option = source.attr("value");
+                                                        
+                                                            if (option == "existing")
+                                                                chooseExistingPaymentMethod();
+                                                            else
+                                                                enterNewPaymentMethod();                        
+                                                        }
+                                                        
+                                                        function paymentMethodChanged(source) {
+                                                            selectPaymentMethod(source);
+                                                        } 
+                                                        
+                                                        function createPayment1(pmid, isPayment) {
+                                                               $("[id$='hpaymethodId']").val(pmid);
+                                                            confirmPayment(pmid, true)                                                            
+                                                        }                                                        
+                                                                                                                                
+                                                        function submitPaymentMethod() {                           
+                                                            var iframe = document.getElementById("z_hppm_iframe");
+                                                            var src = iframe.src + '#' + encodeURIComponent(document.location.href);
+
+                                                            iframe.src = src;
+                                                            ZXD.postMessage("submit", src, iframe.contentWindow);
+                                                        }
+
+                                                        function callbackSuccess(pmid) {
+                                                            $("[id$='hpaymethodId']").val(pmid);
+                                                            confirmPayment(pmid, $("#save-payment-method:checked").length != 0);
+                                                          
+                                                        }
+
+                                                        function callbackFail(errorMessage) {
+                                                          $("[id$='herrorId']").val(errorMessage); 
+                                                            paymentMethodFailed();
+                                                        }
+                                                        
+                                                        function func() {
+                                                            $("#makePaymentButton").attr("disabled", "disabled");
+                                                               var errorMsg = '{!errorMesg}';
+                                                               console.log(errorMsg+ ' --- > '+'{!errorMesg}');
+                                                               if(errorMsg) {
+                                                                   $("[id$='emsg']").show();
+                                                               }
+                                                        }
+                                                    </script>
+                                                    
+                                                </apex:outputPanel>
+                                            </div>
+                                        </div>
+                                    </apex:outputPanel>
+                                </div>                                                                                       
+                            </div> 
+                        </div>
+                    </div>
+                </apex:pageBlock>     
+            </apex:form>                
+        </apex:define>                
+    </apex:composition>
+    
+    <script src="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/jquery.dataTables.min.js')}"></script>
+    <script src="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/dataTables.bootstrap.min.js')}"></script>
+    <link href="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/dataTables.bootstrap.min.css')}" rel="stylesheet" type="text/css" />
+    <script src="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/bootstrap-multiselect.js')}"></script>
+    <link href="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/bootstrap-multiselect.css')}" rel="stylesheet" type="text/css" />          
+    <style>
+        .multiselect-container { padding-top:10px; }
+        .dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus { color:inherit; }
+         #makePaymentButton{float: left;margin-right: 20px; }
+          .button_groups span{ margin: 0; line-height: 16px; display: block; color: #FE4602;}
+          .btn[disabled]{ color: #212B3D !important;}
+          </style>
+</apex:page>

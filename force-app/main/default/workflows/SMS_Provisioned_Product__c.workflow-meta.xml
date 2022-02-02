@@ -1,0 +1,2698 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>BRIGHT_CloudCMA_Cancellation_Confirmation_Email</fullName>
+        <description>BRIGHT CloudCMA Cancellation Confirmation Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_CloudCMA_Premium_Product_Cancellation</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_CloudCMA_New_Sign_Up_Email_Confirmation</fullName>
+        <description>BRIGHT CloudCMA New Sign Up Email Confirmation</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_CloudCMA_SignUp_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_CloudCMA_Product_Change_Email_Alert</fullName>
+        <description>BRIGHT CloudCMA Product Change Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_CloudCMA_Premium_Product_Change</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_Email_to_Salesforce_CloudCMA_Cancellation</fullName>
+        <description>BRIGHT Email to Salesforce CloudCMA Cancellation</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_CloudCMA_Premium_Product_Cancellation</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_Email_to_Salesforce_CloudCMA_New_Sign_Up</fullName>
+        <description>BRIGHT Email to Salesforce CloudCMA New Sign Up</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_CloudCMA_SignUp_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_Email_to_Salesforce_CloudCMA_Product_Change</fullName>
+        <description>BRIGHT Email to Salesforce CloudCMA Product Change</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_CloudCMA_Premium_Product_Change</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_Email_to_Salesforce_XactSite_Agent_IDX_New_Sign_Up</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>BRIGHT Email to Salesforce XactSite Agent IDX New Sign Up</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_SignUp_Email_Agent_IDX</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_Email_to_Salesforce_XactSite_Cancellation</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>BRIGHT Email to Salesforce XactSite Cancellation</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Cancellation_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_Email_to_Salesforce_XactSite_Office_IDX_New_Sign_Up</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>BRIGHT Email to Salesforce XactSite Office IDX New Sign Up</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_SignUp_Email_Office_IDX</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_Email_to_Salesforce_XactSite_Office_Website_New_Sign_Up</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>BRIGHT Email to Salesforce XactSite Office Website New Sign Up</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_SignUp_Email_Office_Website</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_Email_to_Salesforce_XactSite_Premium_New_Sign_Up</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>BRIGHT Email to Salesforce XactSite Premium New Sign Up</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_SignUp_Email_Premium</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_Email_to_Salesforce_XactSite_Product_Change_to_Office_IDX_Email</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>BRIGHT Email to Salesforce XactSite Product Change to XS Office IDX Email</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Product_Change_to_XS_Office_IDX_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_Email_to_Salesforce_XactSite_Product_Change_to_XS_Agent_IDX_Email</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>BRIGHT Email to Salesforce XactSite Product Change to XS Agent IDX Email</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Product_Change_to_XS_Agent_IDX_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_Email_to_Salesforce_XactSite_Product_Change_to_XS_Office_Website_Email</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>BRIGHT Email to Salesforce XactSite Product Change to XS Office Website Email</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Product_Change_to_XS_Office_Website_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_Email_to_Salesforce_XactSite_Product_Change_to_XS_Premium_Email</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>BRIGHT Email to Salesforce XactSite Product Change to XS Premium Email</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Product_Change_to_XS_Premium_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_Email_to_Salesforce_XactSite_Product_Change_to_XS_Select_Email</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>BRIGHT Email to Salesforce XactSite Product Change to XS Select Email</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Product_Change_to_XS_Select_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_Email_to_Salesforce_XactSite_Product_Change_to_XS_Total_Email</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>BRIGHT Email to Salesforce XactSite Product Change to XS Total Email</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Product_Change_to_XS_Total_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_Email_to_Salesforce_XactSite_Select_New_Sign_Up</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>BRIGHT Email to Salesforce XactSite Select New Sign Up</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_SignUp_Email_Select</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_Email_to_Salesforce_XactSite_Total_New_Sign_Up</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>BRIGHT Email to Salesforce XactSite Total New Sign Up</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_SignUp_Email_Total</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_XactSite_Agent_IDX_New_Sign_Up_Email_Confirmation</fullName>
+        <description>BRIGHT XactSite Agent IDX New Sign Up Email Confirmation</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_SignUp_Email_Agent_IDX</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_XactSite_Cancellation_Confirmation_Email</fullName>
+        <description>BRIGHT XactSite Cancellation Confirmation Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Cancellation_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_XactSite_Office_IDX_New_Sign_Up_Email_Confirmation</fullName>
+        <description>BRIGHT XactSite Office IDX New Sign Up Email Confirmation</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_SignUp_Email_Office_IDX</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_XactSite_Office_Website_New_Sign_Up_Email_Confirmation</fullName>
+        <description>BRIGHT XactSite Office Website New Sign Up Email Confirmation</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_SignUp_Email_Office_Website</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_XactSite_Premium_New_Sign_Up_Email_Confirmation</fullName>
+        <description>BRIGHT XactSite Premium New Sign Up Email Confirmation</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_SignUp_Email_Premium</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_XactSite_Product_Change_to_XS_Agent_IDX_Email</fullName>
+        <description>BRIGHT XactSite Product Change to XS Agent IDX Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Product_Change_to_XS_Agent_IDX_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_XactSite_Product_Change_to_XS_Office_IDX_Email</fullName>
+        <description>BRIGHT XactSite Product Change to XS Office IDX Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Product_Change_to_XS_Office_IDX_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_XactSite_Product_Change_to_XS_Office_Website_Email</fullName>
+        <description>BRIGHT XactSite Product Change to XS Office Website Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Product_Change_to_XS_Office_Website_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_XactSite_Product_Change_to_XS_Premium_Email</fullName>
+        <description>BRIGHT XactSite Product Change to XS Premium Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Product_Change_to_XS_Premium_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_XactSite_Product_Change_to_XS_Select_Email</fullName>
+        <description>BRIGHT XactSite Product Change to XS Select Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Product_Change_to_XS_Select_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_XactSite_Product_Change_to_XS_Total_Email</fullName>
+        <description>BRIGHT XactSite Product Change to XS Total Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Product_Change_to_XS_Total_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_XactSite_Select_New_Sign_Up_Email_Confirmation</fullName>
+        <description>BRIGHT XactSite Select New Sign Up Email Confirmation</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_SignUp_Email_Select</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_XactSite_Total_New_Sign_Up_Email_Confirmation</fullName>
+        <description>BRIGHT XactSite Total New Sign Up Email Confirmation</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_SignUp_Email_Total</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_to_Salesforce_Sphere_Office_by_Bright_MLS</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>Email to Salesforce Sphere Office by Bright MLS</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>API_Names/Sphere_Office_by_Bright_MLS_SignUp_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_CloudCMA_Cancellation_Confirmation_Email</fullName>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <description>SMS CloudCMA Cancellation Confirmation Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_CloudCMA_Cancellation_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_CloudCMA_New_Sign_Up_Email_Confirmation</fullName>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <description>SMS CloudCMA New Sign Up Email Confirmation</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_CloudCMA_SignUp_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_CloudCMA_Product_Change_Email_Alert</fullName>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <description>SMS CloudCMA Product Change Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_CloudCMA_Product_Change_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_Email_to_Salesforce_CloudCMA</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <description>SMS Email to Salesforce CloudCMA New Sign Up</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_CloudCMA_SignUp_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_Email_to_Salesforce_CloudCMA_Cancellation</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <description>SMS Email to Salesforce CloudCMA Cancellation</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_CloudCMA_Cancellation_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_Email_to_Salesforce_CloudCMA_Product_Change</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <description>SMS Email to Salesforce CloudCMA Product Change</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_CloudCMA_Product_Change_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_Email_to_Salesforce_XactSite_Agent_IDX_New_Sign_Up</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS Email to Salesforce XactSite Agent IDX New Sign Up</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_XactSite_SignUp_Email_Agent_IDX</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_Email_to_Salesforce_XactSite_Cancellation</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS Email to Salesforce XactSite Cancellation</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_XactSite_Cancellation_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_Email_to_Salesforce_XactSite_Office_IDX_New_Sign_Up</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS Email to Salesforce XactSite Office IDX New Sign Up</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_XactSite_SignUp_Email_Office_IDX</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_Email_to_Salesforce_XactSite_Office_Website_New_Sign_Up</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS Email to Salesforce XactSite Office Website New Sign Up</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_XactSite_SignUp_Email_Office_Website</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_Email_to_Salesforce_XactSite_Premium_New_Sign_Up</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS Email to Salesforce XactSite Premium New Sign Up</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_XactSite_SignUp_Email_Premium</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_Email_to_Salesforce_XactSite_Product_Change_to_Office_IDX_Email</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS Email to Salesforce XactSite Product Change to XS Office IDX Email</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_XactSite_Product_Change_to_XS_Office_IDX_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_Email_to_Salesforce_XactSite_Product_Change_to_XS_Agent_IDX_Email</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS Email to Salesforce XactSite Product Change to XS Agent IDX Email</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_XactSite_Product_Change_to_XS_Agent_IDX_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_Email_to_Salesforce_XactSite_Product_Change_to_XS_Office_Website_Email</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS Email to Salesforce XactSite Product Change to XS Office Website Email</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_XactSite_Product_Change_to_XS_Office_Website_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_Email_to_Salesforce_XactSite_Product_Change_to_XS_Premium_Email</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS Email to Salesforce XactSite Product Change to XS Premium Email</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_XactSite_Product_Change_to_XS_Premium_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_Email_to_Salesforce_XactSite_Product_Change_to_XS_Select_Email</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS Email to Salesforce XactSite Product Change to XS Select Email</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_XactSite_Product_Change_to_XS_Select_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_Email_to_Salesforce_XactSite_Product_Change_to_XS_Total_Email</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS Email to Salesforce XactSite Product Change to XS Total Email</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_XactSite_Product_Change_to_XS_Total_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_Email_to_Salesforce_XactSite_Select_New_Sign_Up</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS Email to Salesforce XactSite Select New Sign Up</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_XactSite_SignUp_Email_Select</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_Email_to_Salesforce_XactSite_Total_New_Sign_Up</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS Email to Salesforce XactSite Total New Sign Up</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_XactSite_SignUp_Email_Total</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_XactSite_Agent_IDX_New_Sign_Up_Email_Confirmation</fullName>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS XactSite Agent IDX New Sign Up Email Confirmation</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_XactSite_SignUp_Email_Agent_IDX</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_XactSite_Cancellation_Confirmation_Email</fullName>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS XactSite Cancellation Confirmation Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_XactSite_Cancellation_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_XactSite_Office_IDX_New_Sign_Up_Email_Confirmation</fullName>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS XactSite Office IDX New Sign Up Email Confirmation</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_XactSite_SignUp_Email_Office_IDX</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_XactSite_Office_Website_New_Sign_Up_Email_Confirmation</fullName>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS XactSite Office Website New Sign Up Email Confirmation</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_XactSite_SignUp_Email_Office_Website</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_XactSite_Premium_New_Sign_Up_Email_Confirmation</fullName>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS XactSite Premium New Sign Up Email Confirmation</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_XactSite_SignUp_Email_Premium</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_XactSite_Product_Change_to_XS_Agent_IDX_Email</fullName>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS XactSite Product Change to XS Agent IDX Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_XactSite_Product_Change_to_XS_Agent_IDX_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_XactSite_Product_Change_to_XS_Office_IDX_Email</fullName>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS XactSite Product Change to XS Office IDX Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_XactSite_Product_Change_to_XS_Office_IDX_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_XactSite_Product_Change_to_XS_Office_Website_Email</fullName>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS XactSite Product Change to XS Office Website Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_XactSite_Product_Change_to_XS_Office_Website_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_XactSite_Product_Change_to_XS_Premium_Email</fullName>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS XactSite Product Change to XS Premium Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_XactSite_Product_Change_to_XS_Premium_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_XactSite_Product_Change_to_XS_Select_Email</fullName>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS XactSite Product Change to XS Select Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_XactSite_Product_Change_to_XS_Select_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_XactSite_Product_Change_to_XS_Total_Email</fullName>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS XactSite Product Change to XS Total Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_XactSite_Product_Change_to_XS_Total_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_XactSite_Select_New_Sign_Up_Email_Confirmation</fullName>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS XactSite Select New Sign Up Email Confirmation</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_XactSite_SignUp_Email_Select</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_XactSite_Total_New_Sign_Up_Email_Confirmation</fullName>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS XactSite Total New Sign Up Email Confirmation</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_XactSite_SignUp_Email_Total</template>
+    </alerts>
+    <alerts>
+        <fullName>Sphere_Agent_Office_IDX_Cancellation_Email</fullName>
+        <description>Sphere Agent/Office IDX Cancellation Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_Sphere_Agent_Office_IDX_Cancellation_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>Sphere_Agent_Office_IDX_Cancellation_Email_to_Salesforce</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>Sphere Agent/Office IDX Cancellation Email to Salesforce</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_Sphere_Agent_Office_IDX_Cancellation_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>Sphere_Agent_Office_IDX_New_Sign_Up_Email</fullName>
+        <description>Sphere Agent/Office IDX New Sign Up Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_Sphere_Agent_Office_IDX_SignUp_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>Sphere_Agent_Office_IDX_New_Sign_Up_Email_to_Salesforce</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>Sphere Agent/Office IDX New Sign Up Email to Salesforce</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_Sphere_Agent_Office_IDX_SignUp_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>Sphere_Cancellation_Confirmation_Email_for_MRIS_TREND</fullName>
+        <description>Sphere Cancellation Confirmation Email for MRIS/TREND</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Sphere_Cancellation_Email_for_MRIS_TREND</template>
+    </alerts>
+    <alerts>
+        <fullName>Sphere_Downgrade_Email_to_Salesforce</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>Sphere Downgrade Email to Salesforce</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Sphere_Product_Change_Downgrade_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>Sphere_Email_to_Salesforce_Cancellation_for_MRIS_TREND</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>Sphere Email to Salesforce Cancellation for MRIS/TREND</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Sphere_Cancellation_Email_for_MRIS_TREND</template>
+    </alerts>
+    <alerts>
+        <fullName>Sphere_Email_to_Salesforce_Select_New_Sign_Up_for_BRIGHT_Pro</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>Sphere Email to Salesforce Select New Sign Up for BRIGHT Pro</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Sphere_SignUp_Email_Select_for_BRIGHT_Pro</template>
+    </alerts>
+    <alerts>
+        <fullName>Sphere_Email_to_Salesforce_Select_New_Sign_Up_for_MRIS_TREND</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>Sphere Email to Salesforce Select New Sign Up for MRIS/TREND</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Sphere_SignUp_Email_Select_for_MRIS_TREND</template>
+    </alerts>
+    <alerts>
+        <fullName>Sphere_Office_by_Bright_MLS_Cancelled_Email_Notification</fullName>
+        <description>Sphere Office by Bright MLS Cancelled Email Notification</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Sphere_Office_by_Bright_MLS_cancellation</template>
+    </alerts>
+    <alerts>
+        <fullName>Sphere_Office_by_Bright_MLS_Cancelled_Email_Notification_to_SF</fullName>
+        <ccEmails>emailtosalesforce@z-lh9dypma9adpo2pq0q6zgoeut46ejmjs7k17uk5g001ihkri0.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>Sphere Office by Bright MLS Cancelled Email Notification to SF</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Sphere_Office_by_Bright_MLS_cancellation</template>
+    </alerts>
+    <alerts>
+        <fullName>Sphere_Office_by_Bright_MLS_SignUp_Email_Notification</fullName>
+        <description>Sphere Office by Bright MLS SignUp Email Notification</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Sphere_Office_by_Bright_MLS_SignUp_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>Sphere_Office_by_Bright_MLS_SignUp_Email_to_SF</fullName>
+        <ccEmails>emailtosalesforce@z-lh9dypma9adpo2pq0q6zgoeut46ejmjs7k17uk5g001ihkri0.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>Sphere Office by Bright MLS SignUp Email to SF</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Sphere_Office_by_Bright_MLS_SignUp_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>Sphere_Product_Change_Upgrade_Email</fullName>
+        <description>Sphere Product Change Upgrade Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Sphere_Product_Change_Upgrade_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>Sphere_Product_Change_for_Downgrade</fullName>
+        <description>Sphere Product Change for Downgrade</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>API_Names/Sphere_Product_Change_Downgrade_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>Sphere_Select_New_Sign_Up_Email_Confirmation_for_BRIGHT_Basic</fullName>
+        <description>Sphere Select New Sign Up Email Confirmation for BRIGHT Basic</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Sphere_SignUp_Email_Select_for_BRIGHT_Basic</template>
+    </alerts>
+    <alerts>
+        <fullName>Sphere_Select_New_Sign_Up_Email_Confirmation_for_BRIGHT_Pro</fullName>
+        <description>Sphere Select New Sign Up Email Confirmation for BRIGHT Pro</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Sphere_SignUp_Email_Select_for_BRIGHT_Pro</template>
+    </alerts>
+    <alerts>
+        <fullName>Sphere_Select_New_Sign_Up_Email_Confirmation_for_MRIS_TREND</fullName>
+        <description>Sphere Select New Sign Up Email Confirmation for MRIS/TREND</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Sphere_SignUp_Email_Select_for_MRIS_TREND</template>
+    </alerts>
+    <alerts>
+        <fullName>Sphere_Upgrade_Email_to_Salesforce</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>Sphere Upgrade Email to Salesforce</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Sphere_Product_Change_Upgrade_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>Sphere_cancellation_email_alert</fullName>
+        <description>Sphere cancellation email alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Sphere_Cancellation_Email_for_Basic_and_Pro</template>
+    </alerts>
+    <alerts>
+        <fullName>Sphere_email_to_salesforce_Select_New_Sign_Up_Email_for_BRIGHT_Basic</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>Sphere email to salesforce Select New Sign Up Email for BRIGHT Basic</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Sphere_SignUp_Email_Select_for_BRIGHT_Basic</template>
+    </alerts>
+    <alerts>
+        <fullName>Sphere_email_to_salesforce_cancellation_email_alert</fullName>
+        <ccEmails>emailtosalesforce@z-lh9dypma9adpo2pq0q6zgoeut46ejmjs7k17uk5g001ihkri0.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>Sphere email to salesforce cancellation email alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Sphere_Cancellation_Email_for_Basic_and_Pro</template>
+    </alerts>
+    <alerts>
+        <fullName>TREND_Email_to_Salesforce_XactSite_Agent_IDX_New_Sign_Up</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>TREND Email to Salesforce XactSite Agent IDX New Sign Up</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_SignUp_Email_Agent_IDX</template>
+    </alerts>
+    <alerts>
+        <fullName>TREND_Email_to_Salesforce_XactSite_Cancellation</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>TREND Email to Salesforce XactSite Cancellation</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Cancellation_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>TREND_Email_to_Salesforce_XactSite_Office_IDX_New_Sign_Up</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>TREND Email to Salesforce XactSite Office IDX New Sign Up</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_SignUp_Email_Office_IDX</template>
+    </alerts>
+    <alerts>
+        <fullName>TREND_Email_to_Salesforce_XactSite_Office_Website_New_Sign_Up</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>TREND Email to Salesforce XactSite Office Website New Sign Up</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_SignUp_Email_Office_Website</template>
+    </alerts>
+    <alerts>
+        <fullName>TREND_Email_to_Salesforce_XactSite_Premium_New_Sign_Up</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>TREND Email to Salesforce XactSite Premium New Sign Up</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_SignUp_Email_Premium</template>
+    </alerts>
+    <alerts>
+        <fullName>TREND_Email_to_Salesforce_XactSite_Product_Change_to_Office_IDX_Email</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>TREND Email to Salesforce XactSite Product Change to XS Office IDX Email</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Product_Change_to_XS_Office_IDX_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>TREND_Email_to_Salesforce_XactSite_Product_Change_to_XS_Agent_IDX_Email</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>TREND Email to Salesforce XactSite Product Change to XS Agent IDX Email</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Product_Change_to_XS_Agent_IDX_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>TREND_Email_to_Salesforce_XactSite_Product_Change_to_XS_Office_Website_Email</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>TREND Email to Salesforce XactSite Product Change to XS Office Website Email</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Product_Change_to_XS_Office_Website_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>TREND_Email_to_Salesforce_XactSite_Product_Change_to_XS_Premium_Email</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>TREND Email to Salesforce XactSite Product Change to XS Premium Email</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Product_Change_to_XS_Premium_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>TREND_Email_to_Salesforce_XactSite_Product_Change_to_XS_Select_Email</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>TREND Email to Salesforce XactSite Product Change to XS Select Email</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Product_Change_to_XS_Select_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>TREND_Email_to_Salesforce_XactSite_Product_Change_to_XS_Total_Email</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>TREND Email to Salesforce XactSite Product Change to XS Total Email</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Product_Change_to_XS_Total_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>TREND_Email_to_Salesforce_XactSite_Select_New_Sign_Up</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>TREND Email to Salesforce XactSite Select New Sign Up</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_SignUp_Email_Select</template>
+    </alerts>
+    <alerts>
+        <fullName>TREND_Email_to_Salesforce_XactSite_Total_New_Sign_Up</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>TREND Email to Salesforce XactSite Total New Sign Up</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_SignUp_Email_Total</template>
+    </alerts>
+    <alerts>
+        <fullName>TREND_XactSite_Agent_IDX_New_Sign_Up_Email_Confirmation</fullName>
+        <description>TREND XactSite Agent IDX New Sign Up Email Confirmation</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_SignUp_Email_Agent_IDX</template>
+    </alerts>
+    <alerts>
+        <fullName>TREND_XactSite_Cancellation_Confirmation_Email</fullName>
+        <description>TREND XactSite Cancellation Confirmation Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Cancellation_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>TREND_XactSite_Office_IDX_New_Sign_Up_Email_Confirmation</fullName>
+        <description>TREND XactSite Office IDX New Sign Up Email Confirmation</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_SignUp_Email_Office_IDX</template>
+    </alerts>
+    <alerts>
+        <fullName>TREND_XactSite_Office_Website_New_Sign_Up_Email_Confirmation</fullName>
+        <description>TREND XactSite Office Website New Sign Up Email Confirmation</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_SignUp_Email_Office_Website</template>
+    </alerts>
+    <alerts>
+        <fullName>TREND_XactSite_Premium_New_Sign_Up_Email_Confirmation</fullName>
+        <description>TREND XactSite Premium New Sign Up Email Confirmation</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_SignUp_Email_Premium</template>
+    </alerts>
+    <alerts>
+        <fullName>TREND_XactSite_Product_Change_to_XS_Agent_IDX_Email</fullName>
+        <description>TREND XactSite Product Change to XS Agent IDX Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Product_Change_to_XS_Agent_IDX_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>TREND_XactSite_Product_Change_to_XS_Office_IDX_Email</fullName>
+        <description>TREND XactSite Product Change to XS Office IDX Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Product_Change_to_XS_Office_IDX_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>TREND_XactSite_Product_Change_to_XS_Office_Website_Email</fullName>
+        <description>TREND XactSite Product Change to XS Office Website Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Product_Change_to_XS_Office_Website_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>TREND_XactSite_Product_Change_to_XS_Premium_Email</fullName>
+        <description>TREND XactSite Product Change to XS Premium Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Product_Change_to_XS_Premium_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>TREND_XactSite_Product_Change_to_XS_Select_Email</fullName>
+        <description>TREND XactSite Product Change to XS Select Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Product_Change_to_XS_Select_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>TREND_XactSite_Product_Change_to_XS_Total_Email</fullName>
+        <description>TREND XactSite Product Change to XS Total Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_Product_Change_to_XS_Total_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>TREND_XactSite_Select_New_Sign_Up_Email_Confirmation</fullName>
+        <description>TREND XactSite Select New Sign Up Email Confirmation</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_SignUp_Email_Select</template>
+    </alerts>
+    <alerts>
+        <fullName>TREND_XactSite_Total_New_Sign_Up_Email_Confirmation</fullName>
+        <description>TREND XactSite Total New Sign Up Email Confirmation</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_XactSite_SignUp_Email_Total</template>
+    </alerts>
+    <outboundMessages>
+        <fullName>Send_Outbound_Message_Pervasive</fullName>
+        <apiVersion>29.0</apiVersion>
+        <description>https://pervasive.tst.mris.com:8443/SF_DI_Message</description>
+        <endpointUrl>https://pervasive.dev.mris.com:8443/SF_DI_Message</endpointUrl>
+        <fields>Authentisign_Id__c</fields>
+        <fields>Authentisign_User_Id__c</fields>
+        <fields>Id</fields>
+        <fields>LastModifiedDate</fields>
+        <fields>MRIS_Subscription_Id__c</fields>
+        <fields>Name</fields>
+        <fields>Order_Id__c</fields>
+        <fields>Previous_Provisioned_Status__c</fields>
+        <fields>Product_Status__c</fields>
+        <fields>Product_Sub_Type__c</fields>
+        <fields>Product_Type__c</fields>
+        <fields>Provisioned_Product_Id__c</fields>
+        <fields>Provisioned_Status__c</fields>
+        <fields>RealPing_Id__c</fields>
+        <fields>Status_Message__c</fields>
+        <fields>XactSite_Office_ID__c</fields>
+        <fields>XactSite_Salesperson_Name__c</fields>
+        <fields>Zuora_Product_Id__c</fields>
+        <fields>Zuora_Product_Rate_Plan_Id__c</fields>
+        <includeSessionId>true</includeSessionId>
+        <integrationUser>mris_sf_api@mris.net</integrationUser>
+        <name>Send Outbound Message Pervasive</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>BRIGHT CloudCMA Cancellation Confirmation Email</fullName>
+        <actions>
+            <name>BRIGHT_CloudCMA_Cancellation_Confirmation_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>BRIGHT_Email_to_Salesforce_CloudCMA_Cancellation</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>IF(ISPICKVAL(Product_Type__c,&apos;CloudCMA&apos;)   &amp;&amp;  ISPICKVAL(Product_Status__c, &apos;Terminate&apos;) &amp;&amp;  ISPICKVAL(Provisioned_Status__c, &apos;Deprovisioned&apos;) &amp;&amp; ISPICKVAL(Subscription__r.Service_Jurisdiction__c , &apos;BRIGHT&apos;) ,true, false)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>BRIGHT CloudCMA New Sign Up Email Confirmation</fullName>
+        <actions>
+            <name>BRIGHT_CloudCMA_New_Sign_Up_Email_Confirmation</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>BRIGHT_Email_to_Salesforce_CloudCMA_New_Sign_Up</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>IF( ISPICKVAL( Product_Type__c, &apos;CloudCMA&apos;)   &amp;&amp; ISPICKVAL(  Provisioned_Status__c, &apos;Provisioned&apos;) &amp;&amp;  ISPICKVAL( Product_Status__c, &apos;New&apos;)  &amp;&amp; ISPICKVAL(Subscription__r.Service_Jurisdiction__c , &apos;BRIGHT&apos;), true, false)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>BRIGHT CloudCMA Product Change Email Confirmation</fullName>
+        <actions>
+            <name>BRIGHT_CloudCMA_Product_Change_Email_Alert</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>BRIGHT_Email_to_Salesforce_CloudCMA_Product_Change</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>IF(Text(Product_Sub_Type__c) !=  Previuos_ProductSubType__c ,true,false) &amp;&amp;  ISPICKVAL(Product_Status__c,&apos;Update&apos;) &amp;&amp; ISPICKVAL(Provisioned_Status__c,&apos;Provisioned&apos;) &amp;&amp;  ISPICKVAL(Subscription__r.Service_Jurisdiction__c, &apos;BRIGHT&apos;)  &amp;&amp; ISPICKVAL(Product_Type__c,&apos;CloudCMA&apos;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>BRIGHT Sphere Product Change Email Confirmation</fullName>
+        <actions>
+            <name>Sphere_Product_Change_Upgrade_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Sphere_Upgrade_Email_to_Salesforce</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <formula>AND(ISPICKVAL(Product_Status__c,&apos;Update&apos;), ISPICKVAL(Product_Type__c,&apos;Sphere by Bright MLS&apos;) , ISPICKVAL(Provisioned_Status__c,&apos;Provisioned&apos;) , OR(ISPICKVAL(Product_Sub_Type__c ,&apos;Sphere by Bright MLS Pro&apos;),  ISPICKVAL(Product_Sub_Type__c , &apos;Sphere by Bright MLS Basic&apos;)),
+(ISPICKVAL(Service_Jurisdiction__c,&apos;BRIGHT&apos;)))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>BRIGHT XactSite Agent IDX New Sign Up Email Confirmation</fullName>
+        <actions>
+            <name>BRIGHT_Email_to_Salesforce_XactSite_Agent_IDX_New_Sign_Up</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>BRIGHT_XactSite_Agent_IDX_New_Sign_Up_Email_Confirmation</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>XactSite Agent IDX</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Provisioned</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status__c</field>
+            <operation>equals</operation>
+            <value>New,Reinstate</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>BRIGHT</value>
+        </criteriaItems>
+        <description>XactSite New Sign Up Email Confirmation for the product XactSite Agent IDX</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>BRIGHT XactSite Cancellation Confirmation Email</fullName>
+        <actions>
+            <name>BRIGHT_Email_to_Salesforce_XactSite_Cancellation</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>BRIGHT_XactSite_Cancellation_Confirmation_Email</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>XactSite Total,XactSite Select,XactSite Premium,XactSite Agent IDX,XactSite Office IDX,XactSite Office Website</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status__c</field>
+            <operation>equals</operation>
+            <value>Terminate</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Deprovisioned</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status_Reason__c</field>
+            <operation>notEqual</operation>
+            <value>Subscription Auto-Suspended</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>BRIGHT</value>
+        </criteriaItems>
+        <description>XactSite Cancellation Email Confirmation for  all XactSite products</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>BRIGHT XactSite Office IDX New Sign Up Email Confirmation</fullName>
+        <actions>
+            <name>BRIGHT_Email_to_Salesforce_XactSite_Office_IDX_New_Sign_Up</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>BRIGHT_XactSite_Office_IDX_New_Sign_Up_Email_Confirmation</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>XactSite Office IDX</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Provisioned</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status__c</field>
+            <operation>equals</operation>
+            <value>New,Reinstate</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>BRIGHT</value>
+        </criteriaItems>
+        <description>XactSite New Sign Up Email Confirmation for the product XactSite Office IDX</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>BRIGHT XactSite Office Website New Sign Up Email Confirmation</fullName>
+        <actions>
+            <name>BRIGHT_Email_to_Salesforce_XactSite_Office_Website_New_Sign_Up</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>BRIGHT_XactSite_Office_Website_New_Sign_Up_Email_Confirmation</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>XactSite Office Website</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Provisioned</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status__c</field>
+            <operation>equals</operation>
+            <value>New,Reinstate</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>BRIGHT</value>
+        </criteriaItems>
+        <description>XactSite New Sign Up Email Confirmation for the product XactSite Office Website</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>BRIGHT XactSite Premium New Sign Up Email Confirmation</fullName>
+        <actions>
+            <name>BRIGHT_Email_to_Salesforce_XactSite_Premium_New_Sign_Up</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>BRIGHT_XactSite_Premium_New_Sign_Up_Email_Confirmation</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>XactSite Premium</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Provisioned</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status__c</field>
+            <operation>equals</operation>
+            <value>New,Reinstate</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>BRIGHT</value>
+        </criteriaItems>
+        <description>XactSite New Sign Up Email Confirmation for the products XactSite Premium</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>BRIGHT XactSite Product Change to XS Agent IDX Email Confirmation</fullName>
+        <actions>
+            <name>BRIGHT_Email_to_Salesforce_XactSite_Product_Change_to_XS_Agent_IDX_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>BRIGHT_XactSite_Product_Change_to_XS_Agent_IDX_Email</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>IF(Text(Product_Sub_Type__c) !=  Previuos_ProductSubType__c ,true,false) &amp;&amp;  ISPICKVAL(Product_Status__c,&apos;Update&apos;) &amp;&amp; ISPICKVAL(Provisioned_Status__c,&apos;Provisioned&apos;) &amp;&amp;  OR(Previuos_ProductSubType__c == &apos;XactSite Total&apos;,    Previuos_ProductSubType__c == &apos;XactSite Select&apos;,    Previuos_ProductSubType__c == &apos;XactSite Premium&apos;,    Previuos_ProductSubType__c == &apos;XactSite Agent IDX&apos;,     Previuos_ProductSubType__c == &apos;XactSite Office IDX&apos;,    Previuos_ProductSubType__c == &apos;XactSite Office Website&apos;)      &amp;&amp;      OR(Text(Product_Sub_Type__c) == &apos;XactSite Agent IDX&apos;)
+&amp;&amp; (ISPICKVAL(Service_Jurisdiction__c,&apos;BRIGHT&apos;))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>BRIGHT XactSite Product Change to XS Office IDX Email Confirmation</fullName>
+        <actions>
+            <name>BRIGHT_Email_to_Salesforce_XactSite_Product_Change_to_Office_IDX_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>BRIGHT_XactSite_Product_Change_to_XS_Office_IDX_Email</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>IF(Text(Product_Sub_Type__c) !=  Previuos_ProductSubType__c ,true,false) &amp;&amp;  ISPICKVAL(Product_Status__c,&apos;Update&apos;) &amp;&amp; ISPICKVAL(Provisioned_Status__c,&apos;Provisioned&apos;) &amp;&amp;  OR(Previuos_ProductSubType__c == &apos;XactSite Total&apos;,    Previuos_ProductSubType__c == &apos;XactSite Select&apos;,    Previuos_ProductSubType__c == &apos;XactSite Premium&apos;,    Previuos_ProductSubType__c == &apos;XactSite Agent IDX&apos;,     Previuos_ProductSubType__c == &apos;XactSite Office IDX&apos;,    Previuos_ProductSubType__c == &apos;XactSite Office Website&apos;)      &amp;&amp;      OR(Text(Product_Sub_Type__c) == &apos;XactSite Office IDX&apos;) &amp;&amp;
+(ISPICKVAL(Service_Jurisdiction__c,&apos;BRIGHT&apos;))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>BRIGHT XactSite Product Change to XS Office Website Email Confirmation</fullName>
+        <actions>
+            <name>BRIGHT_Email_to_Salesforce_XactSite_Product_Change_to_XS_Office_Website_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>BRIGHT_XactSite_Product_Change_to_XS_Office_Website_Email</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>IF(Text(Product_Sub_Type__c) !=  Previuos_ProductSubType__c ,true,false) &amp;&amp;  ISPICKVAL(Product_Status__c,&apos;Update&apos;) &amp;&amp; ISPICKVAL(Provisioned_Status__c,&apos;Provisioned&apos;) &amp;&amp;  OR(Previuos_ProductSubType__c == &apos;XactSite Total&apos;,    Previuos_ProductSubType__c == &apos;XactSite Select&apos;,    Previuos_ProductSubType__c == &apos;XactSite Premium&apos;,    Previuos_ProductSubType__c == &apos;XactSite Agent IDX&apos;,     Previuos_ProductSubType__c == &apos;XactSite Office IDX&apos;,    Previuos_ProductSubType__c == &apos;XactSite Office Website&apos;)      &amp;&amp;      OR(Text(Product_Sub_Type__c) == &apos;XactSite Office Website&apos;) &amp;&amp; 
+(ISPICKVAL(Service_Jurisdiction__c,&apos;BRIGHT&apos;))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>BRIGHT XactSite Product Change to XS Premium Email Confirmation</fullName>
+        <actions>
+            <name>BRIGHT_Email_to_Salesforce_XactSite_Product_Change_to_XS_Premium_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>BRIGHT_XactSite_Product_Change_to_XS_Premium_Email</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>IF(Text(Product_Sub_Type__c) !=  Previuos_ProductSubType__c ,true,false) &amp;&amp;  ISPICKVAL(Product_Status__c,&apos;Update&apos;) &amp;&amp; ISPICKVAL(Provisioned_Status__c,&apos;Provisioned&apos;) &amp;&amp;  OR(Previuos_ProductSubType__c == &apos;XactSite Total&apos;,    Previuos_ProductSubType__c == &apos;XactSite Select&apos;,    Previuos_ProductSubType__c == &apos;XactSite Premium&apos;,    Previuos_ProductSubType__c == &apos;XactSite Agent IDX&apos;,     Previuos_ProductSubType__c == &apos;XactSite Office IDX&apos;,    Previuos_ProductSubType__c == &apos;XactSite Office Website&apos;)      &amp;&amp;      OR(Text(Product_Sub_Type__c) == &apos;XactSite Premium&apos;)
+&amp;&amp; 
+(ISPICKVAL(Service_Jurisdiction__c,&apos;BRIGHT&apos;))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>BRIGHT XactSite Product Change to XS Select Email Confirmation</fullName>
+        <actions>
+            <name>BRIGHT_Email_to_Salesforce_XactSite_Product_Change_to_XS_Select_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>BRIGHT_XactSite_Product_Change_to_XS_Select_Email</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>IF(Text(Product_Sub_Type__c) !=  Previuos_ProductSubType__c ,true,false) &amp;&amp;  ISPICKVAL(Product_Status__c,&apos;Update&apos;) &amp;&amp; ISPICKVAL(Provisioned_Status__c,&apos;Provisioned&apos;) &amp;&amp;  OR(Previuos_ProductSubType__c == &apos;XactSite Total&apos;,    Previuos_ProductSubType__c == &apos;XactSite Select&apos;,    Previuos_ProductSubType__c == &apos;XactSite Premium&apos;,    Previuos_ProductSubType__c == &apos;XactSite Agent IDX&apos;,     Previuos_ProductSubType__c == &apos;XactSite Office IDX&apos;,    Previuos_ProductSubType__c == &apos;XactSite Office Website&apos;)      &amp;&amp;      OR(Text(Product_Sub_Type__c) == &apos;XactSite Select&apos;)
+&amp;&amp; 
+(ISPICKVAL(Service_Jurisdiction__c,&apos;BRIGHT&apos;))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>BRIGHT XactSite Product Change to XS Total Email Confirmation</fullName>
+        <actions>
+            <name>BRIGHT_Email_to_Salesforce_XactSite_Product_Change_to_XS_Total_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>BRIGHT_XactSite_Product_Change_to_XS_Total_Email</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>IF(Text(Product_Sub_Type__c) !=  Previuos_ProductSubType__c ,true,false) &amp;&amp;  ISPICKVAL(Product_Status__c,&apos;Update&apos;) &amp;&amp; ISPICKVAL(Provisioned_Status__c,&apos;Provisioned&apos;) &amp;&amp;  OR(Previuos_ProductSubType__c == &apos;XactSite Total&apos;,    Previuos_ProductSubType__c == &apos;XactSite Select&apos;,    Previuos_ProductSubType__c == &apos;XactSite Premium&apos;,    Previuos_ProductSubType__c == &apos;XactSite Agent IDX&apos;,     Previuos_ProductSubType__c == &apos;XactSite Office IDX&apos;,    Previuos_ProductSubType__c == &apos;XactSite Office Website&apos;)      &amp;&amp; OR(Text(Product_Sub_Type__c) == &apos;XactSite Total&apos;)
+&amp;&amp; 
+(ISPICKVAL(Service_Jurisdiction__c,&apos;BRIGHT&apos;))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>BRIGHT XactSite Select New Sign Up Email Confirmation</fullName>
+        <actions>
+            <name>BRIGHT_Email_to_Salesforce_XactSite_Select_New_Sign_Up</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>BRIGHT_XactSite_Select_New_Sign_Up_Email_Confirmation</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>XactSite Select</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Provisioned</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status__c</field>
+            <operation>equals</operation>
+            <value>New,Reinstate</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>BRIGHT</value>
+        </criteriaItems>
+        <description>XactSite New Sign Up Email Confirmation for the products XactSite Select</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>BRIGHT XactSite Total New Sign Up Email Confirmation</fullName>
+        <actions>
+            <name>BRIGHT_Email_to_Salesforce_XactSite_Total_New_Sign_Up</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>BRIGHT_XactSite_Total_New_Sign_Up_Email_Confirmation</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>XactSite Total</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Provisioned</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status__c</field>
+            <operation>equals</operation>
+            <value>New,Reinstate</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>BRIGHT</value>
+        </criteriaItems>
+        <description>XactSite New Sign Up Email Confirmation for the products XactSite Total</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Product Provisioning Outbound Message</fullName>
+        <actions>
+            <name>Send_Outbound_Message_Pervasive</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Pending Provisioned,Pending Deprovisioned</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>SMS CloudCMA Cancellation Confirmation Email</fullName>
+        <actions>
+            <name>SMS_CloudCMA_Cancellation_Confirmation_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>SMS_Email_to_Salesforce_CloudCMA_Cancellation</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>CloudCMA Cancellation Email Confirmation</description>
+        <formula>IF(ISPICKVAL(Product_Type__c,&apos;CloudCMA&apos;)   &amp;&amp;  ISPICKVAL(Product_Status__c, &apos;Terminate&apos;) &amp;&amp;  ISPICKVAL(Provisioned_Status__c, &apos;Deprovisioned&apos;) &amp;&amp; (ISPICKVAL(Subscription__r.Service_Jurisdiction__c , &apos;MRIS&apos;) ||  ISPICKVAL( Subscription__r.Service_Jurisdiction__c , &apos;&apos;))  ,true, false)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>SMS CloudCMA New Sign Up Email Confirmation</fullName>
+        <actions>
+            <name>SMS_CloudCMA_New_Sign_Up_Email_Confirmation</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>SMS_Email_to_Salesforce_CloudCMA</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>New Sign Up Email Confirmation for the product CloudCMA</description>
+        <formula>IF( ISPICKVAL( Product_Type__c, &apos;CloudCMA&apos;) &amp;&amp; ISPICKVAL( Provisioned_Status__c, &apos;Provisioned&apos;) &amp;&amp; ISPICKVAL( Product_Status__c, &apos;New&apos;) &amp;&amp; (ISPICKVAL(Subscription__r.Service_Jurisdiction__c , &apos;MRIS&apos;)  || ISPICKVAL(Subscription__r.Service_Jurisdiction__c , &apos;&apos;)), true, false)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>SMS CloudCMA Product Change to CloudCMA Monthly Email Confirmation</fullName>
+        <actions>
+            <name>SMS_CloudCMA_Product_Change_Email_Alert</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>SMS_Email_to_Salesforce_CloudCMA_Product_Change</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <description>SMS CloudCMA Product Change to CloudCMA Monthly Email Confirmation</description>
+        <formula>IF(
+Text(Product_Sub_Type__c) !=  Previuos_ProductSubType__c ,true,false) &amp;&amp;  ISPICKVAL(Product_Status__c,&apos;Update&apos;) &amp;&amp; ISPICKVAL(Provisioned_Status__c,&apos;Provisioned&apos;) &amp;&amp;  
+OR(
+   Previuos_ProductSubType__c == &apos;CloudCMA 1 Year&apos;,    
+   Previuos_ProductSubType__c == &apos;CloudCMA 2 Year&apos;,    
+   Previuos_ProductSubType__c == &apos;CloudCMA Monthly&apos;
+)&amp;&amp;      
+OR(
+   Text(Product_Sub_Type__c) == &apos;CloudCMA Monthly&apos;
+) &amp;&amp;  
+OR(
+  ISPICKVAL(Subscription__r.Service_Jurisdiction__c, &apos;MRIS&apos;),
+  ISPICKVAL(Subscription__r.Service_Jurisdiction__c, &apos;&apos;)
+)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>SMS CloudCMA Product Change to CloudCMA One Year Email Confirmation</fullName>
+        <actions>
+            <name>SMS_CloudCMA_Product_Change_Email_Alert</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>SMS_Email_to_Salesforce_CloudCMA_Product_Change</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <description>SMS CloudCMA Product Change to CloudCMA One Year Email Confirmation</description>
+        <formula>IF(Text(Product_Sub_Type__c) != Previuos_ProductSubType__c,true,false) &amp;&amp; 
+ISPICKVAL(Product_Status__c,&apos;Update&apos;) &amp;&amp; ISPICKVAL(Provisioned_Status__c,&apos;Provisioned&apos;) &amp;&amp;  
+OR(
+   Previuos_ProductSubType__c == &apos;CloudCMA 1 Year&apos;,    
+   Previuos_ProductSubType__c == &apos;CloudCMA 2 Year&apos;,    
+   Previuos_ProductSubType__c == &apos;CloudCMA Monthly&apos;
+)&amp;&amp;     
+OR(
+   Text(Product_Sub_Type__c) == &apos;CloudCMA 1 Year&apos;
+) &amp;&amp;  
+OR(
+  ISPICKVAL(Subscription__r.Service_Jurisdiction__c, &apos;MRIS&apos;),
+  ISPICKVAL(Subscription__r.Service_Jurisdiction__c, &apos;&apos;)
+)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>SMS CloudCMA Product Change to CloudCMA Two Year Email Confirmation</fullName>
+        <actions>
+            <name>SMS_CloudCMA_Product_Change_Email_Alert</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>SMS_Email_to_Salesforce_CloudCMA_Product_Change</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <description>SMS CloudCMA Product Change to CloudCMA Two Year Email Confirmation</description>
+        <formula>IF(Text(Product_Sub_Type__c) !=  Previuos_ProductSubType__c ,true,false) &amp;&amp;  
+ISPICKVAL(Product_Status__c,&apos;Update&apos;) &amp;&amp; ISPICKVAL(Provisioned_Status__c,&apos;Provisioned&apos;) &amp;&amp;  
+OR(
+   Previuos_ProductSubType__c == &apos;CloudCMA 1 Year&apos;,    
+   Previuos_ProductSubType__c == &apos;CloudCMA 2 Year&apos;,    
+   Previuos_ProductSubType__c == &apos;CloudCMA Monthly&apos;
+)      &amp;&amp;      
+OR(
+   Text(Product_Sub_Type__c) == &apos;CloudCMA 2 Year&apos;
+) &amp;&amp;  
+OR(
+  ISPICKVAL(Subscription__r.Service_Jurisdiction__c, &apos;MRIS&apos;),
+  ISPICKVAL(Subscription__r.Service_Jurisdiction__c, &apos;&apos;)
+)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>SMS XactSite Agent IDX New Sign Up Email Confirmation</fullName>
+        <actions>
+            <name>SMS_Email_to_Salesforce_XactSite_Agent_IDX_New_Sign_Up</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>SMS_XactSite_Agent_IDX_New_Sign_Up_Email_Confirmation</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>XactSite Agent IDX</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Provisioned</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status__c</field>
+            <operation>equals</operation>
+            <value>New,Reinstate</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>MRIS</value>
+        </criteriaItems>
+        <description>XactSite New Sign Up Email Confirmation for the product XactSite Agent IDX</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>SMS XactSite Cancellation Confirmation Email</fullName>
+        <actions>
+            <name>SMS_Email_to_Salesforce_XactSite_Cancellation</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>SMS_XactSite_Cancellation_Confirmation_Email</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>XactSite Total,XactSite Select,XactSite Premium,XactSite Agent IDX,XactSite Office IDX,XactSite Office Website</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status__c</field>
+            <operation>equals</operation>
+            <value>Terminate</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Deprovisioned</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status_Reason__c</field>
+            <operation>notEqual</operation>
+            <value>Subscription Auto-Suspended</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>MRIS</value>
+        </criteriaItems>
+        <description>XactSite Cancellation Email Confirmation for  all XactSite products</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>SMS XactSite Office IDX New Sign Up Email Confirmation</fullName>
+        <actions>
+            <name>SMS_Email_to_Salesforce_XactSite_Office_IDX_New_Sign_Up</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>SMS_XactSite_Office_IDX_New_Sign_Up_Email_Confirmation</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>XactSite Office IDX</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Provisioned</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status__c</field>
+            <operation>equals</operation>
+            <value>New,Reinstate</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>MRIS</value>
+        </criteriaItems>
+        <description>XactSite New Sign Up Email Confirmation for the product XactSite Office IDX</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>SMS XactSite Office Website New Sign Up Email Confirmation</fullName>
+        <actions>
+            <name>SMS_Email_to_Salesforce_XactSite_Office_Website_New_Sign_Up</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>SMS_XactSite_Office_Website_New_Sign_Up_Email_Confirmation</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>XactSite Office Website</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Provisioned</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status__c</field>
+            <operation>equals</operation>
+            <value>New,Reinstate</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>MRIS</value>
+        </criteriaItems>
+        <description>XactSite New Sign Up Email Confirmation for the product XactSite Office Website</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>SMS XactSite Premium New Sign Up Email Confirmation</fullName>
+        <actions>
+            <name>SMS_Email_to_Salesforce_XactSite_Premium_New_Sign_Up</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>SMS_XactSite_Premium_New_Sign_Up_Email_Confirmation</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>XactSite Premium</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Provisioned</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status__c</field>
+            <operation>equals</operation>
+            <value>New,Reinstate</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>MRIS</value>
+        </criteriaItems>
+        <description>XactSite New Sign Up Email Confirmation for the products XactSite Premium</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>SMS XactSite Product Change to XS Agent IDX Email Confirmation</fullName>
+        <actions>
+            <name>SMS_Email_to_Salesforce_XactSite_Product_Change_to_XS_Agent_IDX_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>SMS_XactSite_Product_Change_to_XS_Agent_IDX_Email</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>IF(Text(Product_Sub_Type__c) !=  Previuos_ProductSubType__c ,true,false) &amp;&amp;  ISPICKVAL(Product_Status__c,&apos;Update&apos;) &amp;&amp; ISPICKVAL(Provisioned_Status__c,&apos;Provisioned&apos;) &amp;&amp;  OR(Previuos_ProductSubType__c == &apos;XactSite Total&apos;,    Previuos_ProductSubType__c == &apos;XactSite Select&apos;,    Previuos_ProductSubType__c == &apos;XactSite Premium&apos;,    Previuos_ProductSubType__c == &apos;XactSite Agent IDX&apos;,     Previuos_ProductSubType__c == &apos;XactSite Office IDX&apos;,    Previuos_ProductSubType__c == &apos;XactSite Office Website&apos;)      &amp;&amp;      OR(Text(Product_Sub_Type__c) == &apos;XactSite Agent IDX&apos;)
+&amp;&amp; (ISPICKVAL(Service_Jurisdiction__c,&apos;MRIS&apos;))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>SMS XactSite Product Change to XS Office IDX Email Confirmation</fullName>
+        <actions>
+            <name>SMS_Email_to_Salesforce_XactSite_Product_Change_to_Office_IDX_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>SMS_XactSite_Product_Change_to_XS_Office_IDX_Email</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>IF(Text(Product_Sub_Type__c) !=  Previuos_ProductSubType__c ,true,false) &amp;&amp;  ISPICKVAL(Product_Status__c,&apos;Update&apos;) &amp;&amp; ISPICKVAL(Provisioned_Status__c,&apos;Provisioned&apos;) &amp;&amp;  OR(Previuos_ProductSubType__c == &apos;XactSite Total&apos;,    Previuos_ProductSubType__c == &apos;XactSite Select&apos;,    Previuos_ProductSubType__c == &apos;XactSite Premium&apos;,    Previuos_ProductSubType__c == &apos;XactSite Agent IDX&apos;,     Previuos_ProductSubType__c == &apos;XactSite Office IDX&apos;,    Previuos_ProductSubType__c == &apos;XactSite Office Website&apos;)      &amp;&amp;      OR(Text(Product_Sub_Type__c) == &apos;XactSite Office IDX&apos;)
+&amp;&amp; (ISPICKVAL(Service_Jurisdiction__c,&apos;MRIS&apos;))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>SMS XactSite Product Change to XS Office Website Email Confirmation</fullName>
+        <actions>
+            <name>SMS_Email_to_Salesforce_XactSite_Product_Change_to_XS_Office_Website_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>SMS_XactSite_Product_Change_to_XS_Office_Website_Email</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>IF(Text(Product_Sub_Type__c) !=  Previuos_ProductSubType__c ,true,false) &amp;&amp;  ISPICKVAL(Product_Status__c,&apos;Update&apos;) &amp;&amp; ISPICKVAL(Provisioned_Status__c,&apos;Provisioned&apos;) &amp;&amp;  OR(Previuos_ProductSubType__c == &apos;XactSite Total&apos;,    Previuos_ProductSubType__c == &apos;XactSite Select&apos;,    Previuos_ProductSubType__c == &apos;XactSite Premium&apos;,    Previuos_ProductSubType__c == &apos;XactSite Agent IDX&apos;,     Previuos_ProductSubType__c == &apos;XactSite Office IDX&apos;,    Previuos_ProductSubType__c == &apos;XactSite Office Website&apos;)      &amp;&amp;      OR(Text(Product_Sub_Type__c) == &apos;XactSite Office Website&apos;) &amp;&amp; (ISPICKVAL(Service_Jurisdiction__c,&apos;MRIS&apos;))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>SMS XactSite Product Change to XS Premium Email Confirmation</fullName>
+        <actions>
+            <name>SMS_Email_to_Salesforce_XactSite_Product_Change_to_XS_Premium_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>SMS_XactSite_Product_Change_to_XS_Premium_Email</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>IF(Text(Product_Sub_Type__c) !=  Previuos_ProductSubType__c ,true,false) &amp;&amp;  ISPICKVAL(Product_Status__c,&apos;Update&apos;) &amp;&amp; ISPICKVAL(Provisioned_Status__c,&apos;Provisioned&apos;) &amp;&amp;  OR(Previuos_ProductSubType__c == &apos;XactSite Total&apos;,    Previuos_ProductSubType__c == &apos;XactSite Select&apos;,    Previuos_ProductSubType__c == &apos;XactSite Premium&apos;,    Previuos_ProductSubType__c == &apos;XactSite Agent IDX&apos;,     Previuos_ProductSubType__c == &apos;XactSite Office IDX&apos;,    Previuos_ProductSubType__c == &apos;XactSite Office Website&apos;)      &amp;&amp;      OR(Text(Product_Sub_Type__c) == &apos;XactSite Premium&apos;)
+&amp;&amp; (ISPICKVAL(Service_Jurisdiction__c,&apos;MRIS&apos;))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>SMS XactSite Product Change to XS Select Email Confirmation</fullName>
+        <actions>
+            <name>SMS_Email_to_Salesforce_XactSite_Product_Change_to_XS_Select_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>SMS_XactSite_Product_Change_to_XS_Select_Email</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>IF(Text(Product_Sub_Type__c) !=  Previuos_ProductSubType__c ,true,false) &amp;&amp;  ISPICKVAL(Product_Status__c,&apos;Update&apos;) &amp;&amp; ISPICKVAL(Provisioned_Status__c,&apos;Provisioned&apos;) &amp;&amp;  OR(Previuos_ProductSubType__c == &apos;XactSite Total&apos;,    Previuos_ProductSubType__c == &apos;XactSite Select&apos;,    Previuos_ProductSubType__c == &apos;XactSite Premium&apos;,    Previuos_ProductSubType__c == &apos;XactSite Agent IDX&apos;,     Previuos_ProductSubType__c == &apos;XactSite Office IDX&apos;,    Previuos_ProductSubType__c == &apos;XactSite Office Website&apos;)      &amp;&amp;      OR(Text(Product_Sub_Type__c) == &apos;XactSite Select&apos;)
+&amp;&amp; (ISPICKVAL(Service_Jurisdiction__c,&apos;MRIS&apos;))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>SMS XactSite Product Change to XS Total Email Confirmation</fullName>
+        <actions>
+            <name>SMS_Email_to_Salesforce_XactSite_Product_Change_to_XS_Total_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>SMS_XactSite_Product_Change_to_XS_Total_Email</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>IF(Text(Product_Sub_Type__c) !=  Previuos_ProductSubType__c ,true,false) &amp;&amp;  ISPICKVAL(Product_Status__c,&apos;Update&apos;) &amp;&amp; ISPICKVAL(Provisioned_Status__c,&apos;Provisioned&apos;) &amp;&amp;  OR(Previuos_ProductSubType__c == &apos;XactSite Total&apos;,    Previuos_ProductSubType__c == &apos;XactSite Select&apos;,    Previuos_ProductSubType__c == &apos;XactSite Premium&apos;,    Previuos_ProductSubType__c == &apos;XactSite Agent IDX&apos;,     Previuos_ProductSubType__c == &apos;XactSite Office IDX&apos;,    Previuos_ProductSubType__c == &apos;XactSite Office Website&apos;)      &amp;&amp; OR(Text(Product_Sub_Type__c) == &apos;XactSite Total&apos;)
+&amp;&amp; (ISPICKVAL(Service_Jurisdiction__c,&apos;MRIS&apos;))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>SMS XactSite Select New Sign Up Email Confirmation</fullName>
+        <actions>
+            <name>SMS_Email_to_Salesforce_XactSite_Select_New_Sign_Up</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>SMS_XactSite_Select_New_Sign_Up_Email_Confirmation</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>XactSite Select</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Provisioned</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status__c</field>
+            <operation>equals</operation>
+            <value>New,Reinstate</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>MRIS</value>
+        </criteriaItems>
+        <description>XactSite New Sign Up Email Confirmation for the products XactSite Select</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>SMS XactSite Total New Sign Up Email Confirmation</fullName>
+        <actions>
+            <name>SMS_Email_to_Salesforce_XactSite_Total_New_Sign_Up</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>SMS_XactSite_Total_New_Sign_Up_Email_Confirmation</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>XactSite Total</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Provisioned</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status__c</field>
+            <operation>equals</operation>
+            <value>New,Reinstate</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>MRIS</value>
+        </criteriaItems>
+        <description>XactSite New Sign Up Email Confirmation for the products XactSite Total</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Sphere Cancellation Confirmation Email for BRIGHT</fullName>
+        <actions>
+            <name>Sphere_Agent_Office_IDX_Cancellation_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Sphere_Agent_Office_IDX_Cancellation_Email_to_Salesforce</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>Sphere by Bright MLS Basic,Sphere by Bright MLS Pro</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status__c</field>
+            <operation>equals</operation>
+            <value>Terminate</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Deprovisioned</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status_Reason__c</field>
+            <operation>notEqual</operation>
+            <value>Subscription Auto-Suspended</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>BRIGHT</value>
+        </criteriaItems>
+        <description>Sphere Cancellation Email Confirmation for  all Sphere products</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Sphere Cancellation Confirmation Email for MRIS%2FTREND</fullName>
+        <actions>
+            <name>Sphere_Cancellation_Confirmation_Email_for_MRIS_TREND</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Sphere_Email_to_Salesforce_Cancellation_for_MRIS_TREND</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>Sphere by Bright MLS Basic,Sphere by Bright MLS Pro</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status__c</field>
+            <operation>equals</operation>
+            <value>Terminate</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Deprovisioned</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status_Reason__c</field>
+            <operation>notEqual</operation>
+            <value>Subscription Auto-Suspended</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>MRIS,TREND</value>
+        </criteriaItems>
+        <description>Sphere Cancellation Email Confirmation for  all Sphere products</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Sphere Select New Sign Up Email Confirmation for BRIGHT for Basic</fullName>
+        <actions>
+            <name>Sphere_Agent_Office_IDX_New_Sign_Up_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Sphere_Agent_Office_IDX_New_Sign_Up_Email_to_Salesforce</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>Sphere by Bright MLS Basic</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Provisioned</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status__c</field>
+            <operation>equals</operation>
+            <value>New,Reinstate</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>BRIGHT</value>
+        </criteriaItems>
+        <description>Sphere New Sign Up Email Confirmation for the products Sphere Select</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Sphere Select New Sign Up Email Confirmation for BRIGHT for Pro</fullName>
+        <actions>
+            <name>Sphere_Email_to_Salesforce_Select_New_Sign_Up_for_BRIGHT_Pro</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Sphere_Select_New_Sign_Up_Email_Confirmation_for_BRIGHT_Pro</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>Sphere by Bright MLS Pro</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Provisioned</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status__c</field>
+            <operation>equals</operation>
+            <value>New,Reinstate</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>BRIGHT</value>
+        </criteriaItems>
+        <description>Sphere New Sign Up Email Confirmation for the products Sphere Select</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Sphere Select New Sign Up Email Confirmation for MRIS%2FTREND</fullName>
+        <actions>
+            <name>Sphere_Email_to_Salesforce_Select_New_Sign_Up_for_MRIS_TREND</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Sphere_Select_New_Sign_Up_Email_Confirmation_for_MRIS_TREND</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>Sphere by Bright MLS Basic,Sphere by Bright MLS Pro</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Provisioned</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status__c</field>
+            <operation>equals</operation>
+            <value>New,Reinstate</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>MRIS,TREND</value>
+        </criteriaItems>
+        <description>Sphere New Sign Up Email Confirmation for the products Sphere Select</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Sphere TREND%2FMRIS Product Change Email Confirmation</fullName>
+        <actions>
+            <name>Sphere_Downgrade_Email_to_Salesforce</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Sphere_Product_Change_for_Downgrade</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status__c</field>
+            <operation>equals</operation>
+            <value>Update</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Provisioned</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Type__c</field>
+            <operation>equals</operation>
+            <value>Sphere by Bright MLS</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>MRIS,TREND</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>Sphere by Bright MLS Basic,Sphere by Bright MLS Pro</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>TREND XactSite Agent IDX New Sign Up Email Confirmation</fullName>
+        <actions>
+            <name>TREND_Email_to_Salesforce_XactSite_Agent_IDX_New_Sign_Up</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>TREND_XactSite_Agent_IDX_New_Sign_Up_Email_Confirmation</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>XactSite Agent IDX</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Provisioned</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status__c</field>
+            <operation>equals</operation>
+            <value>New,Reinstate</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>TREND</value>
+        </criteriaItems>
+        <description>XactSite New Sign Up Email Confirmation for the product XactSite Agent IDX</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>TREND XactSite Cancellation Confirmation Email</fullName>
+        <actions>
+            <name>TREND_Email_to_Salesforce_XactSite_Cancellation</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>TREND_XactSite_Cancellation_Confirmation_Email</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>XactSite Total,XactSite Select,XactSite Premium,XactSite Agent IDX,XactSite Office IDX,XactSite Office Website</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status__c</field>
+            <operation>equals</operation>
+            <value>Terminate</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Deprovisioned</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status_Reason__c</field>
+            <operation>notEqual</operation>
+            <value>Subscription Auto-Suspended</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>TREND</value>
+        </criteriaItems>
+        <description>XactSite Cancellation Email Confirmation for  all XactSite products</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>TREND XactSite Office IDX New Sign Up Email Confirmation</fullName>
+        <actions>
+            <name>TREND_Email_to_Salesforce_XactSite_Office_IDX_New_Sign_Up</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>TREND_XactSite_Office_IDX_New_Sign_Up_Email_Confirmation</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>XactSite Office IDX</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Provisioned</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status__c</field>
+            <operation>equals</operation>
+            <value>New,Reinstate</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>TREND</value>
+        </criteriaItems>
+        <description>XactSite New Sign Up Email Confirmation for the product XactSite Office IDX</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>TREND XactSite Office Website New Sign Up Email Confirmation</fullName>
+        <actions>
+            <name>TREND_Email_to_Salesforce_XactSite_Office_Website_New_Sign_Up</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>TREND_XactSite_Office_Website_New_Sign_Up_Email_Confirmation</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>XactSite Office Website</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Provisioned</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status__c</field>
+            <operation>equals</operation>
+            <value>New,Reinstate</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>TREND</value>
+        </criteriaItems>
+        <description>XactSite New Sign Up Email Confirmation for the product XactSite Office Website</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>TREND XactSite Premium New Sign Up Email Confirmation</fullName>
+        <actions>
+            <name>TREND_Email_to_Salesforce_XactSite_Premium_New_Sign_Up</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>TREND_XactSite_Premium_New_Sign_Up_Email_Confirmation</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>XactSite Premium</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Provisioned</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status__c</field>
+            <operation>equals</operation>
+            <value>New,Reinstate</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>TREND</value>
+        </criteriaItems>
+        <description>XactSite New Sign Up Email Confirmation for the products XactSite Premium</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>TREND XactSite Product Change to XS Agent IDX Email Confirmation</fullName>
+        <actions>
+            <name>TREND_Email_to_Salesforce_XactSite_Product_Change_to_XS_Agent_IDX_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>TREND_XactSite_Product_Change_to_XS_Agent_IDX_Email</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>IF(Text(Product_Sub_Type__c) !=  Previuos_ProductSubType__c ,true,false) &amp;&amp;  ISPICKVAL(Product_Status__c,&apos;Update&apos;) &amp;&amp; ISPICKVAL(Provisioned_Status__c,&apos;Provisioned&apos;) &amp;&amp;  OR(Previuos_ProductSubType__c == &apos;XactSite Total&apos;,    Previuos_ProductSubType__c == &apos;XactSite Select&apos;,    Previuos_ProductSubType__c == &apos;XactSite Premium&apos;,    Previuos_ProductSubType__c == &apos;XactSite Agent IDX&apos;,     Previuos_ProductSubType__c == &apos;XactSite Office IDX&apos;,    Previuos_ProductSubType__c == &apos;XactSite Office Website&apos;)      &amp;&amp;      OR(Text(Product_Sub_Type__c) == &apos;XactSite Agent IDX&apos;)
+&amp;&amp; (ISPICKVAL(Service_Jurisdiction__c,&apos;TREND&apos;))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>TREND XactSite Product Change to XS Office IDX Email Confirmation</fullName>
+        <actions>
+            <name>TREND_Email_to_Salesforce_XactSite_Product_Change_to_Office_IDX_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>TREND_XactSite_Product_Change_to_XS_Office_IDX_Email</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>IF(Text(Product_Sub_Type__c) !=  Previuos_ProductSubType__c ,true,false) &amp;&amp;  ISPICKVAL(Product_Status__c,&apos;Update&apos;) &amp;&amp; ISPICKVAL(Provisioned_Status__c,&apos;Provisioned&apos;) &amp;&amp;  OR(Previuos_ProductSubType__c == &apos;XactSite Total&apos;,    Previuos_ProductSubType__c == &apos;XactSite Select&apos;,    Previuos_ProductSubType__c == &apos;XactSite Premium&apos;,    Previuos_ProductSubType__c == &apos;XactSite Agent IDX&apos;,     Previuos_ProductSubType__c == &apos;XactSite Office IDX&apos;,    Previuos_ProductSubType__c == &apos;XactSite Office Website&apos;)      &amp;&amp;      OR(Text(Product_Sub_Type__c) == &apos;XactSite Office IDX&apos;) &amp;&amp;
+(ISPICKVAL(Service_Jurisdiction__c,&apos;TREND&apos;))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>TREND XactSite Product Change to XS Office Website Email Confirmation</fullName>
+        <actions>
+            <name>TREND_Email_to_Salesforce_XactSite_Product_Change_to_XS_Office_Website_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>TREND_XactSite_Product_Change_to_XS_Office_Website_Email</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>IF(Text(Product_Sub_Type__c) !=  Previuos_ProductSubType__c ,true,false) &amp;&amp;  ISPICKVAL(Product_Status__c,&apos;Update&apos;) &amp;&amp; ISPICKVAL(Provisioned_Status__c,&apos;Provisioned&apos;) &amp;&amp;  OR(Previuos_ProductSubType__c == &apos;XactSite Total&apos;,    Previuos_ProductSubType__c == &apos;XactSite Select&apos;,    Previuos_ProductSubType__c == &apos;XactSite Premium&apos;,    Previuos_ProductSubType__c == &apos;XactSite Agent IDX&apos;,     Previuos_ProductSubType__c == &apos;XactSite Office IDX&apos;,    Previuos_ProductSubType__c == &apos;XactSite Office Website&apos;)      &amp;&amp;      OR(Text(Product_Sub_Type__c) == &apos;XactSite Office Website&apos;) &amp;&amp; 
+(ISPICKVAL(Service_Jurisdiction__c,&apos;TREND&apos;))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>TREND XactSite Product Change to XS Premium Email Confirmation</fullName>
+        <actions>
+            <name>TREND_Email_to_Salesforce_XactSite_Product_Change_to_XS_Premium_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>TREND_XactSite_Product_Change_to_XS_Premium_Email</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>IF(Text(Product_Sub_Type__c) !=  Previuos_ProductSubType__c ,true,false) &amp;&amp;  ISPICKVAL(Product_Status__c,&apos;Update&apos;) &amp;&amp; ISPICKVAL(Provisioned_Status__c,&apos;Provisioned&apos;) &amp;&amp;  OR(Previuos_ProductSubType__c == &apos;XactSite Total&apos;,    Previuos_ProductSubType__c == &apos;XactSite Select&apos;,    Previuos_ProductSubType__c == &apos;XactSite Premium&apos;,    Previuos_ProductSubType__c == &apos;XactSite Agent IDX&apos;,     Previuos_ProductSubType__c == &apos;XactSite Office IDX&apos;,    Previuos_ProductSubType__c == &apos;XactSite Office Website&apos;)      &amp;&amp;      OR(Text(Product_Sub_Type__c) == &apos;XactSite Premium&apos;)
+&amp;&amp; 
+(ISPICKVAL(Service_Jurisdiction__c,&apos;TREND&apos;))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>TREND XactSite Product Change to XS Select Email Confirmation</fullName>
+        <actions>
+            <name>TREND_Email_to_Salesforce_XactSite_Product_Change_to_XS_Select_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>TREND_XactSite_Product_Change_to_XS_Select_Email</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>IF(Text(Product_Sub_Type__c) !=  Previuos_ProductSubType__c ,true,false) &amp;&amp;  ISPICKVAL(Product_Status__c,&apos;Update&apos;) &amp;&amp; ISPICKVAL(Provisioned_Status__c,&apos;Provisioned&apos;) &amp;&amp;  OR(Previuos_ProductSubType__c == &apos;XactSite Total&apos;,    Previuos_ProductSubType__c == &apos;XactSite Select&apos;,    Previuos_ProductSubType__c == &apos;XactSite Premium&apos;,    Previuos_ProductSubType__c == &apos;XactSite Agent IDX&apos;,     Previuos_ProductSubType__c == &apos;XactSite Office IDX&apos;,    Previuos_ProductSubType__c == &apos;XactSite Office Website&apos;)      &amp;&amp;      OR(Text(Product_Sub_Type__c) == &apos;XactSite Select&apos;)
+&amp;&amp; 
+(ISPICKVAL(Service_Jurisdiction__c,&apos;TREND&apos;))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>TREND XactSite Product Change to XS Total Email Confirmation</fullName>
+        <actions>
+            <name>TREND_Email_to_Salesforce_XactSite_Product_Change_to_XS_Total_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>TREND_XactSite_Product_Change_to_XS_Total_Email</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>IF(Text(Product_Sub_Type__c) !=  Previuos_ProductSubType__c ,true,false) &amp;&amp;  ISPICKVAL(Product_Status__c,&apos;Update&apos;) &amp;&amp; ISPICKVAL(Provisioned_Status__c,&apos;Provisioned&apos;) &amp;&amp;  OR(Previuos_ProductSubType__c == &apos;XactSite Total&apos;,    Previuos_ProductSubType__c == &apos;XactSite Select&apos;,    Previuos_ProductSubType__c == &apos;XactSite Premium&apos;,    Previuos_ProductSubType__c == &apos;XactSite Agent IDX&apos;,     Previuos_ProductSubType__c == &apos;XactSite Office IDX&apos;,    Previuos_ProductSubType__c == &apos;XactSite Office Website&apos;)      &amp;&amp; OR(Text(Product_Sub_Type__c) == &apos;XactSite Total&apos;)
+&amp;&amp; 
+(ISPICKVAL(Service_Jurisdiction__c,&apos;TREND&apos;))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>TREND XactSite Select New Sign Up Email Confirmation</fullName>
+        <actions>
+            <name>TREND_Email_to_Salesforce_XactSite_Select_New_Sign_Up</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>TREND_XactSite_Select_New_Sign_Up_Email_Confirmation</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>XactSite Select</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Provisioned</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status__c</field>
+            <operation>equals</operation>
+            <value>New,Reinstate</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>TREND</value>
+        </criteriaItems>
+        <description>XactSite New Sign Up Email Confirmation for the products XactSite Select</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>TREND XactSite Total New Sign Up Email Confirmation</fullName>
+        <actions>
+            <name>TREND_Email_to_Salesforce_XactSite_Total_New_Sign_Up</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>TREND_XactSite_Total_New_Sign_Up_Email_Confirmation</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>XactSite Total</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Provisioned_Status__c</field>
+            <operation>equals</operation>
+            <value>Provisioned</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Product_Status__c</field>
+            <operation>equals</operation>
+            <value>New,Reinstate</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Provisioned_Product__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>TREND</value>
+        </criteriaItems>
+        <description>XactSite New Sign Up Email Confirmation for the products XactSite Total</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

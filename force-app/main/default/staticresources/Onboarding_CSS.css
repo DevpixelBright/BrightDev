@@ -1,0 +1,30 @@
+    #outer{width:100%;}
+    #inner{width:600px;margin:0px auto;}
+    H2{
+        color: #0099FF;
+        font-family: Arial,Helvetica,Sans-serif;
+        font-size: 16px;
+        margin-bottom: 0;
+        margin-top: 0;
+       }
+    .required{
+        color:red;
+    }
+    .label{
+       text-decoration:underline;
+       /*text-transform:uppercase;*/
+       font-family: Arial,Helvetica,sans-serif;
+       font-size: 14px;
+    }
+    P{
+        font-family: Arial,Helvetica,sans-serif;
+       font-size: 14px;
+    }
+    TD {
+    font-family: Arial,Helvetica,Sans-serif;
+    font-size: 14px;
+    }
+    a:link    {color:#0099FF;}
+    a:visited {color:#0099FF;}
+    a:hover   {color:#0099FF;}
+    a:active  {color:#0099FF;}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help></help>
+    <label></label>
+    <name>Other_Resources_Utilized__c</name>
+    <picklistValues>
+        <masterLabel>Built in/Hover Help within the products</masterLabel>
+        <translation></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>In Person Training at the board office</masterLabel>
+        <translation></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Online training Resources</masterLabel>
+        <translation></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Self Help Tutorial Documents</masterLabel>
+        <translation></translation>
+    </picklistValues>
+</CustomFieldTranslation>

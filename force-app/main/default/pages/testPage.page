@@ -1,0 +1,9 @@
+<apex:page controller="MdsDigestQuery" lightningstylesheets="true">
+    <c:bcomHeader />
+    
+    <apex:pageBlock >
+        <apex:form >
+            <apex:commandButton action="{!tmpMethod}" value="Test"/>
+        </apex:form>
+    </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MRIS_U_sync</fullName>
+    <availability>online</availability>
+    <description>Resend the subscription to MRIS-U</description>
+    <displayType>button</displayType>
+    <height>600</height>
+    <linkType>page</linkType>
+    <masterLabel>MRIS-U sync</masterLabel>
+    <openType>sidebar</openType>
+    <page>ResendToLms</page>
+    <protected>false</protected>
+</WebLink>

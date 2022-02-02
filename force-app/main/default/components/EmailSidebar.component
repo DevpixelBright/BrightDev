@@ -1,0 +1,23 @@
+<apex:component access="global">
+<tr>
+<td height="40"><img src="http://www.cgbmedia.com/demo/helpdesknew/contactus.jpg" width="154" height="40"/></td></tr>
+<tr>
+<td valign="top" height="330"><span style="text-align: left; line-height: 14px; font-family: Arial,Helvetica,sans-serif; color: rgb(102, 102, 102); font-size: 12px; font-weight: normal;">
+Additional help is just a phone call (or chat) away! Call the MRIS Support Center at <span style="text-align: left; line-height: 14px; font-family: Arial,Helvetica,sans-serif; color: rgb(120, 166, 32); font-size: 12px; font-weight: normal;"><strong>301-838-7200</strong><br/></span>
+or toll free at <span style="text-align: left; line-height: 14px; font-family: Arial,Helvetica,sans-serif; color: rgb(120, 166, 32); font-size: 12px; font-weight: normal;"><strong>1-888-838-8200 </strong></span>to speak with a representative.<br/>
+<br/>
+<span style="text-align: left; line-height: 14px; font-family: Arial,Helvetica,sans-serif; color: rgb(120, 166, 32); font-size: 12px; font-weight: normal;"><strong>Call Center Hours<br/></strong></span>
+<strong>Monday to Friday</strong><br/>
+8:30 a.m. - 6:30 p.m.<br/>
+<strong>Saturday and Sunday</strong><br/>
+8:30 a.m. - 5:00 p.m.<br/>
+<br/>
+<span style="text-align: left; line-height: 14px; font-family: Arial,Helvetica,sans-serif; color: rgb(120, 166, 32); font-size: 12px; font-weight: normal;"><strong>Online Chat Hours<br/></strong></span>
+<strong>Monday to Friday</strong>
+<br/>9:00 a.m. - 9:00 p.m.<br/>
+<strong>Saturday and Sunday</strong><br/>
+9:00 a.m. -&nbsp; 5:00 p.m.<br/>
+<br/>
+</span>
+<span style="text-align: left; line-height: 14px; font-family: Arial,Helvetica,sans-serif; color: rgb(0, 0, 0); font-size: 12px;"><a style="color: rgb(120, 166, 32);" href="http://www.gotoassist.com/sb/mris-sb?siteurl=mrisinc&amp;renewticket=0&amp;isurlact=true&amp;entactname=/webacd.do&amp;entappname=url0107lc&amp;siteurl=mrisinc&amp;apiname=webacd&amp;servicename=SC&amp;needFilter=false&amp;rnd=6766499328&amp;AT=pqform&amp;QID=31907&amp;UID=0&amp;SK=6f8c924959f8f66021f8767c4d5ea0da" target="_blank"><strong>Click here to chat</strong></a></span></td></tr>
+</apex:component>

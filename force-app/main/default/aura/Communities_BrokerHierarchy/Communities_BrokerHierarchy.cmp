@@ -1,0 +1,169 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,force:appHostable,lightning:isUrlAddressable" controller="Communities_BrokerHierarchyController" access="global">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    
+    
+    <aura:attribute name="subscriptionId" type="String" default=""/>
+    <aura:attribute name="brandFieldMap" type="Map"/>
+    <aura:attribute name="enableButton" type="Boolean" default="true"/>
+    <aura:attribute name="hasBrandValue" type="Boolean" default="true"/>
+    <aura:attribute name="hasCompanyValue" type="Boolean" default="false"/>
+    <aura:attribute name="showModel" type="Boolean" default="false"/>
+    <aura:attribute name="isChilduser" type="Boolean" default="false"/>
+    <aura:attribute name="comapnyFieldMap" type="Map"/>
+    <aura:attribute name="dependentFieldValues" type="object"/>
+    <aura:attribute name="dependentpicklist" type="object"/>
+    <aura:attribute name="account" type="Account" default="{'sobjectType':'Account', 
+                                                           'Brand__c': '',
+                                                           'HoldingCompany__c':''}"/>
+    <aura:attribute name="gridColumns" type="list" />
+    <aura:attribute name="gridData" type="Object" />
+    <aura:attribute name="gridExpandedRows" type="List" access="PRIVATE" />
+     <aura:attribute name="messageType" type="string" default="success"/>
+    <aura:attribute name="message" type="string"/>
+    <aura:attribute name="showToast" type="Boolean" default="false"/>
+    
+    <!-- handlers -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.SelectedOffices}" action="{!c.handleOfficeFilter}"/>
+    <!--<lightning:notificationsLibrary aura:id="notifLib"/>-->
+  
+    
+	
+    
+    <div class="c-container">
+        <div class="fullpage slds-scope">
+             
+            
+            
+            <div class="slds-grid slds-wrap">
+                <lightning:layout multipleRows="true">
+                    <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                        <lightning:layout>
+                            <div class="new-containerpage">
+                                
+                                
+                                
+                                 <!-- -->             
+                                        
+                                        <aura:if isTrue="{!v.showToast==true}"> 
+	<div  aura:id="toastModel" style="height: 4rem;" class="slds-show">
+        <div class="slds-notify_container slds-is-relative">
+            <div class="{!'slds-notify slds-notify_toast slds-theme_'+v.messageType}" role="status">
+                <span class="slds-assistive-text">{!v.messageType}</span>
+              	<span class="{!'slds-icon_container slds-icon-utility-'+v.messageType+' slds-icon-utility-success slds-m-right_small slds-no-flex slds-align-top'}" title="{!v.message}">
+                   <!-- <lightning:icon iconName="{!'utility:'+v.messageType}" size="small" variant="inverse" styleclass="slds-icon slds-icon_small"/>-->
+                </span>
+                <div class="slds-notify__content">
+                    <h2 class="slds-text-heading_small ">{!v.message}</h2>
+                </div>
+              <!-- <div class="slds-notify__close">
+                    <button class="slds-button slds-button_icon slds-button_icon-inverse" title="Close" onclick="{!c.closeModel}">
+                        <lightning:icon iconName="utility:close" size="small" variant="inverse"/>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                </div>-->
+            </div>
+        </div>
+    </div>
+    </aura:if>                  
+      <!-- -->
+            
+                                
+                                
+                                
+                                <div class="slds-container--x-large new-container">
+                                    <div class="page-section page-main">
+                                        
+                           
+                                        
+                                        <div class="dev">
+                                            
+                                            
+                                            
+                                            <div class="top">
+                                                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="7" largeDeviceSize="7">
+                                                    <h2><img src="{!$Resource.acc + '/acc/images/user.svg'}" alt="" /><span>Brokerage Information</span></h2>
+                                                </lightning:layoutItem>
+                                            </div>
+                                            <div class="view"></div>
+                                            
+                                            <div class="middle">
+                                                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                                    <p class="recent">If your brokerage is affiliated with a Corporate Office, Holding Company, Office Group or Brand, please verify the information recorded with Bright and update your Brand affiliation below.
+                                                    </p>
+                                                    <div class="slds-border_top recent recentz" >
+                                                        <p class="recent" style="padding-top:10px">Select the brand affiliated with office(s) in your brokerage to view the corresponding holding companies, then click Submit to update.</p></div>
+                                                    <div class="slds-m-around--x-large partvire">
+                                                        <aura:if isTrue="{!v.showModel==true}">
+                                                        <div class="slds-grid">
+                                                            <div class="slds-col slds-size_5-of-12 inview">
+                                                                <aura:if isTrue="{!or(and(not(empty(v.account.Brand__c)),v.hasBrandValue==true),v.isChilduser==true)}">
+                                                                    <lightning:select value="{!v.account.Brand__c}" label="Brand" disabled="true">
+                                                                        <option value="">--None--</option>
+                                                                        <aura:iteration items="{!v.brandFieldMap}" var="i" indexVar="key">
+                                                                            <option text="{!i.value}" value="{!i.key}" selected="{!i.key==v.account.Brand__c}" ></option>
+                                                                        </aura:iteration>
+                                                                    </lightning:select>
+                                                                    <aura:set attribute="else">
+                                                                        <lightning:select aura:id="brandPicklist" value="{!v.account.Brand__c}" onchange="{!c.handleBrandOnChange}" name="brandPicklist" label="Brand" required="true">
+                                                                            <option value="">--None--</option>
+                                                                            <aura:iteration items="{!v.brandFieldMap}" var="i" indexVar="key">
+                                                                                <option text="{!i.value}" value="{!i.key}" selected="{!i.key==v.account.Brand__c}" ></option>
+                                                                            </aura:iteration>
+                                                                        </lightning:select>
+                                                                    </aura:set>
+                                                                </aura:if> 
+                                                                
+                                                            </div>
+                                                            <div class="slds-col slds-size_5-of-12 inview">
+                                                                <!--<aura:if isTrue="{!or(not(empty(v.account.HoldingCompany__c)),v.hasCompanyValue==false)}">-->
+                                                                    <aura:if isTrue="{!v.hasCompanyValue==false}">
+                                                                    <lightning:select value="{!v.account.HoldingCompany__c}" name="comapnyPicklist" label="Holding Company" disabled="true">
+                                                                        <option value="{!v.account.HoldingCompany__c}">{!v.account.HoldingCompany__c}</option>
+                                                                    </lightning:select>
+                                                                    <aura:set attribute="else">
+                                                                        <lightning:select aura:id="companyPicklist" value="{!v.account.HoldingCompany__c}" onchange="{!c.handleCompanyOnChange}" name="comapnyPicklist" label="Holding Company" required="true">
+                                                                            <option value="">--None--</option>
+                                                                            <aura:iteration items="{!v.comapnyFieldMap}" var="i" indexVar="key">
+                                                                                <option text="{!i.value}" value="{!i.key}" selected="{!i.key==v.account.HoldingCompany__c}" ></option>
+                                                                            </aura:iteration>
+                                                                        </lightning:select>
+                                                                    </aura:set>
+                                                                </aura:if> 
+                                                                
+                                                            </div>
+                                                            <br/>
+                                                            <div class="slds-col slds-size_2-of-12">
+                                                                <!--<aura:if isTrue="{!v.enableButton}">-->
+                                                                    <lightning:button variant="brand" label="Submit" onclick="{!c.handleAccountSave}" disabled="{!v.enableButton}"/> 
+                                                               <!-- </aura:if>-->
+                                                            </div>
+                                                        </div>
+                                                        </aura:if>
+                                                    </div>
+                                                    <div class="slds-border_top slds-p-bottom_medium recentz" >
+                                                        <h3 class="slds-p-top_medium slds-p-bottom_small">Offices in my Brokerage firm</h3>
+                                                        <div class="slds-border_top slds-p-bottom_medium" >
+                                                            <lightning:treeGrid columns="{!v.gridColumns}"
+                                                                                data="{!v.gridData}"
+                                                                                keyField="name"
+                                                                                expandedRows="{!v.gridExpandedRows}"
+                                                                                hideCheckboxColumn = "true"
+                                                                                aura:id="mytree" />
+                                                        </div></div>
+                                                </lightning:layoutItem>
+                                                <div><h3 class="process">If you would like to report affiliation information that is inaccurate, please email the request to <a class="" href="mailto:support@brightmls.com">support@brightmls.com</a>.</h3></div>  
+                                
+                                            </div>
+                                                  </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </lightning:layout>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </div>
+        </div>
+    </div>
+    
+</aura:component>

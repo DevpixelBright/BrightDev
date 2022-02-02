@@ -1,0 +1,393 @@
+<apex:page controller="Communities_OfficeDetails" docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" lightningstylesheets="true">
+    <apex:composition template="Communities_Base">
+        <apex:define name="content">
+            <apex:form >
+                <c:Bootstrap_Resources />   
+                <script>
+                    markUserId("{!subscription.Name}");
+                    markOptionPanel("Brokerage");
+                </script>
+
+                <apex:pageBlock title="Subscription Id - {!subscription.Name}" id="details" >
+                    <style>
+                        .two_buttons{text-align:right; margin-bottom:-44px; margin-top:40px;}
+                        h2{font-size:22px !important; margin:5px 0px !important;}
+                        .tertiaryPalette{display:none !important;}
+                        .for_inputs h4{border-bottom: 1px solid #69A61F; padding-bottom: 10px;}
+                        h2{display:none;}
+                        label{padding-top:0px !important;}
+                        .margin{margin:20px 0 10px 0;}
+                        #content-container{margin-top:0px !important;}
+                        @media(min-width:400px){
+                        .detailList th{width:30% !important;}
+                        .mandatory{color:red; font-weight:bold; font-size:18px;}
+                        }
+                        i.fa {margin: auto 20px;
+                        position: relative;
+                        top: 5px;}
+                        .fa-2x {
+                        font-size: 2em;
+                        }
+                        .fa {
+                        display: inline-block;
+                        font-family: FontAwesome;
+                        font-style: normal;
+                        font-weight: normal;
+                        line-height: 1;
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        }
+                    </style>  
+
+                    <script>
+                        $(document).ready(function(){
+                            $("form").addClass("form-horizontal");
+                            $("label").addClass("col-sm-3 control-label");
+                            $(".for_inputs input").addClass("form-control");
+                            $("select").addClass("form-control");
+                            $(".errorM3").addClass("alert alert-danger");
+                            $(".infoM3").addClass("alert alert-info");
+                            $(".confirmM3").addClass("alert alert-success");
+                            
+                            var errorMsg;
+                            $('[id$=ContactSaveButton]').click(function() {
+                                errorMsg = '';
+                                var regx = /^\([0-9]{3}\) [0-9]{3}-[0-9]{4}$/;
+                                if(!regx.test($('[id$=Phone]').val()) || $('[id$=Phone]').val() == null)
+                                    errorMsg = '<li>Invalid phone number</li>';
+                                
+                                if(errorMsg != '') {    
+                                    var errorBlock = '<div class="message errorM3 alert alert-danger" role="alert"><h4>Errors</h4><ul>' + errorMsg + '</ul></div>';
+                                    $('#messages').html(errorBlock);
+                                    return false;
+                                }
+                                else {
+                                    $('#messages').html('');
+                                    return true;   
+                                }
+                            });
+                            
+                            $('[id$=AddressSaveButton]').click(function() {
+                                errorMsg = '';
+                                if($('[id$=Zip]').val() == '')
+                                    errorMsg += '<li>Required field missing: Zip</li>';
+                                if($('[id$=City]').val() == '')
+                                    errorMsg += '<li>Required field missing: City</li>';  
+                                if($('[id$=State]').val() == '')
+                                    errorMsg += '<li>Required field missing: State</li>'; 
+                                if($('[id$=Document]').val() == '')
+                                    errorMsg += '<li>Required field missing: Office License</li>';                                                                                                         
+
+                                if(errorMsg != '') {    
+                                    var errorBlock = '<div class="message errorM3 alert alert-danger" role="alert"><h4>Errors</h4><ul>' + errorMsg + '</ul></div>';
+                                    $('#messages').html(errorBlock);
+                                    return false;
+                                }
+                                else {
+                                    $('#messages').html('');
+                                    return true;
+                                }    
+                            });                            
+                        });
+                    </script>
+
+                    <div class="row">
+                        <c:Communities_Definition pageTitle="Office Information" pageTitleClass="fa fa-pencil-square-o fa-2x" hasDefinitions="false">
+                            <p><b class="term">Term</b> Definition goes here.</p>
+                        </c:Communities_Definition>
+
+                        <div class="col-xs-12 instructions">
+                            <p>Have your office details recently changed? Update the office information for your MRIS Subscription.?</p>
+                        </div>
+                    </div>
+
+                    <div id="messages">
+                        <apex:pagemessages ></apex:pagemessages>
+                    </div>
+
+                    <div class="two_buttons">                
+                        <apex:commandButton styleClass="btn btn-default my_cancel" action="{!cancelContactEdit}" value="Cancel" rendered="{!isContactEdit}" />
+                        <apex:commandButton id="ContactSaveButton" styleClass="btn btn-primary my_save" action="{!saveContactInfo}" value="Save" rendered="{!isContactEdit}" />
+                        <apex:commandLink styleClass="btn btn-default my_edit" action="{!editContactInfo}" rendered="{!!isContactEdit}">
+                            <span class="glyphicon glyphicon-edit"></span> Edit
+                        </apex:commandLink>                
+                    </div> 
+        
+                    <div class="row for_inputs">
+                        <div>
+                            <h4>
+                                <i class="fa fa-phone-square fa-2x"></i>Telephone and Contact Information                                
+                            </h4>
+                            
+                            <apex:outputPanel rendered="{!!isContactEdit}"> 
+                                <div id="output1">
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Phone"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.Phone}"/>
+                                        </div>
+                                    </div> 
+
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Fax"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.Fax}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!isContactEdit}"> 
+                                <div id="output1">
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Phone"/>
+                                        <div class="col-sm-7">
+                                            <apex:inputField id="Phone" value="{!office.Phone}"/>
+                                        </div>
+                                    </div> 
+
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Fax"/>
+                                        <div class="col-sm-7">
+                                            <apex:inputField id="Fax" value="{!office.Fax}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </apex:outputPanel>                            
+                        </div>
+                    </div>
+                    
+                    <!-- Address information block -->
+
+                    <div class="two_buttons">                
+                        <apex:commandButton styleClass="btn btn-default my_cancel" action="{!cancelAddressEdit}" value="Cancel" rendered="{!isAddressEdit}" />
+                        <apex:commandButton id="AddressSaveButton" styleClass="btn btn-primary my_save" action="{!saveAddressInfo}" value="Save" rendered="{!isAddressEdit}" />
+                        <apex:commandLink styleClass="btn btn-default my_edit" action="{!editAddressInfo}" rendered="{!!isAddressEdit}">
+                            <span class="glyphicon glyphicon-edit"></span> Edit
+                        </apex:commandLink>                
+                    </div> 
+        
+                    <div class="row for_inputs">
+                        <div>
+                            <h4>
+                                <i class="fa fa-envelope fa-2x"></i>Office Address                                
+                            </h4>
+                            
+                            <apex:outputPanel rendered="{!!isAddressEdit}"> 
+                                <div id="output1">
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Account Name"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.Account_Name__c}"/>
+                                        </div>
+                                    </div>                                
+                                
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Street Number"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.Street_Number__c}"/>
+                                        </div>
+                                    </div> 
+
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Street Name"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.Street_Name__c}"/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Street Type"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.QAS_Mailing_Street_Type__c}"/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Street Number Suffix"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.Street_Number_Suffix__c}"/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Street Direction"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.QAS_Mailing_Street_Direction__c}"/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Unit Type"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.QAS_Mailing_Unit_Type__c}"/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Unit #"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.Unit__c}"/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Addl Display Name"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.Addl_Display_Name__c}"/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Zip"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.Zip__c}"/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Zip+4"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.Zip_4__c}"/>
+                                        </div>
+                                    </div> 
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="City"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.City__c}"/>
+                                        </div>
+                                    </div> 
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="State"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.State__c}"/>
+                                        </div>
+                                    </div> 
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="County"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.QAS_Mailing_County__c}"/>
+                                        </div>
+                                    </div>                                                                                                                                                                                                                                                                                                                                                                                                               
+                                </div>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!isAddressEdit}"> 
+                                <div class="alert alert-info">
+                                    <strong>Info !</strong> Changes to office address is not affected immediately. Please upload your license copy document using the attachment option below.
+                                </div>
+                                <div id="output1">
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Account Name"/>
+                                        <div class="col-sm-7">
+                                            <apex:inputField value="{!office.Account_Name__c}"/>
+                                        </div>
+                                    </div>
+                                                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Street Number"/>
+                                        <div class="col-sm-7">
+                                            <apex:inputField value="{!office.Street_Number__c}"/>
+                                        </div>
+                                    </div> 
+
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Street Name"/>
+                                        <div class="col-sm-7">
+                                            <apex:inputField value="{!office.Street_Name__c}"/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Street Type"/>
+                                        <div class="col-sm-7">
+                                            <apex:inputField value="{!office.QAS_Mailing_Street_Type__c}"/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Street Number Suffix"/>
+                                        <div class="col-sm-7">
+                                            <apex:inputField value="{!office.Street_Number_Suffix__c}"/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Street Direction"/>
+                                        <div class="col-sm-7">
+                                            <apex:inputField value="{!office.QAS_Mailing_Street_Direction__c}"/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Unit Type"/>
+                                        <div class="col-sm-7">
+                                            <apex:inputField value="{!office.QAS_Mailing_Unit_Type__c}"/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Unit #"/>
+                                        <div class="col-sm-7">
+                                            <apex:inputField value="{!office.Unit__c}"/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Addl Display Name"/>
+                                        <div class="col-sm-7">
+                                            <apex:inputField value="{!office.Addl_Display_Name__c}"/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Zip"/>
+                                        <div class="col-sm-7">
+                                            <apex:inputField id="Zip" value="{!office.Zip__c}"/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Zip+4"/>
+                                        <div class="col-sm-7">
+                                            <apex:inputField value="{!office.Zip_4__c}"/>
+                                        </div>
+                                    </div> 
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="City"/>
+                                        <div class="col-sm-7">
+                                            <apex:inputField id="City" value="{!office.City__c}"/>
+                                        </div>
+                                    </div> 
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="State"/>
+                                        <div class="col-sm-7">
+                                            <apex:inputField id="State" value="{!office.State__c}"/>
+                                        </div>
+                                    </div> 
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="County"/>
+                                        <div class="col-sm-7">
+                                            <apex:inputField value="{!office.QAS_Mailing_County__c}"/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Office License"/>
+                                        <div class="col-sm-7">
+                                            <apex:inputFile id="Document" value="{!license.Body}" filename="{!license.Name}"/>
+                                        </div>
+                                    </div>                                                                                                                                                 
+                                </div>
+                            </apex:outputPanel>                            
+                        </div>
+                    </div>                            
+                </apex:pageBlock>           
+            </apex:form>
+        </apex:define>       
+    </apex:composition>     
+</apex:page>

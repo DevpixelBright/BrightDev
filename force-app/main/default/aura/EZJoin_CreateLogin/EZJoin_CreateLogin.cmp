@@ -1,0 +1,87 @@
+<aura:component controller="EZJoin_NewApplicationStatusController" implements="force:appHostable,lightning:isUrlAddressable">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    
+    <aura:attribute name="application" type="MRIS_Application__c" default="{ 'sobjectType': 'MRIS_Application__c' }" />
+    <aura:attribute name="showSpinner" type="Boolean" default="false" />
+    <aura:attribute name="errorMsg" type="String" default="" />
+    <aura:attribute name="loginName" type="String" default="" />
+    <aura:attribute name="isAvailable" type="Boolean" default="false" />
+    <aura:attribute name="isTaken" type="Boolean" default="false" />
+    
+    <!-- Aura Handlers -->
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}" />  
+    
+    <!-- Loading spinner container -->
+    <aura:if isTrue="{!v.showSpinner}">
+        <div class="slds-is-relative">
+            <lightning:spinner />
+        </div>
+    </aura:if> 
+    
+    <div class="fullpage slds-scope">
+        <div class="slds-grid slds-wrap">
+            
+            <c:EZJoin_NewApplicationHeader appConfig="[]" />
+            
+            <div class="slds-container--x-large new-container" id="content-container">
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 timepoint">
+                    
+                    <aura:if isTrue="{!v.errorMsg != ''}">
+                        <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert" style="margin-top:10px; border-radius: 2px;">
+                            <span class="slds-assistive-text">error</span>
+                            <span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small" title="Description of icon when needed">
+                                
+                            </span>
+                            <h2 style="margin:0;">{!v.errorMsg}</h2>
+                        </div>
+                    </aura:if>                     
+                    
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplicationstatus">
+                        <h2>Create Login Name </h2>
+                        <p>Please create a login name to authenticate your application</p>
+                        
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newsteplogin">
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 ">
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 steplogin steplogin1">
+                                    <lightning:input type="text" name="LoginName" aura:id="LoginName" value="{!v.loginName}" required="true" placeholder="Start typing the desired login name..." minlength="3" maxlength="25" onchange="{!c.loginNameChangeEvtHandler}" />
+                                </div>
+                                
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 steplogin steplogin1">
+                                    <button class="slds-button slds-button_brand" onclick="{!c.checkAvailabilityEvtHandler}">Check Login Name Availability</button>
+                                </div>
+                                
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 steplogin">
+                                    <aura:if isTrue="{!v.isAvailable}">
+                                    	<div class="approved"><p><img src="{!$Resource.ejoin + '/ejoinimages/ezjoincorrectick.png'}" />Login name available.</p></div>
+                                	</aura:if>
+                                    
+                                    <aura:if isTrue="{!v.isTaken}">
+                                    	<div class="rejected"><p><img src="{!$Resource.ejoin + '/ejoinimages/ezjoincorrectick1.png'}" />Login name not available. Please enter a different login name.</p></div>
+                                	</aura:if>                                    
+                                </div>
+                                
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 steplogin2">
+                                    <h3>Login Name Rules</h3>
+                                    <p><img src="{!$Resource.ejoin + '/ejoinimages/ezjoindot.jpg'}" />Enter 3 to 25 Characters</p>
+                                    <p><img src="{!$Resource.ejoin + '/ejoinimages/ezjoindot.jpg'}" />Can contain letters and numbers</p>
+                                    <p><img src="{!$Resource.ejoin + '/ejoinimages/ezjoindot.jpg'}" />Only these special characters allowed @, period, space and dash</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 spaceline2">
+                    </div>
+                    
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                        <button class="slds-button slds-button_brand" disabled="{!!v.isAvailable}" onclick="{!c.submitBtnEvtHandler}">Review and Pay
+                            <div class="ezjoinarrow"><img src="{!$Resource.ejoin + '/ejoinimages/ezjoinarrow.png'}" /></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <c:EZJoin_NewApplicationFooter />
+        </div>
+    </div>    
+</aura:component>

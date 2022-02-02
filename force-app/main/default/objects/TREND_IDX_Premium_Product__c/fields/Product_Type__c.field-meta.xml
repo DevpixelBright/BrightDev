@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Product Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>IDX Subscriber</fullName>
+                <default>false</default>
+                <label>IDX Subscriber</label>
+            </value>
+            <value>
+                <fullName>IDX Office</fullName>
+                <default>false</default>
+                <label>IDX Office</label>
+            </value>
+            <value>
+                <fullName>IDX/VOW</fullName>
+                <default>false</default>
+                <label>IDX/VOW</label>
+            </value>
+            <value>
+                <fullName>Office Website Data</fullName>
+                <default>false</default>
+                <label>Office Website Data</label>
+            </value>
+            <value>
+                <fullName>VOW</fullName>
+                <default>false</default>
+                <label>VOW</label>
+            </value>
+            <value>
+                <fullName>MRIS XactSite Office</fullName>
+                <default>false</default>
+                <label>MRIS XactSite Office</label>
+            </value>
+            <value>
+                <fullName>MRIS XactSite Agent</fullName>
+                <default>false</default>
+                <label>MRIS XactSite Agent</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

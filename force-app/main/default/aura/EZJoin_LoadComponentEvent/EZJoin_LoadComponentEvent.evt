@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT">
+    <aura:attribute name="cmpName" type="String" />
+    <aura:attribute name="index" type="Integer" />
+</aura:event>

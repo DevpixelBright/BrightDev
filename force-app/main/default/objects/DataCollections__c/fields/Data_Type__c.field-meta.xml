@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Data_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Data Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>ASSESSOR DEEDS</fullName>
+                <default>false</default>
+                <label>ASSESSOR DEEDS</label>
+            </value>
+            <value>
+                <fullName>AUX</fullName>
+                <default>false</default>
+                <label>AUX</label>
+            </value>
+            <value>
+                <fullName>CAMA</fullName>
+                <default>false</default>
+                <label>CAMA</label>
+            </value>
+            <value>
+                <fullName>CORE</fullName>
+                <default>false</default>
+                <label>CORE</label>
+            </value>
+            <value>
+                <fullName>CORE FINAL</fullName>
+                <default>false</default>
+                <label>CORE FINAL</label>
+            </value>
+            <value>
+                <fullName>CORE PRELIM</fullName>
+                <default>false</default>
+                <label>CORE PRELIM</label>
+            </value>
+            <value>
+                <fullName>DEED</fullName>
+                <default>false</default>
+                <label>DEED</label>
+            </value>
+            <value>
+                <fullName>HISTORICAL DIST</fullName>
+                <default>false</default>
+                <label>HISTORICAL DIST</label>
+            </value>
+            <value>
+                <fullName>ISSUES</fullName>
+                <default>false</default>
+                <label>ISSUES</label>
+            </value>
+            <value>
+                <fullName>TAX RATES</fullName>
+                <default>false</default>
+                <label>TAX RATES</label>
+            </value>
+            <value>
+                <fullName>ZONING</fullName>
+                <default>false</default>
+                <label>ZONING</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

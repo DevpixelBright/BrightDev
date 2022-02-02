@@ -1,0 +1,98 @@
+<apex:page docType="html-5.0"  showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false"  lightningstylesheets="true">
+<html>
+<head>
+    <style>
+        @page {
+            padding: 80px 0px 50px 0px;
+            
+            @top-center {
+                content: element(header);
+            }
+            
+            @bottom-center {
+                content: element(footer);
+            }
+        }
+         
+        .pagenumber:before {
+            content: counter(page);
+        }
+        
+        .pagecount:before {
+            content: counter(pages);
+        }
+        
+        body {
+            width: 710px;
+            font-size: 14px;
+            font-family: "Helvetica Neue", Arial, sans-serif;
+        }
+        
+        .header {
+            padding: 50px 0px;
+            position: running(header);
+        }
+        
+        .header .logo {
+            float: left;
+            width: 30%;
+        }
+        
+        .header .logo img {
+            width: 100%;
+        }
+        
+        .header .title {
+            float: right;
+            margin-left: 30px;
+        }
+        
+        .header .title h2 {
+            margin-top: 5px;
+            font-weight: normal;
+        }
+        
+        .content {
+            margin-top: 30px;
+        }
+        
+        .footer {
+            margin: -50px 0px;
+            position: running(footer);
+            text-align: center;
+        }
+        
+        c {
+            display: block;
+            clear: both;
+        }
+    </style>
+    
+    <apex:insert name="head"/>
+    
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo" >
+            <!--<img src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/img/logo-bright.png')}"/>-->
+            <!--<img src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/img/Bright_Logo_Latest-1.jpg')}"/>-->
+            <img height="59px" width="140px" src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/img/logo-bright-2.png')}"/>
+            
+        </div>
+        <div class="title">
+            <h2 style="float:right;"><apex:insert name="title"/></h2>
+        </div>
+        <c/>
+    </div>
+    
+    <div class="footer">
+        Page <span class="pagenumber"/> of <span class="pagecount"/>
+    </div>
+    
+    <div class="content">
+        <apex:insert name="content"/>
+    </div>
+</body>
+</html>
+</apex:page>

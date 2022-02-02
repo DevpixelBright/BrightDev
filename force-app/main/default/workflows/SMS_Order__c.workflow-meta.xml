@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>BRIGHT_MLS_Email_to_Salesforce_Payment_Notification_Generic_Payment</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>BRIGHT MLS Email to Salesforce Payment Notification Generic Payment</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_MLS_Payment_Notification_Generic_Payment</template>
+    </alerts>
+    <alerts>
+        <fullName>BRIGHT_MLS_Payment_Notification_Generic_Payment</fullName>
+        <description>BRIGHT MLS Payment Notification Generic Payment</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_MLS_Payment_Notification_Generic_Payment</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_Email_to_Salesforce_Payment_Notification_Generic_Payment</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS Email to Salesforce Payment Notification Generic Payment</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_Payment_Notification_Generic_Payment</template>
+    </alerts>
+    <alerts>
+        <fullName>SMS_Payment_Notification_Generic_Payment</fullName>
+        <ccEmails>sreehitha.ravi@bltglobalventures.com</ccEmails>
+        <ccEmails>srinivas.rao@bltglobalventures.com</ccEmails>
+        <description>SMS Payment Notification Generic Payment</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/SMS_Payment_Notification_Generic_Payment</template>
+    </alerts>
+    <rules>
+        <fullName>BRIGHT MLS Payment Notification  Generic Payment</fullName>
+        <actions>
+            <name>BRIGHT_MLS_Email_to_Salesforce_Payment_Notification_Generic_Payment</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>BRIGHT_MLS_Payment_Notification_Generic_Payment</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>SMS_Order__c.Amount_Collected__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Order__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Completed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Order__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>BRIGHT</value>
+        </criteriaItems>
+        <description>{&quot;SJ&quot;:&quot;BRIGHT&quot;,&quot;BJ&quot;:&quot;No Jurisdiction&quot;,&quot;TE&quot;: &quot;SMS_Order Update&quot;,&quot;BE&quot;:&quot;Generic Payment&quot;,&quot;Des&quot;: &quot;An email will be sent to the private email address of the subscriber when an amount is collected through Generic Payment&quot;}</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>SMS Payment Notification  Generic Payment</fullName>
+        <actions>
+            <name>SMS_Email_to_Salesforce_Payment_Notification_Generic_Payment</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>SMS_Payment_Notification_Generic_Payment</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND (3 OR 4)</booleanFilter>
+        <criteriaItems>
+            <field>SMS_Order__c.Amount_Collected__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Order__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Completed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Order__c.Service_Jurisdiction__c</field>
+            <operation>contains</operation>
+            <value>MRIS,TREND</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SMS_Order__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <description>{&quot;SJ&quot;:&quot;MRIS,TREND&quot;,&quot;BJ&quot;:&quot;No Jurisdiction&quot;,&quot;TE&quot;: &quot;SMS_Order Update&quot;,&quot;BE&quot;:&quot;Generic Payment&quot;,&quot;Des&quot;: &quot;An email will be sent to the private email address of the subscriber when an amount is collected through Generic Payment&quot;}</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+</Workflow>

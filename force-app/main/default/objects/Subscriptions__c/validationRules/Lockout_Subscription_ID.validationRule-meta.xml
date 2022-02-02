@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Lockout_Subscription_ID</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND( 
+NOT( ISNEW() ), 
+ISCHANGED( Name ) 
+)
+&amp;&amp; NOT( $Setup.Bypass_Validation_rules__c.Disable_Validation_Rules__c )</errorConditionFormula>
+    <errorMessage>The Subscription ID cannot be changed.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,200 @@
+<apex:page controller="AccuracyIssueFormPR_Controller" showHeader="false" cache="false" lightningstylesheets="true">
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/jquery.min.js')}"></script>   
+        <apex:stylesheet value="{!URLFOR($Resource.Bootstrap_Layout_Library, '/css/bootstrap.min.css')}"/>
+                <apex:includeScript value="/support/console/25.0/integration.js"/>
+
+    </head>
+    
+    <style type="text/css">
+        .form-style-1 {
+            margin:10px auto;
+            max-width: 720px;
+            padding: 20px 12px 10px 20px;
+            font: 13px roboto, sans-serif;
+        }
+        .form-style-1 li {
+            padding: 0;
+            display: block;
+            list-style: none;
+            margin: 25px 0 0 0;
+        }
+        .form-style-1 label{
+            margin:0 0 3px 0;
+            padding:0px;
+            display:block;
+            font-weight: bold;
+            color:#2b2b2b;
+        }
+        .form-style-1 input[type=text], 
+        .form-style-1 input[type=date],
+        .form-style-1 input[type=datetime],
+        .form-style-1 input[type=number],
+        .form-style-1 input[type=search],
+        .form-style-1 input[type=time],
+        .form-style-1 input[type=url],
+        .form-style-1 input[type=email],
+        textarea, 
+        select{
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            border:1px solid #BEBEBE;
+            padding: 7px;
+            margin:0px;
+            -webkit-transition: all 0.30s ease-in-out;
+            -moz-transition: all 0.30s ease-in-out;
+            -ms-transition: all 0.30s ease-in-out;
+            -o-transition: all 0.30s ease-in-out;
+            outline: none;  
+        }
+        .form-style-1 input[type=text]:focus, 
+        .form-style-1 input[type=date]:focus,
+        .form-style-1 input[type=datetime]:focus,
+        .form-style-1 input[type=number]:focus,
+        .form-style-1 input[type=search]:focus,
+        .form-style-1 input[type=time]:focus,
+        .form-style-1 input[type=url]:focus,
+        .form-style-1 input[type=email]:focus,
+        .form-style-1 textarea:focus, 
+        .form-style-1 select:focus{
+            -moz-box-shadow: 0 0 8px #88D5E9;
+            -webkit-box-shadow: 0 0 8px #88D5E9;
+            box-shadow: 0 0 8px #88D5E9;
+            border: 1px solid #88D5E9;
+        }
+        .form-style-1 .field-divided{
+            width: 49%;
+        }
+        
+        .form-style-1 .field-long{
+            width: 100%;
+        }
+        .form-style-1 .field-select{
+            width: 100%;
+        }
+        .form-style-1 .field-textarea{
+            height: 100px;
+        }
+        .form-style-1 input[type=submit], .form-style-1 input[type=button]{
+            background: #FF7947;
+            padding: 8px 15px 8px 15px;
+            border: none;
+            color: #fff;
+        }
+        .form-style-1 input[type=submit]:hover, .form-style-1 input[type=button]:hover{
+            background: #FF7947;
+            box-shadow:none;
+            -moz-box-shadow:none;
+            -webkit-box-shadow:none;
+        }
+        .form-style-1 .required, .form-style-1 .required1{
+            color:red;
+        }
+        .header_row{ padding:12px; background-color:#212B3D;}
+        .header_row img.logo{padding: 12px 0px;}
+        body {font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;} 
+        .question1 label { display:inline; font-weight:100; font: 13px roboto, sans-serif !important;}       
+        .submit {            
+            background: #FF7947;
+            padding: 8px 15px 8px 15px;
+            border: none;
+            color: #fff;
+            float:right;
+            text-decoration:none;
+        }
+        .submit:hover {text-decoration:none; color:#fff;}
+        #info-panel, #agreements-panel, #agreements-panel2 { display:none; } 
+        .footer {background-color:#555555; padding:30px; text-align:center; color:#fff; margin-top:20px;}
+        .panel-heading-li { color:#FF7947; padding-bottom:5px; }
+        .panel-heading-li-next {margin-top:10px !important;}
+        .question4 option {margin-bottom:5px;}
+        
+        .error-msg { color:#f53e3e; margin-top:5px; }       
+    </style> 
+    
+    <script>
+        function submitForm() {
+                var hasError = false; 
+                $(".error-msg").remove();                     
+                $(".required").each(function() {                                                            
+                    if($(this).parent().parent().css('display') != 'none' && $(this).parent().parent().attr('id') != 'cb-li' && ($(this).parent().next().val() == null || $(this).parent().next().val() == '' || $(this).parent().next().val() == 'None')) {
+                        $(this).parent().next().after('<div class="error-msg">* This field is required</div>');
+                        $(this).parent().next().css('border-color', '#f53e3e');
+                        hasError = true;
+                    }
+                    else {
+                       $(this).parent().next().css('border-color', '#BEBEBE'); 
+                    }                               
+                });
+                
+                console.log(hasError);    
+                if(hasError) {
+                    $(".errors").show();
+                    $(".alert").html("* Please review below error fields ");
+                    window.scrollTo(100, 100);
+                    return false;
+                }
+                else {   
+                    $(".errors").hide();
+                    $(".alert").html("hi"); 
+                    return true;                   
+                }                             
+        }
+        
+    </script>           
+    
+    <div style="background-color:#f3f3f3;">
+        <header>
+            <div class="header_row">
+                <img class="logo" src="{!URLFOR($Resource.LogoBright)}" alt="logo" height="60" />
+                <span style="float:right; color:white; font-size:120%; margin-top:1%;">Accuracy Issue</span>
+            </div>
+        </header> 
+
+        <apex:form >
+            <div id="questions-panel">           
+                <ul class="form-style-1">
+                    <li class="panel-heading-li">
+                        <h4>Accuracy Issue:</h4>
+                    </li>
+                   <li class="errors" style="display:{!if(msg == null, 'none', 'block')}">
+                        <div class="alert alert-danger" role="alert">{!msg}</div>
+                    </li>
+                    <li>
+                        <label>Tax ID<span class="required">*</span></label>
+                        <apex:inputText value="{!taxid}" styleClass="field-long" disabled="true"></apex:inputText>
+                    </li>
+                    <li>
+                        <label>Property Address <span class="required">*</span></label>
+                        <apex:inputText value="{!propertyAddress}" styleClass="field-long" disabled="true"></apex:inputText>
+                    </li> 
+                    <li>
+                        <label style="font-weight:100;">The information collected in this form will be used solely to investigate the accuracy of the listing. Your contact information is collected so we may follow-up with you if more information is required for investigation.</label>
+                    </li> 
+                    <li>
+                        <label>From <span class="required">*</span></label>
+                        <apex:inputText value="{!fromName}" styleClass="field-long" disabled="true"></apex:inputText>
+                    </li>                    
+                    <li>
+                        <label>Topic <span class="required">*</span></label>
+                        <apex:selectList value="{!topic}" multiselect="false" size="1" styleClass="field-select">
+                            <apex:selectOptions value="{!topics}"></apex:selectOptions>
+                        </apex:selectList>
+                    </li>
+                    <li>
+                        <label>Accuracy Issue Description <span class="required">*</span></label>
+                        <apex:inputTextarea value="{!description}" html-maxlength="1000" styleClass="field-long" />
+                    </li>
+                    <br/>
+                    
+                    <!--<input class="btn" type="button" value="Cancel" id="agreement-panel2-back-button" onclick="testCloseTab()"/>-->
+                    <apex:commandbutton action="{!$Site.BaseUrl}/AccuracyIssueFormPR?from={!fromName}&taxid={!taxid}&address={!propertyAddress}" value="Reset" ></apex:commandbutton>
+                    <apex:commandButton onclick="return submitForm();" action="{!submitAccuracyForm}" value="Submit" style="float:right;" />
+                </ul> 
+            </div>                                        
+        </apex:form>
+    </div>      
+</apex:page>

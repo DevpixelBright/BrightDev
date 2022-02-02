@@ -1,0 +1,11 @@
+<apex:page standardStylesheets="false" lightningstylesheets="true">
+    <apex:composition template="Bootstrap_Base">
+        
+        <apex:define name="layout">
+            <div class="span12">
+                <c:Bootstrap_Content />
+            </div>
+        </apex:define>
+        
+    </apex:composition>
+</apex:page>

@@ -1,0 +1,18 @@
+<apex:component controller="SMS_Attachment_Controller" access="global">
+    <apex:attribute name="billId" type="Id" assignTo="{!billingAccountId}" description="Billing Account Id"/>  
+    <h1>Invoices Document</h1>
+    <apex:dataTable value="{!zInvoicesList}" var="z">
+        <apex:column >
+            <apex:facet name="header">Id</apex:facet>
+            {!z.Id}
+        </apex:column>
+        <apex:column >
+            <apex:facet name="header">Balance</apex:facet>
+            {!z.Zuora__Balance2__c}
+        </apex:column>
+        <apex:column >
+            <apex:facet name="header">Invoice Date</apex:facet>
+            {!z.Zuora__InvoiceDate__c}
+        </apex:column>                
+    </apex:dataTable>
+</apex:component>

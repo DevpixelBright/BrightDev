@@ -1,0 +1,231 @@
+<apex:page controller="EBOSS_StaffOrder" doctype="html-5.0" showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false"  lightningstylesheets="true" title="Elevate BOSS - Staff Order"> 
+    
+    <apex:form styleClass="slds-form" > 
+        <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+            <head>
+                <meta charset="utf-8" />
+                <meta http-equiv="x-ua-compatible" content="ie=edge" />
+                <title></title>
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <!-- Import the Design System style sheet -->
+                <apex:slds />
+            </head>
+            <body>
+                <!-- REQUIRED SLDS WRAPPER -->
+                <div class="slds-scope">
+                    <apex:pageBlock >
+                        <!-- MASTHEAD -->
+                        <p class="slds-text-heading_label slds-m-bottom_small"></p>
+                        <!-- / MASTHEAD -->
+                        <!-- PAGE HEADER -->
+                        <div class="slds-page-header">
+                            <!-- PAGE HEADER TOP ROW -->
+                            <div class="slds-grid">
+                                <!-- PAGE HEADER / ROW 1 / COLUMN 1 -->
+                                <div class="slds-col slds-has-flexi-truncate">
+                                    <!-- HEADING AREA -->
+                                    <!-- MEDIA OBJECT = FIGURE + BODY -->
+                                    <div class="slds-media slds-no-space slds-grow">
+                                        <div class="slds-media__figure">
+                                            <svg aria-hidden="true" class="slds-icon slds-icon-standard-user">
+                                                <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#user')}"></use>
+                                            </svg>
+                                        </div>
+                                        <div class="slds-media__body">
+                                            <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate" title="details">{!subscription.Contact__r.Name}: {!subscription.Name}</h1>
+                                            <p class="slds-text-title slds-line-height_reset">Office ID: {!subscription.Related_Location_Broker_Office__r.Name} | Sub Type: {!subscription.Subscription_Type__c}</p>
+                                        </div>
+                                    </div>
+                                    <!-- / MEDIA OBJECT -->
+                                    <!-- HEADING AREA -->
+                                </div>
+                                <!-- / PAGE HEADER / ROW 1 / COLUMN 1 -->
+                                <!-- PAGE HEADER / ROW 1 / COLUMN 2 -->
+                                
+                                <!-- / PAGE HEADER / ROW 1 / COLUMN 2 -->
+                            </div>
+                            <!-- / PAGE HEADER TOP ROW -->
+                            <!-- PAGE HEADER DETAIL ROW -->
+                            <!-- / PAGE HEADER DETAIL ROW -->
+                        </div>
+                        <!-- / PAGE HEADER -->
+                        
+                        <!-- PRIMARY CONTENT WRAPPER -->
+                        <div class="myapp">
+                            <!-- RELATED LIST CARDS-->
+                            <apex:outputPanel id="Messages">
+            <apex:pagemessages ></apex:pagemessages>
+        </apex:outputPanel>
+                            
+                            <div class="slds-grid slds-m-top_large">
+                                <!-- MAIN CARD -->
+                                <div class="slds-col slds-col_rule-right slds-p-right_large slds-size_8-of-12">
+                                    <article class="slds-card">
+                                        <div class="slds-card__header slds-grid">
+                                            <header class="slds-media slds-media--center slds-has-flexi-truncate">
+                                                <div class="slds-media__figure">
+                                                    <svg aria-hidden="true" class="slds-icon slds-icon-standard-contact slds-icon_small">
+                                                        <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#contact')}"></use>
+                                                    </svg>
+                                                </div>
+                                                <div class="slds-media__body slds-truncate">
+                                                    
+                                                    <span class="slds-text-heading_small">Elevate BOSS Orders</span>
+                                                    
+                                                </div>
+                                                <div class="slds-col slds-no-flex slds-grid slds-align-top">
+                                    <div class="slds-button-group" role="group">
+                                        <apex:commandButton action="{!newProductOrder}" value="New Product" styleClass="slds-button slds-button_neutral"/>
+                                    </div>
+                                </div>
+                                            </header>
+                                        </div>
+                                        <!-- CARD BODY = TABLE -->
+                                        <div class="slds-card__body">
+                                            
+                                            <apex:pageBlockTable rendered="{!hasCOREEB}" value="{!currentProductTypes}" var="prdType"  styleClass="slds-table slds-table_bordered slds-no-row-hover slds-table_cell-buffer" >
+                                                
+                                                <apex:column value="{!prdType}" headerValue="Product Name" styleClass="slds-hint-parent" headerClass="slds-text-heading--label slds-size_1-of-4"/>
+                                                <apex:column value="{!prdType}" headerValue="Product Type" styleClass="slds-hint-parent" headerClass="slds-text-heading--label slds-size_1-of-4"/>
+                                                <apex:column value="{!currentProductTypes[prdType].Quantity__c}" styleClass="slds-hint-parent" headerClass="slds-text-heading--label slds-size_1-of-4"/>
+                                                <apex:column value="{!currentProductTypes[prdType].StartDate__c}" styleClass="slds-hint-parent" headerClass="slds-text-heading--label slds-size_1-of-4"/>
+                                                <apex:column styleClass="slds-hint-parent" >
+                                                    <apex:commandLink value="Update" action="{!updateProductOrder}" rendered="{!!CONTAINS(prdType, 'Elevate BOSS')}">
+                                                        <apex:param name="pgupdateProductType" value="{!prdType}" assignTo="{!updateProductType}"/>
+                                                    </apex:commandLink>
+                                                </apex:column>
+                                                <apex:column styleClass="slds-hint-parent">
+                                                    <apex:commandLink value="Terminate" action="{!terminateProductOrder}" >
+                                                        <apex:param name="pgterminateProductType" value="{!prdType}" assignTo="{!terminateProductType}"/>
+                                                    </apex:commandLink>
+                                                </apex:column>
+                                                <apex:column >
+                                                    <apex:commandLink styleClass="slds-button slds-button_icon-border-filled slds-button_icon-x-small" action="{!updateProductOrder}">
+                                                        <svg aria-hidden="true" class="slds-button__icon slds-button__icon_hint slds-button__icon_small">
+                                                            <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#down')}"></use>
+                                                        </svg>
+                                                        <apex:param name="pgupdateProductType" value="{!prdType}" assignTo="{!updateProductType}"/>
+                                                        <span class="slds-assistive-text">Show More</span>
+                                                    </apex:commandLink>
+                                                </apex:column>
+                                            </apex:pageBlockTable> 
+                                            
+                                        </div>
+                                        <!-- / CARD BODY = SECTION + TABLE -->
+                                        
+                                    </article>
+                                </div>
+                                <!-- / MAIN CARD -->
+                                
+                                <!-- NARROW CARD -->
+                                <div class="slds-col slds-p-left_large slds-size_4-of-12">
+                                    <apex:outputPanel rendered="{!isOrder}">
+                                        <article class="slds-card">
+                                            <div class="slds-card__header slds-grid">
+                                                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                                    <div class="slds-media__figure">
+                                                        <svg class="slds-icon slds-icon-standard-lead slds-icon_small" aria-hidden="true">
+                                                            <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#lead')}"></use>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="slds-media__body slds-truncate">
+                                                        <h2 class="slds-text-heading_small">Products Selection</h2>
+                                                    </div>
+                                                </header>
+                                            </div>
+                                            
+                                            <apex:pageBlockSection id="productSelection" columns="1" >
+                                                
+                                                <apex:selectList id="Onetime" value="{!zOneTimeProductRatePlanId}" size="1" label="One-Time Rate Plan" disabled="{!isUpdate || isTerminate}">
+                                                    <apex:selectOptions value="{!zOnetimeRatePlans}"/>
+                                                </apex:selectList>            
+                                                <apex:selectList id="Recurring" value="{!zRecurringProductRatePlanId}" size="1" label="Rate Plan" disabled="{!isUpdate || isTerminate}">
+                                                    <apex:selectOptions value="{!zProductRatePlans}"/>
+                                                </apex:selectList>
+                                                <apex:input rendered="{!hasCOREEB}" label="Quantity" value="{!quantity}" disabled="{!isTerminate}" type="auto" html-min="1" html-max="100" html-step="1" styleClass="slds-input" />
+                                                
+                                            </apex:pageBlockSection>
+                                            <div class="slds-card__footer">
+                                                <apex:commandButton action="{!previewOrder}" value="Place Order" styleClass="slds-button slds-button_outline-brand"/> 
+                                                <apex:commandButton action="{!cancel}" value="Cancel" styleClass="slds-button slds-button_outline-brand"/>
+                                            </div> 
+                                            
+                                        </article>
+                                    </apex:outputPanel>
+                                </div>
+                                
+                                <!-- / NARROW CARD -->
+                                
+                            </div>
+                            <!-- / RELATED LIST CARDS -->
+                            <!-- Billing details --->
+                            <apex:outputPanel rendered="{!isBilling}">
+                                <div class="slds-col slds-col_rule-right slds-p-right_large slds-size_8-of-12">
+                                    <article class="slds-card">
+                                        <div class="slds-card__header slds-grid">
+                                            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                                <div class="slds-media__figure">
+                                                    <span class="slds-icon_container slds-icon-standard-account" title="payment">
+                                                        <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                                            <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+                                                        </svg>
+                                                        <span class="slds-assistive-text">payment</span>
+                                                    </span>
+                                                </div>
+                                                <div class="slds-media__body">
+                                                    <h2 class="slds-card__header-title">
+                                                        <span class="slds-text-heading_small">Payment Details</span>
+                                                    </h2>
+                                                </div>
+                                                
+                                            </header>
+                                        </div>
+                                        <div class="slds-card__body slds-card__body_inner">
+                                            <apex:pageBlockSection id="billingDetails" columns="1">
+                                                
+                                                <apex:pageBlockTable value="{!invoiceDetails.invoiceItems}" var="invItem">
+                                                    <apex:column headerValue="Product Type" value="{!invItem.ChargeName}"/>
+                                                    <apex:column headerValue="Description" value="{!invItem.ChargeDescription}"/>
+                                                    <apex:column headerValue="Price per unit" value="{!invItem.UnitPrice}"/>
+                                                    <apex:column headerValue="Quantity" value="{!invItem.Quantity}"/>
+                                                    <apex:column headerValue="Charge Amount" value="{!invItem.ChargeAmount}"/>
+                                                </apex:pageBlockTable>
+                                                <apex:outputText label="Total Amount" value="{!invoiceDetails.Amount}"></apex:outputText>
+                                                <apex:outputText label="Tax" value="{!invoiceDetails.tax}"></apex:outputText>
+                                                
+                                            </apex:pageBlockSection>             
+                                        </div>
+                                        <div class="slds-card__footer">
+                                            <apex:commandButton action="{!confirmOrder}" value="Confirm" styleClass="slds-button slds-button_outline-brand"/> 
+                                            <apex:commandButton action="{!cancel}" value="Cancel" styleClass="slds-button slds-button_outline-brand"/>
+                                        </div> 
+                                        
+                                    </article>
+                                </div>
+                            </apex:outputPanel>
+                            <!-- / Billing details --->
+                        </div>
+                        <!-- / PRIMARY CONTENT WRAPPER -->
+                        
+                        <!-- FOOTER -->
+                        <footer role="contentinfo" class="slds-p-around_large">
+                            <!-- LAYOUT GRID -->
+                            <div class="slds-grid slds-grid_align-spread">
+                                <p class="slds-col">Elevate BOSS Staff Initiated Orders</p>
+                                <p class="slds-col">&copy; BrightMLS</p>
+                            </div>
+                            <!-- / LAYOUT GRID -->
+                        </footer>
+                        <!-- / FOOTER --> 
+                    </apex:pageBlock>
+                </div>
+                <!-- / REQUIRED SLDS WRAPPER -->
+                <!-- JAVASCRIPT -->
+                <!-- / JAVASCRIPT -->
+            </body>
+        </html>
+        
+        
+    </apex:form>
+    
+</apex:page>

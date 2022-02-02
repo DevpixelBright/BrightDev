@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10.5" height="7.49" viewBox="0 0 10.5 7.49">
+  <defs>
+    <clipPath id="clip-Custom_Size_1">
+      <rect width="10.5" height="7.49"/>
+    </clipPath>
+  </defs>
+  <g id="Custom_Size_1" data-name="Custom Size – 1" clip-path="url(#clip-Custom_Size_1)">
+    <path id="Icon_feather-chevron-right" data-name="Icon feather-chevron-right" d="M14.375,14.348l2.281-2.281L12.4,7.4" transform="translate(15.848 -10.9) rotate(90)" fill="none" stroke="#b7c726" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+  </g>
+</svg>

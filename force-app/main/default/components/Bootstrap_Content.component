@@ -1,0 +1,8 @@
+<apex:component layout="none">
+    <div class="instructions">
+        <apex:insert name="instructions"/>
+    </div>
+    <div class="content">
+        <apex:insert name="content"/>
+    </div>
+</apex:component>

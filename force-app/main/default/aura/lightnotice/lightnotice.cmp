@@ -1,0 +1,488 @@
+<aura:component>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <ltng:require styles="{!$Resource.headerpart }"></ltng:require>
+   <ltng:require styles="{!$Resource.side }"></ltng:require> 
+   <ltng:require styles="{!$Resource.body }"></ltng:require>
+
+   
+   <div class="c-container">
+      <div class="fullpage slds-scope">
+         <div class="slds-grid slds-wrap">
+            <lightning:layout multipleRows="true">
+               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage header-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:header />
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+               <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <c:mobilemenu />
+                   <lightning:layout>
+                     <div class="new-containerpage">
+                        <div class="slds-container--x-large new-container">
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <c:sidebarnew />
+                           </lightning:layoutItem>
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                              <div class="page-section page-main">
+                                 <div class="middlebar1">
+                                    <h2>Notification Preferences</h2>
+                                     <lightning:button class="brand " variant="brand " label="Reset to Default" title="Brand action" onclick="{! c.openModel }" />
+                     
+                         </div>
+                                 <div class="dev">
+                                   
+                                   <div class="bodybottom">
+          
+                
+                
+                <div class="slds-container--x-large new-container">
+                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                    <div class="footer-full">
+                              <lightning:tabset>
+        <lightning:tab label="Brokerage">
+            
+            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                <div class="pay-ment">
+           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+               <div class=" layer"> 
+               
+               <p class="recent">Select the emails you would like to receive from Bright.</p>
+
+               </div></lightning:layoutItem>
+                  
+                   </div>
+                <div class=" part3">
+                    
+                      <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="8" largeDeviceSize="8">
+                               <div class=" layer part3"> 
+                           <p class="recent">You are updating email preferences for <b>lakshmi.mallipudi@brightmls.com</b>. Want emails sent to a different address?</p>
+                            
+                                  
+                             </div>
+                    </lightning:layoutItem>   
+                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                <div class="layer part3"> 
+                             
+                                   <div class="layer"> 
+            <lightning:button class="brand make" variant="brand " label="Change Email" title="Brand action" onclick="{! c.openModel }" />
+                      </div>
+                             </div>
+                    </lightning:layoutItem>
+                        </div>
+                <div class=" part0">
+                    
+                      <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                               <div class=" layer part3"> 
+                           
+                            
+                                   <h5>
+                                  <lightning:input type="text" name="input3" placeholder="Enter new email address"  variant = "label-hidden" />
+
+                                   </h5>
+                             </div>
+                    </lightning:layoutItem>   
+                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                                <div class="layer part3"> 
+                             
+                                  <lightning:button class="brand make" variant="brand " label="Cancel" title="Brand action" onclick="{! c.openModel }" />
+                    <lightning:button class="brand make brand2" variant="brand " label="Update" title="Brand action" onclick="{! c.openModel }" />
+                    
+                             </div>
+                    </lightning:layoutItem>
+                        </div>
+            </lightning:layoutItem>
+           <div class="sline"></div>
+           <p class="recent">Choose “On” to be added to a list. Choose “Off” to be removed.</p>
+            <div class="view"></div>
+            
+            
+            
+            
+            
+            
+            
+            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                <div class="part0">
+                <lightning:layoutItem flexibility="grow" size="8" mediumDeviceSize="10" largeDeviceSize="10">               
+                <div class="layer part22"> 
+                           
+                            
+                                  <h6>Broker News</h6>
+                    <p>Get emails with information just for brokers, including a broker newsletter.</p>
+                             </div>
+                </lightning:layoutItem>   
+                <lightning:layoutItem flexibility="grow" size="4" mediumDeviceSize="2" largeDeviceSize="2">
+                                <div class="layer part3"> 
+                             
+                            <div class="slds-form-element boxcheck">
+  <label class="slds-checkbox_toggle slds-grid">
+
+    <input type="checkbox" name="checkbox-toggle-16" value="checkbox-toggle-16" aria-describedby="checkbox-toggle-16" />
+    <span id="checkbox-toggle-16" class="slds-checkbox_faux_container" aria-live="assertive">
+      <span class="slds-checkbox_faux"></span>
+      
+    </span>
+  </label>
+</div>
+                    </div></lightning:layoutItem>
+                </div>
+                        </lightning:layoutItem>
+            
+            
+            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                <div class="part0">
+                <lightning:layoutItem flexibility="grow" size="8" mediumDeviceSize="10" largeDeviceSize="10">               
+                <div class="layer part22"> 
+                           
+                            
+                                  <h6>Agent Transfer Notifications</h6>
+                    <p>Receive email notifications for agent requests to transfer listings to your brokerage.</p>
+                             </div>
+                </lightning:layoutItem>   
+                <lightning:layoutItem flexibility="grow" size="4" mediumDeviceSize="2" largeDeviceSize="2">
+                                <div class="layer part3"> 
+                             
+                            <div class="slds-form-element boxcheck">
+  <label class="slds-checkbox_toggle slds-grid">
+
+    <input type="checkbox" name="checkbox-toggle-16" value="checkbox-toggle-16" aria-describedby="checkbox-toggle-16" />
+    <span id="checkbox-toggle-16" class="slds-checkbox_faux_container" aria-live="assertive">
+      <span class="slds-checkbox_faux"></span>
+      
+    </span>
+  </label>
+</div>
+                    </div></lightning:layoutItem>
+                </div>
+                        </lightning:layoutItem>
+            
+            
+            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                <div class="part0">
+                <lightning:layoutItem flexibility="grow" size="8" mediumDeviceSize="10" largeDeviceSize="10">               
+                <div class="layer part22"> 
+                           
+                            
+                                  <h6>New Application Notifications</h6>
+                    <p>Receive email notifications when new agent application(s) need approval.</p>
+                             </div>
+                </lightning:layoutItem>   
+                <lightning:layoutItem flexibility="grow" size="4" mediumDeviceSize="2" largeDeviceSize="2">
+                                <div class="layer part3"> 
+                             
+                            <div class="slds-form-element boxcheck">
+  <label class="slds-checkbox_toggle slds-grid">
+
+    <input type="checkbox" name="checkbox-toggle-16" value="checkbox-toggle-16" aria-describedby="checkbox-toggle-16" />
+    <span id="checkbox-toggle-16" class="slds-checkbox_faux_container" aria-live="assertive">
+      <span class="slds-checkbox_faux"></span>
+      
+    </span>
+  </label>
+</div>
+                    </div></lightning:layoutItem>
+                </div>
+                        </lightning:layoutItem>
+        </lightning:tab>
+        <lightning:tab label="Subscription" title="2nd tab extended title">
+          
+            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                <div class="pay-ment">
+           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+               <div class=" layer"> 
+               
+               <p class="recent">Select the emails you would like to receive from Bright.</p>
+
+               </div></lightning:layoutItem>
+                  
+                   </div>
+                <div class=" part3">
+                    
+                      <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="8" largeDeviceSize="8">
+                               <div class=" layer part3"> 
+                           <p class="recent">You are updating email preferences for <b>lakshmi.mallipudi@brightmls.com</b>. Want emails sent to a different address?</p>
+                            
+                                  
+                             </div>
+                    </lightning:layoutItem>   
+                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                <div class="layer part3"> 
+                             
+                                   <div class="layer"> 
+            <lightning:button class="brand make" variant="brand " label="Change Email" title="Brand action" onclick="{! c.openModel }" />
+                      </div>
+                             </div>
+                    </lightning:layoutItem>
+                        </div>
+                
+            </lightning:layoutItem>
+           <div class="sline"></div>
+           <p class="recent">Choose “On” to be added to a list. Choose “Off” to be removed.</p>
+            <div class="view"></div>
+            
+            
+            
+            
+            
+            
+            
+            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                <div class="part0">
+                <lightning:layoutItem flexibility="grow" size="8" mediumDeviceSize="10" largeDeviceSize="10">               
+                <div class="layer part22"> 
+                           
+                            
+                                  <h6>Weekly Update Newsletter</h6>
+                    <p>Read about the latest news and information for Bright in our weekly newsletter.</p>
+                             </div>
+                </lightning:layoutItem>   
+                <lightning:layoutItem flexibility="grow" size="4" mediumDeviceSize="2" largeDeviceSize="2">
+                                <div class="layer part3"> 
+                             
+                            <div class="slds-form-element boxcheck">
+  <label class="slds-checkbox_toggle slds-grid">
+
+    <input type="checkbox" name="checkbox-toggle-16" value="checkbox-toggle-16" aria-describedby="checkbox-toggle-16" />
+    <span id="checkbox-toggle-16" class="slds-checkbox_faux_container" aria-live="assertive">
+      <span class="slds-checkbox_faux"></span>
+      
+    </span>
+  </label>
+</div>
+                    </div></lightning:layoutItem>
+                </div>
+                        </lightning:layoutItem>
+            
+            
+            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                <div class="part0">
+                <lightning:layoutItem flexibility="grow" size="8" mediumDeviceSize="10" largeDeviceSize="10">               
+                <div class="layer part22"> 
+                           
+                            
+                                  <h6>Market Statistics</h6>
+                    <p>Perfect for sharing with your clients! Receive a monthly update with the latest statistics for real estate activity in your county.</p>
+                             </div>
+                </lightning:layoutItem>   
+                <lightning:layoutItem flexibility="grow" size="4" mediumDeviceSize="2" largeDeviceSize="2">
+                                <div class="layer part3"> 
+                             
+                            <div class="slds-form-element boxcheck">
+  <label class="slds-checkbox_toggle slds-grid">
+
+    <input type="checkbox" name="checkbox-toggle-16" value="checkbox-toggle-16" aria-describedby="checkbox-toggle-16" />
+    <span id="checkbox-toggle-16" class="slds-checkbox_faux_container" aria-live="assertive">
+      <span class="slds-checkbox_faux"></span>
+      
+    </span>
+  </label>
+</div>
+                    </div></lightning:layoutItem>
+                </div>
+                        </lightning:layoutItem>
+            
+            
+            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                <div class="part0">
+                <lightning:layoutItem flexibility="grow" size="8" mediumDeviceSize="10" largeDeviceSize="10">               
+                <div class="layer part22"> 
+                           
+                            
+                                  <h6>Training &amp; Events</h6>
+                    <p>Get more from the MLS. Find out about FREE training classes available online or at an association near you.</p>
+                             </div>
+                </lightning:layoutItem>   
+                <lightning:layoutItem flexibility="grow" size="4" mediumDeviceSize="2" largeDeviceSize="2">
+                                <div class="layer part3"> 
+                             
+                            <div class="slds-form-element boxcheck">
+  <label class="slds-checkbox_toggle slds-grid">
+
+    <input type="checkbox" name="checkbox-toggle-16" value="checkbox-toggle-16" aria-describedby="checkbox-toggle-16" />
+    <span id="checkbox-toggle-16" class="slds-checkbox_faux_container" aria-live="assertive">
+      <span class="slds-checkbox_faux"></span>
+      
+    </span>
+  </label>
+</div>
+                    </div></lightning:layoutItem>
+                </div>
+                        </lightning:layoutItem>
+            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                <div class="part0">
+                <lightning:layoutItem flexibility="grow" size="8" mediumDeviceSize="10" largeDeviceSize="10">               
+                <div class="layer part22"> 
+                           
+                            
+                                  <h6>Product Updates</h6>
+                    <p>Get the latest information about Bright search, report and partner products, including recent updates, important changes and new features.</p>
+                             </div>
+                </lightning:layoutItem>   
+                <lightning:layoutItem flexibility="grow" size="4" mediumDeviceSize="2" largeDeviceSize="2">
+                                <div class="layer part3"> 
+                             
+                            <div class="slds-form-element boxcheck">
+  <label class="slds-checkbox_toggle slds-grid">
+
+    <input type="checkbox" name="checkbox-toggle-16" value="checkbox-toggle-16" aria-describedby="checkbox-toggle-16" />
+    <span id="checkbox-toggle-16" class="slds-checkbox_faux_container" aria-live="assertive">
+      <span class="slds-checkbox_faux"></span>
+      
+    </span>
+  </label>
+</div>
+                    </div></lightning:layoutItem>
+                </div>
+                        </lightning:layoutItem>
+            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                <div class="part0">
+                <lightning:layoutItem flexibility="grow" size="8" mediumDeviceSize="10" largeDeviceSize="10">               
+                <div class="layer part22"> 
+                           
+                            
+                                  <h6>Partner News and Offers</h6>
+                    <p>Get the latest information about Bright search, report and partner products, including recent updates, important changes and new features.</p>
+                             </div>
+                </lightning:layoutItem>   
+                <lightning:layoutItem flexibility="grow" size="4" mediumDeviceSize="2" largeDeviceSize="2">
+                                <div class="layer part3"> 
+                             
+                            <div class="slds-form-element boxcheck">
+  <label class="slds-checkbox_toggle slds-grid">
+
+    <input type="checkbox" name="checkbox-toggle-16" value="checkbox-toggle-16" aria-describedby="checkbox-toggle-16" />
+    <span id="checkbox-toggle-16" class="slds-checkbox_faux_container" aria-live="assertive">
+      <span class="slds-checkbox_faux"></span>
+      
+    </span>
+  </label>
+</div>
+                    </div></lightning:layoutItem>
+                </div>
+                        </lightning:layoutItem>
+            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                <div class="part0">
+                <lightning:layoutItem flexibility="grow" size="8" mediumDeviceSize="10" largeDeviceSize="10">               
+                <div class="layer part22"> 
+                           
+                            
+                                  <h6>Broker News</h6>
+                    <p>Get the latest information about Bright search, report and partner products, including recent updates, important changes and new features.</p>
+                             </div>
+                </lightning:layoutItem>   
+                <lightning:layoutItem flexibility="grow" size="4" mediumDeviceSize="2" largeDeviceSize="2">
+                                <div class="layer part3"> 
+                             
+                            <div class="slds-form-element boxcheck">
+  <label class="slds-checkbox_toggle slds-grid">
+
+    <input type="checkbox" name="checkbox-toggle-16" value="checkbox-toggle-16" aria-describedby="checkbox-toggle-16" />
+    <span id="checkbox-toggle-16" class="slds-checkbox_faux_container" aria-live="assertive">
+      <span class="slds-checkbox_faux"></span>
+      
+    </span>
+  </label>
+</div>
+                    </div></lightning:layoutItem>
+                </div>
+                        </lightning:layoutItem>
+            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                <div class="part0">
+                <lightning:layoutItem flexibility="grow" size="8" mediumDeviceSize="10" largeDeviceSize="10">               
+                <div class="layer part22"> 
+                           
+                            
+                                  <h6>Listing Alert Summary Emails</h6>
+                    <p>Get the latest information about Bright search, report and partner products, including recent updates, important changes and new features.</p>
+                             </div>
+                </lightning:layoutItem>   
+                <lightning:layoutItem flexibility="grow" size="4" mediumDeviceSize="2" largeDeviceSize="2">
+                                <div class="layer part3"> 
+                             
+                            <div class="slds-form-element boxcheck">
+  <label class="slds-checkbox_toggle slds-grid">
+
+    <input type="checkbox" name="checkbox-toggle-16" value="checkbox-toggle-16" aria-describedby="checkbox-toggle-16" />
+    <span id="checkbox-toggle-16" class="slds-checkbox_faux_container" aria-live="assertive">
+      <span class="slds-checkbox_faux"></span>
+      
+    </span>
+  </label>
+</div>
+                    </div></lightning:layoutItem>
+                </div>
+                        </lightning:layoutItem>
+            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                <div class="part0">
+                <lightning:layoutItem flexibility="grow" size="8" mediumDeviceSize="10" largeDeviceSize="10">               
+                <div class="layer part22"> 
+                           
+                            
+                                  <h6>Email Opt Out</h6>
+                    <p>Get the latest information about Bright search, report and partner products, including recent updates, important changes and new features.</p>
+                             </div>
+                </lightning:layoutItem>   
+                <lightning:layoutItem flexibility="grow" size="4" mediumDeviceSize="2" largeDeviceSize="2">
+                                <div class="layer part3"> 
+                             
+                            <div class="slds-form-element boxcheck">
+  <label class="slds-checkbox_toggle slds-grid">
+
+    <input type="checkbox" name="checkbox-toggle-16" value="checkbox-toggle-16" aria-describedby="checkbox-toggle-16" />
+    <span id="checkbox-toggle-16" class="slds-checkbox_faux_container" aria-live="assertive">
+      <span class="slds-checkbox_faux"></span>
+      
+    </span>
+  </label>
+</div>
+                    </div></lightning:layoutItem>
+                </div>
+                        </lightning:layoutItem>
+        </lightning:tab>
+        
+    </lightning:tabset>
+                        
+                    </div>
+                    
+                </lightning:layoutItem>    
+                    
+                </div></div> 
+                                    
+                                    
+                                    
+                                    
+                                  
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                  
+                                   
+                                    
+                                 </div>
+                              </div>
+                           </lightning:layoutItem>
+                        </div>
+                     </div>
+                  </lightning:layout>
+               </lightning:layoutItem>
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage footer-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:footer />
+                         
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+            </lightning:layout>
+         </div>
+      </div>
+    
+   </div>
+</aura:component>

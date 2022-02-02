@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Check_Copy_Address_to_Billing</fullName>
+        <description>Check Copy Address to Billing</description>
+        <field>Copy_Address_to_Billing__c</field>
+        <literalValue>1</literalValue>
+        <name>Check Copy Address to Billing</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>ContactCityStandardAdd</fullName>
+        <field>MailingCity</field>
+        <formula>UPPER(City__c)</formula>
+        <name>ContactCityStandardAdd</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>ContactCountryStandardAdd</fullName>
+        <field>MailingCountry</field>
+        <formula>UPPER(IF( CONTAINS(TEXT(Country__c), &apos;UNITED STATES OF AMERICA&apos;), &apos;USA&apos;, TEXT(Country__c)))</formula>
+        <name>ContactCountryStandardAdd</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>ContactStateStandardAdd</fullName>
+        <field>MailingState</field>
+        <formula>Trim(UPPER(TEXT(State__c)))</formula>
+        <name>ContactStateStandardAdd</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>ContactStreetStandardAdd</fullName>
+        <field>MailingStreet</field>
+        <formula>IF(ISBLANK(Street_Name__c),&apos;&apos;,(TRIM(UPPER(TRIM(Street_Number__c +&apos; &apos;+ Street_Name__c+ &apos; &apos;)
+
++ IF(ISBLANK( QAS_Mailing_Street_Type__c), &apos;&apos;, &apos; &apos;+ QAS_Mailing_Street_Type__c)
+
+
++ IF(ISBLANK(QAS_Mailing_Record_Type__c), &apos;&apos;, &apos; &apos;+ QAS_Mailing_Record_Type__c)
+
++ IF(ISBLANK(Unit__c), &apos;&apos;, &apos; &apos;+ Unit__c)))
+
++IF(ISBLANK(QAS_Mailing_POBox__c), &apos;&apos;, IF (CONTAINS(QAS_Mailing_POBox__c, &apos;PO&apos;), &apos; &apos;+ QAS_Mailing_POBox__c, &apos; PO &apos;+QAS_Mailing_POBox__c))))</formula>
+        <name>ContactStreetStandardAdd</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>ContactZipStandardAdd</fullName>
+        <field>MailingPostalCode</field>
+        <formula>Zip__c +  IF(ISBLANK(Zip_4__c),&apos;&apos;,&apos;-&apos;+Zip_4__c)</formula>
+        <name>ContactZipStandardAdd</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Contact_Owner</fullName>
+        <field>OwnerId</field>
+        <lookupValue>admi.user@mris.net</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Contact Owner</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>SJ_Set_Default_for_Contact</fullName>
+        <description>Set Contact: Service Jurisdiction default value to MRIS</description>
+        <field>Service_Jurisdiction__c</field>
+        <literalValue>MRIS</literalValue>
+        <name>SJ: Set Default for Contact</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Primary_Sub_ID_on_Contact</fullName>
+        <field>Primary_Subscription_ID__c</field>
+        <formula>TEXT(PrimarySubIDRollup__c)</formula>
+        <name>Set Primary Sub ID on Contact</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Private_Email</fullName>
+        <field>Email</field>
+        <formula>Public_Email__c</formula>
+        <name>Set Private Email</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UpdatePreferredLastName</fullName>
+        <field>PreferredLastName__c</field>
+        <formula>LastName</formula>
+        <name>UpdatePreferredLastName</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UpdatePreferredName</fullName>
+        <field>PreferredName__c</field>
+        <formula>FirstName + &quot; &quot; + LastName</formula>
+        <name>UpdatePreferredName</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_PreferredFirstName</fullName>
+        <field>PreferredFirstName__c</field>
+        <formula>FirstName</formula>
+        <name>Update PreferredFirstName</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <outboundMessages>
+        <fullName>Contact_Changes</fullName>
+        <apiVersion>39.0</apiVersion>
+        <endpointUrl>http://ashtalend01.tst.mris.com:8090/services/SFContact</endpointUrl>
+        <fields>Id</fields>
+        <fields>LastModifiedDate</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>andrew.curtis@mris.net</integrationUser>
+        <name>Contact_Changes</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>ContactStandardAddressFieldsPopulation</fullName>
+        <actions>
+            <name>ContactCityStandardAdd</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>ContactCountryStandardAdd</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>ContactStateStandardAdd</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>ContactStreetStandardAdd</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>ContactZipStandardAdd</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>OR(ISCHANGED(Street_Number__c),ISCHANGED(Street_Name__c),ISCHANGED(City__c),ISCHANGED(Country__c),ISCHANGED(Zip__c), ISCHANGED(Zip_4__c), ISCHANGED(QAS_Mailing_POBox__c),  ISCHANGED(QAS_Mailing_Street_Type__c),ISCHANGED(Unit__c), ISCHANGED(QAS_Mailing_Unit_Type__c))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Copy Address to Billing - Contact</fullName>
+        <actions>
+            <name>Check_Copy_Address_to_Billing</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND (2 OR 3)</booleanFilter>
+        <criteriaItems>
+            <field>Contact.Copy_Address_to_Billing__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contact.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>BRIGHT</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contact.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>TREND</value>
+        </criteriaItems>
+        <description>Copy Mailing Address to Billing Address</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Service Jurisdiction%3A Contact Default</fullName>
+        <actions>
+            <name>SJ_Set_Default_for_Contact</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Contact.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <description>If no value is set for Service Jurisdiction, MRIS is set to default(like ezjoin processes)</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Set Primary Sub ID on Contact</fullName>
+        <actions>
+            <name>Set_Primary_Sub_ID_on_Contact</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>ISCHANGED( PrimarySubIDRollup__c )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Set Private Email</fullName>
+        <actions>
+            <name>Set_Private_Email</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Contact.Email</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contact.Public_Email__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Contact Owner</fullName>
+        <actions>
+            <name>Contact_Owner</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Contact.OwnerId</field>
+            <operation>notEqual</operation>
+            <value>Admin User</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Preferred FirstName</fullName>
+        <actions>
+            <name>Update_PreferredFirstName</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>IF(
+ PreferredFirstName__c &lt;&gt; 	 FirstName, True, False 
+	)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Preferred LastName</fullName>
+        <actions>
+            <name>UpdatePreferredLastName</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>IF(
+      PreferredLastName__c &lt;&gt; LastName,
+        True,False)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>UpdatePreferredName</fullName>
+        <actions>
+            <name>UpdatePreferredName</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>IF(
+PreferredName__c ==&quot;&quot; || PreferredName__c &lt;&gt; FirstName +&quot; &quot; + LastName,
+True,False)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

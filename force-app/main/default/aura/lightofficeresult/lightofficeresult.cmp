@@ -1,0 +1,86 @@
+<aura:component>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <ltng:require styles="{!$Resource.headerpart }"></ltng:require>
+   <ltng:require styles="{!$Resource.side }"></ltng:require> 
+   <ltng:require styles="{!$Resource.body }"></ltng:require>
+ 
+   
+   <div class="c-container">
+      <div class="fullpage slds-scope">
+         <div class="slds-grid slds-wrap">
+            <lightning:layout multipleRows="true">
+               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage header-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:header />
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+               <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <c:mobilemenu />
+                   <lightning:layout>
+                     <div class="slds-container--x-large new-container">
+                         <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+            
+            
+                  <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                   <div class=" middlebar1">
+     <lightning:breadcrumbs>
+        <lightning:breadcrumb label="Office Managers"  href="#" class="parent"/>
+        <lightning:breadcrumb label="Assign an Office Manager" href="#" class="parent2"/>
+    </lightning:breadcrumbs>   
+                      
+                      </div> 
+                             </lightning:layoutItem>
+                     <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                     <div class="bottombar bottombar1">
+                     <div class="dev dev1">
+                       
+                         <div class="bodybottom">
+          
+                
+                
+                <div class="slds-container--x-large new-container">
+                     <div class="footer-full ">
+                           
+                         <div class="sucuss">
+                         <img src="{!$Resource.bright + '/bright-3.0/images/success.svg'}" alt="Bright" />
+                             <h4>Office Manager Updated</h4>
+                             <p>Thank you, the changes you have made for this individual have been saved and now effective.</p>
+                             <lightning:button class="brand " variant="brand " label="Back to Responsible Broker" title="Brand action" onclick="{! c.handleClick }" />
+                         </div>
+                        
+                    </div>
+                         
+                </div></div>
+                         
+                         
+                         
+                         
+                         
+                   
+                         
+                  </div>
+                  
+               </div>
+                             </lightning:layoutItem>
+                
+          
+                         </lightning:layoutItem>
+         </div>
+                  </lightning:layout>
+               </lightning:layoutItem>
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage footer-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:footer />
+                         
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+            </lightning:layout>
+         </div>
+      </div>
+    
+   </div>
+</aura:component>

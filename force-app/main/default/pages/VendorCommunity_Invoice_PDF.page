@@ -1,0 +1,399 @@
+<apex:page docType="html-5.0" renderAs="pdf" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="VendorCommunity_SOA_Controller" lightningstylesheets="true">
+    <apex:composition template="VendorCommunity_Base_PDF">
+
+        <apex:define name="head">
+            <style>
+                .invoice {
+                    margin-top: 40px;
+                }
+                
+                .invoice-details-line {
+                    line-height: 20px;
+                }
+                
+                .invoice-details-line.extra-margin {
+                    margin-top: 20px;
+                }
+                
+                .invoice-details-line .invoice-details-label {
+                    display: inline-block;
+                    width: 150px;
+                    font-weight: bold;
+                    text-align: right;
+                    margin-right: 10px;
+                }
+
+                .invoice-item-line:before,
+                .invoice-item-line:after {
+                    content: "";
+                    display: block;
+                    clear: both;
+                }
+
+                .invoice-item-line + .invoice-item-line {
+                    border-top: 1px solid #000;
+                }
+                
+                .invoice-item-line.invoice-item-line-header {
+                    margin-top: 40px;
+                }
+
+                .invoice-item-line > div {
+                    padding: 10px 0px;
+                }
+
+                .invoice-item-line.invoice-item-line-header > div {
+                    font-weight: bold;
+                }
+                
+                .invoice-item-line.invoice-item-line-footer > div {
+                    font-weight: bold;
+                    text-align: right;
+                }
+
+                .invoice-item-line .invoice-item-details {
+                    float: left;
+                    width: 75%;
+                    margin-left: 4%;
+                    padding-right: 10px;
+                    border-right: 1px solid #000;
+                }
+
+                .invoice-item-line .invoice-item-details > i {
+                    color: #000;
+                }
+                
+                .invoice-item-line .invoice-item-cost {
+                    float: left;
+                    width: 15%;
+                    margin-right: 4%;
+                    text-align: right;
+                }
+
+                .product-label {
+                    display: inline-block;
+                    width: 50px;
+                    text-align: right;
+                    margin-right: 10px;
+                    color: #777;
+                }
+
+                .summary-date {
+                    //font-style: italic;
+                }
+
+                .summary-comment {
+                    position: relative;
+                    margin-top: 20px;
+                    border: 1px dotted #ccc;
+                    border-width: 1px 0px;
+                }
+
+                .summary-comment:after {
+                    content: "";
+                    display: block;
+                    clear: both;
+                }
+
+                .summary-comment + .summary-comment {
+                    margin-top: 0px;
+                    border-top: 0px;
+                }
+
+                .summary-comment.heading {
+                    padding: 15px 10px;
+                    font-weight: 500;
+                }
+
+                .summary-comment.cost {
+                    //background-color: #fdd;
+                    //color: #f00;
+                }
+
+                .summary-comment.credit {
+                    background-color: #fefefe;
+                    //color: #0e9a0e;
+                }
+
+                .summary-comment.total {
+                    //background-color: #eee;
+                    font-weight: 500;
+                }
+
+                .summary-comment-text {
+                    clear: both;
+                    float: left;
+                    width: 75%;
+                    border-right: 1px solid #fff;
+                    padding: 14px 10px;
+                }
+
+                .summary-comment.total .summary-comment-text {
+                    text-align: right;
+                }
+
+                .summary-comment-price {
+                    float: left;
+                    width: 15%;
+                    text-align: right;
+                    padding: 15px 10px;
+                }
+
+                .summary-comment.credit .summary-comment-price {
+                    //color: #0e9a0e;
+                }                
+            </style>
+        </apex:define>
+
+        <apex:define name="title">
+            Invoice {!outputInvoiceSummary.invoiceSummary.InvoiceNumber}
+        </apex:define>
+
+        <apex:define name="content">        
+            <div class="instructions">
+                <p>The following invoice lists charges related to your VENDOR account for the date shown. Certain services are subject to sales tax. Where applicable, sales tax has been added. This invoice is due upon receipt. Failure to pay in a timely manner may result in a $25 late fee, and then interruption of service.</p>
+                <p>We encourage you to register and pay online using our secure payment portal, accessed through the MLS website. For your security, we cannot accept payments by phone.</p>
+                <p>If you prefer to pay by check or money order, made payable to Bright MLS, you may mail your payment this address. Please include a copy of the invoice.</p>
+                <p>Bright MLS<br/>P.O. Box 37093<br/>Baltimore, MD 21297-3093</p>
+            </div>
+
+            <div class="invoice">
+                <apex:variable var="is" value="{!outputInvoiceSummary.invoiceSummaryBySubId}" />
+                <div class="invoice-details-line">
+                    <span class="invoice-details-label">Invoice Number</span>
+                    {!is.InvoiceNumber}
+                </div>
+                <div class="invoice-details-line">
+                    <span class="invoice-details-label">Invoice Date</span>
+                    {!is.InvoiceDateString}
+                </div>
+                <div class="invoice-details-line">
+                    <!--<span class="invoice-details-label">{!if(is.isTrend, 'TREND Login Name', 'MRIS ID')}</span>-->
+                    <span class="invoice-details-label">Vendor ID</span>
+                    {!is.MRIS_ID}
+                </div>
+                <div class="invoice-details-line">
+                    <!--<span class="invoice-details-label">{!if(is.isTrend, 'Account Name', 'Office ID')}</span>-->
+                    <span class="invoice-details-label">Account Name</span>
+                    {!is.Office_ID}
+                </div>
+                <div class="invoice-details-line extra-margin">
+                    <span class="invoice-details-label">Bill To</span>
+                    {!is.BillTo}
+                </div>
+                <div class="invoice-details-line">
+                    <span class="invoice-details-label">Email</span>
+                    {!is.Email}
+                </div>
+                <apex:outputPanel rendered="{!if(isRets == true, true, false)}">
+                <div class="invoice-details-line extra-margin">
+                    <div class="invoice-item-details">
+                    </div>
+                </div>
+                </apex:outputPanel>
+                <div class="invoice-item-line invoice-item-line-header">
+                    <div class="invoice-item-details">
+                        Product
+                    </div>
+                    <div class="invoice-item-cost">
+                        Amount
+                    </div>
+                    <c/>
+                </div>
+                <apex:repeat value="{!outputInvoiceSummary.invoiceSummaryBySubIdSortOrder}" var="isk">
+                    <div class="invoice-item-line">
+                        <div class="invoice-item-details">
+                            <apex:variable value="{!is.invoiceItemSummariesBySubIdByInvoiceId[isk]}" var="x"/>
+                            <apex:variable value="{!x.KeyInvoice}" var="k"/>
+
+                            <span class="product-label">Product</span><b>{!k.ProductName}</b><apex:outputText escape="false" value=" (Removal)" rendered="{!!x.IsActive}"/><br/>
+                            
+                            <apex:outputPanel layout="none" rendered="{!k.ProductName == 'Data Licensing'}">
+                                <div class="summary-date">
+                                    <apex:outputPanel layout="none" rendered="{!k.StartDateString != k.EndDateString}">
+                                        <span class="product-label">Period</span>{!k.StartDateString} ・・・ {!k.EndDateString}
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{!k.StartDateString == k.EndDateString}">
+                                        <span class="product-label">Date</span>{!k.StartDateString}
+                                    </apex:outputPanel>
+                                </div>
+                                <!--<br/>
+                                <i style="font-size: 80%;">For Data Licensing products, proration can apply to quantity changes.<br/>
+                                <apex:outputLink value="{!$Label.RetsProductUrl}{!$CurrentPage.parameters.id}" Target="_blank"><b>See here</b></apex:outputLink> for further explanation and full details.</i><br/>
+                                -->
+
+                                <div class="summary-comment heading">
+                                    Amount Breakdown
+                                </div>
+                                
+                                <apex:repeat value="{!x.invoiceItemSummaries}" var="iis">
+                                <apex:outputPanel layout="none" rendered="{!iis.Price >= 0}">
+                                    <div class="summary-comment cost">
+                                        <div class="summary-comment-text">
+                                            <b>Charge</b><br/>
+                                            <apex:outputText escape="false" value="{!iis.Comments}"/>
+                                        </div>
+                                        <div class="summary-comment-price">
+                                            <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                                <apex:param value="{!iis.Price}"/>  
+                                            </apex:outputText>
+                                        </div>
+                                    </div>
+                                </apex:outputPanel>
+                                </apex:repeat>
+                                
+                                <apex:repeat value="{!x.invoiceItemSummaries}" var="iis">
+                                <apex:outputPanel layout="none" rendered="{!iis.Price < 0}">
+                                    <div class="summary-comment credit">
+                                        <div class="summary-comment-text">
+                                            <b>Adjustment</b><br/>
+                                            <apex:outputText escape="false" value="{!iis.Comments}"/>
+                                        </div>
+                                        <div class="summary-comment-price">
+                                            <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                                <apex:param value="{!iis.Price}"/>  
+                                            </apex:outputText>
+                                        </div>
+                                    </div>
+                                </apex:outputPanel>
+                                </apex:repeat>
+
+                                <div class="summary-comment total">
+                                    <div class="summary-comment-text">
+                                        Net amount for this period
+                                    </div>
+                                    <div class="summary-comment-price">
+                                        <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                            <apex:param value="{!x.NetPrice}"/>  
+                                        </apex:outputText>
+                                    </div>
+                                </div>
+                            </apex:outputPanel>
+
+                            <apex:outputPanel layout="none" rendered="{!k.ProductName != 'Data Licensing'}">
+                                <apex:outputPanel layout="none" rendered="{!x.lengthOfSummaries == 1}">
+                                    <div class="summary-date">
+                                        <apex:outputPanel layout="none" rendered="{!k.StartDateString != k.EndDateString}">
+                                            <span class="product-label">Period</span>{!k.StartDateString} ・・・ {!k.EndDateString}
+                                        </apex:outputPanel>
+                                        <apex:outputPanel layout="none" rendered="{!k.StartDateString == k.EndDateString}">
+                                            <span class="product-label">Date</span>{!k.StartDateString}
+                                        </apex:outputPanel>
+                                    </div>
+                                    <div class="summary-comment">
+                                        <apex:outputText escape="false" value="{!k.Comments}"/>
+                                    </div>
+                                </apex:outputPanel>
+
+                                <apex:outputPanel layout="none" rendered="{!x.lengthOfSummaries > 1}">
+                                    <div class="summary-comment heading">
+                                        Amount Breakdown
+                                    </div>   
+
+                                    <apex:repeat value="{!x.invoiceItemSummaries}" var="iis">
+                                    <apex:outputPanel layout="none" rendered="{!iis.Price >= 0}">
+                                        <div class="summary-comment cost">
+                                            <div class="summary-comment-text">
+                                                <b>Charge</b><br/>
+                                                <apex:outputText escape="false" value="{!iis.Comments}"/>
+                                                <div class="summary-date">
+                                                    <apex:outputPanel layout="none" rendered="{!iis.StartDateString != iis.EndDateString}">
+                                                        <span class="product-label">Period</span>{!iis.StartDateString} ・・・ {!iis.EndDateString}
+                                                    </apex:outputPanel>
+                                                    <apex:outputPanel layout="none" rendered="{!iis.StartDateString == iis.EndDateString}">
+                                                        <span class="product-label">Date</span>{!iis.StartDateString}
+                                                    </apex:outputPanel>
+                                                </div>
+                                            </div>
+                                            <div class="summary-comment-price">
+                                                <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                                    <apex:param value="{!iis.Price}"/>  
+                                                </apex:outputText>
+                                            </div>
+                                        </div>
+                                    </apex:outputPanel>
+                                    </apex:repeat>
+                                    
+                                    <apex:repeat value="{!x.invoiceItemSummaries}" var="iis">
+                                    <apex:outputPanel layout="none" rendered="{!iis.Price < 0}">
+                                        <div class="summary-comment credit">
+                                            <div class="summary-comment-text">
+                                                <b>Adjustment</b><br/>
+                                                <apex:outputText escape="false" value="{!iis.Comments}"/>
+                                                <div class="summary-date">
+                                                    <apex:outputPanel layout="none" rendered="{!iis.StartDateString != iis.EndDateString}">
+                                                        <span class="product-label">Period</span>{!iis.StartDateString} ・・・ {!iis.EndDateString}
+                                                    </apex:outputPanel>
+                                                    <apex:outputPanel layout="none" rendered="{!iis.StartDateString == iis.EndDateString}">
+                                                        <span class="product-label">Date</span>{!iis.StartDateString}
+                                                    </apex:outputPanel>
+                                                </div>
+                                            </div>
+                                            <div class="summary-comment-price">
+                                                <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                                    <apex:param value="{!iis.Price}"/>  
+                                                </apex:outputText>
+                                            </div>
+                                        </div>
+                                    </apex:outputPanel>
+                                    </apex:repeat>
+
+                                    <div class="summary-comment total">
+                                        <div class="summary-comment-text">
+                                            Net amount for this period
+                                        </div>
+                                        <div class="summary-comment-price">
+                                            <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                                <apex:param value="{!x.NetPrice}"/>  
+                                            </apex:outputText>
+                                        </div>
+                                    </div>
+                                </apex:outputPanel>
+                            </apex:outputPanel>
+                        </div>
+                        <div class="invoice-item-cost">
+                            <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                                <apex:param value="{!x.NetPrice}"/>  
+                            </apex:outputText>
+                        </div>
+                    </div>
+                </apex:repeat>
+
+                <div class="invoice-item-line invoice-item-line-footer">
+                    <div class="invoice-item-details">
+                        Subtotal
+                    </div>
+                    <div class="invoice-item-cost">
+                        <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                            <apex:param value="{!is.SubTotal}"/>  
+                        </apex:outputText>
+                    </div>
+                    <c/>
+                </div>
+                <div class="invoice-item-line invoice-item-line-footer">
+                    <div class="invoice-item-details">
+                        Tax
+                    </div>
+                    <div class="invoice-item-cost">
+                        <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                            <apex:param value="{!is.TaxAmount}"/>  
+                        </apex:outputText>
+                    </div>
+                    <c/>
+                </div>
+                <div class="invoice-item-line invoice-item-line-footer">
+                    <div class="invoice-item-details">
+                        Total
+                    </div>
+                    <div class="invoice-item-cost">
+                        <apex:outputText value="{0, number, $ ###,###,###,##0.00}">  
+                            <apex:param value="{!is.Total}"/>  
+                        </apex:outputText>
+                    </div>
+                    <c/>
+                </div>
+            </div>
+        </apex:define>
+
+    </apex:composition> 
+</apex:page>

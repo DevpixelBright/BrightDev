@@ -1,0 +1,12 @@
+<apex:page showHeader="false" standardStylesheets="false">
+    <apex:includeLightning />
+    <apex:slds />
+    <div id="dataTable" />
+    <script>
+        $Lightning.use("c:Ejoinnewpage1", function() {
+            $Lightning.createComponent("c:Ejoinnewpage", {}, "dataTable", function(cmp) {
+               console.log('done');
+            });
+        });        
+    </script>
+</apex:page>

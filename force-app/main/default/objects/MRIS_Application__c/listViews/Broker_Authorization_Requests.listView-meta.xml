@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Broker_Authorization_Requests</fullName>
+    <columns>NAME</columns>
+    <columns>Agent_Subscription_ID__c</columns>
+    <columns>Company_Code__c</columns>
+    <columns>Private_Email__c</columns>
+    <columns>Service_Jurisdiction__c</columns>
+    <columns>Status__c</columns>
+    <columns>Website__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Application_Type__c</field>
+        <operation>equals</operation>
+        <value>IDX and VOW Agent Request</value>
+    </filters>
+    <label>IDX and VOW Agent Requests</label>
+</ListView>

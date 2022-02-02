@@ -1,0 +1,6 @@
+<aura:component controller="Communities_AgentAccuracyController" >
+    <aura:attribute name="FileList" type="Object"/>
+    <div>                
+        <lightning:input aura:id="file-input" type="file" files="{!v.FileList}" label="Choose File" name="file" multiple="true" onchange="{! c.handleFilesChange }"/>
+    </div>
+</aura:component>

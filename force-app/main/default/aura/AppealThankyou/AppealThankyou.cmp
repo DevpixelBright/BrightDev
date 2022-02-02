@@ -1,0 +1,18 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+    <aura:attribute type="String" name="subId" default=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <div class="fullpage slds-scope">
+        <div class="slds-grid slds-wrap">
+            <div class="slds-container--x-large new-container">
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 thank">
+                    <h3>Appeal a Fine Form</h3>
+                    <h4>Thank you for submitting a request to appeal a fine</h4>
+                    <p>Your appeal form has been sent to the Bright Accuracy and Policy Department for consideration. Please allow up to two weeks for Bright to review your appeal. During the appeal review no fine will be applied to your account.</p>
+                    
+                    <p>If you have any questions about your appeal, please contact the Accuracy and Policy Department at 301-838-7140 or email them at <a href="mailto:appeals@brightmls.com">appeals@brightmls.com</a>.</p>
+                    <lightning:button class="brand" variant="brand " label="Back" onclick="{!c.handleClick}" />
+                    
+                </div></div>
+        </div></div>
+    
+</aura:component>

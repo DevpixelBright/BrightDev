@@ -1,0 +1,780 @@
+<apex:page standardController="MRIS_Application__c" extensions="MrisReinstatementExtension" sidebar="false" showHeader="false" renderAs="{!renderedAs}" standardStylesheets="false" lightningstylesheets="true">
+<apex:stylesheet value="{!$Resource.Onboarding_CSS}"/>
+<script>
+    var requiredElements = new Array();
+    var ConfirmScreen;
+    var SubscriptionCheck;
+    function RemoveFromRequired(object)
+    {
+        var newArray = new Array();
+        for (i=0;i<requiredElements.length;i++)
+        {
+            if (requiredElements[i].title != object.title)
+                newArray.push(requiredElements[i]);
+        }
+        requiredElements = newArray;
+    }
+    
+    function Validate()
+    {
+        var errors='';
+        var header ='The Required fields are missing:\n';
+        var focusIndex;
+        requiredElements[0].focus();//Causes onblur events to fire
+        for (i=0;i<requiredElements.length;i++)
+        {
+            if (requiredElements[i].value=='' && requiredElements[i].value != undefined)
+            {
+                errors += '\t-'+requiredElements[i].title+'\n';
+                if (focusIndex == null)
+                    focusIndex = i;
+            }
+        }
+        if (errors != '')
+        {
+            alert(header+errors);
+            requiredElements[focusIndex].focus();
+            return false;
+        }
+        else
+        {
+            if (CompanyCheck.value == '')
+            {
+                alert('Broker Code is invalid');
+                for (i=0;i<requiredElements.length;i++)
+                {
+                    if (requiredElements[i].title == 'Broker Code')
+                    {
+                        setTimeout( function(){requiredElements[i].focus(); }, 100 );//Delay is needed to refocus
+                        break;
+                    }                        
+                }
+                return false;
+            }
+            else
+            {
+                if (SubscriptionCheck != null && SubscriptionCheck.value == '')
+                {
+                    alert('Subscription Code is invalid or not active');
+                    for (i=0;i<requiredElements.length;i++)
+                    {
+                        if (requiredElements[i].title == 'Agent Subscription Id')
+                        {
+                            setTimeout( function(){requiredElements[i].focus(); }, 100 );//Delay is needed to refocus
+                            break;
+                        }                        
+                    }
+                }
+                else
+                {
+                    if (SubscriptionType.value == '')
+                    {
+                        alert('This form is for Appraisers only, Please select the form for New Agents Only.');
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+            }         
+        }
+    }
+    function Confirm()
+    {
+        var w = 500;
+        var h = 200;
+        var left = (screen.width/2)-(w/2);
+        var top = (screen.height/2)-(h/2);
+        var url = '/apex/Confirmation?core.apexpages.devmode.url=1&license='+SubscriptionType.value;
+        ConfirmScreen = window.open(url,'popuppage','toolbar=no, location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,copyhistory=no,width='+w+',height='+h+',top='+top+',left='+left);
+        ConfirmScreen.focus(); 
+    }
+    function Confirmed(c)
+    {
+        if (c == true || c =='true')
+            SubmitApplication();
+    }
+    function NeedPrint()
+    {
+        if (doPrint.value=='true')
+        {
+            alert('The Registration has been processed successfully. Please print and fax the following form to Customer Services Fax: 301-838-7171');
+            PrintApplication();
+        }
+    }
+    //Nikhat JIRA ticket
+    function validateLicenseNum(LicenseNum){
+    var rel= /[!@#%\$\^&\*()_+=?,.<>]+/;
+    var rel2 = new RegExp("!@#%\$\^&\*()_+=?,.<>");
+    var n2 =  rel2.exec(LicenseNum.value);
+   // alert(n2);
+   var n = rel.test(LicenseNum.value);
+  // alert(n);
+   if(n)
+   {
+      // alert("invalid");
+       alert(LicenseNum.title+' is Invalid; No special characters are allowed');
+       setTimeout( function(){LicenseNum.focus(); }, 100 );//Delay is needed to refocus
+   }
+ //  else
+    //   alert("valid");
+    }
+    function VPhone(object)
+    {
+        if (object.value.length > 0 && object.value.length < 14)
+        {
+            alert(object.title+' is Invalid');
+            setTimeout( function(){object.focus(); }, 100 );//Delay is needed to refocus    
+        }
+    }
+    function validateEmail(email) { 
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!re.test(email.value) && email.value.length > 0)
+    {
+            alert(email.title+' is Invalid');
+            setTimeout( function(){email.focus(); }, 100 );//Delay is needed to refocus
+    }
+    //Test for length
+    if (email.value.length > 80)
+    {
+        alert(email.title+' is too long. 80 character maximum');
+        email.value='';
+        setTimeout( function(){email.focus(); }, 100 );//Delay is needed to refocus
+    }
+    } 
+    /*============ Phone Number Functions ==================*/
+    
+    var zChar = new Array(' ', '(', ')', '-', '.');
+var maxphonelength = 13;
+var phonevalue1;
+var phonevalue2;
+var cursorposition;
+
+function ParseForNumber1(object){
+phonevalue1 = ParseChar(object.value, zChar);
+}
+function ParseForNumber2(object){
+phonevalue2 = ParseChar(object.value, zChar);
+}
+
+function backspacerUP(object,e) {
+if(e){
+e = e
+} else {
+e = window.event
+}
+if(e.which){
+var keycode = e.which
+} else {
+var keycode = e.keyCode
+}
+
+ParseForNumber1(object)
+
+if(keycode >= 48){
+ValidatePhone(object)
+}
+}
+
+function backspacerDOWN(object,e) {
+if(e){
+e = e
+} else {
+e = window.event
+}
+if(e.which){
+var keycode = e.which
+} else {
+var keycode = e.keyCode
+}
+ParseForNumber2(object)
+}
+
+function GetCursorPosition(){
+
+var t1 = phonevalue1;
+var t2 = phonevalue2;
+var bool = false
+for (i=0; i<t1.length; i++)
+{
+if (t1.substring(i,1) != t2.substring(i,1)) {
+if(!bool) {
+cursorposition=i
+bool=true
+}
+}
+}
+}
+
+function ValidatePhone(object){
+
+var p = phonevalue1
+
+p = p.replace(/[^\d]*/gi,"")
+
+if (p.length < 3) {
+object.value=p
+} else if(p.length==3){
+pp=p;
+d4=p.indexOf('(')
+d5=p.indexOf(')')
+if(d4==-1){
+pp="("+pp;
+}
+if(d5==-1){
+pp=pp+")";
+}
+object.value = pp;
+} else if(p.length>3 && p.length < 7){
+p ="(" + p;
+l30=p.length;
+p30=p.substring(0,4);
+p30=p30+")"
+
+p31=p.substring(4,l30);
+pp=p30+p31;
+
+object.value = pp;
+
+} else if(p.length >= 7){
+p ="(" + p;
+l30=p.length;
+p30=p.substring(0,4);
+p30=p30+")"
+
+p31=p.substring(4,l30);
+pp=p30+p31;
+
+l40 = pp.length;
+p40 = pp.substring(0,8);
+p40 = p40 + "-"
+
+p41 = pp.substring(8,l40);
+ppp = p40 + p41;
+
+object.value = ppp.substring(0, maxphonelength);
+}
+
+GetCursorPosition()
+
+if(cursorposition >= 0){
+if (cursorposition == 0) {
+cursorposition = 2
+} else if (cursorposition <= 2) {
+cursorposition = cursorposition + 1
+} else if (cursorposition <= 5) {
+cursorposition = cursorposition + 2
+} else if (cursorposition == 6) {
+cursorposition = cursorposition + 2
+} else if (cursorposition == 7) {
+cursorposition = cursorposition + 4
+e1=object.value.indexOf(')')
+e2=object.value.indexOf('-')
+if (e1>-1 && e2>-1){
+if (e2-e1 == 4) {
+cursorposition = cursorposition - 1
+}
+}
+} else if (cursorposition < 11) {
+cursorposition = cursorposition + 3
+} else if (cursorposition == 11) {
+cursorposition = cursorposition + 1
+} else if (cursorposition >= 12) {
+cursorposition = cursorposition
+}
+
+/*var txtRange = object.createTextRange();
+txtRange.moveStart( "character", cursorposition);
+txtRange.moveEnd( "character", cursorposition - object.value.length);
+txtRange.select();*/
+}
+
+}
+
+function ParseChar(sStr, sChar)
+{
+if (sChar.length == null)
+{
+zChar = new Array(sChar);
+}
+else zChar = sChar;
+
+for (i=0; i<zChar.length; i++)
+{
+sNewStr = "";
+
+var iStart = 0;
+var iEnd = sStr.indexOf(sChar[i]);
+
+while (iEnd != -1)
+{
+sNewStr += sStr.substring(iStart, iEnd);
+iStart = iEnd + 1;
+iEnd = sStr.indexOf(sChar[i], iStart);
+}
+sNewStr += sStr.substring(sStr.lastIndexOf(sChar[i]) + 1, sStr.length);
+
+sStr = sNewStr;
+}
+
+return sNewStr;
+}  
+  
+function callSetSubscription(){
+    actionSetSubcription();
+}
+
+function refocus(){
+    //alert('Set focus');
+    document.getElementById('thepage:theform:Association').focus;   
+     
+}
+
+    /* ============================================================================== */
+</script>
+<div id="outer">
+    <div id="inner">
+    <apex:outputPanel id="errors">
+    <apex:Messages />
+    </apex:outputPanel>
+    <apex:form >
+    <!-- Application Submission -->   
+        <apex:actionFunction name="SubmitApplication" action="{!Save}"/>
+    <!-- End Applcation Submission -->
+    <!-- Print Application -->   
+        <apex:actionFunction name="PrintApplication" action="{!Print}"/>
+    <!-- End Print Applcation -->
+        <apex:actionFunction name="actionSetSubcription" action="{!setSubscription}" oncomplete="refocus()" reRender="SubscriptionSetter"/>
+    
+        <div style="text-align:center;">
+            <img src="{!$Resource.Onboarding_Top_Logo}"/><br></br>
+            <h3>METROPOLITAN REGIONAL INFORMATION SYSTEMS, INC.</h3>
+            <h3>SUBSCRIBER INFORMATION FORM</h3>              
+            <img src="{!$Resource.Onboarding_Dashed_Line}"/>
+            <div style='text-align:left'>
+              <h3>Use this Subscription Form to:</h3>
+              <ul>
+                <li><h3 style='display:inline'>Request a Secondary ID</h3></li>
+                <li><h3 style='display:inline'>Request for Reinstatements not processed through ezJoin</h3></li>
+              </ul>
+            </div>
+            <img src="{!$Resource.Onboarding_Dashed_Line}"/>
+        </div>
+        <apex:outputPanel id="SubscriptionSetter">
+            <apex:inputText value="{!SubscriptionId}" style="display:none" id="SubscriptionType"/><script> var SubscriptionType= document.getElementById("{!$Component.SubscriptionType}");//alert(SubscriptionType.value);</script>
+        </apex:outputPanel>
+            <apex:inputText value="{!Print}" style="display:none" id="Print"/><script> var doPrint= document.getElementById("{!$Component.Print}");//alert(doPrint.value);</script>
+            <apex:outputText value="Are you a licensed REALTOR? "></apex:outputText> 
+            <apex:selectRadio value="{!RealtorSelection}" title="Are you a licensed REALTOR?" rendered="{!!showPDF}">            
+                <apex:selectOptions value="{!Realtor}"></apex:selectOptions>
+                <apex:actionSupport event="onclick" action="{!setSubscription}"/>
+            </apex:selectRadio>
+            <apex:outputPanel rendered="{!showPDF}">
+            <apex:outputText value="{!RealtorSelection}"></apex:outputText><br></br>
+            </apex:outputPanel>
+            <apex:outputText value="(If you answered NO, are you one of the following?)"></apex:outputText>
+            <apex:selectList value="{!NonRealtorSelection}" multiselect="false" size="1" disabled="{!showRealtor}" rendered="{!!showPDF}">
+                <apex:selectOptions value="{!NonRealtor}"></apex:selectOptions>
+                <apex:actionSupport event="onchange" action="{!setSubscription}"/>
+            </apex:selectList>
+            <apex:outputPanel rendered="{!showPDF}">
+            <apex:outputText value="{!NonRealtorSelection}"></apex:outputText><br></br>
+            </apex:outputPanel>
+            <apex:outputPanel id="OfficeSecretary" rendered="{!showSecretaryQuestion}">
+            <br></br>
+            <apex:outputText value="Does this Office Secretary qualify to be an Office Secretary No Charge?"></apex:outputText>
+            <apex:selectRadio value="{!OfficeSecretaryNCSelection}" title="Does this Office Secretary qualify to be an Office Secretary No Charge?" rendered="{!!showPDF}">            
+                <apex:selectOptions value="{!Realtor}"></apex:selectOptions>
+                <apex:actionSupport event="onclick" action="{!setSubscription}"/>
+            </apex:selectRadio>
+            </apex:outputPanel>
+            <div>
+            <br/>
+            <h2 style='text-align:center'><u>SUBSCRIPTION TYPES</u></h2>
+            <p><font class="label">REALTOR®/ Shareholder:</font> A REALTOR® or a REALTOR® Appraiser who is affiliated with an MRIS® Shareholding Board/Association (listed above), and holds a current state license or certification issued by the appropriate real estate or appraisal licensing board or commission.
+            </p>
+            <p><font class="label">REALTOR®/ Non Shareholder:</font>  A REALTOR® or a REALTOR® Appraiser who is not affiliated with an MRIS® Shareholding Board/Association, but holds a current state license or certification issued by the appropriate real estate or appraisal licensing board or commission.
+            </p>
+            <p><font class="label">Non-REALTOR®/ Real Estate Licensee:</font> A real estate agent, or licensee, who is not affiliated with a REALTOR® Board/Association, but holds a valid real estate license issued by the appropriate real estate licensing board or commission.
+            </p>
+            <p><font class="label">Personal Assistant:</font> An individual with a real estate license or unlicensed, employed by other real estate agents or licensees to assist in their real estate business. Customers with this subscription type may not be the listing or selling agent on the MRIS® system.
+            </p>
+            <p><font class="label">Office Secretary/ No Charge:</font> Each real estate sales office may allow up to three office workers to access the MRIS® system at no additional quarterly charge.
+            </p>
+            <p><font class="label">Office Secretary/ Administrative Assistant:</font> An individual employed by a real estate office to assist in office management. Customers with this subscription type may not be the listing or selling agent on the MRIS® system.
+            </p>
+            </div>
+            <apex:include pageName="FeeSchedule"/>
+            <div style="text-align:center;page-break-before:always;" >
+            <img src="{!$Resource.Onboarding_Dashed_Line}"/>
+                <h2>CONTACT INFORMATION</h2>
+            <img src="{!$Resource.Onboarding_Dashed_Line}"/>
+            </div>
+            <div>
+            Please provide us with the following contact information below:
+            <table>
+            <tr>
+                <td class='required'>* Salutation:</td>
+                <td><apex:inputField value="{!Application.Salutation__c}" id="Salutation" rendered="{!!showPDF}" /><script> var temp= document.getElementById("{!$Component.Salutation}");temp.title='Salutation';requiredElements.push(temp);</script><apex:outputText value="{!Application.Salutation__c}" rendered="{!showPDF}" ></apex:outputText></td>
+            </tr>
+            <tr>
+                <td class='required'>* First Name:</td>
+                <td><apex:inputField value="{!Application.First_Name__c}" id="FirstName"/><script> var temp= document.getElementById("{!$Component.FirstName}");temp.title='First Name';requiredElements.push(temp);</script>
+                <apex:outputPanel rendered="{!showPDF}">
+                <apex:outputText value="{!Application.First_Name__c}"></apex:outputText>
+                </apex:outputPanel>
+                </td>
+            </tr>
+            <tr>
+                <td>Middle Initial:</td>
+                <td><apex:inputField value="{!Application.Middle_Name__c}"/>
+                <apex:outputPanel rendered="{!showPDF}">
+                <apex:outputText value="{!Application.Middle_Name__c}"></apex:outputText>
+                </apex:outputPanel>
+                </td>
+            </tr>
+            <tr>
+                <td class='required'>* Last Name:</td>
+                <td><apex:inputField value="{!Application.Last_Name__c}" id="LastName"/><script> var temp= document.getElementById("{!$Component.LastName}");temp.title='Last Name';requiredElements.push(temp);</script>
+                <apex:outputPanel rendered="{!showPDF}">
+                <apex:outputText value="{!Application.Last_Name__c}"></apex:outputText>
+                </apex:outputPanel>
+                </td>
+            </tr>
+            <tr>
+                <td>Nick Name:</td>
+                <td><apex:inputField value="{!Application.Nickname__c}"/>
+                <apex:outputPanel rendered="{!showPDF}">
+                <apex:outputText value="{!Application.Nickname__c}"></apex:outputText>
+                </apex:outputPanel>
+                </td>
+            </tr>
+            <tr>
+                <td class="required">* Contact Phone<br></br>(Displays in Listing) </td>
+                <td><apex:inputField value="{!Application.Primary_Phone__c}" id="ContactPhone" onkeydown="javascript:backspacerDOWN(this,event);" onkeyup="javascript:backspacerUP(this,event);" onblur="VPhone(this);"/><script> var temp= document.getElementById("{!$Component.ContactPhone}");temp.title='Contact Phone';requiredElements.push(temp);</script>
+                <apex:outputPanel rendered="{!showPDF}">
+                <apex:outputText value="{!Application.Primary_Phone__c}"></apex:outputText>
+                </apex:outputPanel>
+                </td>
+            </tr>
+            <tr>
+                <td class="required">* Cell Phone</td>
+                <td><apex:inputField value="{!Application.Mobile_Phone__c}" id="CellPhone" onkeydown="javascript:backspacerDOWN(this,event);" onkeyup="javascript:backspacerUP(this,event);" onblur="VPhone(this);"/><script> var temp= document.getElementById("{!$Component.CellPhone}");temp.title='Cell Phone';requiredElements.push(temp);</script>
+                <apex:outputPanel rendered="{!showPDF}">
+                <apex:outputText value="{!Application.Mobile_Phone__c}"></apex:outputText>
+                </apex:outputPanel>
+                </td>
+            </tr>
+            <tr>
+                <td>Home Fax</td>
+                <td><apex:inputField value="{!Application.Home_Fax__c}" id="HomeFax" onkeyup="javascript:backspacerUP(this,event);" onkeydown="javascript:backspacerDOWN(this,event);" onblur="VPhone(this);"/>
+                <apex:outputPanel rendered="{!showPDF}">
+                <apex:outputText value="{!Application.Home_Fax__c}"></apex:outputText>
+                </apex:outputPanel>
+                </td> 
+            </tr>
+            <tr>
+                <td>Voice Mail</td>
+                <td><apex:inputField value="{!Application.Voicemail__c}" id="VoiceMail" onkeydown="javascript:backspacerDOWN(this,event);" onkeyup="javascript:backspacerUP(this,event);" onblur="VPhone(this);"/>
+                <apex:outputPanel rendered="{!showPDF}">
+                <apex:outputText value="{!Application.Voicemail__c}"></apex:outputText>
+                </apex:outputPanel>
+                </td> 
+            </tr>
+            <tr>
+                <td>Voice Mail Extension</td>
+                <td><apex:inputField value="{!Application.VM_Ext__c}"/>
+                <apex:outputPanel rendered="{!showPDF}">
+                <apex:outputText value="{!Application.VM_Ext__c}"></apex:outputText>
+                </apex:outputPanel>
+                </td> 
+            </tr>
+            <tr>
+                <td>Agent Office Phone</td>
+                <td><apex:inputField value="{!Application.Agent_Office_Phone__c}" id="AgentPhone" onkeydown="javascript:backspacerDOWN(this,event);" onkeyup="javascript:backspacerUP(this,event);" onblur="VPhone(this);"/>
+                <apex:outputPanel rendered="{!showPDF}">
+                <apex:outputText value="{!Application.Agent_Office_Phone__c}"></apex:outputText>
+                </apex:outputPanel>
+                </td> 
+            </tr>
+            <tr>
+                <td>Agent Office Fax</td>
+                <td><apex:inputField value="{!Application.Agent_Office_Fax__c}" id="AgentFax" onkeydown="javascript:backspacerDOWN(this,event);" onkeyup="javascript:backspacerUP(this,event);" onblur="VPhone(this);"/>
+                <apex:outputPanel rendered="{!showPDF}">
+                <apex:outputText value="{!Application.Agent_Office_Fax__c}"></apex:outputText>
+                </apex:outputPanel>
+                </td> 
+            </tr>
+            <tr>
+                <td>Email Address Private</td>
+                <td><apex:inputText value="{!Application.Private_Email__c}" onblur="validateEmail(this);" title="Email Address Private"/>
+                <apex:outputPanel rendered="{!showPDF}">
+                <apex:outputText value="{!Application.Private_Email__c}"></apex:outputText>
+                </apex:outputPanel>
+                </td> 
+            </tr>
+            <tr>
+                <td class="required">* Email Address Public</td>
+                <td><apex:inputField value="{!Application.Public_Email__c}" id="EmailPublic" onblur="validateEmail(this);"/><script> var temp= document.getElementById("{!$Component.EmailPublic}");temp.title='Email Address Public';requiredElements.push(temp);</script>
+                <apex:outputPanel rendered="{!showPDF}">
+                <apex:outputText value="{!Application.Public_Email__c}"></apex:outputText>
+                </apex:outputPanel>
+                </td> 
+            </tr>
+            <tr>
+                <td>Web Address</td>
+                <td><apex:inputField value="{!Application.Website__c}"/>
+                <apex:outputPanel rendered="{!showPDF}">
+                <apex:outputText value="{!Application.Website__c}"></apex:outputText>
+                </apex:outputPanel>
+                </td> 
+            </tr>
+            <tr>
+                <td>Professional Designations</td>
+                <td><apex:inputField value="{!Application.Professional_Designations__c}" rendered="{!!showPDF}"/><apex:outputText value="{!Application.Professional_Designations__c}" rendered="{!showPDF}"/></td> 
+            </tr>
+            </table>
+            <table>
+               <tr>
+               <td>NRDS ID #</td>
+               <td colspan='2'><apex:inputField value="{!Application.NRDS_ID__c}"/>
+               <apex:outputPanel rendered="{!showPDF}">
+               <apex:outputText style="text-align:left" value="{!Application.NRDS_ID__c}" ></apex:outputText>
+               </apex:outputPanel>
+               </td>
+               <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> 
+               <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> 
+               </tr>
+               <tr>
+               <td colspan='3'>The NRDS ID# is your identification number from the National REALTORS Database System. It is located on your NAR Membership Card.</td>
+               </tr>
+               <tr>
+                   <td colspan='3' style="text-align:left;"><a href='https://reg.realtor.org/roreg.nsf/retrieveID?OpenForm' target='_blank'>Find My NRDS ID</a></td>
+               </tr>
+               <tr>
+               <td colspan='3' style="text-align:left;">If you have a disability which requires special services during the training class, Select all that apply below:</td>
+               </tr>
+               <tr>
+               
+                   <td colspan='3' style="text-align:center;"><apex:inputField value="{!Application.Disabilities__c}" rendered="{!!showPDF}"/><apex:outputField value="{!Application.Disabilities__c}" rendered="{!showPDF}"/></td>
+               </tr>
+            </table>
+            <div style="text-align:center;page-break-before:always;" >
+            <img src="{!$Resource.Onboarding_Dashed_Line}"/>
+                <h2>REINSTATEMENTS</h2>
+            <img src="{!$Resource.Onboarding_Dashed_Line}"/>
+            </div>
+            <p>If this is a reinstatement, and you know your old MRIS subscriber ID, please enter it below.</p>
+            <table>
+              <tr>
+                  <td>Existing Subscription ID</td>
+                  <td>
+                    <apex:inputText value="{!Application.Existing_Subscriber_ID__c}" id="Existing_Subscriber_ID"/>
+                    <apex:outputPanel rendered="{!showPDF}">
+                      <apex:outputText value="{!Application.Existing_Subscriber_ID__c}" ></apex:outputText>
+                    </apex:outputPanel>
+                  </td>
+              </tr>
+            </table>
+            <apex:outputPanel id="PersonalAssistant" rendered="{!showPersonalAssistant}" >
+            <div style="text-align:center">
+            <img src="{!$Resource.Onboarding_Dashed_Line}"/>
+                <h2>Agent Information</h2>
+            <img src="{!$Resource.Onboarding_Dashed_Line}"/>
+            </div>
+            <table>
+                <tr>
+                    <td class="required">* Agent Subscription ID
+                    </td>
+                    <td><apex:inputText value="{!AppraiserCode}" id="AppraiserCode"><apex:actionSupport event="onblur" action="{!LookupAppraiserCode}" reRender="PersonalAssistant"/></apex:inputText><script> var temp= document.getElementById("{!$Component.AppraiserCode}");temp.title='Agent Subscription Id';RemoveFromRequired(temp);requiredElements.push(temp);</script>
+                    <apex:outputPanel rendered="{!showPDF}">
+                    <apex:outputText value="{!AppraiserCode}" ></apex:outputText>
+                    
+                    </apex:outputPanel>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Agent Name
+                    </td>
+                    <td>
+                    <apex:inputText disabled="true" value="{!AppraiserName}"  style="background-color:#F8F8F8;width:350px;" id="SubscriptionCheck" rendered="{!!showPDF}"/><script> SubscriptionCheck= document.getElementById("{!$Component.SubscriptionCheck}");</script>
+                    <apex:outputPanel rendered="{!showPDF}">
+                   <apex:outputText value="{!AppraiserName}"></apex:outputText>
+                  
+                    </apex:outputPanel>
+                    </td>
+                </tr>
+            </table>
+            </apex:outputPanel>            
+            <div style="text-align:center">
+            <img src="{!$Resource.Onboarding_Dashed_Line}"/>
+                <h2>COMPANY INFORMATION</h2>
+            <img src="{!$Resource.Onboarding_Dashed_Line}"/>
+            </div>
+            </div>
+            <apex:outputPanel id="CompanyInfo">
+            <table>
+            <tr>
+                <td class='required'>* Broker Code:</td>
+                <td><apex:inputText value="{!BrokerCode}" id="BrokerCode"><apex:actionSupport event="onblur" action="{!LookupBrokerCode}" reRender="CompanyInfo"/></apex:inputText><script> var temp= document.getElementById("{!$Component.BrokerCode}");temp.title='Broker Code';RemoveFromRequired(temp);requiredElements.push(temp);</script>
+                <apex:outputPanel rendered="{!showPDF}">
+                <apex:outputText value="{!BrokerCode}"></apex:outputText>
+                </apex:outputPanel>
+                </td>
+            </tr>
+            <tr>
+                <td>Name of Company</td>
+                <td><apex:inputText disabled="true" value="{!BrokerInfo.Account_Name__c}"  style="background-color:#F8F8F8;width:350px;" id="CompanyCheck" rendered="{!!showPDF}"/><script> var CompanyCheck= document.getElementById("{!$Component.CompanyCheck}");</script>
+                <apex:outputPanel rendered="{!showPDF}">
+                <apex:outputText value="{!BrokerInfo.Account_Name__c}"></apex:outputText>
+                </apex:outputPanel>
+                </td>
+            </tr>
+            <tr>
+                <td>Office Address</td>
+                <td><apex:inputText disabled="true" value="{!BrokerInfo.BrokerAddress__c}" style="background-color:#F8F8F8;width:350px;" rendered="{!!showPDF}"/>               
+                <apex:outputPanel rendered="{!showPDF}">
+                <apex:outputText value="{!BrokerInfo.BrokerAddress__c}"></apex:outputText>
+                </apex:outputPanel>
+                </td>
+            </tr>
+  <!--          
+            <tr>
+                <td>Office Address2</td>
+                <td><apex:inputText value="{!BrokerInfo.BrokerAddress__c}" style="background-color:#F8F8F8;width:350px;" rendered="{!!showPDF}"/>
+                <apex:outputPanel rendered="{!showPDF}">
+                <apex:outputText value="{!BrokerInfo.BrokerAddress__c}"></apex:outputText>
+                </apex:outputPanel>
+                </td>
+            </tr>
+  -->            
+            <tr>
+                <td>Office City</td>
+                <td><apex:inputText disabled="true" value="{!BrokerInfo.City__c}" style="background-color:#F8F8F8;width:350px;" rendered="{!!showPDF}"/>
+                <apex:outputPanel rendered="{!showPDF}">
+                <apex:outputText value="{!BrokerInfo.City__c}"></apex:outputText>
+                </apex:outputPanel>
+                </td>
+            </tr>
+            <tr>
+                <td>Office State</td>
+                <td><apex:inputText disabled="true" value="{!BrokerInfo.State__c}" style="background-color:#F8F8F8;width:350px;" rendered="{!!showPDF}"/>
+                <apex:outputPanel rendered="{!showPDF}">
+                <apex:outputText value="{!BrokerInfo.State__c}"></apex:outputText>
+                </apex:outputPanel>
+                </td>
+            </tr>
+            <tr>
+                <td>Office County</td>
+                <td><apex:inputText disabled="true" value="{!BrokerInfo.County__c}" style="background-color:#F8F8F8;width:350px;" rendered="{!!showPDF}"/>
+                <apex:outputPanel rendered="{!showPDF}">
+                <apex:outputText value="{!BrokerInfo.County__c}"></apex:outputText>
+                </apex:outputPanel>
+                </td>
+            </tr>
+            <tr>
+                <td>Office Zip</td>
+                <td><apex:inputText disabled="true" value="{!BrokerInfo.Zip__c}" style="background-color:#F8F8F8;width:350px;" rendered="{!!showPDF}"/>
+                <apex:outputPanel rendered="{!showPDF}">
+                <apex:outputText value="{!BrokerInfo.Zip__c}"></apex:outputText>
+                </apex:outputPanel>
+                </td>
+            </tr>
+            </table>
+            </apex:outputPanel>
+            <apex:outputPanel id="Realtor" rendered="{!showRealtor}" >
+            <div style="text-align:center">
+            <img src="{!$Resource.Onboarding_Dashed_Line}"/>
+                <h2>ASSOCIATION/BOARD AFFILIATION</h2>
+            <img src="{!$Resource.Onboarding_Dashed_Line}"/>
+            </div>           
+            <table>
+                <tr>
+                    <td class='required'><apex:outputText value="*Please Select" rendered="{!!showPDF}"/>
+                    </td>
+                    <td>
+                        <apex:selectList value="{!selectedAssociation}" multiselect="false" size="7" style="width:400px;" id="Association" onChange="callSetSubscription();" rendered="{!!showPDF}">
+                            <apex:selectOptions value="{!Associations}"></apex:selectOptions>
+                        </apex:selectList><script> var temp= document.getElementById("{!$Component.Association}");temp.title='Association/Board Affiliation';requiredElements.push(temp);</script>
+                        <apex:outputText value="{!selectedAssociation}" rendered="{!showPDF}"></apex:outputText>
+                    </td>
+                </tr>
+            </table>
+            </apex:outputPanel>
+            <apex:outputPanel id="Appraiser" rendered="{!showRealEstate}" >
+            <div style="text-align:center">
+            <img src="{!$Resource.Onboarding_Dashed_Line}"/>
+                <h2>REAL ESTATE LICENSE INFORMATION</h2>
+            <img src="{!$Resource.Onboarding_Dashed_Line}"/>
+            </div>           
+            <table>
+            <tr>
+                <td>State</td>
+                <td>License</td>
+                <td>Date Expires</td>
+                <td>Type</td>
+            </tr>
+            <tr>
+                <td><apex:inputField id="LicenseState" value="{!Application.License_State__c}" rendered="{!!showPDF}"/><apex:outputText value="{!Application.License_State__c}" rendered="{!showPDF}"/><script> var temp= document.getElementById("{!$Component.LicenseState}");temp.title='License State';requiredElements.push(temp);</script></td>
+                <td><apex:inputField id="LicenseNumber" onblur="validateLicenseNum(this)" value="{!Application.License_Number__c}" rendered="{!!showPDF}"/><apex:outputText value="{!Application.License_Number__c}" rendered="{!showPDF}"/><script> var temp= document.getElementById("{!$Component.LicenseNumber}");temp.title='License Number';requiredElements.push(temp);</script></td>
+                <td>
+                    <apex:inputField id="LicenseMonth" value="{!Application.Date_Expires_Month__c}" rendered="{!!showPDF}"/><script> var temp= document.getElementById("{!$Component.LicenseMonth}");temp.title='License Month';requiredElements.push(temp);</script>
+                    <apex:inputField id="LicenseYear" value="{!Application.Date_Expires_Year__c}" rendered="{!!showPDF}"/><script> var temp= document.getElementById("{!$Component.LicenseYear}");temp.title='License Year';requiredElements.push(temp);</script>
+                    <apex:outputText value="{!shortExpDate}" rendered="{!showPDF}"/>
+                </td>
+                <td>
+                    <apex:selectRadio value="{!LicenseTypeSelection}" layout="pageDirection" rendered="{!!showPDF}">
+                        <apex:selectOptions value="{!LicenseType}"></apex:selectOptions>
+                    </apex:selectRadio>
+                    <apex:outputText value="{!LicenseTypeSelection}" rendered="{!showPDF}"></apex:outputText>
+                </td>
+            </tr>
+            
+            </table>
+            </apex:outputPanel>
+                        <!-- SM Change Issue 124-->
+            <br></br>
+            <!--NM show the footer if the application is of type agent-->
+           
+              <!--  <p> A copy of your Real Estate Agent License is required, please include.</p>-->
+              <apex:outputPanel id="AgentFooter" rendered="{!showFooter}">
+                  <p> A copy of your Real Estate Agent License is required, please include.</p>
+              </apex:outputPanel>
+            
+                        <!-- SM Change Issue 124-->            
+            <br></br><br></br>
+            <div style="text-align:center;">
+            <apex:commandButton value="Continue" onclick="if (Validate())Confirm();" reRender="errors"/>
+            </div>
+            <apex:outputPanel rendered="{!showPDF}" >
+            <div style='text-align:center;page-break-before:always;'>
+            <p><b>IN WITNESS WHERE OF, the Subscriber hereto and the Subscribers Principal Broker Subscriber or duly authorized representative each have executed this Agreement as of the date set forth below.</b></p>
+            <p><b>LICENSED AGENT, PERSONAL ASSISTANT or OFFICE SECRETARY SUBSCRIBER</b></p>
+            <p>By: ________________________________________________________
+            <br></br>(Signature)</p>
+            <p>Name: _____________________________________________________
+            <br></br>(Please Print)</p>
+            <p>PRINCIPAL BROKER SUBSCRIBER or their AUTORIZED REPRESENTATIVE</p>
+            <p>By: ________________________________________________________
+            <br></br>(Signature)</p>
+            <p>Name: _____________________________________________________
+            <br></br>(Please Print)</p>
+            <p>Effective Date: ______________________________________________</p>
+            <p><b>PLEASE FAX or MAIL the COMPLETE Subscription Agreement. The complete application consists of:</b></p>
+            <p><b>- The MRIS Member Application Form</b></p>
+            <p><b>- The Broker/Agent Signature Page</b></p>
+            <p>Please include A COPY OF YOUR LICENSE in your FAX or MAIL to:</p>
+            <p>9707 KEY WEST AVENUE, SUITE 200<br></br>
+            ROCKVILLE, MARYLAND 20850-3915<br></br>
+            Tel: 301.838.7200 or 888.838.8200<br></br>
+            Fax: 301.838.7171
+            </p>
+            <br></br>
+            Copyright 2003 Metropolitan Regional Information Systems, Inc.<br></br>MRIS Form 111 Rev. 11/06 All Rights Reserved
+            </div>
+            </apex:outputPanel>
+    </apex:form>
+    </div>
+</div> 
+<script>NeedPrint();</script>
+</apex:page>

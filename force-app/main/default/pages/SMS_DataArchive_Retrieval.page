@@ -1,0 +1,266 @@
+<apex:page controller="SMS_DataArchive_Retrieval_Controller" sidebar="false" standardStylesheets="false" docType="html-5.0" applyBodyTag="false" lightningstylesheets="true">
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.js"/>
+    <apex:includeScript value="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.js"/>  
+    <c:Bootstrap_Resources />  
+    
+    <script>
+        var first = angular.module("first",['ui.bootstrap']);
+
+        first.controller("firstcontroller", function ($scope) {
+            $scope.items ={!CaseList};
+            $scope.tasks ={!TaskList};         
+        });
+        
+
+        $(document).ready(function(){
+            $(".infoM3").addClass("alert alert-info");
+            $(".infoM3").removeClass("infoM3");
+            $(".message").removeClass("message");
+            
+            $(".tab").click(function(){
+                $(".tab").removeClass("active");
+                $(this).addClass("active");
+
+                if(this.id == "CasesTab") {
+                    $("#CasesContainer").show();
+                    $("#TasksContainer").hide();
+                }
+                else {
+                    $("#CasesContainer").hide();
+                    $("#TasksContainer").show();                
+                }
+            });
+        });
+
+    </script>
+    <style>
+
+        .tab {
+            float: left;
+            background-color: rgb(200,200,200);
+            padding: 5px 19px;
+            margin: 0px 2px 0px 0px;
+            color: black;
+            list-style: none;
+            text-decoration: none;
+            color: white;
+            font-size: 15px;
+            text-shadow: 1px 0px 3px rgb(157, 157, 157);
+            text-decoration:none; 
+            cursor:pointer;           
+        }
+        ul{
+            -webkit-padding-start: 10px;
+        }
+        .tab:hover {
+            background-color: #1797c0;
+            color:white;
+            text-decoration:none;
+        }
+
+        .active {
+            background-color: #1797c0;
+        }
+        #TasksContainer {
+            display:none;
+        }
+    </style>
+    
+    <div ng-app="first" ng-controller="firstcontroller">
+        <ul>
+            <li class="tab active" id="CasesTab"> 
+                Archived Cases   
+            </li>
+            <li class="tab" id="TasksTab"> 
+                Archived Tasks 
+            </li>
+        </ul>
+        <div id="CasesContainer">
+        <apex:pageBlock >
+
+            <table width="100%">
+                <tr>
+                    <td width="90%">
+                        <center><input type="text" ng-model="search" class="form-control" placeholder="Search Cases" style="width:40%; margin-bottom:10px;" /></center>
+                    </td>
+                    <td>
+                        <apex:form >
+                            <apex:commandLink title="Download CSV" action="{!createCSV}" styleClass="glyphicon glyphicon-download-alt" style="height:30px;float:right;">
+                                <apex:param value="Cases" assignTo="{!fileName}" name="Cases" />
+                            </apex:commandLink>
+                        </apex:form>
+                        
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="alert alert-danger" role="alert" ng-show="(items | filter:search).length == 0" style="margin:2%;">
+                <span class="glyphicon glyphicon-info-sign"></span> No Results Available
+            </div>
+    
+            <table class='table' ng-show="(items | filter:search).length > 0" style="border:none;">
+                <thead>
+                    <tr style="color:#428bca; background-color:#F2F2F2;">
+                    <th>Action</th>
+                    <th >Case Number</th>
+                    <th >Subscription ID</th>
+                    <th >Status</th>            
+                    <th >Subject</th>
+                    <!-- <th >ContactName</th> -->
+                    <th >Category</th>
+                    <th >Case Opened</th>
+                    </tr>
+                </thead>
+    
+                <tbody ng-repeat="case in items | filter:search">
+                    <tr>
+                        <td style="color:#0099FF;">
+                            <span ng-class="{'glyphicon glyphicon-minus': case.showDetails, 'glyphicon glyphicon-plus': !case.showDetails}" ng-click="case.showDetails = !case.showDetails" style="cursor:pointer;" class="glyphicon glyphicon-plus"></span>
+                        </td>
+                        <td>{{case.CASENUMBER}}</td>
+                        <td>{{case.MRIS_SUBSCRIPTION_ID__C}}</td>
+                        <td>{{case.STATUS}}</td>                
+                        <td width="35%">{{case.SUBJECT}}</td>
+                        <!-- <td>{{case.ContactName}}</td> -->
+                        <td>{{case.CATEGORY__C}}</td>
+                        <td>{{case.CREATEDDATE}}</td>
+                    </tr>
+    
+                    <tr ng-show="case.showDetails">
+                        <td colspan="7">
+                            <div style="padding:10px; margin:1%; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; background-color:white;">
+                                <table style="margin:auto; line-height:16px;" cellspacing="10" width="90%">
+                                    <tr>
+                                        <td width="10%" style="padding:10px;font-weight:bold; padding-right:0px; color:#1797c0; text-align:right;">CaseNumber </td>
+                                        <td width="1%"> : </td>
+                                        <td width="20%"> {{case.CASENUMBER}}</td>
+                                        <td width="10%" style="padding:10px;font-weight:bold; padding-right:0px; color:#1797c0; text-align:right;">SubscriptionId </td>
+                                        <td width="1%"> : </td>
+                                        <td width="20%"> {{case.MRIS_SUBSCRIPTION_ID__C}}</td> 
+                                        <td width="10%" style="padding:10px;font-weight:bold; padding-right:0px; color:#1797c0; text-align:right;">Status </td>
+                                        <td width="1%"> : </td>
+                                        <td width="20%"> {{case.STATUS}}</td>                                                                          
+                                    </tr>
+                                    <tr>
+                                        <td width="10%" style="padding:10px;font-weight:bold; padding-right:0px; color:#1797c0; text-align:right;">Reason </td>
+                                        <td width="1%"> : </td>
+                                        <td width="20%"> {{case.REASON}}</td>
+                                        <td width="10%" style="padding:10px;font-weight:bold; padding-right:0px; color:#1797c0; text-align:right;">PrivateEmail </td>
+                                        <td width="1%"> : </td>
+                                        <td width="20%"> {{case.PRIVATE_EMAIL__C}}</td> 
+                                        <td width="10%" style="padding:10px;font-weight:bold; padding-right:0px; color:#1797c0; text-align:right;">Product </td>
+                                        <td width="1%"> : </td>
+                                        <td width="20%"> {{case.PRODUCT__C}}</td>                                                                          
+                                    </tr>                                
+                                    <tr>
+                                        <td width="10%" style="padding:10px;font-weight:bold; padding-right:0px; color:#1797c0; text-align:right;">Origin </td>
+                                        <td> : </td>
+                                        <td> {{case.ORIGIN}}</td>
+                                        <td style="padding:10px; padding-right:0px;font-weight:bold; color:#1797c0; text-align:right;">ContactName </td>
+                                        <td> : </td>
+                                        <td> {{case.ContactName}}</td> 
+                                        <td style="padding:10px; padding-right:0px;font-weight:bold; color:#1797c0; text-align:right;">Category </td>
+                                        <td> : </td>
+                                        <td> {{case.CATEGORY__C}}</td>                                                                          
+                                    </tr> 
+                                    <tr>
+                                        <td style="padding:10px; padding-right:0px;font-weight:bold; color:#1797c0; text-align:right;">Subject </td>
+                                        <td> : </td>
+                                        <td colspan='7'> {{case.SUBJECT}}</td>
+                                                                            
+                                    </tr>                                 
+                                    <tr>
+                                        <td style="vertical-align: top;padding:10px; padding-top:5px; padding-right:0px; color:#1797c0; font-weight:bold; text-align:right;">Description </td>
+                                        <td style="vertical-align: top; padding-top:5px;"> : </td>
+                                        <td colspan='7'> {{case.DESCRIPTION}}</td>
+                                                                            
+                                    </tr>                                                                
+                                </table>                            
+                                
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </apex:pageBlock>
+        </div>
+        <div id="TasksContainer">
+        <apex:pageBlock >
+        
+            <table width="100%">
+                <tr>
+                    <td width="90%">
+                        <center>
+                            <input type="text" ng-model="TaskSearch" class="form-control" placeholder="Search Tasks" style="width:40%; margin-bottom:10px;" />
+                        </center>                        
+                    </td>
+                    <td>
+                        <apex:form >
+                            <apex:commandLink title="Download CSV" action="{!createCSV}" styleClass="glyphicon glyphicon-download-alt" style="height:30px;float:right;">
+                                <apex:param value="Tasks" assignTo="{!fileName}" name="Tasks" />
+                            </apex:commandLink>
+                        </apex:form>
+                        
+                    </td>
+                </tr>
+            </table>        
+        
+
+        
+            <div class="alert alert-danger" role="alert" ng-show="(tasks | filter:TaskSearch).length == 0" style="margin:2%;">
+                <span class="glyphicon glyphicon-info-sign"></span> No Results Available
+            </div>        
+        
+            <table class='table' ng-show="(tasks | filter:TaskSearch).length > 0">
+                <thead>
+                    <tr style="color:#428bca; background-color:#F2F2F2;">
+                        <th></th>
+                        <th>Subscription ID</th>
+                        <th>Status</th>
+                        <th>Subject</th>
+                        <th>Priority</th>
+                        <th>Activity Date</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="t in tasks | filter:TaskSearch">
+                    <tr>
+                        <td style="color:#0099FF;">
+                            <span ng-class="{'glyphicon glyphicon-minus': task.showDetails, 'glyphicon glyphicon-plus': !task.showDetails}" ng-click="task.showDetails = !task.showDetails" style="cursor:pointer;" class="glyphicon glyphicon-plus"></span>
+                        </td>
+                        <td><apex:outputText value="{{t.MRIS_SUBSCRIPTION_ID__C}}"/></td>
+                        <td><apex:outputText value="{{t.STATUS}}"/></td>
+                        <td><apex:outputText value="{{t.SUBJECT}}"/></td>
+                        <td><apex:outputText value="{{t.PRIORITY}}"/></td>
+                        <td><apex:outputText value="{{t.ACTIVITYDATE}}"/></td>
+                    </tr>
+                    <tr ng-show="task.showDetails">
+                        <td colspan="5">
+                            <div style="padding:10px; margin:1%; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; background-color:white;">
+                                <table style="margin:auto; line-height:16px;" cellspacing="10" width="90%">
+                                    <tr>
+                                        <td width="10%" style="color:#1797c0; font-weight:bold;padding:10px; padding-right:0px; color:#0b86f4; text-align:right;">SubscriptionId </td>
+                                        <td> : </td>
+                                        <td> {{t.MRIS_SUBSCRIPTION_ID__C}}</td>
+                                        <td style="color:#1797c0; font-weight:bold;padding:10px; padding-right:0px; color:#0b86f4; text-align:right;">Status </td>
+                                        <td> : </td>
+                                        <td> {{t.STATUS}}</td> 
+                                        <td style="color:#1797c0; font-weight:bold;padding:10px; padding-right:0px; color:#0b86f4; text-align:right;">Subject </td>
+                                        <td> : </td>
+                                        <td> {{t.SUBJECT}}</td>                                                                          
+                                    </tr> 
+                                    <tr>
+                                        <td style="color:#1797c0; font-weight:bold;vertical-align: top;padding:10px; padding-top:5px; padding-right:0px; color:#0b86f4; text-align:right;">Description </td>
+                                        <td style="vertical-align: top; padding-top:5px;"> : </td>
+                                        <td colspan='7'> &nbsp;&nbsp;{{t.DESCRIPTION}}</td>
+                                                                            
+                                    </tr>                                  
+                                </table>
+                            </div>                        
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+       </apex:pageBlock>
+       </div>        
+    </div>    
+</apex:page>

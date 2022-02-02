@@ -1,0 +1,170 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+   <ltng:require styles="{!$Resource.brightcss }"></ltng:require>
+   <ltng:require styles="{!$Resource.sidemenu }"></ltng:require> 
+   <ltng:require styles="{!$Resource.bodycontainer }"></ltng:require> 
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   
+    
+    
+    
+    <div class="fullpage slds-scope">
+      <div class="slds-grid slds-wrap">
+         <div class="new-containerpage">
+            <div class="slds-container--x-large new-container">
+               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12  header-full">
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 header-part">
+                     <div class="logo"> 
+                         <img src="{!$Resource.bright + '/bright-3.0/images/brightlogolightning.png'}" alt="Bright" />
+                     </div>
+                  </div>
+                   <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 header-part">
+                     <div class="account">
+                      <h3>Accounts &amp; Settings</h3>
+                     </div>
+                  </div>
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 header-part header-part1">
+                      <div class="all">
+                          <h5>AL</h5>
+                          </div>
+                      <div class="call">
+                         
+                        <h4>Amanda Lynn </h4>
+                        <h3>Subscriber ID: 8987987 &nbsp;<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" />  | <a href="#">Active</a></h3>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+          
+          
+         <div class="slds-container--x-large new-container">
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 sidebar">
+                <ul class="menuside">
+                    <li><a class="active" href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Accounts-Home.svg'}" alt="Accounts Home" />Accounts Home</a></li>
+                    <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                    <li onclick="{!c.treeMenu}"><a><img src="{!$Resource.bright + '/bright-3.0/images/Brokerage.svg'}" alt="Brokerage" />Brokerage<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                      <ul class="submenu submenu1">
+                         <li><a href="#">Office Roster</a></li>
+                        <li><a href="#">Office Statement </a></li>
+                        <li><a href="#">W-9 Forms </a></li>
+                        <li><a href="#">Office Information </a></li>
+                        <li><a href="#">Responsible Broker </a></li>
+                         <li><a href="#">Authorized Signers</a></li>
+                        <li><a href="#">Office Managers</a></li>
+                        <li><a href="#">Accuracy Notifications</a></li>
+                        <li><a href="#">Data Licensing</a></li>
+                        </ul>
+                    
+                    </li>
+                    <li onclick="{!c.treeMenu1}"><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Subscription.svg'}" alt="Subscription" />Subscription<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                     <ul class="submenu submenu2">
+                         <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                        </ul>
+                    </li>
+                    <li onclick="{!c.treeMenu2}"><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Requests.svg'}" alt="Requests" />Requests<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                    <ul class="submenu submenu3">
+                         <li><a href="#">Office Roster</a></li>
+                        <li><a href="#">Office Statement </a></li>
+                        <li><a href="#">W-9 Forms </a></li>
+                        <li><a href="#">Office Information </a></li>
+                        <li><a href="#">Responsible Broker </a></li>
+                         <li><a href="#">Authorized Signers</a></li>
+                        <li><a href="#">Office Managers</a></li>
+                        <li><a href="#">Accuracy Notifications</a></li>
+                        <li><a href="#">Data Licensing</a></li>
+                        </ul>
+                    </li>
+                    <li onclick="{!c.treeMenu3}"><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Finance.svg'}" alt="Finance" />Finance<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                    <ul class="submenu submenu4">
+                         <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Notification-Preferences.svg'}" alt="Notification" />Notification Preferences</a></li>
+                    <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Settings-Permissions.svg'}" alt="Settings" />Settings &amp; Permissions</a></li>
+                     <li class="logout"><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Logout.svg'}" alt="Logout" />Logout</a></li>
+                </ul>
+                
+                </div>
+                
+                
+                
+                
+                
+                
+                
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_9-of-12 slds-large-size_9-of-12 middlebar">
+                    <h2>Hello <b>Amanda,</b> here is a quick look at what’s happening.</h2>
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 bottombar">
+                <div class="dev dev1">
+                    <h2><img src="{!$Resource.bright + '/bright-3.0/images/AccountSettingsNotifications.svg'}" alt="Account &amp; Settings Notifications" />Account &amp; Settings Notifications</h2>
+                    
+                    <div class="centerview centerview1">
+                        <img src="{!$Resource.bright + '/bright-3.0/images/No-notifications.svg'}" alt="No notifications" />
+                        
+                    <h4>Account &amp; Settings Notifications</h4>
+                        <p>Once you start using your Accounts &amp; Settings, you will get all your notification alerts here.</p>
+                    </div>
+                    </div>
+                    <div class="dev dev1">
+                    <h2><img style="margin-top:2px" src="{!$Resource.bright + '/bright-3.0/images/Cases.svg'}" alt="Cases" />Cases</h2>
+                    
+                    <div class="centerview centerview1">
+                        <img src="{!$Resource.bright + '/bright-3.0/images/No-cases.svg'}" alt="No cases" />
+                        
+                    <h4>No cases right now</h4>
+                        <p>Once you submit a case, you can view them here.</p>
+                    </div>
+                    </div>
+                    </div>
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 bottombar1">
+                 <div class="dev dev1">
+                    <h2><img src="{!$Resource.bright + '/bright-3.0/images/Account-Balance.svg'}" alt="Account-Balance" /> Account Balance</h2>
+                    
+                    <div class="centerview">
+                         <img src="{!$Resource.bright + '/bright-3.0/images/No-invoices.svg'}" alt="No invoices" />
+                    <h4>You have no invoices now</h4>
+                        <p>As you start receiving invoices, the details will be here.</p>
+                    </div>
+                    </div>
+                    <div class="dev dev1">
+                    <div class="full">
+                        <div class="fullleft">
+                        <h5>AL</h5>
+                        </div>
+                        <div class="fullright">
+                        <h4>Amanda Lynn</h4>
+                        <p>Broker | Fox &amp; Roach LP Devon, PA amandalynn@foxroach.com (301) 729-3843</p>
+                        </div>
+                               <div class="fullright1">
+                        <img src="{!$Resource.bright + '/bright-3.0/images/Edit.svg'}" alt="Edit" />    </div>
+                        </div>
+                        
+                    
+               
+                    </div>
+                 <div class="dev dev1">
+                    <div class="full">
+                        
+                        <div class="fullright">
+                        <h4>Amanda Lynn</h4>
+                        <p>Broker | Fox &amp; Roach LP Devon, PA amandalynn@foxroach.com (301) 729-3843</p>
+                        </div>
+                               <div class="fullright1">
+                        <img src="{!$Resource.bright + '/bright-3.0/images/Edit.svg'}" alt="Edit" />    </div>
+                        </div>
+                        
+                    
+               
+                    </div>
+                    </div>
+                
+                </div>
+                
+            </div>
+         </div>
+      
+      </div>
+   </div>
+</aura:component>

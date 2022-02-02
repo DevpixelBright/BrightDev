@@ -1,0 +1,67 @@
+<aura:component>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <ltng:require styles="{!$Resource.headerpart }"></ltng:require>
+   <ltng:require styles="{!$Resource.side }"></ltng:require> 
+   <ltng:require styles="{!$Resource.body }"></ltng:require>
+
+   
+   <div class="c-container">
+      <div class="fullpage slds-scope">
+         <div class="slds-grid slds-wrap">
+            <lightning:layout multipleRows="true">
+               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage header-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:header />
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+               <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                   <c:mobilemenu />
+                   <lightning:layout>
+                     <div class="new-containerpage">
+                        <div class="slds-container--x-large new-container">
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <c:sidebarnew />
+                           </lightning:layoutItem>
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                              <div class="page-section page-main">
+                                 <div class="middlebar1">
+                                    <h2>Brokerage Payment Methods</h2>
+                                    
+                         </div>
+                                 <div class="dev">
+                                     <p class="recent">Welcome to My Payment Methods. To add a new Visa, Mastercard, American Express, Discover card or Direct Debit, click “Add New Payment Method.” </p>
+                                     <p class="recent">Need to manage your current payment methods? You can edit and delete payment methods below by using the Edit and Delete icons located in the right corner when you hover over any existing payment method. From this edit screen, you can update Expiration Date, Cardholder Name and Address, and you can select or remove a card as your auto-payment method.</p>
+                                     <p class="recent"> If you need to change a card number, please delete the current card on file and add the new card using the “Add New Payment Method” option.</p>
+                                     <div class="view"></div>
+           
+                 <div class="lake">
+                         <img src="{!$Resource.bright + '/bright-3.0/images/LakeMountain.svg'}" alt="Lake Mountain" />
+                         <p>No Cards Yet.</p>
+                      <lightning:button class="brand brand5" variant="brand " label="Add New License" title="Brand action" onclick="{! c.openModel }" />
+                         </div>
+                                 
+                     
+                        
+                                 </div>
+                              </div>
+                           </lightning:layoutItem>
+                        </div>
+                     </div>
+                  </lightning:layout>
+               </lightning:layoutItem>
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage footer-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:footer />
+                         
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+            </lightning:layout>
+         </div>
+      </div>
+    
+   </div>
+</aura:component>

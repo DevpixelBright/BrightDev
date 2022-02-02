@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Realtionshiptypestate_Validation_rule</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(ISPICKVAL(Relationship_Type__c,  &apos;Responsible Broker&apos;),     ISBLANK(TEXT(State__c)  ))</errorConditionFormula>
+    <errorDisplayField>State__c</errorDisplayField>
+    <errorMessage>Please enter the value</errorMessage>
+</ValidationRule>

@@ -1,0 +1,9 @@
+<apex:page standardController="SMS_Provisioned_Product__c" extensions="ProvisionedProductDetailExtension"  lightningstylesheets="true">
+
+    <apex:pagemessage severity="warning" title="Permissions problem" strength="1" rendered="{!AND(UserCanEdit,NOT(UserCanSendOutboundMessages))}" >
+        If you make changes to this record, they may not be sent to the provisioning system. Contact CRM Support.
+    </apex:pagemessage>
+
+    <apex:detail relatedList="true"/>
+
+</apex:page>

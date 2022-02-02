@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Created by Lightning App Builder</description>
+    <flexiPage>Case_Distribution_v2</flexiPage>
+    <label>Case Distribution v2</label>
+    <motif>Custom62: Chalkboard</motif>
+</CustomTab>

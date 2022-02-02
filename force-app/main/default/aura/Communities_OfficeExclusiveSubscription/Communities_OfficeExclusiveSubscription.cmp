@@ -1,0 +1,221 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" 
+                Controller="OfficeExclusiveSubscription" access="global" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    
+    <aura:attribute name="officeExclusive" type="List"/>
+    <aura:attribute name="officeExclusiveDisplay" type="List"/>
+    <aura:attribute name="officeExclusiveByOffice" type="Map"/>
+    
+    <aura:attribute name="subscriptionId" type="String" default=""/>
+    <aura:attribute name="officeExclusiveId" type="String" default=""/>
+    
+    <aura:attribute type="Boolean" name="sortAsc" default="false"/>
+    <aura:attribute type="String" name="sortField" default="officeId"/>
+    
+    <aura:attribute name="currentPage" type="Integer" default="0"/>
+    <aura:attribute name="selectedPageSize" type="string" default="10"/>
+    <aura:attribute name="recordsPerPage" type="Integer" default="10"/>
+    <aura:attribute name="pagination" type="Integer" default="0"/>
+    <aura:attribute name="pages" type="List" default="[]"/>
+    
+    <aura:attribute name="searchKey" type="String" />
+    <aura:attribute name="offices" type="List" default="[]"/>
+    <aura:attribute name="SelectedOffices" type="List" />
+    <aura:attribute name="wrapperList" type="object"/>
+    <aura:attribute name="pageSizeOptions" type="List" default="[
+                                                                {'label': '10', 'value': '10'},
+                                                                {'label': '25', 'value': '25'},
+                                                                {'label': '50', 'value': '50'},
+                                                                {'label': '100', 'value': '100'}
+                                                                ]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.SelectedOffices}" action="{!c.handleOfficeFilter}"/>
+    
+    
+    <div class="c-container">
+        <div class="fullpage slds-scope">
+            <div class="slds-grid slds-wrap">
+                <lightning:layout multipleRows="true">
+                    
+                    <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                        <lightning:layout>
+                            <div class="new-containerpage">
+                                <div class="slds-container--x-large new-container">
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                        <div class="page-section page-main">
+                                            <div class="dev">
+                                                <div class="top">
+                                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="7" largeDeviceSize="7">
+                                                        <h2><lightning:icon iconName="utility:user"/>&nbsp;&nbsp;<span>Office Exclusives</span></h2>
+                                                    </lightning:layoutItem>
+                                                    
+                                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="5" largeDeviceSize="5">
+                                                      <!--  <div class="line">
+                                                            <lightning:button class="brand" variant="brand" label="Add a new Office Exclusive Certification" title="Brand action" onclick="{!c.gotoURL}" value="{!v.recordId}"/>
+                                                        </div><br/>-->
+                                                        <div class="line">
+                                                            <lightning:button class="brand" variant="brand " label="Print" title="Brand action" onclick="{!c.print}"/>
+                                                            <lightning:button class="brand" variant="brand " label="Export" title="Brand action" onclick="{!c.export}" />                                                            
+                                                        </div>
+                                                    </lightning:layoutItem>
+                                                </div>
+                                                
+                                                <div class="view"></div>
+                                                <div class="middle">
+                                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                                        <p class="recent">
+                                                            Below is a summary of the Office Exclusives you submitted to Bright.
+                                                        </p>
+                                                        <p class="recent">To learn about our policy on Office Exclusives, <a href="https://support.brightmls.com/s/article/Waiver-of-Broker-Cooperation" target="_blank">go to this article</a>. You can access and submit an Office Exclusive Certification form <a href="javascript:void(0)" onclick="{!c.gotoURL}" value="{!v.recordId}">here</a>.</p>
+                                                        
+                                                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                                                            <h5 class="new">
+                                                                <lightning:input aura:id="searchKey" type="text"  name="input3" placeholder="Search by property address, city, state, zip, date or person that submitted."  
+                                                                                 variant = "label-hidden" value="{!v.searchKey}" onchange="{!c.search}"/>
+                                                                <img src="{!$Resource.acc + '/acc/images/search1.svg'}" alt=""/>
+                                                            </h5></lightning:layoutItem>
+                                                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                                                            <div class="point">
+                                                               <!-- <c:MultiSelectCombobox options="{!v.offices}" values="{!v.SelectedOffices}"
+                                                                                       showPills="false" aura:id="officeFilter" allValue = "All Offices"/>-->
+                                                            </div>
+                                                        </lightning:layoutItem>
+                                                    </lightning:layoutItem>
+                                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                                                            <div class="point">
+               												Showing {!v.officeExclusiveDisplay.length} of {!v.officeExclusiveDisplay.length} entries
+                                                            </div>
+                                                        </lightning:layoutItem>
+                                                </div>
+                                                <aura:if isTrue="{!v.officeExclusiveDisplay.length>0}">
+                                                    <div class="view"></div>
+                                                    <div class="middle">
+                                                        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped newtin">
+                                                            <thead>
+                                                                <tr class="slds-line-height_reset">
+                                                                <!--    <th class="" scope="col" >
+                                                                        <div class="slds-truncate"  title="" data-fld ="officeId" onclick="{!c.sortByField}">
+                                                                            Office ID
+                                                                            <c:SortIcon sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="officeId"/>   
+                                                                            <br/></div>
+                                                                    </th>
+                                                                    <th class="" scope="col" >
+                                                                        <div class="slds-truncate"  title="" data-fld ="listAgentId" onclick="{!c.sortByField}">
+                                                                            Agent ID
+                                                                            <c:SortIcon sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="listAgentId"/>   
+                                                                            <br/></div>
+                                                                    </th>
+                                                                    <th class="" scope="col" >
+                                                                        <div class="slds-truncate"  title="" data-fld ="agentName" onclick="{!c.sortByField}">
+                                                                            Agent Name
+                                                                            <c:SortIcon sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="agentName"/>   
+                                                                            <br/></div>
+                                                                    </th>-->
+                                                                    <th class="" scope="col">
+                                                                        <div class="slds-truncate"  title="" data-fld ="propertyAddress" onclick="{!c.sortByField}">
+                                                                            Property Address
+                                                                            <c:SortIcon sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="propertyAddress"/>   
+                                                                            <br/></div>
+                                                                    </th>
+                                                                    <th class="" scope="col" >
+                                                                        <div class="slds-truncate"  title="" data-fld ="city" onclick="{!c.sortByField}">
+                                                                            City
+                                                                            <c:SortIcon sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="city"/>   
+                                                                            <br/></div>
+                                                                    </th>
+                                                                    <th class="" scope="col" >
+                                                                        <div class="slds-truncate"  title="" data-fld ="state" onclick="{!c.sortByField}">
+                                                                            State
+                                                                            <c:SortIcon sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="state"/>   
+                                                                            <br/></div>
+                                                                    </th>
+                                                                    <th class="" scope="col" >
+                                                                        <div class="slds-truncate"  title="" data-fld ="zip" onclick="{!c.sortByField}">
+                                                                            Zip
+                                                                            <c:SortIcon sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="zip"/>   
+                                                                            <br/></div>
+                                                                    </th>
+                                                                    <th class="" scope="col" >
+                                                                        <div class="slds-truncate"  title="" data-fld ="submittedOn" onclick="{!c.sortByField}">
+                                                                            Office Exclusive<br/>Date Submitted
+                                                                            <c:SortIcon sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="submittedOn"/>   
+                                                                            <br/></div>
+                                                                    </th>
+                                                                    <th class="" scope="col" >
+                                                                        <div class="slds-truncate"  title="" data-fld ="submittedBy" onclick="{!c.sortByField}">
+                                                                            Submitted by
+                                                                            <c:SortIcon sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="submittedBy"/>   
+                                                                            <br/></div>
+                                                                    </th>
+                                                                    
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <aura:iteration items="{!v.officeExclusiveDisplay}"  var="oExc" >
+                                                                    <tr class="blue">
+                                                                      <!--  <td>{!oExc.officeId}</td>
+                                                                        <td>{!oExc.listAgentId}</td>
+                                                                        <td>{!oExc.agentName}</td>-->
+                                                                        <td>{!oExc.propertyAddress}</td>
+                                                                        <td>{!oExc.city}</td>
+                                                                        <td>{!oExc.state}</td>
+                                                                        <td>{!oExc.zip}</td>
+                                                                        <td> {!oExc.submittedOnStr}
+                                                                            <!--<lightning:formattedDateTime value="{!oExc.CreatedDate}" year="numeric" month="numeric" day="numeric" hour12="false"/>-->
+                                                                        </td>
+                                                                        <td>{!oExc.submittedBy}</td>
+                                                                        
+                                                                    </tr>
+                                                                </aura:iteration>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="view"></div>
+                                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                                                            <div class="show">
+                                                                <h4>Show</h4> 
+                                                                <lightning:combobox style="width:100px;display:inline-block;margin:0 5px;" value="{!v.selectedPageSize}" 
+                                                                                    options="{!v.pageSizeOptions}" 
+                                                                                    onchange="{!c.handlePageSize}"/>
+                                                                <h4>entries</h4> 
+                                                            </div>
+                                                        </lightning:layoutItem>
+                                                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                                                            <div class="linepoint">
+                                                                
+                                                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication3">
+                                                                    <div class="pagination">
+                                                                        <!--<a href="javascript:void(0);" onclick="{!c.firstPage}">First</a>-->
+                                                                        <a href="javascript:void(0);" onclick="{!c.previousPage}">Previous</a>
+                                                                        <aura:iteration items="{!v.pages}" var="page">
+                                                                            <aura:if isTrue="{!page != 9999}">
+                                                                                <a  href="javascript:void(0);" class="{!(page == v.currentPage)?'active':''}"  onclick="{!c.getPage}" data-offset="{!page}">{!page}</a>
+                                                                            </aura:if>
+                                                                        </aura:iteration>
+                                                                        <a href="javascript:void(0);" onclick="{!c.nextPage}">Next</a>
+                                                                        <!--<a href="javascript:void(0);" onclick="{!c.lastPage}">Last</a>-->
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                        </lightning:layoutItem>
+                                                    </lightning:layoutItem>
+                                                    <aura:set attribute="else">
+                                                        <div class="alert alert-warning">
+                                                            No Office Exclusives to display.
+                                                        </div>
+                                                    </aura:set>
+                                                </aura:if>
+                                            </div>
+                                        </div>
+                                    </lightning:layoutItem>
+                                </div>
+                            </div>
+                        </lightning:layout>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </div>
+        </div>
+    </div>
+</aura:component>

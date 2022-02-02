@@ -1,0 +1,785 @@
+<apex:page sidebar="false" controller="SMS_LockBoxDeposits_Controller" lightningstylesheets="true" >
+    <apex:slds />
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/angular.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/ui-bootstrap-tpls-0.12.0.js')}"/> 
+    <c:Bootstrap_Resources />
+    
+    <style>
+        body {
+            font-size:12px;
+        }
+        h2 { 
+            font-size:100%;
+        }
+
+        .cbtn {
+            background: #3498db !important;
+            background-image: -webkit-linear-gradient(top, #3498db, #2980b9) !important;
+            background-image: -moz-linear-gradient(top, #3498db, #2980b9) !important;
+            background-image: -ms-linear-gradient(top, #3498db, #2980b9) !important;
+            background-image: -o-linear-gradient(top, #3498db, #2980b9) !important;
+            background-image: linear-gradient(to bottom, #3498db, #2980b9) !important;
+            -webkit-border-radius: 3 !important;
+            -moz-border-radius: 3 !important;
+            border-radius: 3px !important;
+            font-family: Arial !important;
+            color: #ffffff !important;
+            font-size: 16px !important;
+            padding: 6px 20px 6px 20px !important;
+            text-decoration: none !important;
+        }
+        .cbtn2 {
+            background: #3498db !important;
+            background-image: -webkit-linear-gradient(top, #3498db, #2980b9) !important;
+            background-image: -moz-linear-gradient(top, #3498db, #2980b9) !important;
+            background-image: -ms-linear-gradient(top, #3498db, #2980b9) !important;
+            background-image: -o-linear-gradient(top, #3498db, #2980b9) !important;
+            background-image: linear-gradient(to bottom, #3498db, #2980b9) !important;
+            -webkit-border-radius: 3 !important;
+            -moz-border-radius: 3 !important;
+            border-radius: 3px !important;
+            font-family: Arial !important;
+            color: #ffffff !important;
+            font-size: 12px !important;
+            padding: 5px 7px 5px 7px !important;
+            text-decoration: none !important;
+        }   
+        input[type=file] {
+            display: inline;
+        }  
+        .fileContainer {
+            overflow: hidden;
+            position: relative;
+        }
+        .fileContainer [type=file] {
+            cursor: inherit;
+            display: block;
+            font-size: 16px;
+            filter: alpha(opacity=0);
+            min-height: 100%;
+            min-width: 100%;
+            opacity: 0;
+            position: absolute;
+            right: 0;
+            text-align: right;
+            top: 0;
+        }
+        .fileContainer {
+            /*background: #CCCCCC;
+            border-radius: 4px;
+            float: left;
+            padding: 8px 20px 8px 20px;
+            */
+        }
+        .fileContainer [type=file] {
+            cursor: pointer;
+        }
+        .nav-tabs>li>a {
+            font-weight:bold;
+        } 
+        
+        .btn1-success {
+          color: #fff;
+          background-color: #5cb85c;
+          border-color: #4cae4c;
+        }
+        .btn1-danger {
+          color: #fff;
+          background-color: #d9534f;
+          border-color: #d43f3a;
+        }      
+        .btn1-primary {
+          color: #fff;
+          background-color: #337ab7;
+          border-color: #2e6da4;
+        }          
+        .btn1 {
+          display: inline-block;
+          margin-bottom: 0;
+          font-weight: 400;
+          text-align: center;
+          vertical-align: middle;
+          cursor: pointer;
+          background-image: none;
+          border: 1px solid transparent;
+          white-space: nowrap;
+          padding: 2px 6px;
+          font-size: 13px;
+          line-height: 1.42857143;
+          border-radius: 0px;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+        } 
+        .sortorder:after {
+            content: '\25b2';
+        }
+        .sortorder.reverse:after {
+            content: '\25bc';
+        }  
+        td a {
+            cursor:pointer;
+            text-decoration:none;
+        }
+        span.tip {
+            border-bottom: 1px dashed;
+            text-decoration: none
+        }
+        span.tip:hover {
+            cursor: help;
+            position: relative
+        }
+        span.tip span {
+            display: none
+        }
+        span.tip:hover span {
+            border: #c0c0c0 1px dotted;
+            padding: 5px 20px 5px 5px;
+            display: block;
+            z-index: 100;
+            background: url(../images/status-info.png) #f0f0f0 no-repeat 100% 5%;
+            left: -210px;
+            margin: 10px;
+            width: 200px;
+            position: absolute;
+            top: -30px;
+            text-decoration: none
+        }                                          
+    </style>
+
+    <script>
+        var batches = 0;
+        var batchesProcessed = 0;    
+        var first = angular.module("first",['ui.bootstrap']);
+
+        first.controller("firstcontroller", function ($scope) {
+            $scope.payments = {!paymentsListStr};
+            $scope.isSaved = {!isSaved};
+            $scope.failedPayments = {!failedPaymentsListStr};
+            
+            $scope.predicate = '';
+            $scope.reverse = true;
+            $scope.order = function(predicate) {
+                $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+                $scope.predicate = predicate;
+            };            
+            
+            $scope.validateInvalidPayments = function(){
+                validate(JSON.stringify($scope.payments));
+            } 
+            
+            $scope.reloadPayments = function(data) {
+                $scope.payments = data;
+            }
+            
+            $scope.reloadFailedPayments = function(data) {
+                $scope.failedPayments = data;
+            }            
+            
+            $scope.selectAllRecords = function(){
+                if($scope.selectAll) {
+                    for(var i=0; i<$scope.payments.length;i++) {
+                        if($scope.payments[i].valid)
+                            $scope.payments[i].selected = true;
+                    }
+                }
+                else {
+                    for(var i=0; i<$scope.payments.length;i++) {
+                        if($scope.payments[i].valid)
+                            $scope.payments[i].selected = false;    
+                    }           
+                }
+            }
+            
+            $scope.selectAllInvalidRecords = function(){
+                if($scope.selectAllInvalid) {
+                    for(var i=0; i<$scope.payments.length;i++) {
+                        if(!$scope.payments[i].valid)
+                            $scope.payments[i].selected = true;
+                    }
+                }
+                else {
+                    for(var i=0; i<$scope.payments.length;i++) {
+                        if(!$scope.payments[i].valid)
+                            $scope.payments[i].selected = false;    
+                    }           
+                }
+            }             
+            
+            $scope.createPayments = function() {
+                $(".responseStatus").html('');
+                $scope.finalResult = [];
+                var j = 1;
+                for(var i=0; i<$scope.payments.length;i++) {
+                    if($scope.payments[i].selected) {
+                        if(j%10 == 0) {
+                            batches++;
+                            createPayments(JSON.stringify($scope.finalResult));
+                            $scope.finalResult = [];
+                        }
+                        $scope.finalResult.push($scope.payments[i]);
+                        j++;
+                    }
+                }
+                if($scope.finalResult.length > 0) {
+                    batches++;
+                    createPayments(JSON.stringify($scope.finalResult));
+                }
+            }
+            
+            $scope.deleteInvalidPayments = function() {
+                $scope.selectedRecords = [];
+                var j = 1;
+                for(var i=0; i<$scope.payments.length;i++) {
+                    if($scope.payments[i].selected && !$scope.payments[i].valid) {
+                        $scope.selectedRecords.push($scope.payments[i]);
+                        j++;
+                    }
+                }
+                if($scope.selectedRecords.length > 0)
+                    deletePayments(JSON.stringify($scope.selectedRecords));
+            } 
+            
+            $scope.deleteValidPayments = function() {
+                $scope.selectedRecords = [];
+                var j = 1;
+                for(var i=0; i<$scope.payments.length;i++) {
+                    if($scope.payments[i].selected && $scope.payments[i].valid) {
+                        $scope.selectedRecords.push($scope.payments[i]);
+                        j++;
+                    }
+                }
+                if($scope.selectedRecords.length > 0)
+                    deletePayments(JSON.stringify($scope.selectedRecords));
+            }                       
+            
+            $scope.saveUnprocessedRecords = function() {
+                $scope.records = [];
+                var j = 1;
+                for(var i=0; i<$scope.payments.length;i++) {
+                    if(!$scope.payments[i].processed) {
+                        $scope.records.push($scope.payments[i]);
+                        j++;
+                    }
+                }
+                if($scope.records.length > 0) {
+                    savePaymentRecords(JSON.stringify($scope.records));
+                }                
+            } 
+            
+            $scope.invalidCount = function() {
+                var j = 0;
+                if($scope.payments) {
+                    for(var i=0; i<$scope.payments.length;i++) {
+                        if(!$scope.payments[i].valid) 
+                            j++;
+                    }
+                }
+                return j;
+            } 
+            
+            $scope.validCount = function() {
+                var j = 0;
+                if($scope.payments) {
+                    for(var i=0; i<$scope.payments.length;i++) {
+                        if($scope.payments[i].valid && !$scope.payments[i].processed) 
+                            j++;
+                    }
+                }
+                return j;
+            } 
+            
+            $scope.processedCount = function() {
+                var j = 0;
+                if($scope.payments) {
+                    for(var i=0; i<$scope.payments.length;i++) {
+                        if($scope.payments[i].processed) 
+                            j++;
+                    }
+                }
+                return j;            
+            }
+            
+            $scope.unprocessedCount = function() {
+                var j = 0;
+                if($scope.payments) {
+                    for(var i=0; i<$scope.payments.length;i++) {
+                        if(!$scope.payments[i].processed) 
+                            j++;
+                    }
+                }
+                return j;            
+            }  
+            
+            $scope.failedCount = function() {
+                var j = 0;
+                if($scope.failedPayments ) {
+                    for(var i=0; i<$scope.failedPayments .length;i++) {
+                        j++;
+                    }
+                }
+                return j;            
+            }                       
+            
+            $scope.refreshPaymentsProcessed = function(data) {
+                for(var i=0; i<11; i++) {
+                    for(var j=0; j<$scope.payments.length;j++) {
+                        if($scope.payments[j].recordId == data[i]) {
+                            $scope.payments[j].processed = true;
+                            $scope.payments[j].selected= false;
+                        } 
+                    }
+                }
+            } 
+            $scope.clearPayments = function() {
+
+            }                   
+        });
+                   
+         
+
+        function Upload() {
+            var fileUpload = document.getElementById("fileUpload");
+            var fileName = document.getElementById("fileUpload").value;
+            fileName  = fileName.replace(/C:\\fakepath\\/i, '');
+            if(confirm("Are you sure want to upload the file " + fileName + " to Lockbox Deposits?")) {
+                var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+                if (regex.test(fileUpload.value.toLowerCase())) {
+                    if (typeof (FileReader) != "undefined") {
+                     
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            var scope = angular.element(document.getElementById("result")).scope();
+                            scope.records = []; 
+                            var j = 1;                     
+                            var rows = e.target.result.split("\n");
+                            for (var i = 0; i < rows.length; i++) {
+                                if(j%80 == 0) {
+                                    j = 1;
+                                    FileRecords(JSON.stringify(scope.records));
+                                    scope.records = []; 
+                                }
+                            
+                                var cells = rows[i].split(",");
+                                if(cells.length == 3) {
+                                    if(cells[0] != '' && cells[1] != '' && cells[2] != '') {
+                                        scope.records[j-1] = {};
+                                        scope.records[j-1]['subscriptionId'] = cells[0];
+                                        scope.records[j-1]['checkNumber'] = cells[1];
+                                        scope.records[j-1]['amount'] = cells[2];
+                                        scope.records[j-1]['fileName'] = fileName;
+                                        j++;
+                                    }
+                                }
+                            }
+                            if(scope.records.length > 0)
+                            FileRecords(JSON.stringify(scope.records));
+                        }
+                       
+                        reader.readAsText(fileUpload.files[0]);
+                        
+                    } else {
+                        alert("This browser does not support HTML5.");
+                    }
+                } else {
+                    alert("Please upload a valid CSV file.");
+                }
+            }
+        }
+       
+                      
+    </script>   
+
+    <apex:form >
+    
+        <apex:actionFunction name="FileRecords" action="{!fileRecords}" status="PaymentStatus" reRender="out3" oncomplete="confirmRecordsUpload();">
+            <apex:param name="Parameter" assignTo="{!newPaymentsListStr}" value="" />
+        </apex:actionFunction>     
+    
+        <apex:actionFunction name="validate" action="{!validate}" status="PaymentStatus" reRender="out" oncomplete="confirmProceed();">
+            <apex:param name="Parameter" assignTo="{!paymentsListStr}" value="" />
+        </apex:actionFunction> 
+        
+        <apex:actionFunction name="createPayments" action="{!createPayments}" status="PaymentStatus" reRender="out1" oncomplete="confirmPayment();">
+            <apex:param name="Parameter" assignTo="{!paymentsListStr}" value="" />
+        </apex:actionFunction>
+        
+        <apex:actionFunction name="deletePayments" action="{!deletePayments}" status="PaymentStatus" reRender="out4" oncomplete="confirmDelete();">
+            <apex:param name="Parameter" assignTo="{!paymentsListStr}" value="" />
+        </apex:actionFunction>      
+        
+        <apex:actionFunction name="savePaymentRecords" action="{!savePayments}" reRender="out2" oncomplete="confirmSavePayment();">
+            <apex:param name="Parameter" assignTo="{!paymentsListStr}" value="" />
+        </apex:actionFunction>        
+        
+        <apex:actionStatus id="PaymentStatus">
+            <apex:facet name="start">
+                <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 1000; background-color: black;">
+                     <div class="alert alert-info" style="width:50%; margin:auto; margin-top:15%; color:black; font-size:16px; font-weight:bold;">
+                         <center>Processing request. Please wait ...<br/>
+                             <img src="{!URLFOR($Resource.AngularLibrary,'/Cursor_Windows_Vista.gif')}" />
+                         </center>
+                     </div>
+                </div>
+
+            </apex:facet>
+            <apex:facet name="stop">
+                 <div class="alert alert-danger" id="status"  style="display:none;">
+                     <center>Credit Balance Adjustment failed for few accounts. Please review the result below. </center>
+                 </div>
+            </apex:facet>                
+        </apex:actionStatus> 
+
+        <apex:outputPanel id="out4">
+            <script>
+                function confirmDelete(){             
+                    var scope = angular.element(document.getElementById("result")).scope();
+                    scope.$apply(function () {
+                        scope.reloadPayments({!paymentsListStr});
+                    });
+                } 
+                
+            </script>       
+        </apex:outputPanel>         
+         
+        <apex:outputPanel id="out3">
+            <script>
+                function confirmRecordsUpload(){ 
+                    var scope = angular.element(document.getElementById("result")).scope();
+                    scope.$apply(function () {
+                        scope.reloadPayments({!paymentsListStr});
+                        scope.reloadFailedPayments({!failedPaymentsListStr});
+                    });
+                } 
+                
+            </script>       
+        </apex:outputPanel>                  
+
+        <apex:outputPanel id="out">
+            <script>
+                function confirmProceed(){ 
+                    var scope = angular.element(document.getElementById("result")).scope();
+                    scope.$apply(function () {
+                        scope.reloadPayments({!paymentsListStr});
+                    });
+                } 
+                
+            </script>       
+        </apex:outputPanel>
+        
+        <apex:outputPanel id="out1">
+            <script>
+                function confirmPayment(){ 
+                    
+                    var scope = angular.element(document.getElementById("result")).scope();
+                    scope.test = {};
+                    var result = "{!paymentsProcessed}";
+                    var acctsCompleted = result.split(",");
+                    for(var i=0; i<acctsCompleted.length; i++) {
+                        $("#Status_" + acctsCompleted[i]).html("<span style='color:green;' class='glyphicon glyphicon-ok'></span>");
+                        scope.test[i] = acctsCompleted[i];
+                    }
+                    scope.$apply(function () {
+                        scope.refreshPaymentsProcessed(scope.test);
+                    }); 
+                        
+                    var failedResult = "{!paymentsFailed}";
+                    if(failedResult != '') {
+                        var acctsFailed = failedResult.split(",");                   
+                        for(var i=0; i<acctsFailed.length; i++) {
+                            var parts = acctsFailed[i].split('@@');
+                            $("#Status_" + parts[0]).html("<span style='color:red;' class='tip glyphicon glyphicon-remove'><span style='font-size:11px;'>" + parts[1]+"</span></span>");  
+                            //$("#Status_" + parts[0]).attr('title', parts[1]);
+                        }              
+                    }
+
+                    if(batchesProcessed == batches) {
+
+                    }
+                                          
+                } 
+            </script>       
+        </apex:outputPanel>
+        
+        <apex:outputPanel id="out2">
+            <script> 
+                function confirmSavePayment() {
+                    alert("All unprocessed payments saved successfully");
+                    var scope = angular.element(document.getElementById("result")).scope();
+                    scope.$apply(function () {
+                        for(var i=0; i<scope.payments.length;i++) {
+                            scope.payments[i].processed = true;
+                        }
+                    });                    
+                    window.location = '';
+                }               
+            </script>               
+        </apex:outputPanel>
+        <apex:pagemessages />
+
+        <div id="result" ng-app="first" ng-controller="firstcontroller" style="font-size:14px; padding:10px;" ng-cloak="true">
+
+            <apex:outputPanel id="UploadFileBlock" rendered="{!showUploadBlock}">
+                <div class="panel panel-info" >
+                    <div class="panel-heading">
+                    
+                        <b>Upload External Payments</b>
+                        <label class="fileContainer" style="float:right; color:#353535;">
+                            <span class="glyphicon glyphicon-cloud-upload" style="color:#1797C0; font-size:17px;"></span>&nbsp;Upload File
+                            <input type="file" id="fileUpload" onchange="Upload()" />
+                        </label>    
+                    </div>
+                    <!--
+                    <div class="panel-body">
+                        <table style="margin:auto;">
+                            <tr>
+                                <td>
+                                    <label class="fileContainer">
+                                        Choose File
+                                        <input type="file" id="fileUpload" />
+                                    </label>
+                                </td>
+                                <td style="padding-left:5px;"> 
+                                    <input type="button" onclick="Upload()" value="upload" Class="cbtn" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    -->
+                </div>
+            </apex:outputPanel>
+          
+            <style>
+            
+            .nav-tabs>li>input {  
+                background-color:red;
+            }          
+            </style>
+            <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                <ul id="myTab" class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Unknown Payments <span class="label label-info">{{invalidCount()}}</span></a></li>
+                    <li role="presentation" class=""><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Valid Payments <span class="label label-primary">{{validCount()}}</span></a></li>
+                    <li role="presentation" class=""><a href="#completed" role="tab" id="completed-tab" data-toggle="tab" aria-controls="completed" aria-expanded="false" ng-show="processedCount() > 0">Payments Processed <span class="label label-success">{{processedCount()}}</span></a></li>  
+                    <li role="presentation" class=""><a href="#failed" role="tab" id="failed-tab" data-toggle="tab" aria-controls="failed" aria-expanded="false" ng-show="failedCount() > 0">Failed Records <span class="label label-danger">{{failedCount()}}</span></a></li> 
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab" style="min-height:250px;">
+                        
+                        <div class="alert alert-info" role="alert" ng-show="invalidCount() == 0" style="width:70%; margin:auto; margin-top:2%;">No invalid paymments</div>
+                        
+                        <div ng-show="invalidCount() > 0" style="padding-top:10px;">
+                        <apex:outputPanel id="InValidPaymentsBlock" rendered="{!showInvalidPaymentsBlock}">
+                                
+                                <!--<input type="button" class="btn1 btn1-danger" value="Delete" style="margin-top:10px;" ng-click="deleteInvalidPayments()" />-->
+                                <!--<input type="button" class="btn1 btn1-primary" value="Validate Payments" style="margin-top:10px;" ng-click="validateInvalidPayments()" />-->
+                                
+                            <input type="button" class="slds-button slds-button_destructive" value="Delete" ng-click="deleteInvalidPayments()" />
+                            <input type="button" class="slds-button slds-button_brand" value="Validate Payments" ng-click="validateInvalidPayments()" />
+                            
+                                <input type="text" ng-model="search" class="form-control" placeholder="Search Payment Records" style="float:right; width:40%; margin-top:5px; margin-bottom:5px;" />
+                                <!--
+                                <div style="color:red; font-size:12px; margin-top:5px;">
+                                    * Please select checkboxes to delete the invalid payment records <br/>
+                                </div>
+                                -->
+                                <table class='table' id='table' ng-show="(payments | filter:search).length > 0" style="margin-top:5px;">
+                                    <thead>
+                                        <tr style="color:#428bca; background-color:#F2F2F2;">
+                                            <td style="padding-top:15px; color:#428bca;"><input type="checkbox" ng-model="selectAllInvalid" ng-click="selectAllInvalidRecords()" ng-disabled="search" /></td>
+                                            <td style="color:#428bca; width:20%;">
+                                                <a href="" ng-click="order('subscriptionId')">MRIS Subscription</a>
+                                                <span class="sortorder" ng-show="predicate == 'subscriptionId'" ng-class="{reverse:reverse}"></span>                                            
+                                            </td>
+                                            <td style="color:#428bca;">        
+                                                <a href="" ng-click="order('checkNumber')">Check Number</a>
+                                                <span class="sortorder" ng-show="predicate == 'checkNumber'" ng-class="{reverse:reverse}"></span>
+                                            </td>            
+                                            <td style="color:#428bca; width:12%;">
+                                                <a href="" ng-click="order('amount')">Amount</a>
+                                                <span class="sortorder" ng-show="predicate == 'amount'" ng-class="{reverse:reverse}"></span>                                            
+                                            </td>
+                                            <td style="color:#428bca;">
+                                                <a href="" ng-click="order('fileName')">File Name</a>
+                                                <span class="sortorder" ng-show="predicate == 'fileName'" ng-class="{reverse:reverse}"></span>                                             
+                                            </td>
+                                            <td style="color:#428bca;">
+                                                <a href="" ng-click="order('createdDate')">Created Date</a>
+                                                <span class="sortorder" ng-show="predicate == 'createdDate'" ng-class="{reverse:reverse}"></span>                                             
+                                            </td>
+                                        </tr>
+                                    </thead> 
+                                    <tbody>
+                                        <tr ng-repeat="payment in payments | filter:search | orderBy:predicate:reverse" ng-show="payment.valid == false">
+                                            <td style="padding-top:15px;"><input type="checkbox" ng-model="payment.selected" value="{{payment.zuoraAcctId}}" /></td>
+                                            <td><input type="text" class="form-control" ng-model="payment.subscriptionId" value="{{payment.subscriptionId}}" style="width:70%; height:25px; padding:2px 12px; " /></td>
+                                            <td>{{payment.checkNumber}}</td>
+                                            <td>$ {{payment.amount}}</td>  
+                                            <td>{{payment.fileName}}</td>
+                                            <td>{{payment.createdDate}}</td>        
+                                        </tr>
+                                    </tbody>
+                                </table>       
+                        </apex:outputPanel>          
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab" style="min-height:250px;">
+                    
+                        <div class="alert alert-info" role="alert" ng-show="validCount() == 0" style="width:70%; margin:auto; margin-top:2%;">No valid paymments</div>
+                    
+                        <div ng-show="validCount() > 0" style="padding-top:10px;">
+                        <apex:outputPanel id="ValidPaymentsBlock" rendered="{!hasValidPayments}">
+                                
+                                <!--<input type="button" class="btn1 btn1-danger" value="Delete" style="margin-top:10px;" ng-click="deleteValidPayments()" />-->
+                                <!--<input type="button" class="btn1 btn1-primary" value="Create Payments" style="margin-top:10px;" ng-click="createPayments()" />-->
+                                
+                            	<input type="button" class="slds-button slds-button_destructive" value="Delete" ng-click="deleteValidPayments()" />
+                                <input type="button" class="slds-button slds-button_brand" value="Create Payments" ng-click="createPayments()" />
+                            
+                                <input type="text" ng-model="search2" class="form-control" placeholder="Search Payment Records" style="float:right; width:40%; margin-top:5px; margin-bottom:5px;" />
+                                
+                                <table class='table' id='table' ng-show="(payments | filter:search2).length > 0" style="border:none; margin-top:10px;">
+                                    <thead>
+                                        <tr style="color:#428bca; background-color:#F2F2F2;">
+                                            <td style="padding-top:15px; color:#428bca;"><input type="checkbox" ng-model="selectAll" ng-click="selectAllRecords()" /></td>
+                                            <td style="color:#428bca;">
+                                                <a href="" ng-click="order('subscriptionId')">MRIS Subscription</a>
+                                                <span class="sortorder" ng-show="predicate == 'subscriptionId'" ng-class="{reverse:reverse}"></span>                                              
+                                            </td>
+                                            <td style="color:#428bca;">
+                                                <a href="" ng-click="order('checkNumber')">Check Number</a>
+                                                <span class="sortorder" ng-show="predicate == 'checkNumber'" ng-class="{reverse:reverse}"></span>                                            
+                                            </td>            
+                                            <td style="color:#428bca; width:12%;">
+                                                <a href="" ng-click="order('amount')">Amount</a>
+                                                <span class="sortorder" ng-show="predicate == 'amount'" ng-class="{reverse:reverse}"></span>                                            
+                                            </td>
+                                            <td style="color:#428bca;">
+                                                <a href="" ng-click="order('zuoraAcctId')">Zuora Account Id</a>
+                                                <span class="sortorder" ng-show="predicate == 'zuoraAcctId'" ng-class="{reverse:reverse}"></span>                                             
+                                            </td>
+                                            <td style="color:#428bca;">
+                                                <a href="" ng-click="order('zuoraAcctName')">Account Name</a>
+                                                <span class="sortorder" ng-show="predicate == 'zuoraAcctName'" ng-class="{reverse:reverse}"></span>                                              
+                                            </td>
+                                            <td style="color:#428bca;">
+                                                <a href="" ng-click="order('fileName')">File Name</a>
+                                                <span class="sortorder" ng-show="predicate == 'fileName'" ng-class="{reverse:reverse}"></span>                                                
+                                            </td>
+                                            <td style="color:#428bca;">
+                                                <a href="" ng-click="order('createdDate')">Created Date</a>
+                                                <span class="sortorder" ng-show="predicate == 'createdDate'" ng-class="{reverse:reverse}"></span>                                             
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    </thead> 
+                                    <tbody>
+                                        <tr ng-repeat="payment in payments | filter:search2 | orderBy:predicate:reverse" ng-show="payment.valid != false && payment.processed == false">
+                                            <td style="padding-top:15px;"><input type="checkbox" ng-model="payment.selected" value="{{payment.zuoraAcctId}}" ng-show="payment.processed == false" /></td>
+                                            <td>{{payment.subscriptionId}}</td>
+                                            <td>{{payment.checkNumber}}</td>
+                                            <td>$ {{payment.amount}}</td>  
+                                            <td>{{payment.zuoraAcctId}}</td> 
+                                            <td>{{payment.zuoraAcctName}}</td> 
+                                            <td>{{payment.fileName}}</td>
+                                            <td>{{payment.createdDate}}</td>
+                                            <td class="responseStatus" id="Status_{{payment.recordId}}"></td>          
+                                        </tr>
+                                    </tbody>       
+                                </table>
+                        </apex:outputPanel> 
+                        </div>
+                    </div>
+                    
+                     <div role="tabpanel" class="tab-pane fade" id="completed" aria-labelledby="completed-tab" style="min-height:250px;">
+                        
+                        <div class="alert alert-info" role="alert" ng-show="processedCount() == 0" style="width:70%; margin:auto; margin-top:2%;">No payments processed yet.</div>
+                        
+                        <div ng-show="processedCount() > 0">
+                        <table class='table' id='table' ng-show="payments.length > 0" style="border:none; margin-top:10px;">
+                            <thead>
+                                <tr style="color:#428bca; background-color:#F2F2F2;">
+                                            <td style="color:#428bca;">
+                                                <a href="" ng-click="order('subscriptionId')">MRIS Subscription</a>
+                                                <span class="sortorder" ng-show="predicate == 'subscriptionId'" ng-class="{reverse:reverse}"></span>                                              
+                                            </td>
+                                            <td style="color:#428bca;">
+                                                <a href="" ng-click="order('checkNumber')">Check Number</a>
+                                                <span class="sortorder" ng-show="predicate == 'checkNumber'" ng-class="{reverse:reverse}"></span>                                            
+                                            </td>            
+                                            <td style="color:#428bca; width:12%;">
+                                                <a href="" ng-click="order('amount')">Amount</a>
+                                                <span class="sortorder" ng-show="predicate == 'amount'" ng-class="{reverse:reverse}"></span>                                            
+                                            </td>
+                                            <td style="color:#428bca;">
+                                                <a href="" ng-click="order('zuoraAcctId')">Zuora Account Id</a>
+                                                <span class="sortorder" ng-show="predicate == 'zuoraAcctId'" ng-class="{reverse:reverse}"></span>                                             
+                                            </td>
+                                            <td style="color:#428bca;">
+                                                <a href="" ng-click="order('zuoraAcctName')">Account Name</a>
+                                                <span class="sortorder" ng-show="predicate == 'zuoraAcctName'" ng-class="{reverse:reverse}"></span>                                              
+                                            </td>
+                                            <td style="color:#428bca;">
+                                                <a href="" ng-click="order('fileName')">File Name</a>
+                                                <span class="sortorder" ng-show="predicate == 'fileName'" ng-class="{reverse:reverse}"></span>                                                
+                                            </td>
+                                            <td style="color:#428bca;">
+                                                <a href="" ng-click="order('createdDate')">Created Date</a>
+                                                <span class="sortorder" ng-show="predicate == 'createdDate'" ng-class="{reverse:reverse}"></span>                                             
+                                            </td>
+                                    <td></td>
+                                </tr>
+                            </thead> 
+                            <tbody>
+                                <tr ng-repeat="payment in payments | orderBy:predicate:reverse" ng-show="payment.processed">
+                                    
+                                    <td>{{payment.subscriptionId}}</td>
+                                    <td>{{payment.checkNumber}}</td>
+                                    <td>$ {{payment.amount}}</td>  
+                                    <td>{{payment.zuoraAcctId}}</td> 
+                                    <td>{{payment.zuoraAcctName}}</td>
+                                    <td>{{payment.fileName}}</td>
+                                    <td>{{payment.createdDate}}</td>                                     
+                                    <td id="Status_{{payment.recordId}}"></td>          
+                                </tr>
+                            </tbody>       
+                        </table> 
+                        </div>                    
+                     </div>
+                     
+                     
+                    <div role="tabpanel" class="tab-pane fade" id="failed" aria-labelledby="failed-tab" style="min-height:250px;">
+                        
+                        <div class="alert alert-info" role="alert" ng-show="failedCount() == 0" style="width:70%; margin:auto; margin-top:2%;">No payments processed yet.</div>
+                        
+                        <div ng-show="failedCount() > 0">
+                        <table class='table' id='table' ng-show="failedPayments.length > 0" style="border:none; margin-top:10px;">
+                            <thead>
+                                <tr style="color:#428bca; background-color:#F2F2F2;">
+                                    
+                                    <td style="color:#428bca;">MRIS Subscription</td>
+                                    <td style="color:#428bca;">Check Number</td>            
+                                    <td style="color:#428bca;">Amount</td>
+                                    <td style="color:#428bca;">Failed Reason</td>
+                                </tr>
+                            </thead> 
+                            <tbody>
+                                <tr ng-repeat="payment in failedPayments | filter:search">
+                                    
+                                    <td>{{payment.subscriptionId}}</td>
+                                    <td>{{payment.checkNumber}}</td>
+                                    <td>$ {{payment.amount}}</td>  
+                                    <td>{{payment.zuoraAcctName}}</td>   
+                                </tr>
+                            </tbody>       
+                        </table> 
+                        </div>                    
+                     </div>                     
+                     
+                </div>
+            </div>
+            
+        </div>                    
+        
+    </apex:form> 
+</apex:page>

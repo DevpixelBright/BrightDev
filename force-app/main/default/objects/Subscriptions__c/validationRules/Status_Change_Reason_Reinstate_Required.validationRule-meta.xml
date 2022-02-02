@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_Change_Reason_Reinstate_Required</fullName>
+    <active>true</active>
+    <description>If Status is changed from Active to Inactive or Inactive to Active; value must be provided in the Reason for Change field</description>
+    <errorConditionFormula>AND( 
+ISCHANGED(Status__c), 
+TEXT(Status__c)=&quot;Active&quot;, 
+TEXT(PRIORVALUE(Status__c))= &quot;Inactive&quot;,
+NOT(TEXT(Status_Change_Reason__c)=&quot;Reinstate&quot;) 
+)
+&amp;&amp; NOT( $Setup.Bypass_Validation_rules__c.Disable_Validation_Rules__c )</errorConditionFormula>
+    <errorDisplayField>Status_Change_Reason__c</errorDisplayField>
+    <errorMessage>Reinstate is required in Status Change Reason when changing from Inactive to Active</errorMessage>
+</ValidationRule>

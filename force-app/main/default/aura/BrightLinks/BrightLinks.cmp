@@ -1,0 +1,19 @@
+<!-- BrightLinks -->
+<aura:component implements="flexipage:availableForAllPageTypes">
+   <lightning:card>
+       <aura:set attribute="title">Bright Links</aura:set>  
+  	<div class="slds-card__body_inner">
+        <p><lightning:formattedUrl value="https://accounts.brightmls.com/identity/XUI/?realm=/#passwordReset/" label="Bright Password Reset" tooltip="Go to Bright Password Reset" target="_blank"/></p>
+        <p><lightning:formattedUrl value="https://applications.brightmls.com/permissions/" label="Permissions" tooltip="Go to Permissions" target="_blank"/></p>
+        <p><lightning:formattedUrl value="https://www.dllr.state.md.us/cgi-bin/ElectronicLicensing/OP_search/OP_search.cgi?calling_app=RE::RE_qselect" label="MD License" tooltip="Go to MD License" target="_blank"/></p>
+        <p><lightning:formattedUrl value="https://www.dpor.virginia.gov/LicenseLookup/" label="VA license" tooltip="Go to VA License" target="_blank"/></p>
+        <p><lightning:formattedUrl value="https://accessdc.dcra.dc.gov/" label="DC License" tooltip="Go to DC License" target="_blank"/></p>     
+        <p><lightning:formattedUrl value="https://www.dos.pa.gov/Pages/default.aspx" label="PA License" tooltip="Go to PA License" target="_blank"/></p>  
+        <p><lightning:formattedUrl value="https://dpronline.delaware.gov/mylicense%20weblookup/Search.aspx" label="DE License" tooltip="Go to DE License" target="_blank"/></p>  
+        <p><lightning:formattedUrl value="https://www.state.nj.us/dobi/division_rec/licensing/online_Instructions/licSearch.html" label="NJ License" tooltip="Go to NJ License" target="_blank"/></p>   
+    	<p><lightning:formattedUrl value="https://www.nar.realtor/" label="Realtor.org" tooltip="Go to Realtor.org" target="_blank"/></p>     
+        <p><lightning:formattedUrl value="https://www.arello.com/" label="ARELLO" tooltip="Go to ARELLO" target="_blank"/></p> 
+        <p><lightning:formattedUrl value="https://www.timeanddate.com/date/dateadd.html" label="Time &amp; Date Calculator" tooltip="Go to Time &amp; Date Calculator" target="_blank"/></p>   
+    </div>
+  </lightning:card>    
+</aura:component>

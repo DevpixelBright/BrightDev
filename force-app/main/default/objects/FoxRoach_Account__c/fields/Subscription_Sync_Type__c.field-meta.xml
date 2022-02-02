@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Subscription_Sync_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Subscription Sync Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Sync Active</fullName>
+                <default>false</default>
+                <label>Sync Active</label>
+            </value>
+            <value>
+                <fullName>Sync Inactive</fullName>
+                <default>false</default>
+                <label>Sync Inactive</label>
+            </value>
+            <value>
+                <fullName>Do Nothing</fullName>
+                <default>false</default>
+                <label>Do Nothing</label>
+            </value>
+            <value>
+                <fullName>Sync Create</fullName>
+                <default>false</default>
+                <label>Sync Create</label>
+            </value>
+            <value>
+                <fullName>Office Not in SF-</fullName>
+                <default>false</default>
+                <label>Office Not in SF-</label>
+            </value>
+            <value>
+                <fullName>Sync Reinstate</fullName>
+                <default>false</default>
+                <label>Sync Reinstate</label>
+            </value>
+            <value>
+                <fullName>Subscription In Progress</fullName>
+                <default>false</default>
+                <label>Subscription In Progress</label>
+            </value>
+            <value>
+                <fullName>Office Not in SF- Subscription Inactive</fullName>
+                <default>false</default>
+                <label>Office Not in SF- Subscription Inactive</label>
+            </value>
+            <value>
+                <fullName>Office Changed- Subscription Inactive</fullName>
+                <default>false</default>
+                <label>Office Changed- Subscription Inactive</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

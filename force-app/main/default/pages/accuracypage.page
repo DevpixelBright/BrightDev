@@ -1,0 +1,274 @@
+<apex:page id="thePage" controller="Communities_AgentAccuracyController" docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" lightningstylesheets="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />   
+    <c:Bootstrap_Resources />
+    <apex:stylesheet value="{!URLFOR($Resource.AgentAccuracy_CSS, '/AccuracyPolicyAgentStyles/AccuracyPolicyAgentStyle.css')}"/>
+    <style>
+        @media (min-width: 992px){
+        .modal-lg {
+        width: 950px;
+        }
+        }
+    </style>
+    <apex:composition template="Communities_Base">
+        <apex:define name="content">
+            <apex:form id="fm">
+                <c:Bootstrap_Resources />
+                <div class="row content-block">
+                    <div class="col-xs-12 topview">
+                        <div class="col-xs-8 topsub1">
+                            <c:Communities_Definition pageTitle="Accuracy & Policy Notifications" pageTitleClass="fa fa-pencil-square-o fa-2x" hasDefinitions="false">
+                            </c:Communities_Definition>
+                        </div>
+                        <div class="col-xs-4 topsub">
+                            <div class="pointer">
+                                <span for="printBtnid" class="glyphicon glyphicon-print"/>
+                                <apex:commandLink id="printBtnid" styleClass="btn" value="Print" action="/Communities_AgentAccuracy_Print?id={!subscriptionId}" target="_blank" />
+                            </div>
+                            <div class="pointer">
+                                <image src="{!URLFOR($Resource.AgentAccuracy_CSS, '/images/excel-icon.png')}" height="20px;"/>
+                                <apex:commandLink styleClass="btn" value="Export to Excel" action="/Communities_AgentAccuracy_Export?id={!subscriptionId}" reRender="thePage" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inner-addon right-addon">
+                        <input type="text" id="searchbox" class="form-control input-sm" placeHolder="Search MLS Number, Violation Number..."/><i class="glyphicon glyphicon-search"></i>
+                    </div>   
+                    <div class="col-xs-12 instructions">
+                        <p>Below is a summary of the violation email notifications you received specific to your listings. This information includes courtesy notifications and fine notices. Please note, fine notices with a status of Pending will not be billed until after the appeal timeframe has expired. Any fine notices listed with a status of Billed will appear on your account statement.</p>
+                        <p>Read the definitions of the Appeal Statuses <a href="{!$Label.Communities_AgentAccuracy_Article}" target="_blank">here.</a></p>
+                        <p>Please note: A notification may take up to 24 hours to show below.</p>
+                    </div>
+                    <apex:pageBlock >
+                        <!-- Results display panel -->                        
+                        <apex:outputPanel id="OfficeResults"> 
+                            <div class="row content-block listing-block">
+                                <div class="col-sm-12 instructions">  
+                                    
+                                    <table class="table table-striped table-bordered" id="compliances">
+                                        <thead>
+                                            <tr>
+                                                <th>MLS#</th>
+                                                <th>Violation Type</th>
+                                                <th>Violation No</th>
+                                                <th>Notification Type</th>
+                                                <th>Notification Date</th>
+                                                <th>Fine Amount</th>
+                                                <th>Status</th>
+                                                <th>Last Day of Appeal</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </apex:outputPanel>
+                        <!-- End of results display panel -->
+                        
+                        <!-- <apex:commandbutton action="{!getValue}" reRender="test" value="Appeal">
+<apex:param assignTo="{!violationNumber}" value="{!violationNumber}"/>
+</apex:commandbutton> -->
+                        
+                        <apex:outputPanel id="contentPanel">
+                            <div id="messages">
+                                <apex:pagemessages ></apex:pagemessages>
+                            </div>
+                            
+                            <script> 
+                            var violationNumber;
+                            var activeTable;
+                            console.log('*****','testing');
+                            var dataSet = {!finalComplianceWrap};
+                            console.log('---dataSet-->',dataSet);
+                            $(document).ready(function() {                    
+                                $(".errorM3").addClass("alert alert-danger");
+                                $(".infoM3").addClass("alert alert-info");
+                                $(".confirmM3").addClass("alert alert-success");
+                                
+                                
+                                var dataPrepare = new Array();
+                                for(var i =0; i < dataSet.length; i++){
+                                    //debugger;
+                                    console.log('====i===',dataSet[i]);
+                                    
+                                    var row = dataSet[i];                                
+                                    var activeOrInactiveCss = 'inactive';
+                                    if(dataSet[i].childViolations)
+                                        activeOrInactiveCss = 'active';
+                                    
+                                    
+                                    if(!dataSet[i].violationType)
+                                        dataSet[i].violationType = '<a class="'+activeOrInactiveCss+'">No Photo</a>';
+                                    else
+                                        dataSet[i].violationType = '<a class="'+activeOrInactiveCss+'">'+dataSet[i].violationType+'</a>';
+                                    
+                                    if(dataSet[i].displayAppeal){
+                                        var fineNumber = dataSet[i].fineName;
+                                        console.log("fineNumber:- ", fineNumber); 
+                                        // "/Appeal_Form?id"
+                                        row["buttonStr"] = '<button class="appealbutton" id="violation" onclick="saveCaseDetails(\''+fineNumber+'\'); return false;" >Appeal</button>';
+                                        
+                                    }else{
+                                        row["buttonStr"] = '';
+                                    }
+                                    dataPrepare[i] = row;
+                                }
+                                console.log('--final dataPrepare--',dataPrepare);
+                                
+                                $('#violation').click(function() {
+                                    console.log("Appeal button clicked");
+                                });
+                                
+                                activeTable = $('#compliances').DataTable( {
+                                    "data": dataPrepare,
+                                    "columns": [
+                                        { "data":           "mlsNumber" },
+                                        { 
+                                            "className":      'details-control',
+                                            "orderable":      true,
+                                            "data": "violationType",
+                                            "defaultContent": ''
+                                            
+                                        },
+                                        { "data": "violationNo" },
+                                        { "data": "notificationType" },
+                                        { "data": "notificationDate" },
+                                        { "data": "fineAmount" },
+                                        { "data": "status" },
+                                        { "data": "lastDayToAppeal" },
+                                        { "data": "buttonStr" },
+                                        
+                                    ],
+                                        "order": [[1, 'asc']],
+                                    "dom": '<"top"fi>rt<"bottom"lp><"clear">'
+                                } );
+                                
+                                // Add event listener for opening and closing details
+                                $('#compliances tbody').on('click', 'td.details-control', function () {
+                                    
+                                    
+                                    var tr = $(this).closest('tr');
+                                    var row = activeTable.row( tr );
+                                    
+                                    console.log('---row.child-->',row.child);
+                                    if ( row.child.isShown() ) {
+                                        // This row is already open - close it
+                                        row.child.hide();
+                                        tr.removeClass('shown');
+                                    }
+                                    else {
+                                        // Open this row
+                                        var remFines = format(row.data());
+                                        if(remFines){
+                                            row.child( remFines ).show();
+                                        }
+                                        tr.addClass('shown');
+                                    }
+                                    $('[data-toggle="tooltip"]').tooltip();
+                                    
+                                }); 
+                                
+                                $('#compliances_filter').addClass('col-sm-12');
+                                $('#compliances_info').addClass('col-sm-12');
+                                $("#compliances_info").after( "<div style='clear:both;'></div>" );
+                                $('#compliances_length').addClass('col-sm-6');
+                                $('#compliances_paginate').addClass('col-sm-6');
+                                $("#compliances_paginate").after( "<div style='clear:both;'></div>" );
+                                $('[data-toggle="tooltip"]').tooltip();
+                                
+                                $("#searchbox").on("keyup", function() {
+                                    activeTable.search(this.value).draw();
+                                });
+                                
+                            });
+                            
+                            function format ( d ) {
+                                console.log('--d-',d);
+                                if(d.childViolations)
+                                    return d.childViolations;
+                                
+                            }
+                            
+                            function saveCaseDetails(violationNum) {
+                                Communities_AgentAccuracyController.fetchCases(violationNum, function(result,event) {
+                                    console.log('case result---'+result);
+                                    if (event.status) {
+                                        if(result != ''){
+                                            $('#submit-form-modal').modal('show');
+                                            document.getElementById('{!$Component.cn}').innerHTML = result;
+                                        }else{
+                                            window.open('/customers/communities_appealform?vid='+violationNum);
+                                            //window.location = '/customers/communities_appealform?vid='+violationNum;
+                                        }
+                                    }
+                                    else{
+                                        alert('failed');
+                                    }
+                                });
+                            }                            
+                            </script>
+                            
+                            
+                            <!-- Submit form popup -->
+                            <apex:outputPanel id="caseform">
+                                <div class="modal fade in" id="submit-form-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" data-backdrop="static" data-keyboard="false">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <h4 class="modal-title" id="modal-label"><i class="fa fa-file-text"></i> &nbsp; Appeal already submitted for this violation</h4>
+                                            </div>
+                                            
+                                            <!-- Modal Body -->
+                                            <div class="modal-body">
+                                                <apex:outputPanel >
+                                                    <div class="col-md-12" style="margin-bottom:20px; border-bottom: 1px solid #cccccc3d; padding-bottom: 30px;">
+                                                        Your appeal for this violation was already submitted to the Bright Accuracy &amp; Policy Department for consideration (Ref. Case Number &nbsp;<apex:outputText id="cn" value="case num"></apex:outputText>).
+                                                    </div>
+                                                </apex:outputPanel>
+                                                
+                                                <!-- Alert to display errors -->
+                                                <div class="alert alert-danger alert-dismissible" id="FormAlert" style="display:none; clear:both;">
+                                                    This alert box could indicate a dangerous or potentially negative action.
+                                                </div>                                                               
+                                            </div>
+                                            
+                                            <!-- Modal Footer -->
+                                            <apex:outputPanel >
+                                                <div class="modal-footer">
+                                                    <!--<button style ="padding: 6px 40px;float: left;" id= "button1" type="submit" class="btn btn-primary okmodel" onclick="closeForm(this)" html-data-dismiss="modal">Ok</button>-->
+                                                       <button style ="padding: 6px 40px;float: left;" type="button" class="btn btn-primary okmodel" data-dismiss="modal" aria-hidden="true" onclick="closeForm()">Ok</button>
+
+                                                </div>
+                                            </apex:outputPanel>
+                                        </div>
+                                    </div>
+                                </div>
+                            </apex:outputPanel>
+                            
+                        </apex:outputPanel>
+                    </apex:pageBlock>
+                    
+                </div>
+                <script>
+                markOptionPanel("subscription");
+                function closeForm(){
+                    $('#submit-form-modal').html();
+                    $('#submit-form-modal').hide();
+                    //$('.modal-backdrop').hide();
+                    //window.top.close();
+                    
+                }
+                
+                </script>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+    <script src="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/jquery.dataTables.min.js')}"></script>
+    <script src="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/dataTables.bootstrap.min.js')}"></script>
+    <link href="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/dataTables.bootstrap.min.css')}" rel="stylesheet" type="text/css" />
+    <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet" />
+    <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    </apex:page>

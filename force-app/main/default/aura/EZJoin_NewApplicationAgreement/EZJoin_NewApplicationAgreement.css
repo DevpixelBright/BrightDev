@@ -1,0 +1,97 @@
+.THIS #register-one {
+            background-color: #FFFFFF;
+        }
+        .THIS #register-one h1 {
+    		width:100%;
+            font-size: 1.5em;
+            /* 24 / 16 */
+            line-height: 1.188em;
+            /* 19 / 16 */
+            color: #212B3D;
+            font-family: 'Arial', georgia, serif !important;
+            font-weight: 700;
+            float: left;
+            padding: 0 32px 0 0;
+            margin: 19px 16px 19px 0;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+        .THIS #register-one nav ul {
+            list-style: none;
+            margin-bottom: 0;
+        }
+        
+        .THIS .terms h1 {
+            font-size: 1.2em;
+            /* 24 / 16 */
+            line-height: 1.188em;
+            /* 19 / 16 */
+            color: #212B3D;
+            font-family: 'Arial', georgia, serif !important;
+            font-weight: 700;
+            margin: 8px 8;
+            text-align: center;
+        }
+        .THIS .terms h2 {
+            font-size: 1em;
+            /* 24 / 16 */
+            line-height: 1.188em;
+            /* 19 / 16 */
+            color: #212B3D;
+            font-family: 'Arial', georgia, serif !important;
+            font-weight: 700;
+            margin: 16px 0 8px 0;
+            text-align: center;
+        }
+        .THIS .terms p {
+            display: block;
+            margin: 4px 0 !important;
+        }
+        
+        .THIS .terms li {
+            display: block;
+        }
+        .THIS .terms li::before {
+            display: inline-block;
+            content: counter(item) ".";
+            counter-increment: item;
+            font-weight: bold;
+        }
+        .THIS .terms ol { 
+            counter-reset: item 
+        }
+        .THIS .terms ol li ol { 
+            counter-reset: item 
+        }
+        .THIS .terms ol li { 
+            display: block;
+            margin-left: 2em; 
+        }
+        .THIS .terms ol li ol li { 
+            display: block; 
+            margin-left: 3em; 
+        }
+        .THIS .terms ol li:before { 
+            content: counters(item, ".") ". "; 
+            counter-increment: item; 
+            width: 2em;
+            margin-left: -2em;
+            font-weight: bold; 
+        }
+        .THIS .terms ol li ol li:before { 
+            content: counters(item, ".") ". "; 
+            counter-increment: item; 
+            width: 3em;
+            margin-left: -3em;
+            font-weight: bold; 
+        }
+        
+        .THIS #main-two p a {
+            color: #0000FF;
+            text-decoration: none;
+        }
+         
+        .THIS #main-two ol li a {
+            color: #FE4602;
+            text-decoration: none;
+        }

@@ -1,0 +1,64 @@
+<apex:page controller="AppealForm_Controller" showHeader="false" lightningstylesheets="true">
+	<apex:form >
+        
+        <div >
+            <label>First Name</label>
+            <apex:inputText value="{!lst.Agent_Name__r.FirstName}" ></apex:inputText>
+        </div>
+        <div >
+						<label>Last Name<span>*</span>:</label>
+                       <apex:inputText value="{!lst.Agent_Name__r.LastName}" ></apex:inputText>
+					</div>
+        <div>
+						<label>Subscriber ID<span>*</span>:</label>
+                       <apex:inputText value="{!lst.Subscription__r.Name}" ></apex:inputText>
+					</div>
+					<div >
+						<label>E-mail<span>*</span>:</label>
+                       <apex:inputText value="{!lst.Subscription__r.Private_Email__c}" ></apex:inputText>
+					</div>
+				
+					<div >
+						<label>Broker Code Affiliation<span>*</span>:</label>
+                       <apex:inputText value="{!lst.Broker_Of_Record__r.Name}" ></apex:inputText>
+					</div>
+					<div >
+						<label>MLS Number<span>*</span>:</label>
+                       <apex:inputText value="{!lst.MLS_Number__c}" ></apex:inputText>
+					</div>
+					
+        <div >
+            <label>Dates of Fine<span>*</span>:</label>
+            <apex:inputText value="{!lst.Date_of_Fine__c}" ></apex:inputText>
+        </div>
+        <div >
+            <label>Fine Amount<span>*</span>:</label>
+            <apex:inputText value="{!lst.Fine_Amount__c}" ></apex:inputText>
+        </div>
+        <div >
+            <label>Property Address<span>*</span>:</label>
+            <apex:inputText value="{!lst.Full_Address__c}" ></apex:inputText>
+        </div>
+        <div >
+            <label>City<span>*</span>:</label>
+            <apex:inputText value="{!lst.Subscription__r.City__c}" ></apex:inputText>
+        </div>
+        <div>
+            <label>State</label>
+            <select>
+                <option value="AL">Alabama</option><option value="AK">Alaska</option><option value="AS">American Samoa</option><option value="AZ">Arizona</option><option value="AR">Arkansas</option><option value="CA">California</option><option value="CO">Colorado</option><option value="CT">Connecticut</option><option value="DE">Delaware</option><option value="DC">District Of Columbia</option><option value="FM">Federated States Of Micronesia</option><option value="FL">Florida</option><option value="GA">Georgia</option><option value="GU">Guam</option><option value="HI">Hawaii</option><option value="ID">Idaho</option><option value="IL">Illinois</option><option value="IN">Indiana</option><option value="IA">Iowa</option><option value="KS">Kansas</option><option value="KY">Kentucky</option><option value="LA">Louisiana</option><option value="ME">Maine</option><option value="MH">Marshall Islands</option><option value="MD">Maryland</option><option value="MA">Massachusetts</option><option value="MI">Michigan</option><option value="MN">Minnesota</option><option value="MS">Mississippi</option><option value="MO">Missouri</option><option value="MT">Montana</option><option value="NE">Nebraska</option><option value="NV">Nevada</option><option value="NH">New Hampshire</option><option value="NJ">New Jersey</option><option value="NM">New Mexico</option><option value="NY">New York</option><option value="NC">North Carolina</option><option value="ND">North Dakota</option><option value="MP">Northern Mariana Islands</option><option value="OH">Ohio</option><option value="OK">Oklahoma</option><option value="OR">Oregon</option><option value="PW">Palau</option><option value="PA">Pennsylvania</option><option value="PR">Puerto Rico</option><option value="RI">Rhode Island</option><option value="SC">South Carolina</option><option value="SD">South Dakota</option><option value="TN">Tennessee</option><option value="TX">Texas</option><option value="UT">Utah</option><option value="VT">Vermont</option><option value="VI">Virgin Islands</option><option value="VA">Virginia</option><option value="WA">Washington</option><option value="WV">West Virginia</option><option value="WI">Wisconsin</option><option value="WY">Wyoming</option>
+            </select>
+        </div>
+        <div >
+            <label>Reason for Appeal<span>*</span>:</label>
+            <textarea></textarea>
+        </div>
+        
+        <div >
+            <label>Attach Any Supporting Documents:</label>
+            <apex:inputFile id="Document" value="{!fine.Body}" filename="{!fine.Name}"/>
+        </div> 
+        <apex:commandButton value="Submit" action="{!submitAppealForm}" />
+    </apex:form>
+
+</apex:page>

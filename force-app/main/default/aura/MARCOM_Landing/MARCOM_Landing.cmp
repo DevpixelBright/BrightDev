@@ -1,0 +1,314 @@
+<aura:component controller="MARCOM_LandingPageController" implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" >
+    <aura:attribute name="eTempalates" type="List" default="[]"/>
+    <aura:attribute name="pageETempalates" type="List" default="[]"/>
+    <aura:attribute name="folders" type="List" default="[]"/>
+    <aura:attribute name="category" type="List" default="[]"/>
+    <aura:attribute name="recordsPerPage" type="Integer" default="10"/>
+    <aura:attribute name="pagination" type="Integer" default="0"/>
+    <aura:attribute name="pages" type="List" default="[]"/>
+    <aura:attribute name="currentPage" type="Integer" default="0"/>
+    <aura:attribute name="currentFolder" type="String" default=""/>
+    <aura:attribute name="status" type="String" default=""/>
+    <aura:attribute name="lastModofiedDate" type="String" default=""/>
+    <aura:attribute name="createdDate" type="String" default=""/>
+    <aura:attribute name="searchText" type="String" default=""/>
+    <aura:attribute name="selectedCategory" type="String" default=""/>
+    <aura:attribute name="isCurrentUserSysAdmin" type="Boolean" default="false" />
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    
+    <aura:attribute name="sortColumn" type="String" default="Name"/>
+    <aura:attribute name="descending" type="Boolean" default="false"/>
+    <aura:attribute name="selectAllCheckboxes" type="Boolean" default="false"/>
+    <lightning:notificationsLibrary aura:id="notifLib"/>
+    <aura:attribute name="loading" type="Boolean" default="false" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:if isTrue="{! v.loading }">
+        <div class="slds-backdrop slds-backdrop_open">
+            <lightning:spinner alternativeText="Loading" size="medium" />
+        </div>
+    </aura:if>
+    <aura:html tag="style">
+        .slds-modal__container { 
+        width : 70% !important; max-width : 70% !important; 
+        } 
+    </aura:html>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <div class="fullpage slds-scope step1">
+        <div class="slds-grid slds-wrap">
+            <div class="new-containerpage">
+                <div class="slds-container--x-large new-container">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12  header-full">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 header-part">
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 h-logo">
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_5-of-12 slds-large-size_5-of-12 newlogo">
+                                    <div class="logo">
+                                        <img src="{!$Resource.brightlogolightning}" />                      
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_7-of-12 slds-large-size_7-of-12 newlogo">
+                                    <h4>
+                                        <lightning:input type="Text" name="input2" value="{!v.searchText}" placeholder="Search Content" onblur="{!c.onConfigChange}"/>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_9-of-12 slds-large-size_9-of-12 header-part partbypart">
+                            
+                            <div class="middleone">
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 header-part ">
+                                    <h4>Filter by</h4>
+                                </div>
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_2-of-12 slds-large-size_2-of-12 newlogo">
+                                    <lightning:select onchange="{! c.onConfigChange}" value="{!v.status}">
+                                        <option value="">Status</option>
+                                        <option value="Active">Active</option>
+                                        <option value="InActive">InActive</option>
+                                    </lightning:select>
+                                </div>
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_2-of-12 slds-large-size_2-of-12 newlogo">
+                                    <lightning:select aura:id="select" name="select" label="" variant = "label-hidden" onchange="{! c.onConfigChange }" value="{!v.selectedCategory}">
+                                        <option value="">Template Category</option>
+                                         <aura:iteration items="{!v.category}" var="cat">
+                                            <option text="{!cat.label}" value="{!cat.value}"></option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 newlogo">
+                                    <lightning:select aura:id="select" name="select" variant="label-hidden" onchange="{! c.onConfigChange }" value="{!v.currentFolder}">
+                                        <option value="">Folder</option>
+                                        <aura:iteration items="{!v.folders}" var="folder">
+                                            <option text="{!folder.label}" value="{!folder.value}"></option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_2-of-12 slds-large-size_2-of-12 newlogo cal">
+                                    <lightning:input type="date" class="slds-is-open" name="input2" placeholder="Date Created" value="{!v.createdDate}" onchange="{! c.onConfigChange }" dateStyle="short"  messageWhenBadInput="mm/dd/yyyy"/>
+                                </div>
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_2-of-12 slds-large-size_2-of-12 newlogo cal">
+                                    <lightning:input type="date" name="input3" placeholder="Date Last Modified" onchange="{! c.onConfigChange }" value="{!v.lastModofiedDate}" dateStyle="short"  messageWhenBadInput="mm/dd/yyyy"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    <div class="fullpage slds-scope step2">
+        <div class="slds-grid slds-wrap">
+            <div class="slds-container--x-large new-container">
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 timepoint">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 Edit">
+                                <h2>Email Templates </h2>
+                            </div>
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 Edit Edit1">
+                                <button class="slds-button slds-button_brand" onclick="{!c.printSelectedEmail}">Print</button>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication1">
+                            <table aria-multiselectable="true" class="slds-table slds-table_bordered slds-table_fixed-layout slds-table_resizable-cols" role="grid">
+                                <thead>
+                                    <tr class="slds-line-height_reset">
+                                        <th class="slds-text-align_left" scope="col" style="width:1.50rem">
+                                            <span id="column-group-header" class="slds-assistive-text">Choose a row</span>
+                                            <div class="slds-th__action slds-th__action_form">
+                                                <div>
+                                                    <lightning:input type="checkbox" label="Basic option" variant = "label-hidden"  name="input1" onchange="{!c.selectAll}" aura:id="selectAllCheckbox" checked="{!v.selectAllCheckboxes}"/>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <th aria-label="Name" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col" style="width:4rem" onclick="{!c.sortByColumn}" data-columnName="Description.Id">
+                                            <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="0">
+                                                <span class="slds-assistive-text">Sort by: </span>
+                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                    <span class="slds-truncate">Id</span>
+                                                    <c:MARCOM_SortIcons sortColumn="{!v.sortColumn}"  descending="{!v.descending}" column="Description.Id"/>
+                                                </div>
+                                            </a>
+                                            <div class="slds-resizable">
+                                                <input type="range" aria-label="Name column width" class="slds-resizable__input slds-assistive-text" id="cell-resize-handle-540" max="1000" min="20" tabindex="0" />
+                                            </div>
+                                        </th>
+                                        <th aria-label="Name" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col" style="width:4rem" onclick="{!c.sortByColumn}" data-columnName="IsActive">
+                                            <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="0">
+                                                <span class="slds-assistive-text">Sort by: </span>
+                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                    <span class="slds-truncate">Status</span>
+                                                    <c:MARCOM_SortIcons sortColumn="{!v.sortColumn}"  descending="{!!v.descending}" column="IsActive"/>
+                                                </div>
+                                            </a>
+                                            <div class="slds-resizable">
+                                                <input type="range" aria-label="Name column width" class="slds-resizable__input slds-assistive-text" id="cell-resize-handle-540" max="1000" min="20" tabindex="0" />
+                                            </div>
+                                        </th>
+                                        <th aria-label="Name" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col" style="width:10rem" onclick="{!c.sortByColumn}" data-columnName="Name">
+                                            <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="0">
+                                                <span class="slds-assistive-text">Sort by: </span>
+                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                    <span class="slds-truncate">Name</span>
+                                                    <c:MARCOM_SortIcons sortColumn="{!v.sortColumn}"  descending="{!v.descending}" column="Name"/>
+                                                </div>
+                                            </a>
+                                        </th>
+                                        <th aria-label="Template Type" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col" style="width:7rem" onclick="{!c.sortByColumn}" data-columnName="Description.Category">
+                                            <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="0">
+                                                <span class="slds-assistive-text">Sort by: </span>
+                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                    <span class="slds-truncate" >Category</span>
+                                                    <c:MARCOM_SortIcons sortColumn="{!v.sortColumn}"  descending="{!v.descending}" column="Description.Category"/>
+                                                </div>
+                                            </a>
+                                        </th>
+                                        <th aria-label="Template Type" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col" style="width:7rem" onclick="{!c.sortByColumn}" data-columnName="TemplateType">
+                                            <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="0">
+                                                <span class="slds-assistive-text">Sort by: </span>
+                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                    <span class="slds-truncate" >Template Type</span>
+                                                    <c:MARCOM_SortIcons sortColumn="{!v.sortColumn}"  descending="{!v.descending}" column="TemplateType"/>
+                                                </div>
+                                            </a>
+                                        </th>
+                                        <th aria-label="Folder" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col" style="width:8rem" onclick="{!c.sortByColumn}" data-columnName="FolderName">
+                                            <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="0">
+                                                <span class="slds-assistive-text">Sort by: </span>
+                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                    <span class="slds-truncate" title="Close Date">Folder</span>
+                                                    <c:MARCOM_SortIcons sortColumn="{!v.sortColumn}"  descending="{!v.descending}" column="FolderName"/>
+                                                </div>
+                                            </a>
+                                        </th>
+                                        <th aria-label="Automated" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col" style="width:6rem" onclick="{!c.sortByColumn}" data-columnName="Description.Automated">
+                                            <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="0">
+                                                <span class="slds-assistive-text">Sort by: </span>
+                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                    <span class="slds-truncate" title="Stage">Automated</span>
+                                                    <c:MARCOM_SortIcons sortColumn="{!v.sortColumn}"  descending="{!v.descending}" column="Description.Automated"/>
+                                                </div>
+                                            </a>
+                                        </th>
+                                        <th aria-label="Created on" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col" style="width:6rem" onclick="{!c.sortByColumn}" data-columnName="CreatedDate">
+                                            <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="0">
+                                                <span class="slds-assistive-text">Sort by: </span>
+                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                    <span class="slds-truncate" title="Confidence">Created On</span>
+                                                    <c:MARCOM_SortIcons sortColumn="{!v.sortColumn}"  descending="{!v.descending}" column="CreatedDate"/>
+                                                </div>
+                                            </a>
+                                        </th>
+                                        <!--th aria-label="Description" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col" style="width:18rem" onclick="{!c.sortField}" data-columnName="Description">
+                                            <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="0">
+                                                <span class="slds-assistive-text">Sort by: </span>
+                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                    <span class="slds-truncate" title="Amount">Description</span>
+                                                    <c:MARCOM_SortIcons sortColumn="{!v.sortColumn}"  descending="{!v.descending}" column="Description"/>
+                                                </div>
+                                            </a>
+                                        </th-->
+                                        <th class="" scope="col" style="width:3.25rem">
+                                            <div class="slds-truncate slds-assistive-text" title="Actions">Actions</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <aura:iteration items="{!v.pageETempalates}" var="item">
+                                        <tr aria-selected="false" class="slds-hint-parent">
+                                            <td class="slds-text-align_left" role="gridcell">
+                                                <div>
+                                                    <lightning:input type="checkbox" variant = "label-hidden" aura:id="selectedEmail" value="{!item.Id}"/>
+                                                </div>
+                                            </td>
+                                            <td role="gridcell">
+                                                <div class="slds-truncate">{!item.Description.Id}</div>
+                                            </td>
+                                             <td role="gridcell">
+                                                <div class="slds-truncate">{!item.IsActive?'Active':'InActive'}</div>
+                                            </td>
+                                            <th scope="row">
+                                                <aura:if isTrue="{!v.isCurrentUserSysAdmin}">
+                                                    <div class="slds-truncate">
+                                                        <!--<a class="namestatus" href="javascript:void(0);" tabindex="0" onclick="{!c.navigateToTemplate}" data-template-id="{!item.Id}">{!item.Name}</a>-->
+                                                        <!--<a class="namestatus" href="{!'/lightning/r/EmailTemplate/'+item.Id+'/view'}" tabindex="0" target="_blank">{!item.Name}</a>-->
+                                                        <a class="namestatus" href="{!'/lightning/setup/CommunicationTemplatesEmail/page?address=%2F'+item.Id+'%3Fsetupid%3DCommunicationTemplatesEmail'}" tabindex="0" target="_blank">{!item.Name}</a>
+                                                    </div>
+                                                    <aura:set attribute="else">
+                                                        <div class="slds-truncate" style="text-transform: capitalize;">{!item.Name}</div>
+                                                    </aura:set>
+                                                </aura:if>
+                                            </th>
+                                            <td role="gridcell">
+                                                <div class="slds-truncate" style="text-transform: capitalize;">{!item.Description.Category}</div>
+                                            </td>
+                                            <td role="gridcell">
+                                                <div class="slds-truncate" style="text-transform: capitalize;">{!item.TemplateType}</div>
+                                            </td>
+                                            <td role="gridcell">
+                                                <div class="slds-truncate">{!item.FolderName}</div>
+                                            </td>
+                                            <td role="gridcell">
+                                                <div class="slds-truncate">{!item.Description.Automated}</div>
+                                            </td>
+                                            <td role="gridcell">
+                                                <div class="slds-truncate">
+                                                    <lightning:formattedDateTime aura:id="dt"
+                                                                                 value="{!item.CreatedDate}"
+                                                                                 month="2-digit"
+                                                                                 day="2-digit"
+                                                                                 year="2-digit"
+                                                                                 hour12="true"
+                                                                                 timeZone="{!$Locale.timezone}"/>
+                                                </div>
+                                            </td>
+                                            <!--td role="gridcell">
+                                                <div class="slds-truncate">{!item.Description.Desc}</div>
+                                            </td-->
+                                            <td role="gridcell">
+                                                <div class="slds-truncate">
+                                                    <a href="javascript:void(0);" tabindex="0" onclick="{!c.openPopup}" data-templateId="{!item.Id}">Edit</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </aura:iteration>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <aura:if isTrue="{!v.pagination > 1 }">
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication2">
+                            <div class="pagination">
+                                <a href="javascript:void(0);" onclick="{!c.firstPage}">&laquo;</a>
+                                <aura:iteration items="{!v.pages}" var="page">
+                                    <aura:if isTrue="{!page != 9999}">
+                                    <a  href="javascript:void(0);" class="{!(page == v.currentPage)?'active':''}"  onclick="{!c.getPage}" data-offset="{!page}">{!page}</a>
+                                    </aura:if>
+                                </aura:iteration>
+                                <a href="javascript:void(0);" onclick="{!c.lastPage}">&raquo;</a>
+                            </div>
+                            </div>
+                        </aura:if>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="footerbottom">
+                <div class="slds-container--x-large new-container">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 footer-full">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 footer-part">
+                            <p class="copy">Copyright © 2020 Bright MLS, Inc.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

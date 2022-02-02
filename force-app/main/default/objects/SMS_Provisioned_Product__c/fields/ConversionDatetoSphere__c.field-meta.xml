@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ConversionDatetoSphere__c</fullName>
+    <description>This field is used for XactSite Conversion to Sphere</description>
+    <externalId>false</externalId>
+    <label>Conversion Date to Sphere</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

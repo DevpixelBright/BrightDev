@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="144.57" height="118" viewBox="0 0 144.57 118">
+  <defs>
+    <clipPath id="clip-Custom_Size_1">
+      <rect width="144.57" height="118"/>
+    </clipPath>
+  </defs>
+  <g id="Custom_Size_1" data-name="Custom Size – 1" clip-path="url(#clip-Custom_Size_1)">
+    <g id="Group_1" data-name="Group 1">
+      <path id="Path_19" data-name="Path 19" d="M0,0H144.571V118H0Z" fill="#eff2f5"/>
+      <g id="Icon_feather-home" data-name="Icon feather-home" transform="translate(54.5 41)">
+        <path id="Path_20" data-name="Path 20" d="M4.5,13.5,18,3,31.5,13.5V30a3,3,0,0,1-3,3H7.5a3,3,0,0,1-3-3Z" fill="none" stroke="#cad6e2" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+        <path id="Path_21" data-name="Path 21" d="M13.5,33V18h9V33" fill="none" stroke="#cad6e2" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+      </g>
+    </g>
+  </g>
+</svg>

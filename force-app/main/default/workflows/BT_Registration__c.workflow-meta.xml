@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>BT_ClassRegistrationEmailNotification</fullName>
+        <description>BT Class Registration Email Notification</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BT_RegistrationEmailforClasswithAddress</template>
+    </alerts>
+    <alerts>
+        <fullName>BT_ClassRegistrationEmailtoSF</fullName>
+        <ccEmails>emailtosalesforce@z-lh9dypma9adpo2pq0q6zgoeut46ejmjs7k17uk5g001ihkri0.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>BT Class Registration Email to SF</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BT_RegistrationEmailforClasswithAddress</template>
+    </alerts>
+    <alerts>
+        <fullName>BT_CustomerCancelsClassEmailNotification</fullName>
+        <description>BT Customer Cancels Class Email Notification</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BT_CustomerCancelsClassConfirmationEmail</template>
+    </alerts>
+    <alerts>
+        <fullName>BT_CustomerCancelsClassEmailtoSF</fullName>
+        <ccEmails>emailtosalesforce@z-lh9dypma9adpo2pq0q6zgoeut46ejmjs7k17uk5g001ihkri0.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>BT Customer Cancels Class Email to SF</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BT_CustomerCancelsClassConfirmationEmail</template>
+    </alerts>
+    <alerts>
+        <fullName>BT_RegistrationforOnlineClassEmailNotification</fullName>
+        <description>BT Registration for Online Class Email Notification</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BT_RegistrationEmailforOnlineClass</template>
+    </alerts>
+    <alerts>
+        <fullName>BT_RegistrationforOnlineClassEmailtoSF</fullName>
+        <ccEmails>emailtosalesforce@z-lh9dypma9adpo2pq0q6zgoeut46ejmjs7k17uk5g001ihkri0.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>BT Registration for Online Class Email to SF</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BT_RegistrationEmailforOnlineClass</template>
+    </alerts>
+    <alerts>
+        <fullName>BT_StaffCancelsClassEmailNotification</fullName>
+        <description>BT Staff Cancels Class Email Notification</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BT_StaffCancelsClassNotification</template>
+    </alerts>
+    <alerts>
+        <fullName>BT_StaffCancelsClassEmailtoSF</fullName>
+        <ccEmails>emailtosalesforce@z-lh9dypma9adpo2pq0q6zgoeut46ejmjs7k17uk5g001ihkri0.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>BT Staff Cancels Class Email to SF</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BT_StaffCancelsClassNotification</template>
+    </alerts>
+    <rules>
+        <fullName>BT Class Registration Email Notification</fullName>
+        <actions>
+            <name>BT_ClassRegistrationEmailNotification</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>BT_ClassRegistrationEmailtoSF</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <formula>ISPICKVAL(Status__c  , &apos;Registered&apos;)  &amp;&amp;  ISPICKVAL(Subscription__r.Status__c , &apos;Active&apos;) &amp;&amp; ISPICKVAL(Schedule__r.DeliveryMethod__c,&apos;In-Person&apos;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>BT Online Class Registration Email Notification</fullName>
+        <actions>
+            <name>BT_RegistrationforOnlineClassEmailNotification</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>BT_RegistrationforOnlineClassEmailtoSF</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <formula>AND(ISPICKVAL(Status__c ,&apos;Registered&apos;),NOT(ISPICKVAL(Schedule__r.DeliveryMethod__c,&apos;In-Person&apos;)),ISPICKVAL(Subscription__r.Status__c,&apos;Active&apos;) )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Bright Cancels class notification</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>BT_Class__c.IsActive__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Customer Cancels Confirmation Email</fullName>
+        <actions>
+            <name>BT_CustomerCancelsClassEmailNotification</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>BT_CustomerCancelsClassEmailtoSF</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <description>When User canceled the class that user get a Email</description>
+        <formula>ISPICKVAL(Status__c  , &apos;Canceled&apos;)  &amp;&amp;  ISPICKVAL(Subscription__r.Status__c , &apos;Active&apos;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

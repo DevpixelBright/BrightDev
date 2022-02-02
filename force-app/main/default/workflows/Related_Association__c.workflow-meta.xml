@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <outboundMessages>
+        <fullName>LMS_Association_Update</fullName>
+        <apiVersion>29.0</apiVersion>
+        <description>CSOD LMS</description>
+        <endpointUrl>https://pervasive.mris.com:8443/DI_CSOD_LMS</endpointUrl>
+        <fields>AgentKey__c</fields>
+        <fields>Association_Office_ID__c</fields>
+        <fields>Id</fields>
+        <fields>Status__c</fields>
+        <fields>Subscription_ID__c</fields>
+        <includeSessionId>true</includeSessionId>
+        <integrationUser>mrisadmin@mris.net</integrationUser>
+        <name>LMS Association Update</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <outboundMessages>
+        <fullName>SFDC_Association</fullName>
+        <apiVersion>52.0</apiVersion>
+        <endpointUrl>https://sfdcservices.dev.brightmls.com/association</endpointUrl>
+        <fields>Association_Office_ID__c</fields>
+        <fields>Id</fields>
+        <fields>Service_Jurisdiction__c</fields>
+        <fields>Subscription__c</fields>
+        <fields>SystemModstamp</fields>
+        <includeSessionId>true</includeSessionId>
+        <integrationUser>mris_sf_api@mris.net</integrationUser>
+        <name>SFDC Association</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <outboundMessages>
+        <fullName>Subscription_Association_Update</fullName>
+        <apiVersion>39.0</apiVersion>
+        <endpointUrl>http://talend.dev.brightmls.com/services/SFAssociation</endpointUrl>
+        <fields>Association_Office_ID__c</fields>
+        <fields>Id</fields>
+        <fields>Service_Jurisdiction__c</fields>
+        <fields>Subscription__c</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>mris_sf_api@mris.net</integrationUser>
+        <name>Subscription_Association_Update</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>LMS Capture primary association update</fullName>
+        <actions>
+            <name>LMS_Association_Update</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>false</active>
+        <description>Sends an outbound message to update the LMS.</description>
+        <formula>Primary__c &amp;&amp; ISPICKVAL(Subscription__r.Status__c,&apos;Active&apos;) &amp;&amp; (ISCHANGED(Primary__c) || ISCHANGED( Subscription__c ) ||  ISCHANGED( Association__c ) || ISCHANGED( Status__c ) || ISCHANGED( SysPrRoleKey__c ) || ISCHANGED( Resend_to_LMS_Flag__c ) )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Subscription_Association_Inactivated</fullName>
+        <actions>
+            <name>SFDC_Association</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Related_Association__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Inactive</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Related_Association__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>BRIGHT</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Subscription_Association_Updated</fullName>
+        <actions>
+            <name>SFDC_Association</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Related_Association__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Active</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Related_Association__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>BRIGHT</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Primary Association in LMS</fullName>
+        <actions>
+            <name>LMS_Association_Update</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>false</active>
+        <description>Sends an outbound message to update the LMS.</description>
+        <formula>Primary__c &amp;&amp; (ISNEW() || ISCHANGED(Primary__c) || ISCHANGED( Subscription__c ) ||  ISCHANGED( Association__c ) || ISCHANGED( Status__c ))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

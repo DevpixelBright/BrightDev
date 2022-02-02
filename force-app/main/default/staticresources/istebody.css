@@ -1,0 +1,213 @@
+@font-face {
+    font-family: 'Avenir-Regular';
+    src: url(/resource/istenew/iste/fonts/Avenir-Regular.ttf);  
+}
+@font-face {
+    font-family: 'Avenir-Black';
+    src: url(/resource/istenew/iste/fonts/Avenir-Black.ttf);  
+}
+@font-face {
+    font-family: 'Avenir-Book';
+    src: url(/resource/istenew/iste/fonts/Avenir-Book.ttf);  
+}
+@font-face {
+    font-family: 'Avenir-Medium';
+    src: url(/resource/istenew/iste/fonts/Avenir-Medium.ttf);  
+}
+@font-face {
+    font-family: 'Avenir-Light';
+    src: url(/resource/istenew/iste/fonts/Avenir-Light.ttf);  
+}
+@font-face {
+    font-family: 'Avenir-Heavy';
+    src: url(/resource/istenew/iste/fonts/Avenir-Heavy.ttf);  
+}
+
+.slds-scope {
+  background: #EFF2F5;
+}
+
+.slds-box_x-small {
+  padding: 0;
+  border: none;
+}
+
+.new-container {
+  margin: 0 auto;
+  border: none;
+  width: -webkit-fill-available;
+  width: 100%;
+}
+
+.new-containerpage {
+  background: #EFF3F8;
+  margin: 0 auto;
+  width: -webkit-fill-available;
+  width: 100%;
+}
+
+.header-new-containerpage {
+  background: #fff;
+  overflow: overlay;
+}
+
+.slds-wrap {
+  width: 100%;
+}
+
+.slds-p-around_small {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.slds-grow {
+  display: inline-block;
+  vertical-align: top;
+}
+
+/*iste 1 page start*/
+.title{ margin:20px 0;padding:0}
+.title h2{color:#000000; font-size:20px; font-family: 'Avenir-Medium';}
+.error{    margin: 0 0 20px;
+    padding: 8px 20px;border-radius: 2px;
+    border: 1px solid #EA8F34;
+    background: #fff;}
+.errortxt{ margin:6px 0 0;padding:0;}
+.errortxt img{ display:inline-block;}
+.errortxt h2{ color:#1A1A1A;font-family: 'Avenir-Book'; font-size:12px;    display: inline-block;
+    margin: 0 0 0 10px;
+    padding: 0; }
+.brand {
+    color: #fff;
+    background: #1284A9;
+    font-family: 'Avenir-Regular';
+    border-radius: 30px;
+    font-size: 12px;
+    display: block;
+    padding: 6px 20px;
+    border: 1px solid #1284A9;
+    line-height: normal;
+}
+    .brand:hover{background: #fff; color:#1284A9;}
+.brand:focus{background: #fff; color:#1284A9;box-shadow:none;outline:none;}
+.errorbtn{ margin:0;padding:0; float:right;}
+.errorbtn .brand{ display:inline-block; margin:0 20px 0 0; }
+.errorbtn p{ color:#1284A9; font-size:12px;display:inline-block; font-family: 'Avenir-Regular';}
+.fill{ background: none;
+    padding: 0 20px 0 0;;
+    border-radius: 5px;}
+.firstcost{ margin:0; background: #fff;
+    padding:20px 20px 0;border-radius: 5px 5px 0 0;
+    }
+.firstcost h2{ color:#000; font-size:16px;font-family: 'Avenir-Medium'; margin-bottom:20px;}
+.firstcost h2 span {
+    float: right;
+    font-size: 12px;
+    margin: 4px 0 0 0;
+    color: #DD8E10;
+    vertical-align: top;
+}
+.firstcost h3{ color:#B7C726; font-size:25px;font-family: 'Avenir-Medium'; margin:0 0 5px;}
+.firstcost h4{     color: #000;
+    font-size: 32px;
+    font-family: 'Avenir-Black';
+    margin-bottom: 20px;
+    line-height: normal;
+    vertical-align: top;
+    height: inherit;}
+.firstcost h4 span{ color:#000;font-family: 'Avenir-Medium'; font-size:14px;}
+.date{ padding:5px 0 20px 0; margin:0;    min-height: 76px;}
+.date p{color:#000000;font-family: 'Avenir-Medium'; font-size:14px;}
+.date1{  width:50%; display:inline-block; }
+.date2{  width:50%; display:inline-block; }
+.date1 p{ color:#4E4E4E;font-size:12px; font-family: 'Avenir-Book'; margin:0;padding:0; }
+.date1 p.due{ color:#4E4E4E;font-size:12px;  font-family: 'Avenir-Black'; margin:0 0 0;padding:0; }
+.date2 p{ color:#4E4E4E;font-size:12px; font-family: 'Avenir-Book'; margin:0;padding:0; }
+.date2 p.due{ color:#4E4E4E;font-size:12px;  font-family: 'Avenir-Black'; margin:0 0 0;padding:0; }
+.bottomone{background: #FCE1C0;    padding: 20px;    border-radius: 0 0 5px 5px; }
+.bottomone1{background: #fff;}
+.bottomone p{ color:#414141; font-size:12px;font-family: 'Avenir-Book'; margin:0 0 10px;     min-height: 22px;}
+.bottomone .brand{     width: 100%;
+    font-size: 14px;
+    padding: 10px;}
+.cost{ margin:0 0 60px;}
+.us{ padding:0 0 0 30px; margin:0;}
+
+.us h2{ color:#000; font-size:14px;margin:0 0 5px;font-family: 'Avenir-Heavy';}
+.us p{ margin:0; padding:0; font-size:14px; font-family: 'Avenir-Light';color:#000;}
+.address{ margin:40px 0 0;}
+.address h6{ font-size:14px; font-family: 'Avenir-Medium'; color:#000; margin: 0 0 8px}
+.address h6 img{ margin:0 10px 0 0;} 
+/*iste 1 page end*/
+
+/*iste 2 page start*/
+.error1{ border:1px solid #EA3434;}
+.firstcost h2 span.expired{color:#DD2F10;}
+.firstcost h2 span.active{color:#4BBF4B;}
+.bottomone p.renew{ color:#FF0707}
+.fill1{padding:0;}
+/*iste 2 page end*/
+
+
+/*iste 4 page start*/
+.thanks{background:#001431;float:right; border:1px solid #001431;    margin: 10px 0 0 0;}
+.thanks:hover{color:#001431;border:1px solid #001431;background: #fff; }
+.thanks:focus{background: #fff; color:#001431;box-shadow:none;outline:none;}
+.plan{  margin:10px 0 40px; padding:0; }
+.plan h2{margin:0 0 30px; padding:0; font-size:30px; font-family: 'Avenir-Black';color:#000;}
+.basic{ background:#fff; padding:30px 0; border-radius:16px;}
+.premium1{padding:0 30px; margin:0;       min-height:750px;}
+.premium{ padding:0 30px; margin:0;    border-right: 1px solid #E6E6E6;    min-height:750px;}
+.premium h2{ color:#B7C726;font-size:23px; font-family: 'Avenir-Medium'; margin: 0 0 0px; padding:0;}
+.premium h3{    color: #000;
+    font-size: 32px;
+    font-family: 'Avenir-Black';
+    margin-bottom: 0px;
+    line-height: normal;
+    vertical-align: top;
+    height: inherit;}
+.premium h3 span{    color: #000;
+    font-family: 'Avenir-Medium';
+    font-size: 14px;}
+.premium .brand {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+    background:#152C53; border-radius:3px;
+    border:1px solid #152C53;    margin: 0 0 0px;
+}
+.premium .brand:hover{color:#152C53;border:1px solid #152C53;background: #fff; }
+.premium .brand:focus{background: #fff; color:#152C53;box-shadow:none;outline:none;}
+.premium ul{margin: 20px 0 0 0;
+    padding: 0;
+    display: inline-block;}
+.premium ul li {
+background: url(/resource/1621426065000/istenew/iste/images/size.svg) no-repeat left 6px;
+    padding: 0 0 0 20px;
+    margin: 0 0 10px; font-size:14px;font-family: 'Avenir-Light';color:#000;
+}
+.premium ul li.read{    background: none; margin:20px 0 0;}
+.premium ul li.read a{ color:#169398; font-size:13px; font-family: 'Avenir-Heavy';}
+.premium ul li.read a:hover{     text-decoration: underline;}
+
+.premium1 h3{ color:#000; font-size:14px; font-family: 'Avenir-Heavy'; margin:0 0 10px 0; padding:0;}
+.premium1 a{ color:#1284A9;font-size:14px; font-family: 'Avenir-Medium'; margin: 0 0 20px; padding:0;    display: block;}
+.premium1 a:hover{ text-decoration: underline;}
+.us1{ padding:0 0 0 0px; margin:20px 0 0 0;    display: inline-block;}
+.us1 h2{ color:#000; font-size:14px;margin:0 0 5px;font-family: 'Avenir-Heavy';}
+/*iste 4 page end*/
+
+/*iste 5 page start*/
+.premium2{ border-right:none;}
+.premium2 .brand{    margin: 16px 0 0;}
+.premium h6{color:#000; font-size:14px; font-family: 'Avenir-Heavy'; margin:20px 0 10px 0; padding:0;}
+.premium p{ color:#1284A9; font-size:14px; font-family: 'Avenir-Medium';}
+.premium a {color:#1284A9; font-size:14px; font-family: 'Avenir-Medium';}
+.premium a.small{ text-align:left; margin:0 20px 0 0;}
+.premium a.medium{ text-align:center; margin:0 20px;}
+.premium a.large{ text-align:center; margin:0 20px ;}
+.term{ margin:100px 0 0 0;}
+.term h3{ color:#000; font-size:14px; font-family: 'Avenir-Heavy'; margin:0 0 10px 0; padding:0;}
+.term a{ color:#1284A9;font-size:14px; font-family: 'Avenir-Medium'; margin: 0 0 20px; padding:0;    display: block;}
+.term a:hover{ text-decoration: underline;}
+/*iste 5 page end*/

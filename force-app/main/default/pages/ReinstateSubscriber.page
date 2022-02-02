@@ -1,0 +1,505 @@
+<apex:page controller="ReinstatementApplication" showHeader="false" lightningstylesheets="true">
+    <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/jquery.min.js')}"></script>
+    <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/bootstrap.min.js')}"></script>  
+    <apex:stylesheet value="{!URLFOR($Resource.Bootstrap_Layout_Library, '/css/bootstrap.min.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/postmessage.js')}"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>    
+    <apex:stylesheet value="{!URLFOR($Resource.wholestyle, '/fonts/style.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.wholestyle, '/fonts/fonts-style.css')}"/>
+   
+            
+    <style>
+        
+        .tableStyle tr td { 
+            line-height:32px; 
+            width:25%; 
+        }
+        .menu-header h3 table.value-title { 
+            margin-left: 26px;
+        }
+        .value-title{margin-left: 26px;}
+        labal { 
+            font-weight: normal;
+            font-family: MontserratRegular; 
+            font-size: 14px;  
+        }
+        #accordion .panel-default {
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.40);
+        }
+    </style>
+    
+    <script>
+        var availableTags = [];
+        $(document).ready(function() {
+            $(".errorM3").addClass("alert alert-danger");
+            $(".infoM3").addClass("alert alert-info");
+            $(".confirmM3").addClass("alert alert-success");            
+        });
+       
+        function toggleOfficeEdit(type) {
+            if(type == 'Show') {
+                $('#OfficeInfo').hide();
+                $('#OfficeInfoEdit').show();
+            }
+            else {
+                $('#OfficeInfo').show();
+                $('#OfficeInfoEdit').hide();
+                $("#BrokerCodeInput").val('');
+                $("[id$=BrokerCode]").val('');                            
+            }
+        }
+        
+        function remoteMethod(searchTerm, type) {
+            
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.ReinstatementApplication.searchBroker}', 
+                searchTerm, type,
+                function(result, event){                      
+                    availableTags = [];
+                    for(var i=0; i<result.length; i++) {
+                        var parser = new DOMParser;
+                        var dom = parser.parseFromString('<!doctype html><body>' + result[i].Account_Name__c, 'text/html');
+                        var decodedString = dom.body.textContent;                     
+                        availableTags.push({value:decodedString  + ' - ' + result[i].Name, id:result[i].Id, name:result[i].Name, accountName:result[i].Account_Name__c, city:result[i].City__c, state:result[i].State__c, zip:result[i].Zip__c});    
+                    }                    
+                }, 
+                {buffer: false, escape: true, timeout: 120000}
+            );
+     
+        }
+    </script> 
+    
+   
+       
+    <header>
+        <div class="header_row">
+<!--             <img class="logo" src="{!if(subscription.Service_Jurisdiction__c == 'TREND', URLFOR($Resource.eProcess, '/images/TREND.png'), if(subscription.Service_Jurisdiction__c == 'BRIGHT', URLFOR($Resource.eProcess, '/images/BRIGHT.png'), URLFOR($Resource.eProcess, '/images/MRIS.png')))}" alt="logo" height="86" /> -->
+      <!--      <img class="logo" src="{!if(subscription.Service_Jurisdiction__c == 'TREND', URLFOR($Resource.eProcessNewlogos, '/images/TREND.png'), if(subscription.Service_Jurisdiction__c == 'BRIGHT', URLFOR($Resource.eProcessNewlogos, '/images/BRIGHT.png'),URLFOR($Resource.eProcessNewlogos, '/images/MRIS.png')))}" alt="logo" height="70" />  -->
+            <img class="logo" src="{!URLFOR($Resource.eProcessNewlogos, '/images/BRIGHT.png')}" alt="logo" height="70" />
+        </div>
+    </header>
+    <br/>   
+    <apex:form id="theForm">
+        <div class="body_content col-sm-12">
+            <apex:actionFunction action="{!enableEditing}" name="enableEditing" reRender="ContentBlock" />       
+                 
+        <div class="col-sm-12">       
+            <apex:outputPanel id="ContentBlock">       
+                <script>
+                    var accountName = "{!subscription.Related_Location_Broker_Office__r.Name}";
+                    var isAccountTypeDownSelect = false;
+                    $(function() {
+                        $("#BrokerCodeInput").autocomplete({
+                            source: function(request, response) {
+                                //remoteMethod(request.term, "{!subscription.Service_Jurisdiction__c}");
+                                 remoteMethod(request.term, "BRIGHT");
+                                response(availableTags);
+                            },
+                            minLength: 2,
+                            select: function(event, ui) {
+                                //console.log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+                                $("[id$=BrokerCode]").val(ui.item.id);
+                                isAccountTypeDownSelect = true;
+                                //console.log(  $('[id$=BrokerCode]').val() );
+                            }
+                        });
+                    });
+                    
+                    function checkAccountDetails() {
+                        $("[id$=submitApp]").css('pointer-events', 'none');
+                        if($("#BrokerCodeInput").length) {                            
+                            if(accountName != $("#BrokerCodeInput").val() && ($("[id$=BrokerCode]").val() == '' || !isAccountTypeDownSelect)) {
+                                $("[id$=BrokerCode]").val($("#BrokerCodeInput").val());                                   
+                            }
+                        }
+                        return true;
+                    }
+                    
+                     
+                </script>         
+            
+                <div style="float:left;">                   
+                    <a class="goback-link" href="/eProcess/NewAgentApplication?mls={!subscription.Service_Jurisdiction__c}"> <i class="glyphicon glyphicon-home"/>&nbsp; HOME</a> / REACTIVATE ACCOUNT <!--Application details   <img src="{!URLFOR($Resource.eProcess, '/images/Back.gif')}" /> -->
+                </div>
+                
+                <apex:outputPanel rendered="{!!isEdit && showSubmitButton}">
+                    <div style="float:right;">
+                        
+                        <apex:commandLink styleclass="button" style="margin-left:5px;" value="Edit Details" onclick="enableEditing();" reRender="ContentBlock"/>
+                        
+                    </div>
+                </apex:outputPanel>
+                
+                <div style="clear:both;"></div>
+                <div id="messages">
+                    <apex:pagemessages id="page_message"></apex:pagemessages>
+                </div>
+                
+                <apex:outputPanel rendered="{!viewAppButton}">
+<!--                    <div class="col-sm-13 status-message" style="padding-top:10px; border-bottom:1px solid #fff;"> -->
+                        <div class="message alert alert-success" role="alert">
+                            <strong>Reinstate application already submitted.</strong> Please click "View Application" button to get more details.
+                        </div>
+<!--                    </div> -->
+                </apex:outputPanel>
+                
+                <div class="panel-group " id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default ">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <div class="col-sm-12 menu-header ">
+                            <h3 class="panel-title">
+                                <table class="value-title" style="width:100%;">
+                                    <tr>
+                                        <td class="sectionheader" style=" vertical-align:top; font-size:17px; " >
+                                            Subscription Details
+                                        </td>
+                                        <td colspan="3"></td>
+                                    </tr>
+                                </table>
+                            </h3>
+                        </div>
+                    </div>
+                    
+                    
+                     <apex:outputPanel rendered="{!!isEdit}">
+                            <div id="subscrPanel1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" style="margin-left:30px;">
+                                <div class="panel-body" style="color: #666666; font-family: 'MontserratRegular'; font-size:14px;">
+                                    <div class="col-sm-12" style="padding: 0px 35px;">
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6">Subscription ID</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:outputField styleClass="form-control " value="{!subscription.Name}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6">Status</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:outputField styleClass="form-control " value="{!subscription.Status__c}" />
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    
+                                    <div class="col-sm-12" style="padding: 0px 35px;">
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6">Expiration Date</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:outputField styleClass="form-control " value="{!subscription.Date_Terminated__c}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6">Status Reason</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:outputField styleClass="form-control " value="{!subscription.Status_Change_Reason__c}" />
+                                            </div>
+                                        </div>
+                                    </div>                                  
+                                    
+                                    <div class="col-sm-12" style="padding: 0px 35px;">
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6">First Name</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:outputField styleClass="form-control " value="{!subscription.Contact__r.FirstName}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6">Last Name</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:outputField styleClass="form-control " value="{!subscription.Contact__r.LastName}" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12" style="padding: 0px 35px;">
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6">Middle Name</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:outputField styleClass="form-control " value="{!subscription.Contact__r.Middle_Name__c}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6">Suffix</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:outputField styleClass="form-control " value="{!subscription.Contact__r.Suffix__c}" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-sm-12" style="padding: 0px 35px;">
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6">Salutation</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:outputField styleClass="form-control " value="{!subscription.Contact__r.Salutation}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6">Nickname</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:outputField styleClass="form-control "  value="{!subscription.Contact__r.Nickname__c}" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12" style="padding: 0px 35px;">
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6">Office</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:outputField styleClass="form-control "  value="{!subscription.Related_Location_Broker_Office__c}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6">Contact Type</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:outputField styleClass="form-control " value="{!subscription.Contact_Type__c}" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12" style="padding: 0px 35px;">
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6">Phone</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:outputField styleClass="form-control " value="{!subscription.Primary_Phone__c}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6">Email</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:outputField styleClass="form-control "  value="{!subscription.Private_Email__c}" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12" style="padding: 0px 35px;">
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6">NRDS ID</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:outputField styleClass="form-control "  value="{!subscription.NRDS_ID__c}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6">Association</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:outputText style="box-shadow: none; border: none;"  value="{!associationName}" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12" style="padding: 0px 35px;">
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6">Date Terminated</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:outputField styleClass="form-control "  value="{!subscription.Date_Terminated__c}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+
+                                        </div>
+                                    </div>                                      
+                                </div>
+                           </div>
+                     </apex:outputPanel>
+                        
+                     
+                     <apex:outputPanel rendered="{!isEdit}">
+                            <div id="applicPanel" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" style="margin-left:30px;">
+                                <div class="panel-body" style="color: #666666; font-family: 'MontserratRegular'; font-size:14px;">
+                                    <div class="col-sm-12" style="padding: 0px 35px;">
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6">Subscription ID</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:outputField styleClass="form-control " style="" id="appnameinp" value="{!newApplication.Name}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6">Status</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:outputField styleClass="form-control " id="appstatusInp" value="{!subscription.Status__c}" />
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    
+                                    <div class="col-sm-12" style="padding: 0px 35px;">
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6">Expiration Date</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:outputField styleClass="form-control " id="subexpoutp" value="{!subscription.Date_Terminated__c}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6">Status Reason</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:outputField styleClass="form-control " id="subreasoutp" value="{!subscription.Status_Change_Reason__c}" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12" style="padding: 0px 35px;">
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6" style="padding-top:5px;">First Name</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:inputField styleClass="form-control " style="" id="firstNameinp" value="{!newApplication.First_Name__c}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6" style="padding-top:5px;">Last Name</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:inputField styleClass="form-control " id="applastnameinp" value="{!newApplication.Last_Name__c}" />
+                                            </div>
+                                        </div>
+                                    </div> 
+
+                                    <div class="col-sm-12" style="padding: 0px 35px;">
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6" style="padding-top:5px;">Middle Name</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:inputField styleClass="form-control " id="appMiddleNameinp" value="{!newApplication.Middle_Name__c}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6" style="padding-top:5px;">Suffix</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:inputField styleClass="form-control " id="appsuffixinp" value="{!newApplication.Suffix__c}" />
+                                            </div>
+                                        </div>
+                                    </div> 
+
+                                    <div class="col-sm-12" style="padding: 0px 35px;">
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6" style="padding-top:5px;">Salutation</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:inputField styleClass="form-control " id="appsalinp"  value="{!newApplication.Salutation__c}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6" style="padding-top: 5px; padding-bottom: 9px;">Nickname</div>
+                                            <div class="col-sm-6" style="color:#000; padding-top: 5px; padding-bottom: 9px;">
+                                                <apex:outputField styleClass="form-control " id="appsufinp" value="{!newApplication.Nickname__c}" />
+                                            </div>
+                                        </div>
+                                    </div>  
+
+                                    <div class="col-sm-12" style="padding: 0px 35px;">
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6" style="padding-top:5px;">Office</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:outputText >
+                                                    <input type="text" class="form-control" id="BrokerCodeInput" value="{!subscription.Related_Location_Broker_Office__r.Name}" />
+                                                    <apex:inputHidden id="BrokerCode" value="{!brokerCode}" />                                                     
+                                                </apex:outputText>                                              
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6" style="padding-top: 5px; padding-bottom: 9px;">Contact Type</div>
+                                            <div class="col-sm-6" style="color:#000; padding-top: 5px; padding-bottom: 9px;">
+                                                <apex:outputField styleClass="form-control " value="{!subscription.Contact_Type__c}" />
+                                            </div>
+                                        </div>
+                                    </div> 
+
+                                    <div class="col-sm-12" style="padding: 0px 35px;">
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6" style="padding-top:5px;">Phone</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:inputField styleClass="form-control " id="appPhoneinp" value="{!newApplication.Primary_Phone__c}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6" style="padding-top:5px;">Email</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:inputField styleClass="form-control " id="appemailinp" value="{!newApplication.Private_Email__c}" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12" style="padding: 0px 35px;">
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6" style="padding-top:5px;">NRDS ID</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:inputField styleClass="form-control " id="appnrdsinp" value="{!newApplication.NRDS_ID__c}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6" style="padding-top:5px;">Association</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:outputText >
+                                                    <apex:selectList size="1" id="assinp" styleClass="form-control"  multiselect="false" value="{!association}" >
+                                                        <apex:selectOptions value="{!options}"/>
+                                                    </apex:selectList>
+                                                </apex:outputText>
+                                            </div>
+                                        </div>
+                                    </div>  
+
+                                    <div class="col-sm-12" style="padding: 0px 35px;">
+                                        <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6">Date Terminated</div>
+                                            <div class="col-sm-6" style="color:#000;">
+                                                <apex:outputField styleClass="form-control "  value="{!subscription.Date_Terminated__c}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+
+                                        </div>
+                                    </div>                                          
+                                    
+                                    
+<!--                                <apex:commandButton action="{!createSubcription}" value="Continue" rendered="{!showcontinue}" styleClass="button" onclick="$(this).css('pointer-events', 'none');" />                         -->
+                                </div>
+                           </div>
+                           
+                            <apex:outputPanel rendered="{!isEdit}">
+                                <input type="button" value="Cancel" Class="button" style="margin-right: 15px; margin-top:10px; margin-bottom: 10px;"  onclick="window.location='/eProcess/ReinstateSubscriber?id={!subscription.Name}';"  /> &nbsp; 
+                            </apex:outputPanel>
+                            
+                     
+                     </apex:outputPanel>
+                     <apex:outputPanel rendered="{!showSubmitButton}">
+                        <apex:commandLink onclick="return checkAccountDetails();" value="Submit Application" id="submitApp" styleClass="button" style="margin:10px 15px; font-family: 'MontserratRegular' !important;" action="{!submitApplication}" rendered="{!showSubmitButton}" />
+                     </apex:outputPanel>
+                     <apex:outputPanel rendered="{!viewAppButton}">
+                        <apex:commandLink value="View Application" id="viewApp" styleClass="button" style="margin-bottom: 10px; margin-right: 10px;" action="{!submitApplication}" rendered="{!viewAppButton}" />
+                     </apex:outputPanel>  
+                </div>
+              </div>
+                   
+                
+                
+<!--                 <div>     -->
+<!--                     <h4> -->
+<!--                         Subscription Details -->
+<!--                         <apex:outputPanel rendered="{!!isEdit && showSubmitButton}"> -->
+<!--                             <a onclick="enableEditing()" title="Edit Details" class="edit-link"><img src="{!URLFOR($Resource.eProcess, '/images/Edit.png')}" />Edit Details</a> -->
+<!--                         </apex:outputPanel> -->
+<!--                     </h4> -->
+<!--                 </div> -->
+                
+                               
+<!--                 <center> -->
+<!--                     <apex:outputPanel rendered="{!isEdit}"> -->
+<!--                         <input type="button" value="Cancel" Class="button" onclick="window.location='/eProcess/ReinstateSubscriber?id={!subscription.Name}';"  /> &nbsp;  -->
+<!--                     </apex:outputPanel> -->
+<!--                     <apex:commandButton onclick="return checkAccountDetails();" value="Submit Application" id="submitApp" styleClass="button" action="{!submitApplication}" rendered="{!showSubmitButton}" /> -->
+<!--                 </center>         -->
+            </apex:outputPanel>
+            </div>
+            <div style="clear:both;" />
+            <div  class="copy-cat"> 
+                Copyright © 2017 Bright MLS, Inc.
+            </div>
+        </div>
+    </apex:form>
+    
+    <script>
+        function submitPaymentMethod() {        
+            submitHostedPage("z_hppm_iframe");
+        } 
+        function callbackFail(errorMessage) {
+            alert(errorMessage);
+        }
+        function callbackSuccess(pmid) {
+            makePayment(pmid);
+        }        
+                       
+    </script>        
+</apex:page>

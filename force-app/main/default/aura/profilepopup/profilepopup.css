@@ -1,0 +1,58 @@
+@font-face {
+    font-family: 'Acronym-Regular';
+    src: url(/resource/bright/bright-3.0/fonts/Acronym-Regular.ttf);  
+}
+@font-face {
+    font-family: 'Acronym-Bold';
+    src: url(/resource/bright/bright-3.0/fonts/Acronym-Bold.ttf);
+}
+.THIS.slds-scope{}
+.THIS .fullpage {   margin:0;  padding:0;}
+.THIS .slds-box_x-small{ padding:0; border:none;}
+.THIS .new-container { margin: 0 auto; border: none; width: -webkit-fill-available; width:100%;}
+.THIS .newapplication{ margin:10px 0; padding:0;}
+.THIS .newapplication .Edit h2.email{ margin:0 0 0px; padding:0; color:#4F5A65;font-family: 'Acronym-Bold'; font-size:16px; text-align:left;}
+.THIS .newapplication .Edit h2.email span{margin:0 0 0px 40px; color:#1B3799; font-size:10px;  font-family: 'Acronym-Regular'; font-style:italic;}
+.THIS .newapplication .Edit h2.email span img{ margin:0 10px 0 0;}
+.THIS .newapplication .Edit{ display:inline-block; margin:0;padding:0;}
+.THIS .newapplication .Edit1{ text-align:right;}
+.THIS .newapplication .Edit1 img.close{width:32px;}
+.THIS .bodycontainer{ background:#fff;     width: 100%;border-bottom: 1px solid #ACACAC;}
+.THIS .bodytop{ background: #fff;
+    width: 100%;
+    border-bottom: 1px solid #ACACAC;
+    padding: 10px 0;}
+.THIS .bodyline{padding: 20px 10px;}
+.THIS .bodyline h2{color:#4F5A65; font-size:12px;  font-family: 'Acronym-Bold'; margin:0 0 10px 0;}
+.THIS .bodyline h3{color:#4F5A65; font-size:14px;  font-family: 'Acronym-Regular'; margin:0 0 10px 0;}
+.THIS .bodyline h4{color:#4F5A65; font-size:12px;  font-family: 'Acronym-Regular'; margin:0 0 10px 0;}
+.THIS .bodyline1{ margin:0; padding:0 40px 0 0; display:inline-block;    vertical-align: top;}
+.THIS .bodyline1 .slds-input{ border:1px solid #DDDBDA; border-radius:0;color: #4f5a65;
+    font-family: 'Acronym-Regular';padding:10px;    line-height: normal;
+    font-size: 14px;}
+.THIS .bodyline1 .slds-input:hover{border:1px solid #DDDBDA; border-radius:0; box-shadow: none;}
+.THIS .bodyline1 .slds-input:focus{border:1px solid #DDDBDA; border-radius:0; box-shadow: none;}
+.THIS .bodyline1 .slds-input::placeholder{color:#8B8B8B;}
+.THIS .brand{    color: #ff4500;
+    background: #fff;
+    font-family: 'Acronym-Regular';
+    border-radius: 20px;
+    font-size: 12px;
+    min-width: 100px;    text-align: center;
+    display: block;
+    padding: 0px 20px;
+    border: 2px solid #ff4500;}
+.THIS  .brand:hover{color: #fff; background: #ff4500; border: 2px solid #ff4500;}
+.THIS  .brand:focus{color: #fff; background: #ff4500;outline:none;box-shadow: none; border: 2px solid #ff4500;}
+.THIS .bodyline2{ margin:0; padding:0; display:inline-block;    vertical-align: top;}
+.THIS .bodyline2 ul{ margin:10px 0;padding:0;}
+.THIS .bodyline2 ul li{ font-size:10px; color:#4F5A65;font-family: 'Acronym-Regular';list-style: inside;}
+.THIS .bodytop1{ background: #fff;
+    width: 100%;
+    
+    padding: 10px 0;}
+.THIS .new-container .brand{ display:inline-block; }
+.THIS .new-container .cancel{ display:inline-block; margin:0 0 0 20px }
+.THIS .cancel{ color:#505050; background:#D9D9D9; border:2px solid #D9D9D9;}
+.THIS .cancel:hover{color: #D9D9D9; background: #505050; border: 2px solid #505050;}
+.THIS .cancel:focus{color: #D9D9D9; background: #505050;outline:none;box-shadow: none; border: 2px solid #505050;}

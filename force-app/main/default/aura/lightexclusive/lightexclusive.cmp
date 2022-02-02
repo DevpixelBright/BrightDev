@@ -1,0 +1,194 @@
+<aura:component>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <ltng:require styles="{!$Resource.headerpart }"></ltng:require>
+   <ltng:require styles="{!$Resource.side }"></ltng:require> 
+   <ltng:require styles="{!$Resource.body }"></ltng:require>
+
+   
+   <div class="c-container">
+      <div class="fullpage slds-scope">
+         <div class="slds-grid slds-wrap">
+            <lightning:layout multipleRows="true">
+               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage header-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:header />
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+               <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                   <c:mobilemenu />
+                   <lightning:layout>
+                     <div class="new-containerpage">
+                        <div class="slds-container--x-large new-container">
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <c:sidebarnew />
+                           </lightning:layoutItem>
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                              <div class="page-section page-main">
+                                 <div class="middlebar1 titlebar">
+                                    <h2>Office Exclusive Certification</h2>
+                     <lightning:button class="brand cancel" variant="brand " label="Cancel" title="Brand action" onclick="{! c.handleClick }" />
+                    
+                       <lightning:button class="brand brand2" variant="brand " label="Submit" title="Brand action" onclick="{! c.handleClick }" />
+                       <lightning:button class="brand" variant="brand" label="Download Office Exclusive Form" title="Brand action" onclick="{! c.handleClick }" />
+                    </div>
+                                 <div class="dev">
+                                    <p class="recent"> Please use this online form to certify that you have an Office Exclusive form signed by the sellers/landlords.<b> Please note, you are required to include the Office Exclusive form or similar addendum to complete the certification</b>.</p>
+                                     <p class="recent">To comply with Bright’s policy on Office Exclusive listings, this online form must be submitted to Bright MLS within 3 business days after the seller/landlord signatures are obtained on the listing contract and the listing term has begun. </p>
+                                     <p class="recent">If you are completing this form on behalf of the Listing Agent, click the pencil icon next to Listing Agent ID field to update the form with their ID and information.</p>
+                                     <div class="view"></div>
+           
+                                <div class="part0">
+                             <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">       
+                           
+                                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                               <div class="layer part1 log"> 
+                               <h4>Listing Agent ID <span class="star">*</span></h4>
+                            
+                                   <h5>
+                                  <lightning:input type="text" name="input3" placeholder="Enter listing agent ID"  variant = "label-hidden" />
+                                   </h5>
+                             </div>
+                                </lightning:layoutItem>
+                                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                    <div class="layer part1 log"> 
+                        <h4>Listing Office ID <span class="star">*</span></h4>
+                                   <h5><lightning:input type="text"  name="input3" placeholder="Enter listing office ID"  variant = "label-hidden" /></h5>
+                             </div>    
+                                </lightning:layoutItem>
+                                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                <div class="layer part2"> 
+                               <h4>Listing Agent Name <span class="star">*</span></h4>
+                                   <h5>  <lightning:input type="text" name="input3" placeholder="Enter listing agent name"  variant = "label-hidden" />
+                                  
+                                    
+                                    
+                                    </h5>
+                             </div>
+                                </lightning:layoutItem>
+                  
+                     
+                                     </lightning:layoutItem>
+                                    
+                                    
+                               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">      
+                          
+                                   <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">      
+                               <div class="layer part1 log"> 
+                                   <h4>Listing Office Name <span class="star">*</span></h4>
+                                   <h5> <lightning:input type="text" name="input3" placeholder="Enter listing office name"  variant = "label-hidden" />
+                                  </h5>
+                             </div>
+                                   </lightning:layoutItem>
+                                   <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">    
+                    <div class=" layer part1"> 
+                               <h4>Seller/Landlord Name 1 <span class="star">*</span></h4>
+                                   <h5> <lightning:input type="text" name="input3" placeholder="Enter seller/landlord name 1"  variant = "label-hidden" />
+                                  </h5>
+                             </div>
+                                   </lightning:layoutItem>
+                                   <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">    
+                                <div class="layer part2"> 
+                               <h4>Seller/ Landlord Name 2</h4>
+                                   <h5> <lightning:input type="text" name="input3" placeholder="Enter seller/landlord name 2"  variant = "label-hidden" />
+                                  </h5>
+                                       </div></lightning:layoutItem>
+                  
+                                 </lightning:layoutItem>  
+                                   <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">  
+                                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3"> 
+                               <div class="layer part1 "> 
+                                    <h4>New Construction <div class="slds-form-element">
+  
+  <div class="slds-form-element__control">
+    <span class="slds-checkbox slds-checkbox_standalone">
+      <input type="checkbox" id="checkbox-unique-id-75" name="label" value="option" />
+      <span class="slds-checkbox_faux"></span>
+    </span>
+  </div>
+</div></h4>
+                                   
+                                
+                                  
+                                     </div></lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9"> 
+                                    <div class="layer part2"> 
+                                    <h4></h4>
+                                   <h5 class="info"><p class="newline">(Check New Construction for lots or properties that do not have a valid address registered with USPS.)</p></h5>
+                                    </div>
+                                       </lightning:layoutItem>
+                                    </lightning:layoutItem>
+                                     <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12"> 
+                                  <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="8" largeDeviceSize="8">   
+                               <div class="layer part1"> 
+                                   <h4>Property Address <span class="star">*</span> <p class="newline">Enter full address (Street Address, Suite/Apt. Number, City, State, Zip).</p></h4>
+                                   <h5> <lightning:textarea name="input3" label="Textarea field with a placeholder" placeholder="Enter property address" variant = "label-hidden" /></h5>
+                             </div>
+                                         </lightning:layoutItem>
+                                          <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4"> 
+                    <div class="layer part3"> 
+                               <h4></h4>
+                        <h5 class="info"><p class="newline newline1">Example:<br/> 9707 Key West Avenue, Suite 300, Rockville, MD 20850</p></h5>
+                             </div>
+                              
+                                         </lightning:layoutItem>
+                        
+                                    </lightning:layoutItem>  
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12"> 
+                                   <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4"> 
+                               <div class="layer part1"> 
+                               <h4>city <span class="star">*</span></h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter city"  variant = "label-hidden" /></h5>
+                                       </div></lightning:layoutItem>
+                                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4"> 
+                    <div class="layer part1"> 
+                               <h4>State<span class="star">*</span> </h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter state"  variant = "label-hidden" /></h5>
+                                            </div></lightning:layoutItem>
+                                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4"> 
+                                <div class="layer part2"> 
+                               <h4>Zip<span class="star">*</span></h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter zip code"  variant = "label-hidden" /></h5>
+                             </div>
+                                        </lightning:layoutItem>
+                                        </lightning:layoutItem>
+                                    
+                                    <p class="recent">By submitting the Office Exclusive form, signed by the seller/landlord, I bright test with Bright test understand that this property will not be entered into the Bright MLS system for Bright MLS to disseminate information about the property. I affirm, that I will not publicly market the property, including through communications with other licensees or brokers outside of my Broker/Licensee’s firm. Please upload a copy of your Office Exclusive or Listing Agreement form signed by the seller/landlord before submitting this online form. </p>
+                                 <p class="recent">Please upload a copy of your Office Exclusive or Listing Agreement form signed by the seller/landlord before submitting this online form.</p>
+            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">                          
+        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3"> 
+                               <div class="layer part1"> 
+                               <h4>Add Attachment(s) <span class="star">*</span></h4>
+                                   <p class="addr addr1">(Maximum file size: 4 MB)</p>
+            </div></lightning:layoutItem>
+                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4"> 
+                    <div class="layer part2"> 
+                               <h4></h4>
+                                   <h5><div class="file"><a href=""><span>Choose File</span> No file chosen</a></div></h5>
+                                                 </div>
+                </lightning:layoutItem>
+                  
+               </lightning:layoutItem>
+                                 </div>
+                              </div>
+                                     </div>
+                           </lightning:layoutItem>
+                        </div>
+                     </div>
+                  </lightning:layout>
+               </lightning:layoutItem>
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage footer-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:footer />
+                         
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+            </lightning:layout>
+         </div>
+      </div>
+
+   </div>
+</aura:component>

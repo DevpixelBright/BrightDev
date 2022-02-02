@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Data Collection</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Data Collections</value>
+    </caseValues>
+    <layouts>
+        <layout>Data Collections Layout</layout>
+        <sections>
+            <label></label>
+            <section>Check Request</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Amount_is_required_for_Check_Request</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Contact_is_required_for_Check_Request</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>LogDate_cannot_be_less_than_RecDate</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Log_Date_is_older_then_Request_date</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Payment_is_required_for_Check_Request</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>RecDate_cannot_be_earlier_than_ReqDate</name>
+    </validationRules>
+</CustomObjectTranslation>

@@ -1,0 +1,29 @@
+<apex:page standardStylesheets="false" lightningstylesheets="true">
+    <apex:composition template="Bootstrap_Base">
+        
+        <apex:define name="scripts">
+            <script>
+                var article = $("article");
+                var interval;
+                var last_height = -1;
+                
+                var resize_handler = function () {
+                    try {
+                        var height = article.outerHeight();
+                        
+                        if (height != last_height) {
+                            last_height = height;
+                            parent.resize_iframe(height);
+                        }
+                    }
+                    catch (e) {
+                        window.clearInterval(interval);
+                    }
+                };
+                
+                interval = window.setInterval(resize_handler, 100);
+            </script>
+        </apex:define>
+                
+    </apex:composition>
+</apex:page>

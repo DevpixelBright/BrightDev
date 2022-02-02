@@ -1,0 +1,13 @@
+<apex:page showHeader="false" standardStylesheets="false">
+    <!--<c:bcomHeader />-->
+    <apex:includeLightning />
+    <apex:slds />
+    <div id="dataTable" />
+    <script>
+    $Lightning.use("c:Ezjoininactivepage1", function() {
+        $Lightning.createComponent("c:Ezjoininactivepage", {}, "dataTable", function(cmp) {
+            console.log('done');
+        });
+    });        
+    </script>
+</apex:page>

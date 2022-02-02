@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <name>ArticleApprovals</name>
+    <queueMembers>
+        <users>
+            <user>abhi.kankanala@bltglobalventures.com</user>
+            <user>hegel.encarnacion@mris.net</user>
+            <user>levelthreemail@gmail.com</user>
+            <user>verlisha.carter@mris.net</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>KnowledgeArticleVersion</sobjectType>
+    </queueSobject>
+</Queue>

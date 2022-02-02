@@ -1,0 +1,101 @@
+<apex:page sidebar="false" showheader="false" controller="BT_AllCoursesController" lightningstylesheets="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/angular.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/ui-bootstrap-tpls-0.12.0.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.AngularJsTable,'/ng-table.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.AngularJsTable,'/ng-table.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.DataArchive_Library,'js/jquery.min.js')}"/>
+    <c:Bootstrap_Resources />
+    <apex:stylesheet value="{!URLFOR($Resource.BT_Styling,'style.css')}"/>
+    <style>
+           div.siteforceThemeLayoutStarter > div.body { padding-top:0px;}
+    </style>
+    <apex:form >     
+        <div ng-app="first" ng-controller="firstcontroller" id="ContentContainer">
+            
+            
+            <div class="courses ng-cloak">
+                <h2>BrightMLS Courses ({{finalWrap.length}})</h2>
+                <div class="downcourse">
+                    <div class="middlecourse">
+<!--                         <h2>Courses <span>({{finalWrap.length}})</span></h2> -->
+                        <table id="table" class="table tablebox" ng-table="tableParams">
+                            <tr >
+                                <td ng-repeat="cd in $data">
+                                    <a href="/learnbrightmls/s/coursedetail?courseId={{cd.Id}}" target="_top"> 
+                                        <div class="innercourse">
+                                            <ul class="class-box">
+                                                <li>
+                                                    <div class="in-box">
+                                                        <img src="{{cd.Image__c}}" width="195" height="135" alt=""/>
+                                                        <h4>{{cd.AvailableDeliveryMethods__c}}</h4>
+                                                        
+                                                        <div class="in-boxpart">
+                                                            <h3>{{cd.Title__c}}</h3>
+                                                            <p>{{cd.Description__c}}</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <script>
+            var app = angular.module('first', ['ngTable']).
+            controller('firstcontroller', function($scope, $filter, NgTableParams) {
+                
+                var data = [];
+                $scope.finalWrap = [];
+                
+                $scope.finalWrap = JSON.parse('{!coursesjson}');
+                data = $scope.finalWrap;
+                console.log('---$scope.finalWrap-->'+$scope.finalWrap.length+'-->',$scope.finalWrap[0]);
+                
+                $scope.isAuthenticatedUser = '{!isAuthenticatedUser}';
+                console.log('--$scope.isAuthenticatedUser-->'+$scope.isAuthenticatedUser);
+                
+                /* Ng-table initiation */
+                $scope.tableParams = new NgTableParams({
+                    page: 1,
+                    count: 24,
+                    sorting: {
+                        isAvailable: 'asc'
+                    }
+                }, {
+                    total: data.length,
+                    getData: function($defer, params) {
+                        console.log(params);
+                        var searchedData = searchData();
+                        console.log('---searchedData--->',searchedData);
+                        params.total(searchedData.length);
+                        var orderedData = params.sorting() ? $filter('orderBy')(searchedData , params.orderBy()) : searchedData;
+                        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                    }
+                });
+                
+                var searchData = function(){
+                    if($scope.search){
+                        return $filter('filter')(data, $scope.search, true);
+                    }
+                    return data;
+                }
+                
+                adjustContainer();
+                
+                });
+                
+                function adjustContainer() {
+                    setTimeout(function() { 
+                        console.log('**** current height', document.getElementById('ContentContainer').scrollHeight); 
+                        $('iframe', window.parent.document).height(document.getElementById('ContentContainer').scrollHeight + 'px');
+                    }, 1000);
+                }
+            </script>
+        </div>
+    </apex:form>
+</apex:page>

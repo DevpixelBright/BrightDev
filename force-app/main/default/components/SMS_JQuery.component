@@ -1,0 +1,29 @@
+<apex:component layout="none" >
+    <apex:attribute name="uiThemeName" type="String"
+        description="JQueryUI theme name to load"  
+        required="false" default="smoothness" />
+    <apex:attribute name="jqueryVersion" type="String"
+        description="Version of JQuery to load"
+        required="false" default="1.9.1" />
+    <apex:attribute name="uiVersion" type="String"
+        description="Version of JQuery UI to load"
+        required="false" default="1.10.2" />
+
+    <apex:stylesheet value="https://ajax.googleapis.com/ajax/libs/jqueryui/{!uiVersion}/themes/{!uiThemeName}/jquery-ui.css" />
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/{!jqueryVersion}/jquery.min.js" />
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jqueryui/{!uiVersion}/jquery-ui.min.js" />
+    
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        
+        /* Rename jQuery to prevent conflicts. */
+        var $j = jQuery.noConflict();
+        
+        /* Return a jQuery friendly string */
+        function jq(myid, asId) {
+            asId = (typeof asId === "undefined") ? true : asId;
+            return (asId ? '#' : '') + myid.replace(/(:|\.)/g,'\\\\$1');
+        }
+        /* ]]> */
+    </script>
+</apex:component>

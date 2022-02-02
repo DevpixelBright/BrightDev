@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LCC_Terminate_Productlex</fullName>
+    <availability>online</availability>
+    <description>Created from Lightning Experience Configuration Converter.</description>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <height>600</height>
+    <linkType>url</linkType>
+    <masterLabel>Terminate Product</masterLabel>
+    <openType>sidebar</openType>
+    <protected>false</protected>
+    <url>/apex/SMS_TerminateProvisionedProduct?id={!SMS_Provisioned_Product__c.Id}&amp;mrisId={!SMS_Provisioned_Product__c.MRIS_Subscription_Id__c}</url>
+</WebLink>

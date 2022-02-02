@@ -1,0 +1,64 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    
+    <div class="fullpage slds-scope step2">
+        <div class="slds-grid slds-wrap">
+            <div class="bodytop">
+                <div class="slds-container--x-large new-container">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 timepoint">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication">
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_8-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 Edit">
+                                    <h2 class="email">Change Login Name <span><img src="{!$Resource.bright + '/bright-3.0/images/information.svg'}" alt="information" />Once the Login Name is changed, you will be logged out.</span> </h2>
+                                </div>
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_4-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 Edit Edit1">
+                                    <img class="close" src="{!$Resource.close}" />  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bodycontainer">
+                <div class="slds-container--x-large new-container">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodyline">
+                        <h2>Current Login Name</h2>
+                        <h3>319005</h3>
+                        <h4>Login Name</h4>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_4-of-12 slds-medium-size_4-of-12 slds-large-size_8-of-12 bodyline1">
+                           <lightning:input type="text" name="input3" placeholder="Enter login name"  variant = "label-hidden" />
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_8-of-12 slds-medium-size_8-of-12 slds-large-size_4-of-12 bodyline2">
+                            <lightning:button class="brand" variant="brand" label="Validate" title="Brand action" onclick="{! c.handleClick }" />
+          
+                        </div>
+                  
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_8-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 bodyline2">
+                            <ul>
+                            <li>min 3 characters and max 25 characters</li>
+                            <li>can contain letters and numbers</li>
+                            <li>only 4 special characters @ or period or space or dash allowed</li>    
+                            </ul>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+             <div class="bodytop1">
+                <div class="slds-container--x-large new-container">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 timepoint">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication">
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+              <lightning:button class="brand" variant="brand" label="Submit" title="Brand action" onclick="{! c.handleClick }" />
+          <lightning:button class="brand cancel" variant="brand" label="Cancel" title="Brand action" onclick="{! c.handleClick }" />
+          
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

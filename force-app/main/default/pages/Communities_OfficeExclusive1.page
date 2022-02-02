@@ -1,0 +1,805 @@
+<apex:page controller="Communities_OfficeExclusive" docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false"
+           standardStylesheets="false" lightningstylesheets="true">
+    
+    
+    <style>
+        .Invalid input,
+        .Invalid textarea,
+        .Invalid select {
+        border-color: red;
+        }
+        
+        .Invalid input[type='checkbox'] {
+        outline: red 1px solid;
+        }
+        
+        .Invalid .control-label {
+        color: red;
+        }
+        
+        input[type='checkbox'] {}
+        
+        .showError {
+        display: block !important;
+        }
+        
+        #communities-definition-component-title {
+        border-bottom: 1px solid #999 !important;
+        }
+        
+        .ui-border {
+        border-bottom: 1px solid #999;
+        padding-bottom: 20px;
+        margin-top: 0px !important;
+        margin-bottom: 20px;
+        }
+        
+        .newline {
+        margin: 0;
+        padding: 0 0 0 15px;
+        display: inline-block;
+        }
+        
+        .newline1 {
+        font-weight: 600;
+        }
+        
+        .newline2 {
+        font-weight: 500;padding: 0 0 0 2px;font-size: 10px;;
+        }
+        
+        .glyphicon.glyphicon-minus-sign {
+        color: #e33636;
+        }
+        
+        .form1 span {
+        word-break: break-all;
+        }
+        
+        .attachmentInvalid {
+        color: red
+        }
+    </style>
+    <apex:composition template="Communities_Base">
+        <apex:define name="content">
+            <apex:form id="theform">
+                
+                <c:Bootstrap_Resources />
+                <link href="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/font-awesome.min.css')}" rel="stylesheet" type="text/css"
+                      />
+                <apex:actionFunction action="{!dummy}" name="dummy" reRender="thepageblock,buttonsPanel,attachmentSection,printSection,attachmentTextSection,errorPanelId"
+                                     />
+                <apex:pageBlock id="thepageblock">
+                    <div class="row">
+                        <apex:outputPanel rendered="{!oOfficeExclusive.id != null}" id="printSection">
+                            <div style="float:right">
+                                <a class="btn btn-primary" href="/customers/apex/Communities_OfficeExclusivesPDF?id={!oOfficeExclusive.id}" target="_blank">Print</a>
+                            </div>
+                        </apex:outputPanel>
+                        <c:Communities_Definition pageTitle="Office Exclusive Certification" pageTitleClass="fa fa-home fa-2x" hasDefinitions="false">
+                            
+                        </c:Communities_Definition>
+                        
+                        <div class="col-xs-12 instructions">
+                            <p>
+                                Please use this online form to certify that you have an Office Exclusive form signed by the sellers/landlords.<b> Please note, you are required to include the Office Exclusive form or similar addendum to complete the certification.</b> 
+                            </p>
+                        </div>
+                        <div class="col-xs-12 instructions">
+                            <a href="https://support.brightmls.com/s/article/Waiver-of-Broker-Cooperation" target="_blank"><b>Download the Office Exclusive form.</b></a>
+                        </div>
+                        <div class="col-xs-12 instructions">
+                            <p>
+                                To comply with Bright’s policy on Office Exclusive listings, this online form must be submitted to Bright MLS within 3 business days after the seller/landlord signatures are obtained on the listing contract and the listing term has begun.
+                            </p>
+                        </div>
+                        
+                    </div>
+                    
+                    <div id="messages">
+                        
+                        <div id="validationErrorSection">
+                        </div>
+                        <apex:outputPanel id="successPanelId" rendered="{!isSuccessMsg}">
+                            <p class="alert alert-success">
+                                <apex:outputtext value="{!message}" escape="false" />
+                            </p>
+                        </apex:outputPanel>
+                        <apex:outputPanel id="errorPanelId" rendered="{!hasError}">
+                            <p class="alert alert-danger">
+                                <apex:outputtext value="{!message}" escape="false" />
+                            </p>
+                        </apex:outputPanel>
+                        <apex:outputPanel styleClass="jvalidation" style="display: none;" rendered="{!!hasError}">
+                            <p class="alert alert-danger">
+                                <strong>Error:</strong> Required fields must be populated.
+                            </p>
+                        </apex:outputPanel>
+                    </div>
+                    <apex:pageBlock id="pageblocktag">
+                        <div class="row address-edit" id="mailing-address-edit">
+                            
+                            <div class="sf-fields">
+                                <input type="text" data-bind="AddressLine1" id="AddressLine1" value="" />
+                                <input type="text" data-bind="Unit_Type__c" id="Unit_Type__c" />
+                                <input type="text" data-bind="Unit__c" id="Unit__c" />
+                                <input type="text" data-bind="City__c" id="City__c" />
+                                <input type="text" data-bind="Zip__c" id="Zip__c" />
+                                <input type="text" data-bind="State__c" id="State__c" />
+                                <input type="text" data-bind="Street_Number__c" id="Street_Number__c" />
+                                <input type="text" data-bind="Street_Number_Suffix__c" id="Street_Number_Suffix__c" />
+                                <input type="text" data-bind="Street_Name__c" id="Street_Name__c" />
+                                <input type="text" data-bind="Street_Type__c" id="Street_Type__c" />
+                                <input type="text" data-bind="Street_Direction__c" id="Street_Direction__c" />
+                            </div>
+                            
+                            <div class="form-group col-sm-12 col-lg-6">
+                                <span class="col-lg-4 col-sm-4 control-label">
+                                    <b>Listing Agent ID </b>
+                                    <span style="color:red;">*</span>
+                                </span>
+                                <div class="col-lg-8 col-sm-8">
+                                    {!subscription.Name}
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12 col-lg-6">
+                                <span class="col-lg-4 col-sm-4 control-label">
+                                    <b>Listing Office ID</b>
+                                    <span style="color:red;">*</span>
+                                </span>
+                                <div class="col-lg-8 col-sm-8">
+                                    {!subscription.Related_Location_Broker_Office__r.name}
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12 col-lg-6">
+                                <span class="col-lg-4 col-sm-4 control-label">
+                                    <b>Listing Agent Name</b>
+                                    <span style="color:red;">*</span>
+                                </span>
+                                <div class="col-lg-8 col-sm-8">
+                                    {!subscription.contact__r.Name}
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12 col-lg-6">
+                                <span class="col-lg-4 col-sm-4 control-label">
+                                    <b>Listing Office Name</b>
+                                    <span style="color:red;">*</span>
+                                </span>
+                                <div class="col-lg-8 col-sm-8">
+                                    {!subscription.Related_Location_Broker_Office__r.Account_Name__c}
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12 col-lg-6">
+                                <span class="col-lg-4 col-sm-4 control-label clabel">
+                                    <b>Seller/Landlord Name 1</b>
+                                    <span style="color:red;">*</span>
+                                </span>
+                                <div class="form1 col-lg-8 col-sm-8">
+                                    <apex:outputPanel layout="none" rendered="{!!isSuccessMsg}">
+                                        <apex:inputField styleClass="form-control required Seller_Landlord_Name_1__c" value="{!oOfficeExclusive.Seller_Landlord_Name_1__c}"
+                                                         html-autocomplete="off" />
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{!isSuccessMsg}">
+                                        <apex:outputField value="{!oOfficeExclusive.Seller_Landlord_Name_1__c}" />
+                                    </apex:outputPanel>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12 col-lg-6">
+                                <span class="col-lg-4 col-sm-4 control-label">
+                                    <b>Seller/Landlord Name 2</b>
+                                </span>
+                                <div class="form1 col-lg-8 col-sm-8">
+                                    <apex:outputPanel layout="none" rendered="{!!isSuccessMsg}">
+                                        <apex:inputField styleClass="form-control Seller_Landlord_Name_2__c" value="{!oOfficeExclusive.Seller_Landlord_Name_2__c}"
+                                                         html-autocomplete="off" />
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{!isSuccessMsg}">
+                                        <apex:outputField value="{!oOfficeExclusive.Seller_Landlord_Name_2__c}" />
+                                    </apex:outputPanel>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12 col-lg-12">
+                                <span class="col-sm-2 control-label">
+                                    <b>New Construction</b>
+                                </span>
+                                <div class="col-sm-10">
+                                    <apex:outputPanel layout="none" rendered="{!!isSuccessMsg}">
+                                        <apex:inputField value="{!oOfficeExclusive.New_Construction__c}" styleClass="New_Construction__c" onchange="enableUSPS()"
+                                                         />
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{!isSuccessMsg}">
+                                        <apex:outputField value="{!oOfficeExclusive.New_Construction__c}" />
+                                    </apex:outputPanel>
+                                    <div class="control-label newline newline2" style="font-weight: 500;padding: 0 0 0 2px;font-size: 10px;">
+                                    <p> Check New Construction for lots or properties that do not have a valid address registered with USPS.</p></div>
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="form-group col-sm-12 col-lg-6">
+                                <span class="col-lg-4 col-sm-4 control-label">
+                                    <b>Property Address</b>
+                                    <span style="color:red;">*</span>
+                                    <div class="control-label newline newline2" style="font-weight: 500;padding: 0 0 0 2px;font-size: 10px;">
+                                    <p> Enter full address (Street Address, Suite/Apt. Number, City, State, Zip). </p>
+                                    </div>
+                                </span>
+                                <div class="form1 col-lg-8 col-sm-8">
+                                    <apex:outputPanel layout="none" rendered="{!!isSuccessMsg}">
+                                        <apex:inputField styleClass="form-control required Property_Address__c" id="Property_Address" value="{!oOfficeExclusive.Property_Address__c}"
+                                                         html-autocomplete="off" html-data-bind="Street_Name__c" onblur="validateAddress()"
+                                                         />
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{!isSuccessMsg}">
+                                        <apex:outputField value="{!oOfficeExclusive.Property_Address__c}" />
+                                    </apex:outputPanel>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12 col-lg-6">
+                                <div class="col-lg-12 col-sm-12 usps">
+                                    <c:Communities_AddressValidation ></c:Communities_AddressValidation>
+                                    <div style="display:none;">
+                                        <input class="full-address" type="text"></input>
+                                </div>
+                                <div class="form-group alerts usps">
+                                    <apex:outputLabel value="" />
+                                    <div class="col-sm-12">
+                                        <div class="alert"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group options col-sm-12 usps">
+                                    <apex:outputLabel value="" />
+                                    <div class="">
+                                        <ul></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style=" padding-left:0;padding-bottom: 8px;" class="col-sm-12">
+                            <div class="form-group col-sm-12 col-lg-4">
+                                <span class="col-lg-4 col-sm-4 control-label">
+                                    <b>Apartment/Suite</b>
+                                </span>
+                                <div class="col-lg-8 col-sm-8">
+                                    <apex:outputPanel layout="none" rendered="{!!isSuccessMsg}">
+                                        <apex:inputField styleClass="form-control required Unit_Type__c" value="{!oOfficeExclusive.Unit_Type__c}" html-autocomplete="off" id="Unit_Type__c"
+                                                         onblur="validateAddress()" />
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{!isSuccessMsg}">
+                                        <apex:outputField value="{!oOfficeExclusive.Unit_Type__c}" />
+                                    </apex:outputPanel>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group col-sm-12 col-lg-4">
+                                <span class="col-lg-2 col-sm-2 control-label">
+                                    <b>City</b><span style="color:red;">*</span>
+                                </span>
+                                <div class="col-lg-10 col-sm-10">
+                                    <apex:outputPanel layout="none" rendered="{!!isSuccessMsg}">
+                                        <apex:inputField styleClass="form-control required City__c" value="{!oOfficeExclusive.City__c}" html-autocomplete="off" id="City__c"
+                                                         onblur="validateAddress()" />
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{!isSuccessMsg}">
+                                        <apex:outputField value="{!oOfficeExclusive.City__c}" />
+                                    </apex:outputPanel>
+                                </div>
+                            </div>
+                            
+                            <div style="padding-right:0;" class="form-group col-sm-12 col-lg-4">
+                                <span class="col-lg-2 col-sm-2 control-label">
+                                    <b>State</b><span style="color:red;">*</span>
+                                </span>
+                                <div class="col-lg-10 col-sm-10">
+                                    <apex:outputPanel layout="none" rendered="{!!isSuccessMsg}">
+                                        <apex:inputField styleClass="form-control required State__c" value="{!oOfficeExclusive.State__c}" html-autocomplete="off"
+                                                         id="State__c" onblur="validateAddress()" />
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{!isSuccessMsg}">
+                                        <apex:outputField value="{!oOfficeExclusive.State__c}" />
+                                    </apex:outputPanel>
+                                </div>
+                            </div>
+                            <div style="padding-right:0;" class="form-group col-sm-12 col-lg-4">
+                                <span class="col-lg-2 col-sm-2 control-label">
+                                    <b>Zip</b>
+                                    <span style="color:red;">*</span>
+                                </span>
+                                <div class="col-lg-10 col-sm-10">
+                                    <apex:outputPanel layout="none" rendered="{!!isSuccessMsg}">
+                                        <apex:inputField styleClass="form-control required ZIP__c" value="{!oOfficeExclusive.ZIP__c}" html-autocomplete="off" id="ZIP__c"
+                                                         onblur="validateAddress()" html-data-bind="Zip__c" />
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{!isSuccessMsg}">
+                                        <apex:outputField value="{!oOfficeExclusive.ZIP__c}" />
+                                    </apex:outputPanel>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </apex:pageBlock>
+                <apex:pageBlock >
+                    <div class="row">
+                        <div class="form-group col-sm-12 col-lg-12">
+                            <span class="col-lg-12 col-sm-12 control-label">By submitting the Office Exclusive form, signed by the seller/landlord, I {!subscription.contact__r.Name}
+                                with {!subscription.Related_Location_Broker_Office__r.Account_Name__c} understand that
+                                this property will not be entered into the Bright MLS system for Bright MLS to disseminate
+                                information about the property. I affirm, that I will not publicly market the property,
+                                including through communications with other licensees or brokers outside of my Broker/Licensee’s
+                                firm.
+                            </span>
+                        </div>
+                        
+                    </div>
+                </apex:pageBlock>
+                
+                
+                
+                <apex:pageBlock rendered="{!oOfficeExclusive.id == null}" id="attachmentSection">
+                    <div class="row">
+                        <div style="margin-bottom:0;" class="form-group col-sm-12 col-lg-12">
+                            <div class="control-label newline">
+                                Please upload a copy of your Office Exclusive or Listing Agreement form signed by the seller/landlord before submitting this online form.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="control-label newline newline1 attachment">
+                            Add Attachment(s)
+                            <span style="color:red;">*</span>
+                            <input type="hidden" name="filecount" id="filecount" value="1" class="form-control"/>
+                        </div>
+                        <div class="control-label newline newline2" style="font-weight: 500;padding: 0 0 0 2px;font-size: 10px;">
+                            (maximum file size 4MB)
+                        </div>
+                        <div class="control-label newline newline3" style="padding-top:7px;" id="filesContainer">
+                            <div id="fileContainer1" style="margin-bottom:5px;">
+                                <input class="filesclass" type="file" id="1" name="file" onchange="AddAnother()" />
+                            </div>
+                        </div>
+                    </div>
+                </apex:pageBlock>
+                
+                <apex:pageBlock id="buttonsPanel" rendered="{!oOfficeExclusive.id == null}">
+                    <div class="row">
+                        <div class="form-group col-sm-12 col-lg-12">
+                            <div class="col-sm-6 col-lg-1">
+                                <div class="btn btn-default" onclick="confirmCancel()">
+                                    Cancel
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-1">
+                                <div class="validateButton">
+                                    <apex:commandButton styleClass="btn btn-primary my_save" id="SaveButton" value="Submit" onclick="validateForm();" reRender="buttonsPanel"
+                                                        />
+                                </div>
+                                <div class="noValidateButton" style="display:none">
+                                    <apex:commandButton styleClass="btn btn-primary" value="Submit" onclick="validateForm();" reRender="buttonsPanel" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </apex:pageBlock>
+            </apex:pageBlock>
+            <apex:actionFunction action="{!submitOfficeExclusiveForm}" name="saveForm" reRender="runAttchementScript" />
+            
+            <apex:outputPanel id="runAttchementScript">
+                <script>
+                OEId = "{!oOfficeExclusive.Id}";
+                if (OEId && OEId != null) {
+                    $("#OE-option-modal").modal({ backdrop: 'static' })
+                    $(".caseResult").html("<center>Office Exclusive Certification is submitted successfully</center><br/>");
+                    $(".uploadBox").show();
+                    
+                    /* Displaying list of attachments with intial status */
+                    var html = "<span class='loadingText'>Uploading attachments. Please Wait ...</span><br/><br/><table width='100%' cellspacing='10' cellpadding='5' style='backgound-color:#cccccc;'>";
+                    for (var i = 0; i < parseInt($("#filecount").val()); i++) {
+                        
+                        if (document.getElementById(i) != null) {
+                            
+                            /* Calculate size of attachment */
+                            var displaySize;
+                            if (document.getElementById(i).files[0].size < 1000000) {
+                                displaySize = Math.floor(document.getElementById(i).files[0].size / 1000) + 'K';
+                            } else {
+                                displaySize = Math.round((document.getElementById(i).files[0].size / 1000000) * 10) / 10 + 'MB';
+                            }
+                            
+                            html = html + "<tr>";
+                            html = html + "<td style='padding:3px;'>" + document.getElementById(i).files[0].name + "</td>";
+                            html = html + "<td>" + displaySize + "</td>";
+                            html = html + "<td id='status_" + i + "'> Pending </td>";
+                            html = html + "</tr>";
+                            
+                        }
+                        
+                    }
+                    html = html + "</table>";
+                    $(".uploadBox").html(html);
+                    
+                    /* File upload process start */
+                    prepareFileUploads(fileId);
+                    //prepareFileUploads(fileId);
+                }
+                </script>
+            </apex:outputPanel>
+        </apex:form>
+        <div class="modal fade" id="OE-option-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-vertical-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="caseResult">
+                            Please wait while form is being submitted.
+                            <br/>
+                            <br/>
+                            <div class="row" id="loading-block">
+                                <div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-5">
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar" style="width: 100%">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="uploadBox" style="display:none;">
+                            <div class="row" id="loading-block">
+                                <div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-5">
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar" style="width: 100%">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="padding-top:10px">
+                            <div style="float:right">
+                                <button class="btn btn-primary" onclick="okHandler();">
+                                    Ok
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="modal fade" id="cancel-button-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-vertical-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="modal-label">Confirm Cancel</h4>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to cancel?
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button class="btn btn-default" data-dismiss="modal">No</button>
+                        <button class="btn btn-primary" data-dismiss="modal" onclick="window.location='/customers/apex/Communities_Subscription';">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </apex:define>
+</apex:composition>
+
+
+
+<script>
+
+function okHandler() {
+    dummy();
+    $('#OE-option-modal').modal('hide');
+}
+
+var myVar;
+$("ul").click(function () {
+    myVar = setInterval(checkAddressFields, 500);
+});
+
+function checkAddressFields() {
+    console.log('AddressLine1',$('#AddressLine1').val());
+    if ($('#AddressLine1').val() != '' && $('#City__c').val() != '' && $('#State__c').val() != '' && $('#Zip__c').val() != '') {
+        $('.Property_Address__c').val($('#Street_Number__c').val() +' '+ $('#Street_Number_Suffix__c').val() +' '+$('#Street_Name__c').val()+' '+$('#Street_Type__c').val()+' '+$('#Street_Direction__c').val());
+        $('.Unit_Type__c').val($('#Unit_Type__c').val()+' '+$('#Unit__c').val());
+        //$('.Unit__c').val($('#Unit__c').val());
+        $('.City__c').val($('#City__c').val());
+        $('.State__c').val($('#State__c').val());
+        $('.ZIP__c').val($('#Zip__c').val());
+        stopTimer();
+    }
+}
+
+function stopTimer() {
+    clearInterval(myVar);
+}
+
+function confirmCancel() {
+    $('#cancel-button-modal').modal();
+}
+
+$("#mailing-address-edit .full-address").val('');
+new AddressValidation.bind("#mailing-address-edit", "input.my_save");
+
+function validateForm() {
+    var vError = '';
+    window.scrollTo(0, 0);
+    let flag = true;
+    $.each($('.required'), function (index, value) {
+        if ((value.type != 'checkbox' && value.value == '') || (value.type == 'checkbox' && value.checked != true)) {
+            flag = false;
+            $(value).closest(".form-group").addClass('Invalid');
+        } else {
+            $(value).closest(".form-group").removeClass('Invalid');
+        }
+        if (value.dataset && value.dataset.type == 'date') {
+            if (new Date(value.value) == 'Invalid Date') {
+                flag = false;
+                $(value).closest(".form-group").addClass('Invalid');
+            }
+            if (value.dataset && value.dataset.isFuture == true) {
+                if (new Date(value.value).getTime() < new Date().getTime()) {
+                    flag = false;
+                    $(value).closest(".form-group").addClass('Invalid');
+                }
+            }
+        }
+        try {
+            var previousFileId = $("#filecount").val();
+            var files = document.getElementById(previousFileId-1).files;
+            if (!files[0]) {
+                $('.attachment').addClass('attachmentInvalid');
+                flag = false;
+            } else {
+                $('.attachment').removeClass('attachmentInvalid');
+            }
+        } catch (ex) {
+            $('.attachment').addClass('attachmentInvalid');
+            flag = false;
+        }
+    });
+    if (flag) {
+        $('.jvalidation').removeClass('showError');
+        saveForm();
+        
+    } else {
+        $('.jvalidation').addClass('showError');
+    }
+}
+
+function enableUSPS() {
+    var newConn = $('.New_Construction__c').prop("checked");
+    if (newConn != true) {
+        validateAddress();
+        $('.validateButton').show()
+        $('.noValidateButton').hide()
+        $('.usps').show()
+    } else {
+        $('.validateButton').hide()
+        $('.noValidateButton').show()
+        $('.usps').hide()
+    }
+}
+
+function validateAddress() {
+    var newConn = $('.New_Construction__c').prop("checked");
+    if (newConn != true) {
+        $('.validateButton').show()
+        $('.noValidateButton').hide()        
+        console.log("console result:- ", $('.Unit_Type__c').val())
+        var mailing_address = AddressValidation.standardize({
+            Street_Name__c: $('.Property_Address__c').val(),
+            Unit_Type__c: $('.Unit_Type__c').val(),
+            Unit__c: $('.Unit__c').val(),
+            City__c: $('.City__c').val(),
+            State__c: $('.State__c').val(),
+            Zip__c: $('.ZIP__c').val()
+        });
+        $("#mailing-address-edit .full-address").val(mailing_address.render.text);
+        new AddressValidation.bind("#mailing-address-edit", "input.my_save");
+    } else {
+        $('.validateButton').hide()
+        $('.noValidateButton').show()
+        $('.usps').hide()
+    }
+}
+
+function AddAnother() {
+    var previousFileId = $("#filecount").val();
+    var files = document.getElementById(previousFileId).files;
+    
+    if (files[0].size < 4000000) {
+        $("#" + previousFileId).hide();
+        $("#fileContainer" + previousFileId).append('<a onclick="DeleteAttachment(' + previousFileId + ')" class="glyphicon glyphicon-minus-sign"></a> &nbsp;' + files[0].name);
+        var filecount = parseInt($("#filecount").val()) + 1;
+        $("#filesContainer").append('<div style="margin-bottom:5px;" id="fileContainer' + filecount + '"><input class="filesclass" type="file" id="' + filecount + '" name="' + filecount + '" onchange="AddAnother()" /></div>');
+        $("#filecount").val(filecount);
+    }
+    else {
+        alert("Your attachment exceeds the maximum file size allowed of 4 MB.");
+        $("#" + previousFileId).val('');
+    }
+}
+
+function DeleteAttachment(id) {
+    $("#fileContainer" + id).remove();
+}
+
+var OEId = null;
+var byteChunkArray;
+var fileId = 1;
+var files;
+var currentFile;
+var $upload;
+var CHUNK_SIZE = 180000; //Must be evenly divisible by 3, if not, data corruption will occur
+var VIEW_URL = '/servlet/servlet.FileDownload?file=';
+
+/* Executes when start Upload button is selected */
+function prepareFileUploads(id) {
+    /* Checking if atachment id exists or not */
+    if (document.getElementById(id) != null) {
+        /* Get the file(s) from the input field */
+        files = document.getElementById(id).files;
+        
+        /* Only proceed if there are files selected and if null it would be end of attachments */
+        if (files.length == 0) {
+            //window.location = 'Communities_Subscription';
+            $('.loadingText').hide();
+            dummy();
+            return;
+        }
+        
+        /* Updating status to processing file in file listing */
+        $("#status_" + id).html('Processing');
+        
+        /* Once elements have been added to the page representing the uploads, start the actual upload process */
+        checkForUploads();
+    }
+    else {
+        /* If not process next attachment */
+        fileId = parseInt(fileId) + 1;
+        prepareFileUploads(fileId);
+    }
+}
+
+function checkForUploads() {
+    /* Based on index of the div, get correct file from files array */
+    currentFile = files[0];
+    
+    /* 
+                                Build the byteChunkArray array for the current file we are processing. This array is formatted as:
+                                ['0-179999','180000-359999',etc] and represents the chunks of bytes that will be uploaded individually.
+                            */
+    
+    byteChunkArray = new Array();
+    
+    /* First check to see if file size is less than the chunk size, if so first and only chunk is entire size of file */
+    if (currentFile.size <= CHUNK_SIZE) {
+        byteChunkArray[0] = '0-' + (currentFile.size - 1);
+    } else {
+        /* Determine how many whole byte chunks make up the file */
+        var numOfFullChunks = Math.floor(currentFile.size / CHUNK_SIZE); // i.e. 1.2MB file would be 1000000 / CHUNK_SIZE
+        var remainderBytes = currentFile.size % CHUNK_SIZE; // would determine remainder of 1200000 bytes that is not a full chunk
+        var startByte = 0;
+        var endByte = CHUNK_SIZE - 1;
+        
+        /* Loop through the number of full chunks and build the byteChunkArray array */
+        for (i = 0; i < numOfFullChunks; i++) {
+            byteChunkArray[i] = startByte + '-' + endByte;
+            
+            /* Set new start and stop bytes for next iteration of loop */
+            startByte = endByte + 1;
+            endByte += CHUNK_SIZE;
+        }
+        
+        /* Add the last chunk of remaining bytes to the byteChunkArray */
+        startByte = currentFile.size - remainderBytes;
+        endByte = currentFile.size;
+        byteChunkArray.push(startByte + '-' + endByte);
+    }
+    
+    /* 
+                                Start processing the byteChunkArray for the current file, parameter is '' because this is the first chunk 
+                                being uploaded and there is no attachment Id
+                            */
+    
+    processByteChunkArray('');
+    
+    
+}
+
+/* Uploads a chunk of bytes, if attachmentId is passed in it will attach the bytes to an existing attachment record */
+function processByteChunkArray(attachmentId) {
+    
+    /* Proceed if there are still values in the byteChunkArray, if none, all piece of the file have been uploaded */
+    if (byteChunkArray.length > 0) {
+        
+        /* Determine the byte range that needs to uploaded, if byteChunkArray is like... ['0-179999','180000-359999'] */
+        var indexes = byteChunkArray[0].split('-'); //... get the first index range '0-179999' -> ['0','179999']
+        var startByte = parseInt(indexes[0]);       //0
+        var stopByte = parseInt(indexes[1]);        //179999
+        
+        /* Slice the part of the file we want to upload, currentFile variable is set in checkForUploads() method that is called before this method */
+        if (currentFile.webkitSlice) {
+            var blobChunk = currentFile.webkitSlice(startByte, stopByte + 1);
+        } else if (currentFile.mozSlice) {
+            var blobChunk = currentFile.mozSlice(startByte, stopByte + 1);
+        } else if (currentFile.slice) {
+            var blobChunk = currentFile.slice(startByte, stopByte + 1);
+        }
+        
+        /* Create a new reader object, part of HTML5 File API */
+        var reader = new FileReader();
+        
+        /* Read the blobChunk as a binary string, reader.onloadend function below is automatically called after this line */
+        reader.readAsArrayBuffer(blobChunk);
+        
+        /* Create a reader.onload function, this will execute immediately after reader.readAsBinaryString() function above; */
+        reader.onloadend = function (evt) {
+            if (evt.target.readyState == FileReader.DONE) {
+                /*
+                          Make sure read was successful, DONE == 2
+                          Base 64 encode the data for transmission to the server with JS remoting, window.btoa currently on support by some browsers
+                        */
+                
+                var binary = "";
+                var bytes = new Uint8Array(evt.target.result);
+                var length = bytes.byteLength;
+                
+                for (var i = 0; i < length; i++) {
+                    binary += String.fromCharCode(bytes[i]);
+                }
+                
+                /* Remote function call to start uploading process */
+                Communities_OfficeExclusive.attachFile(OEId, attachmentId, currentFile.name, currentFile.type, window.btoa(binary), function (result, event) {
+                    
+                    if (event.status == true) {
+                        
+                        /* Calculate percent uploaded and updating in files listing */
+                        var percentComplete = Math.round((stopByte / currentFile.size) * 100);
+                        $("#status_" + fileId).html(percentComplete + '%');
+                        
+                        /* Remove the index information from the byteChunkArray array for the piece just uploaded. */
+                        byteChunkArray.shift(); //removes 0 index
+                        
+                        /* Set the attachmentId of the file we are now processing */
+                        attachmentId = result;
+                        
+                        /* Call process byteChunkArray to upload the next piece of the file */
+                        processByteChunkArray(attachmentId);
+                        
+                        /* Update final status and start process next attachment */
+                        if (processByteChunkArray.length <= 0) {
+                            $("#status_" + fileId).html("Completed");
+                            fileId = parseInt(fileId) + 1;
+                            prepareFileUploads(fileId);
+                        }
+                    }
+                    else {
+                        /* Update failed status and start processing next attachment */
+                        $("#status_" + fileId).html("<span style='color:red;'>Failed: " + event.message + "</span>");
+                        fileId = parseInt(fileId) + 1;
+                        prepareFileUploads(fileId);
+                    }
+                });
+            }
+            else {
+                /* Error handling for bad read */
+                alert('Could not read file');
+            }
+        };
+        
+    } else {
+        /* Update status for completed file and start processing next file */
+        $("#status_" + fileId).html("Completed");
+        fileId = parseInt(fileId) + 1;
+        prepareFileUploads(fileId);
+    }
+}
+
+</script>
+</apex:page>

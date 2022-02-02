@@ -1,0 +1,7 @@
+<apex:page renderAs="pdf" controller="Communities_OfficeBillingInformation" lightningstylesheets="true">  
+    <h1>Congratulations!!</h1>
+    <p>You created a PDF</p> 
+    <apex:repeat value="{!selectedAccounts}" var="key">
+        {!selectedAccounts[key].Subscription__r.Contact__r.Name}
+    </apex:repeat>  
+</apex:page>

@@ -1,0 +1,461 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+      <ltng:require styles="{!$Resource.brightcss }"></ltng:require>
+   <ltng:require styles="{!$Resource.sidemenu }"></ltng:require> 
+   <ltng:require styles="{!$Resource.bodycontainer }"></ltng:require>
+    <aura:attribute name="popup1" type="boolean" default="false"/>
+    <aura:attribute name="popup2" type="boolean" default="false"/>
+    
+     <aura:attribute name="options" type="List" default="[
+        { label: 'English', value: 'en' },
+        { label: 'German', value: 'de' },
+        { label: 'Spanish', value: 'es' },
+        { label: 'French', value: 'fr' },
+        { label: 'Italian', value: 'it' },
+        { label: 'Japanese', value: 'ja' }]"/>
+    
+    
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <div class="fullpage slds-scope">
+      <div class="slds-grid slds-wrap">
+         <div class="new-containerpage">
+            <div class="slds-container--x-large new-container">
+               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12  header-full">
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 header-part">
+                     <div class="logo"> 
+                         <img src="{!$Resource.bright + '/bright-3.0/images/brightlogolightning.png'}" alt="Bright" />
+                     </div>
+                  </div>
+                   <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 header-part">
+                     <div class="account">
+                      <h3>Accounts &amp; Settings</h3>
+                     </div>
+                  </div>
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 header-part header-part1">
+                      <div class="all">
+                          <h5>AL</h5>
+                          </div>
+                      <div class="call">
+                         
+                        <h4>Amanda Lynn </h4>
+                        <h3>Subscriber ID: 8987987 &nbsp;<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" />  | <a href="#">Active</a></h3>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="slds-container--x-large new-container">
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 sidebar">
+                <ul class="menuside">
+                    <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/AccountsHome-black.svg'}" alt="Accounts Home" />Accounts Home</a></li>
+                    <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                    <li onclick="{!c.treeMenu}"><a><img src="{!$Resource.bright + '/bright-3.0/images/Brokerage.svg'}" alt="Brokerage" />Brokerage<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                      <ul class="submenu submenu1">
+                         <li><a  class="active" href="#">Office Roster</a></li>
+                        <li><a href="#">Office Statement </a></li>
+                        <li><a href="#">W-9 Forms </a></li>
+                        <li><a href="#">Office Information </a></li>
+                        <li><a href="#">Responsible Broker </a></li>
+                         <li><a href="#">Authorized Signers</a></li>
+                        <li><a href="#">Office Managers</a></li>
+                        <li><a href="#">Accuracy Notifications</a></li>
+                        <li><a href="#">Data Licensing</a></li>
+                        </ul>
+                    
+                    </li>
+                    <li onclick="{!c.treeMenu1}"><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Subscription.svg'}" alt="Subscription" />Subscription<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                     <ul class="submenu submenu2">
+                         <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                        </ul>
+                    </li>
+                    <li onclick="{!c.treeMenu2}"><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Requests.svg'}" alt="Requests" />Requests<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                    <ul class="submenu submenu3">
+                         <li><a href="#">Office Roster</a></li>
+                        <li><a href="#">Office Statement </a></li>
+                        <li><a href="#">W-9 Forms </a></li>
+                        <li><a href="#">Office Information </a></li>
+                        <li><a href="#">Responsible Broker </a></li>
+                         <li><a href="#">Authorized Signers</a></li>
+                        <li><a href="#">Office Managers</a></li>
+                        <li><a href="#">Accuracy Notifications</a></li>
+                        <li><a href="#">Data Licensing</a></li>
+                        </ul>
+                    </li>
+                    <li onclick="{!c.treeMenu3}"><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Finance.svg'}" alt="Finance" />Finance<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                    <ul class="submenu submenu4">
+                         <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Notification-Preferences.svg'}" alt="Notification" />Notification Preferences</a></li>
+                    <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Settings-Permissions.svg'}" alt="Settings" />Settings &amp; Permissions</a></li>
+                     <li class="logout"><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Logout.svg'}" alt="Logout" />Logout</a></li>
+                </ul>
+                
+                </div>
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_9-of-12 slds-large-size_9-of-12 middlebar">
+                 
+                   <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 middlebar1">
+                   <h2><b>License Association MLS</b></h2> 
+                       
+                       </div>    
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bottombar bottombar1">
+                     <div class="dev dev1">
+                          
+                         <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 footer-full">
+                              <lightning:tabset>
+        <lightning:tab label="Licenses">
+            
+            
+            <div class="dev dev1 dev2 dev3">
+                         <h6>Your license information currently displayed in the MLS is below. Only one license (Agent, Associate Broker or Broker) can be added per state. Office licenses cannot be added. To update your license Expiration date, click the Pencil icon. To remove a license that is no longer active, click the trash can icon.</h6>
+                        <lightning:button class="brand" variant="brand " label="Add New License" title="Brand action" />
+                <div class="lake1">
+                         <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped newtin">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            
+                                            
+                                           
+                                            
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Opportunity Name">Number</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Type</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Close Date">State</div>
+                                            </th>
+                                          <th class="" scope="col">
+                                                <div class="slds-truncate" title="Close Date"></div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Close Date"></div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="slds-hint-parent blue">
+                                   
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">123-BRO-LIC-NON-PA</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Broker</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">DE</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015"><a href="#">Edit License</a></div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015"><a href="#">Delete</a></div>
+                                            </td>
+                                        </tr>
+                                        
+          
+                                        
+                                        
+                                        
+                                    </tbody>
+                                </table>
+                         </div>
+                <div class="lake">
+                         <img src="{!$Resource.bright + '/bright-3.0/images/LakeMountain.svg'}" alt="Lake Mountain" />
+                         <p>No Licenses yet.</p>
+                             <lightning:button class="brand brand5" variant="brand " label="Add New License" title="Brand action" onclick="{! c.openModel }" />
+                         </div>
+             
+                  </div>
+            
+            
+
+       
+            
+          
+        </lightning:tab>
+        <lightning:tab label="Associations" title="2nd tab extended title">
+         <div class="dev dev1 dev2 ">
+             <h6>Your current association information with the MLS is below. Please use the Edit Association button to change any Association information.</h6>
+                <div class="lake">
+                         <img src="{!$Resource.bright + '/bright-3.0/images/LakeMountain.svg'}" alt="Lake Mountain" />
+                         <p>No Association found for this Subscription</p>
+                             <lightning:button class="brand brand5" variant="brand " label="Add New Association" title="Brand action" onclick="{! c.openModel1 }" />
+                         </div>
+             
+                  </div>
+
+       
+            
+             
+        </lightning:tab>
+        <lightning:tab label="Professional Designations" title="3rd tab extended title">
+         <div class="dev dev1 dev2 ">
+             <h6>To update your professional designations, please select from the below list and click the right arrow. To remove a designation, select it from the “Chosen” list and click the left arrow.</h6>
+             
+             
+                  </div>
+
+       
+   
+
+    <lightning:dualListbox name="languages"
+                          
+                           sourceLabel="Available"
+                           selectedLabel="Chosen"
+                       
+                           options="{!v.options}"
+                           onchange="{! c.handleChange }"/>
+
+
+            <lightning:button class="brand" variant="brand " label="Save" title="Brand action"  />
+             
+        </lightning:tab>
+                                  
+           <lightning:tab label="MLS" title="4nd tab extended title">
+         <div class="dev dev1 dev2 ">
+             <h6>Please select your Primary MLS below. If you are a member of additional MLSs, select them from the list and then click the right arrow. Click Save once you have made your changes.</h6>
+                  </div>
+
+        <div class="review">
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 layer part1"> 
+                                                <h4>Primary MLS</h4>
+                                                <h5>             <lightning:select name="select1" label="" required="false" variant = "label-hidden">
+        <option value="">choose one...</option>
+        <option value="1">one</option>
+        <option value="2">two</option>
+        <option value="3">three</option>
+    </lightning:select>
+                                                </h5>
+                                            </div>
+                                            
+                                            
+                                            
+                                        </div>
+               </div>
+   
+
+    <lightning:dualListbox name="languages"
+                          
+                           sourceLabel="Available"
+                           selectedLabel="Chosen"
+                       
+                           options="{!v.options}"
+                           onchange="{! c.handleChange }"/>
+
+
+            <lightning:button class="brand " variant="brand " label="Save" title="Brand action"  />
+             
+        </lightning:tab>
+    </lightning:tabset>
+                        
+                    </div>
+                         
+                         
+                         
+                      
+             
+                  </div>
+                  
+               </div>
+            </div>
+                
+            </div>
+         </div>
+      
+      </div>
+       
+       <!-- PopUp 1 start -->
+       <aura:if isTrue="{!v.popup1}">
+           <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- ###### MODAL BOX HEADER Start ######-->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModel }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate email">Add New License</h2>
+                    </header>
+                    <!--###### MODAL BOX BODY Part Start######-->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                       <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodyline">
+                      
+                        <h3>Please enter the necessary information below and press “Submit” when done.</h3>
+                        
+                      
+                        
+                        
+       
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_8-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodylinefull">
+                       <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodyline1 ask">
+                            <h6>License Number <span>*</span></h6>
+                         <lightning:input type="text" name="input3" placeholder="Enter license number *"  variant = "label-hidden" />
+                      
+                        </div>
+                           </div>
+                           <div class="slds-col slds-size_12-of-12 slds-small-size_8-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodylinefull">
+                       <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodyline1 ask">
+                            <h6>License Type  <span>*</span></h6>
+                                 <lightning:select name="select1" label="" required="false" variant = "label-hidden">
+        <option value="">choose one...</option>
+        <option value="1">one</option>
+        <option value="2">two</option>
+        <option value="3">three</option>
+    </lightning:select>
+                        </div>
+                           </div>
+                           <div class="slds-col slds-size_12-of-12 slds-small-size_8-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodylinefull">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodyline1 ask">
+                            <h6>License Expiration <span>*</span></h6>
+           
+                             <lightning:input type="text" name="input3" placeholder="Enter license type"  variant = "label-hidden" />
+                                
+                            <h5>Use current date</h5>
+                                    
+                                    
+                                   
+                               </div>
+            
+                        </div>
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_8-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodylinefull">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodyline1 ask">
+                            <h6>License State  <span>*</span></h6>
+                              <lightning:select name="select1" label="" required="false" variant = "label-hidden">
+        <option value="">choose one...</option>
+        <option value="1">one</option>
+        <option value="2">two</option>
+        <option value="3">three</option>
+    </lightning:select>
+                            
+                           
+                                    
+                                    
+                                   
+                               </div>
+            
+                        </div>
+                          
+                    </div>
+                    </div>
+                    <!--###### MODAL BOX FOOTER Part Start ######-->
+                    <footer class="slds-modal__footer">
+                         <lightning:button class="brand" variant="brand" label="Submit" title="Brand action" onclick="{! c.handleClick }" />
+                       
+                        <lightning:button variant="neutral" 
+                                          label="Cancel"
+                                          title="Cancel"
+                                           class="newCancel"
+                                          onclick="{! c.closeModel }"/>
+                        
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+       </aura:if>
+       <!-- PopUp 1 end -->
+         <!-- PopUp 2 start -->
+       <aura:if isTrue="{!v.popup2}">
+           <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- ###### MODAL BOX HEADER Start ######-->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModel }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate email">Add New License</h2>
+                    </header>
+                    <!--###### MODAL BOX BODY Part Start######-->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                       <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodyline">
+                      
+                        <h3>Please enter the necessary information below and press “Submit” when done.</h3>
+                        
+                      
+                        
+                        
+       
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_8-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodylinefull">
+                       <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodyline1 ask">
+                            <h6>Secondary Association</h6>
+                                       <lightning:select name="select1" label="" required="false" variant = "label-hidden">
+        <option value="">choose one...</option>
+        <option value="1">one</option>
+        <option value="2">two</option>
+        <option value="3">three</option>
+    </lightning:select>
+                        </div>
+                           </div>
+                           <div class="slds-col slds-size_12-of-12 slds-small-size_8-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodylinefull">
+                       <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodyline1 ask">
+                            <h6>Start Date</h6>
+                                 <lightning:select name="select1" label="" required="false" variant = "label-hidden">
+        <option value="">choose one...</option>
+        <option value="1">one</option>
+        <option value="2">two</option>
+        <option value="3">three</option>
+    </lightning:select>
+                        </div>
+                           </div>
+                           <div class="slds-col slds-size_12-of-12 slds-small-size_8-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodylinefull">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodyline1 ask">
+                            <h6>End Date</h6>
+           
+                                           <lightning:select name="select1" label="" required="false" variant = "label-hidden">
+        <option value="">choose one...</option>
+        <option value="1">one</option>
+        <option value="2">two</option>
+        <option value="3">three</option>
+    </lightning:select>
+                                    
+                                    
+                                   
+                               </div>
+            
+                        </div>
+                          <div class="slds-col slds-size_12-of-12 slds-small-size_8-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodylinefull">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodyline1 ask ask1">
+                            <h6>Primary                <div class="slds-form-element">
+  
+  <div class="slds-form-element__control">
+    <span class="slds-checkbox slds-checkbox_standalone">
+      <input type="checkbox" id="checkbox-unique-id-75" name="label" value="option" />
+      <span class="slds-checkbox_faux"></span>
+    </span>
+  </div>
+</div></h6>
+           
+                       
+                                    
+                                    
+                                   
+                               </div>
+            
+                        </div>      
+                          
+                    </div>
+                    </div>
+                    <!--###### MODAL BOX FOOTER Part Start ######-->
+                    <footer class="slds-modal__footer">
+                         <lightning:button class="brand" variant="brand" label="Submit" title="Brand action" onclick="{! c.handleClick }" />
+                       
+                        <lightning:button variant="neutral" 
+                                          label="Cancel"
+                                          title="Cancel"
+                                           class="newCancel"
+                                          onclick="{! c.closeModel1 }"/>
+                        
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+       </aura:if>
+         <!-- PopUp 2 end -->
+   </div>
+</aura:component>

@@ -1,0 +1,7 @@
+<apex:page standardController="Account" tabStyle="Account" lightningstylesheets="true">
+    <apex:outputPanel rendered="{!account.AddressValidationStatus__c == 'To be verify'}">
+        <script>
+            window.top.location.href = '/apex/AccountAddressValidation1?id={!account.Id}';
+        </script>
+    </apex:outputPanel>
+</apex:page>

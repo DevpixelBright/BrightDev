@@ -1,0 +1,103 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" lightningstylesheets="true">
+    <apex:composition template="Communities_Base">
+        
+        <apex:define name="content">
+            <style>
+                .address {
+                    text-align: center;
+                }
+
+                .address input {
+                    width: 80%;
+                    margin: 50px 10%;
+                    padding: 20px;
+                    font-size: 30px;
+                    font-family: Arial;
+                }
+
+                .results {
+                    font-family: Arial;
+                }
+
+                .results > div + div{
+                    margin-top: 10px;
+                }
+
+                .results label {
+                    display: inline-block;
+                    text-align: right;
+                    width: 30%;
+                    margin-right: 20px;
+                }
+            </style>
+            <div class="address">
+                <input type="text"></input>
+            </div>
+            <div class="results"></div>
+            <script>
+                $(function () {
+                    var input = "";
+                    var changed = false;
+
+                    var line = function (label, value) {
+                        if (value == null) value = "";
+
+                        return "<div><label>" + label + ":</label><value>" + value + "</value></div>";
+                    }
+
+                    var check = function (address) {
+                        var authId = "09016660-0270-c2bb-588b-e9af95a5928f";
+                        var authToken = "33lmlawnsgwLpq3bsqzd";
+                        var url = "https://us-street.api.smartystreets.com/street-address?auth-id=" + authId + "&auth-token=" + authToken + "&street=";
+                         url += encodeURI(address);
+                         console.log('---URL----'+url);
+                        $.get(url, function (data, status) {
+                            results = $(".results");
+                            results.append(line("Response", data.length == 1 ? "Verified" : "Invalid Entry"));
+                            console.log('-------- data.length-----'+data.length);
+                            if (data.length != 1) return;
+
+                            var d = data[0];
+
+                            var isPOBox = d.metadata.zip_type == "POBox";
+                            
+                            results.append(line("Street_Number__c", isPOBox ? "" : d.components.primary_number));
+                            results.append(line("Street_Number_Suffix__c", d.components.street_predirection));
+                            results.append(line("Street_Name__c", isPOBox ? "" : d.components.street_name));
+                            results.append(line("Street_Type__c", d.components.street_suffix));
+                            results.append(line("Street_Direction__c", d.components.street_postdirection));
+                            results.append(line("Unit_Type__c", d.components.secondary_designator));
+                            results.append(line("Unit__c", d.components.secondary_number));
+                            results.append(line("City__c", d.components.city_name));
+                            results.append(line("State__c", d.components.state_abbreviation));
+                            results.append(line("Zip__c", d.components.zipcode));
+                            results.append(line("Zip_4__c", d.components.plus4_code));
+                            results.append(line("Country__c", "USA"));
+                            results.append(line("Box__c", isPOBox ? d.components.primary_number : ""));
+                            results.append(line("Addl_Display_Name__c", isPOBox ? "PO Box" : ""));
+                            results.append(line("County__c", d.metadata.county_name));
+                        });
+                    }
+
+                    $(".address input").val("1600 Pennsylvania Ave NW, Suite 100, Washington, DC");
+
+                    window.setInterval(function () {
+                        var value = $(".address input").val().trim();
+
+                        if (value == input) return;
+
+                        input = value;
+
+                        results = $(".results");
+
+                        results.empty();
+                        results.append(line("Input", input));
+
+                        check(input);
+                    }, 1000);
+                });
+            </script>
+        </apex:define>
+
+    </apex:composition> 
+</apex:page>

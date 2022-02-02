@@ -1,0 +1,43 @@
+<apex:page renderAs="pdf" controller="Communities_AgentAccuracy_Print_export" applyHtmlTag="false"  showHeader="false" docType="html-5.0" standardStylesheets="false" readOnly="true" lightningstylesheets="true">  
+    <apex:composition template="Communities_Base_PDF">  </apex:composition> 
+           <div class="col-xs-12 instructions" style="padding-top:20px; padding-bottom:20px;">
+                               <div class="col-xs-9">
+                                    <p>Please find below the violation notices for your listings. The information will reflect violation notices and fine notices sent where a listing violated one of the Bright MLS Rules and Regulations. Fine Notices listed here with a status of Pending will not be Billed until after appeal timeframe has expired. Fine notices are listed here with a status Billed will appear on the Statement of Account.</p>
+                                </div>
+            </div>
+    <table style="font-size:11px; width:100%">
+        <thead>
+            <tr>
+                <th style="text-align:center"><input type="checkbox" id="activeSelectAll" /></th>
+                                        <th style="text-align:left">MLS Number</th>
+                                        <th style="text-align:left">Violation Type</th>
+                                        <th style="text-align:left">Violation No</th>
+                                        <th style="text-align:left">Notification Type</th>
+                                        <th style="text-align:left">Notification Date</th>
+                                        <th style="text-align:left">Fine Amount</th>
+                                        <th style="text-align:left">Status</th>
+                                        <th style="text-align:left">Last Day To Appeal</th>
+                                         <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <apex:repeat value="{!lstcomplianceFinesWrapper}" var="Cfines" id="LstcomplianceFinesWrapper">
+                <tr>
+                    <td style="text-align:left"><input type="checkbox" class="activeBox" value="{!Cfines.subscriptionId}" /></td>
+                    <td style="text-align:left">{!Cfines.mlsNumber}</td>
+                    <td style="text-align:left">{!Cfines.ViolationType}</td>
+                    <td style="text-align:left">{!Cfines.ViolationNo}</td>
+                    <td style="text-align:left">{!Cfines.NotificationType}</td>
+                    <td style="text-align:left">{!Cfines.NotificationDate}</td>
+                    <td style="text-align:left">{!Cfines.FineAmount}</td>
+                    <td style="text-align:left">{!Cfines.Status}</td>
+                    <td style="text-align:left">{!Cfines.LastDayToAppeal}</td>
+                    <td></td>
+                    
+                 
+                </tr>
+            </apex:repeat>                                                                                       
+        </tbody>                                        
+    </table>  
+    
+</apex:page>

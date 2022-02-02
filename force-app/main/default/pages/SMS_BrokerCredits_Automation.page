@@ -1,0 +1,862 @@
+<apex:page id="thePage" controller="SMS_BrokerCredits_Automation" tabStyle="Account" sidebar="false" lightningstylesheets="true">
+
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/angular.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/ui-bootstrap-tpls-0.12.0.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.AngularJsTable,'/ng-table.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.AngularJsTable,'/ng-table.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.DataArchive_Library,'js/jquery.min.js')}"/>
+    <c:Bootstrap_Resources />    
+    
+    <style>
+    
+        .table-fixed thead {
+        width: 97%;
+        }
+        .table-fixed tbody {
+            height: 230px;
+            overflow-y: auto;
+            width: 100%;
+        }
+        .table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+            display: block;
+        }
+        .table-fixed tbody td, .table-fixed thead > tr> th {
+            float: left;
+            border-bottom-width: 0;
+        }    
+    
+        body {
+            font-size:12px;
+        }
+        h2 { 
+            font-size:100%;
+        }
+        .nav-tabs>li>a {
+            font-weight:bold;
+        }
+        .btn1-primary {
+            color: #fff;
+            background-color: #5cb85c;
+            border-color: #2e6da4;
+        }          
+        .btn1 {
+            display: inline-block;
+            margin-bottom: 0;
+            font-weight: 400;
+            text-align: center;
+            vertical-align: middle;
+            cursor: pointer;
+            background-image: none;
+            border: 1px solid transparent;
+            white-space: nowrap;
+            padding: 4px 10px;
+            font-size: 13px;
+            line-height: 1.42857143;
+            border-radius: 2px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        } 
+        .pagination {
+            margin:0px;
+        }   
+        .pull-right {
+            margin-top:5px;
+        }  
+        input[type=checkbox] {
+            margin-top:3px !important;
+        }  
+        .panel-heading {
+            
+        }  
+        input[type=file] {
+            display: inline;
+        }  
+        .fileContainer {
+            overflow: hidden;
+            position: relative;
+        }
+        .fileContainer [type=file] {
+            cursor: inherit;
+            display: block;
+            font-size: 16px;
+            filter: alpha(opacity=0);
+            min-height: 100%;
+            min-width: 100%;
+            opacity: 0;
+            position: absolute;
+            right: 0;
+            text-align: right;
+            top: 0;
+        }
+        .fileContainer {
+            /*background: #CCCCCC;
+            border-radius: 4px;
+            float: left;
+            padding: 8px 20px 8px 20px;
+            */
+        }
+        .fileContainer [type=file] {
+            cursor: pointer;
+        }                 
+    </style>
+    <apex:form id="theForm">
+        <apex:outputPanel id="out">
+            <script>
+                function confirmBrokerCredits(){             
+                    alert("{!brokerCreditstr}");
+                }           
+            </script>       
+        </apex:outputPanel> 
+        <!--
+        <apex:actionFunction name="ApplyBrokerCredits" action="{!validateData}" status="PaymentStatus" reRender="out" oncomplete="confirmBrokerCredits();">
+            <apex:param name="Parameter" assignTo="{!brokerCreditstr}" value="" />
+        </apex:actionFunction>        
+        -->
+        <apex:actionFunction name="FileRecords" action="{!fileRecords}" status="PaymentStatus" reRender="out3" oncomplete="confirmRecordsUpload();">
+            <apex:param name="Parameter" assignTo="{!creditsFromFileJSON}" value="" />
+        </apex:actionFunction>
+        <apex:outputPanel id="out3">
+            <script>
+                function confirmRecordsUpload(){ 
+                    var scope = angular.element(document.getElementById("result")).scope();
+                    scope.$apply(function () {
+                        scope.reloadCredits({!verifiedBrokerCreditsJSON});
+                        //scope.reloadTable({!verifiedBrokerCreditsJSON});
+                    });
+                } 
+                
+            </script>       
+        </apex:outputPanel>
+        
+        <apex:actionStatus id="PaymentStatus">
+            <apex:facet name="start">
+                <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 1000; background-color: black;">
+                     <div class="alert alert-info" style="width:50%; margin:auto; margin-top:15%; color:black; font-size:16px; font-weight:bold;">
+                         <center>Processing request. Please wait ...<br/>
+                             <img src="{!URLFOR($Resource.AngularLibrary,'/Cursor_Windows_Vista.gif')}" />
+                         </center>
+                     </div>
+                </div>
+            </apex:facet>
+            <apex:facet name="stop">
+                 <div class="alert alert-success" id="successMsg"  style="display:none; font-size:13px;">
+                     
+                 </div>
+                 <div class="alert alert-danger" id="failedMsg"  style="display:none; font-size:13px;">
+                     
+                 </div>             
+            </apex:facet>                
+        </apex:actionStatus>
+    </apex:form>     
+
+    <div id="result" ng-app="first" ng-controller="firstcontroller" style="font-size:12px; min-height:480px;">
+        <div id="Loading" style="display:none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 1000; background-color: black;">
+             <div class="alert alert-info" style="width:50%; margin:auto; margin-top:15%; color:black; font-size:16px; font-weight:bold;">
+                 <center>Processing request. Please wait ...<br/>
+                     <img src="{!URLFOR($Resource.AngularLibrary,'/Cursor_Windows_Vista.gif')}" />
+                 </center>
+             </div>
+        </div>    
+        <div class="col-sm-10">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="height:38px;">
+                    <div style="float:left">
+                        <h3 class="panel-title" style="color:#428bca; font-weight:bold; font-size:14px;">
+                            <span class="glyphicon glyphicon-th-list"></span> Broker Credits Automation
+                        </h3>
+                    </div>
+                    <div style="float:right">
+                        <label class="fileContainer" style="float:right; color:#353535;" ng-show="records.length == 0">
+                            <span class="glyphicon glyphicon-cloud-upload" style="color:#1797C0; font-size:17px;"></span>&nbsp;Upload File
+                            <input type="file" id="fileUpload" onchange="Upload()" />
+                        </label>
+                        
+                        <label class="fileContainer" style="float:right; color:#353535;" ng-show="records.length > 0">
+                            <span class="glyphicon glyphicon-cloud-upload" style="color:#1797C0; font-size:17px;"></span>&nbsp;
+                            <a style="cursor:pointer;" ng-click="ReloadPage()">Reload</a>                    
+                        </label>                                             
+                    </div>
+                </div>
+                
+                <div class="panel-body" ng-show="records.length > 0"> 
+                    
+                    <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                        <ul id="myTab" class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Processed Credits <span class="label label-info">{{invalidCount()}}</span></a></li>
+                            <li role="presentation" class=""><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">To be Processed Credits <span class="label label-primary">{{validCount()}}</span></a></li>
+                            <li role="presentation" class=""><a href="#completed" role="tab" id="completed-tab" data-toggle="tab" aria-controls="completed" aria-expanded="false" ng-show="processedCount() > 0">Payments Processed <span class="label label-success">{{processedCount()}}</span></a></li>  
+                            <li role="presentation" class=""><a href="#failed" role="tab" id="failed-tab" data-toggle="tab" aria-controls="failed" aria-expanded="false" ng-show="failedCount() > 0">Failed Records <span class="label label-danger">{{failedCount()}}</span></a></li> 
+                        </ul>
+                        <div id="myTabContent" class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab" style="min-height:250px;">
+                                
+                                <div class="alert alert-info" role="alert" ng-show="invalidCount() == 0" style="width:70%; margin:auto; margin-top:2%;">No Processed Credits</div>
+                                
+                                <div ng-show="invalidCount() > 0">
+                                    <!--<div style="margin-bottom:10px;">
+                                    <select ng-model="ratePlanSelected" ng-change="ApplyRatePlan()" ng-disabled="requestProcessed">
+                                    <option value='choose' ng-selected="true">Choose Rateplan To Apply</option>
+                                    <option ng-repeat="ratePlan in ratePlans" value="{{ratePlan.zRatePlanId}}">{{ratePlan.zRatePlanName}} - ${{-1 * ratePlan.zChargeAmount}}</option> 
+                                    </select>
+                                    </div>-->
+                                    <div style="max-height:450px; overflow:auto;">
+                                        <table ng-table="tableParams2" class='table' id='table'>
+                                            <tr ng-repeat="account in $data" ng-show="account.processed">
+                                                <td header="'ng-table/headers/checkbox.html'"><input ng-change="CaluculateSummary()" type="checkbox" ng-model="account.Checked" ng-checked="account.Checked" ng-disabled="account.Disabled" /> </td>
+                                                <td data-title="'Subscription Id'" sortable="'subscriptionId'">{{account.subscriptionId}} </td>
+                                                <td data-title="'Rate Plan Id'" sortable="'zRatePlanId'">{{account.zRatePlanId}}</td>
+                                                <td data-title="'Rate Plan Name'" sortable="'zRatePlanName'">{{account.zRatePlanName}}</td> 
+                                                <td data-title="'Total Amount'">{{account.totalCreditAmount}}</td>
+                                                <td data-title="'Record status'" sortable="'status'">{{account.status}}</td>
+                                                <td data-title="'Status'" sortable="'isValid'">
+                                                    <i style="color:green;" class="glyphicon glyphicon-ok" title="{{account.Notes}}" ng-show="account.isValid == true"> Success</i>
+                                                    <i style="color:red;" class="glyphicon glyphicon-remove" title="{{account.Notes}}" ng-show="account.isValid == false"> Failed</i>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        
+                                        <script type="text/ng-template" id="ng-table/headers/checkbox.html">
+                                        <input ng-click="test()" type="checkbox" ng-model="SelectAll" id="select_all" name="filter-checkbox" />
+                                            </script>                        
+                                    </div>
+                                </div>
+                            </div>
+                       
+                            <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab" style="min-height:250px;">
+                                <br/>
+                                <div class="alert alert-info" role="alert" ng-show="validCount() == 0" style="width:70%; margin:auto; margin-top:2%;">No Credits to be processed</div>
+                                
+                                <div ng-show="validCount() > 0">
+                                    <div style="margin-bottom:10px;">
+                                        <select ng-model="ratePlanSelected" ng-change="ApplyRatePlan()" ng-disabled="requestProcessed">
+                                            <option value='choose' ng-selected="true">Choose Rateplan To Apply</option>
+                                            <option ng-repeat="ratePlan in ratePlans" value="{{ratePlan.zRatePlanId}}">{{ratePlan.zRatePlanName}} - ${{-1 * ratePlan.zChargeAmount}}</option> 
+                                        </select>
+                                    </div>
+                                    <div style="max-height:450px; overflow:auto;">
+                                        <table ng-table="tableParams" class='table' id='table'>
+                                            <tr ng-repeat="account in $data" ng-show="!account.processed">
+                                                <td header="'ng-table/headers/checkbox.html'"><input ng-change="CaluculateSummary()" type="checkbox" ng-model="account.Checked" ng-checked="account.Checked" ng-disabled="account.Disabled" /> </td>
+                                                <td data-title="'Subscription Id'" sortable="'subscriptionId'">{{account.subscriptionId}} </td>
+                                                <td data-title="'Rate Plan Id'" sortable="'zRatePlanId'">{{account.zRatePlanId}}</td>
+                                                <td data-title="'Rate Plan Name'" sortable="'zRatePlanName'">{{account.zRatePlanName}}</td>
+                                                <td data-title="'Total Amount'">{{account.totalCreditAmount}}</td>
+                                                <td data-title="'Record status'" sortable="'status'">{{account.status}}</td>
+                                                <td data-title="'Status'" sortable="'isValid'">
+                                                    <i style="color:green;" class="glyphicon glyphicon-ok" title="{{account.Notes}}" ng-show="account.isValid == true"> Valid</i>
+                                                    <i style="color:red;" class="glyphicon glyphicon-remove" title="{{account.Notes}}" ng-show="account.isValid == false"> Invalid</i>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        
+                                        <script type="text/ng-template" id="ng-table/headers/checkbox.html">
+                                        <input ng-click="test()" type="checkbox" ng-model="SelectAll" id="select_all" name="filter-checkbox" />
+                                            </script>                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="panel-body" ng-show="records.length == 0">
+                    <div class="alert alert-info">
+                        <b style="margin-left:40px;">Steps for Broker Credit Automation</b>
+                        <ol style="font-size:14px; padding-top:10px;">
+                            <li>Upload File</li>
+                            <li>Select records and apply Broker Credits rateplan from dropdown</li>
+                            <li>Review Summary of Broker Credits</li>
+                            <li>Validate records</li>
+                            <li>Apply Broker Credits</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2" style="min-height:460px; font-size:14px; color:#428bca; border: 1px solid #ccc; border-radius: 7px; padding-top:10px; padding-bottom:10px;">
+           
+            <div style="font-weight:bold;">
+                <span class="glyphicon glyphicon-search"></span> Search
+            </div>            
+           
+            <div class="form-group" style="margin-top:10px;margin-bottom:10px;">
+              <input type="text" class="form-control" placeholder="Search Records" ng-model="search"  />
+            </div>
+            <hr/>
+            
+            <div ng-show="rp != null && rp != ''">
+                <span class="glyphicon glyphicon-bell"></span> <b>Summary</b><br/><br/>
+                <div>
+                    <table class="table" style="color:black; font-size:12px;">
+                        <tr>
+                            <th colspan="2"><span ng-show="requestProcessed == true">Valid</span> {{rp}} <br/><span ng-show="requestProcessed == true">that will be applied in Zuora</span></th>
+                        </tr>
+                        <tr>
+                            <td>Total Amount</td>
+                            <td style="text-allign:right;">${{total}}</td>
+                        </tr>
+                        <tr ng-show="requestProcessed == false && finalProcess == false">
+                            <td colspan="2">
+                                <center>
+                                    <input class="btn1 btn1-primary" type="button" value="Validate Records" ng-click="ValidateBrokerCredits()" />
+                                </center>
+                            </td>
+                        </tr>
+                        <tr ng-show="requestProcessed == true && finalProcess == false">
+                            <td colspan="2">
+                                <center>
+                                    <input class="btn1 btn1-primary" type="button" value="Apply" ng-click="CreateBrokerCredits()" /> &nbsp; 
+                                    <input style="background-color:#5bc0de;" class="btn1 btn1-primary" type="button" value="Cancel" ng-click="CancelRequest()" />
+                                </center>
+                            </td>
+                        </tr>
+                        <tr ng-show="requestProcessed == true && finalProcess == true">
+                            <td colspan="2">
+                                <center>
+                                    <input style="background-color:#5bc0de;" class="btn1 btn1-primary" type="button" value="Done" onclick="window.location='';" />
+                                </center>
+                            </td>
+                        </tr>                                                                                                                          
+                    </table>   
+                </div>
+            </div>
+            <hr ng-show="createdData.length > 0" />
+            <div style="font-weight:bold;" ng-show="createdData.length > 0" ng-click="DownloadRecords()">
+                <span class="glyphicon glyphicon-download-alt"></span> Download<br/>
+                <div style="color:black; font-size:12px; font-weight:bold; padding:10px;">
+                    {{createdData.length}} zuora accounts gets applied with {{rp}}. Click here to download details.    
+                </div>
+            </div>             
+        </div>         
+    </div>
+    
+    <script>
+        
+        function Upload() {
+            var fileUpload = document.getElementById("fileUpload");
+            var fileName = document.getElementById("fileUpload").value;
+            fileName  = fileName.replace(/C:\\fakepath\\/i, '');
+            if(confirm("Are you sure want to upload the file \"" + fileName + "\" to Broker Credits?")) {
+                
+                
+                Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.SMS_BrokerCredits_Automation.checkFile}',
+                 fileName,
+                 function(result, event) {
+                     //console.log('--event.status--'+event.status+'---result-->',result);
+                    if (event.status) {
+                        var proceed = true;
+                        if(result){
+                            if(confirm("File is already processed. Do you want to proceed ?")) {
+                                
+                            }else{
+                                proceed = false;
+                            }
+                        }
+                        if(proceed){
+                            
+                            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+                            if (regex.test(fileUpload.value.toLowerCase())) {
+                                if (typeof (FileReader) != "undefined") {
+                                    
+                                    var reader = new FileReader();
+                                    reader.onload = function (e) {
+                                        var records = [];
+                                        var j = 1;
+                                        var rows = e.target.result.split("\n");
+                                        if(rows.length >= 200){
+                                            alert('Should not exceed more than 200 records');
+                                            return;
+                                        }
+                                        
+                                        for (var i = 1; i < rows.length; i++) {
+                                            
+                                            var cells = rows[i].split(",");
+                                            
+                                            if(cells.length > 3) {
+                                                
+                                                if(cells[0] != '' && cells[1] != '') {
+                                                    
+                                                    records[j-1] = {};
+                                                    records[j-1]['subscriptionId'] = cells[0];
+                                                    //records[j-1]['Quantity'] = parseFloat(cells[1]).toFixed(2);
+                                                    
+                                                    records[j-1]['zRatePlanId'] = cells[2];
+                                                    records[j-1]['zRatePlanName'] = cells[3];
+                                                    records[j-1]['Price'] = parseFloat(cells[1]).toFixed(2); 
+                                                    records[j-1]['Checked'] = false;
+                                                    //records[j-1]['Total'] = parseInt(cells[1]);
+                                                    records[j-1]['totalCreditAmount'] = parseFloat(cells[1]).toFixed(2);
+                                                    records[j-1]['isValid'] = null; 
+                                                    records[j-1]['Notes'] = null;
+                                                    records[j-1]['RatePlanChargeId'] = null; 
+                                                    records[j-1]['Disabled'] = false;
+                                                    records[j-1]['fileName'] = fileName;
+                                                    records[j-1]['status'] = null;
+                                                    j++;
+                                                }
+                                            }
+                                        }
+                                        var scope = angular.element(document.getElementById("result")).scope();
+                                        scope.$apply(function () {
+                                            //scope.reloadTable(records);
+                                            console.log('--records.length--',records.length);
+                                            if(records.length > 0)
+                                                FileRecords(JSON.stringify(records));
+                                        }); 
+                                    }
+                                    reader.readAsText(fileUpload.files[0]);
+                                    
+                                    
+                                } else {
+                                    alert("This browser does not support HTML5.");
+                                }
+                            } else {
+                                alert("Please upload a valid CSV file.");
+                            }
+                        }
+                    }
+                    else{
+                        alert(event.message); 
+                    }
+                    $("#Loading").hide();         
+                }, 
+                {buffer: false, escape: true, timeout: 50000}
+            );
+            }
+            else{
+                document.getElementById('thePage:theForm').reset();
+            }
+        }
+        
+        var data = [];
+        var app = angular.module('first', ['ngTable']).
+        controller('firstcontroller', function($scope, $filter, NgTableParams) {
+            $scope.records = [];
+            $scope.resultsDisplay = 10;
+            $scope.requestProcessed = false;
+            $scope.recordsProcessed = [];
+       
+            $scope.reloadTable = function(records) {
+                $scope.records = records;
+                data = records;
+                $scope.tableParams = new NgTableParams({
+                    page: 1,
+                    count: $scope.resultsDisplay,
+                    sorting: {
+                        name: 'asc'
+                    }
+                }, {
+                    total: data.length, // length of data
+                    getData: function($defer, params) {
+                        var searchedData = searchData();
+                        params.total(searchedData.length);
+                        var filteredData = params.filter() ? $filter('filter')(searchedData, params.filter()) : searchedData;
+                        var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : searchedData;
+                        params.total(orderedData.length); 
+                        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                    }
+                }); 
+                 
+                
+                $scope.tableParams2 = new NgTableParams({
+                    page: 1,            
+                    count: $scope.resultsDisplay,
+                    sorting: {
+                        name: 'asc'     
+                    }
+                }, {
+                    total: data.length, // length of data
+                    getData: function($defer, params) {   
+                        var searchedData = searchData();
+                        params.total(searchedData.length);                                                                                                                                                                  
+                        var filteredData = params.filter() ? $filter('filter')(searchedData, params.filter()) : searchedData;
+                        var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : searchedData;
+                        params.total(orderedData.length); 
+                        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                    }
+                }); 
+                $scope.resultsDisplay = $scope.resultsDisplay + 1;
+            } 
+            
+            
+            $scope.reloadCredits = function(data) {
+               
+                if(data != 'undefined' && data != null){
+                    $scope.records = [];
+                    
+                    for (var j = 0; j < data.length; j++) {
+                                               
+                        $scope.records[j] = {};
+                        $scope.records[j]['subscriptionId'] = data[j].subscriptionId;
+                        //$scope.records[j]['Quantity'] = parseFloat(data[j].totalCreditAmount).toFixed(2);
+                        
+                        $scope.records[j]['zRatePlanId'] = data[j].zRatePlanId;
+                        $scope.records[j]['zRatePlanName'] = data[j].zRatePlanName;
+                        $scope.records[j]['Price'] = parseFloat(data[j].totalCreditAmount).toFixed(2); 
+                        $scope.records[j]['Checked'] = false;
+                        
+                        $scope.records[j]['totalCreditAmount'] = parseFloat(data[j].totalCreditAmount).toFixed(2);
+                        $scope.records[j]['isValid'] = data[j].isValid; 
+                        $scope.records[j]['Notes'] = data[j].notes;
+                        $scope.records[j]['RatePlanChargeId'] = null; 
+                        $scope.records[j]['Disabled'] = false;
+                        $scope.records[j]['fileName'] = data[j].fileName;
+                        $scope.records[j]['status'] = data[j].status;
+                        $scope.records[j]['processed'] = data[j].processed;
+                        $scope.records[j]['caHistoryId'] = data[j].caHistoryId;                        
+                    } 
+                    
+                    $scope.reloadTable($scope.records);
+                }
+            }
+            
+            $scope.invalidCount = function() {
+                var j = 0;
+                if($scope.records) {
+                    for(var i=0; i<$scope.records.length; i++) {
+                        if($scope.records[i].processed) 
+                            j++;
+                    }
+                }
+                return j;
+            } 
+            
+            $scope.validCount = function() {
+                var j = 0;
+                if($scope.records) {
+                    for(var i=0; i<$scope.records.length;i++) {
+                        if(!$scope.records[i].valid && !$scope.records[i].processed) 
+                            j++;
+                    }
+                }
+                return j;
+            } 
+                    
+            
+            $scope.$watch("search", function () {
+                $scope.tableParams.reload();
+            });                
+            
+            var searchData = function(){
+                if($scope.search)
+                   return $filter('filter')(data,$scope.search);
+                return data;
+            }                
+            
+            /* Rateplan update */
+            $scope.ratePlans = {!BCRatePlanstr};
+            $scope.ratePlanSelected = '';
+            
+            $scope.ApplyRatePlan = function() {
+                if( $scope.ratePlanSelected == '')
+                    alert("Please select rate plan to apply");
+                    
+                for(var i=0; i<$scope.ratePlans.length; i++) {
+                    if($scope.ratePlans[i].zRatePlanId == $scope.ratePlanSelected) {
+                        for(var j=0; j<data.length; j++) {
+                            if(!data[j].processed) {
+                                data[j].zRatePlanId = $scope.ratePlans[i].zRatePlanId; 
+                                data[j].zRatePlanName = $scope.ratePlans[i].zRatePlanName; 
+                                data[j].Price = -1 * $scope.ratePlans[i].zChargeAmount; 
+                                data[j].RatePlanChargeId = $scope.ratePlans[i].zRatePlanChargeId; 
+                                data[j].Checked = true;
+                            }
+                        }
+                    }
+                }
+                $scope.tableParams.reload();
+                $scope.tableParams2.reload();
+                //$scope.ratePlanSelected = 'choose';
+                $('#select_all').attr('checked', true); 
+                $scope.CaluculateSummary(); 
+            } 
+            
+            $scope.summary = [];
+            $scope.CaluculateSummary = function() {
+                //$scope.Quantity = 0;
+                $scope.Price = 0;
+                $scope.total = 0;
+                $scope.rp = null;
+                
+                for(var i=0; i<data.length; i++) {
+                    
+                    if(data[i].Checked && data[i].zRatePlanName != null && data[i].zRatePlanName != '' && data[i].zRatePlanId != '' && data[i].RatePlanChargeId != '') {
+                        //$scope.Quantity = parseFloat($scope.Quantity + parseFloat(data[i].Quantity).toFixed(2));
+                        $scope.Price = parseFloat(data[i].Price);
+                        $scope.rp = data[i].zRatePlanName;
+                        
+                        $scope.total += parseFloat(data[i].totalCreditAmount);
+                    }
+                }
+                $scope.total = ($scope.total).toFixed(2);
+            }
+            
+            $scope.ReCaluculateSummary = function() {
+                //$scope.Quantity = 0;
+                $scope.Price = 0;
+                $scope.total = 0;
+                $scope.rp = null;
+                for(var i=0; i<data.length; i++) {
+                    if(data[i].isValid && data[i].zRatePlanName != null && data[i].zRatePlanName != '') {
+                        //$scope.Quantity = parseFloat($scope.Quantity + parseFloat(data[i].Quantity).toFixed(2));
+                        $scope.Price = parseFloat(data[i].Price);
+                        $scope.rp = data[i].zRatePlanName;
+                        $scope.total += parseFloat(data[i].totalCreditAmount);
+                    }
+                }
+                $scope.total = ($scope.total).toFixed(2);
+            } 
+            
+            $scope.disableAll = function() {
+                for(var i=0; i<data.length; i++) {
+                    if(!(data[i].isValid)) {
+                        data[i].Checked = false;
+                        $('#select_all').attr('checked', false);
+                    }
+                    data[i].Disabled = true;
+                }    
+            }           
+            
+            $scope.ValidateBrokerCredits = function() {
+                
+                $scope.recordsProcessed = [];
+                $scope.finalList = [];
+                
+                for(var i=0; i<data.length; i++) {
+                    if(data[i].Checked && !data[i].processed) {
+                        $scope.finalList.push({subscriptionId:data[i].subscriptionId, zRatePlanName:data[i].zRatePlanName, zRatePlanId:data[i].zRatePlanId, zRatePlanChargeId:data[i].RatePlanChargeId, numOfCredits:data[i].Quantity, totalCreditAmount:data[i].totalCreditAmount, isSelected:true, caHistoryId: data[i].caHistoryId, fileName: data[i].fileName })
+                    }
+                }
+                
+                if($scope.finalList.length > 0) {
+                    ValidateBrokerCredits(JSON.stringify($scope.finalList));
+                    $("#Loading").show();
+                }    
+            }
+            
+            $scope.CompareResults = function() {
+                for(var i=0; i<data.length; i++) {
+                    for(j=0; j<$scope.processedResults.length; j++) {
+                        alert($scope.processedResults[j].SubscriptionId +', '+ data[i].subscriptionId);
+                        if($scope.processedResults[j].SubscriptionId == data[i].subscriptionId) {
+                            data[i].isValid = $scope.processedResults[j].isValid;
+                        }
+                    }
+                }            
+            } 
+            
+            $scope.CancelRequest = function() {
+                $scope.requestProcessed = false;
+                $scope.CaluculateSummary();
+                $('#select_all').removeAttr("disabled");
+                for(var i=0; i<data.length; i++) {
+                    data[i].isValid = null;
+                    data[i].Disabled = false;
+                }
+                $scope.tableParams.reload();
+                $scope.tableParams2.reload();
+            }
+            
+            $scope.finalProcess = false;
+            $scope.CreateBrokerCredits = function() {
+                $scope.finalList = [];
+                if(confirm("Are you sure want to apply " + $scope.rp + " for selected records?")) {
+                    for(var i=0; i<$scope.recordsProcessed.length; i++) {
+                        if($scope.recordsProcessed[i].isValid) {
+                            console.log('---$scope.recordsProcessed[i]-->'+i+'==',$scope.recordsProcessed[i]);
+                            $scope.finalList.push($scope.recordsProcessed[i])    
+                        }
+                    }
+                    
+                    if($scope.finalList.length > 0) {
+                        CreateBrokerCredits(JSON.stringify($scope.finalList));
+                        $("#Loading").show();
+                    }
+                }     
+            }
+            $scope.SelectAll = null;
+            $scope.test = function() {
+                var selectAllRecords = $("#select_all").is(':checked');
+                for(var i=0; i<data.length; i++) {
+                    if(selectAllRecords) 
+                        data[i].Checked = true;
+                    else
+                        data[i].Checked = false;
+                }
+                $scope.CaluculateSummary();
+            } 
+            
+            $scope.recordsProcessed = [];
+            $scope.createdData = [];
+            
+            $scope.DownloadRecords = function() {
+                JSONToCSVConvertor($scope.createdData, 'Broker Credits', true);                             
+            }
+            
+            $scope.ReloadPage = function() {
+                if(confirm("Reloading another file will terminate current transaction. Are you sure want to reload another file?")) {
+                    window.location = '';
+                }
+            }                                                     
+        });              
+        
+        function ValidateBrokerCredits(finalList) {
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.SMS_BrokerCredits_Automation.validateData}', 
+                finalList,
+                function(result, event) {
+                    if (event.status) {
+                        
+                        for(var i=0; i<data.length; i++) {
+                            for(j=0; j<result.length; j++) {
+                                if(data[i]['Checked']) {
+                                    if(result[j].subscriptionId == data[i]['subscriptionId']) {
+                                        data[i]['isValid'] = result[j].isValid;
+                                        data[i]['Notes'] = result[j].notes;
+                                    }
+                                }
+                            }
+                        }
+                        var scope = angular.element(document.getElementById("result")).scope();                
+                        scope.$apply(function () {                      
+                            scope.tableParams.reload();
+                            scope.tableParams2.reload();
+                            scope.requestProcessed = true;
+                            scope.ReCaluculateSummary();
+                            $('#select_all').attr('disabled','true');
+                            scope.disableAll();
+                            for(j=0; j<result.length; j++) {
+                                scope.recordsProcessed.push(result[j]);
+                            }
+                        });                                
+                    }
+                    else
+                        alert(event.message); 
+                    
+                    $("#Loading").hide();         
+                }, 
+                {buffer: false, escape: true, timeout: 50000}
+            );       
+        } 
+        
+        function CreateBrokerCredits(finalList) {
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.SMS_BrokerCredits_Automation.createRatePlan}', 
+                finalList,
+                function(result, event) {
+                    if(event.status) {
+                        var scope = angular.element(document.getElementById("result")).scope();                
+                        scope.$apply(function () {
+                            //console.log('--result.length--'+result.length);
+                            for(var i=0; i<result.length; i++) {
+                                scope.createdData.push(result[i]);
+                                for(var j=0; j<data.length; j++) {
+                                    if(data[j]['subscriptionId'] == result[i]['zAccountNumber']) {
+                                        if(!(result[i]['status'])) {
+                                            data[j]['Notes'] = 'Failed to create zuora subscription';
+                                            data[j]['isValid'] = false;
+                                        }
+                                        else{
+                                            data[j]['processed'] = true;
+                                            data[j]['status'] = 'processed';
+                                            data[j]['isValid'] = true;
+                                        }
+                                    }
+                                    else if(!data[j]['processed'] ){
+                                        var temp = data[j]['subscriptionId'];
+                                        //console.log('--data[j][subscriptionId]--'+temp);
+                                        data[j]['isValid'] = false;
+                                    }                                  
+                                }
+                            }
+                            scope.finalProcess = true;
+                            scope.reloadCredits(data);
+                        });                           
+                    }
+                    else
+                       alert(event.message);  
+                    
+                    $("#Loading").hide();           
+                }, 
+                {buffer: false, escape: true, timeout: 50000}
+            );       
+        } 
+        
+        function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
+            //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
+            var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
+            
+            var CSV = '';    
+            //Set Report title in first row or line
+            
+            CSV += ReportTitle + '\r\n\n';
+        
+            //This condition will generate the Label/Header
+            if (ShowLabel) {
+                var row = "";
+                
+                //This loop will extract the label from 1st index of on array
+                for (var index in arrData[0]) {
+                    
+                    //Now convert each value to string and comma-seprated
+                    row += index + ',';
+                }
+        
+                row = row.slice(0, -1);
+                
+                //append Label row with line break
+                CSV += row + '\r\n';
+            }
+            
+            //1st loop is to extract each row
+            for (var i = 0; i < arrData.length; i++) {
+                var row = "";
+                
+                //2nd loop will extract each column and convert it in string comma-seprated
+                for (var index in arrData[i]) {
+                    row += '"' + arrData[i][index] + '",';
+                }
+        
+                row.slice(0, row.length - 1);
+                
+                //add a line break after each row
+                CSV += row + '\r\n';
+            }
+        
+            if (CSV == '') {        
+                alert("Invalid data");
+                return;
+            }   
+            
+            //Generate a file name
+            var fileName = "MyReport_";
+            //this will remove the blank-spaces from the title and replace it with an underscore
+            fileName += ReportTitle.replace(/ /g,"_");   
+            
+            //Initialize file format you want csv or xls
+            var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
+            
+            // Now the little tricky part.
+            // you can use either>> window.open(uri);
+            // but this will not work in some browsers
+            // or you will not get the correct file extension    
+            
+            //this trick will generate a temp <a /> tag
+            var link = document.createElement("a");    
+            link.href = uri;
+            
+            //set the visibility hidden so it will not effect on your web-layout
+            link.style = "visibility:hidden";
+            link.download = fileName + ".csv";
+            
+            //this part will append the anchor tag and remove it after automatic click
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }                       
+    </script>    
+    
+</apex:page>

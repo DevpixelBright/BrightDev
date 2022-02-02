@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Negative_response_or_low_score_received_from_office_meeting_campaign_survey</fullName>
+        <ccEmails>test.mrisblt@gmail.com</ccEmails>
+        <description>Negative response or low score received from office meeting campaign survey</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>API_Names/Feedback_Alert_response</template>
+    </alerts>
+    <rules>
+        <fullName>Feedback Owner</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Feedback__c.CreatedDate</field>
+            <operation>equals</operation>
+            <value>TODAY</value>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Negative response on office meeting</fullName>
+        <actions>
+            <name>Negative_response_or_low_score_received_from_office_meeting_campaign_survey</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 OR 2 OR 3 OR 4 OR 5 OR 6 OR 7 OR 8 OR 9 OR 10 OR 11 OR 12</booleanFilter>
+        <criteriaItems>
+            <field>Feedback__c.Client_Alliance_Manager_was_knowledgeabl__c</field>
+            <operation>equals</operation>
+            <value>Disagree,Strongly Disagree</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Feedback__c.Client_Alliance_Manager_was_professional__c</field>
+            <operation>equals</operation>
+            <value>Disagree,Strongly Disagree</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Feedback__c.MRIS_best_enable_your_success_Sentiment__c</field>
+            <operation>equals</operation>
+            <value>Negative</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Feedback__c.Overall_how_satisfied_were_you_with_the__c</field>
+            <operation>equals</operation>
+            <value>Dissatisfied,Very Dissatisfied</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Feedback__c.How_can_we_improve_Sentiment__c</field>
+            <operation>equals</operation>
+            <value>Negative</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Feedback__c.Additional_comments_Sentiments__c</field>
+            <operation>equals</operation>
+            <value>Negative</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Feedback__c.Features_you_will_implement_Sentiments__c</field>
+            <operation>equals</operation>
+            <value>Negative</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Feedback__c.MRIS_best_enable_your_success_Sentiment__c</field>
+            <operation>equals</operation>
+            <value>Negative</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Feedback__c.Presentation_material_was_very_helpful__c</field>
+            <operation>equals</operation>
+            <value>Disagree,Strongly Disagree</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Feedback__c.Quality_of_presentation_highly_effective__c</field>
+            <operation>equals</operation>
+            <value>Disagree,Strongly Disagree</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Feedback__c.Why_dissatisfied_Sentiment__c</field>
+            <operation>equals</operation>
+            <value>Negative</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Feedback__c.Quality_of_presentation_highly_effective__c</field>
+            <operation>equals</operation>
+            <value>Disagree,Strongly Disagree</value>
+        </criteriaItems>
+        <description>A negative survey response for a office meeting response makes this alert be sent out.</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+</Workflow>

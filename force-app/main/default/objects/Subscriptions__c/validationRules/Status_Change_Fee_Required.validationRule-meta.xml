@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_Change_Fee_Required</fullName>
+    <active>true</active>
+    <description>When Status is changed from Inactive to Active a value must be provided in Status Change Fee field</description>
+    <errorConditionFormula>AND( 
+ISCHANGED(Status__c), 
+TEXT(Status__c)=&quot;Active&quot;, 
+TEXT(PRIORVALUE(Status__c))=&quot;Inactive&quot;, 
+TEXT(Status_Change_Fee__c)=&quot;&quot;)
+&amp;&amp; NOT( $Setup.Bypass_Validation_rules__c.Disable_Validation_Rules__c )</errorConditionFormula>
+    <errorDisplayField>Status_Change_Fee__c</errorDisplayField>
+    <errorMessage>Required when changing Status from Inactive to Active</errorMessage>
+</ValidationRule>

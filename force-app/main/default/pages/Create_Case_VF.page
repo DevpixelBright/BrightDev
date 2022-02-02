@@ -1,0 +1,6 @@
+<apex:page controller="Create_Case_VF"  lightningstylesheets="true">
+  <apex:form >
+      <apex:inputField value="{!c.Status}"/>
+      <apex:commandButton value="Save" action="{!save}"/>
+  </apex:form>
+</apex:page>

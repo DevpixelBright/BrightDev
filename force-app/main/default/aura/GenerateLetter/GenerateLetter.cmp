@@ -1,0 +1,33 @@
+<aura:component controller="GoodStandingController" implements="force:hasRecordId,flexipage:availableForRecordHome,force:lightningQuickActionWithoutHeader">
+	<aura:attribute name="SubscriptionRecord" type="Object"/>
+    <aura:attribute name="recordLoadError" type="String"/>
+    
+    <force:recordData aura:id="recordLoader"
+    layoutType="FULL"
+    recordId="{!v.recordId}"
+    fields="Id,Name"
+    targetFields="{!v.SubscriptionRecord}"
+    targetError="{!v.recordLoadError}"
+    />
+     <lightning:messages/>
+     <lightning:select aura:id="companyPicklist" value="" onchange="{!c.handleCompanyOnChange}" name="Email Template" label="Email Template" required="true">
+                                                                            <option value="">--None--</option>
+         <option value="template1">--template1--</option>
+                                                                           <!-- <aura:iteration items="{!v.comapnyFieldMap}" var="i" indexVar="key">
+                                                                                <option text="{!i.value}" value="{!i.key}" selected="{!i.key==v.account.HoldingCompany__c}" ></option>
+                                                                            </aura:iteration> -->
+                                                                        </lightning:select>
+      <lightning:select aura:id="companyPicklist" value="" onchange="{!c.handleCompanyOnChange}" name="PDF Template" label="PDF Template" required="true">
+                                                                            <option value="">--None--</option>
+         <option value="template1">--PDF template1--</option>
+                                                                           <!-- <aura:iteration items="{!v.comapnyFieldMap}" var="i" indexVar="key">
+                                                                                <option text="{!i.value}" value="{!i.key}" selected="{!i.key==v.account.HoldingCompany__c}" ></option>
+                                                                            </aura:iteration> -->
+                                                                        </lightning:select>
+    <div class="slds-p-bottom_large"> 
+           <lightning:button class="slds-float_right" label="Generate letter" 
+                    onclick="{!c.handleClick}"/>
+            
+       
+    </div>
+</aura:component>

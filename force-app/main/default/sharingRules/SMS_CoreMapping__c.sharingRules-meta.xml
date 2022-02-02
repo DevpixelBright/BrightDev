@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>CORE_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>CORE Sharing</label>
+        <sharedTo>
+            <allCustomerPortalUsers></allCustomerPortalUsers>
+        </sharedTo>
+        <criteriaItems>
+            <field>Name</field>
+            <operation>contains</operation>
+            <value>Mapping</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+</SharingRules>

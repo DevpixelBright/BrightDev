@@ -1,0 +1,27 @@
+<apex:page controller="PrintEmailTemplate" renderAs="pdf">
+    <apex:repeat value="{!tempList}" var="temLst">
+            <table style="width:100%;">
+                <tr style="display: block;vertical-align:top;">
+                    <td style="display:inline-block;text-align:left;width:20%;"><b>Template Name</b></td>
+                    <td style="display:inline-block;text-align:left;width:40%;">{!temLst.Name}</td>
+                </tr>
+                <tr style="display: block;vertical-align:top;">
+                    <td style="display:inline-block;text-align:left;width:20%"><b>Email Subject</b></td>
+                    <td style="display:inline-block;text-align:left;width:40%">{!temLst.Subject}</td>
+                </tr>
+                <apex:outputPanel rendered="{!temLst.TemplateType == 'text'}">
+                    <tr style="display:block;vertical-align:top;margin-bottom:20px;">
+                        <td style= "display:block;"><b>Email Preview</b></td>
+                        <!--<td><apex:outputText value="{!temLst.Body}" escape="false"> </apex:outputText></td>-->
+                        <td>{!temLst.Body}</td>
+                    </tr>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!temLst.TemplateType != 'text'}">
+                    <tr style= "display:block;vertical-align:top;margin-bottom:20px;">
+                        <td style="display:block;"><b>Email Preview</b></td>
+                        <td><apex:outputText value="{!temLst.HtmlValue}" escape="false"> </apex:outputText></td>
+                    </tr>
+                </apex:outputPanel>
+            </table>
+        </apex:repeat>
+</apex:page>

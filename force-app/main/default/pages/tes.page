@@ -1,0 +1,5 @@
+<apex:page standardController="Office_Exclusive__c" showHeader="false" sidebar="false" standardStylesheets="false">
+    <script>
+    	window.open("/apex/Communities_OfficeExclusivesPDF",'_blank');
+    </script>
+</apex:page>

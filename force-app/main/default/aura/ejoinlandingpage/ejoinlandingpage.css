@@ -1,0 +1,54 @@
+@font-face {
+    font-family: 'LatoBold';
+    src: url(/resource/LatoBold);
+}
+@font-face {
+    font-family: 'LatoRegular';
+    src: url(/resource/LatoRegular);
+}
+.THIS.slds-scope{ background:#fff;}
+.THIS .fullpage { background:#f2f3f7;  margin:0;  padding:0;}
+.THIS .slds-box_x-small{ padding:0; border:none;}
+/*header css start*/
+.THIS .header-part{ display: inline-block; padding:0;line-height: 40px; vertical-align: top;}
+.THIS .header-part .logo img{ width:140px;}
+.THIS .new-container { margin: 0 auto; border: none; width: -webkit-fill-available;}
+.THIS .new-containerpage { margin: 0 auto;border-bottom:1px solid #ccc; width: -webkit-fill-available;}
+.THIS .header-full{ padding:14px 0;}
+.THIS .header-part .bar h2{ color: #00b0b9;font-size: 20px;font-family:LatoBold;} 
+.THIS .header-part .bar1 h2{ color: #282828;} 
+.THIS .bar-title-box{display: inline-block;}
+.THIS .bar-title{ display:block;line-height: normal;}
+.THIS .bar-title h5{ display:inline-block; color:#333; font-family:LatoRegular; font-size:13px;}
+.THIS .bar-title h6{color:#333; font-family:LatoRegular; font-size:13px; text-align: right;}
+.THIS .call{ margin:0; padding:0;text-align: right;line-height: normal;}
+.THIS .call h4{ color:#333; font-family:LatoRegular; font-size:13px; margin:12px 54px 5px 0;}
+.THIS .call h3{ color:#282828; font-family:LatoRegular; font-size:18px;}
+/*header css end*/
+/*footer css start*/
+.THIS .footer-full{ padding:26px 0; margin:0;}
+.THIS .footerbottom{background: #212b3d;width: 100%;}
+.THIS .footer-part{ margin:0; padding:0; display:inline-block;}
+.THIS .footer-part p{color:#a8b3c6; margin:0 ;font-size:14px; font-family:LatoRegular;  display:inline-block; }
+.THIS .footer-part p a{color:#a8b3c6; margin:0 40px 0 0 ;font-size:14px; font-family:LatoRegular;  display:inline-block; }
+.THIS .footer-part p.copy{   text-align: right;    display: block;}
+/*footer css end*/
+/*content css start*/
+.THIS .landing{ margin:44px auto 120px; text-align:center;}
+.THIS .landing h2{ font-size: 26px;font-family: LatoBold; color: #fe4602; margin: 0 0 40px 0;}
+.THIS .linkpointmain{ margin:0 auto 60px; clear:both; display:block;}
+.THIS .linkpoint{display:inline-block; margin:0;padding:0 20px 0 0;}
+.THIS .linkpoint1{display:inline-block; margin:0;padding:0 0 0 0;}
+.THIS .select-home{ margin:0; padding:0; border:1px solid #ccc; cursor: pointer;}
+.THIS .select-home h4{ color:#282828; padding:20px 0;font-family:LatoRegular;margin:0;font-size:16px;}
+.THIS .select-home img{ width:100%; margin:0; padding:0;}
+.THIS .select-home:hover{border:1px solid #fe4602;-webkit-box-shadow:0 0 20px rgba(0,0,0,0.4);
+    -moz-box-shadow:0 0 20px rgba(0,0,0,0.4);
+    box-shadow:0 0 20px rgba(0,0,0,0.4);}
+
+
+.THIS .slds-button_brand{ border-radius:0; color:#fff;border:1px solid #fe4602; font-size:14px; padding:10px 30px; background:#fe4602; font-family:LatoRegular;}
+.THIS .slds-button_brand:hover{border:1px solid #fe4602;color:#fe4602;background:#fff;}
+.THIS .slds-button_brand:active{border:1px solid #fe4602;color:#fe4602;background:#fff;}
+.THIS .slds-button_brand:focus{border:1px solid #fe4602;color:#fe4602;background:#fff;outline: 0; box-shadow: none;}
+/*footer css end*/

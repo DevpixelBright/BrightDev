@@ -1,0 +1,170 @@
+<aura:component>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <ltng:require styles="{!$Resource.headerpart }"></ltng:require>
+   <ltng:require styles="{!$Resource.side }"></ltng:require> 
+   <ltng:require styles="{!$Resource.body }"></ltng:require>
+
+   
+   <div class="c-container">
+      <div class="fullpage slds-scope">
+         <div class="slds-grid slds-wrap">
+            <lightning:layout multipleRows="true">
+               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage header-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:header />
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+               <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <c:mobilemenu />
+                   <lightning:layout>
+                     <div class="new-containerpage">
+                        <div class="slds-container--x-large new-container">
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <c:sidebarnew />
+                           </lightning:layoutItem>
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                              <div class="page-section page-main">
+                                 <div class="middlebar1">
+                                    <h2>IDX &amp; VOW Licensing Request</h2>
+                                         <lightning:button class="brand pdf" variant="brand " label="Cancel" title="Brand action"  />
+                       <lightning:button class="brand brand2" variant="brand " label="Submit" title="Brand action"  />
+                   </div>
+                                 <div class="dev">
+                                    <p class="recent"> Request an IDX or VOW listing feed for your website from an approved third-party vendor. See <a href="#">Product Pricing</a>.</p>
+                                     <div class="view"></div>
+           
+                               
+                                    
+                            <div class="lake1">
+                              
+                            <fieldset class="slds-form-element">
+  
+  <div class="slds-form-element__control">
+    <span class="slds-radio">
+      <input type="radio" id="radio-43" value="radio-43" name="default" checked="" />
+      <label class="slds-radio__label" for="radio-43">
+        <span class="slds-radio_faux"></span>
+        <span class="slds-form-element__label">IDX Website <img src="{!$Resource.bright + '/bright-3.0/images/information.svg'}" alt="Bright" /></span>
+      </label>
+    </span>
+    <span class="slds-radio">
+      <input type="radio" id="radio-44" value="radio-44" name="default" />
+      <label class="slds-radio__label" for="radio-44">
+        <span class="slds-radio_faux"></span>
+        <span class="slds-form-element__label">VOW Website</span>
+      </label>
+    </span>
+  </div>
+</fieldset>
+                                
+                                <div class="review">
+                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="8" largeDeviceSize="8">
+                           <div class="part24">
+                               <div class="layer part1"> 
+                               <h4>Vendor Name<span class="star">*</span></h4>
+                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                   <h5>
+                                       <lightning:layoutItem flexibility="grow" size="11" mediumDeviceSize="11" largeDeviceSize="11">
+                                       <div class="layer part5">
+                                  <lightning:input type="text" name="input3" placeholder="Start Typing for list"  variant = "label-hidden" />
+                                       </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="1" mediumDeviceSize="1" largeDeviceSize="1">
+                                       <div class="layer part5">
+                                           <img src="{!$Resource.bright + '/bright-3.0/images/information.svg'}" alt="Bright" /></div>
+                                       </lightning:layoutItem>
+                                   </h5>
+                                   </lightning:layoutItem> 
+                             </div>
+                                                  
+                                
+                  
+                        </div>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                   <div class="part24">
+                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="8" largeDeviceSize="8">
+                               <div class="layer part1"> 
+                               <h4>Vendor Office ID <span class="star">*</span></h4>
+                            
+                                   <h5>
+                                       <lightning:layoutItem flexibility="grow" size="11" mediumDeviceSize="11" largeDeviceSize="11">
+                                       <div class="layer part5">
+                                  <lightning:input type="text" name="input3" placeholder="Type Vendor ID"  variant = "label-hidden" />
+                                       </div>
+                                       </lightning:layoutItem>
+                                      <lightning:layoutItem flexibility="grow" size="1" mediumDeviceSize="1" largeDeviceSize="1">
+                                       </lightning:layoutItem>
+                                   </h5>
+                             </div>
+                       </lightning:layoutItem>
+                                                  
+                                
+                  
+                        </div>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                   <div class="part24">
+                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="8" largeDeviceSize="8">
+                               <div class="layer part1"> 
+                               <h4>Website URL <span class="star">*</span></h4>
+                            
+                                   <h5>
+                                       <lightning:layoutItem flexibility="grow" size="11" mediumDeviceSize="11" largeDeviceSize="11">
+                                       <div class="layer part5">
+                                  <lightning:input type="text" name="input3" placeholder="Enter URL of website where the IDX or VOW data will appear"  variant = "label-hidden" />
+                                       </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="1" mediumDeviceSize="1" largeDeviceSize="1">
+                                       <div class="layer part5">
+                                           <img  src="{!$Resource.bright + '/bright-3.0/images/information.svg'}" alt="Bright" /></div>
+                                       </lightning:layoutItem></h5>
+                           </div></lightning:layoutItem>
+                                                  
+                                
+                  
+                        </div>
+                  
+                                    </lightning:layoutItem>
+                                
+                              
+                               
+                     </div>           
+
+                         </div>        
+                                    
+                                  
+                                 
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                  
+                                   
+                                    
+                                 </div>
+                              </div>
+                           </lightning:layoutItem>
+                        </div>
+                     </div>
+                  </lightning:layout>
+               </lightning:layoutItem>
+                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage footer-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:footer />
+                         
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+            </lightning:layout>
+         </div>
+      </div>
+
+   </div>
+</aura:component>

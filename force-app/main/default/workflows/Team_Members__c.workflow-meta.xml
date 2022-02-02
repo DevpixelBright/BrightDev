@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Email_to_Team_Lead_when_a_invitee_approves_a_Team_invitation_Email_Alert</fullName>
+        <description>Email to Team Lead when a invitee approves a Team invitation Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Team_Lead_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>no-reply@brightmls.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Email_to_Team_Lead_when_a_invitee_approves_a_Team_invitation</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_to_Team_Lead_when_a_invitee_approves_a_Team_invitation_Email_Alert_to_SF</fullName>
+        <ccEmails>emailtosalesforce@z-lh9dypma9adpo2pq0q6zgoeut46ejmjs7k17uk5g001ihkri0.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>Email to Team Lead when a invitee approves a Team invitation Email Alert to SF</description>
+        <protected>false</protected>
+        <senderAddress>no-reply@brightmls.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Email_to_Team_Lead_when_a_invitee_approves_a_Team_invitation</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_to_Team_Lead_when_an_invitee_declines_a_Team_invitation_Email_Alert</fullName>
+        <description>Email to Team Lead when an invitee declines a Team invitation Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Team_Lead_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>no-reply@brightmls.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Email_to_Team_Lead_when_an_invitee_declines_a_Team_invitation</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_to_Team_Lead_when_an_invitee_declines_a_Team_invitation_Email_Alert_to_SF</fullName>
+        <ccEmails>emailtosalesforce@z-lh9dypma9adpo2pq0q6zgoeut46ejmjs7k17uk5g001ihkri0.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>Email to Team Lead when an invitee declines a Team invitation Email Alert to SF</description>
+        <protected>false</protected>
+        <senderAddress>no-reply@brightmls.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Email_to_Team_Lead_when_an_invitee_declines_a_Team_invitation</template>
+    </alerts>
+    <alerts>
+        <fullName>Reminder_to_Team_Lead_for_pending_invitee_Email_Alert</fullName>
+        <description>Reminder to Team Lead for pending invitee Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Team_Lead_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>no-reply@brightmls.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Reminder_to_Team_Lead_for_pending_invitee</template>
+    </alerts>
+    <alerts>
+        <fullName>Reminder_to_Team_Lead_for_pending_invitee_Email_Alert_to_SF</fullName>
+        <ccEmails>emailtosalesforce@z-lh9dypma9adpo2pq0q6zgoeut46ejmjs7k17uk5g001ihkri0.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>Reminder to Team Lead for pending invitee Email Alert to SF</description>
+        <protected>false</protected>
+        <senderAddress>no-reply@brightmls.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Reminder_to_Team_Lead_for_pending_invitee</template>
+    </alerts>
+    <alerts>
+        <fullName>Teams_Notify_Agent_when_added_from_the_team_Email_Alert</fullName>
+        <description>Teams-Notify Agent when added from the team Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Team_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>no-reply@brightmls.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Teams_Notify_Agent_when_added_to_the_team</template>
+    </alerts>
+    <alerts>
+        <fullName>Teams_Notify_Agent_when_added_from_the_team_Email_Alert_to_SF</fullName>
+        <ccEmails>emailtosalesforce@z-lh9dypma9adpo2pq0q6zgoeut46ejmjs7k17uk5g001ihkri0.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>Teams-Notify Agent when added from the team Email Alert to SF</description>
+        <protected>false</protected>
+        <senderAddress>no-reply@brightmls.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Teams_Notify_Agent_when_added_to_the_team</template>
+    </alerts>
+    <alerts>
+        <fullName>Teams_Notify_Agent_when_removed_from_the_team</fullName>
+        <description>Teams-Notify Agent when removed from the team</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Team_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>no-reply@brightmls.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Teams_Notify_Agent_when_removed_from_the_team</template>
+    </alerts>
+    <alerts>
+        <fullName>Teams_Notify_Agent_when_removed_from_the_team_to_SF</fullName>
+        <ccEmails>emailtosalesforce@z-lh9dypma9adpo2pq0q6zgoeut46ejmjs7k17uk5g001ihkri0.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>Teams-Notify Agent when removed from the team to SF</description>
+        <protected>false</protected>
+        <senderAddress>no-reply@brightmls.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Teams_Notify_Agent_when_removed_from_the_team</template>
+    </alerts>
+    <outboundMessages>
+        <fullName>SFDC_TeamMember</fullName>
+        <apiVersion>52.0</apiVersion>
+        <endpointUrl>https://sfdcservices.dev.brightmls.com/teammember</endpointUrl>
+        <fields>Id</fields>
+        <fields>SystemModstamp</fields>
+        <includeSessionId>true</includeSessionId>
+        <integrationUser>mris_sf_api@mris.net</integrationUser>
+        <name>SFDC TeamMember</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <outboundMessages>
+        <fullName>TeamMemberUpdate</fullName>
+        <apiVersion>51.0</apiVersion>
+        <endpointUrl>http://talend.dev.brightmls.com/services/SFTeamMember</endpointUrl>
+        <fields>Id</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>mris_sf_api@mris.net</integrationUser>
+        <name>TeamMemberUpdate</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>TeamMemberUpdated</fullName>
+        <actions>
+            <name>SFDC_TeamMember</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>Team_Members__c.Status_of_Invitation__c</field>
+            <operation>equals</operation>
+            <value>Accepted</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Team_Members__c.Status_of_Invitation__c</field>
+            <operation>equals</operation>
+            <value>Removed</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

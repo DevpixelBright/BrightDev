@@ -1,0 +1,169 @@
+<apex:page standardController="Subscriptions__c" extensions="BillingInfoViaSubExtension"   lightningstylesheets="true">
+    <style>
+        .badge { padding: 5px; float: left; }
+        .caption { text-align: center; font-size: 80%; }
+        .sub { text-align: center; height: 50px; vertical-align: middle; }
+        .subtext { display: inline-block; }
+        .active { background-color: green; color: white; font-size: 120% }
+        .inactive { background-color: red; color: white; font-size: 120% }
+        .hide { display: none; }
+        .button_sync{ float:right;}
+        .btn{background-color:#1797c0 !important; background-image:none !important;border:none !important;
+         color:#ffffff !important; padding:6px 10px !important; font-size:12px !important;}
+        .rltitle {
+            color: black;
+            display: block;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+          }
+          .title{font-size:20px !important;}
+    </style>
+
+    <apex:variable var="icon_width" value="50"/>
+    <apex:variable var="icon_height" value="50"/>
+
+<apex:outputLink value="/{!Subscriptions__c.Id}">Back to Subscription</apex:outputLink>
+<apex:form >
+<apex:pageMessages ></apex:pageMessages>
+<apex:pageBlock rendered="{!isBillingInfo}"> 
+<apex:pageBlock > 
+    <div style="margin:16px 0px;">
+    <apex:outputText ><h2 class="title">Billing Info Summary</h2></apex:outputText>    
+    <br/><center><apex:outputText ><h2 class="title">Balance ${!zBalanceAll}</h2></apex:outputText></center>   
+        <apex:commandButton value="Outstanding Balance Notification" action="{!Redirect}" styleClass="button_sync"/> &nbsp;
+        <apex:commandButton value="OnDemand Sync" action="{!onDemandSync}" styleClass="button_sync"/>
+     
+    </div>
+    <apex:repeat value="{!Summaries}" var="summary" >
+    <apex:pageblockSection showHeader="true" title="Billing Info for {!summary.type} ({!summary.core_sub_id})" columns="1" collapsible="false" >
+      <apex:outputPanel >
+        <div class="badge {!IF(summary.flags.isActive,'hide','')}">
+          <apex:image url="{!URLFOR($Resource.subscription_status, 'inactive.png')}" width="{!icon_width}" height="{!icon_height}" alt="Inactive" title="Inactive"/>
+          <div class="caption">Inactive</div>
+        </div>
+        <div class="badge {!IF(summary.flags.isSuspended,'','hide')}">
+          <apex:image url="{!URLFOR($Resource.subscription_status, 'lock.png')}" width="{!icon_width}" height="{!icon_height}" alt="Suspended" title="Suspended"/>
+          <div class="caption">Suspended</div>
+        </div>
+        <div class="badge {!IF(summary.flags.inTerm,'','hide')}">
+          <apex:image styleClass="badge" url="{!URLFOR($Resource.subscription_status, 'upcoming_renewal.png')}" width="{!icon_width}" height="{!icon_height}" alt="In-term" title="In-term"/>
+          <div class="caption">In-term</div>
+        </div>
+        <div class="badge {!IF(summary.flags.inTerm,'hide','')}">
+          <apex:image styleClass="badge" url="{!URLFOR($Resource.subscription_status, 'red_calendar.png')}" width="{!icon_width}" height="{!icon_height}" alt="Out-of-term" title="Out-of-term"/>
+          <div class="caption">Out-of-term</div>
+        </div>
+        <div class="badge {!IF(summary.auto_renew,'','hide')}">
+          <apex:image styleClass="badge" url="{!URLFOR($Resource.subscription_status, 'medal.png')}" width="{!icon_width}" height="{!icon_height}" alt="Auto-renew" title="Auto-renew"/>
+          <div class="caption">Auto-renew</div>
+        </div>
+        <div class="badge {!IF(summary.flags.hasAutoPay,'','hide')}">
+          <apex:image styleClass="badge" url="{!URLFOR($Resource.subscription_status, 'credit_cards.png')}" width="{!icon_width}" height="{!icon_height}" alt="Auto-pay" title="Auto-pay"/>
+          <div class="caption">Auto-pay</div>
+        </div>
+      </apex:outputPanel>
+    </apex:pageBlockSection>
+    
+    <apex:pageBlockSection showHeader="false" columns="2" >
+
+        <apex:pageblockSectionItem >
+        <div class="sub current active">
+            <span class="subtext">Current Subscription<br/>{!summary.type} - ${!summary.rate}</span>
+        </div>
+        <span>{!summary.term_start_date}</span>
+        <span style="float: right;">{!summary.term_end_date}</span>
+        </apex:pageblockSectionItem>
+        <apex:pageblockSectionItem rendered="{!summary.auto_renew}">
+        <div class="sub future active">
+            <span class="subtext">Next Term<br/>{!summary.future_type} - ${!summary.future_rate}</span>
+        </div>
+        <span>{!summary.next_renewal_date}</span>
+        <span style="float: right;">{!summary.future_renewal_date}</span>
+        </apex:pageblockSectionItem>
+        <apex:pageblockSectionItem rendered="{!NOT(summary.auto_renew)}">
+            <div class="sub future inactive">
+                <span class="subtext">Next term<br/>No renewal scheduled</span>
+            </div>
+        </apex:pageblockSectionItem>
+    </apex:pageBlockSection>
+    <apex:pageBlockSection showHeader="false" columns="2">
+        <apex:outputText label="Subscription type">{!summary.type}</apex:outputText>
+        <apex:outputText label="Subscription rate">${!summary.rate}</apex:outputText>
+        <!-- <apex:outputText label="Next bill date">{!summary.next_bill_date}</apex:outputText> -->
+        <apex:outputText label="Next renewal date">{!summary.next_renewal_date}</apex:outputText>
+        <apex:outputText label="MRIS Subscription">{!summary.core_sub_id}</apex:outputText>
+        <apex:outputText label="MRIS Subscription Status">{!summary.core_sub_status}</apex:outputText>
+    </apex:pageblockSection>
+    </apex:repeat>
+  </apex:pageblock>
+    
+  <apex:pageBlock mode="detail" title="Zuora Subscriptions">
+    <apex:pageblockSection showHeader="false" columns="1" >
+    <apex:pageblockTable value="{!SubsList}" var="sub" >
+        <apex:column >
+            <apex:outputLink value="/{!sub.Id}">{!sub.Name}</apex:outputLink>
+        </apex:column>
+        <apex:column value="{!sub.Zuora__AutoRenew__c}"/>
+        <apex:column value="{!sub.Zuora__InitialTerm__c }"/>
+        <apex:column value="{!sub.Zuora__Status__c}"/>
+        <apex:column value="{!sub.Zuora__SubscriptionStartDate__c}"/>
+        <!-- <apex:column value="{!sub.Zuora__NextChargeDate__c}" /> -->
+        <apex:column value="{!sub.Zuora__NextRenewalDate__c }"/>
+    </apex:pageblockTable>
+    </apex:pageblockSection>
+  </apex:pageBlock>
+  <apex:pageBlock mode="detail" title="Zuora Invoices">
+    <apex:pageblockSection showHeader="false" columns="1" >
+        <apex:pageblockTable value="{!InvoiceList}" var="invoice" >
+        <apex:column >
+            <apex:outputLink value="/{!invoice.Id}">{!invoice.Name}</apex:outputLink>
+        </apex:column>
+        <apex:column value="{!invoice.Zuora__BillingAccount__r.SubscriptionID__c}"/>
+        <apex:column value="{!invoice.Zuora__Balance2__c}"/>
+        <apex:column value="{!invoice.Zuora__TotalAmount__c}"/>
+        <apex:column value="{!invoice.Zuora__PaymentAmount__c}"/>
+        <apex:column value="{!invoice.Zuora__RefundedAmount__c}"/>
+        <apex:column value="{!invoice.Zuora__Status__c}"/>         
+        <apex:column value="{!invoice.Zuora__DueDate__c }"/>
+    </apex:pageblockTable>
+    </apex:pageblockSection>
+  </apex:pageBlock>
+  <apex:pageBlock mode="detail" title="Zuora Payments">
+    <apex:pageblockSection showHeader="false" columns="1" >
+        <apex:pageblockTable value="{!PaymentList}" var="payment" >
+        <apex:column >
+            <apex:outputLink value="/{!payment.Id}">{!payment.Name}</apex:outputLink>
+        </apex:column>
+        <apex:column value="{!payment.Zuora__BillingAccount__r.SubscriptionID__c}"/>
+        <apex:column value="{!payment.Zuora__PaymentMethod__c}"/>        
+        <apex:column value="{!payment.Zuora__Amount__c}"/>
+        <apex:column value="{!payment.Zuora__Status__c}"/> 
+        <apex:column value="{!payment.Zuora__GatewayResponse__c}"/>
+        <apex:column headerValue="Submitted On"> 
+            <apex:outputText value="{0,date,M'/'dd'/'yyyy}">
+                <apex:param value="{!payment.Zuora__SubmittedOn__c}" /> 
+            </apex:outputText>  
+        </apex:column>             
+        <!-- <apex:column value="{!payment.Zuora__SubmittedOn__c}"/> -->
+    </apex:pageblockTable>
+    </apex:pageblockSection>
+  </apex:pageBlock>
+  <apex:pageBlock mode="detail" title="Zuora Payment Methods">
+    <apex:pageblockSection showHeader="false" columns="1" >
+        <apex:pageblockTable value="{!MethodList}" var="method" >
+        <apex:column >
+            <apex:outputLink value="/{!method.Id}">{!method.Name}</apex:outputLink>
+        </apex:column>
+        <apex:column value="{!method.Zuora__Type__c}"/>        
+        <apex:column value="{!method.Zuora__CreditCardType__c}"/>
+        <apex:column value="{!method.Zuora__CreditCardHolderName__c}"/>         
+        <apex:column value="{!method.Zuora__CreditCardMaskNumber__c}"/>
+        <apex:column value="{!method.Zuora__PaymentMethodStatus__c}"/>
+        <apex:column value="{!method.Zuora__DefaultPaymentMethod__c}"/>
+    </apex:pageblockTable>
+    </apex:pageblockSection>
+  </apex:pageBlock>
+</apex:pageBlock>  
+  </apex:form>
+</apex:page>

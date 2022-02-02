@@ -1,0 +1,103 @@
+<aura:component>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <ltng:require styles="{!$Resource.headerpart }"></ltng:require>
+   <ltng:require styles="{!$Resource.side }"></ltng:require> 
+   <ltng:require styles="{!$Resource.body }"></ltng:require>
+
+   
+   <div class="c-container">
+      <div class="fullpage slds-scope">
+         <div class="slds-grid slds-wrap">
+            <lightning:layout multipleRows="true">
+               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage header-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:header />
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+               <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                    <c:mobilemenu />
+                   <lightning:layout>
+                     <div class="new-containerpage">
+                        <div class="slds-container--x-large new-container">
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <c:sidebarnew />
+                           </lightning:layoutItem>
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                              <div class="page-section page-main">
+                                 <div class="middlebar1">
+                                    <h2>Settings &amp; Permissions</h2>
+                             </div>
+                                 <div class="dev">
+                                     <p class="recent">Customize your Client Portal, report headers, email signature, custom exports, and displays, set access permission for others to manage your listings and clients and check your permission settings.</p>
+                                     <div class="view"></div>
+                                     
+                                     
+                                     
+                                     
+                                     <div class="lake1">
+                         <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+            <div class="part3">
+                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                               <div class="layer part4"> 
+                           
+                           <div class="topup">
+                                   <h2>MLS Settings</h2>
+                                   <p>Customize your Client Portal, report headers, email signature, custom exports, and displays.</p>
+                                     <lightning:button class="brand " variant="brand " label="MLS Settings" title="Brand action"  />
+                                   </div>
+                                
+                             </div>
+                </lightning:layoutItem>
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                               <div class="layer part4"> 
+                           
+                           <div class="topup">
+                                   <h2>Manage Act As</h2>
+                                   <p>Do you want to allow others to manage your listings and clients?</p>
+                                     <lightning:button class="brand " variant="brand " label="Manage Act As" title="Brand action"  />
+                                   </div>
+                                
+                             </div>
+                </lightning:layoutItem>
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                               <div class="layer part3"> 
+                           
+                           <div class="topup">
+                                   <h2>Permissions</h2>
+                                   <p>Check and manage your permissions settings.</p>
+                                     <lightning:button class="brand " variant="brand " label="Permissions" title="Brand action"  />
+                                   </div>
+                                
+                             </div>
+                </lightning:layoutItem>
+                     
+                  
+                        </div>
+
+            </lightning:layoutItem>  
+                         </div>        
+                                   
+                        
+                                 </div>
+                              </div>
+                           </lightning:layoutItem>
+                        </div>
+                     </div>
+                  </lightning:layout>
+               </lightning:layoutItem>
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage footer-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:footer />
+                         
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+            </lightning:layout>
+         </div>
+      </div>
+ 
+   </div>
+</aura:component>

@@ -1,0 +1,97 @@
+<aura:component >
+	<nav class="menu">
+                     
+  <input id ="menu__toggle" type="checkbox" class='menu__toggle'/>
+  <label for="menu__toggle" class="menu__toggle-label">
+       <img  src="{!$Resource.bright + '/bright-3.0/images/mmobile.png'}" alt="" />
+     <!-- <img  src="{!$Resource.bright + '/bright-3.0/images/mclose.png'}" alt="" />-->
+
+	  
+   
+  </label>
+                  
+  <ol class='menu__content'>
+      <li class="callfree">   <div class="custom-box ">
+                                
+                                 <div class="call">
+                                    <h4>Amanda Lynn </h4>
+                                    <h3>
+                                       Subscriber ID: 8987987 &nbsp;  
+                                       
+                                    </h3>
+                                 </div>
+                              </div></li>
+    <li class="menu-item"><a href="#"><img  src="{!$Resource.bright + '/bright-3.0/images/AccountsHome-black.svg'}" alt="" />
+     
+                                          Accounts Home</a></li>
+    <li class="menu-item"><a href="#"><img  src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="" />
+                                          
+                                          Profile</a></li>
+    <li onclick="{!c.treeMenu}" class="menu-item">
+      <a href="#"><img  src="{!$Resource.bright + '/bright-3.0/images/Brokerage.svg'}" alt="" />
+                          
+                                          Brokerage<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+      <ol class="sub-menu submenu1">
+        <li class="menu-item"><a href="#">Office Roster</a></li>
+        <li class="menu-item"><a href="#">Office Statement</a></li>
+        <li class="menu-item"><a href="#">W-9 Forms</a></li>
+           <li class="menu-item"><a href="#">Office Information</a></li>
+        <li class="menu-item"><a href="#">Responsible Broker</a></li>
+        <li class="menu-item"><a href="#">Authorized Signers</a></li>
+           <li class="menu-item"><a href="#">Office Managers</a></li>
+        <li class="menu-item"><a href="#">Accuracy Notifications</a></li>
+        <li class="menu-item"><a href="#">Data Licensing</a></li>
+      </ol>
+    </li>
+    <li onclick="{!c.treeMenu1}" class="menu-item">
+      <a href="#"><img  src="{!$Resource.bright + '/bright-3.0/images/Subscription.svg'}" alt="" />
+                                          
+                                          Subscription<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+      <ol class="sub-menu submenu2">
+        <li class="menu-item"><a href="#">Subscribed Products  </a></li>
+        <li class="menu-item"><a href="#">License Association MLS</a></li>
+        <li class="menu-item"><a href="#">Agent Listing Transfer</a></li>
+          <li class="menu-item"><a href="#">Agent Accuracy Notifications  </a></li>
+        <li class="menu-item"><a href="#">IDX &amp; VOW Licensing Request</a></li>
+        <li class="menu-item"><a href="#">Office Exclusive Certification</a></li>
+          <li class="menu-item"><a href="#">Data Licensing </a></li>
+      </ol>
+    </li>
+      <li  onclick="{!c.treeMenu2}" class="menu-item">
+      <a href="#"> <img  src="{!$Resource.bright + '/bright-3.0/images/Requests.svg'}" alt="" />
+                           
+                                          Requests<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+      <ol class="sub-menu submenu3">
+        <li class="menu-item"><a href="#">New Applications   </a></li>
+        <li class="menu-item"><a href="#">Agent Transfer Request </a></li>
+        <li class="menu-item"><a href="#">Listing Transfer Request</a></li>
+          <li class="menu-item"><a href="#"> IDX &amp; VOW Agent Request Forms  </a></li>
+      
+     
+      </ol>
+    </li>
+      <li onclick="{!c.treeMenu3}" class="menu-item">
+      <a href="#"><img  src="{!$Resource.bright + '/bright-3.0/images/Finance.svg'}" alt="" />
+                                           Finance<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+      <ol class="sub-menu submenu4">
+        <li class="menu-item"><a href="#">Broker Data Licensing Fees  </a></li>
+        <li class="menu-item"><a href="#">Brokerage Payment Method</a></li>
+        <li class="menu-item"><a href="#">Statement of Account</a></li>
+          <li class="menu-item"><a href="#"> Pay My Balances  </a></li>
+        <li class="menu-item"><a href="#">My Payment Methods </a></li>
+     
+      </ol>
+    </li>
+    <li class="menu-item"><a href="#"> <img  src="{!$Resource.bright + '/bright-3.0/images/Notification-Preferences.svg'}" alt="" />
+                                          
+                                            Notification Preferences</a></li>
+      <li class="menu-item"><a href="#"> <img  src="{!$Resource.bright + '/bright-3.0/images/Settings-Permissions.svg'}" alt="" />
+                                            Settings &amp; Permissions</a></li>
+       <li class="menu-item"><a href="#"> <img  src="{!$Resource.bright + '/bright-3.0/images/Settings-Permissions.svg'}" alt="" />
+                                            Support</a></li>
+       <li class="menu-item"><a href="#">  <img  src="{!$Resource.bright + '/bright-3.0/images/Logout.svg'}" alt="" />
+                                           
+                                           Logout</a></li>
+  </ol>
+</nav> 
+</aura:component>

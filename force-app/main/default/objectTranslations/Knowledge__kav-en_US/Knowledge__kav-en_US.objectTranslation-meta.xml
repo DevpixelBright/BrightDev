@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Knowledge</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Knowledge</value>
+    </caseValues>
+    <layouts>
+        <layout>Case Management Article Layout</layout>
+        <sections>
+            <label></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>FAQ Standard Article FAQ Standard Article Layout</layout>
+        <sections>
+            <label></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>KB Article KB Article Layout</layout>
+        <sections>
+            <label></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Knowledge Layout</layout>
+        <sections>
+            <label></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Standard Article Standard Article Layout</layout>
+        <sections>
+            <label></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Knowledge Article</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label></label>
+        <name>API_is_Acceptable</name>
+    </quickActions>
+    <recordTypes>
+        <label></label>
+        <name>FAQ_Standard_Article</name>
+    </recordTypes>
+    <recordTypes>
+        <label></label>
+        <name>KB_Article</name>
+    </recordTypes>
+    <recordTypes>
+        <label></label>
+        <name>Standard_Article</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>KB_PublishCheck</name>
+    </validationRules>
+    <webLinks>
+        <label></label>
+        <name>Print</name>
+    </webLinks>
+</CustomObjectTranslation>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Agent_should_not_be_blank</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISBLANK( Agent__c ),
+NOT(ISBLANK(  On_Behalf_of_Agent__c ))
+)</errorConditionFormula>
+    <errorDisplayField>Agent__c</errorDisplayField>
+    <errorMessage>Agent should not be blank when the order is made on behalf of another agent</errorMessage>
+</ValidationRule>

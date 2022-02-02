@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Billing_Unit_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>CS_Home Unit Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>FRNT, FRONT</fullName>
+                <default>false</default>
+                <label>FRNT, FRONT</label>
+            </value>
+            <value>
+                <fullName>SLIP, SLIP</fullName>
+                <default>false</default>
+                <label>SLIP, SLIP</label>
+            </value>
+            <value>
+                <fullName>BLDG, BUILDING</fullName>
+                <default>false</default>
+                <label>BLDG, BUILDING</label>
+            </value>
+            <value>
+                <fullName>#, #</fullName>
+                <default>false</default>
+                <label>#, #</label>
+            </value>
+            <value>
+                <fullName>PIER, PIER</fullName>
+                <default>false</default>
+                <label>PIER, PIER</label>
+            </value>
+            <value>
+                <fullName>KEY, KEY</fullName>
+                <default>false</default>
+                <label>KEY, KEY</label>
+            </value>
+            <value>
+                <fullName>APT, APARTMENT</fullName>
+                <default>false</default>
+                <label>APT, APARTMENT</label>
+            </value>
+            <value>
+                <fullName>DEPT#, DEPARTMENT #</fullName>
+                <default>false</default>
+                <label>DEPT#, DEPARTMENT #</label>
+            </value>
+            <value>
+                <fullName>LBBY, LOBBY</fullName>
+                <default>false</default>
+                <label>LBBY, LOBBY</label>
+            </value>
+            <value>
+                <fullName>SU, SUITE</fullName>
+                <default>false</default>
+                <label>SU, SUITE</label>
+            </value>
+            <value>
+                <fullName>BLDG#, BUILDING #</fullName>
+                <default>false</default>
+                <label>BLDG#, BUILDING #</label>
+            </value>
+            <value>
+                <fullName>OFC#, OFFICE #</fullName>
+                <default>false</default>
+                <label>OFC#, OFFICE #</label>
+            </value>
+            <value>
+                <fullName>FLR, FLOOR</fullName>
+                <default>false</default>
+                <label>FLR, FLOOR</label>
+            </value>
+            <value>
+                <fullName>LOWR, LOWER</fullName>
+                <default>false</default>
+                <label>LOWR, LOWER</label>
+            </value>
+            <value>
+                <fullName>UNIT, UNIT</fullName>
+                <default>false</default>
+                <label>UNIT, UNIT</label>
+            </value>
+            <value>
+                <fullName>PH, PENTHOUSE</fullName>
+                <default>false</default>
+                <label>PH, PENTHOUSE</label>
+            </value>
+            <value>
+                <fullName>SIDE, SIDE</fullName>
+                <default>false</default>
+                <label>SIDE, SIDE</label>
+            </value>
+            <value>
+                <fullName>UNIT, UNIT #</fullName>
+                <default>false</default>
+                <label>UNIT, UNIT #</label>
+            </value>
+            <value>
+                <fullName>RM, ROOM</fullName>
+                <default>false</default>
+                <label>RM, ROOM</label>
+            </value>
+            <value>
+                <fullName>STE#, SUITE #</fullName>
+                <default>false</default>
+                <label>STE#, SUITE #</label>
+            </value>
+            <value>
+                <fullName>RM#, ROOM #</fullName>
+                <default>false</default>
+                <label>RM#, ROOM #</label>
+            </value>
+            <value>
+                <fullName>DEPT, DEPARTMENT</fullName>
+                <default>false</default>
+                <label>DEPT, DEPARTMENT</label>
+            </value>
+            <value>
+                <fullName>BSMT, BASEMENT</fullName>
+                <default>false</default>
+                <label>BSMT, BASEMENT</label>
+            </value>
+            <value>
+                <fullName>REAR, REAR</fullName>
+                <default>false</default>
+                <label>REAR, REAR</label>
+            </value>
+            <value>
+                <fullName>SPC, SPACE</fullName>
+                <default>false</default>
+                <label>SPC, SPACE</label>
+            </value>
+            <value>
+                <fullName>STE, SUITE</fullName>
+                <default>false</default>
+                <label>STE, SUITE</label>
+            </value>
+            <value>
+                <fullName>APT#, APARTMENT #</fullName>
+                <default>false</default>
+                <label>APT#, APARTMENT #</label>
+            </value>
+            <value>
+                <fullName>TRLR, TRAILER</fullName>
+                <default>false</default>
+                <label>TRLR, TRAILER</label>
+            </value>
+            <value>
+                <fullName>LOT, LOT</fullName>
+                <default>false</default>
+                <label>LOT, LOT</label>
+            </value>
+            <value>
+                <fullName>UPPR, UPPER</fullName>
+                <default>false</default>
+                <label>UPPR, UPPER</label>
+            </value>
+            <value>
+                <fullName>OFC, OFFICE</fullName>
+                <default>false</default>
+                <label>OFC, OFFICE</label>
+            </value>
+            <value>
+                <fullName>STOP, STOP</fullName>
+                <default>false</default>
+                <label>STOP, STOP</label>
+            </value>
+            <value>
+                <fullName>FL, FLOOR</fullName>
+                <default>false</default>
+                <label>FL, FLOOR</label>
+            </value>
+            <value>
+                <fullName>HNGR, HANGAR</fullName>
+                <default>false</default>
+                <label>HNGR, HANGAR</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>CURE_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>CURE Sharing</label>
+        <sharedTo>
+            <allCustomerPortalUsers></allCustomerPortalUsers>
+        </sharedTo>
+        <criteriaItems>
+            <field>Origin</field>
+            <operation>equals</operation>
+            <value>CURE Community</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingOwnerRules>
+        <fullName>AMS_SMS</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>AMS SMS</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+        <sharedFrom>
+            <queue>AMS_SMS</queue>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Billing_Queue_Case_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Cases in the Billing queue can be read by everyone.</description>
+        <label>Billing Queue Case Sharing</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+        <sharedFrom>
+            <queue>Billing</queue>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Compliance_Role_Case_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Cases owned by Compliance users are hidden from other roles.</description>
+        <label>Compliance Role Case Sharing</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>Compliance</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>Compliance</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Data_Corrections_Case_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Cases in the Data Corrections queue can be read by everyone.</description>
+        <label>Data Corrections Case Sharing</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+        <sharedFrom>
+            <queue>SC_Data_Corrections</queue>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Email_Queue_Case_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Cases in the Email Support Analyst queue can be read by everyone.</description>
+        <label>Email Queue Case Sharing</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+        <sharedFrom>
+            <queue>Email_Support_Analysts</queue>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Exception_Queue_Case_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Cases in the Exception queue are read/write to everyone.</description>
+        <label>Exception Queue Case Sharing</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+        <sharedFrom>
+            <queue>Exception</queue>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Level_1_Queue_Case_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Cases in Support queues can be read by everyone.</description>
+        <label>Level 1 Queue Case Sharing</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+        <sharedFrom>
+            <queue>Level_1</queue>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Level_2_Queue_Case_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Cases in the Level 2 queue can be read by everyone.</description>
+        <label>Level 2 Queue Case Sharing</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+        <sharedFrom>
+            <queue>Level_2</queue>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Level_3_Queue_Case_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Cases in the Level 3 queue can be read by everyone.</description>
+        <label>Level 3 Queue Case Sharing</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+        <sharedFrom>
+            <queue>Level_3</queue>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Marketing_CAM_Queue_Case_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Cases in the CAM queue can be read by everyone.</description>
+        <label>Marketing CAM Queue Case Sharing</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+        <sharedFrom>
+            <queue>Marketing_CAMS</queue>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Marketing_Ed_Queue_Case_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Cases in the Marketing Education queue can be read by everyone.</description>
+        <label>Marketing Ed Queue Case Sharing</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+        <sharedFrom>
+            <queue>Marketing_Education</queue>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Processing_Queue_Case_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Cases in the Processing queue can be read by everyone.</description>
+        <label>Processing Queue Case Sharing</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+        <sharedFrom>
+            <queue>Processing</queue>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>SC_Supervisors_Case_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Cases in the Supervisors queue can be read by everyone.</description>
+        <label>SC Supervisors Case Sharing</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+        <sharedFrom>
+            <queue>SC_Supervisors</queue>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>SC_Virtual_Tours_Case_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Cases in the Virtual Tours queue can be read by everyone.</description>
+        <label>SC Virtual Tours Case Sharing</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+        <sharedFrom>
+            <queue>SC_Virtual_Tours</queue>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Staff_Cases_public_Read_Write</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Staff Cases public Read/Write</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>Staff</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

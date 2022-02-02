@@ -1,0 +1,31 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" lightningstylesheets="true">
+    <apex:includeLightning />
+    <apex:slds />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />   
+    <c:Bootstrap_Resources />
+    <apex:stylesheet value="{!URLFOR($Resource.AgentAccuracy_CSS, '/AccuracyPolicyAgentStyles/AccuracyPolicyAgentStyle.css')}"/>
+    
+    <apex:composition template="Communities_Base">
+        <apex:define name="content">
+            <div id="dataTable" />
+            <script>
+            try {
+                $Lightning.use("c:Communities_AppealFormApp", function() {
+                    $Lightning.createComponent("c:Communities_AppealForm", {}, "dataTable", function(cmp) {
+                        
+                    });
+                }); 
+            }
+            catch(err) {
+                if(err.message == '$Lightning is not defined')
+                    window.location = '';
+            }
+            </script>
+        </apex:define>
+    </apex:composition>
+    
+    
+    
+    
+    
+</apex:page>

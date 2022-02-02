@@ -1,0 +1,22 @@
+<apex:page standardController="Related_Association__c" extensions="AccountAssociations" tabStyle="Account" showHeader="true" sidebar="true" lightningstylesheets="true"> 
+<apex:form >
+<apex:sectionHeader subtitle="New Account Association" />
+   <apex:pageBlock mode="edit">
+        <apex:pageBlockSection title="Information">            
+            <apex:inputField value="{!association.Association__c}"/>
+            <apex:inputField value="{!association.Start_Date__c}"/>
+            <apex:inputField value="{!association.Broker_Code__c}"/>
+            <apex:inputField value="{!association.MDS_Status__c}"/>
+            <apex:inputField value="{!association.Notes__c}"/>  
+            <apex:inputField value="{!association.End_Date__c}"/>
+            <apex:inputField value="{!association.Primary__c}"/>              
+            <apex:inputField value="{!association.SysPrRoleKey__c}"/>   
+            <apex:inputField value="{!association.Status__c}"/>            
+        </apex:pageBlockSection>
+        <apex:pageBlockButtons >
+            <apex:commandButton value="Save" action="{!saveEdit}"/>
+            <apex:commandButton value="Cancel" action="{!cancelEdit}"/>
+        </apex:pageBlockButtons>    
+    </apex:pageBlock>  
+</apex:form>
+</apex:page>

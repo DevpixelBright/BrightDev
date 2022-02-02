@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>RETS Product Order</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>RETS Product Orders</value>
+    </caseValues>
+    <layouts>
+        <layout>RETS Product Order Layout</layout>
+        <sections>
+            <label></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>On Activation Details (Read Only)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Zuora Integration Details (Read Only)</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>AgentOrBroker_Validate</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Agent_should_not_be_blank</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Status</name>
+    </validationRules>
+</CustomObjectTranslation>

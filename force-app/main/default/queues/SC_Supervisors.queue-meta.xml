@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <email>noemail@mris.net</email>
+    <name>SC Supervisors</name>
+    <queueMembers>
+        <publicGroups>
+            <publicGroup>AllInternalUsers</publicGroup>
+        </publicGroups>
+        <users>
+            <user>antonio.ross@mris.net</user>
+            <user>cameron.jones@mris.net</user>
+            <user>glennae.russell@mris.net</user>
+            <user>hamza.fellah@brightmls.com</user>
+            <user>katrina.washington@mris.net</user>
+            <user>monica.williams@mris.net</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>Case</sobjectType>
+    </queueSobject>
+</Queue>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Amount_is_required_for_Check_Request</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(NOT(ISNULL(Date__c)), ISBLANK(Amount__c))</errorConditionFormula>
+    <errorMessage>Amount is required for check request.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,303 @@
+<apex:page id="thePage" controller="NewAgentApplication" cache="false" showHeader="false">
+    <head>  
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/jquery.min.js')}"></script>
+        <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/bootstrap.min.js')}"></script>  
+        <apex:stylesheet value="{!URLFOR($Resource.Bootstrap_Layout_Library, '/css/bootstrap.min.css')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/postmessage.js')}"/>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>    
+        <apex:stylesheet value="{!URLFOR($Resource.wholestyle, '/fonts/style.css')}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.wholestyle, '/fonts/fonts-style.css')}"/>
+    </head>
+            
+    <style>
+        #accordion .panel-default { 
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.40); 
+        }
+        .menu-header h3 table { 
+            margin-left: 26px; 
+        }
+        #accordion { 
+            min-height:350px; 
+        }
+        
+        .inp {
+            position: relative;
+            margin: auto;
+            width: 100%;
+            max-width: 280px;
+        }
+        .inp .title-label {
+            padding:0;
+            position: absolute;
+            top: 16px;
+            left: 0;
+            font-size: 16px;
+            color: #9098a9;
+            font-weight: 500;
+            transform-origin: 0 0;
+            transition: all 0.2s ease;
+        }
+        .inp .border {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 2px;
+            width: 100%;
+            background: #07f;
+            transform: scaleX(0);
+            transform-origin: 0 0;
+            transition: all 0.15s ease;
+        }
+        .inp input {
+            -webkit-appearance: none;
+            width: 100%;
+            border: 0;
+            font-family: inherit;
+            padding: 12px 0;
+            height: 48px;
+            font-size: 16px;
+            font-weight: 500;
+            border-bottom: 2px solid #c8ccd4;
+            background: none;
+            border-radius: 0;
+            color: #223254;
+            transition: all 0.15s ease;
+        }
+        .inp input:hover {
+            background: rgba(34,50,84,0.03);
+        }
+        .inp input:not(:placeholder-shown) + span {
+            color: #5a667f;
+            transform: translateY(-26px) scale(0.75);
+        }
+        .inp input:focus {
+            background: none;
+            outline: none;
+        }
+        
+        .inp input:focus + span {
+            color: #07f;
+            transform: translateY(-26px) scale(0.75);
+        }
+        .inp input:focus + span + .border {
+            transform: scaleX(1);
+        }
+        
+        .ui-menu-item-wrapper { font-family: 'MontserratLight';}
+        .menu-header p { margin:10px 0; }
+        p {font-family: 'MontserratLight' !important;}
+        
+        </style>
+        
+        <script>
+            var availableTags = [];
+            $(document).ready(function() {
+                $(".errorM3").addClass("alert alert-danger");
+                $(".infoM3").addClass("alert alert-info");
+                $(".confirmM3").addClass("alert alert-success");            
+            });
+        
+            function validateLicenseDetails() {
+                var errorMsg = '';
+                console.log('----test--'+$('[id$=SubscriberId]').val());
+                
+                if(($('[id$=SubscriberId]').val() == undefined || $('[id$=SubscriberId]').val() == '')
+                   && ($('[id$=applicationId]').val() == undefined || $('[id$=applicationId]').val() == '')
+                   && ($('[id$=TrendLoginName]').val() == undefined || $('[id$=TrendLoginName]').val() == '')) {
+                    
+                    errorMsg += ' <li>Required field missing </li>';
+                }
+                if(errorMsg != '') {
+                    console.log('--errorMsg--'+errorMsg);
+                    var errorBlock = '<div class="message errorM3 alert alert-danger" role="alert"><ul>' + errorMsg + '</ul></div>';
+                    $('#messages').html(errorBlock);
+                    return false;
+                }
+                else {
+                    console.log('--errorMsg--'+errorMsg);
+                    $('#messages').html('');
+                    return true;
+                }                       
+            }
+        </script> 
+        
+        
+        <header>
+            <div class="header_row">
+       <!--         <img class="logo" src="{!if(mls == 'TREND', URLFOR($Resource.eProcessNewlogos, '/images/TREND.png'), if(mls == 'BRIGHT', URLFOR($Resource.eProcessNewlogos, '/images/BRIGHT.png'),URLFOR($Resource.eProcessNewlogos, '/images/MRIS.png')))}" alt="logo" height="70" /> -->
+                <img class="logo" src="{!URLFOR($Resource.eProcessNewlogos, '/images/BRIGHT.png')}" alt="logo" height="70" />
+
+            </div>
+        </header>
+        <br/>   
+        <apex:form id="theForm" html-autocomplete="off">
+            <div class="body_content col-sm-12">
+                
+                <div class="col-sm-12">       
+                    <apex:outputPanel id="ContentBlock">       
+                        
+                        <div style="float:left;">                   
+                            <a class="goback-link" href="/eProcess/NewAgentApplication?mls={!mls}"> <i class="glyphicon glyphicon-home"/>&nbsp; HOME</a> / {!if($CurrentPage.parameters.app == 'true', 'APPLICATION STATUS', 'REACTIVATE ACCOUNT')} 
+                        </div>
+                        
+                        
+                        <div style="clear:both;"></div>
+                        <div id="messages">
+                            <apex:pagemessages id="page_message"></apex:pagemessages>
+                        </div>
+                        
+                        
+                        <div class="panel-group " id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default ">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <div class="col-sm-12 menu-header ">
+                                        <h3 class="panel-title">
+                                            <div class="to-reactivate-sec">
+                                                
+                                                <apex:outputPanel rendered="{!if($CurrentPage.parameters.app == 'false' && mls != 'TREND', true, false )}">
+                                                    <apex:outputText styleclass="step-heading sectionheader"  value="Reactivate your subscription"/> 
+                                                    <p style="">To reactivate your account you must enter your Subscription ID. If you dont know your Subscription ID, call the Customer Support Center at 1-844-55 BRIGHT (1-844-552-7444) for assistance</p>
+                                                </apex:outputPanel>
+                                                
+                                                <apex:outputPanel rendered="{!if($CurrentPage.parameters.app == 'false' && mls == 'TREND', true, false )}">
+                                                    <apex:outputText styleclass="step-heading sectionheader"  value="TREND Login Name"/> 
+                                                    <p style="">To reactivate your account, you must enter your TREND Login Name. If you don’t know your TREND Login Name, call the Customer Support Center at 1-844-55-BRIGHT (1-844-552-7444) for assistance. <br/><br/>Note: you can only reactivate your account online if you are a licensed associate broker or agent.</p>
+                                                </apex:outputPanel>
+                                                
+                                                <apex:outputPanel rendered="{!if($CurrentPage.parameters.app == 'true', true, false )}">
+                                                    <apex:outputText styleclass="step-heading sectionheader"  value="Application Status" />
+                                                    <p style="">To check the status of your application, enter your Application ID </p>
+                                                </apex:outputPanel>
+                                                
+                                            </div>
+                                        </h3>
+                                    </div>
+                                </div>
+                                
+                                <apex:outputPanel rendered="{!licenseBlock}">
+                                    <div id="collapseOne"  role="tabpanel" aria-labelledby="headingOne">
+                                        <div class="panel-body" >
+                                            
+                                            <div class="col-sm-12 subsc-id-sec" style="border-bottom:1px solid #fff;">
+                                                <div class="subscription-id-sec">
+                                                    
+                                                    <apex:outputPanel rendered="{!if($CurrentPage.parameters.app == 'false' && mls != 'TREND', true, false)}">
+                                                        <!--                                                        <div class="form-group"> -->
+                                                        <!--                                                            <apex:inputText styleClass="form-control inputFiledsCss" style="height:40px; border-left: 2px solid red;" value="{!subscriberId}" id="SubscriberId" disabled="{!if(licenseBlockState == 'Completed', true, false)}" html-placeholder="Subscription ID"/> -->
+                                                        <!--                                                        </div> -->
+                                                        
+                                                        
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group">
+                                                                <label for="inp" class="inp">
+                                                                    <apex:inputText value="{!subscriberId}" id="SubscriberId" disabled="{!if(licenseBlockState == 'Completed', true, false)}" html-placeholder=" " />
+                                                                    <span onclick="$(this).prev().focus();" class="title-label">Subscription ID <span style="color:red;">*</span></span>
+                                                                    <span class="border"></span>
+                                                                </label>
+                                                                <label class="field-error" id="SubscriberError"></label>
+                                                            </div>                            
+                                                        </div>
+                                                        
+                                                        
+                                                    </apex:outputPanel>
+                                                    
+                                                    <apex:outputPanel rendered="{!if($CurrentPage.parameters.app == 'false' && mls == 'TREND', true, false)}">
+                                                        <!--                                                        <div class="form-group"> -->
+                                                        <!--                                                            <apex:inputText styleClass="form-control inputFiledsCss" style="height:40px; border-left: 2px solid red;" value="{!trendLoginName}" id="TrendLoginName" disabled="{!if(licenseBlockState == 'Completed', true, false)}" html-placeholder="TREND Login Name" /> -->
+                                                        <!--                                                        </div> -->
+                                                        
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group">
+                                                                <label for="inp" class="inp">
+                                                                    <apex:inputText value="{!trendLoginName}" id="TrendLoginName" disabled="{!if(licenseBlockState == 'Completed', true, false)}" html-placeholder=" " />
+                                                                    <span onclick="$(this).prev().focus();" class="title-label">TREND Login Name <span style="color:red;">*</span></span>
+                                                                    <span class="border"></span>
+                                                                </label>
+                                                                <label class="field-error" id="TrendLoginNameError"></label>
+                                                            </div>                            
+                                                        </div>
+                                                        
+                                                        
+                                                    </apex:outputPanel>
+                                                    
+                                                    <apex:outputPanel rendered="{!if($CurrentPage.parameters.app == 'true', true, false)}">
+                                                        <!--                                                        <apex:inputText styleClass="form-control inputFiledsCss" style="height:40px; border-left: 2px solid red;" value="{!applicationId}" id="applicationId" disabled="{!if(licenseBlockState == 'Completed', true, false)}"  html-placeholder="Application ID" /> -->
+                                                        
+                                                        
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group">
+                                                                <label for="inp" class="inp">
+                                                                    <apex:inputText value="{!applicationId}" id="applicationId" disabled="{!if(licenseBlockState == 'Completed', true, false)}"  html-placeholder=" " />
+                                                                    <span onclick="$(this).prev().focus();" class="title-label">Application ID <span style="color:red;">*</span></span>
+                                                                    <span class="border"></span>
+                                                                </label>
+                                                                <label class="field-error" id="applicationIdError"></label>
+                                                            </div>                            
+                                                        </div>
+                                                        
+                                                    </apex:outputPanel>
+                                                    
+                                                </div>
+                                                
+                                                <apex:outputPanel rendered="{!licenseStatus == 'Existing'}">
+                                                    <div class="col-sm-12 status-message" style="padding-top:10px; border-bottom:1px solid #fff;">
+                                                        <div class="alert alert-success" role="alert">
+                                                            <strong>Thank you for subscribing with {!mls}.</strong> Please click below "View Application" to see more details.
+                                                        </div>
+                                                    </div>
+                                                </apex:outputPanel>
+                                                
+                                                <apex:outputPanel rendered="{!licenseStatus == 'Active'}">
+                                                    <div class="col-sm-12 status-message" style="padding-top:10px; border-bottom:1px solid #fff;">
+                                                        <div class="alert alert-success" role="alert">
+                                                            <strong>Your subscription is already Active</strong>
+                                                        </div>
+                                                    </div>
+                                                </apex:outputPanel> 
+                                                
+                                                
+                                                <apex:outputPanel rendered="{!licenseStatus == 'Terminated'}">
+                                                    <div class="col-sm-12" style="padding-top:10px; border-bottom:1px solid #fff;">
+                                                        <div class="alert alert-danger status-message" role="alert">
+                                                            Your subscription has terminated. Please click below "Reinstate" button to activate again.
+                                                        </div>
+                                                    </div>
+                                                </apex:outputPanel>
+                                                <div class="form-group subscription-but">
+                                                    <apex:commandLink styleClass="button submitBtn" style="{!if($CurrentPage.parameters.app == 'false' , '', 'display:none;' )}" value="Submit" onclick="return validateLicenseDetails();" action="{!redirectToReinstate}"/>
+                                                    <apex:commandLink styleClass="button submitBtn" style="{!if($CurrentPage.parameters.app == 'true' , '', 'display:none;' )}" value="Submit" onclick="return validateLicenseDetails();" action="{!redirectToPayment}"/>
+                                                </div> 
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </apex:outputPanel>
+                                
+                            </div>
+                        </div>
+                        
+                        
+                    </apex:outputPanel>
+                </div>
+                <div style="clear:both;" />
+                <div class="copy-cat"> 
+                    Copyright © 2017 Bright MLS, Inc.
+                </div>
+            </div>
+        </apex:form>
+        
+        <script>
+        function submitPaymentMethod() {        
+            submitHostedPage("z_hppm_iframe");
+        } 
+        function callbackFail(errorMessage) {
+            alert(errorMessage);
+        }
+        function callbackSuccess(pmid) {
+            makePayment(pmid);
+        }                   
+        </script>        
+    </apex:page>

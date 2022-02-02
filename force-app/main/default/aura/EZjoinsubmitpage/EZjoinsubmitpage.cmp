@@ -1,0 +1,190 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	 <aura:attribute name="saved" type="Boolean" default="false" />
+    <aura:attribute name="showSpinner" type="Boolean" default="false" />
+    <aura:attribute name="disabled" type="Boolean" default="true" />
+    <aura:attribute name="currentStep" type="String" default="Step_1" />
+    <aura:attribute name="validationError" type="Boolean" default="false" />
+    <aura:attribute name="validationErrorMsg" type="String" default="" />
+    <aura:attribute name="captcha" type="String" default="" />
+    <aura:attribute name="recTypeId" type="String" default="" />
+    <aura:attribute name="initCatptchaDone" type="Boolean" default="false"/>
+    <div class="fullpage slds-scope">
+         <div class="slds-grid slds-wrap">
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside newsideheader">
+                      <div class="slds-container--x-large new-container">
+                         <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small new-contain new-containnew">
+                       <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_6-of-12 field-side ">
+                             <div class="logo"><img src="{!$Resource.brightlogolightning}"/>
+                           
+                           </div>
+                             </div>
+                          
+                      </div>
+                         </div>
+                 </div>
+             <div class="slds-container--x-large new-container">
+                 <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small new-contain new-containnew">
+                     <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+
+    
+
+    <lightning:accordion aura:id="accordion" activeSectionName="A">
+        <lightning:accordionSection class="active-application" name="A" label="Application Details">
+          
+            <aura:set attribute="body">
+            
+                <fieldset class="slds-form-element">
+  
+  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                 <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_2-of-12 field-side1 ">
+                <h5>Office ID</h5>
+                </div>
+                 <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side1">
+                  
+                <h6>LFI0700</h6>
+                </div>
+                   <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side1 ">
+                  
+                 <h5>Account Name</h5>
+                </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side1 ">
+                        <h6>{!v.brokerCodeName}</h6>
+                </div>
+            </div>
+             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                 <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_2-of-12 field-side1 ">
+                <h5>City</h5>
+                </div>
+                 <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side1">
+                  
+                <h6>Rockvilla</h6>
+                </div>
+                   <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side1 ">
+                  
+                 <h5>State</h5>
+                </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side1 ">
+                  
+                 <h6>MD</h6>
+                </div>
+            </div>
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                 <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_2-of-12 field-side1 ">
+                <h5>zip</h5>
+                </div>
+                 <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side1">
+                  
+                <h6>20185</h6>
+                </div>
+                   <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side1 ">
+                  
+                 <h5>Saluation</h5>
+                </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side1 ">
+                  
+                 <h6>Mr</h6>
+                </div>
+            </div>
+             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                 <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_2-of-12 field-side1 ">
+                <h5>First Name</h5>
+                </div>
+                 <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side1">
+                  
+                <h6>Test</h6>
+                </div>
+                   <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side1 ">
+                  
+                 <h5>Last Name</h5>
+                </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side1 ">
+                  
+                 <h6>Test1</h6>
+                </div>
+            </div>
+             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                 <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_2-of-12 field-side1 ">
+                <h5>Middle Name</h5>
+                </div>
+                 <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side1">
+                  
+                <h6>Account</h6>
+                </div>
+                   <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side1 ">
+                  
+                 <h5>Nick Name</h5>
+                </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side1 ">
+                  
+                 <h6>txt</h6>
+                </div>
+            </div>
+               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                 <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_2-of-12 field-side1 ">
+                <h5>Primary Phone</h5>
+                </div>
+                 <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side1">
+                  
+                <h6>09199999999</h6>
+                </div>
+                   <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side1 ">
+                  
+                 <h5>Email</h5>
+                </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side1 ">
+                  
+                 <h6>test@gmail.com</h6>
+                </div>
+            </div>
+              <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                 <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_2-of-12 field-side1 ">
+                <h5>Suffix</h5>
+                </div>
+                 <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side1">
+                  
+                <h6>11</h6>
+                </div>
+                
+            </div>
+                     <div style=" clear:both;" class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                 <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_2-of-12 field-side1 ">
+                <h4 class="clrs">Agents Selected</h4> 
+                         </div></div>
+                    <div style=" clear:both;" class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+            
+                 <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side1">
+                  
+                <h3>1. 156467 Agent One Name</h3>
+                </div>
+                   <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side1 ">
+                  
+                 <h3>2. 156467 Agent Two Name</h3>
+                </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side1 ">
+                  
+                 <h3>3. 156467 Agent Three Name</h3>
+                </div>
+            </div>
+</fieldset>
+         
+            </aura:set>
+        </lightning:accordionSection>
+       
+       
+       
+     
+       
+    </lightning:accordion>
+
+
+                     </div>
+                 </div>
+                     <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                    <div class="footer"><p>Copyright © 2017 Bright MLS, Inc.</p></div>
+                 </div>
+             </div>
+         </div>
+    </div>
+</aura:component>

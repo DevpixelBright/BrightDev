@@ -1,0 +1,83 @@
+<apex:page showHeader="false" standardStylesheets="false" lightningstylesheets="true">
+    <apex:pageMessages />
+    <c:SMS_JQuery />
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+            var regexS = "[\\?&]" + name + "=([^&#]*)";
+            var regex = new RegExp(regexS);
+            var results = regex.exec(window.location.search);
+            if (results == null) {
+                return "";
+            } else {
+                return decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+        }
+        
+        function callback() {
+            if (getParameterByName("success") == "true") {
+                //document.write('success');
+                parent.callbackSuccess(getParameterByName("refId"));
+                //document.write(getParameterByName("refId"));
+            } else {
+                
+                var callbackParameters = "";
+                if (getParameterByName("errorCode") != "") {
+                    callbackParameters += "errorCode=" + getParameterByName("errorCode");
+                }
+                if (getParameterByName("errorMessage") != "") {
+                    callbackParameters += "<br>errorMessage=" + getParameterByName("errorMessage");
+                }
+                if (getParameterByName("errorField_creditCardType") != "") {
+                    callbackParameters += "<br>errorField_creditCardType=" + getParameterByName("errorField_creditCardType");
+                }
+                if (getParameterByName("errorField_creditCardNumber") != "") {
+                    callbackParameters += "<br>errorField_creditCardNumber=" + getParameterByName("errorField_creditCardNumber");
+                }
+                if (getParameterByName("errorField_creditCardExpirationMonth") != "") {
+                    callbackParameters += "<br>errorField_creditCardExpirationMonth=" + getParameterByName("errorField_creditCardExpirationMonth");
+                }
+                if (getParameterByName("errorField_creditCardExpirationYear") != "") { 
+                    callbackParameters += "<br>errorField_creditCardExpirationYear=" + getParameterByName("errorField_creditCardExpirationYear");
+                }
+                if (getParameterByName("errorField_cardSecurityCode") != "") {
+                    callbackParameters += "<br>errorField_cardSecurityCode=" + getParameterByName("errorField_cardSecurityCode");
+                }
+                if (getParameterByName("errorField_creditCardHolderName") != "") {
+                    callbackParameters += "<br>errorField_creditCardHolderName=" + getParameterByName("errorField_creditCardHolderName");
+                }
+                if (getParameterByName("errorField_creditCardCountry") != "") {
+                    callbackParameters += "<br>errorField_creditCardCountry=" + getParameterByName("errorField_creditCardCountry");
+                }
+                if (getParameterByName("errorField_creditCardAddress1") != "") {
+                    callbackParameters += "<br>errorField_creditCardAddress1=" + getParameterByName("errorField_creditCardAddress1");
+                }
+                if (getParameterByName("errorField_creditCardAddress2") != "") {
+                    callbackParameters += "<br>errorField_creditCardAddress2=" + getParameterByName("errorField_creditCardAddress2");
+                }
+                if (getParameterByName("errorField_creditCardCity") != "") {
+                    callbackParameters += "<br>errorField_creditCardCity=" + getParameterByName("errorField_creditCardCity");
+                }
+                if (getParameterByName("errorField_creditCardState") != "") {
+                    callbackParameters += "<br>errorField_creditCardState=" + getParameterByName("errorField_creditCardState");
+                }
+                if (getParameterByName("errorField_creditCardPostalCode") != "") {
+                    callbackParameters += "<br>errorField_creditCardPostalCode=" + getParameterByName("errorField_creditCardPostalCode");
+                }
+                if (getParameterByName("errorField_phone") != "") {
+                    callbackParameters += "<br>errorField_phone=" + getParameterByName("errorField_phone");
+                }
+                if (getParameterByName("errorField_email") != "") {
+                    callbackParameters += "<br>errorField_email=" + getParameterByName("errorField_email");
+                }
+                parent.callbackFail(callbackParameters);
+            }
+        }
+        
+        $j(document).ready(function() {
+            callback();
+        });
+        /* ]]> */
+    </script>
+</apex:page>

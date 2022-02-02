@@ -1,0 +1,625 @@
+<aura:component>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <ltng:require styles="{!$Resource.headerpart }"></ltng:require>
+   <ltng:require styles="{!$Resource.side }"></ltng:require> 
+   <ltng:require styles="{!$Resource.body }"></ltng:require>
+ <aura:attribute name="popup1" type="boolean" default="false"/>
+   
+   <div class="c-container">
+      <div class="fullpage slds-scope">
+         <div class="slds-grid slds-wrap">
+            <lightning:layout multipleRows="true">
+               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage header-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:header />
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+               <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                 <c:mobilemenu />
+                   <lightning:layout>
+                     <div class="new-containerpage">
+                        <div class="slds-container--x-large new-container">
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <c:sidebarnew />
+                           </lightning:layoutItem>
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                              <div class="page-section page-main">
+                                 <div class="middlebar1">
+                                    <h2>Agent Transfer Requests</h2>
+                     </div>
+                                 <div class="dev">
+                             <p class="recent">Below is a list of Agent Transfer requests for your office(s). Click the Application ID to approve or decline the request.</p>
+                     <div class="view2"></div> 
+                                   <div class="bodybottom">
+           
+                
+                
+                <div class="slds-container--x-large new-container">
+                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                    <div class="footer-full">
+                       
+            
+            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+            
+                
+ 
+                
+                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="2" largeDeviceSize="2">
+                                <div class="layer part4"> 
+                             
+                                 <h4>Application ID</h4>
+                                   <h5 >
+                                  <lightning:input type="text" name="input3" placeholder="Enter ID"  variant = "label-hidden" />
+                                   </h5>
+                        </div></lightning:layoutItem>
+                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="2" largeDeviceSize="2">
+                               
+                     
+                    
+                     <div class="layer part4"> 
+                             
+                                <h4>Agent Name</h4>
+                                   <h5 >
+                                  <lightning:input type="text" name="input3" placeholder="Enter name"  variant = "label-hidden" />
+                                   </h5>
+                        </div></lightning:layoutItem>
+                          <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="2" largeDeviceSize="2">
+                                <div class="layer part4"> 
+                             
+                               
+                            <h4>Origination Office</h4>
+                                   <h5 >
+                                  <lightning:input type="text" name="input3" placeholder="Enter office"  variant = "label-hidden" />
+                                   </h5>
+                        </div></lightning:layoutItem>
+                  <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="2" largeDeviceSize="2">
+                                <div class="layer part4"> 
+                             
+                              <h4>Destination Office</h4> 
+                                   <h5 >
+                                  <lightning:input type="text" name="input3" placeholder="Enter office"  variant = "label-hidden" />
+                                   </h5>
+                        </div></lightning:layoutItem>
+                  <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="2" largeDeviceSize="2">
+                                <div class="layer part4"> 
+                             
+                                 <h4>Status</h4>
+                                   <h5 >
+                                 <lightning:select name="select1" label="" required="false" variant = "label-hidden">
+        <option value="">choose one...</option>
+        <option value="1">one</option>
+        <option value="2">two</option>
+        <option value="3">three</option>
+    </lightning:select></h5>
+                        </div></lightning:layoutItem>
+                  <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="2" largeDeviceSize="2">
+                                <div class="layer partb"> 
+                             
+                                  <h4></h4>
+                                   <h5 >
+                                   <lightning:button class="brand" variant="brand " label="Search" title="Brand action" onclick="{! c.handleClick }" /></h5>
+                             
+                        </div></lightning:layoutItem>
+                     
+            
+            </lightning:layoutItem>
+
+       
+             <div class="font">
+                 <div class="table-form ">
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped new newapp">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            
+                                            
+                              
+                                            
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Opportunity Name">Application ID     </div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">First Name</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Last Name</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Close Date">Origination</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Stage">Destination</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Confidence">Status</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Amount">Status Message</div>
+                                            </th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="slds-hint-parent blue">
+                                            <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#"  onclick="{! c.openModel }">010110</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TSTOFF </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Agent</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">630KWR00</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">TESTOFF1</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">New</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k"></div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                          <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#"  onclick="{! c.openModel }">010110</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TSTOFF </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Agent</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">630KWR00</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">TESTOFF1</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">New</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k"></div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                           <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#"  onclick="{! c.openModel }">010110</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TSTOFF </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Agent</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">630KWR00</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">TESTOFF1</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">New</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k"></div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                         <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#"  onclick="{! c.openModel }">010110</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TSTOFF </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Agent</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">630KWR00</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">TESTOFF1</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">New</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k"></div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                            <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#"  onclick="{! c.openModel }">010110</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TSTOFF </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Agent</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">630KWR00</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">TESTOFF1</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">New</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k"></div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                          <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#"  onclick="{! c.openModel }">010110</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TSTOFF </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Agent</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">630KWR00</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">TESTOFF1</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">New</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k"></div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                            <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#"  onclick="{! c.openModel }">010110</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TSTOFF </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Agent</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">630KWR00</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">TESTOFF1</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">New</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k"></div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                          <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#"  onclick="{! c.openModel }">010110</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TSTOFF </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Agent</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">630KWR00</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">TESTOFF1</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">New</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k"></div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                            <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#"  onclick="{! c.openModel }">010110</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TSTOFF </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Agent</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">630KWR00</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">TESTOFF1</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">New</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k"></div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                          <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#"  onclick="{! c.openModel }">010110</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TSTOFF </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Agent</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">630KWR00</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">TESTOFF1</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">New</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k"></div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                            <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#"  onclick="{! c.openModel }">010110</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TSTOFF </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Agent</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">630KWR00</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">TESTOFF1</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">New</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k"></div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                          <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#"  onclick="{! c.openModel }">010110</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TSTOFF </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Agent</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">630KWR00</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">TESTOFF1</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">New</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k"></div>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                            <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate" title="Cloudhub"><a href="#"  onclick="{! c.openModel }">010110</a></div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TSTOFF </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">Agent</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">630KWR00</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">TESTOFF1</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">New</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k"></div>
+                                            </td>
+                                            
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                     </div>
+                        </div>
+            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                <div class="part0">
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">               
+                <div class="layer part1"> 
+                           
+                            
+                                   <h5 class="search1">
+                                  Showing 1 to 10 of 34 entries
+                                   </h5>
+                             </div>
+                </lightning:layoutItem>   
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                                <div class="layer part3"> 
+                             
+                                   <h5 class="onechoose1">           
+                                    <div class="pagination">
+  <a href="#">Previous</a>
+  <a href="#" class="active">1</a>
+  <a href="#" >2</a>
+  
+  <a href="#">Next</a>
+</div>
+                                    </h5>
+                    </div></lightning:layoutItem>
+                </div>
+                        </lightning:layoutItem>
+      
+                        
+                    </div>
+                    
+                </lightning:layoutItem>    
+                    
+                </div></div> 
+                                    
+                                    
+                                    
+                                    
+                                  
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                  
+                                   
+                                    
+                                 </div>
+                              </div>
+                           </lightning:layoutItem>
+                        </div>
+                     </div>
+                  </lightning:layout>
+               </lightning:layoutItem>
+                  <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage footer-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:footer />
+                         
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+            </lightning:layout>
+         </div>
+      </div>
+    <!-- PopUp 1 start -->
+       <aura:if isTrue="{!v.popup1}">
+           <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- ###### MODAL BOX HEADER Start ######-->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModel }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate email">Application Details </h2>
+                    </header>
+                    <!--###### MODAL BOX BODY Part Start######-->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                         <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                              <div class="page-section page-main page-main2">
+                               
+                    
+                                     <h2 class="notice">
+                                     Application Details
+                                    </h2>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                                          <div class="layer part1 partype">
+            <h4>Application Type</h4>
+                                   <h5>New Agent</h5>
+                                   <p>Berkshire Hathaway HomeServices PenFed Realty-Test1234 (630KWR00)<br />
+                                       1234 1st<br />Rockville MD 20850</p>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                                          <div class="layer part1 partype">
+                                             <h4>Destination Office</h4>
+                                   <h5>TESTOFF1 (TESTOFF1) </h5>
+                                    <p>414 Federal<br/>Dover DE 19901</p>
+                                          </div>
+                                       </lightning:layoutItem>
+                  
+                                    </lightning:layoutItem>
+                                  <div class="view"></div>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                          <div class="layer part1 partype">
+               <p>Please review and verify that the above application detail is correct. In order to Decline or Approve an application you are first required to read and accept the Broker/Authorized Signer Additional Terms and Conditions.</p>
+                <p>After selecting that you accept the Broker/Authorized Signer Additional Terms and Conditions, then click Approve or Decline to complete the application approval process.</p>                          
+                                           
+                                                <div class="longp">
+                            <div class="slds-form-element__control">
+    <div class="slds-checkbox">
+      <input type="checkbox" name="options" id="checkbox-unique-id-78" value="checkbox-unique-id-78" checked="" />
+      <label class="slds-checkbox__label" for="checkbox-unique-id-78">
+        <span class="slds-checkbox_faux"></span>
+        <span class="slds-form-element__label">I accept the Additional Terms and Conditions</span>
+      </label>
+    </div>
+              </div>
+  </div>
+                                           </div>
+                                       </lightning:layoutItem>
+                                     
+                                      
+                                    </lightning:layoutItem>
+                                    
+                                    
+                                    
+                                   
+                                  
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                              
+                                    
+                             
+                              </div>
+                           </lightning:layoutItem>
+                    </div>
+                    <!--###### MODAL BOX FOOTER Part Start ######-->
+                      <footer class="slds-modal__footer">
+                         <lightning:button class="brand cancel" variant="brand" label="Approve" title="Brand action" onclick="{! c.handleClick }" />
+                       
+                        <lightning:button variant="neutral" 
+                                          label="Reject"
+                                          title="Cancel"
+                                           class="newCancel cancel"
+                                          onclick="{! c.closeModel }"/>
+                        
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+       </aura:if>
+       <!-- PopUp 1 end -->
+   </div>
+</aura:component>

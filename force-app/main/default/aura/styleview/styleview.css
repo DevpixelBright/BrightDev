@@ -1,0 +1,51 @@
+.THIS.fullpage { 
+    background:none; 
+    margin:0; 
+    padding:20px;
+}
+.THIS .new-container { 
+    margin:-0 auto 20px; 
+    border:none;
+    background:#fff;
+    -webkit-box-shadow:0 0 2px rgba(0,0,0,0.8);
+	-moz-box-shadow:0 0 2px rgba(0,0,0,0.8);
+   	box-shadow:0 0 2px rgba(0,0,0,0.8);
+}
+.THIS .slds-table_bordered, .THIS .slds-table--bordered {
+    border-collapse: separate;
+    border-top: 1px solid #dddbda;
+    border-bottom: 1px solid #dddbda;
+}
+.THIS .slds-table {
+    background-color: white;
+    font-size: inherit;
+    width:100%;
+}
+.THIS .slds-line-height_reset, .THIS .slds-line-height--reset {
+    line-height: 1;
+}
+.THIS .slds-table thead th {
+    background-color: #fafaf9;
+    color: #514f4d;
+    padding: .75rem 0.5rem;
+}
+.THIS .slds-truncate {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.THIS .slds-table th {
+    font-weight: 400;
+}
+.THIS .slds-table tbody tr {
+    counter-increment: row-number;
+}
+.THIS .slds-table td {
+    padding: 1rem .5rem;
+    white-space: nowrap;
+    position: relative;
+}
+.THIS .slds-table_bordered tbody td, .THIS .slds-table_bordered tbody th, .THIS .slds-table--bordered tbody td, .THIS .slds-table--bordered tbody th {
+    border-top: 1px solid #dddbda;
+}

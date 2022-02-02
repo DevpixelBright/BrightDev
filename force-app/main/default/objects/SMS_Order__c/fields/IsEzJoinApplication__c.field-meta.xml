@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IsEzJoinApplication__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This field value is set to true only when the reinstatement is happening from another system (like EZJoin) apart from Salesforce</description>
+    <externalId>false</externalId>
+    <label>IsEzJoinApplication</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

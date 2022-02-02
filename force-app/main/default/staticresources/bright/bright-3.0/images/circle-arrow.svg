@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="61.25" height="61.25" viewBox="0 0 61.25 61.25">
+  <defs>
+    <clipPath id="clip-Custom_Size_1">
+      <rect width="61.25" height="61.25"/>
+    </clipPath>
+  </defs>
+  <g id="Custom_Size_1" data-name="Custom Size – 1" clip-path="url(#clip-Custom_Size_1)">
+    <g id="Group_1" data-name="Group 1">
+      <g id="Ellipse_13" data-name="Ellipse 13" fill="#fff" stroke="#e8e8e8" stroke-width="1">
+        <circle cx="31" cy="31" r="31" stroke="none"/>
+        <circle cx="31" cy="31" r="30.5" fill="none"/>
+      </g>
+      <g id="Icon_ionic-ios-arrow-dropright" data-name="Icon ionic-ios-arrow-dropright" transform="translate(-3.375 -3.375)">
+        <path id="Path_26" data-name="Path 26" d="M3.375,34A30.625,30.625,0,1,0,34,3.375,30.62,30.62,0,0,0,3.375,34Zm4.712,0a25.9,25.9,0,0,1,44.23-18.316A25.9,25.9,0,1,1,15.684,52.316,25.691,25.691,0,0,1,8.087,34Z" transform="translate(0 0)" fill="none"/>
+        <path id="Icon_material-arrow-forward" data-name="Icon material-arrow-forward" d="M18,6,15.885,8.115l8.37,8.385H6v3H24.255l-8.37,8.385L18,30,30,18Z" transform="translate(16.375 15.375)"/>
+      </g>
+    </g>
+  </g>
+</svg>

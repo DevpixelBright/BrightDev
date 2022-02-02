@@ -1,0 +1,120 @@
+<!--<apex:page showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="Communities_OfficeExclusivePDF">--> 
+<apex:page renderAs="pdf" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="Communities_OfficeExclusivePDF">
+    <style>
+    body{ margin:0 auto; width:60%;}
+    </style>
+    <div style="display:block;width:100%">
+        <div class="part" style="width:170px; margin:0 60px 0 0; padding:20px 0 0;">
+            <apex:image value="{!urlfor($Resource.BrightRegisterLogo)}" alt="logo" width="150" height="auto" style="display:block; border:none; outline:none; text-decoration:none;"/>
+        </div>
+    </div>
+    
+    <div style="display:block;width:100%;     margin: 0 0 40px;   border-bottom: 1px solid #000;">
+        <h2 style="margin: 0 auto;text-align: center;display: block;font-size: 20px;    font-weight: normal;">
+            Office Exclusive Certification
+        </h2>
+    </div>
+    <div style="display:block;width:100%;margin: 0;">
+        <div style="margin: 0 auto;text-align: left;display: block;font-size: 17px;    font-weight: normal;">
+            Thank you for submitting the Office Exclusive Certification. The information below is a record of what you submitted to Bright MLS. 
+        </div>
+    </div>
+    <div style="display:block;width:100%;margin: 0;">
+        <div style="display:block;width:100%;margin: 30px 0;">
+        <div style="display:inline-block;width:50%;margin: 0;float: left;">
+            <div Style="text-align: left;display: block;font-size: 17px;font-weight: normal;">
+              <div type="text" id="fname1" name="fname" value="{!sOfficeExclusive.List_Agent_ID__c}">
+              
+        </div>
+        <label for="fname1">Listing Agent ID:</label> {!sOfficeExclusive.List_Agent_ID__r.Name}
+            </div>
+   <div Style="text-align: left;display: block;font-size: 17px;font-weight: normal;">
+            <div type="text" id="fname1" name="fname" value="{!sOfficeExclusive.List_Agent_Name__c}">
+              
+        </div>
+        <label for="fname1">Listing Agent Name:</label> {!sOfficeExclusive.List_Agent_Name__c} 
+             </div>
+        </div>
+         <div style="display:inline-block;width:50%;margin: 0;">
+          <div Style="text-align: left;display: block;font-size: 17px;font-weight: normal;">
+             <div type="text" id="fname1" name="fname" value="{!sOfficeExclusive.List_Office_ID__c}">
+              
+        </div>
+        <label for="fname1">Listing Office ID:</label> {!sOfficeExclusive.List_Office_ID__r.Name}
+        </div>
+       <div Style="text-align: left;display: block;font-size: 17px;font-weight: normal;">
+          <div type="text" id="fname1" name="fname" value="{!sOfficeExclusive.List_Office_Name__c}">
+              
+        </div>
+        <label for="fname1">Listing Office Name:</label> {!sOfficeExclusive.List_Office_Name__c}
+        </div>
+      
+        </div>
+        </div>
+       
+      
+        <div style="display:block;width:100%;margin:0 0 30px 0;">
+        <div Style="text-align: left;display: block;font-size: 17px;font-weight: normal;">
+       <div type="text" id="fname1" name="fname" value="{!sOfficeExclusive.Seller_Landlord_Name_1__c}">
+              
+        </div>
+        <label for="fname1">Seller/Landlord Name (1):</label> {!sOfficeExclusive.Seller_Landlord_Name_1__c}
+            </div>
+            <div Style="text-align: left;display: block;font-size: 17px;font-weight: normal;">
+        <div type="text" id="fname1" name="fname" value="{!sOfficeExclusive.Seller_Landlord_Name_2__c}">
+              
+        </div>
+        <label for="fname1">Seller/Landlord Name (2):</label> {!sOfficeExclusive.Seller_Landlord_Name_2__c}
+    </div>
+        
+        </div>
+       
+         <div style="display:block;width:100%;margin:0 0 30px 0;">
+        
+        <div Style="text-align: left;display: block;font-size: 17px;font-weight: normal;">
+        <label for="fname1">New Construction: </label>
+            <apex:outputText value="{!IF(sOfficeExclusive.New_Construction__c, 'Yes', 'No')}">
+            </apex:outputText>
+             </div>
+             <div Style="text-align: left;display: block;font-size: 17px;font-weight: normal;">
+                  <div type="text" id="fname1" name="fname" value="{!sOfficeExclusive.Property_Address__c}">
+              
+        </div>
+        <label for="fname1">Property Address:</label> {!sOfficeExclusive.Property_Address__c}
+             </div>
+             <div Style="text-align: left;display: block;font-size: 17px;font-weight: normal;">
+                  <div type="text" id="fname1" name="fname" value="{!sOfficeExclusive.Property_Address__c}">
+              
+        </div>
+        <label for="fname1">Apt/Suite:</label> {!sOfficeExclusive.Unit_Type__c}
+             </div>
+             <div Style="text-align: left;display: block;font-size: 17px;font-weight: normal;">
+                  <div type="text" id="fname1" name="fname" value="{!sOfficeExclusive.City__c} && {!sOfficeExclusive.State__c} && {!sOfficeExclusive.ZIP__c}">
+              
+        </div>
+                 <label for="fname1">City, State, ZIP:</label> {!sOfficeExclusive.City__c}, {!sOfficeExclusive.State__c}, {!sOfficeExclusive.ZIP__c}
+             </div>
+        </div>
+    </div>
+    
+   <!--<div style="display:block;width:100%;margin:0 0 30px 0;">
+       <div Style="text-align: left;display: block;font-size: 17px;font-weight: normal;">
+           <label for="fname1">Listing Agreement Date: </label>
+           <apex:outputText value="{0,date,MM/dd/yyyy}"> 
+               <apex:param value="{!sOfficeExclusive.Listing_Agreement_Date__c}" /> 
+           </apex:outputText>
+       </div>
+       <div Style="text-align: left;display: block;font-size: 17px;font-weight: normal;">
+           <label for="fname1">Listing Expiration Date: </label>
+           <apex:outputText value="{0,date,MM/dd/yyyy}"> 
+               <apex:param value="{!sOfficeExclusive.Listing_Expiration_Date__c}" /> 
+           </apex:outputText>
+       </div>
+    </div>-->
+    <div>
+        <p style="font-size: 17px;font-weight: normal;">
+            By submitting the Office Exclusive form, signed by the seller/landlord, I {!sOfficeExclusive.List_Agent_Name__c} with {!sOfficeExclusive.List_Office_Name__c} understand that this property will not be entered into the Bright MLS system for Bright MLS to disseminate information about the property.
+            I affirm, that I will not publicly market the property, including through communications with other licensees or brokers outside of my Broker/Licensee's firm.
+        </p>
+    </div>
+</apex:page>

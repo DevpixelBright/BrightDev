@@ -1,0 +1,15 @@
+<apex:page showHeader="false" sidebar="false" standardController="Subscriptions__c"
+extensions="QAS_NA.CARedirectToValidationPageController"
+action="{!DetermineRedirect}" lightningstylesheets="true">
+<QAS_NA:CAAddressValidationRedirectComponent IsUpdated="{!IsUpdated}"
+IsNewRecord="{!IsNewRecord}"
+IsAddress="{!IsAddress}"
+IsEmailPhone="{!IsEmailPhone}"
+ValidateOnlyIfInConsoleView="{!ValidateOnlyIfInConsoleView}"
+SFSessionId="{!SFSessionId}"
+RecordId="{!RecordId}"
+sObjectName="{!SObjectName}"
+RNextUrl="{!RNextUrl}"
+QASToolsSmallURL="{!QASToolsSmallURL}">
+</QAS_NA:CAAddressValidationRedirectComponent>
+</apex:page>

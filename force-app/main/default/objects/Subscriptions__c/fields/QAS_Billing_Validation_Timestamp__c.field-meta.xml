@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QAS_Billing_Validation_Timestamp__c</fullName>
+    <description>This field is meant for Billing address</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Please do not enter anything in this field</inlineHelpText>
+    <label>QAS Home Validation Timestamp</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>DateTime</type>
+</CustomField>

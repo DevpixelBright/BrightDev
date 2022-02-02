@@ -1,0 +1,35 @@
+<apex:page standardController="Account" extensions="AccountAssociations" showChat="false"  lightningstylesheets="true"> 
+<apex:form >
+
+    <apex:detail subject="{!Account}" relatedList="true"/>   
+    <apex:pageBlock mode="edit" title="Account Associations" tabStyle="Account"  >  
+     <apex:actionfunction name="addAsso" action="{!addAssociation}" />
+     <apex:pageBlockButtons location="top">
+             <apex:commandButton action="{!addAssociation}" value="New Account Association" onclick="addAsso();"/> 
+     </apex:pageBlockButtons> 
+        <apex:outputText rendered="{!!showTable}">No records to display</apex:outputText>
+        <apex:pageBlockTable value="{!associationsList}" var="al" rendered="{!showTable}">
+            <apex:column headerValue="Action">
+                <apex:commandLink value="{!al.editValue}" action="{!editAssociation}" style="color:#015baf" >
+                 <apex:param assignTo="{!associationId}" value="{!al.relatedAssociation.id}" name="rid"/>     
+                </apex:commandLink>&nbsp;|&nbsp;
+                <apex:commandLink value="{!al.deleteValue}" action="{!deleteAssociation}" style="color:#015baf;">
+                    <apex:param assignTo="{!associationId}" value="{!al.relatedAssociation.id}" name="rid"/>     
+                </apex:commandLink>
+            </apex:column>
+            <apex:column headerValue="SubscriptionAssocID">
+                <apex:outputLink value="/{!al.relatedAssociation.id}"> {!al.relatedAssociation.Name} </apex:outputLink>                 
+            </apex:column>
+            <apex:column value="{!al.relatedAssociation.Primary__c}"/>
+            <apex:column value="{!al.relatedAssociation.Association__c}"/>
+            <apex:column value="{!al.relatedAssociation.Start_Date__c}"/>
+            <apex:column value="{!al.relatedAssociation.End_Date__c}"/>
+        </apex:pageBlockTable>  
+    </apex:pageBlock> 
+    <apex:outputPanel rendered="{!account.AddressValidationStatus__c == 'To be verify'}">
+        <script>
+            window.location = '/apex/SSV_AddressValidation?id={!account.Id}';
+        </script>
+    </apex:outputPanel>     
+</apex:form>     
+</apex:page>

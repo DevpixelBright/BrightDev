@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Evidence_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Evidence Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Sign</fullName>
+                <default>false</default>
+                <label>Sign</label>
+            </value>
+            <value>
+                <fullName>Website URL</fullName>
+                <default>false</default>
+                <label>Website URL</label>
+            </value>
+            <value>
+                <fullName>Flyer</fullName>
+                <default>false</default>
+                <label>Flyer</label>
+            </value>
+            <value>
+                <fullName>Email</fullName>
+                <default>false</default>
+                <label>Email</label>
+            </value>
+            <value>
+                <fullName>Private Network</fullName>
+                <default>false</default>
+                <label>Private Network</label>
+            </value>
+            <value>
+                <fullName>Social Media</fullName>
+                <default>false</default>
+                <label>Social Media</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

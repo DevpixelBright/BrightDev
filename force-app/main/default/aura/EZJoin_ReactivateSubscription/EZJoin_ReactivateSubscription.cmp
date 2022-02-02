@@ -1,0 +1,543 @@
+<aura:component controller="EZJoin_ReinstatementController" implements="force:appHostable,lightning:isUrlAddressable">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    
+    <!-- Aura Attributes -->
+    <aura:attribute name="reinstateRecord" type="EZJoin_ReinstatementController.wrapperClass" default="" />
+    <aura:attribute name="showSpinner" type="Boolean" default="false" />
+    <aura:attribute name="showServerError" type="Boolean" default="false" />
+    <aura:attribute name="agents" type="List" default="[]" />    
+    <aura:attribute name="subscription" type="Object" default="{}" />
+    <aura:attribute name="sublicense" type="Object" default="{}" />
+    <aura:attribute name="relAssociation" type="Object" default="{}" />
+    <aura:attribute name="existingApplication" type="Object" default="{}" />
+    <aura:attribute name="isEdit" type="Boolean" default="false" />
+    <aura:attribute name="salutations" type="List" default="[]" />
+    <aura:attribute name="suffixes" type="List" default="[]" />
+    <aura:attribute name="brokerCode" type="Account" default="{ 'sobjectType': 'Account' }" />    
+    <aura:attribute name="agent" type="Subscriptions__c" default="{ 'sobjectType': 'Subscriptions__c' }" />
+    <aura:attribute name="appType" type="String" default="" />
+    <aura:attribute name="application" type="MRIS_Application__c" default="{ 'sobjectType': 'MRIS_Application__c' }"/>
+    <aura:attribute name="errorMsg" type="String" default="" description="test" />
+    <aura:attribute name="showSuccess" type="Boolean" default="false" />
+    <aura:attribute name="applicationId" type="String" default="" />
+    <aura:attribute name="prevApplicationId" type="String" default="" description="Flag to prompt the confirmation dialog " />
+    <aura:attribute name="showConfirm" type="Boolean" default="false" description="Flag to prompt the confirmation dialog " />
+    <aura:attribute name="tempBrokerCode" type="Object" default="{}" description="Attribute to maintain new broker code on change until promt confirmation" /> 
+    <aura:attribute name="reload" type="Boolean" default="true" />
+    
+    <!-- Aura Handlers -->
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}" />
+    <aura:handler name="cmpEvent" event="c:EZJoin_AutoCompleteSelectionEvt" action="{!c.handleComponentEvent}" />
+    <aura:handler name="cmpEvent1" event="c:EZJoin_AutoCompleteClearEvent" action="{!c.handleClearEvent}" />    
+    
+    <!-- Loading spinner container -->
+    <aura:if isTrue="{!v.showSpinner}">
+        <div class="slds-is-relative">
+            <lightning:spinner />
+        </div>
+    </aura:if> 
+    
+    <!-- Server Error Prompt -->
+    <aura:if isTrue="{!v.showConfirm}">
+        <div class="demo-only">
+            <section role="alertdialog" tabindex="0" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal_prompt" aria-modal="true">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header slds-theme_error slds-theme_alert-texture">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                            <lightning:icon iconName="utility:close"></lightning:icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 class="slds-text-heading_medium" id="prompt-heading-id">Are you sure you want to change offices?</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="prompt-message-wrapper">
+                        <p>Changing offices will remove all agents that were added previously. Click yes to proceed.</p>
+                    </div>
+                    <footer class="slds-modal__footer slds-theme_default">
+                        <button class="slds-button slds-button_neutral" onclick="{!c.confirmYesEvtHandler}">Yes</button>
+                        <button class="slds-button slds-button_neutral slds-button_neutral1" onclick="{!c.confirmCancelEvtHandler}">Cancel</button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>    
+    </aura:if>
+    
+    <div class="fullpage slds-scope">
+        <div class="slds-grid slds-wrap">
+            
+            <c:EZJoin_NewApplicationHeader appConfig="[]" />
+            
+            <div class="slds-container--x-large new-container" id="content-container">
+                <aura:if isTrue="{!!v.showSuccess}">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 timepoint">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 succesmsg">
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 succesmsg1">
+                                <aura:if isTrue="{!v.subscription.Status__c == 'Inactive'}">
+                                    <aura:if isTrue="{!v.prevApplicationId != ''}">
+                                        <div class="approved"><p><img src="{!$Resource.ejoin + '/ejoinimages/ezjoincorrectick.png'}" />Reinstate application already submitted. Please click "View Application" button to get more details.</p></div>
+                                    </aura:if>
+                                    <aura:if isTrue="{!v.prevApplicationId == ''}">
+                                        <div class="rejected"><p><img src="{!$Resource.ejoin + '/ejoinimages/ezjoininfo.png'}" />Please verify your subscription information is correct and click Continue. To update your information or join another office, click Edit.</p></div>
+                                    </aura:if>
+                                </aura:if>
+                                
+                                <aura:if isTrue="{!v.subscription.Status__c == 'Active'}">
+                                    <div class="approved"><p><img src="{!$Resource.ejoin + '/ejoinimages/ezjoincorrectick.png'}" />Subscription is already active.</p></div>
+                                </aura:if>
+                            </div>
+                        </div>
+                        
+                        <aura:if isTrue="{!v.errorMsg != ''}">
+                            <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert" style="margin-top:10px; border-radius: 2px;">
+                                <span class="slds-assistive-text">error</span>
+                                <span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small" title="Description of icon when needed">
+                                    
+                                </span>
+                                <h2 style="margin:0;">{!v.errorMsg}</h2>
+                            </div>
+                        </aura:if>                           
+                        
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication">
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_9-of-12 slds-large-size_9-of-12 newapplication1">
+                                <h3>Subscription Details</h3>
+                                
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 newapplication4">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                                <h3>Subscription Id</h3>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                                <h4>{!v.subscription.Name}</h4>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 newapplication4">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                                <h3>Contact</h3>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                                <h4>{!v.subscription.Contact__r.Name}</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 newapplication4">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                                <h3>Type</h3>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                                <h4>{!v.subscription.Contact_Type__c}</h4>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 newapplication4">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                                <h3>Sub Type</h3>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                                <h4>{!v.subscription.Subscription_Type__c}</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 newapplication4">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                                <h3>Salutation</h3>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3 requiredline">
+                                                <aura:if isTrue="{!!v.isEdit}">
+                                                    <h4>{!v.subscription.Contact__r.Salutation}</h4>
+                                                    <aura:set attribute="else">
+                                                        <h4>
+                                                            <lightning:select name="Salutation" aura:id="Salutation" label="Salutation" class="required" required="true" value="{!v.subscription.Contact__r.Salutation}">
+                                                                <aura:iteration items="{!v.salutations}" var="sal">
+                                                                    <option value="{!sal.value}">{!sal.label}</option>
+                                                                </aura:iteration>
+                                                            </lightning:select>                                                   
+                                                        </h4>
+                                                    </aura:set>                                                
+                                                </aura:if>                                             
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 newapplication4">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3 ">
+                                                <h3>First Name</h3>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3 requiredline">
+                                                <aura:if isTrue="{!!v.isEdit}">
+                                                    <h4>{!v.subscription.Contact__r.FirstName}</h4>
+                                                    <aura:set attribute="else">
+                                                        <h4>
+                                                            <lightning:input type="text" class="required" name="FirstName" aura:id="FirstName" placeholder="Enter first name" required="true" value="{!v.subscription.Contact__r.FirstName}" maxlength="40" />
+                                                        </h4>
+                                                    </aura:set>                                                
+                                                </aura:if>                                          
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 newapplication4">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                                <h3>Middle Name</h3>
+                                            </div>
+                                            
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                                <aura:if isTrue="{!!v.isEdit}">
+                                                    <h4>{!v.subscription.Contact__r.Middle_Name__c}</h4>
+                                                    <aura:set attribute="else">
+                                                        <h4>
+                                                            <lightning:input type="text" name="MiddleName" aura:id="MiddleName" placeholder="Enter middle name" value="{!v.subscription.Contact__r.Middle_Name__c}" maxlength="40" />
+                                                        </h4>
+                                                    </aura:set>                                                
+                                                </aura:if>    
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 newapplication4">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                                <h3>Last Name</h3>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3 requiredline">
+                                                <aura:if isTrue="{!!v.isEdit}">
+                                                    <h4>{!v.subscription.Contact__r.LastName}</h4>
+                                                    <aura:set attribute="else">
+                                                        <h4>
+                                                            <lightning:input type="text" name="LastName" aura:id="LastName" placeholder="Enter last name" required="true" class="required" value="{!v.subscription.Contact__r.LastName}" maxlength="40" />
+                                                        </h4>
+                                                    </aura:set>                                                
+                                                </aura:if>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 newapplication4">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                                <h3>Suffix</h3>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                                <aura:if isTrue="{!!v.isEdit}">
+                                                    <h4>{!v.subscription.Contact__r.Suffix__c}</h4>
+                                                    <aura:set attribute="else">
+                                                        <h4>
+                                                            <lightning:select name="Suffix" label="Suffix" value="{!v.subscription.Contact__r.Suffix__c}">
+                                                                <aura:iteration items="{!v.suffixes}" var="suffix">
+                                                                    <option value="{!suffix.value}">{!suffix.label}</option>
+                                                                </aura:iteration>
+                                                            </lightning:select>                                                    
+                                                        </h4>
+                                                    </aura:set>                                                
+                                                </aura:if>                                         
+                                            </div>
+                                        </div>	
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 newapplication4">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                                <h3>Nick Name</h3>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                                <aura:if isTrue="{!!v.isEdit}">
+                                                    <h4>{!v.subscription.Contact__r.Nickname__c}</h4>
+                                                    <aura:set attribute="else">
+                                                        <h4>
+                                                            <lightning:input type="text" name="NickName" aura:id="NickName" placeholder="Enter nick name" value="{!v.subscription.Contact__r.Nickname__c}" maxlength="40" />
+                                                        </h4>
+                                                    </aura:set>                                                
+                                                </aura:if>                                             
+                                            </div>
+                                        </div> 
+                                    </div>
+                                    
+                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 newapplication4">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                                <h3>Primary Phone</h3>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3 requiredline">
+                                                <aura:if isTrue="{!!v.isEdit}">
+                                                    <h4>{!v.subscription.Primary_Phone__c}</h4>
+                                                    <aura:set attribute="else">
+                                                        <h4>
+                                                            <lightning:input type="tel" class="required" name="Phone" aura:id="Phone" placeholder="Enter primary phone" required="true" value="{!v.subscription.Primary_Phone__c}" pattern="^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$" messageWhenPatternMismatch="Invalid phone number format" maxlength="15" />
+                                                        </h4>
+                                                    </aura:set>                                                
+                                                </aura:if>                                            
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 newapplication4">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                                <h3>Mobile Number</h3>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3 requiredline">
+                                                <aura:if isTrue="{!!v.isEdit}">
+                                                    <h4>{!v.subscription.Mobile_Phone__c}</h4>
+                                                    <aura:set attribute="else">
+                                                        <h4>
+                                                            <lightning:input type="tel" class="required" name="Mobile" aura:id="Mobile" placeholder="Enter mobile number" required="true" value="{!v.subscription.Mobile_Phone__c}" pattern="^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$" messageWhenPatternMismatch="Invalid mobile number format" maxlength="15" />
+                                                        </h4>
+                                                    </aura:set>                                                
+                                                </aura:if>                                             
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--
+                                    <div style="display:none;" class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 newapplication4">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                                <h3>City</h3>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                                <h4>{!v.subscription.City__c}</h4>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 newapplication4">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                                <h3>State</h3>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                                <h4>{!v.subscription.State__c}</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="display:none;" class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 newapplication4">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                                <h3>County</h3>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                                <h4>{!v.subscription.County__c}</h4>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 newapplication4">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                                <h3>Zip</h3>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                                <h4>{!v.subscription.Zip__c}</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    -->
+                                    
+                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 newapplication4">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                                <h3>Private Email</h3>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3 requiredline">
+                                                <aura:if isTrue="{!!v.isEdit}">
+                                                    <h4>{!v.subscription.Private_Email__c}</h4>
+                                                    <aura:set attribute="else">
+                                                        <h4>
+                                                            <lightning:input type="email" class="required" name="Email" aura:id="Email" placeholder="Enter email" required="true" value="{!v.subscription.Private_Email__c}" maxlength="254" />
+                                                        </h4>
+                                                    </aura:set>                                                
+                                                </aura:if>                                            
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 newapplication4">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                                <h3>Broker Code</h3>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3 requiredline">
+                                                <aura:if isTrue="{!!v.isEdit}">
+                                                    <h4>{!v.subscription.Related_Location_Broker_Office__r.Name}</h4>
+                                                    <aura:set attribute="else">
+                                                        <h4>
+                                                            <aura:if isTrue="{!v.reload}">
+                                                                <c:EZJoin_AutoCompleteComponent aura:id="BrokerCodeCmp" subscriptionType="{!v.subscription.Subscription_Type__c}" transaction="Reinstatement" applicationType="{!v.appType}" cmpType="BrokerCode" label="" inputValue="{!v.brokerCode.Name}" selectedOption="{!(v.brokerCode.Account_Name__c ? '0' : '')}" selectedObj="{!v.brokerCode}" placeHolder="Start typing the broker code..." />
+                                                            </aura:if>
+                                                            <aura:if isTrue="{!!v.brokerCode.Name}">
+                                                                <div style="color:rgb(194, 57, 52);" id="help-message-2" data-help-message="true" role="alert" class="slds-form-element__help">Complete this field.</div>
+                                                            </aura:if>
+                                                        </h4>
+                                                    </aura:set>                                                
+                                                </aura:if>                                            
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 newapplication4">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                                <h3>Status</h3>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                                <h4>{!v.subscription.Status__c}</h4>
+                                            </div>
+                                        </div> 
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 newapplication4">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                                <h3>Date Terminated</h3>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                                <h4>{!v.subscription.Date_Terminated__c}</h4>
+                                            </div>
+                                        </div>   
+                                    </div>
+                                    
+                                    <aura:if isTrue="{!v.subscription.Contact_Type__c  == 'Agent'}">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 newapplication4">
+                                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                                        <h3>NRDS ID</h3>
+                                                    </div>
+                                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                                        <h4>{!v.subscription.NRDS_ID__c}</h4>
+                                                    </div>
+                                                </div> 
+                                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 newapplication4">
+                                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                                        <h3>Association</h3>
+                                                    </div>
+                                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                                        <h4>{!v.relAssociation.Association__r.Name}</h4>
+                                                    </div>
+                                                </div>   
+                                            </div>
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 newapplication4">
+                                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                                    <h3>Status Reason</h3>
+                                                </div>
+                                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                                    <h4>{!v.subscription.Status_Change_Reason__c}</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </aura:if>
+                                </div>
+                            </div>
+                            
+                            <aura:if isTrue="{!v.appType == 'PersonalAssistant'}">
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 newapplication1">
+                                    <aura:if isTrue="{!and(!v.isEdit, v.subscription.Subscription_Type__c == 'Personal Assistant')}">
+                                        <h3>Selected Agents</h3>
+                                    </aura:if>
+                                    
+                                    <aura:if isTrue="{!and(!v.isEdit, v.subscription.Subscription_Type__c == 'Personal Assistant to Appraiser')}">
+                                        <h3>Selected Appraiser</h3>
+                                    </aura:if>                                
+                                    
+                                    <aura:if isTrue="{!and(v.isEdit, v.subscription.Subscription_Type__c == 'Personal Assistant')}">
+                                        <h3>Select Agent(s) - Maximum 5 Agents only</h3>
+                                    </aura:if>
+                                    
+                                    <aura:if isTrue="{!and(v.isEdit, v.subscription.Subscription_Type__c == 'Personal Assistant to Appraiser')}">
+                                        <h3>Select Appraiser</h3>
+                                    </aura:if>                                 
+                                    
+                                    <aura:if isTrue="{!v.isEdit}">
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication2">
+                                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication54">
+                                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication3 newapplication31">
+                                                        <h4>
+                                                            <aura:if isTrue="{!v.subscription.Subscription_Type__c == 'Personal Assistant'}">
+                                                                <aura:if isTrue="{!v.reload}">
+                                                                    <c:EZJoin_AutoCompleteComponent transaction="Reinstatement" aura:id="AgentsCmp" applicationType="PersonalAssistant" brokerCode="{!v.brokerCode}" agents="{!v.agents}" cmpType="Agents" label="" placeHolder="Start typing the agent name..." /> 
+                                                                </aura:if>
+                                                            </aura:if>
+                                                            
+                                                            <aura:if isTrue="{!v.subscription.Subscription_Type__c == 'Personal Assistant to Appraiser'}">
+                                                                <aura:if isTrue="{!v.reload}">
+                                                                    <c:EZJoin_AutoCompleteComponent transaction="Reinstatement" aura:id="AppraiserCmp" applicationType="{!v.appType}" brokerCode="{!v.brokerCode}" cmpType="Appraiser" label="" inputValue="{!(and(v.subscription.Contact__r.Name, v.agents.length > 0) ? (v.agents[0].Contact__r.Name + ' - ' + v.agents[0].Name) : '')}" selectedOption="{!(v.agents[0].Name ? '0' : '')}" selectedObj="{!v.agents[0]}" placeHolder="Start typing the appraiser..." />
+                                                                </aura:if>
+                                                            </aura:if>
+                                                            
+                                                            <aura:if isTrue="{!and(v.subscription.Subscription_Type__c == 'Personal Assistant', v.agents.length == 0)}">
+                                                                <div style="color:rgb(194, 57, 52); clear:both;" id="help-message-2" data-help-message="true" role="alert" class="slds-form-element__help">Please select agents.</div>
+                                                            </aura:if>
+                                                            
+                                                            <aura:if isTrue="{!and(v.subscription.Subscription_Type__c == 'Personal Assistant to Appraiser', v.agents.length == 0)}">
+                                                                <div style="color:rgb(194, 57, 52); clear:both;" id="help-message-2" data-help-message="true" role="alert" class="slds-form-element__help">Please select appraiser.</div>
+                                                            </aura:if>                                                             
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </aura:if>
+                                    
+                                    <aura:if isTrue="{!and(v.subscription.Subscription_Type__c == 'Personal Assistant', v.agents.length > 0)}">
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                            <aura:iteration items="{!v.agents}" var="agent" indexVar="index">
+                                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication2">
+                                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication4">
+                                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication3 newapplication31">
+                                                            <aura:if isTrue="{!v.isEdit}">
+                                                                <h4><img src="{!$Resource.ejoin + '/ejoinimages/ejoincorrect.jpg'}" style="margin-right:10px;" /> {!agent.Contact__r.Name} - {!agent.Name} <img style="margin-left:10px;" class="delete" src="{!$Resource.ejoin + '/ejoinimages/ejoindelete.jpg'}" data-index="{!index}" onclick="{!c.deleteAgentEvtHandler}" /></h4>
+                                                                <aura:set attribute="else">
+                                                                    <h4>{!agent.Contact__r.Name} - {!agent.Name}</h4>
+                                                                </aura:set>                                                	
+                                                            </aura:if>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </aura:iteration>
+                                        </div>
+                                    </aura:if>
+                                    
+                                    <aura:if isTrue="{!and(v.subscription.Subscription_Type__c == 'Personal Assistant to Appraiser', v.agents.length > 0)}">
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                            <aura:iteration items="{!v.agents}" var="agent" indexVar="index">
+                                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication2">
+                                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication4">
+                                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication3 newapplication31">
+                                                            <aura:if isTrue="{!!v.isEdit}">
+                                                                <h4>{!agent.Contact__r.Name} - {!agent.Name}</h4>
+                                                            </aura:if>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </aura:iteration>
+                                        </div>                                        
+                                    </aura:if>
+                                </div>
+                            </aura:if>
+                        </div>
+                        
+                        <aura:if isTrue="{!v.subscription.Status__c == 'Inactive'}">
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 spaceline2">
+                            </div>
+                            
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                <aura:if isTrue="{!and(!v.isEdit, v.prevApplicationId == '')}">
+                                    <button class="slds-button slds-button_brand2" onclick="{!c.editBtnClickEvtHandler}">Edit</button>
+                                </aura:if>
+                                <aura:if isTrue="{!v.prevApplicationId == ''}">
+                                    <button class="slds-button slds-button_brand" onclick="{!c.submitBtnHandler}">Continue</button>
+                                </aura:if>
+                                <aura:if isTrue="{!v.prevApplicationId != ''}">
+                                    <button class="slds-button slds-button_brand" onclick="{!c.viewApplicationEvtHandler}">View Application</button>
+                                </aura:if>                        
+                                <aura:if isTrue="{!v.isEdit}">
+                                    <button class="slds-button cancelpoint" onclick="{!c.cancelEvtHandler}">Cancel</button>
+                                </aura:if>
+                            </div>
+                        </aura:if>
+                    </div>
+                </aura:if>
+                
+                <aura:if isTrue="{!v.showSuccess}">
+                    <div class="slds-container--x-large new-container" id="content-container">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 Successful">
+                                <img src="{!$Resource.ejoin + '/ejoinimages/submittick.jpg'}" />
+                                <h3>Application ID: {!v.applicationId}</h3>
+                                <h4>Submitted Successfully </h4> 
+                                <h5>Requested changes to your subscription details will be updated after broker approval.</h5>
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 spaceline3"></div>
+                                <p> Your application will be reviewed. Status updates will be sent to the email address you provided.</p>
+                                <button class="slds-button slds-button_brand" onclick="{!c.backToHomeEvtHandler}">Return to Join Page</button>
+                            </div>
+                        </div>
+                    </div>                  
+                </aura:if>                      
+            </div>
+            
+            <c:EZJoin_NewApplicationFooter />
+        </div>
+    </div>    
+</aura:component>

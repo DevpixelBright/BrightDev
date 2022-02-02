@@ -1,0 +1,3160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Role__c</fullName>
+    <externalId>false</externalId>
+    <label>Role</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Role_Group__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Access Showings</fullName>
+                <default>false</default>
+                <label>Access Showings</label>
+            </value>
+            <value>
+                <fullName>Active Agent Column Filter</fullName>
+                <default>false</default>
+                <label>Active Agent Column Filter</label>
+            </value>
+            <value>
+                <fullName>Active and Pending Only</fullName>
+                <default>false</default>
+                <label>Active and Pending Only</label>
+            </value>
+            <value>
+                <fullName>Active No Contract</fullName>
+                <default>false</default>
+                <label>Active No Contract</label>
+            </value>
+            <value>
+                <fullName>Affiliate Vendor</fullName>
+                <default>false</default>
+                <label>Affiliate Vendor</label>
+            </value>
+            <value>
+                <fullName>Agent</fullName>
+                <default>false</default>
+                <label>Agent</label>
+            </value>
+            <value>
+                <fullName>Agent Column Filter</fullName>
+                <default>false</default>
+                <label>Agent Column Filter</label>
+            </value>
+            <value>
+                <fullName>Agent Private Info</fullName>
+                <default>false</default>
+                <label>Agent Private Info</label>
+            </value>
+            <value>
+                <fullName>Agent Tool V2</fullName>
+                <default>false</default>
+                <label>Agent Tool V2</label>
+            </value>
+            <value>
+                <fullName>AllowSaveWithNoValidation</fullName>
+                <default>false</default>
+                <label>AllowSaveWithNoValidation</label>
+            </value>
+            <value>
+                <fullName>Analytics</fullName>
+                <default>false</default>
+                <label>Analytics</label>
+            </value>
+            <value>
+                <fullName>Applied Video</fullName>
+                <default>false</default>
+                <label>Applied Video</label>
+            </value>
+            <value>
+                <fullName>Appraiser/Non-shareholder</fullName>
+                <default>false</default>
+                <label>Appraiser/Non-shareholder</label>
+            </value>
+            <value>
+                <fullName>Appraiser/Shareholder</fullName>
+                <default>false</default>
+                <label>Appraiser/Shareholder</label>
+            </value>
+            <value>
+                <fullName>Assoc Staff</fullName>
+                <default>false</default>
+                <label>Assoc Staff</label>
+            </value>
+            <value>
+                <fullName>BAAG_BETA_1</fullName>
+                <default>false</default>
+                <label>BAAG_BETA_1</label>
+            </value>
+            <value>
+                <fullName>BAAG_BETA_2</fullName>
+                <default>false</default>
+                <label>BAAG_BETA_2</label>
+            </value>
+            <value>
+                <fullName>BAAG_PREMIUM_PRODUCT_TIER_1</fullName>
+                <default>false</default>
+                <label>BAAG_PREMIUM_PRODUCT_TIER_1</label>
+            </value>
+            <value>
+                <fullName>BALTIMORE SUN</fullName>
+                <default>false</default>
+                <label>BALTIMORE SUN</label>
+            </value>
+            <value>
+                <fullName>Baltimore Sun - Newspaper Advertising</fullName>
+                <default>false</default>
+                <label>Baltimore Sun - Newspaper Advertising</label>
+            </value>
+            <value>
+                <fullName>BALTIMORE SUNv2</fullName>
+                <default>false</default>
+                <label>BALTIMORE SUNv2</label>
+            </value>
+            <value>
+                <fullName>Base Restrictionsv2</fullName>
+                <default>false</default>
+                <label>Base Restrictionsv2</label>
+            </value>
+            <value>
+                <fullName>Broker_On Common Ground</fullName>
+                <default>false</default>
+                <label>Broker_On Common Ground</label>
+            </value>
+            <value>
+                <fullName>Broker Backofficev2</fullName>
+                <default>false</default>
+                <label>Broker Backofficev2</label>
+            </value>
+            <value>
+                <fullName>Broker Back Officev2</fullName>
+                <default>false</default>
+                <label>Broker Back Officev2</label>
+            </value>
+            <value>
+                <fullName>Broker C21 Abrams, Hutchinson Assoc</fullName>
+                <default>false</default>
+                <label>Broker C21 Abrams, Hutchinson Assoc</label>
+            </value>
+            <value>
+                <fullName>Broker C21 Alliance</fullName>
+                <default>false</default>
+                <label>Broker C21 Alliance</label>
+            </value>
+            <value>
+                <fullName>Broker C21 Alliance Email Only</fullName>
+                <default>false</default>
+                <label>Broker C21 Alliance Email Only</label>
+            </value>
+            <value>
+                <fullName>Broker C21 Alliance Marlton</fullName>
+                <default>false</default>
+                <label>Broker C21 Alliance Marlton</label>
+            </value>
+            <value>
+                <fullName>Broker C21 Alliance WC</fullName>
+                <default>false</default>
+                <label>Broker C21 Alliance WC</label>
+            </value>
+            <value>
+                <fullName>Broker C21 Hartman</fullName>
+                <default>false</default>
+                <label>Broker C21 Hartman</label>
+            </value>
+            <value>
+                <fullName>Broker C21 Hearst</fullName>
+                <default>false</default>
+                <label>Broker C21 Hearst</label>
+            </value>
+            <value>
+                <fullName>Broker Cassidon</fullName>
+                <default>false</default>
+                <label>Broker Cassidon</label>
+            </value>
+            <value>
+                <fullName>Broker CB Pref</fullName>
+                <default>false</default>
+                <label>Broker CB Pref</label>
+            </value>
+            <value>
+                <fullName>Broker CB Realty 1</fullName>
+                <default>false</default>
+                <label>Broker CB Realty 1</label>
+            </value>
+            <value>
+                <fullName>Broker CB Select Professionals</fullName>
+                <default>false</default>
+                <label>Broker CB Select Professionals</label>
+            </value>
+            <value>
+                <fullName>Broker Edgar &amp; Son</fullName>
+                <default>false</default>
+                <label>Broker Edgar &amp; Son</label>
+            </value>
+            <value>
+                <fullName>Broker ERA Burgdorff</fullName>
+                <default>false</default>
+                <label>Broker ERA Burgdorff</label>
+            </value>
+            <value>
+                <fullName>Broker Falconer Bell</fullName>
+                <default>false</default>
+                <label>Broker Falconer Bell</label>
+            </value>
+            <value>
+                <fullName>Broker Gloria Nilson</fullName>
+                <default>false</default>
+                <label>Broker Gloria Nilson</label>
+            </value>
+            <value>
+                <fullName>Broker GMAC Princeton Junction</fullName>
+                <default>false</default>
+                <label>Broker GMAC Princeton Junction</label>
+            </value>
+            <value>
+                <fullName>Broker Haddon Group</fullName>
+                <default>false</default>
+                <label>Broker Haddon Group</label>
+            </value>
+            <value>
+                <fullName>Broker Kurfiss</fullName>
+                <default>false</default>
+                <label>Broker Kurfiss</label>
+            </value>
+            <value>
+                <fullName>Broker Lenny Vermaat and Leonard</fullName>
+                <default>false</default>
+                <label>Broker Lenny Vermaat and Leonard</label>
+            </value>
+            <value>
+                <fullName>Broker Long &amp; Foster</fullName>
+                <default>false</default>
+                <label>Broker Long &amp; Foster</label>
+            </value>
+            <value>
+                <fullName>Broker Long and Foster</fullName>
+                <default>false</default>
+                <label>Broker Long and Foster</label>
+            </value>
+            <value>
+                <fullName>Broker On Common Ground</fullName>
+                <default>false</default>
+                <label>Broker On Common Ground</label>
+            </value>
+            <value>
+                <fullName>Broker Only</fullName>
+                <default>false</default>
+                <label>Broker Only</label>
+            </value>
+            <value>
+                <fullName>Broker Only - Accountech</fullName>
+                <default>false</default>
+                <label>Broker Only - Accountech</label>
+            </value>
+            <value>
+                <fullName>Broker Only - Accountech / CBCE</fullName>
+                <default>false</default>
+                <label>Broker Only - Accountech / CBCE</label>
+            </value>
+            <value>
+                <fullName>Broker Only - Accountech / Century 21 Leading Edge</fullName>
+                <default>false</default>
+                <label>Broker Only - Accountech / Century 21 Leading Edge</label>
+            </value>
+            <value>
+                <fullName>Broker Only - Accountech / ERA Elite Group</fullName>
+                <default>false</default>
+                <label>Broker Only - Accountech / ERA Elite Group</label>
+            </value>
+            <value>
+                <fullName>Broker Only - Accountech / ERA Teachers</fullName>
+                <default>false</default>
+                <label>Broker Only - Accountech / ERA Teachers</label>
+            </value>
+            <value>
+                <fullName>Broker Only - Adwritter / TTR Sothebys Intl Realty</fullName>
+                <default>false</default>
+                <label>Broker Only - Adwritter / TTR Sothebys Intl Realty</label>
+            </value>
+            <value>
+                <fullName>Broker Only - Century 21 Redwood</fullName>
+                <default>false</default>
+                <label>Broker Only - Century 21 Redwood</label>
+            </value>
+            <value>
+                <fullName>Broker Only - Century 21 The Real Estate Centre</fullName>
+                <default>false</default>
+                <label>Broker Only - Century 21 The Real Estate Centre</label>
+            </value>
+            <value>
+                <fullName>Broker Only - RSP/Long &amp; Foster</fullName>
+                <default>false</default>
+                <label>Broker Only - RSP/Long &amp; Foster</label>
+            </value>
+            <value>
+                <fullName>Broker Only - SkySlope / Century 21 New Millennium</fullName>
+                <default>false</default>
+                <label>Broker Only - SkySlope / Century 21 New Millennium</label>
+            </value>
+            <value>
+                <fullName>Broker OPG</fullName>
+                <default>false</default>
+                <label>Broker OPG</label>
+            </value>
+            <value>
+                <fullName>Broker ReMax City Space</fullName>
+                <default>false</default>
+                <label>Broker ReMax City Space</label>
+            </value>
+            <value>
+                <fullName>Broker  Staff</fullName>
+                <default>false</default>
+                <label>Broker  Staff</label>
+            </value>
+            <value>
+                <fullName>Broker Weidel</fullName>
+                <default>false</default>
+                <label>Broker Weidel</label>
+            </value>
+            <value>
+                <fullName>C21 Alliance CREST</fullName>
+                <default>false</default>
+                <label>C21 Alliance CREST</label>
+            </value>
+            <value>
+                <fullName>C21 Home Real Estate</fullName>
+                <default>false</default>
+                <label>C21 Home Real Estate</label>
+            </value>
+            <value>
+                <fullName>CARETS-ALLOW NO QUERIES</fullName>
+                <default>false</default>
+                <label>CARETS-ALLOW NO QUERIES</label>
+            </value>
+            <value>
+                <fullName>CARETS-BROKER</fullName>
+                <default>false</default>
+                <label>CARETS-BROKER</label>
+            </value>
+            <value>
+                <fullName>CARETS-CLAW-ACCESS</fullName>
+                <default>false</default>
+                <label>CARETS-CLAW-ACCESS</label>
+            </value>
+            <value>
+                <fullName>CARETS-CRISNET-ACCESS</fullName>
+                <default>false</default>
+                <label>CARETS-CRISNET-ACCESS</label>
+            </value>
+            <value>
+                <fullName>CARETS-DOM</fullName>
+                <default>false</default>
+                <label>CARETS-DOM</label>
+            </value>
+            <value>
+                <fullName>CARETS History</fullName>
+                <default>false</default>
+                <label>CARETS History</label>
+            </value>
+            <value>
+                <fullName>CARETS-History Restricted</fullName>
+                <default>false</default>
+                <label>CARETS-History Restricted</label>
+            </value>
+            <value>
+                <fullName>CARETS-IDX</fullName>
+                <default>false</default>
+                <label>CARETS-IDX</label>
+            </value>
+            <value>
+                <fullName>CARETS-ITECH-ACCESS</fullName>
+                <default>false</default>
+                <label>CARETS-ITECH-ACCESS</label>
+            </value>
+            <value>
+                <fullName>CARETS-MRMLS-ACCESS</fullName>
+                <default>false</default>
+                <label>CARETS-MRMLS-ACCESS</label>
+            </value>
+            <value>
+                <fullName>CARETS-OMIT_CDAR</fullName>
+                <default>false</default>
+                <label>CARETS-OMIT_CDAR</label>
+            </value>
+            <value>
+                <fullName>CARETS-OMIT_CLAW</fullName>
+                <default>false</default>
+                <label>CARETS-OMIT_CLAW</label>
+            </value>
+            <value>
+                <fullName>CARETS-OMIT_CRISNET</fullName>
+                <default>false</default>
+                <label>CARETS-OMIT_CRISNET</label>
+            </value>
+            <value>
+                <fullName>CARETS-OMIT_ITECH</fullName>
+                <default>false</default>
+                <label>CARETS-OMIT_ITECH</label>
+            </value>
+            <value>
+                <fullName>CARETS-OMIT_MRMLS</fullName>
+                <default>false</default>
+                <label>CARETS-OMIT_MRMLS</label>
+            </value>
+            <value>
+                <fullName>CARETS-OMIT_SOCAL</fullName>
+                <default>false</default>
+                <label>CARETS-OMIT_SOCAL</label>
+            </value>
+            <value>
+                <fullName>CARETS-OMIT_VCRDS</fullName>
+                <default>false</default>
+                <label>CARETS-OMIT_VCRDS</label>
+            </value>
+            <value>
+                <fullName>CARETS-SOCAL-ACCESS</fullName>
+                <default>false</default>
+                <label>CARETS-SOCAL-ACCESS</label>
+            </value>
+            <value>
+                <fullName>CAT Administrator</fullName>
+                <default>false</default>
+                <label>CAT Administrator</label>
+            </value>
+            <value>
+                <fullName>CAT HelpDesk</fullName>
+                <default>false</default>
+                <label>CAT HelpDesk</label>
+            </value>
+            <value>
+                <fullName>CAT Security</fullName>
+                <default>false</default>
+                <label>CAT Security</label>
+            </value>
+            <value>
+                <fullName>CAT User</fullName>
+                <default>false</default>
+                <label>CAT User</label>
+            </value>
+            <value>
+                <fullName>CAT Viewer</fullName>
+                <default>false</default>
+                <label>CAT Viewer</label>
+            </value>
+            <value>
+                <fullName>CIE 360 member</fullName>
+                <default>false</default>
+                <label>CIE 360 member</label>
+            </value>
+            <value>
+                <fullName>Class Only</fullName>
+                <default>false</default>
+                <label>Class Only</label>
+            </value>
+            <value>
+                <fullName>CMT Full</fullName>
+                <default>false</default>
+                <label>CMT Full</label>
+            </value>
+            <value>
+                <fullName>CMT View</fullName>
+                <default>false</default>
+                <label>CMT View</label>
+            </value>
+            <value>
+                <fullName>Coming Soon Listings Access</fullName>
+                <default>false</default>
+                <label>Coming Soon Listings Access</label>
+            </value>
+            <value>
+                <fullName>Commercial Source</fullName>
+                <default>false</default>
+                <label>Commercial Source</label>
+            </value>
+            <value>
+                <fullName>Company</fullName>
+                <default>false</default>
+                <label>Company</label>
+            </value>
+            <value>
+                <fullName>CURE Administrator</fullName>
+                <default>false</default>
+                <label>CURE Administrator</label>
+            </value>
+            <value>
+                <fullName>Customized - Market Data Service</fullName>
+                <default>false</default>
+                <label>Customized - Market Data Service</label>
+            </value>
+            <value>
+                <fullName>Cyberhomes.com</fullName>
+                <default>false</default>
+                <label>Cyberhomes.com</label>
+            </value>
+            <value>
+                <fullName>Data Sharing Ocean</fullName>
+                <default>false</default>
+                <label>Data Sharing Ocean</label>
+            </value>
+            <value>
+                <fullName>Disable_MRIS_RETS_Functionality_Extensions</fullName>
+                <default>false</default>
+                <label>Disable_MRIS_RETS_Functionality_Extensions</label>
+            </value>
+            <value>
+                <fullName>Display AgentPrivateEmail</fullName>
+                <default>false</default>
+                <label>Display AgentPrivateEmail</label>
+            </value>
+            <value>
+                <fullName>Ecommerce Admin</fullName>
+                <default>false</default>
+                <label>Ecommerce Admin</label>
+            </value>
+            <value>
+                <fullName>Ecommerce Billing</fullName>
+                <default>false</default>
+                <label>Ecommerce Billing</label>
+            </value>
+            <value>
+                <fullName>Ecommerce Support Center</fullName>
+                <default>false</default>
+                <label>Ecommerce Support Center</label>
+            </value>
+            <value>
+                <fullName>Ecommerce Sys Admin</fullName>
+                <default>false</default>
+                <label>Ecommerce Sys Admin</label>
+            </value>
+            <value>
+                <fullName>Edit</fullName>
+                <default>false</default>
+                <label>Edit</label>
+            </value>
+            <value>
+                <fullName>Email Admin</fullName>
+                <default>false</default>
+                <label>Email Admin</label>
+            </value>
+            <value>
+                <fullName>eProcess Admin</fullName>
+                <default>false</default>
+                <label>eProcess Admin</label>
+            </value>
+            <value>
+                <fullName>eProcess Support Center</fullName>
+                <default>false</default>
+                <label>eProcess Support Center</label>
+            </value>
+            <value>
+                <fullName>eProcess Sys Admin</fullName>
+                <default>false</default>
+                <label>eProcess Sys Admin</label>
+            </value>
+            <value>
+                <fullName>Fairfax County Government</fullName>
+                <default>false</default>
+                <label>Fairfax County Government</label>
+            </value>
+            <value>
+                <fullName>FREELANCE STAR</fullName>
+                <default>false</default>
+                <label>FREELANCE STAR</label>
+            </value>
+            <value>
+                <fullName>Government Agency/PA - N/C</fullName>
+                <default>false</default>
+                <label>Government Agency/PA - N/C</label>
+            </value>
+            <value>
+                <fullName>Government Agency/Personal Assistant</fullName>
+                <default>false</default>
+                <label>Government Agency/Personal Assistant</label>
+            </value>
+            <value>
+                <fullName>Govt Agency</fullName>
+                <default>false</default>
+                <label>Govt Agency</label>
+            </value>
+            <value>
+                <fullName>Govt Agency N/C</fullName>
+                <default>false</default>
+                <label>Govt Agency N/C</label>
+            </value>
+            <value>
+                <fullName>HDB.com</fullName>
+                <default>false</default>
+                <label>HDB.com</label>
+            </value>
+            <value>
+                <fullName>HOMES.COM</fullName>
+                <default>false</default>
+                <label>HOMES.COM</label>
+            </value>
+            <value>
+                <fullName>HOMES AND LAND</fullName>
+                <default>false</default>
+                <label>HOMES AND LAND</label>
+            </value>
+            <value>
+                <fullName>HOMESDATABASE.COM</fullName>
+                <default>false</default>
+                <label>HOMESDATABASE.COM</label>
+            </value>
+            <value>
+                <fullName>HOMETOWNANNAPOLIS.COM</fullName>
+                <default>false</default>
+                <label>HOMETOWNANNAPOLIS.COM</label>
+            </value>
+            <value>
+                <fullName>HometownAnnapolis.comV2</fullName>
+                <default>false</default>
+                <label>HometownAnnapolis.comV2</label>
+            </value>
+            <value>
+                <fullName>Honorary Agent</fullName>
+                <default>false</default>
+                <label>Honorary Agent</label>
+            </value>
+            <value>
+                <fullName>House and Home</fullName>
+                <default>false</default>
+                <label>House and Home</label>
+            </value>
+            <value>
+                <fullName>IDX Plus</fullName>
+                <default>false</default>
+                <label>IDX Plus</label>
+            </value>
+            <value>
+                <fullName>Ignore Localization Names</fullName>
+                <default>false</default>
+                <label>Ignore Localization Names</label>
+            </value>
+            <value>
+                <fullName>INTERNATIONAL LISTING ADVERTISING EXCHANGE</fullName>
+                <default>false</default>
+                <label>INTERNATIONAL LISTING ADVERTISING EXCHANGE</label>
+            </value>
+            <value>
+                <fullName>International newer listing newer advertising newer exchange</fullName>
+                <default>false</default>
+                <label>International newer listing newer advertising newer exchange</label>
+            </value>
+            <value>
+                <fullName>INTERNET DATA EXCHANGE</fullName>
+                <default>false</default>
+                <label>INTERNET DATA EXCHANGE</label>
+            </value>
+            <value>
+                <fullName>Licensed Appraiser</fullName>
+                <default>false</default>
+                <label>Licensed Appraiser</label>
+            </value>
+            <value>
+                <fullName>Licensee</fullName>
+                <default>false</default>
+                <label>Licensee</label>
+            </value>
+            <value>
+                <fullName>Licensee/Non-Realtor</fullName>
+                <default>false</default>
+                <label>Licensee/Non-Realtor</label>
+            </value>
+            <value>
+                <fullName>Lister</fullName>
+                <default>false</default>
+                <label>Lister</label>
+            </value>
+            <value>
+                <fullName>Listing Agents</fullName>
+                <default>false</default>
+                <label>Listing Agents</label>
+            </value>
+            <value>
+                <fullName>Listing Score Restrictions</fullName>
+                <default>false</default>
+                <label>Listing Score Restrictions</label>
+            </value>
+            <value>
+                <fullName>Lock Boxv2</fullName>
+                <default>false</default>
+                <label>Lock Boxv2</label>
+            </value>
+            <value>
+                <fullName>Login</fullName>
+                <default>false</default>
+                <label>Login</label>
+            </value>
+            <value>
+                <fullName>LVAR BLI</fullName>
+                <default>false</default>
+                <label>LVAR BLI</label>
+            </value>
+            <value>
+                <fullName>MDS Access Advanced</fullName>
+                <default>false</default>
+                <label>MDS Access Advanced</label>
+            </value>
+            <value>
+                <fullName>MDS Access Common</fullName>
+                <default>false</default>
+                <label>MDS Access Common</label>
+            </value>
+            <value>
+                <fullName>MDS Access Office/Agent</fullName>
+                <default>false</default>
+                <label>MDS Access Office/Agent</label>
+            </value>
+            <value>
+                <fullName>MDS Application Login</fullName>
+                <default>false</default>
+                <label>MDS Application Login</label>
+            </value>
+            <value>
+                <fullName>MDS Return HTTP Status 200 Only</fullName>
+                <default>false</default>
+                <label>MDS Return HTTP Status 200 Only</label>
+            </value>
+            <value>
+                <fullName>MDS SHARE_SYSTEM_SESSION_ROLES</fullName>
+                <default>false</default>
+                <label>MDS SHARE_SYSTEM_SESSION_ROLES</label>
+            </value>
+            <value>
+                <fullName>MDS Trusted Application</fullName>
+                <default>false</default>
+                <label>MDS Trusted Application</label>
+            </value>
+            <value>
+                <fullName>MDS User Login</fullName>
+                <default>false</default>
+                <label>MDS User Login</label>
+            </value>
+            <value>
+                <fullName>Media Package Search</fullName>
+                <default>false</default>
+                <label>Media Package Search</label>
+            </value>
+            <value>
+                <fullName>Media Restrictions</fullName>
+                <default>false</default>
+                <label>Media Restrictions</label>
+            </value>
+            <value>
+                <fullName>MediaShowSearchStatusField</fullName>
+                <default>false</default>
+                <label>MediaShowSearchStatusField</label>
+            </value>
+            <value>
+                <fullName>Metadata Display MRIS Extension</fullName>
+                <default>false</default>
+                <label>Metadata Display MRIS Extension</label>
+            </value>
+            <value>
+                <fullName>Metadata Use New Metadata engine</fullName>
+                <default>false</default>
+                <label>Metadata Use New Metadata engine</label>
+            </value>
+            <value>
+                <fullName>MIREALSOURCE Only</fullName>
+                <default>false</default>
+                <label>MIREALSOURCE Only</label>
+            </value>
+            <value>
+                <fullName>MIREX-Broker</fullName>
+                <default>false</default>
+                <label>MIREX-Broker</label>
+            </value>
+            <value>
+                <fullName>MIREX-IDX</fullName>
+                <default>false</default>
+                <label>MIREX-IDX</label>
+            </value>
+            <value>
+                <fullName>MIREX-LisitngBook</fullName>
+                <default>false</default>
+                <label>MIREX-LisitngBook</label>
+            </value>
+            <value>
+                <fullName>MRIS Consultant</fullName>
+                <default>false</default>
+                <label>MRIS Consultant</label>
+            </value>
+            <value>
+                <fullName>MRIS Instructor</fullName>
+                <default>false</default>
+                <label>MRIS Instructor</label>
+            </value>
+            <value>
+                <fullName>MRIS Manager</fullName>
+                <default>false</default>
+                <label>MRIS Manager</label>
+            </value>
+            <value>
+                <fullName>MRIS Staff</fullName>
+                <default>false</default>
+                <label>MRIS Staff</label>
+            </value>
+            <value>
+                <fullName>MRIS Training Department</fullName>
+                <default>false</default>
+                <label>MRIS Training Department</label>
+            </value>
+            <value>
+                <fullName>MRIS Vendor</fullName>
+                <default>false</default>
+                <label>MRIS Vendor</label>
+            </value>
+            <value>
+                <fullName>NAR</fullName>
+                <default>false</default>
+                <label>NAR</label>
+            </value>
+            <value>
+                <fullName>National Advertising - AGGREGATOR - Homes.Com</fullName>
+                <default>false</default>
+                <label>National Advertising - AGGREGATOR - Homes.Com</label>
+            </value>
+            <value>
+                <fullName>National Advertising - AGGREGATOR - Realtor.Com</fullName>
+                <default>false</default>
+                <label>National Advertising - AGGREGATOR - Realtor.Com</label>
+            </value>
+            <value>
+                <fullName>New York Times Standard</fullName>
+                <default>false</default>
+                <label>New York Times Standard</label>
+            </value>
+            <value>
+                <fullName>Non-MLS</fullName>
+                <default>false</default>
+                <label>Non-MLS</label>
+            </value>
+            <value>
+                <fullName>Non Subscriber Mgr</fullName>
+                <default>false</default>
+                <label>Non Subscriber Mgr</label>
+            </value>
+            <value>
+                <fullName>Non-Subscribing Consultant</fullName>
+                <default>false</default>
+                <label>Non-Subscribing Consultant</label>
+            </value>
+            <value>
+                <fullName>Ocean Data</fullName>
+                <default>false</default>
+                <label>Ocean Data</label>
+            </value>
+            <value>
+                <fullName>Office Listings</fullName>
+                <default>false</default>
+                <label>Office Listings</label>
+            </value>
+            <value>
+                <fullName>Office Private Info</fullName>
+                <default>false</default>
+                <label>Office Private Info</label>
+            </value>
+            <value>
+                <fullName>Office Secretary</fullName>
+                <default>false</default>
+                <label>Office Secretary</label>
+            </value>
+            <value>
+                <fullName>Office Secretary NC</fullName>
+                <default>false</default>
+                <label>Office Secretary NC</label>
+            </value>
+            <value>
+                <fullName>OfficeShowLeadFields</fullName>
+                <default>false</default>
+                <label>OfficeShowLeadFields</label>
+            </value>
+            <value>
+                <fullName>Other Committee Members</fullName>
+                <default>false</default>
+                <label>Other Committee Members</label>
+            </value>
+            <value>
+                <fullName>Override Display Rules</fullName>
+                <default>false</default>
+                <label>Override Display Rules</label>
+            </value>
+            <value>
+                <fullName>Override Staging Area Lock</fullName>
+                <default>false</default>
+                <label>Override Staging Area Lock</label>
+            </value>
+            <value>
+                <fullName>Patterson Schwarz Company</fullName>
+                <default>false</default>
+                <label>Patterson Schwarz Company</label>
+            </value>
+            <value>
+                <fullName>Patuxent - Newspaper Advertising</fullName>
+                <default>false</default>
+                <label>Patuxent - Newspaper Advertising</label>
+            </value>
+            <value>
+                <fullName>Patuxent Publishing - Newspaper Advertising</fullName>
+                <default>false</default>
+                <label>Patuxent Publishing - Newspaper Advertising</label>
+            </value>
+            <value>
+                <fullName>Personal Asst</fullName>
+                <default>false</default>
+                <label>Personal Asst</label>
+            </value>
+            <value>
+                <fullName>Personal Asst to Appraiser</fullName>
+                <default>false</default>
+                <label>Personal Asst to Appraiser</label>
+            </value>
+            <value>
+                <fullName>property_history</fullName>
+                <default>false</default>
+                <label>property_history</label>
+            </value>
+            <value>
+                <fullName>PropertyShowDMPNeighborhoodField</fullName>
+                <default>false</default>
+                <label>PropertyShowDMPNeighborhoodField</label>
+            </value>
+            <value>
+                <fullName>PropertyShowDMPResidentialPlusField</fullName>
+                <default>false</default>
+                <label>PropertyShowDMPResidentialPlusField</label>
+            </value>
+            <value>
+                <fullName>Provisioning Admin</fullName>
+                <default>false</default>
+                <label>Provisioning Admin</label>
+            </value>
+            <value>
+                <fullName>Provisioning System User</fullName>
+                <default>false</default>
+                <label>Provisioning System User</label>
+            </value>
+            <value>
+                <fullName>PruFoxRoach Company Data</fullName>
+                <default>false</default>
+                <label>PruFoxRoach Company Data</label>
+            </value>
+            <value>
+                <fullName>PSRE Business History</fullName>
+                <default>false</default>
+                <label>PSRE Business History</label>
+            </value>
+            <value>
+                <fullName>Public Records</fullName>
+                <default>false</default>
+                <label>Public Records</label>
+            </value>
+            <value>
+                <fullName>Public Records Unrestricted</fullName>
+                <default>false</default>
+                <label>Public Records Unrestricted</label>
+            </value>
+            <value>
+                <fullName>Pulse Research, Inc. - Newspaper Advertising</fullName>
+                <default>false</default>
+                <label>Pulse Research, Inc. - Newspaper Advertising</label>
+            </value>
+            <value>
+                <fullName>QC Administrator</fullName>
+                <default>false</default>
+                <label>QC Administrator</label>
+            </value>
+            <value>
+                <fullName>QC Agent Responsible</fullName>
+                <default>false</default>
+                <label>QC Agent Responsible</label>
+            </value>
+            <value>
+                <fullName>QC Compliance Issue Manager</fullName>
+                <default>false</default>
+                <label>QC Compliance Issue Manager</label>
+            </value>
+            <value>
+                <fullName>QC County Record Manager</fullName>
+                <default>false</default>
+                <label>QC County Record Manager</label>
+            </value>
+            <value>
+                <fullName>QC Issue Reporter</fullName>
+                <default>false</default>
+                <label>QC Issue Reporter</label>
+            </value>
+            <value>
+                <fullName>QC Public</fullName>
+                <default>false</default>
+                <label>QC Public</label>
+            </value>
+            <value>
+                <fullName>QC User</fullName>
+                <default>false</default>
+                <label>QC User</label>
+            </value>
+            <value>
+                <fullName>Re/Max 440 SureClose</fullName>
+                <default>false</default>
+                <label>Re/Max 440 SureClose</label>
+            </value>
+            <value>
+                <fullName>Realtor/NonShareholder</fullName>
+                <default>false</default>
+                <label>Realtor/NonShareholder</label>
+            </value>
+            <value>
+                <fullName>Realtor/Shareholder</fullName>
+                <default>false</default>
+                <label>Realtor/Shareholder</label>
+            </value>
+            <value>
+                <fullName>REALTOR.COM</fullName>
+                <default>false</default>
+                <label>REALTOR.COM</label>
+            </value>
+            <value>
+                <fullName>REALTOR.COM.ACTIVES</fullName>
+                <default>false</default>
+                <label>REALTOR.COM.ACTIVES</label>
+            </value>
+            <value>
+                <fullName>Realtor Appraiser/Non-Shareholder</fullName>
+                <default>false</default>
+                <label>Realtor Appraiser/Non-Shareholder</label>
+            </value>
+            <value>
+                <fullName>Realtor Appraiser/Shareholder</fullName>
+                <default>false</default>
+                <label>Realtor Appraiser/Shareholder</label>
+            </value>
+            <value>
+                <fullName>REALTORS  Property Resource</fullName>
+                <default>false</default>
+                <label>REALTORS  Property Resource</label>
+            </value>
+            <value>
+                <fullName>Referral</fullName>
+                <default>false</default>
+                <label>Referral</label>
+            </value>
+            <value>
+                <fullName>ReMax Tri County</fullName>
+                <default>false</default>
+                <label>ReMax Tri County</label>
+            </value>
+            <value>
+                <fullName>RESO Query Allowed</fullName>
+                <default>false</default>
+                <label>RESO Query Allowed</label>
+            </value>
+            <value>
+                <fullName>Responsible Member</fullName>
+                <default>false</default>
+                <label>Responsible Member</label>
+            </value>
+            <value>
+                <fullName>Restricted Text</fullName>
+                <default>false</default>
+                <label>Restricted Text</label>
+            </value>
+            <value>
+                <fullName>RETS Advanced</fullName>
+                <default>false</default>
+                <label>RETS Advanced</label>
+            </value>
+            <value>
+                <fullName>RETS Customer</fullName>
+                <default>false</default>
+                <label>RETS Customer</label>
+            </value>
+            <value>
+                <fullName>RETS Enable 1.7 Features</fullName>
+                <default>false</default>
+                <label>RETS Enable 1.7 Features</label>
+            </value>
+            <value>
+                <fullName>Review Publishing Subscription</fullName>
+                <default>false</default>
+                <label>Review Publishing Subscription</label>
+            </value>
+            <value>
+                <fullName>Rolling Date</fullName>
+                <default>false</default>
+                <label>Rolling Date</label>
+            </value>
+            <value>
+                <fullName>Saved Searches</fullName>
+                <default>false</default>
+                <label>Saved Searches</label>
+            </value>
+            <value>
+                <fullName>Search</fullName>
+                <default>false</default>
+                <label>Search</label>
+            </value>
+            <value>
+                <fullName>Security Search</fullName>
+                <default>false</default>
+                <label>Security Search</label>
+            </value>
+            <value>
+                <fullName>See Company Data</fullName>
+                <default>false</default>
+                <label>See Company Data</label>
+            </value>
+            <value>
+                <fullName>Showing Appointment Service</fullName>
+                <default>false</default>
+                <label>Showing Appointment Service</label>
+            </value>
+            <value>
+                <fullName>Show Password</fullName>
+                <default>false</default>
+                <label>Show Password</label>
+            </value>
+            <value>
+                <fullName>Sort</fullName>
+                <default>false</default>
+                <label>Sort</label>
+            </value>
+            <value>
+                <fullName>Staged Object</fullName>
+                <default>false</default>
+                <label>Staged Object</label>
+            </value>
+            <value>
+                <fullName>Statistics</fullName>
+                <default>false</default>
+                <label>Statistics</label>
+            </value>
+            <value>
+                <fullName>Statistics Search</fullName>
+                <default>false</default>
+                <label>Statistics Search</label>
+            </value>
+            <value>
+                <fullName>Stats Baker Realty Services</fullName>
+                <default>false</default>
+                <label>Stats Baker Realty Services</label>
+            </value>
+            <value>
+                <fullName>Stats CB Residential</fullName>
+                <default>false</default>
+                <label>Stats CB Residential</label>
+            </value>
+            <value>
+                <fullName>Stats Gloria Nilson GMAC</fullName>
+                <default>false</default>
+                <label>Stats Gloria Nilson GMAC</label>
+            </value>
+            <value>
+                <fullName>Stats Kurfiss</fullName>
+                <default>false</default>
+                <label>Stats Kurfiss</label>
+            </value>
+            <value>
+                <fullName>Stats Long $ Foster</fullName>
+                <default>false</default>
+                <label>Stats Long $ Foster</label>
+            </value>
+            <value>
+                <fullName>Stats Long and Foster</fullName>
+                <default>false</default>
+                <label>Stats Long and Foster</label>
+            </value>
+            <value>
+                <fullName>Status Active</fullName>
+                <default>false</default>
+                <label>Status Active</label>
+            </value>
+            <value>
+                <fullName>Status Duplicate</fullName>
+                <default>false</default>
+                <label>Status Duplicate</label>
+            </value>
+            <value>
+                <fullName>Status Inactive</fullName>
+                <default>false</default>
+                <label>Status Inactive</label>
+            </value>
+            <value>
+                <fullName>Status Waived</fullName>
+                <default>false</default>
+                <label>Status Waived</label>
+            </value>
+            <value>
+                <fullName>STREET EASY</fullName>
+                <default>false</default>
+                <label>STREET EASY</label>
+            </value>
+            <value>
+                <fullName>Strong Authentication</fullName>
+                <default>false</default>
+                <label>Strong Authentication</label>
+            </value>
+            <value>
+                <fullName>Super</fullName>
+                <default>false</default>
+                <label>Super</label>
+            </value>
+            <value>
+                <fullName>Suppress Private Information</fullName>
+                <default>false</default>
+                <label>Suppress Private Information</label>
+            </value>
+            <value>
+                <fullName>Supra</fullName>
+                <default>false</default>
+                <label>Supra</label>
+            </value>
+            <value>
+                <fullName>Syndication Modified</fullName>
+                <default>false</default>
+                <label>Syndication Modified</label>
+            </value>
+            <value>
+                <fullName>System-CARETS</fullName>
+                <default>false</default>
+                <label>System-CARETS</label>
+            </value>
+            <value>
+                <fullName>System-MIREX</fullName>
+                <default>false</default>
+                <label>System-MIREX</label>
+            </value>
+            <value>
+                <fullName>System MRIS</fullName>
+                <default>false</default>
+                <label>System MRIS</label>
+            </value>
+            <value>
+                <fullName>System-TREND</fullName>
+                <default>false</default>
+                <label>System-TREND</label>
+            </value>
+            <value>
+                <fullName>System-WIREX</fullName>
+                <default>false</default>
+                <label>System-WIREX</label>
+            </value>
+            <value>
+                <fullName>Tax Historical Designation</fullName>
+                <default>false</default>
+                <label>Tax Historical Designation</label>
+            </value>
+            <value>
+                <fullName>Temp MDS IDX PLUS</fullName>
+                <default>false</default>
+                <label>Temp MDS IDX PLUS</label>
+            </value>
+            <value>
+                <fullName>Term Disconnect</fullName>
+                <default>false</default>
+                <label>Term Disconnect</label>
+            </value>
+            <value>
+                <fullName>Terminated</fullName>
+                <default>false</default>
+                <label>Terminated</label>
+            </value>
+            <value>
+                <fullName>TREND</fullName>
+                <default>false</default>
+                <label>TREND</label>
+            </value>
+            <value>
+                <fullName>TREND_BASE Broker Standard</fullName>
+                <default>false</default>
+                <label>TREND_BASE Broker Standard</label>
+            </value>
+            <value>
+                <fullName>TREND_Centralized Showing</fullName>
+                <default>false</default>
+                <label>TREND_Centralized Showing</label>
+            </value>
+            <value>
+                <fullName>TREND_IDX</fullName>
+                <default>false</default>
+                <label>TREND_IDX</label>
+            </value>
+            <value>
+                <fullName>TREND_IDX_SUB</fullName>
+                <default>false</default>
+                <label>TREND_IDX_SUB</label>
+            </value>
+            <value>
+                <fullName>TREND_IDX OH</fullName>
+                <default>false</default>
+                <label>TREND_IDX OH</label>
+            </value>
+            <value>
+                <fullName>TREND_IDXSUB</fullName>
+                <default>false</default>
+                <label>TREND_IDXSUB</label>
+            </value>
+            <value>
+                <fullName>TREND_PocketRE</fullName>
+                <default>false</default>
+                <label>TREND_PocketRE</label>
+            </value>
+            <value>
+                <fullName>TREND_Real Estate Book</fullName>
+                <default>false</default>
+                <label>TREND_Real Estate Book</label>
+            </value>
+            <value>
+                <fullName>TREND_Review Publishing</fullName>
+                <default>false</default>
+                <label>TREND_Review Publishing</label>
+            </value>
+            <value>
+                <fullName>TREND_RPIS</fullName>
+                <default>false</default>
+                <label>TREND_RPIS</label>
+            </value>
+            <value>
+                <fullName>TREND_SHOWING BASE</fullName>
+                <default>false</default>
+                <label>TREND_SHOWING BASE</label>
+            </value>
+            <value>
+                <fullName>TREND_Showing Solutions</fullName>
+                <default>false</default>
+                <label>TREND_Showing Solutions</label>
+            </value>
+            <value>
+                <fullName>TREND_Showing Time</fullName>
+                <default>false</default>
+                <label>TREND_Showing Time</label>
+            </value>
+            <value>
+                <fullName>TREND_SIMG</fullName>
+                <default>false</default>
+                <label>TREND_SIMG</label>
+            </value>
+            <value>
+                <fullName>TREND_STATS</fullName>
+                <default>false</default>
+                <label>TREND_STATS</label>
+            </value>
+            <value>
+                <fullName>TREND_Supra</fullName>
+                <default>false</default>
+                <label>TREND_Supra</label>
+            </value>
+            <value>
+                <fullName>TREND_SysPartyMedia</fullName>
+                <default>false</default>
+                <label>TREND_SysPartyMedia</label>
+            </value>
+            <value>
+                <fullName>TREND_Terradatum</fullName>
+                <default>false</default>
+                <label>TREND_Terradatum</label>
+            </value>
+            <value>
+                <fullName>TREND_TProducer</fullName>
+                <default>false</default>
+                <label>TREND_TProducer</label>
+            </value>
+            <value>
+                <fullName>TREND_VOW</fullName>
+                <default>false</default>
+                <label>TREND_VOW</label>
+            </value>
+            <value>
+                <fullName>TREND_VOW Expired</fullName>
+                <default>false</default>
+                <label>TREND_VOW Expired</label>
+            </value>
+            <value>
+                <fullName>TREND_VOW Pending</fullName>
+                <default>false</default>
+                <label>TREND_VOW Pending</label>
+            </value>
+            <value>
+                <fullName>TREND_VOW Sold</fullName>
+                <default>false</default>
+                <label>TREND_VOW Sold</label>
+            </value>
+            <value>
+                <fullName>TREND_VOW Withdrawn</fullName>
+                <default>false</default>
+                <label>TREND_VOW Withdrawn</label>
+            </value>
+            <value>
+                <fullName>TREND 10k</fullName>
+                <default>false</default>
+                <label>TREND 10k</label>
+            </value>
+            <value>
+                <fullName>TREND Business History</fullName>
+                <default>false</default>
+                <label>TREND Business History</label>
+            </value>
+            <value>
+                <fullName>TREND Buyers Real Estate Weekly</fullName>
+                <default>false</default>
+                <label>TREND Buyers Real Estate Weekly</label>
+            </value>
+            <value>
+                <fullName>TREND Centalized Showing Sub</fullName>
+                <default>false</default>
+                <label>TREND Centalized Showing Sub</label>
+            </value>
+            <value>
+                <fullName>TREND Circle Pix</fullName>
+                <default>false</default>
+                <label>TREND Circle Pix</label>
+            </value>
+            <value>
+                <fullName>TREND CMMS</fullName>
+                <default>false</default>
+                <label>TREND CMMS</label>
+            </value>
+            <value>
+                <fullName>TREND CoreLogix</fullName>
+                <default>false</default>
+                <label>TREND CoreLogix</label>
+            </value>
+            <value>
+                <fullName>TREND Courier Post</fullName>
+                <default>false</default>
+                <label>TREND Courier Post</label>
+            </value>
+            <value>
+                <fullName>TREND Cyberhomes</fullName>
+                <default>false</default>
+                <label>TREND Cyberhomes</label>
+            </value>
+            <value>
+                <fullName>TREND Delaware on Line</fullName>
+                <default>false</default>
+                <label>TREND Delaware on Line</label>
+            </value>
+            <value>
+                <fullName>TREND Distinctive Homes</fullName>
+                <default>false</default>
+                <label>TREND Distinctive Homes</label>
+            </value>
+            <value>
+                <fullName>TREND EShowings</fullName>
+                <default>false</default>
+                <label>TREND EShowings</label>
+            </value>
+            <value>
+                <fullName>TREND FIND</fullName>
+                <default>false</default>
+                <label>TREND FIND</label>
+            </value>
+            <value>
+                <fullName>TREND Harmon Homes</fullName>
+                <default>false</default>
+                <label>TREND Harmon Homes</label>
+            </value>
+            <value>
+                <fullName>TREND History</fullName>
+                <default>false</default>
+                <label>TREND History</label>
+            </value>
+            <value>
+                <fullName>TREND Homes &amp; Land</fullName>
+                <default>false</default>
+                <label>TREND Homes &amp; Land</label>
+            </value>
+            <value>
+                <fullName>TREND Homes and Land</fullName>
+                <default>false</default>
+                <label>TREND Homes and Land</label>
+            </value>
+            <value>
+                <fullName>TREND Homestore</fullName>
+                <default>false</default>
+                <label>TREND Homestore</label>
+            </value>
+            <value>
+                <fullName>TREND Journal Register</fullName>
+                <default>false</default>
+                <label>TREND Journal Register</label>
+            </value>
+            <value>
+                <fullName>TREND ListHub</fullName>
+                <default>false</default>
+                <label>TREND ListHub</label>
+            </value>
+            <value>
+                <fullName>TREND Move Find</fullName>
+                <default>false</default>
+                <label>TREND Move Find</label>
+            </value>
+            <value>
+                <fullName>TREND NAR</fullName>
+                <default>false</default>
+                <label>TREND NAR</label>
+            </value>
+            <value>
+                <fullName>TREND NAR Research</fullName>
+                <default>false</default>
+                <label>TREND NAR Research</label>
+            </value>
+            <value>
+                <fullName>TREND Newspaper Base Role</fullName>
+                <default>false</default>
+                <label>TREND Newspaper Base Role</label>
+            </value>
+            <value>
+                <fullName>TREND NJ.com</fullName>
+                <default>false</default>
+                <label>TREND NJ.com</label>
+            </value>
+            <value>
+                <fullName>TREND Office and Agent</fullName>
+                <default>false</default>
+                <label>TREND Office and Agent</label>
+            </value>
+            <value>
+                <fullName>TREND Offutt</fullName>
+                <default>false</default>
+                <label>TREND Offutt</label>
+            </value>
+            <value>
+                <fullName>TREND Open House</fullName>
+                <default>false</default>
+                <label>TREND Open House</label>
+            </value>
+            <value>
+                <fullName>TREND Open House Public</fullName>
+                <default>false</default>
+                <label>TREND Open House Public</label>
+            </value>
+            <value>
+                <fullName>TREND Philly.com</fullName>
+                <default>false</default>
+                <label>TREND Philly.com</label>
+            </value>
+            <value>
+                <fullName>TREND Philly Burbs</fullName>
+                <default>false</default>
+                <label>TREND Philly Burbs</label>
+            </value>
+            <value>
+                <fullName>TREND Prospects Plus</fullName>
+                <default>false</default>
+                <label>TREND Prospects Plus</label>
+            </value>
+            <value>
+                <fullName>TREND Real Data</fullName>
+                <default>false</default>
+                <label>TREND Real Data</label>
+            </value>
+            <value>
+                <fullName>Trend Realtor.com</fullName>
+                <default>false</default>
+                <label>Trend Realtor.com</label>
+            </value>
+            <value>
+                <fullName>Trend Realtor Property Resource</fullName>
+                <default>false</default>
+                <label>Trend Realtor Property Resource</label>
+            </value>
+            <value>
+                <fullName>TREND RPR</fullName>
+                <default>false</default>
+                <label>TREND RPR</label>
+            </value>
+            <value>
+                <fullName>TREND Showing Center</fullName>
+                <default>false</default>
+                <label>TREND Showing Center</label>
+            </value>
+            <value>
+                <fullName>TREND Sold</fullName>
+                <default>false</default>
+                <label>TREND Sold</label>
+            </value>
+            <value>
+                <fullName>TREND Sold Plus</fullName>
+                <default>false</default>
+                <label>TREND Sold Plus</label>
+            </value>
+            <value>
+                <fullName>TREND South Jersey.com</fullName>
+                <default>false</default>
+                <label>TREND South Jersey.com</label>
+            </value>
+            <value>
+                <fullName>TREND Support</fullName>
+                <default>false</default>
+                <label>TREND Support</label>
+            </value>
+            <value>
+                <fullName>TREND Supra</fullName>
+                <default>false</default>
+                <label>TREND Supra</label>
+            </value>
+            <value>
+                <fullName>TREND Terradatum</fullName>
+                <default>false</default>
+                <label>TREND Terradatum</label>
+            </value>
+            <value>
+                <fullName>TREND VoicePad</fullName>
+                <default>false</default>
+                <label>TREND VoicePad</label>
+            </value>
+            <value>
+                <fullName>TREND Xpress Copy</fullName>
+                <default>false</default>
+                <label>TREND Xpress Copy</label>
+            </value>
+            <value>
+                <fullName>Trulia Plus</fullName>
+                <default>false</default>
+                <label>Trulia Plus</label>
+            </value>
+            <value>
+                <fullName>Trulia Standard</fullName>
+                <default>false</default>
+                <label>Trulia Standard</label>
+            </value>
+            <value>
+                <fullName>Trusted Application</fullName>
+                <default>false</default>
+                <label>Trusted Application</label>
+            </value>
+            <value>
+                <fullName>UNDO_MRIS_MAIN_RESTRICTION</fullName>
+                <default>false</default>
+                <label>UNDO_MRIS_MAIN_RESTRICTION</label>
+            </value>
+            <value>
+                <fullName>VAR - Housing - VA</fullName>
+                <default>false</default>
+                <label>VAR - Housing - VA</label>
+            </value>
+            <value>
+                <fullName>View Staged Object</fullName>
+                <default>false</default>
+                <label>View Staged Object</label>
+            </value>
+            <value>
+                <fullName>ViewStagedObjectRole</fullName>
+                <default>false</default>
+                <label>ViewStagedObjectRole</label>
+            </value>
+            <value>
+                <fullName>VIRTUAL OFFICE WEBSITES</fullName>
+                <default>false</default>
+                <label>VIRTUAL OFFICE WEBSITES</label>
+            </value>
+            <value>
+                <fullName>Virtual Tour</fullName>
+                <default>false</default>
+                <label>Virtual Tour</label>
+            </value>
+            <value>
+                <fullName>WASHINGTON POST</fullName>
+                <default>false</default>
+                <label>WASHINGTON POST</label>
+            </value>
+            <value>
+                <fullName>Washington Post Actives</fullName>
+                <default>false</default>
+                <label>Washington Post Actives</label>
+            </value>
+            <value>
+                <fullName>Washington Post Closed</fullName>
+                <default>false</default>
+                <label>Washington Post Closed</label>
+            </value>
+            <value>
+                <fullName>Washington Post - Newspaper Advertising</fullName>
+                <default>false</default>
+                <label>Washington Post - Newspaper Advertising</label>
+            </value>
+            <value>
+                <fullName>WildFyre</fullName>
+                <default>false</default>
+                <label>WildFyre</label>
+            </value>
+            <value>
+                <fullName>WIREX-Active</fullName>
+                <default>false</default>
+                <label>WIREX-Active</label>
+            </value>
+            <value>
+                <fullName>WIREX-Active-Closed-Pending</fullName>
+                <default>false</default>
+                <label>WIREX-Active-Closed-Pending</label>
+            </value>
+            <value>
+                <fullName>WIREX-IDX</fullName>
+                <default>false</default>
+                <label>WIREX-IDX</label>
+            </value>
+            <value>
+                <fullName>WIREX-IDX-PNA</fullName>
+                <default>false</default>
+                <label>WIREX-IDX-PNA</label>
+            </value>
+            <value>
+                <fullName>WIREX-IDX-PUB-PNA</fullName>
+                <default>false</default>
+                <label>WIREX-IDX-PUB-PNA</label>
+            </value>
+            <value>
+                <fullName>WIREX-RANW</fullName>
+                <default>false</default>
+                <label>WIREX-RANW</label>
+            </value>
+            <value>
+                <fullName>WIREX-SampleData</fullName>
+                <default>false</default>
+                <label>WIREX-SampleData</label>
+            </value>
+            <value>
+                <fullName>WIREX-SSAD</fullName>
+                <default>false</default>
+                <label>WIREX-SSAD</label>
+            </value>
+            <value>
+                <fullName>WIREX-VOW</fullName>
+                <default>false</default>
+                <label>WIREX-VOW</label>
+            </value>
+            <value>
+                <fullName>WVA SYNDICATION</fullName>
+                <default>false</default>
+                <label>WVA SYNDICATION</label>
+            </value>
+            <value>
+                <fullName>Zillow Plus</fullName>
+                <default>false</default>
+                <label>Zillow Plus</label>
+            </value>
+            <value>
+                <fullName>Zillow Standard</fullName>
+                <default>false</default>
+                <label>Zillow Standard</label>
+            </value>
+            <value>
+                <fullName>BRIGHT CAAR Data Access</fullName>
+                <default>false</default>
+                <label>BRIGHT CAAR Data Access</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>WIREX</controllingFieldValue>
+            <valueName>WIREX-Active</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>WIREX</controllingFieldValue>
+            <valueName>WIREX-Active-Closed-Pending</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>WIREX</controllingFieldValue>
+            <valueName>WIREX-IDX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>WIREX</controllingFieldValue>
+            <valueName>WIREX-IDX-PNA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>WIREX</controllingFieldValue>
+            <valueName>WIREX-IDX-PUB-PNA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>WIREX</controllingFieldValue>
+            <valueName>WIREX-RANW</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>WIREX</controllingFieldValue>
+            <valueName>WIREX-SampleData</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>WIREX</controllingFieldValue>
+            <valueName>WIREX-SSAD</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>WIREX</controllingFieldValue>
+            <valueName>WIREX-VOW</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MIREX</controllingFieldValue>
+            <valueName>MIREALSOURCE Only</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MIREX</controllingFieldValue>
+            <valueName>MIREX-Broker</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MIREX</controllingFieldValue>
+            <valueName>MIREX-IDX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MIREX</controllingFieldValue>
+            <valueName>MIREX-LisitngBook</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETS Custom</controllingFieldValue>
+            <valueName>Access Showings</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETS Custom</controllingFieldValue>
+            <valueName>Broker Only - Accountech / CBCE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETS Custom</controllingFieldValue>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker Only - Accountech / Century 21 Leading Edge</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETS Custom</controllingFieldValue>
+            <valueName>Broker Only - Accountech / ERA Elite Group</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETS Custom</controllingFieldValue>
+            <valueName>Broker Only - Accountech / ERA Teachers</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETS Custom</controllingFieldValue>
+            <valueName>Broker Only - Adwritter / TTR Sothebys Intl Realty</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETS Custom</controllingFieldValue>
+            <valueName>Broker Only - Century 21 The Real Estate Centre</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETS Custom</controllingFieldValue>
+            <valueName>Broker Only - SkySlope / Century 21 New Millennium</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETS Custom</controllingFieldValue>
+            <valueName>Coming Soon Listings Access</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETS Custom</controllingFieldValue>
+            <valueName>Customized - Market Data Service</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETS Custom</controllingFieldValue>
+            <valueName>New York Times Standard</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETS Custom</controllingFieldValue>
+            <valueName>PropertyShowDMPNeighborhoodField</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETS Custom</controllingFieldValue>
+            <valueName>PropertyShowDMPResidentialPlusField</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETS Custom</controllingFieldValue>
+            <valueName>REALTOR.COM.ACTIVES</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETS Custom</controllingFieldValue>
+            <valueName>Syndication Modified</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETS Custom</controllingFieldValue>
+            <valueName>Trulia Plus</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETS Custom</controllingFieldValue>
+            <valueName>Trulia Standard</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETS Custom</controllingFieldValue>
+            <valueName>Washington Post Actives</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETS Custom</controllingFieldValue>
+            <valueName>Washington Post Closed</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETS Custom</controllingFieldValue>
+            <valueName>WVA SYNDICATION</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETS Custom</controllingFieldValue>
+            <valueName>Zillow Plus</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETS Custom</controllingFieldValue>
+            <valueName>Zillow Standard</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Status</controllingFieldValue>
+            <valueName>Status Duplicate</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Status</controllingFieldValue>
+            <valueName>Status Inactive</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Status</controllingFieldValue>
+            <valueName>Status Waived</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Status</controllingFieldValue>
+            <valueName>Term Disconnect</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Status</controllingFieldValue>
+            <valueName>Terminated</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>JoeB</controllingFieldValue>
+            <valueName>BRIGHT CAAR Data Access</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>User Roles</controllingFieldValue>
+            <valueName>Affiliate Vendor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>User Roles</controllingFieldValue>
+            <valueName>Honorary Agent</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>User Roles</controllingFieldValue>
+            <valueName>Non-Subscribing Consultant</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>User Roles</controllingFieldValue>
+            <valueName>Responsible Member</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>Agent Tool V2</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>Applied Video</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>BAAG_BETA_1</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>BAAG_BETA_2</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>BAAG_PREMIUM_PRODUCT_TIER_1</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>Class Only</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>CMT Full</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>CMT View</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>Commercial Source</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>Company</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>Data Sharing Ocean</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>Fairfax County Government</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>International newer listing newer advertising newer exchange</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>Listing Agents</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>LVAR BLI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>Media Package Search</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>NAR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>Non-MLS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>Ocean Data</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>Office Listings</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>Other Committee Members</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>property_history</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>PSRE Business History</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>Public Records</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>Referral</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>Review Publishing Subscription</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>Rolling Date</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>Saved Searches</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>See Company Data</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>Showing Appointment Service</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>Supra</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>VAR - Housing - VA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <controllingFieldValue>Advertising</controllingFieldValue>
+            <valueName>VIRTUAL OFFICE WEBSITES</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Miscellaneous</controllingFieldValue>
+            <valueName>WildFyre</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Active No Contract</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Agent</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Appraiser/Non-shareholder</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Appraiser/Shareholder</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Assoc Staff</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Base Restrictionsv2</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker Backofficev2</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Broker  Staff</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>CIE 360 member</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Edit</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Government Agency/PA - N/C</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Government Agency/Personal Assistant</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Govt Agency</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Govt Agency N/C</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>IDX Plus</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <controllingFieldValue>Advertising</controllingFieldValue>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>INTERNET DATA EXCHANGE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Licensed Appraiser</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Licensee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Licensee/Non-Realtor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Lister</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Login</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>MDS User Login</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>MRIS Consultant</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>MRIS Manager</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>MRIS Staff</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>MRIS Vendor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Non Subscriber Mgr</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Office Secretary</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Office Secretary NC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Personal Asst</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Personal Asst to Appraiser</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Realtor/NonShareholder</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Realtor/Shareholder</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Realtor Appraiser/Non-Shareholder</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Realtor Appraiser/Shareholder</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>RETS Customer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Search</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Status Active</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>System MRIS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Virtual Tour</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Advertising</controllingFieldValue>
+            <valueName>BALTIMORE SUN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Advertising</controllingFieldValue>
+            <valueName>Baltimore Sun - Newspaper Advertising</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Advertising</controllingFieldValue>
+            <valueName>BALTIMORE SUNv2</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Advertising</controllingFieldValue>
+            <valueName>Cyberhomes.com</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Advertising</controllingFieldValue>
+            <valueName>FREELANCE STAR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Advertising</controllingFieldValue>
+            <valueName>HDB.com</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Advertising</controllingFieldValue>
+            <valueName>HOMES.COM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Advertising</controllingFieldValue>
+            <valueName>HOMES AND LAND</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Advertising</controllingFieldValue>
+            <valueName>HOMESDATABASE.COM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Advertising</controllingFieldValue>
+            <valueName>HOMETOWNANNAPOLIS.COM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Advertising</controllingFieldValue>
+            <valueName>HometownAnnapolis.comV2</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Advertising</controllingFieldValue>
+            <valueName>House and Home</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Advertising</controllingFieldValue>
+            <valueName>INTERNATIONAL LISTING ADVERTISING EXCHANGE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Advertising</controllingFieldValue>
+            <valueName>National Advertising - AGGREGATOR - Homes.Com</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Advertising</controllingFieldValue>
+            <valueName>National Advertising - AGGREGATOR - Realtor.Com</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Advertising</controllingFieldValue>
+            <valueName>Patuxent - Newspaper Advertising</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Advertising</controllingFieldValue>
+            <valueName>Patuxent Publishing - Newspaper Advertising</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Advertising</controllingFieldValue>
+            <valueName>Pulse Research, Inc. - Newspaper Advertising</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Advertising</controllingFieldValue>
+            <valueName>REALTOR.COM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Advertising</controllingFieldValue>
+            <valueName>REALTORS  Property Resource</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Advertising</controllingFieldValue>
+            <valueName>STREET EASY</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Advertising</controllingFieldValue>
+            <valueName>WASHINGTON POST</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Advertising</controllingFieldValue>
+            <valueName>Washington Post - Newspaper Advertising</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MLS</controllingFieldValue>
+            <valueName>System-CARETS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MLS</controllingFieldValue>
+            <valueName>System-MIREX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MLS</controllingFieldValue>
+            <valueName>System-TREND</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MLS</controllingFieldValue>
+            <valueName>System-WIREX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Employee Roles</controllingFieldValue>
+            <valueName>Ecommerce Admin</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Employee Roles</controllingFieldValue>
+            <valueName>Ecommerce Billing</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Employee Roles</controllingFieldValue>
+            <valueName>Ecommerce Support Center</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Employee Roles</controllingFieldValue>
+            <valueName>Ecommerce Sys Admin</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Employee Roles</controllingFieldValue>
+            <valueName>Email Admin</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Employee Roles</controllingFieldValue>
+            <valueName>eProcess Admin</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Employee Roles</controllingFieldValue>
+            <valueName>eProcess Support Center</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Employee Roles</controllingFieldValue>
+            <valueName>eProcess Sys Admin</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Employee Roles</controllingFieldValue>
+            <valueName>MRIS Instructor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Employee Roles</controllingFieldValue>
+            <valueName>MRIS Training Department</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Employee Roles</controllingFieldValue>
+            <valueName>Provisioning Admin</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Employee Roles</controllingFieldValue>
+            <valueName>Provisioning System User</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Employee Roles</controllingFieldValue>
+            <valueName>Super</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>StatS</controllingFieldValue>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Statistics</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>StatS</controllingFieldValue>
+            <valueName>Statistics Search</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>StatS</controllingFieldValue>
+            <valueName>Stats Baker Realty Services</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>StatS</controllingFieldValue>
+            <valueName>Stats CB Residential</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>StatS</controllingFieldValue>
+            <valueName>Stats Gloria Nilson GMAC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>StatS</controllingFieldValue>
+            <valueName>Stats Kurfiss</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>StatS</controllingFieldValue>
+            <valueName>Stats Long $ Foster</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>StatS</controllingFieldValue>
+            <valueName>Stats Long and Foster</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAT</controllingFieldValue>
+            <valueName>CAT Administrator</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAT</controllingFieldValue>
+            <valueName>CAT HelpDesk</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAT</controllingFieldValue>
+            <valueName>CAT Security</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAT</controllingFieldValue>
+            <valueName>CAT User</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAT</controllingFieldValue>
+            <valueName>CAT Viewer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAT</controllingFieldValue>
+            <valueName>CURE Administrator</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>QC</controllingFieldValue>
+            <valueName>QC Administrator</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>QC</controllingFieldValue>
+            <valueName>QC Agent Responsible</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>QC</controllingFieldValue>
+            <valueName>QC Compliance Issue Manager</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>QC</controllingFieldValue>
+            <valueName>QC County Record Manager</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>QC</controllingFieldValue>
+            <valueName>QC Issue Reporter</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>QC</controllingFieldValue>
+            <valueName>QC Public</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>QC</controllingFieldValue>
+            <valueName>QC User</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Active Agent Column Filter</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Active and Pending Only</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Agent Column Filter</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Agent Private Info</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>AllowSaveWithNoValidation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Analytics</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker_On Common Ground</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker Back Officev2</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <controllingFieldValue>Conditional</controllingFieldValue>
+            <valueName>Broker C21 Abrams, Hutchinson Assoc</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker C21 Alliance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker C21 Alliance Email Only</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker C21 Alliance Marlton</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker C21 Alliance WC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker C21 Hartman</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker C21 Hearst</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker Cassidon</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker CB Pref</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker CB Realty 1</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker CB Select Professionals</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker Edgar &amp; Son</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker ERA Burgdorff</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker Falconer Bell</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker Gloria Nilson</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker GMAC Princeton Junction</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker Haddon Group</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker Kurfiss</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker Lenny Vermaat and Leonard</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker Long &amp; Foster</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker Long and Foster</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker On Common Ground</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker Only</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker Only - Accountech</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker Only - Century 21 Redwood</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker Only - RSP/Long &amp; Foster</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker OPG</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker ReMax City Space</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Broker Weidel</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>C21 Alliance CREST</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>C21 Home Real Estate</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Disable_MRIS_RETS_Functionality_Extensions</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Display AgentPrivateEmail</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Ignore Localization Names</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Listing Score Restrictions</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Lock Boxv2</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>MDS Access Advanced</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>MDS Access Common</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>MDS Access Office/Agent</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>MDS Application Login</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>MDS Return HTTP Status 200 Only</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>MDS SHARE_SYSTEM_SESSION_ROLES</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>MDS Trusted Application</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Media Restrictions</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>MediaShowSearchStatusField</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Metadata Display MRIS Extension</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Metadata Use New Metadata engine</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Office Private Info</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>OfficeShowLeadFields</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Override Display Rules</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Override Staging Area Lock</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Patterson Schwarz Company</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>PruFoxRoach Company Data</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Public Records Unrestricted</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Re/Max 440 SureClose</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>ReMax Tri County</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>RESO Query Allowed</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Restricted Text</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>RETS Advanced</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>RETS Enable 1.7 Features</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Security Search</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Show Password</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Sort</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Staged Object</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Strong Authentication</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Suppress Private Information</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Tax Historical Designation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Temp MDS IDX PLUS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>Trusted Application</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>UNDO_MRIS_MAIN_RESTRICTION</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>View Staged Object</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETSMDS</controllingFieldValue>
+            <valueName>ViewStagedObjectRole</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND_BASE Broker Standard</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND_Centralized Showing</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND_IDX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND_IDX_SUB</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND_IDX OH</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND_IDXSUB</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND_PocketRE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND_Real Estate Book</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND_Review Publishing</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND_RPIS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND_SHOWING BASE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND_Showing Solutions</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND_Showing Time</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND_SIMG</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND_STATS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND_Supra</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND_SysPartyMedia</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND_Terradatum</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND_TProducer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND_VOW</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND_VOW Expired</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND_VOW Pending</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND_VOW Sold</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND_VOW Withdrawn</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND 10k</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Business History</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Buyers Real Estate Weekly</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Centalized Showing Sub</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Circle Pix</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND CMMS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND CoreLogix</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Courier Post</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Cyberhomes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Delaware on Line</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Distinctive Homes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND EShowings</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND FIND</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Harmon Homes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND History</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Homes &amp; Land</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Homes and Land</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Homestore</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Journal Register</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND ListHub</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Move Find</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND NAR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND NAR Research</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Newspaper Base Role</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND NJ.com</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Office and Agent</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Offutt</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Open House</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Open House Public</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Philly.com</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Philly Burbs</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Prospects Plus</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Real Data</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>Trend Realtor.com</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>Trend Realtor Property Resource</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND RPR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Showing Center</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Sold</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Sold Plus</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND South Jersey.com</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Support</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Supra</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Terradatum</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND VoicePad</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TREND</controllingFieldValue>
+            <valueName>TREND Xpress Copy</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CARETS</controllingFieldValue>
+            <valueName>CARETS-ALLOW NO QUERIES</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CARETS</controllingFieldValue>
+            <valueName>CARETS-BROKER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CARETS</controllingFieldValue>
+            <valueName>CARETS-CLAW-ACCESS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CARETS</controllingFieldValue>
+            <valueName>CARETS-CRISNET-ACCESS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CARETS</controllingFieldValue>
+            <valueName>CARETS-DOM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CARETS</controllingFieldValue>
+            <valueName>CARETS History</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CARETS</controllingFieldValue>
+            <valueName>CARETS-History Restricted</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CARETS</controllingFieldValue>
+            <valueName>CARETS-IDX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CARETS</controllingFieldValue>
+            <valueName>CARETS-ITECH-ACCESS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CARETS</controllingFieldValue>
+            <valueName>CARETS-MRMLS-ACCESS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CARETS</controllingFieldValue>
+            <valueName>CARETS-OMIT_CDAR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CARETS</controllingFieldValue>
+            <valueName>CARETS-OMIT_CLAW</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CARETS</controllingFieldValue>
+            <valueName>CARETS-OMIT_CRISNET</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CARETS</controllingFieldValue>
+            <valueName>CARETS-OMIT_ITECH</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CARETS</controllingFieldValue>
+            <valueName>CARETS-OMIT_MRMLS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CARETS</controllingFieldValue>
+            <valueName>CARETS-OMIT_SOCAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CARETS</controllingFieldValue>
+            <valueName>CARETS-OMIT_VCRDS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CARETS</controllingFieldValue>
+            <valueName>CARETS-SOCAL-ACCESS</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

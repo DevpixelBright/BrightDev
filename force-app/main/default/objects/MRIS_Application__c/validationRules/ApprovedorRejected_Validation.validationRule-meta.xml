@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ApprovedorRejected_Validation</fullName>
+    <active>false</active>
+    <errorConditionFormula>OR(
+   AND(
+       ISPICKVAL(PRIORVALUE(Status__c),&quot;Approved&quot;), 
+       NOT(
+           OR(
+             ISPICKVAL(Status__c,&quot;Completed&quot;), 
+             ISPICKVAL(Status__c,&quot;Approved&quot;),
+             ISPICKVAL(Status__c,&quot;Expired&quot;),
+             ISPICKVAL(Status__c,&quot;Approved - Expired&quot;)
+             )
+          )
+       ), 
+    ISPICKVAL(PRIORVALUE(Status__c),&quot;Reject&quot;)
+  )</errorConditionFormula>
+    <errorMessage>You can&apos;t edit an approved or rejected application</errorMessage>
+</ValidationRule>

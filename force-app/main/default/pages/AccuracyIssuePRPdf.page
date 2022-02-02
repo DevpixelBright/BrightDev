@@ -1,0 +1,56 @@
+<apex:page controller="AccuracyIssueFormPR_Controller" showHeader="false" cache="false" renderAs="PDF" applyBodyTag="false" lightningstylesheets="true">
+    <head>
+        <style type="text/css">
+            p, label {
+                font-weight:bold;
+            }
+            .form-group {
+                background-color:#D5CCD1;
+            }
+            label {
+                display: inline-block;
+                margin: 10px 6px 6px 16px;
+            }
+            table th {font-size:14px;}
+            table td {font-size:15px;}
+        </style>
+    </head>   
+    <header>
+        <div class="header" >
+            <img class="logo" src="{!URLFOR($Resource.BRIGHT_EmailTemplateLogo)}" alt="logo" height="86" />
+        </div>
+    </header>
+    
+    <p>
+        Thank you for submitting the Accuracy Issue. We will work to get this resolved as quickly as possible.</p>
+    
+    <div>
+        <h4 style="color:#FF7947;">Accuracy Issue:</h4>
+        <table>
+            <!--<tr>
+                <th>Case Number:</th>
+                <td>{!newcase.caseNumber}</td>
+            </tr>-->
+            <tr>
+                <th>Tax ID:</th>
+                <td>{!taxId}</td>
+            </tr>
+            <tr>
+                <th>Property Address:</th>
+                <td>{!propertyAddress}</td>
+            </tr>
+            <tr>
+                <th>From:</th>
+                <td>{!fromName}</td>
+            </tr>
+            <tr>
+                <th>Topic:</th>
+                <td>{!topic}</td>
+            </tr>                                    
+            <tr>
+                <th>Accuracy Issue Description:</th>
+                <td>{!description}</td>
+            </tr>
+        </table>
+    </div>
+</apex:page>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Auto_Suspend_Batch_ID__c</fullName>
+    <description>Batch ID identifies the records that are part of a Auto Suspend Run</description>
+    <externalId>false</externalId>
+    <label>Auto Suspend Batch ID</label>
+    <length>18</length>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

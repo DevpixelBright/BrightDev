@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'AvenirNextLTPro-Bold';
+    src: url(/resource/isteloop/isteloop/AvenirNextLTPro-Bold/AvenirNextLTPro-Bold.ttf);
+}
+@font-face {
+    font-family: 'AvenirNextLTPro-Regular';
+    src: url(/resource/isteloop/isteloop/AvenirNextLTPro-Regular/AvenirNextLTPro-Regular.ttf);
+}
+@font-face {
+    font-family: 'AvenirLTStd-Roman';
+    src: url(/resource/isteloop/isteloop/AvenirLTStd-Roman/AvenirLTStd-Roman.ttf);
+}
+
+/* common for every page start*/
+
+.THIS.slds-scope{ background:#2F3A41;}
+.THIS .fullpage { background:#fff;  margin:0;  padding:0;}
+.THIS .slds-box_x-small{ padding:0; border:none;}
+.THIS .new-container { margin: 0 auto; border: none; width: -webkit-fill-available;width:100%; }
+
+/* common for every page end*/
+
+
+/*placeholder start*/
+.THIS .tapline1 input::placeholder { color:#999;} 
+
+/*placeholder end*/

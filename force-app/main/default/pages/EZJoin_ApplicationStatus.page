@@ -1,0 +1,15 @@
+<apex:page showHeader="false" standardStylesheets="false">
+    <apex:includeLightning />
+    <apex:slds />
+    <div id="dataTable" />
+    <script>
+        $Lightning.use("c:EZJoin_ApplicationStatusApp", function() {
+            $Lightning.createComponent("c:EZJoin_ApplicationStatus", {}, "dataTable", function(cmp) {
+            	var headerHeight = document.getElementById('header-container').offsetHeight;
+                var footerHeight = document.getElementById('footer-container').offsetHeight;
+                var windowHeight = window.innerHeight;
+                document.getElementById('content-container').style.minHeight  = (windowHeight - headerHeight - footerHeight) + 'px';
+            });
+        });        
+    </script>
+</apex:page>

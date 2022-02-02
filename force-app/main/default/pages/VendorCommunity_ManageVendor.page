@@ -1,0 +1,255 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="VendorCommunity_ManageVendor" lightningstylesheets="true">
+    <apex:composition template="VendorCommunity_Base">
+        
+        <apex:define name="content">
+            <apex:form id="portal">
+                <apex:actionFunction action="{!loadAccounts}" name="loadAccounts" reRender="portal" />
+
+                <c:Bootstrap_Resources />
+                
+                <div class="row" id="loading-block">
+                    <div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-5">
+                        <div class="progress progress-striped active">
+                            <div class="progress-bar" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    var loading_block = $("#loading-block");
+                </script>
+                
+                <apex:outputPanel layout="none" rendered="{!initialLoad}" >
+                    <script>$(loadAccounts)</script>
+                </apex:outputPanel>
+
+                <apex:outputPanel layout="none" rendered="{!!initialLoad && hasError}" >
+                    <div id="error-block" style="display: none;">
+                        <div class="alert alert-danger">
+                            <p>We’re sorry. The connection has timed out.</p>
+                            <p>If this issue persists, please contact the Customer Support Center for assistance at 1-844-55-BRIGHT (1-844-552-7444) or via email at <a href="mailto:support@brightmls.com">support@brightmls.com</a>.</p>
+                            <apex:outputPanel layout="none" rendered="{!debugMode}" >
+                                <div><apex:pageMessages /></div>
+                            </apex:outputPanel>
+                        </div>
+                        <div class="row" style="margin-top: 30px;">
+                            <div class="col-md-2 col-md-offset-5">
+                                <div class="btn-group btn-group-justified">
+                                    <a href="{!cancelUrl}" class="btn btn-primary" role="button">Back</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <script>
+                            loading_block.hide();
+                            $("#error-block").show();
+                        </script>
+                    </div>
+                </apex:outputPanel>
+                
+                <apex:outputPanel layout="none" rendered="{!!initialLoad && !hasError}" >
+                    <style>
+                        #account-option-modal .dropdown {
+                            padding-top: 20px;
+                        }
+                        
+                            #account-option-modal .dropdown > button {
+                                width: 100%;
+                            }
+
+                            #account-option-modal .dropdown > ul {
+                                width: 100%;
+                            }
+
+                                #account-option-modal .dropdown > ul > li {
+                                    text-align: center;
+                                }
+                            .jumbotron p {
+                                font-size: 17px;
+                            }
+                            .jumbotron {
+                                padding-top: 10px;
+                                padding-bottom: 20px;
+                            }
+                    </style>
+                
+                    <div id="content-block" style="display: none;">
+                        <div class="jumbotron landing_instructions">
+                            <!--<p>Want to add, edit or remove a payment method? Need to pay a balance or view your Statement of Account? You've come to the right place.
+</p>
+                            <p>Manage your vendor account by selecting from the options below.</p>-->
+                            <apex:outputPanel layout="none" rendered="{!debugMode}" >
+                                <div><apex:pageMessages /></div>
+                            </apex:outputPanel>
+                        </div>
+                        
+                        <div class="row action-panels"></div>
+                        <div class="modal fade" id="account-option-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="modal-label"></h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Please select the Account ID you wish to review.</p>
+                                        <select class="form-control"></select>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-primary" onclick="openAccount();">Continue</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->                      
+
+                        <script>
+                            markOptionPanel("managevendor");
+                                      
+                            var options = {
+                                contact_information: {
+                                    icon: "pencil-square-o",
+                                    text: "Contact Information",
+                                    description: "Update the contact information for key roles at your company, e.g., technical, administrative and billing contacts.",
+                                    ids: [],
+                                    url: "VendorCommunity_MyAccount"
+                                },
+                                office_information: {
+                                    icon: "shield",
+                                    text: "Office Information",
+                                    description: "Update your company's main office address and phone numbers.",
+                                    ids: [],
+                                    url: "VendorCommunity_OfficeDetails"
+                                },
+                                product_line: {
+                                    icon: "search",
+                                    text: "Products You Offer",
+                                    description: "View the list of products you currently offer to Bright MLS subscribers.",
+                                    ids: [],
+                                    url: "VendorCommunity_ProductLine"
+                                },
+                                /*
+                                reconciliation_files: {
+                                    icon: "files-o",
+                                    text: "Upload Reconciliation Files",
+                                    description: "Quarterly Vendor reconciliation files uploads are required.",
+                                    ids: [],
+                                    url: "VendorCommunity_ReconciliationFile"
+                                }*/
+                                /*,
+                                Listing_Transfer: {
+                                    icon: "briefcase",
+                                    text: "Listing Transfer",
+                                    description: "request to trnafer your previous listings.",
+                                    ids: [],
+                                    url:"LT_AgentListings"                             
+                                }*/
+                            };
+                            var optionNames = [];
+                        </script>
+
+                         <apex:repeat value="{!lstaccountsData}" var="s">
+                            <script>
+                                options["{!s.Category}"].ids.push("{!s.Id}");
+                                optionNames["{!s.Id}"] = "{!s.displayText}";
+                            </script>
+                        </apex:repeat>
+                            
+                        <script>
+                        
+                            var isBrightLogin = "{!isBrightLogin}";
+                            var panels = $(".action-panels");
+
+                            panels.empty();
+                            
+                            for (i in options) {
+                                var option = options[i];
+                                console.log(option.text);
+                                 
+                                if(isBrightLogin == 'true' && (option.text == 'MLS Settings' || option.text == 'Manage Act As' || option.text == 'Permissions')) {
+                                    panels.append(String.format('<div class="col-sm-6 col-md-4"><a href="{0}" target="_blank"><h4><i class="fa fa-{1} fa-2x"></i>{2}</h4><p>{3}</p></a></div>',
+                                        option.url,
+                                        option.icon,
+                                        option.text,
+                                        option.description
+                                    ));
+                                    continue;                                    
+                                }                                    
+                                     
+                                panels.append(String.format('<div class="col-sm-6 col-md-4"><a href="#" onclick="selectOption(\'{0}\'); return false;"><h4><i class="fa fa-{1} fa-2x"></i>{2}</h4><p>{3}</p></a></div>',
+                                    i,
+                                    option.icon,
+                                    option.text,
+                                    option.description
+                                ));                                
+                            }
+
+                            loading_block.hide();
+                            $("#content-block").show();
+                            init_action_panels();
+
+                            var modal = $("#account-option-modal");
+                            
+                            function selectOption(option) {
+                                modal.find("#modal-label").text(options[option].text);
+                                
+                                modal.find("button.btn-primary")
+                                    .attr("option-target", option)
+                                    .attr("disabled", "disabled");
+                                
+                                var dropdown = modal.find("select");
+                                
+                                dropdown.empty();
+                                
+                                dropdown.append('<option>Select a Account</option>');
+                                
+                                var ids = options[option].ids;
+                                for (i in ids)
+                                    dropdown.append(String.format('<option account-target="{0}">{1}</option>',
+                                        ids[i],
+                                        optionNames[ids[i]]
+                                    ));
+
+                                if (ids.length == 1) {
+                                    dropdown.find("option[account-target]").attr("selected", "selected");
+                                    openAccount();
+                                }
+                                else
+                                    modal.modal("show");
+                            }
+                            
+                            function selectAccount() {
+                                var selected = modal.find("select option:selected");
+                                
+                                if (selected.length != 1 || selected.attr("account-target") == null)
+                                    modal.find("button.btn-primary").attr("disabled", "disabled");
+                                else
+                                    modal.find("button.btn-primary").removeAttr("disabled");
+                            }
+                            
+                            modal.find("select").change(selectAccount);
+                            
+                            function openAccount() {
+                                modal.modal("hide");
+
+                                var option = modal.find("button.btn-primary").attr("option-target");
+                                var selected = modal.find("select option:selected");
+                                
+                                window.location.href = options[option].url + "?id=" + '{!vendorId}';
+                                /*
+                                if(options[option].text == 'Vendor Payment Methods' || options[option].text == 'Pay Vendor Balances' || options[option].text == 'Statement of Vendor')
+                                    window.location.href = options[option].url + "?id=" + '{!vendorId}';
+                                                                
+                                else
+                                    window.location.href = options[option].url + "?id=" + selected.attr("account-target");
+                                */
+                            }
+                        </script>
+
+                    </div>
+                </apex:outputPanel>
+            </apex:form>
+        </apex:define>
+
+    </apex:composition> 
+</apex:page>

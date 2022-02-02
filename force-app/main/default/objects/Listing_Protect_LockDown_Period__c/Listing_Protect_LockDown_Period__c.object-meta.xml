@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>Lockdown Period for a Broker of Record to change his Opt in and out election for the MRIS Listing Protect program</description>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <label>Listing Protect LockDown Period</label>
+    <visibility>Public</visibility>
+</CustomObject>

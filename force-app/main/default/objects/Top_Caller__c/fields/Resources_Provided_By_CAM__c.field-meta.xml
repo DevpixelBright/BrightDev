@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Resources_Provided_By_CAM__c</fullName>
+    <description>What resources were provided by the CAM?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>What resources were provided by the CAM?</inlineHelpText>
+    <label>What resources were provided by the CAM</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Introduced MRIS U and online resources</fullName>
+                <default>false</default>
+                <label>Introduced MRIS U and online resources</label>
+            </value>
+            <value>
+                <fullName>Invited to upcoming training session.</fullName>
+                <default>false</default>
+                <label>Invited to upcoming training session.</label>
+            </value>
+            <value>
+                <fullName>Scheduled an office visit</fullName>
+                <default>false</default>
+                <label>Scheduled an office visit</label>
+            </value>
+            <value>
+                <fullName>Sent online resources via email</fullName>
+                <default>false</default>
+                <label>Sent online resources via email</label>
+            </value>
+            <value>
+                <fullName>Offered personal 1-2-1 support</fullName>
+                <default>false</default>
+                <label>Offered personal 1-2-1 support</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>5</visibleLines>
+</CustomField>

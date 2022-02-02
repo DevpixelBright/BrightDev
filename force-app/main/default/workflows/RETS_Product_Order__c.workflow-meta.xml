@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>RETS_Inactive_and_Cancelled_by_Subscriber</fullName>
+        <description>RETS Inactive and Cancelled by Subscriber</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Agent_Email_Address__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/RETS_Inactive_Cancelled_by_Subscriber</template>
+    </alerts>
+    <alerts>
+        <fullName>RETS_Inactive_and_Cancelled_by_Subscriber_to_SF</fullName>
+        <ccEmails>emailtosalesforce@z-lh9dypma9adpo2pq0q6zgoeut46ejmjs7k17uk5g001ihkri0.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>RETS Inactive and Cancelled by Subscriber to SF</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/RETS_Inactive_Cancelled_by_Subscriber</template>
+    </alerts>
+    <alerts>
+        <fullName>RETS_Inactive_and_Cancelled_by_Vendor</fullName>
+        <description>RETS Inactive and Cancelled by Vendor</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Agent_Email_Address__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/RETS_Inactive_Cancelled_by_Vendor</template>
+    </alerts>
+    <alerts>
+        <fullName>RETS_Inactive_and_Cancelled_by_Vendor_to_SF</fullName>
+        <ccEmails>emailtosalesforce@z-lh9dypma9adpo2pq0q6zgoeut46ejmjs7k17uk5g001ihkri0.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>RETS Inactive and Cancelled by Vendor to SF</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/RETS_Inactive_Cancelled_by_Vendor</template>
+    </alerts>
+    <alerts>
+        <fullName>RETS_Status_Inactive_Auto_Suspended_for_Agent_product</fullName>
+        <description>RETS Status Inactive Auto Suspended for Agent product</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Vendor_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>API_Names/RETS_Status_Inactive_Suspended_for_Agent_product_template</template>
+    </alerts>
+    <alerts>
+        <fullName>RETS_Status_Inactive_Auto_Suspended_for_Agent_product_to_SF</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>RETS Status Inactive Auto Suspended for Agent product to SF</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/RETS_Status_Inactive_Suspended_for_Agent_product_template</template>
+    </alerts>
+    <alerts>
+        <fullName>RETS_Status_Inactive_Cancelled_by_Vendor_for_Broker_product</fullName>
+        <description>RETS Status Inactive Cancelled by Vendor for Broker product</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Vendor_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/RETS_Status_Inactive_Cancelled_by_Vendor_for_Broker_product_template</template>
+    </alerts>
+    <alerts>
+        <fullName>RETS_Status_Inactive_Cancelled_by_Vendor_for_Broker_product_to_SF</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>RETS Status Inactive Cancelled by Vendor for Broker product to SF</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/RETS_Status_Inactive_Cancelled_by_Vendor_for_Broker_product_template</template>
+    </alerts>
+    <alerts>
+        <fullName>RETS_Status_Inactive_Terminated_for_Agent_product</fullName>
+        <description>RETS Status Inactive Terminated for Agent product</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Vendor_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/RETS_Status_Inactive_Terminated_for_Agent_product_template</template>
+    </alerts>
+    <alerts>
+        <fullName>RETS_Status_Inactive_Terminated_for_Agent_product_to_SF</fullName>
+        <ccEmails>emailtosalesforce@1szhpowh3gftyxya6ugoev6ku5ede3yzcjt8vyzs1tf3i3y1zq.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>RETS Status Inactive Terminated for Agent product to SF</description>
+        <protected>false</protected>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/RETS_Status_Inactive_Terminated_for_Agent_product_template</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>RETS_Inactive_Cancelled_by_Vendor</fullName>
+        <field>Vendor_Email__c</field>
+        <formula>Agent__r.Private_Email__c</formula>
+        <name>RETS Inactive Cancelled by Vendor</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+</Workflow>

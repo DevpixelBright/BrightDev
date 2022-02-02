@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <email>noemail@mris.net</email>
+    <name>Compliance</name>
+    <queueMembers>
+        <users>
+            <user>jackie.colon-boone@mris.net</user>
+            <user>kendra.buchspics@mris.net</user>
+            <user>michelle.yam@brightmls.com</user>
+            <user>monique.howell@mris.net</user>
+            <user>sandra.hilliard@mris.net</user>
+            <user>sean.gallagher@mris.net</user>
+            <user>suzanne.foley@mris.net</user>
+            <user>valerie.cato@mris.net</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>Case</sobjectType>
+    </queueSobject>
+</Queue>

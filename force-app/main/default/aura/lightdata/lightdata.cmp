@@ -1,0 +1,144 @@
+<aura:component>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <ltng:require styles="{!$Resource.headerpart }"></ltng:require>
+   <ltng:require styles="{!$Resource.side }"></ltng:require> 
+   <ltng:require styles="{!$Resource.body }"></ltng:require>
+
+   
+   <div class="c-container">
+      <div class="fullpage slds-scope">
+         <div class="slds-grid slds-wrap">
+            <lightning:layout multipleRows="true">
+               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage header-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:header />
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+               <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                   <c:mobilemenu />
+                   <lightning:layout>
+                     <div class="new-containerpage">
+                        <div class="slds-container--x-large new-container">
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <c:sidebarnew />
+                           </lightning:layoutItem>
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                              <div class="page-section page-main">
+                                 <div class="middlebar1">
+                                    <h2>Data Licensing</h2>
+                                    
+                         </div>
+                                 <div class="dev">
+                                     <p class="recent">Below is a list of all the data licenses to which you are currently subscribed and are being billed. For a list of data licenses you have had in the past, but are no longer being billed for, click the <b>Inactive</b> tab. </p>
+                                     <p class="recent">See a data license for a product you don’t recognize? Click <b>Not My Product</b> to submit a case to our Support team. Please provide as many details as you can so we can correct this information quickly.</p>
+                                     <div class="view"></div>
+           <lightning:tabset>
+        <lightning:tab label="Billed">
+             <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+            <div class="part0">
+                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                               <div class="layer part1"> 
+                           
+                            
+                                
+                             </div>
+                </lightning:layoutItem>
+                      <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">                            
+                                <div class="layer part3"> 
+                             
+                                   <h5 class="onechoose">  <lightning:select name="select1" label="" required="false" variant = "label-hidden">
+        <option value="">choose one...</option>
+        <option value="1">one</option>
+        <option value="2">two</option>
+        <option value="3">three</option>
+    </lightning:select>
+                                    
+                                    
+                                    </h5>
+                             </div>
+                </lightning:layoutItem>
+                  
+                        </div>
+
+            </lightning:layoutItem>
+            
+                 <div class="lake">
+                         <img src="{!$Resource.bright + '/bright-3.0/images/LakeMountain.svg'}" alt="Lake Mountain" />
+                         <p>No W-9 Information yet.</p>
+                         </div>
+                                
+        </lightning:tab>
+        <lightning:tab label="Inactive" title="2nd tab extended title">
+             <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+         <div class="part0">
+              <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                               <div class="layer part1"> 
+                           
+                            
+                                  
+                             </div>
+             </lightning:layoutItem>
+              <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                                                 
+                                <div class="layer part3"> 
+                             
+                                   <h5 class="onechoose">  <lightning:select name="select1" label="" required="false" variant = "label-hidden">
+        <option value="">choose one...</option>
+        <option value="1">one</option>
+        <option value="2">two</option>
+        <option value="3">three</option>
+    </lightning:select>
+                                    
+                                    
+                                    </h5>
+
+                  </div>
+                  
+             </lightning:layoutItem>
+                  
+                              <div class="lake">
+                         <img src="{!$Resource.bright + '/bright-3.0/images/LakeMountain.svg'}" alt="Lake Mountain" />
+                         <p>No W-9 Information yet.</p>
+                         </div>
+                                 </div>
+
+       
+            </lightning:layoutItem>
+             
+        </lightning:tab>
+        
+    </lightning:tabset>
+                                
+                                    
+                                  
+                            
+                                    
+                                    
+                                    
+                                    
+                                  
+                                   
+                                    
+                                 </div>
+                              </div>
+                           </lightning:layoutItem>
+                        </div>
+                     </div>
+                  </lightning:layout>
+               </lightning:layoutItem>
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage footer-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:footer />
+                         
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+            </lightning:layout>
+         </div>
+      </div>
+    
+   </div>
+</aura:component>

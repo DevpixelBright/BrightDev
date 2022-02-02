@@ -1,0 +1,354 @@
+<apex:page controller="WorkflowsAPI" sidebar="false" showHeader="false" standardStylesheets="false" docType="html-5.0" applyBodyTag="false" lightningstylesheets="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/angular.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/ui-bootstrap-tpls-0.12.0.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.AngularJsTable,'/ng-table.js')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.AngularJsTable,'/ng-table.css')}" />
+    <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/jquery.min.js')}"></script>
+    <apex:stylesheet value="{!URLFOR($Resource.WorkflowsAPICSS, '/WorkflowsAPICSS.css')}"/>
+    <c:Bootstrap_Resources />
+    
+    <style>
+                
+        
+        
+    </style>
+
+    <header>
+        <div class="header_row">
+            <img class="logo" src="{!URLFOR($Resource.eProcessNewlogos, '/images/MRIS.png')}" alt="logo" height="70" />
+        </div>
+    </header>
+    
+    
+    <apex:form >
+    
+    <div class="body_content col-sm-12" >
+                
+        <div class="panel-group ">
+        <div class="panel ">
+        <apex:actionFunction name="queryworkflowrules" action="{!query}" reRender="out" status="myStatus" oncomplete="confirmProceed()">
+            <apex:param name="firstParam" assignTo="{!querybyOffset}" value="" />
+        </apex:actionFunction>
+
+        <apex:outputPanel id="out">
+            <apex:actionStatus id="myStatus">
+                <apex:facet name="start">
+                    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 1000; background-color: black;">
+                        <div class="alert alert-info" style="width: 50%; margin: auto; margin-top: 10%; color: black; font-size: 16px; font-weight: bold;">
+                            <center> 
+                                Retrieving workflow rules in process. Please wait ...<br /> <img src="{!URLFOR($Resource.AngularLibrary,'/Cursor_Windows_Vista.gif')}" />
+                            </center>
+                        </div>
+                    </div>
+
+                </apex:facet>
+                <apex:facet name="stop">
+                    <div class="alert alert-danger" id="status" style="display: none;">
+                        <center>Credit Balance Adjustment failed for few accounts. Please review the result below.</center>
+                    </div>
+                </apex:facet>
+            </apex:actionStatus>
+        </apex:outputPanel>
+
+        <div id="resultPanel" ng-app="first" ng-controller="firstcontroller" style="font-size: 13px;">
+
+            <div class="col-sm-2 LeftPanel" ><!-- color: #428bca; border: 1px solid #ccc; border-radius: 7px; -->
+                <div class="SearchOut" >
+                    Search
+                </div>
+
+                <div class="form-group Searchinput" >
+                    <input type="text" ng-model="search" class="form-control fieldCustomStyle" placeholder="Search Workflows" />
+                </div>
+                
+                <br />
+                <div style="margin-bottom: 10px; font-weight: normal;    font-size: 18px;">
+                    Filters
+                </div>
+
+                <!--<div class="form-group" style="margin-top:5px;margin-bottom:5px;">
+                    Object Name<input type="text" ng-model="objectname" ng-change="filterResults()" class="form-control" placeholder="Object Name" />
+                </div>
+                -->
+
+                <div class="form-group filterFields" >
+                    Rule Name<input type="text" ng-model="rulecriteria" ng-change="filterResults()" class="form-control fieldCustomStyle" placeholder="Rule Criteria" />
+                </div>
+
+                <!--  <div class="form-group" style="margin-top: 5px; margin-bottom: 5px;">
+                    Workflow Actions<input type="text" ng-model="actionname" ng-change="filterResults()" class="form-control" placeholder="Action" />
+                    
+                </div>
+                -->
+                <div class="form-group filterFields" >
+                    Service Jurisdiction<input type="text" ng-model="serjur" ng-change="filterResults()" class="form-control fieldCustomStyle" placeholder="Action" />
+                </div>
+
+                <div class="form-group filterFields" >
+                    Billing Jurisdiction<input type="text" ng-model="billjur" ng-change="filterResults()" class="form-control fieldCustomStyle" placeholder="Action" />
+                </div>
+
+            </div>
+
+            <apex:outputPanel >
+                <div class="col-sm-10" style="padding-top:10px;" id="balAccId">
+                    <div ><!-- class="panel panel-default" -->
+
+                        <div ><!-- class="panel-heading" -->
+                            <h3 class="panel-title" style="color: #ff8100; font-weight: bold; font-size: 17px;">
+                                <!-- <span class="glyphicon glyphicon-th-list"></span> -->   
+                                Workflow rules
+                            </h3>
+                        </div>
+                        <div class="alert alert-danger" role="alert" ng-show="(wfrules | filter:search).length == 0" style="margin: 2%;">
+                            <span class="glyphicon glyphicon-info-sign"></span> No Results Available
+                        </div>
+                        <div class="panel-body" ng-show="(wfrules | filter:search).length > 0" style="font-size: 12px; padding:0;">
+                            <table ng-table="tableParams" class='table' style="font-weight: bold;" id='table'>
+
+                                <tr ng-repeat="wfrule in $data">
+                                    <td data-title="'Status'" sortable="'status'">{{wfrule.status}}</td>
+                                    <td data-title="'Rule Name'" sortable="'name'"><a href="{!$Site.BaseUrl}/{{wfrule.Id}}" target="_blank">{{wfrule.name}}</a></td>
+                                    <!--<td data-title="'Object Name'" sortable="'objectName'">{{wfrule.objectName}}</td>-->
+                                    <!--<td data-title="'Rule Criteria'" sortable="'formula'">{{wfrule.formula}}</td>-->
+                                    <td data-title="'Service Jurisdiction'" sortable="'SJ'">{{wfrule.SJ}}</td>
+                                    <td data-title="'Billing Jurisdiction'" sortable="'BJ'">{{wfrule.BJ}}</td>
+                                    <td data-title="'Trigger event'" sortable="'TE'">{{wfrule.TE}}</td>
+                                    <!--<td data-title="'Recipients '" sortable="'recipient '">{{wfrule.recipientList}}</td> -->
+                                    <!-- <td data-title="'Business Event'" sortable="'BE'">{{wfrule.BE}}</td>-->
+                                    <td data-title="'Description'" sortable="'DES'">{{wfrule.DES}}</td>
+                                    
+                                    <td style="">
+                                        <!-- <a id="a_{{wfrule.Id}}" style="color:#428bca; cursor:pointer;" onclick="SlideDetails('{{wfrule.Id}}')">View More <i style="line-height:10px; color:#000000; cursor:pointer; margin-left:5px;" class="fa fa-angle-double-down fa-2"></i></a> -->
+                                        <a ng-click="toggleModal(wfrule, $index)" style="color: #428bca; cursor: pointer;">View More <i style="line-height: 10px; color: #000000; cursor: pointer; margin-left: 5px;" class="fa fa-angle-double-down fa-2"> </i></a>
+                                    </td>
+                                </tr>
+
+                            </table>
+
+                            <modal visible="showModal"> 
+                            </modal>
+
+                        </div>
+                    </div>
+                </div>
+                <script> 
+                
+                var first = angular.module("first",['ngTable']);
+                first.controller("firstcontroller", function ($scope, $filter, NgTableParams) {
+                    
+                    //-------------
+                    $scope.showModal = false;
+                    $scope.objNm = "";
+                    
+                    $scope.toggleModal = function(objN, ind){
+                        $scope.showModal = !$scope.showModal;
+                        $scope.objNm = objN;
+                        //console.log('--ind-->'+ind+'---$scope.wfrules--->'+$scope.wfrules[ind].objectName);
+                        console.log('---$scope.objNm--->',$scope.objNm);
+                        console.log('---$scope.objNm  actions--->',$scope.objNm.actions);
+                        console.log('---$scope.objNm time depend actions--->',$scope.objNm.timedependentDetials);
+                        
+                        console.log('--objNm-'+$scope.objNm.objectName+'---formula--'+$scope.objNm.formula+'---businessEvent--'+$scope.objNm.BE);
+                        
+                        var tr = $(this).closest('tr');
+                        console.log('---tr-->',tr);
+                        //var row = $scope.tableParams.row(tr);  // $('#table').row( tr );
+                        var activeTable = $('#table').table();
+                        console.log('---activeTable--->',activeTable);
+                        var row = activeTable.row( tr );
+                        console.log('---tr--->',tr);
+                        if ( row.child.isShown() ) {
+                            // This row is already open - close it
+                            row.child.hide();
+                            tr.removeClass('shown');
+                        }
+                        else {
+                            // Open this row
+                            row.child( format(row.data()) ).show();
+                            tr.addClass('shown');
+                        }
+                    };
+                    //-------------
+                    
+                                       
+                    $scope.wfrules = {!apiWorkflowRules}; 
+                    var data = {!apiWorkflowRules};
+                    $scope.tableParams = new NgTableParams({
+                        page: 1,            // show first page
+                        count: 10,          // count per page
+                        sorting: {
+                            name: 'asc'     // initial sorting
+                        }
+                    }, 
+                                                           {
+                                                               total: data.length, // length of data
+                                                               getData: function($defer, params) {
+                                                                   console.log(params);
+                                                                   var searchedData = searchData();
+                                                                   params.total(searchedData.length);
+                                                                   var orderedData = params.sorting() ? $filter('orderBy')(searchedData , params.orderBy()) : searchedData;
+                                                                   $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                                                               }
+                                                           });
+                    $scope.$watch("search", function () {
+                        $scope.tableParams.reload();
+                    });                
+                    
+                    var searchData = function(){
+                        if($scope.search)
+                            return $filter('filter')(data,$scope.search);
+                        return data;
+                    }           
+                    
+                                       
+                    
+                    $scope.filterResults = function() {
+                        console.log('---$scope.objname--'+$scope.objectname);
+                        console.log('---$scope.rulecriteria--'+$scope.rulecriteria);
+                        console.log('---$scope.actionname--'+$scope.actionname);
+                        console.log('---$scope.serjur--'+$scope.serjur);
+                        console.log('---$scope.billjur--'+$scope.billjur);
+                        
+                                                    
+                        if(!$scope.objectname && !$scope.rulecriteria && !$scope.actionname && !$scope.serjur && !$scope.billjur ){
+                            data = $scope.wfrules;
+                        }else
+                            data = [];
+                        console.log('==$scope.wfrules.formula==',$scope.wfrules);
+                        for(var i=0; i < $scope.wfrules.length; i++){
+                            
+                            var containsAction = false;
+                            
+                            if($scope.objectname && $scope.wfrules[i].objectName.toUpperCase().match($scope.objectname.toUpperCase())){
+                                containsAction = true;
+                            }
+                            if($scope.rulecriteria && $scope.wfrules[i].name && $scope.wfrules[i].name.toUpperCase().match($scope.rulecriteria.toUpperCase())){
+                                containsAction = true;
+                            }
+                           /* if($scope.actionname && $scope.wfrules[i].actions ){
+                                
+                                for(var j=0; j< $scope.wfrules[i].actions.length; j++){
+                                    if($scope.wfrules[i].actions[j] && $scope.wfrules[i].actions[j].name.toUpperCase().match($scope.actionname.toUpperCase())){
+                                        containsAction = true;
+                                    }
+                                }
+                            }
+                            */
+                            if($scope.serjur && $scope.wfrules[i].SJ && $scope.wfrules[i].SJ.toUpperCase().match($scope.serjur.toUpperCase())){
+                                containsAction = true;
+                            }
+                            if($scope.billjur && $scope.wfrules[i].BJ && $scope.wfrules[i].BJ.toUpperCase().match($scope.billjur.toUpperCase())){
+                                containsAction = true;
+                            }
+                            
+                            if(containsAction)
+                                data.push($scope.wfrules[i]);
+                        }
+                        //console.log('--data after filter--',data);
+                        $scope.tableParams.reload();
+                    }
+                    
+                }); 
+                    
+                
+                //-----------------------------
+                
+                    first.directive('modal', function () {
+                        return {
+                          template: '<div class="modal fade">' + 
+                              '<div class="modal-dialog" style="width:65%; font-weight:bold;">' + 
+                                '<div class="modal-content">' + 
+                                  '<div class="modal-header">' + 
+                                    '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' + 
+                                    '<h4 class="modal-title" style="padding: 0; font-weight: bold;">More Information</h4>' + 
+                                  '</div>' + 
+                                  
+                                  '<div class="modal-body" ng-transclude>' + 
+                                        '<table class="table" style="margin:auto; line-height:16px;" cellspacing="10" width="80%">'+
+                                            '<tr>'+
+                                                '<td style="padding-right:0px; color:#0b86f4; text-align:left;">Object Name: </td>'+
+                                                '<td > {{objNm.objectName}}</td>'+
+                                            '</tr>'+
+                                            '<tr>'+
+                                                '<td style="padding-right:0px; color:#0b86f4; text-align:left;">Criteria: </td>'+
+                                                '<td >{{objNm.formula}}</td>'+
+                                            '</tr>'+
+                                            '<tr>'+
+                                                '<td style="padding-right:0px; color:#0b86f4; text-align:left;">Business Event: </td>'+
+                                                '<td>{{objNm.BE}}</td>'+
+                                            '</tr>'+
+                                        '</table>'+
+                                        
+                                        '<br/>'+
+                                   
+                                        
+                                        '<table class="table" style="margin:auto; line-height:16px;" cellspacing="10" width="80%">'+
+                                            '<caption style="color: cornflowerblue; font-size: large;margin:0 0 20px;">Actions and Templates</caption>'+
+                                            '<tr>'+
+                                                '<th>Email Alert </th>'+
+                                                '<th>Template</th>'+
+                                                '<th>Offset field</th>'+
+                                                '<th>Fire time </th>'+
+                                                '<th>Recipient</th>'+
+                                                
+                                            '</tr>'+
+                                            '<tr ng-repeat="temp in objNm.timedependentDetials">'+
+                                                   '<td > {{temp.name}}</td>'+
+                                                   '<td ><a href="{!$Site.BaseUrl}/{{temp.TemplateId}}" target="_blank"> {{temp.template}} </a></td>'+
+                                                   '<td > {{temp.offsetFromField}}</td>'+
+                                                   '<td > {{temp.timeLength}} &nbsp; {{temp.workflowTimeTriggerUnit}}</td>'+
+                                                   '<td > {{temp.recipient}}</td>'+
+                                               '</tr>'+
+                                       '</table>'+
+                                        
+                                  '</div>'+
+                                  
+                                '</div>' + 
+                              '</div>' + 
+                            '</div>',
+                          restrict: 'E',
+                          transclude: true,
+                          replace:true,
+                          scope:true,
+                          link: function postLink(scope, element, attrs) {
+                              scope.$watch(attrs.visible, function(value){
+                              
+                              if(value == true)
+                                $(element).modal('show');
+                              else
+                                $(element).modal('hide');
+                            });
+                    
+                            $(element).on('shown.bs.modal', function(){
+                          
+                              scope.$apply(function(){
+                                scope.$parent[attrs.visible] = true;
+                              });
+                            });
+                    
+                            $(element).on('hidden.bs.modal', function(){
+                                
+                              scope.$apply(function(){
+                                scope.$parent[attrs.visible] = false;
+                              });
+                            });
+                          }
+                        };
+                  });
+                
+                
+                </script>
+            </apex:outputPanel>
+        </div>
+        </div>
+        </div><div style="clear:both;" />
+        <div class="copy-cat" > 
+            Copyright © 2017 Bright MLS, Inc.
+        </div>
+        <div style="clear:both;" />
+        </div>
+        
+    </apex:form>
+</apex:page>

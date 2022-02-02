@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Quarterly_Fee__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE( Text(Subscription_Type__c) , 
+&quot;Association Staff&quot;, 0, 
+&quot;Broker Staff&quot;, 0, 
+&quot;Government Agency&quot;, 0, 
+&quot;Government Agency - N/C&quot;, 0, 
+&quot;Government Agency/PA - N/C&quot;, 0, 
+&quot;Government Agency/Personal Assistant&quot;, 0, 
+&quot;Licensed Appraiser/Non Realtor&quot;, 213, 
+&quot;Licensee&quot;, 213, 
+&quot;Licensee/Non Realtor&quot;, 213, 
+&quot;MRIS Consultant&quot;, 0, 
+&quot;MRIS Manager&quot;, 0, 
+&quot;MRIS Staff&quot;, 0, 
+&quot;MRIS Vendor&quot;, 0, 
+&quot;Non-Subscribing Consultant&quot;, 0, 
+&quot;Non-Subscribing Manager&quot;, 0, 
+&quot;Office Secretary&quot;, 123, 
+&quot;Office Secretary - NC&quot;, 0, 
+&quot;Personal Assistant&quot;, 123, 
+&quot;Personal Assistant to Appraiser&quot;, 123, 
+&quot;Realtor/Appraiser Non Shareholder&quot;, 213, 
+&quot;Realtor/Appraiser Shareholder&quot;, 123, 
+&quot;Realtor/Non Shareholder&quot;, 213, 
+&quot;Realtor/Shareholder&quot;, 123, 
+0)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Quarterly Fee</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

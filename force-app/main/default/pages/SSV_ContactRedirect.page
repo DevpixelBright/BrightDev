@@ -1,0 +1,7 @@
+<apex:page standardController="Contact" tabStyle="Contact" showHeader="false" applyHtmlTag="false" lightningstylesheets="true">
+    <apex:outputPanel rendered="{!contact.AddressValidationStatus__c == 'To be verify'}">
+        <script>
+            window.top.location.href = '/apex/SSV_AddressValidation?id={!contact.Id}';    
+        </script>   
+    </apex:outputPanel>   
+</apex:page>

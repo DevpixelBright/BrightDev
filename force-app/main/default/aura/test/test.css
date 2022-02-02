@@ -1,0 +1,76 @@
+@font-face {
+    font-family: 'LatoBold';
+    src: url(/resource/LatoBold);
+}
+@font-face {
+    font-family: 'LatoRegular';
+    src: url(/resource/LatoRegular);
+}
+.THIS.slds-scope{ background:#fff;}
+.THIS .fullpage { background:#f2f3f7;  margin:0;  padding:0;}
+.THIS .slds-box_x-small{ padding:0; border:none;}
+
+.THIS .field {
+  display: flex;
+  flex-flow: column-reverse;
+  margin-bottom: 1em;
+}
+
+.THIS .field label {
+  transition: all 0.2s;
+  touch-action: manipulation;
+}
+.THIS .field input {
+  transition: all 0.2s;
+  touch-action: manipulation;
+}
+
+
+.THIS .field input {
+  font-size: 1.5em;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  font-family: inherit;
+  -webkit-appearance: none;
+  border-radius: 0;
+  padding: 0;
+  cursor: text;
+}
+
+.THIS .field input:focus {
+  outline: 0;
+  border-bottom: 1px solid #666;
+}
+
+.THIS .field label {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.THIS .field input:placeholder-shown + label {
+  cursor: text;
+  max-width: 66.66%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transform-origin: left bottom;
+  transform: translate(0, 2.125rem) scale(1.5);
+}
+
+.THIS  ::-webkit-input-placeholder {
+  opacity: 0;
+  transition: inherit;
+}
+ 
+.THIS .field input:focus::-webkit-input-placeholder {
+  opacity: 1;
+}
+
+.THIS .field input:not(:placeholder-shown) + label{
+  transform: translate(0, 0) scale(1);
+  cursor: pointer;
+}
+.THIS .field input:focus + label {
+  transform: translate(0, 0) scale(1);
+  cursor: pointer;
+}

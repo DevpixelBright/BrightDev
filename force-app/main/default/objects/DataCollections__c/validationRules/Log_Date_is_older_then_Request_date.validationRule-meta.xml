@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Log_Date_is_older_then_Request_date</fullName>
+    <active>true</active>
+    <description>Log Date isolder then Request Date</description>
+    <errorConditionFormula>Log_Date__c  &lt;  Request_Date__c</errorConditionFormula>
+    <errorMessage>Log Date must be older than Request Date</errorMessage>
+</ValidationRule>

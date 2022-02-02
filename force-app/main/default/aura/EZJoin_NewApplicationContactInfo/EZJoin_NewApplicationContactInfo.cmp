@@ -1,0 +1,82 @@
+<aura:component controller="EZJoin_NewApplicationController">
+    <!-- Aura Attributes -->
+    <aura:attribute name="appConfig" type="List" default="[]" />
+    <aura:attribute name="appData" type="Object" />
+    <aura:attribute name="currentConfig" type="Object" />
+    <aura:attribute name="errorMsg" type="String" default="" description="test" />
+    <aura:attribute name="salutations" type="List" default="[]" />
+    <aura:attribute name="suffixes" type="List" default="[]" />
+    
+    <!-- Aura Actions -->
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}" />
+    
+    <!-- Application Events -->
+    <aura:registerEvent name="EZJoin_NewApplicationAppConfigEvent" type="c:EZJoin_NewApplicationAppConfigEvent" /> 
+    <aura:registerEvent name="cmpEvent" type="c:EZJoin_LoadComponentEvent" />      
+
+    <div class="slds-text-longform">
+        <h3 class="slds-text-heading_medium">Please provide your contact information</h3>
+        
+        <aura:if isTrue="{!v.errorMsg != ''}">
+            <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert" style="margin-bottom:26px; border-radius: 2px;">
+                <span class="slds-assistive-text">error</span>
+                <span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small" title="Description of icon when needed">
+    
+                </span>
+                <h2 style="margin:0;">{!v.errorMsg}</h2>
+            </div>
+        </aura:if>        
+        
+        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 full-field">
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow1">
+                <lightning:select name="Salutation" aura:id="Salutation" label="Salutation" class="required" required="true" value="{!v.appData.contact.salutation}">
+                    <aura:iteration items="{!v.salutations}" var="sal">
+                    	<option value="{!sal.value}">{!sal.label}</option>
+                    </aura:iteration>
+                </lightning:select>                
+            </div>
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow1">
+				<lightning:input type="text" class="required" name="FirstName" aura:id="FirstName" label="First Name" placeholder="Enter first name" required="true" value="{!v.appData.contact.firstName}" maxlength="40" />
+            </div>
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+            	<lightning:input type="text" name="MiddleName" label="Middle Name" aura:id="MiddleName" placeholder="Enter middle name" value="{!v.appData.contact.middleName}" maxlength="40" />
+            </div>
+        </div>
+        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field1 full-field">
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow1">
+            	<lightning:input type="text" name="LastName" label="Last Name" aura:id="LastName" placeholder="Enter last name" required="true" class="required" value="{!v.appData.contact.lastName}" maxlength="40" />
+            </div>
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow1">
+                <lightning:select name="select1" label="Suffix" value="{!v.appData.contact.suffix}">
+                    <aura:iteration items="{!v.suffixes}" var="suffix">
+                    	<option value="{!suffix.value}">{!suffix.label}</option>
+                    </aura:iteration>
+                </lightning:select>                
+            </div>
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+                <lightning:input type="text" name="NickName" aura:id="NickName" label="Nick Name" placeholder="Enter nick name" value="{!v.appData.contact.nickName}" maxlength="40" />
+            </div>
+        </div>
+        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field2 full-field">
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow1">
+                <lightning:input type="email" class="required" name="Email" aura:id="Email" label="Email" placeholder="Enter Email" required="true" value="{!v.appData.contact.email}" onblur="{!c.confirmEmailBlurHandler}" maxlength="254" />
+            </div>
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow1">
+                <lightning:input type="email" class="required" name="ConfirmEmail" aura:id="ConfirmEmail" label="Confirm Email" placeholder="Re enter email" required="true" value="{!v.appData.contact.confirmEmail}" onblur="{!c.confirmEmailBlurHandler}" maxlength="254" />
+            </div>
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+                <lightning:input type="tel" class="required" name="Phone" aura:id="Phone" label="Primary Phone" placeholder="Enter primary phone" required="true" value="{!v.appData.contact.phone}" pattern="^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$" messageWhenPatternMismatch="Invalid phone number format" maxlength="15" />
+            </div>
+        </div>
+        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field2">
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow1">
+                <lightning:input type="tel" class="required" name="Mobile" label="Mobile Number" aura:id="Mobile" placeholder="Enter mobile number" required="true" value="{!v.appData.contact.mobile}" pattern="^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$" messageWhenPatternMismatch="Invalid mobile number format" maxlength="15" />
+            </div>
+        </div>
+        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 spaceline2"></div>
+        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+            <button class="slds-button slds-button_brand2" onclick="{!c.previousBtnEvtHandler}">Previous</button>
+            <button class="slds-button slds-button_brand" onclick="{!c.submitBtnHandler}">Continue</button>
+        </div>
+    </div>    
+</aura:component>

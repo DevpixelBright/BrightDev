@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mailing_POBox_should_be_numeric</fullName>
+    <active>true</active>
+    <description>Mailing POBox should be numeric</description>
+    <errorConditionFormula>AND(NOT(ISBLANK(QAS_Mailing_POBox__c)),NOT( ISNUMBER(QAS_Mailing_POBox__c )))</errorConditionFormula>
+    <errorDisplayField>QAS_Mailing_POBox__c</errorDisplayField>
+    <errorMessage>Enter numeric value</errorMessage>
+</ValidationRule>

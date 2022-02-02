@@ -1,0 +1,180 @@
+<aura:component implements="flexipage:availableForAllPageTypes" 
+                access="global">
+    <!-- Control attributes -->
+    <aura:attribute name="allowRowSelect" type="boolean" default="true"/>
+    <aura:attribute name="allowFilters" type="boolean" default="true"/>
+    <aura:attribute name="allowSearch" type="boolean" default="true"/>
+    
+    <!-- attributes -->
+    <aura:attribute name="tableTitle" type="string" default="Table Header"/>
+    <aura:attribute name="data" type="List"/>
+    <aura:attribute name="filteredData" type="List"/>
+    <aura:attribute name="pageRecords" type="List"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="hrefLink" type="string"/>
+    
+    <aura:attribute name="searchKey" type="string"/>
+    
+    <aura:attribute name="showSpinner" type="Boolean" default="false"/>
+    
+    <!-- Infinite Load variables-->
+    <aura:attribute name="enableInfiniteLoading" type="Boolean" default="true"/>
+    <aura:attribute name="rowsToLoad" type="Integer" default="10"/>
+    <aura:attribute name="loadMoreOffset" type="Integer" default="10"/>
+    <aura:attribute name="totalNumberOfRows" type="Integer" default="200"/>
+    
+    <!-- pagination variables-->
+    <aura:attribute name="recordsPerPage" type="Integer" default="10"/>
+    <aura:attribute name="totalPages" type="Integer" default="0"/>
+    <aura:attribute name="pages" type="List" default="[]"/>
+    <aura:attribute name="currentPage" type="Integer" default="1"/>
+    
+    <!-- sort variables-->
+    <aura:attribute name="sortBy" type="String"/>
+    <aura:attribute name="sortDirection" type="String"/>
+    
+    <!-- filter variables-->
+    <aura:attribute name="selectAllCheckboxes" type="boolean" default="false"/>
+    <aura:attribute name="filterConfigurations" type="list"/>
+    
+    <!-- handlers-->
+    <aura:handler name="init" value="{!this }" action="{!c.init }"/>
+    <aura:method name="refreshTable" action="{!c.refreshData}" />
+    
+    <lightning:card title="{!v.tableTitle}">
+        <aura:set attribute="actions">
+            <!--<lightning:button label="Change status" variant="brand" onclick="{!c.openStatusPopup}"/>-->
+        </aura:set>
+        <lightning:layout multipleRows="true">
+            <lightning:layoutItem padding="around-small" size="4">
+                <!-- Search Input -->
+                <aura:if isTrue="{!v.allowSearch}">
+                    <lightning:input onchange="{!c.searchTable}" type="search" label="Searh" 
+                                     placeholder="Enter search key" aura:id="SearchBox"
+                                     value="{!v.searchKey}"/>
+                </aura:if>
+            </lightning:layoutItem>
+            
+            <lightning:layoutItem padding="around-small" size="4">
+                <!-- Empty space -->
+            </lightning:layoutItem>
+            
+            <lightning:layoutItem padding="around-small" size="4">
+                <!-- Picklist filter -->
+                <aura:if isTrue="{!v.allowFilters}">
+                    <lightning:layout>
+                        <aura:iteration items="{!v.filterConfigurations}" var="eachFilter">
+                            <lightning:layoutItem class="slds-p-around_xx-small" size="{!12/v.filterConfigurations.length}">
+                                <lightning:combobox name="{!eachFilter.fieldName}" 
+                                                    label="{!eachFilter.label}" 
+                                                    placeholder="Select an Option" 
+                                                    options="{!eachFilter.options}" 
+                                                    onchange="{! c.handleFilterChange }"
+                                                    value="{!eachFilter.value}"/>
+                            </lightning:layoutItem>
+                        </aura:iteration>
+                    </lightning:layout>
+                </aura:if>
+            </lightning:layoutItem>
+            <!--
+            <lightning:layoutItem padding="around-small" size="12">
+                <div style="height: 300px">
+                    <lightning:datatable
+                                         aura:id="contactTable"
+                                         columns="{!v.columns}"
+                                         data="{!v.filteredData}"
+                                         keyField="Id"
+                                         showRowNumberColumn="true"
+                                         enableInfiniteLoading="{!v.enableInfiniteLoading}"
+                                         loadMoreOffset="{! v.loadMoreOffset }"
+                                         onloadmore="{! c.loadMoreData }"
+                                         sortedBy="{!v.sortBy}"
+                                         sortedDirection="{!v.sortDirection}"
+                                         onsort="{!c.handleSort}"
+                                         />
+                </div>
+            </lightning:layoutItem>
+            -->
+            <lightning:layoutItem padding="around-small" size="12">
+                <table aria-multiselectable="true" class="slds-table slds-table_bordered slds-table_fixed-layout slds-table_resizable-cols" role="grid">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <aura:if isTrue="{!v.allowRowSelect}">
+                                <th class="slds-text-align_left" scope="col" style="width:1.50rem">
+                                    <span id="column-group-header" class="slds-assistive-text">Choose a row</span>
+                                    <div class="slds-th__action slds-th__action_form">
+                                        <lightning:input type="checkbox" label="Basic option" variant = "label-hidden"  
+                                                         name="input1" onchange="{!c.selectAll}" aura:id="selectAllCheckbox" 
+                                                         checked="{!v.selectAllCheckboxes}"/>
+                                    </div>
+                                </th>
+                            </aura:if>
+                            <aura:iteration items="{!v.columns}" var="eachColumn">
+                                <th aria-label="{!eachColumn.label}" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col" onclick="{!c.handleSort}" data-columnName="{!eachColumn.fieldName}">
+                                    <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="0">
+                                        <span class="slds-assistive-text">Sort by: </span>
+                                        <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                            <span class="slds-truncate">{!eachColumn.label}</span>
+                                            <c:MARCOM_SortIcons sortColumn="{!v.sortBy}"  descending="{!v.sortDirection}" column="{!eachColumn.fieldName}"/>
+                                        </div>
+                                    </a>
+                                    <div class="slds-resizable">
+                                        <input type="range" aria-label="Name column width" class="slds-resizable__input slds-assistive-text" id="cell-resize-handle-540" max="1000" min="20" tabindex="0" />
+                                    </div>
+                                </th>
+                            </aura:iteration>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <aura:iteration items="{!v.pageRecords}" var="eachRowData">
+                            <tr aria-selected="false" class="slds-hint-parent">
+                                <aura:if isTrue="{!v.allowRowSelect}">
+                                    <td class="slds-text-align_left" role="gridcell">
+                                        <div>
+                                            <lightning:input type="checkbox" variant="label-hidden" 
+                                                             aura:id="eachRowCheckId" value="{!eachRowData.Id}" 
+                                                             checked="{!eachRowData.selected}"/>
+                                        </div>
+                                    </td>
+                                </aura:if>
+                                <aura:iteration items="{!v.columns}" var="eachColumn">
+                                    <td role="gridcell">
+                                        <c:DataTableCell recordData="{!eachRowData}" fieldName="{!eachColumn.fieldName}" 
+                                                         hrefLink="{!v.hrefLink}"
+                                                         dataType="{!eachColumn.type}"
+                                                         />
+                                    </td>
+                                </aura:iteration>
+                            </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </lightning:layoutItem>
+            
+            <aura:if isTrue="{!v.totalPages > 1 }">
+                <lightning:layoutItem padding="around-small" size="12">
+                    <div class="pagination">
+                        <a href="javascript:void(0);" onclick="{!c.firstPage}">&laquo;</a>
+                        <aura:iteration items="{!v.pages}" var="page">
+                            <a href="javascript:void(0);" class="{!(page == v.currentPage)?'active':''}" onclick="{!c.getPage}" data-offset="{!page}">{!page}</a>
+                        </aura:iteration>
+                        <a href="javascript:void(0);" onclick="{!c.lastPage}">&raquo;</a>
+                    </div>
+                </lightning:layoutItem>
+            </aura:if>
+        </lightning:layout>
+    </lightning:card>	
+    
+    <aura:html tag="style">
+        .slds-modal__container {
+        position: absolute;
+        height: fit-content;
+        margin: auto;
+        padding: 0;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        }
+    </aura:html>
+</aura:component>

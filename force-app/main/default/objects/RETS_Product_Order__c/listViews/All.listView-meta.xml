@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>Agent__c</columns>
+    <columns>Brokerage__c</columns>
+    <columns>Status__c</columns>
+    <columns>Vendor_Product__c</columns>
+    <columns>Broker_Of_Record__c</columns>
+    <columns>End_Date__c</columns>
+    <columns>On_Behalf_of_Agent__c</columns>
+    <columns>RETS_Billing_Exclusion__c</columns>
+    <columns>URL__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+</ListView>

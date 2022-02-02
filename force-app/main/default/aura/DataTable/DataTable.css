@@ -1,0 +1,23 @@
+.THIS {
+}
+.THIS .slds-modal__content{
+    overflow: initial;
+}
+
+.THIS .pagination a.active {
+  background-color: #ff8100;
+  color: white;
+  border: 1px solid #ff8100;
+}
+
+.THIS .pagination a:hover:not(.active) {background-color: #ddd;}
+
+.THIS .pagination a:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.THIS .pagination a:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}

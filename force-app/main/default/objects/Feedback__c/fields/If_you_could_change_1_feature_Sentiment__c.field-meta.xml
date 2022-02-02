@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>If_you_could_change_1_feature_Sentiment__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>If you could change one MRIS system/feature, what would it be and how would you change it?  Sentiment score from Clicktools text insight.</inlineHelpText>
+    <label>If you could change 1 feature Sentiment</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Positive</fullName>
+                <default>false</default>
+                <label>Positive</label>
+            </value>
+            <value>
+                <fullName>Neutral</fullName>
+                <default>false</default>
+                <label>Neutral</label>
+            </value>
+            <value>
+                <fullName>Negative</fullName>
+                <default>false</default>
+                <label>Negative</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,61 @@
+<apex:page standardController="Subscription_Role__c" 
+           recordSetVar="Subscription_Role__c" 
+           extensions="CornerstoneSync"
+           action="{!loadPage}" lightningstylesheets="true">
+
+<style type="text/css">
+   p { font-weight: bold; font-size:15px;}
+</style>
+<h1><p>Cornerstone Sync for subscription: {!subName}</p></h1>
+
+<apex:form >
+<apex:pageBlock title="Currently Synced">
+   <apex:pageBlockTable value="{!RMatch}" var="m" rendered="{!NOT(ISNULL(RMatch))}">
+      <apex:column value="{!m.sr.Role__c}"/>
+      <apex:column value="{!m.sr.Role_Start_Date__c}"/>
+      <apex:column value="{!m.sr.Role_End_Date__c}"/>
+      <apex:column value="{!m.sr.SysPrRoleKey__c}"/>
+      <apex:column value="{!m.sr.Status__c}" style="{!if(m.sr.Status__c=m.csStatus,'color:black','color:red;font-weight: bold')}"/>
+      <apex:column value="{!m.csStatus}" headerValue="CS Status" style="{!if(m.sr.Status__c=m.csStatus,'color:black','color:red;font-weight: bold')}"/>
+      <apex:column value="{!m.sr.MDS_Status__c}"/>
+   </apex:pageBlockTable>
+</apex:pageBlock>
+<apex:pageBlock title="Add to Cornerstone">
+   <apex:pageBlockTable value="{!CSadd}" var="c" rendered="{!NOT(ISNULL(CSadd))}">
+      <apex:column ><apex:inputCheckbox value="{!c.srSelected}"/></apex:column>
+      <apex:column value="{!c.sr.Role__c}"/>
+      <apex:column value="{!c.sr.Role_Start_Date__c}"/>
+      <apex:column value="{!c.sr.Role_End_Date__c}"/>
+      <apex:column value="{!c.sr.SysPrRoleKey__c}"/>
+      <apex:column value="{!c.sr.Status__c}"/>
+      <apex:column value="{!c.sr.MDS_Status__c}"/>
+   </apex:pageBlockTable>
+</apex:pageBlock>
+<apex:pageBlock title="Add to Salesforce">
+   <apex:pageBlockTable value="{!SFadd}" var="s" rendered="{!NOT(ISNULL(SFadd))}">
+      <apex:column ><apex:inputCheckbox value="{!s.srSelected}"/></apex:column>
+      <apex:column value="{!s.sr.Role__c}"/>
+      <apex:column value="{!s.sr.Role_Start_Date__c}"/>
+      <apex:column value="{!s.sr.Role_End_Date__c}"/>
+      <apex:column value="{!s.sr.SysPrRoleKey__c}"/>
+      <apex:column value="{!s.sr.Status__c}"/>
+      <apex:column value="{!s.sr.MDS_Status__c}"/>
+   </apex:pageBlockTable>
+</apex:pageBlock>
+<apex:pageBlock title="Update Key from Cornerstone">
+   <apex:pageBlockTable value="{!RLink}" var="r" rendered="{!NOT(ISNULL(RLink))}">
+      <apex:column ><apex:inputCheckbox value="{!r.srSelected}"/></apex:column>
+      <apex:column value="{!r.sr.Role__c}"/>
+      <apex:column value="{!r.sr.Role_Start_Date__c}"/>
+      <apex:column value="{!r.sr.Role_End_Date__c}"/>
+      <apex:column value="{!r.sr.SysPrRoleKey__c}"/>
+      <apex:column value="{!r.sr.Status__c}"/>
+      <apex:column value="{!r.sr.MDS_Status__c}"/>
+   </apex:pageBlockTable>
+</apex:pageBlock>
+<CENTER>
+<apex:commandButton action="{!submit}" value="Submit" id="submit"/>
+<apex:commandButton action="{!cancel}" value="Cancel" id="cancel"/>
+</CENTER>
+</apex:form>
+</apex:page>

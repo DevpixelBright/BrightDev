@@ -1,0 +1,79 @@
+<aura:component>
+    <aura:attribute name="selectedItem" type="String" />
+    <aura:attribute name="currentContent" type="String" />
+    <aura:attribute name="updatedCount" type="Integer" />
+    
+    <aura:handler name="init" value="{! this }" action="{! c.init }" />
+    
+    <div>
+        <lightning:layout>
+            <lightning:layoutItem>
+                <lightning:verticalNavigation
+                                              selectedItem="{! v.selectedItem }"
+                                              onselect="{! c.handleSelect }"
+                                              class="navigation">
+                    
+                    <lightning:verticalNavigationSection label="Accounts Home">
+                      <!--  
+                        <lightning:verticalNavigationItemBadge
+                                                               label="Brokerage"
+                                                               name="reports_updated"
+                                                               badgeCount="{! v.updatedCount }"
+                                                               iconName="utility:home"
+                                                               />-->
+                        
+                        
+                        <lightning:verticalNavigationItemIcon label="Profile" name="folders_created" iconName="utility:user" badgeCount="{! v.updatedCount }" >
+                           <!-- <aura:set attribute="label">
+                                <lightning:badge label="6"/>
+                            </aura:set>-->
+                        </lightning:verticalNavigationItemIcon>
+                            <lightning:verticalNavigationItemIcon label="Brokerage" name="folders_created" iconName="utility:home" />
+                            <lightning:verticalNavigationOverflow>
+                                <lightning:verticalNavigationItem label="Extra Folder 1" name="folders_extra1" />
+                                <lightning:verticalNavigationItem label="Extra Folder 2" name="folders_extra2" />
+                                <lightning:verticalNavigationItem label="Extra Folder 3" name="folders_extra3" />
+                            </lightning:verticalNavigationOverflow>
+                            <lightning:verticalNavigationItemIcon label="Subscription" name="folders_shared" iconName="utility:toggle_panel_top" />
+                            <lightning:verticalNavigationOverflow>
+                                <lightning:verticalNavigationItem label="Extra Folder 1" name="folders_extra1" />
+                                <lightning:verticalNavigationItem label="Extra Folder 2" name="folders_extra2" />
+                                <lightning:verticalNavigationItem label="Extra Folder 3" name="folders_extra3" />
+                            </lightning:verticalNavigationOverflow>
+                            <lightning:verticalNavigationItemIcon label="Requests" name="folders_shared" iconName="utility:adduser" />
+                            <lightning:verticalNavigationOverflow>
+                                <lightning:verticalNavigationItem label="Extra Folder 1" name="folders_extra1" />
+                                <lightning:verticalNavigationItem label="Extra Folder 2" name="folders_extra2" />
+                                <lightning:verticalNavigationItem label="Extra Folder 3" name="folders_extra3" />
+                            </lightning:verticalNavigationOverflow>
+                            <lightning:verticalNavigationItemIcon label="Finance" name="folders_shared" iconName="utility:metrics" />
+                            <lightning:verticalNavigationOverflow>
+                                <lightning:verticalNavigationItem label="Extra Folder 1" name="folders_extra1" />
+                                <lightning:verticalNavigationItem label="Extra Folder 2" name="folders_extra2" />
+                                <lightning:verticalNavigationItem label="Extra Folder 3" name="folders_extra3" />
+                            </lightning:verticalNavigationOverflow>
+                            <lightning:verticalNavigationItemIcon label="Notifications Preferences" name="folders_shared" iconName="utility:slider" />
+                            <lightning:verticalNavigationOverflow>
+                                <lightning:verticalNavigationItem label="Extra Folder 1" name="folders_extra1" />
+                                <lightning:verticalNavigationItem label="Extra Folder 2" name="folders_extra2" />
+                                <lightning:verticalNavigationItem label="Extra Folder 3" name="folders_extra3" />
+                            </lightning:verticalNavigationOverflow>
+                            <lightning:verticalNavigationItemIcon label="Settings and Permissions" name="folders_shared" iconName="utility:settings" />
+                            <lightning:verticalNavigationOverflow>
+                                <lightning:verticalNavigationItem label="Extra Folder 1" name="folders_extra1" />
+                                <lightning:verticalNavigationItem label="Extra Folder 2" name="folders_extra2" />
+                                <lightning:verticalNavigationItem label="Extra Folder 3" name="folders_extra3" />
+                            </lightning:verticalNavigationOverflow>
+                            <lightning:verticalNavigationItemIcon label="Logout" name="folders_all" iconName="utility:power"/>
+                            
+                        </lightning:verticalNavigationSection>
+                        
+                    </lightning:verticalNavigation>
+                </lightning:layoutItem>
+                
+                <lightning:layoutItem padding="around-medium">
+                    <p>You Are Viewing: {! v.currentContent } </p>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </div>
+    </aura:component>

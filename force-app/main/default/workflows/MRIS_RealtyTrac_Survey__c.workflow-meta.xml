@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Send_Negative_Response_from_RealtyTrac</fullName>
+        <description>Send Negative Response from RealtyTrac</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>elena.medved@mris.net</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>API_Names/Realty_Trac_Alert_response</template>
+    </alerts>
+    <rules>
+        <fullName>Negative Responses</fullName>
+        <actions>
+            <name>Send_Negative_Response_from_RealtyTrac</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>MRIS_RealtyTrac_Survey__c.Overall_rate__c</field>
+            <operation>contains</operation>
+            <value>Poor</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>MRIS_RealtyTrac_Survey__c.Overall_search_rate__c</field>
+            <operation>contains</operation>
+            <value>Poor</value>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+</Workflow>

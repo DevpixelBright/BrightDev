@@ -1,0 +1,8 @@
+<apex:page controller="ArticlesPrint" renderas="pdf" showHeader="false" applyHtmlTag="false" applyBodyTag="false">
+    <table style="width:100%;">
+        <tr style= "display:block;vertical-align:top;margin-bottom:20px;">
+            <td style="text-align: center;padding: 20px 0 20px;display: block;font-size: 20px;font-weight: bold;"><apex:outputText value="{!currentArticle.Title}"> </apex:outputText></td>
+            <td><apex:outputText value="{!currentArticle.KB_Article_Content_RTF__c}" escape="false"> </apex:outputText></td>
+        </tr>
+    </table>
+</apex:page>

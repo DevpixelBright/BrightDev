@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>marc.duverneuil@brightmls.com</contactEmail>
+    <label>Team Permission App</label>
+    <oauthConfig>
+        <callbackUrl>https://mris--dev.my.salesforce.com/</callbackUrl>
+        <consumerKey>3MVG9_7ddP9KqTzdV3vv3WOicDYu6EarTyHHjy.2VM8ukYolhLpjh0kHP2f.qZrDJ1.qPqa9_c1N6qvtBofx0</consumerKey>
+        <isAdminApproved>true</isAdminApproved>
+        <isConsumerSecretOptional>false</isConsumerSecretOptional>
+        <isIntrospectAllTokens>false</isIntrospectAllTokens>
+        <isSecretRequiredForRefreshToken>true</isSecretRequiredForRefreshToken>
+        <scopes>Api</scopes>
+        <scopes>Full</scopes>
+    </oauthConfig>
+    <oauthPolicy>
+        <ipRelaxation>BYPASS</ipRelaxation>
+        <refreshTokenPolicy>zero</refreshTokenPolicy>
+    </oauthPolicy>
+    <profileName>API</profileName>
+</ConnectedApp>

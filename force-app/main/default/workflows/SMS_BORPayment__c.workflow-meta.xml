@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Bright_Broker_Payment_Online_Alert</fullName>
+        <description>Bright Broker Payment Online Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_Broker_Payment_Online</template>
+    </alerts>
+    <alerts>
+        <fullName>Bright_Only_Broker_Online_Payment_Alert</fullName>
+        <description>Bright Only Broker Online Payment Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Private_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>billing@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/BRIGHT_Only_Broker_Payment_Online</template>
+    </alerts>
+    <rules>
+        <fullName>BRIGHT Broker Payment Online Rule</fullName>
+        <actions>
+            <name>Bright_Broker_Payment_Online_Alert</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>{&quot;SJ&quot;:&quot;BRIGHT&quot;,&quot;BJ&quot;:&quot;No Jurisdiction&quot;,&quot;TE&quot;: &quot; SMS BORPayment Update&quot;,&quot;BE&quot;:&quot;Broker Payment&quot;,&quot;Des&quot;: &quot;Broker payment feature of Account &amp; Settings, Office Statement, Pay online option&quot;}</description>
+        <formula>AND( NOT(ISPICKVAL(BOR_Subscription__r.Service_Jurisdiction__c , &apos;BRIGHT&apos;)),  ISPICKVAL(Status__c, &apos;Success&apos;))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>BRIGHT Only Broker Payment Online Rule</fullName>
+        <actions>
+            <name>Bright_Only_Broker_Online_Payment_Alert</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>{&quot;SJ&quot;:&quot;BRIGHT&quot;,&quot;BJ&quot;:&quot;No Jurisdiction&quot;,&quot;TE&quot;: &quot; SMS BORPayment Update&quot;,&quot;BE&quot;:&quot;Broker Payment&quot;,&quot;Des&quot;: &quot;Broker payment feature of Account &amp; Settings, Office Statement, Pay online option&quot;}</description>
+        <formula>AND(ISPICKVAL(BOR_Subscription__r.Service_Jurisdiction__c , &apos;BRIGHT&apos;),  ISPICKVAL(Status__c, &apos;Success&apos;))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

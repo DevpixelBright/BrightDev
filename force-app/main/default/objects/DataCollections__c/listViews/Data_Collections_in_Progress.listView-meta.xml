@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Data_Collections_in_Progress</fullName>
+    <columns>Account__c</columns>
+    <columns>Account_Name__c</columns>
+    <columns>NAME</columns>
+    <columns>Data_Type__c</columns>
+    <columns>Request_Date__c</columns>
+    <columns>Received_Date__c</columns>
+    <columns>Amount__c</columns>
+    <columns>Date_Check_Sent__c</columns>
+    <columns>Date_Check_Received__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>Data Collections in Progress</label>
+</ListView>

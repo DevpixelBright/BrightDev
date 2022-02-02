@@ -1,0 +1,32 @@
+<apex:component access="global">
+<tr>
+<td width="18" bgcolor="#ffffff" height="130"></td>
+<td colspan="3" bgcolor="#ffffff" height="130"><img src="http://www.cgbmedia.com/demo/helpdesknew/chat.jpg" usemap="#Map" width="564" border="0" height="94"/></td>
+<td width="18" bgcolor="#ffffff" height="130"></td></tr>
+<tr>
+<td colspan="5"><img usemap="#rade_img_map_1331846957589" style="" src="http://app7.publicaster.com/ImageLibrary/account3611/images/Headers/bluebanner_Darkerfooter.jpg" border="0"/><br/></td></tr>
+<tr>
+<td colspan="5">
+<div align="center">&nbsp;<font color="#7f7f7f" size="1"><font face="Arial"><span style="font-family: Arial,sans-serif; font-size: 8pt;">PRIVILEGED AND CONFIDENTIAL </span></font></font></div><font color="#7f7f7f" size="1">
+<p><map id="Map2" name="Map2"><area href="http://www.facebook.com/MRISonFB" shape="rect" alt="MRIS on Facebook" target="_blank" coords="20,10,178,34"/>
+<area href="http://twitter.com/#%21/MRIS_REal_News" shape="rect" alt="MRIS on Twitter" target="_blank" coords="252,11,399,38"/>
+<area href="http://mris.com/" shape="rect" alt="MRIS.com" target="_default" coords="465,9,579,39"/></map></p>
+<map id="Map" name="Map"><area href="http://mris.com/mris-customers/training/" shape="rect" target="_blank" coords="142,-1,278,92"/>
+<area href="http://mristv.com" shape="rect" target="_blank" coords="287,1,421,93"/>
+<area href="http://mrisblog.com/" shape="rect" target="_blank" coords="429,2,564,92"/>
+<!---
+<area href="http://www.gotoassist.com/sb/mris-sb?siteurl=mrisinc&amp;renewticket=0&amp;isurlact=true&amp;entactname=/webacd.do&amp;entappname=url0107lc&amp;siteurl=mrisinc&amp;apiname=webacd&amp;servicename=SC&amp;needFilter=false&amp;rnd=6766499328&amp;AT=pqform&amp;QID=31907&amp;UID=0&amp;SK=6f8c924959f8f66021f8767c4d5ea0da" shape="rect" target="_blank" coords="2,1,134,93"/></map>
+--->
+<area href="http://www.gotoassist.com/sb/mris-sb?siteurl=mrisinc&renewticket=0&isurlact=true&entactname=/webacd.do&entappname=url0107ld&siteurl=mrisinc&apiname=webacd&servicename=SC&needFilter=false&rnd=6443783602&AT=pqform&QID=31907&UID=0&SK=6f8c924959f8f66021f8767c4d5ea0da" shape="rect" target="_blank" coords="2,1,134,93"/></map>
+<map name="rade_img_map_1331846957589" id="rade_img_map_1331846957589"><area shape="RECT" coords="22,9,169,31" href="http://facebook.com/MRISonFB" target="_blank"/>
+<area shape="RECT" coords="260,10,387,34" href="https://twitter.com/#%21/MRIS_REal_News" target="_blank"/>
+<area shape="RECT" coords="476,13,571,31" href="http://mris.com" target="_blank"/></map>
+<p><font face="Arial"><span style="font-family: Arial,sans-serif; font-size: 8pt;">Nothing in this email is intended to be an offer to commit Metropolitan Regional Information Systems to any purchase, sale or other course of action.
+ The information contained in this email may be copyrighted, confidential and/or legally privileged.
+ It has been sent for the sole use of the intended recipient(s), in the manner intended.
+ If the reader of this message is not an intended recipient, you are hereby notified that any unauthorized review, use, disclosure, dissemination, distribution, or copying of this communication, or any of its contents, is strictly prohibited.
+ Delivery of this message to any person other than the intended recipient(s) is not intended in any way to waive privilege or confidentiality.
+ If you have received this communication in error, please contact the sender by reply email and destroy all copies of the original message and any attachments.
+ All rights are reserved.</span></font></p></font></td></tr>
+
+</apex:component>

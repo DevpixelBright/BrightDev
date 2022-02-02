@@ -1,0 +1,235 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">   
+   <ltng:require styles="{!$Resource.brightcss }"></ltng:require>
+   <ltng:require styles="{!$Resource.sidemenu }"></ltng:require> 
+   <ltng:require styles="{!$Resource.bodycontainer }"></ltng:require>     
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <div class="fullpage slds-scope">
+      <div class="slds-grid slds-wrap">
+         <div class="new-containerpage">
+            <div class="slds-container--x-large new-container">
+               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12  header-full">
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 header-part">
+                     <div class="logo"> 
+                        <img src="{!$Resource.bright + '/bright-3.0/images/brightlogolightning.png'}" alt="Bright" />
+                     </div>
+                  </div>
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 header-part">
+                     <div class="account">
+                        <h3>Accounts &amp; Settings</h3>
+                     </div>
+                  </div>
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 header-part header-part1">
+                     <div class="all">
+                        <h5>AL</h5>
+                     </div>
+                     <div class="call">
+                        <h4>Amanda Lynn </h4>
+                        <h3>Subscriber ID: 8987987 &nbsp;<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" />  | <a href="#">Active</a></h3>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="slds-container--x-large new-container">
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 sidebar">
+                  <ul class="menuside">
+                     <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/AccountsHome-black.svg'}" alt="Accounts Home" />Accounts Home</a></li>
+                     <li><a  class="active" href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile-orange.svg'}" alt="Profile" />Profile</a></li>
+                     <li onclick="{!c.treeMenu}">
+                        <a><img src="{!$Resource.bright + '/bright-3.0/images/Brokerage.svg'}" alt="Brokerage" />Brokerage<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                        <ul class="submenu submenu1">
+                           <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                        </ul>
+                     </li>
+                     <li onclick="{!c.treeMenu1}">
+                        <a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Subscription.svg'}" alt="Subscription" />Subscription<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                        <ul class="submenu submenu2">
+                           <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                        </ul>
+                     </li>
+                     <li onclick="{!c.treeMenu2}">
+                        <a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Requests.svg'}" alt="Requests" />Requests<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                        <ul class="submenu submenu3">
+                           <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                        </ul>
+                     </li>
+                     <li onclick="{!c.treeMenu3}">
+                        <a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Finance.svg'}" alt="Finance" />Finance<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                        <ul class="submenu submenu4">
+                           <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                        </ul>
+                     </li>
+                     <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Notification-Preferences.svg'}" alt="Notification" />Notification Preferences</a></li>
+                     <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Settings-Permissions.svg'}" alt="Settings" />Settings &amp; Permissions</a></li>
+                     <li class="logout"><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Logout.svg'}" alt="Logout" />Logout</a></li>
+                  </ul>
+               </div>
+               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_9-of-12 slds-large-size_9-of-12 middlebar">
+                 
+                   <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 middlebar1">
+                   <h2><b>Profile</b></h2> 
+                   
+                    <lightning:button class="brand" variant="brand" label="Edit" title="Brand action" onclick="{! c.handleClick }" />
+                   </div>    
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bottombar bottombar1">
+                     <div class="dev dev1">
+                        <p>Have your contact details recently changed? Update the contact information for your MLS Subscription.</p>
+                         <h2 class="notes"><img src="{!$Resource.bright + '/bright-3.0/images/Personal-Information.svg'}" alt="Account &amp; Settings Notifications" />Personal Information</h2>
+                         <div class="review view">
+                        
+                           <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1"> 
+                               <h4>Title</h4>
+                                   <h5>-</h5>
+                             </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part2"> 
+                               <h4>Login Name <span>Change Login Name</span></h4>
+                                   <h5>319005</h5>
+                             </div>
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part3"> 
+                               <h4>Job Title</h4>
+                                   <h5>-</h5>
+                             </div>
+                  
+                        </div>
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1"> 
+                               <h4>First Name <span>Change Login Name</span></h4>
+                                   <h5>John</h5>
+                             </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part2"> 
+                               <h4>Middle Initial </h4>
+                                   <h5>-</h5>
+                             </div>
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part3"> 
+                               <h4>Last Name</h4>
+                                   <h5>-</h5>
+                             </div>
+                  
+                        </div>
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1"> 
+                               <h4>Generation/Suffix</h4>
+                                   <h5>-</h5>
+                             </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part2"> 
+                               <h4>Nickname </h4>
+                                   <h5>John</h5>
+                             </div>
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part3"> 
+                               <h4>Preferred Name</h4>
+                                   <h5>John Smith</h5>
+                             </div>
+                  
+                        </div> 
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1"> 
+                               <h4>Website</h4>
+                                   <h5>-</h5>
+                             </div>
+                   
+                            
+                  
+                        </div>
+                     </div>
+                      <h2 class="notes"><img src="{!$Resource.bright + '/bright-3.0/images/TelephoneContact-Information.svg'}" alt="Account &amp; Settings Notifications" />Telephone &amp; Contact Information</h2>
+                         <div class="review view">
+                        
+                           <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1"> 
+                               <h4>Preferred Phone</h4>
+                                   <h5>(320) 452-7100</h5>
+                             </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part2"> 
+                               <h4>Mobile</h4>
+                                   <h5>(320) 452-7100</h5>
+                             </div>
+                              
+                  
+                        </div>
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1"> 
+                               <h4>Home Phone</h4>
+                                   <h5>-</h5>
+                             </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part2"> 
+                               <h4>Home Fax </h4>
+                                   <h5>-</h5>
+                             </div>
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part3"> 
+                               <h4>Agent Office Phone</h4>
+                                   <h5>-</h5>
+                             </div>
+                  
+                        </div>
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                                    <p><img src="{!$Resource.bright + '/bright-3.0/images/information.svg'}" alt="Account &amp; Settings Notifications" />This information WILL appear in your listings</p>
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1"> 
+                               <h4>Public Email</h4>
+                                   <h5>qonavewoll-9840@yopmail.com</h5>
+                             </div>
+                    
+              
+                  
+                        </div> 
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                                   <p><img src="{!$Resource.bright + '/bright-3.0/images/information.svg'}" alt="Account &amp; Settings Notifications" />This information WILL NOT appear in your listings</p>
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1"> 
+                               <h4>Private Email</h4>
+                                   <h5>qonavewoll-9840@yopmail.com</h5>
+                             </div>
+                                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part2"> 
+                               <h4>Alternate Private Email </h4>
+                                   <h5>qonavewoll-9840@yopmail.com</h5>
+                             </div>
+                            
+                                                   <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1"> 
+                               <h4>NRDS ID</h4>
+                                   <h5>-</h5>
+                             </div>
+                        </div>
+                              <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                                  
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1"> 
+                               <h4>NRDS ID</h4>
+                                   <h5>-</h5>
+                             </div>
+         
+                        </div>
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_11-of-12 slds-large-size_11-of-12 part0 part01">
+                                  
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 layer part1"> 
+                                <lightning:button class="brand" variant="brand" label="Find my NRDS ID" title="Brand action" onclick="{! c.handleClick }" />
+          
+                             </div>
+         
+                        </div>  
+                     </div>
+                         <div class="review">
+                        <h2 class="notes"><img src="{!$Resource.bright + '/bright-3.0/images/Address.svg'}" alt="Account &amp; Settings Notifications" />Address(es)</h2>
+                           <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1"> 
+                               <h4>Mailing Address</h4>
+                                   <h5>9707 Key West Ave<br/>Rockville, MD 20850-3992</h5>
+                             </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part2"> 
+                               <h4>Home Address</h4>
+                                   <h5>-</h5>
+                             </div>
+                              
+                  
+                        </div>
+                             
+                                
+                               
+                     </div>
+                  </div>
+                  
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+    </div>
+</aura:component>

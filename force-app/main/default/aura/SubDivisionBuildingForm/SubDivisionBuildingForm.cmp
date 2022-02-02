@@ -1,0 +1,80 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,force:hasRecordId,lightning:isUrlAddressable" 
+                controller="SubdivisionBuilding_Form" access="global">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    
+    <ltng:require styles="{!$Resource.headeras }"></ltng:require>
+    <ltng:require styles="{!$Resource.bcomfooter }"></ltng:require>
+    <ltng:require styles="{!$Resource.bodyas }"></ltng:require>
+    <aura:attribute name="selected" type="String" default="Subdivision"/>
+    <aura:attribute name="options" type="List" default="[
+                                                        {'label': 'Add a new Subdivision', 'value': 'Subdivision'},
+                                                        {'label': 'Add a new Building Name', 'value': 'Building'}
+                                                        ]"/>
+    <!--
+    <aura:attribute name="isSubdivision" type="Boolean" default="false"/>
+    <aura:attribute name="isBuilding" type="Boolean" default="false"/>
+	-->    
+    <aura:attribute name="showSecondScreen" type="Boolean" default="false"/>
+	<aura:attribute name="subscriptionId" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    
+    <aura:if isTrue="{!!v.showSecondScreen}">
+        <div class="c-container">
+            <div class="fullpage slds-scope">
+                <div class="slds-grid slds-wrap">
+                    <lightning:layout multipleRows="true">                        
+                        <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                            
+                            <lightning:layout>
+                                <div class="new-containerpage">
+                                    <div class="slds-container--x-large new-container">
+                                        
+                                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                            <div class="page-section page-main">
+                                                
+                                                <div class="dev dev1">
+                                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                                                        <h2>Subdivision or Building Name Request</h2>
+                                                        
+                                                        <p>If the Subdivision or Building Name is not available for the listing you are entering in Bright, please submit this request form for Bright Staff to review and process. Select one of name options below to begin this request form.</p>
+                                                        
+                                                        <lightning:radioGroup name="SubdivisionRadioGroup"
+                                                                              options="{!v.options}"
+                                                                              value="{!v.selected}"
+                                                                              type="radio" />     
+                                                        
+                                                        <div class="height"></div>  
+                                                        <lightning:button class="brand" variant="brand " 
+                                                                          label="Continue" title="Brand action" 
+                                                                          aura:id="continueBtn" onclick="{!c.gotoNextPage}" 
+                                                                          disabled="true"/>
+                                                    </lightning:layoutItem>
+                                                    
+                                                    
+                                                </div>
+                                                
+                                            </div>
+                                        </lightning:layoutItem>
+                                    </div>
+                                </div>
+                            </lightning:layout>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                            <div class="new-containerpage footer-new-containerpage">
+                                <div class="slds-container--x-large new-container">
+                                    <!--<c:footeras />-->
+                                    <c:bcomfooter />
+                                </div>
+                            </div>
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </div>
+            </div>
+            
+        </div>
+    </aura:if>
+    <aura:if isTrue="{!v.showSecondScreen}">
+        <c:SubDivisionFormSubmit subDivisionOrBuilding="{!v.selected}"/>
+    </aura:if>
+</aura:component>

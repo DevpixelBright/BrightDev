@@ -1,0 +1,97 @@
+<aura:component implements="force:appHostable,lightning:isUrlAddressable">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
+    <div class="fullpage slds-scope">
+        <div class="slds-grid slds-wrap">
+            
+            <c:EZJoin_NewApplicationHeader appConfig="[]" />
+            
+            <div class="slds-container--x-large new-container" id="content-container">
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 landing">
+                        <h2>Welcome to Bright MLS</h2>
+                        <p>
+                        	Select your office role from the list below to complete your application and take the first step towards joining Bright.
+                        </p>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 linkpointmain">
+                            <div class="slds-col linkpoint" data-value="Agent" onclick="{!c.appTypeClickEvtHandler}">
+                                <div class="select-home">
+                                    <!--<img src="{!$Resource.EZJoin_AppType_Agent}" />
+                                    <h4>Agent</h4>-->
+                                    <div class="main-title">
+                                    <h3>Agent</h3>
+                                        <div class="line-sub"></div>
+                                    </div>
+                                    <div class="sub-title">
+                                        <p>A licensee affiliated with a broker who subscribes to Bright.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-col linkpoint" data-value="AB" onclick="{!c.appTypeClickEvtHandler}">
+                                <div class="select-home">
+                                   <!-- <img src="{!$Resource.e3}" />
+                                    <h4>Associate Broker</h4>-->
+                                     <div class="main-title">
+                                    <h3>Associate Broker</h3>
+                                        <div class="line-sub"></div>
+                                    </div>
+                                    <div class="sub-title">
+                                        <p>A broker or associate broker licensee who works on behalf of the Broker of Record.</p>
+                                    </div>
+                                    
+                                    
+                                </div>
+                            </div>     
+                            <div class="slds-col linkpoint" data-value="BR" onclick="{!c.appTypeClickEvtHandler}">
+                                <div class="select-home">
+                                    <!--<img src="{!$Resource.e4}" />
+                                    <h4>Broker of Record<br />and Appraisers</h4>-->
+                                     <div class="main-title">
+                                         <h3 class="agent-line">Broker of<br />Record/Appraisers</h3>
+                                        <div class="line-sub"></div>
+                                    </div>
+                                    <div class="sub-title">
+                                        <p>A broker licensee who is able to offer/accept offers of compensation with other subscribers or is certified by a state regulatory agency to perform appraisals.</p>
+                                    </div>
+                                </div>
+                            </div>                            
+                            <div class="slds-col linkpoint" data-value="OS" onclick="{!c.appTypeClickEvtHandler}">
+                                <div class="select-home">
+                                    <!--<img src="{!$Resource.e2}" />
+                                    <h4>Office Secretary</h4>-->
+                                     <div class="main-title">
+                                    <h3>Office Secretary</h3>
+                                        <div class="line-sub"></div>
+                                    </div>
+                                    <div class="sub-title">
+                                        <p>A person who assists the entire office and all members within the office (Broker, agents, office managers, etc.). </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-col linkpoint linkpoint1" data-value="PA" onclick="{!c.appTypeClickEvtHandler}">
+                                <div class="select-home">
+                                    <!--<img src="{!$Resource.e5}" />
+                                    <h4>Personal Assistant</h4>-->
+                                      <div class="main-title">
+                                    <h3>Personal Assistant</h3>
+                                        <div class="line-sub"></div>
+                                    </div>
+                                    <div class="sub-title">
+                                        <p>A person who assists specific individual(s) within the office.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 linkpointmain1">
+                        <h3>Already a subscriber?<a href="{!$Label.c.Already_Subscriber_Login}" target="_blank"> Login</a>.</h3>
+                             <button class="slds-button slds-button_brand" data-value="ApplicationStatus" onclick="{!c.appTypeClickEvtHandler}">Check Application Status</button>
+                             <button class="slds-button slds-button_brand Rebrand" data-value="Reinstate" onclick="{!c.appTypeClickEvtHandler}">Reactivate</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <c:EZJoin_NewApplicationFooter />
+        </div>
+    </div>    
+</aura:component>

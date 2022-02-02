@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <email>pdsesc@mris.net</email>
+    <name>Email Support Analysts</name>
+    <queueMembers>
+        <publicGroups>
+            <publicGroup>SC_Group_1</publicGroup>
+            <publicGroup>SC_Group_2</publicGroup>
+            <publicGroup>SC_Group_3</publicGroup>
+            <publicGroup>SC_Group_4</publicGroup>
+            <publicGroup>SC_Processors</publicGroup>
+            <publicGroup>SC_Supervisors</publicGroup>
+        </publicGroups>
+        <users>
+            <user>anita.chopra@mris.net</user>
+            <user>antonio.ross@mris.net</user>
+            <user>brian.butts@mris.net</user>
+            <user>brian.frankl@mris.net</user>
+            <user>cameron.jones@mris.net</user>
+            <user>donovan.hudson@mris.net</user>
+            <user>glennae.russell@mris.net</user>
+            <user>hamza.fellah@brightmls.com</user>
+            <user>hegel.encarnacion@mris.net</user>
+            <user>jacqueline.williams@mris.net</user>
+            <user>katrina.washington@mris.net</user>
+            <user>kevin.chu@mris.net</user>
+            <user>larissa.hyland@mris.net</user>
+            <user>laurie.egbert@mris.net</user>
+            <user>leslie.gaye@mris.net</user>
+            <user>margaret.miriga@mris.net</user>
+            <user>monica.williams@mris.net</user>
+            <user>qiana.downs@mris.net</user>
+            <user>shawn.stotelmyer@mris.net</user>
+            <user>steven.williams@mris.net</user>
+            <user>verlisha.carter@mris.net</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>Case</sobjectType>
+    </queueSobject>
+</Queue>

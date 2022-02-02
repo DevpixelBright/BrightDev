@@ -1,0 +1,170 @@
+<apex:page sidebar="false" showheader="false" controller="BT_MyClassesController" lightningstylesheets="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/angular.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/ui-bootstrap-tpls-0.12.0.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.AngularJsTable,'/ng-table.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.AngularJsTable,'/ng-table.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.DataArchive_Library,'js/jquery.min.js')}"/>
+    <c:Bootstrap_Resources />
+    <apex:stylesheet value="{!URLFOR($Resource.BT_Styling,'style.css')}"/>
+    <style>
+        
+    </style>
+    <apex:form >
+
+        <div id="mainDiv" class="courses" ng-app="first" ng-controller="firstcontroller">
+            <div class="downcourse ng-cloak" ng-show="isAuthenticatedUser">
+            
+            <div class="innercourse">
+                <div class="pointer-class">
+                    <div class="btn-radio" style="padding: 20px 10px 0px 0px;">
+                        
+                        <div class="radio-item">
+                            <input type="radio" id="ritemb" name="ritem" value="Registered" ng-model="check" checked="true" ng-change="filterResults()"/>
+                            <label for="ritemb">Upcoming</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="ritema" name="ritem" value="Attended" ng-model="check" ng-change="filterResults()"/>
+                            <label for="ritema">Completed</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="ritemc" name="ritem" value="cancel" ng-model="check" ng-change="filterResults()"/>
+                            <label for="ritemc">Canceled</label>
+                        </div>                    
+                    </div>
+                </div>
+            </div>
+                
+               <div class="middlecourse">
+                    <h2>Classes <span>({{totalClasses}})</span></h2>
+                    <div ng-show="totalClasses <= 0">
+                        <h2>No Classes Available</h2>
+                    </div>
+                    <div class="innercourse" ng-show="totalClasses > 0">
+                        <table id="table" class="table" ng-table="tableParams">
+                            <tr ng-repeat="cd in $data">
+                            <td>
+                               
+                                <a href="/learnbrightmls/s/classes?classId={{cd.classRec.Schedule__r.Id }}" target="_top">
+                                    <div class="innercoursebox">
+                                        
+                                        <div class="inner-text" style="width:80%">
+                                            <h3>{{cd.classRec.Schedule__r.Title__c}} </h3>
+                                            <ul class="indiviual-point">
+                                                <li class="delivery"><label>Location: </label>
+                                                    <p>{{cd.classRec.Schedule__r.Venue__r.State__c}} {{cd.classRec.Schedule__r.Venue__r.City__c}}  {{cd.classRec.Schedule__r.Venue__r.Street__c}}</p>
+                                                </li>
+                                            </ul>
+                                            
+                                            <p>{{cd.classRec.Schedule__r.AdditionalDescription__c}}</p>
+                                        </div>
+                                        
+                                        <div class="inner-boximg non-boximg" style="text-align: center;width:224px;">
+                                            <label>{{cd.classDate}}</label>
+                                            <label ng-show="cd.classDate != null">{{cd.classStartTime}} - {{cd.classEndTime}}</label>
+                                            <p ng-show="cd.classRec.Schedule__r.SeatsRemaining__c > 0 && cd.isUpcoming ">{{cd.classRec.Schedule__r.SeatsRemaining__c}} seats available</p>
+                                            <p ng-show="cd.classRec.Schedule__r.SeatsRemaining__c == 0 || cd.classRec.Schedule__r.SeatsRemaining__c == null && cd.isUpcoming" style="color:gray;"> No Seats available</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </td>
+                          </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="unauthenticatedUser" ng-show="!isAuthenticatedUser">
+                <h2>
+                    <b>User is Un-Authenticated</b>        
+                </h2>
+            </div>
+         <script>             
+                var app = angular.module('first', ['ngTable']).
+                controller('firstcontroller', function($scope, $filter, NgTableParams) {
+                    
+                    var data = [];
+                    $scope.finalWrap = [];
+                    $scope.totalClasses ;
+                    $scope.check = 'Registered';
+                    $scope.isAuthenticatedUser = {!isAuthenticatedUser};
+                    $scope.finalWrap = JSON.parse('{!classDetailsWrapJson}');
+                    data = $scope.finalWrap;
+                    console.log('---$scope.finalWrap-->',$scope.finalWrap);
+                    if($scope.finalWrap){
+                        data = [];
+                        for(var i=0; i < $scope.finalWrap.length; i++){
+                            
+                            console.log('---$scope.check-->'+$scope.check);
+                            if($scope.check == 'Registered' && $scope.finalWrap[i].isUpcoming){
+                                data.push($scope.finalWrap[i]);
+                            }
+                        }
+                        $scope.totalClasses = data.length;
+                    }
+                    
+                    
+                    /* Ng-table initiation */
+                    $scope.tableParams = new NgTableParams({
+                        page: 1,
+                        count: 25,
+                        sorting: {
+                            isAvailable: 'asc'
+                        }
+                    }, {
+                        total: data.length,
+                        getData: function($defer, params) {
+                            console.log(params);
+                            var searchedData = searchData();
+                            console.log('---searchedData--->',searchedData);
+                            params.total(searchedData.length);
+                            var orderedData = params.sorting() ? $filter('orderBy')(searchedData , params.orderBy()) : searchedData;
+                            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                            
+                        }
+                    });                    
+                    
+                    $scope.$watch("search", function () {
+                        $scope.tableParams.reload();
+                    });
+                    var searchData = function(){
+                        if($scope.search){
+                            return $filter('filter')(data, $scope.search, true);
+                        }
+                        return data;
+                    }
+                    
+                    $scope.filterResults = function(){
+                        console.log('---$scope.check--->'+$scope.check);
+                        
+                        if($scope.finalWrap){
+                            data = [];
+                            for(var i=0; i < $scope.finalWrap.length; i++){
+                                
+                                if($scope.check == 'Attended' && $scope.finalWrap[i].isUpcoming != null && !$scope.finalWrap[i].isUpcoming ){
+                                    data.push($scope.finalWrap[i]);
+                                }
+                                else if($scope.check == 'Registered' && $scope.finalWrap[i].isUpcoming){
+                                    data.push($scope.finalWrap[i]);
+                                }
+                                else if($scope.check == 'cancel' && $scope.finalWrap[i].isCancelled){
+                                    data.push($scope.finalWrap[i]);
+                                }
+                            }
+                            console.log('--data after filter--',data);
+                            $scope.totalClasses = data.length;
+                            $scope.tableParams.reload();
+                        }
+                        adjustContainer();
+                    }
+                    adjustContainer();
+                });
+                function adjustContainer() {
+                    setTimeout(function() { 
+                        console.log('**** current height', document.getElementById('mainDiv').scrollHeight); 
+                        $('iframe', window.parent.document).height((document.getElementById('mainDiv').scrollHeight + 100) + 'px');
+                    }, 1000);
+                }           
+            </script>
+        </div>
+    </apex:form>
+</apex:page>

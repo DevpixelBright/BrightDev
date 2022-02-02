@@ -1,0 +1,30 @@
+<apex:page standardController="Subscriptions__c" showHeader="false" sidebar="false" standardStylesheets="false"  lightningstylesheets="true">
+<html>
+<head>
+  <apex:includeScript value="{!URLFOR($Resource.jquery_1_8_2_min)}"  />
+  <style>
+    #alertmsg {
+      display: none;
+      padding-left: 5px;
+      border-radius: 5px;
+      background-color: #E00747;
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 250%;
+    }
+  </style>
+</head>
+<body>
+  <apex:outputPanel layout="block" rendered="{!NOT(ISBLANK(Subscriptions__c.Contact__r.Info_Message__c))}" >
+    <div id="alertmsg">
+      {!Subscriptions__c.Contact__r.Info_Message__c}  
+    </div>
+  </apex:outputPanel>
+  
+  <script language="Javascript">
+    $j = jQuery.noConflict();
+    $j("#alertmsg").fadeIn(1500);
+  </script>
+</body>
+</html>  
+</apex:page>

@@ -1,0 +1,210 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<div class="fullpage slds-scope">
+		<div class="slds-grid slds-wrap">
+			<div class="new-containerpage">
+				<div class="slds-container--x-large new-container">
+					<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12  header-full">
+						<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 header-part">
+							<div class="logo">
+								<img src="{!$Resource.brightlogolightning}" />
+							</div>
+						</div>
+                        				<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 header-part">
+							<div class="middleone">
+								<img src="{!$Resource.ezjointop1}" />
+							</div>
+						</div>
+						<!--<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_5-of-12 slds-large-size_5-of-12 header-part">
+							<div class="bar bar1">
+								<h2>Joining MLS as Personal Assistant</h2>
+								<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_7-of-12 slds-large-size_7-of-12">
+									<div class="bar-title">
+										<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 bar-title-box">
+											<h5>Progress</h5>
+										</div>
+										<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 bar-title-box">
+											<div class="slds-progress-bar slds-progress-bar_medium" aria-valuemin="0" aria-valuemax="100" aria-valuenow="75" role="progressbar">
+                                            <span class="slds-progress-bar__value" style="width:10%">
+                                            <span class="slds-assistive-text">Progress: 10%</span>
+												</span>
+											</div>
+										</div>
+										<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_2-of-12 slds-large-size_2-of-12 bar-title-box">
+											<h6>10%</h6> 
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>-->
+						<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 header-part">
+							<div class="call">
+								<h4>Looking for support? </h4>
+								<h3>Call: 1-844-552-7444</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="slds-container--x-large new-container">
+				<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 timepoint">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 succesmsg">
+                    <div class="approved"><p><img src="{!$Resource.ezjoincorrectick}" />Your application has been approved. Please create a login name to proceed</p></div>
+                    </div>
+					<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication">
+                   <h2>Application ID:  078900 </h2>
+                        
+                     <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_9-of-12 slds-large-size_9-of-12 newapplication1">
+                         <h3>Application Details</h3>
+                         <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                         <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 newapplication2">
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication4">
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                 <h3>Submited On</h3>
+                         </div>
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                 <h4>03/28/2020</h4>
+                         </div>
+                             </div>
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication4">
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                 <h3>Expires On</h3>
+                         </div>
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                 <h4>04/28/2020</h4>
+                         </div>
+                             </div>
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication4">
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                 <h3>Office ID</h3>
+                         </div>
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                 <h4>LF10700</h4>
+                         </div>
+                             </div>
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication4">
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                 <h3>City</h3>
+                         </div>
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                 <h4>Rockville</h4>
+                         </div>
+                             </div>
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication4">
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                 <h3>State</h3>
+                         </div>
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                 <h4>MD</h4>
+                         </div>
+                             </div>
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication4">
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                 <h3>Zip</h3>
+                         </div>
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                 <h4>208850</h4>
+                         </div>
+                             </div>
+                         </div>
+                         <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 newapplication2">
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication4">
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                 <h3>First Name</h3>
+                         </div>
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                 <h4>Jim</h4>
+                         </div>
+                             </div>
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication4">
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                 <h3>Last Name</h3>
+                         </div>
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                 <h4>Gill</h4>
+                         </div>
+                             </div>
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication4">
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                 <h3>Salutation</h3>
+                         </div>
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                 <h4>Mr</h4>
+                         </div>
+                             </div>
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication4">
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                 <h3>Account Name</h3>
+                         </div>
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                 <h4>Long &amp; Foster Real Estate Inc</h4>
+                         </div>
+                             </div>
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication4">
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                 <h3>Primary Email</h3>
+                         </div>
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                 <h4>jim@gmail.com</h4>
+                         </div>
+                             </div>
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication4">
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newapplication3">
+                                 <h3>Primary Phone</h3>
+                         </div>
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 newapplication3">
+                                 <h4>345-76890</h4>
+                         </div>
+                             </div>
+                         </div>
+                         </div>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 newapplication1">
+                            <h3>Selected Agents</h3>
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                              <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication2">
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication4">
+                             
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication3">
+                                 <h4>Coastal associations - 176677</h4>
+                         </div>
+                             </div>
+                                </div>
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication2">
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication4">
+                             
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication3">
+                                 <h4>Coastal associations - 176677</h4>
+                         </div>
+                             </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 spaceline2">
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12"><button class="slds-button slds-button_brand">Create Login<div class="ezjoinarrow">
+								<img src="{!$Resource.ezjoinarrow}" />
+							</div></button></div>
+				</div>
+			</div>
+			<div class="footerbottom">
+				<div class="slds-container--x-large new-container">
+					<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 footer-full">
+						<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 footer-part">
+							<p><a href="#">Privacy</a> 
+							</p>
+							<p><a href="#">Terms of Use</a>
+							</p>
+							<p><a href="#">Copyright</a>
+							</p>
+						</div>
+						<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 footer-part">
+							<p class="copy">Copyright © 2020 Bright MLS, Inc.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</aura:component>

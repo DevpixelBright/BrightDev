@@ -1,0 +1,289 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="Communities_CommPreferences_controller" lightningstylesheets="true">
+    <apex:composition template="Communities_Base">
+        <apex:define name="content">
+            <apex:form >
+                <c:Bootstrap_Resources />
+                <script src="{!URLFOR($Resource.Bootstrap_communication_preferences, '/js/bootstrap-toggle.min.js')}"/> 
+                <link href="{!URLFOR($Resource.Bootstrap_communication_preferences, '/css/bootstrap-toggle.min.css')}" rel="stylesheet"/> 
+                    
+                    <apex:actionFunction name="updatepreferences" action="{!updatePreferences}" reRender="preference-data" >
+                        <apex:param name="preferencename" value=""/>
+                            <apex:param name="preferencevalue" value=""/>
+                                </apex:actionFunction>
+                            <apex:actionFunction name="resetPreferences" action="{!resetPreferences}" oncomplete="reloadPage()" />
+                                <div class="row">
+                                    <c:Communities_Definition pageTitle="Communication Preferences" pageTitleClass="fa fa-envelope fa-2x" hasDefinitions="false">
+                                        </c:Communities_Definition>
+                                    </div>
+                                    <script>
+                                        
+                                        markUserId("{!displayName}");
+                markOptionPanel("subscription");
+                
+                $(document).ready(function() {
+                    var count = 0;
+                    $('#email_OptOut').change(function() {
+                        if (this.checked){
+                            $('#project-list-area').fadeIn('slow'),
+                                $('#topology').fadeOut('slow');
+                            count++;
+                        }
+                        if (count === 2)
+                            window.location.reload;
+                        else{
+                            $('#topology').fadeIn('slow'),
+                                $('#project-list-area').fadeOut('slow');
+                        }
+                        
+                    });
+                });
+                $(document).ready(function() {
+                    $("form").addClass("form-horizontal");
+                    //$("label").addClass("col-sm-3 control-label");
+                    $(".for_inputs input").addClass("form-control");
+                    $("select").addClass("form-control");
+                    $(".errorM3").addClass("alert alert-danger");
+                    $(".infoM3").addClass("alert alert-info");
+                    $(".confirmM3").addClass("alert alert-success");
+                    
+                    if('{!subscription.contact__r.BRIGHT_email_preferences_NEWS__c}'== 'true'){
+                        $('#news').bootstrapToggle('on');
+                    }
+                    if('{!subscription.contact__r.BRIGHT_email_preferences_market__c}'== 'true'){
+                        $('#market_trends').bootstrapToggle('on');
+                    }
+                    if('{!subscription.contact__r.BRIGHT_email_preferences_TRAINING__c}'== 'true'){
+                        $('#training').bootstrapToggle('on');
+                    }
+                    if('{!subscription.contact__r.BRIGHT_email_preferences_TIPS__c}'== 'true'){
+                        $('#product_tips').bootstrapToggle('on');
+                    }
+                    if('{!subscription.contact__r.BRIGHT_email_preferences_PARTNER__c}'== 'true'){
+                        $('#partner_prod_news').bootstrapToggle('on');
+                    }
+                    
+                    if('{!subscription.contact__r.BRIGHT_email_preferences_BROKER__c}'== 'true'){
+                        $('#broker_news').bootstrapToggle('on');
+                    } 
+                    if('{!subscription.contact__r.BRIGHT_email_preferences_VENDOR__c}'== 'true'){
+                        $('#vendor_news').bootstrapToggle('on');
+                    }
+                    if('{!subscription.contact__r.BRIGHT_email_preferences_Listings__c}'== 'true'){
+                        $('#listing_notification').bootstrapToggle('on');
+                    }
+                    if('{!subscription.contact__r.HasOptedOutOfEmail}'== 'true'){
+                        $('#email_OptOut').bootstrapToggle('on');
+                        $('#listing_notification').bootstrapToggle('off');
+                        $('#vendor_news').bootstrapToggle('off');
+                        $('#broker_news').bootstrapToggle('off');
+                        $('#partner_prod_news').bootstrapToggle('off');
+                        $('#product_tips').bootstrapToggle('off');
+                        $('#training').bootstrapToggle('off');
+                        $('#market_trends').bootstrapToggle('off');
+                        $('#news').bootstrapToggle('off');
+                        
+                    }
+                });
+                function changeState(field){
+                    var status = $('#'+field).prop('checked');
+                    updatepreferences(field,status);
+                }    
+                function reloadPage(){
+                    window.location.reload();
+                }
+                </script>
+                <style>
+                    .checkbox {
+                    text-align:right;
+                    }
+                    .resetlink{
+                    text-align:right;
+                    }
+                    .toggle.android { border-radius: 20px;}
+                    .toggle.android .toggle-handle { border-radius: 10px}
+                    
+                    } 
+                    .action_buttons {
+                    position: absolute;
+                    top: 7px;
+                    right: 0px;
+                    }
+                    
+                    .action_buttons input {
+                    width: auto;
+                    margin-right: 0px !important;
+                    }
+                    
+                    .action_buttons input + input {
+                    margin-left: 10px;
+                    }
+                    input[type=text] {
+                    width: 20%;
+                    margin-right: 3px;
+                    padding-top: 1px;
+                    padding-bottom: 4px;
+                    } 
+                    input[type=submit] {
+                    margin-right: 10px !important;
+                    padding-top: 4px;
+                    padding-bottom: 4px;
+                    } 
+                    .errorMsg {display:none;}
+                </style>
+                <apex:outputPanel >
+                    <div id="messages">
+                        <apex:pagemessages ></apex:pagemessages>
+                        
+                    </div>
+                </apex:outputPanel>
+                <div class="row" id="preference-instructions">
+                    <div class="col-xs-12 instructions">
+                        <p><b>Select the emails you would like to receive from Bright.</b> </p>
+                        <p>You are updating email preferences for <b>{!privateEmail}</b>. Want emails sent to a different address? Update your private email  <u><apex:commandLink action="{!renderPrivateEmail}" value="here" /></u>.  </p>
+                        <apex:outputPanel rendered="{!isUpdateEmail}" >           
+                            <apex:inputField value="{!subscription.Private_Email__c}"/>
+                            <apex:commandButton styleClass="btn btn-primary my_save" value="update" action="{!updatePrivateEmail}" />
+                            <apex:commandLink value="cancel" action="{!reloadPage}" immediate="true" />
+                        </apex:outputPanel>
+                    </div>
+                </div>
+                
+                <div >
+                    <apex:outputText style="float:left;">Choose “On” to be added to a list. Choose “Off” to be removed.</apex:outputText> 
+                    <b> <apex:commandLink style="float:right;" action="{!resetPreferences}" onclick="resetPreferences()" value="Reset to default" /></b> 
+                </div>
+                
+                
+                
+                <table class="table" id="preference-data">
+                    
+                    <tr>
+                        <td>
+                            <p><b>Weekly Update Newsletter</b></p>
+                            <p>Read about the latest news and information for Bright in our weekly newsletter.</p>
+                        </td>
+                        <td>
+                            <div class="checkbox">
+                                <label>
+                                    <input id="news"  type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-size="small" data-style="android"  onChange="changeState(this.id)"  />
+                                </label>
+                            </div>
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <td>
+                            <p><b>Market Statistics</b></p>
+                            <p>Perfect for sharing with your clients! Receive a monthly update with the latest statistics for real estate activity in your county.</p>
+                        </td>
+                        <td>
+                            <div class="checkbox">
+                                <label>
+                                    <input id="market_trends" type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-size="small" data-style="android"  onChange="changeState(this.id)"/>
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p><b>Training and Events</b></p>
+                            <p>Get more from the MLS. Find out about FREE training classes available online or at an association near you.</p>
+                        </td>
+                        <td>
+                            <div class="checkbox">
+                                <label>
+                                    <input id="training" type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-size="small" data-style="android"  onChange="changeState(this.id)"/>
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p><b>Product Updates</b></p>
+                            <p>Get the latest information about Bright search, report and partner products, including recent updates, important changes and new features.</p>
+                        </td>
+                        <td>
+                            <div class="checkbox">
+                                <label>
+                                    <input id="product_tips" type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-size="small" data-style="android"  onChange="changeState(this.id)"/>    
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p><b>Partner News and Offers</b></p>
+                            <p>Take your business to the next level. Learn about premium products and services you can use with Bright.</p>
+                        </td>
+                        <td>
+                            <div class="checkbox">
+                                <label>
+                                    <input id="partner_prod_news" type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-size="small" data-style="android"  onChange="changeState(this.id)"/> 
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                    <apex:outputPanel rendered="{!subscription.Contact_Type__c == 'Broker' || subscription.Contact_Type__c == 'Office Manager'}">
+                        <tr>
+                            <td>
+                                <p><b>Broker News</b></p>
+                                <p>TBD</p>
+                            </td>
+                            <td>
+                                <div class="checkbox">
+                                    <label>
+                                        <input id="broker_news" type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-size="small" data-style="android"  onChange="changeState(this.id)"/>
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!subscription.Contact_Type__c == 'Vendor'}">
+                        <tr>
+                            <td>
+                                <p><b>Vendor News</b></p>
+                                <p>TBD</p>
+                            </td>
+                            <td>
+                                <div class="checkbox">
+                                    <label>
+                                        <input id="vendor_news" type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-size="small" data-style="android"  onChange="changeState(this.id)"/>
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                    </apex:outputPanel>
+                    
+                    <tr>
+                        <td>
+                            <p><b>Listing Alert Summary Emails</b></p>
+                            <p>Receive a daily summary of your listing alerts</p>
+                        </td>
+                        <td>
+                            <div class="checkbox">
+                                <label>
+                                    <input id="listing_notification" type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-size="small" data-style="android"  onChange="changeState(this.id)"/>
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                            <p><b>Email Opt Out</b></p>
+                            <p>I would like to opt out of all promotional email communication from Bright.</p>
+                        </td>
+                        <td>
+                            <div class="checkbox">
+                                <label>
+                                    <input id="email_OptOut" type="checkbox" data-toggle="toggle" data-on="Portfolio" data-off="Topology" data-onstyle="success" data-offstyle="danger" data-size="small" data-style="android"  onChange="changeState(this.id)"/>
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

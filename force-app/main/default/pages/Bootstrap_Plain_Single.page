@@ -1,0 +1,9 @@
+<apex:page standardStylesheets="false" lightningstylesheets="true">
+    <apex:composition template="Bootstrap_Plain">
+        
+        <apex:define name="layout">
+            <c:Bootstrap_Content />
+        </apex:define>
+        
+    </apex:composition>
+</apex:page>

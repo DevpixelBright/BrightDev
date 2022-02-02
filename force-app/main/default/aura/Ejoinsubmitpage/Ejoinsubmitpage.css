@@ -1,0 +1,48 @@
+@font-face {
+    font-family: 'LatoBold';
+    src: url(/resource/LatoBold);
+}
+@font-face {
+    font-family: 'LatoRegular';
+    src: url(/resource/LatoRegular);
+}
+.THIS.slds-scope{ background:#fff;}
+.THIS .fullpage { background:#f2f3f7;  margin:0;  padding:0;}
+.THIS .slds-box_x-small{ padding:0; border:none;}
+/*header css start*/
+.THIS .header-part{ display: inline-block; padding:0;line-height: 40px; vertical-align: top;}
+.THIS .header-part .logo img{ width:140px;}
+.THIS .new-container { margin: 0 auto; border: none; width: -webkit-fill-available;}
+.THIS .new-containerpage { margin: 0 auto;border-bottom:1px solid #ccc; width: -webkit-fill-available;}
+.THIS .header-full{ padding:14px 0;}
+.THIS .header-part .bar h2{ color: #00b0b9;font-size: 20px;font-family:LatoBold;} 
+.THIS .header-part .bar1 h2{ color: #282828;} 
+.THIS .bar-title-box{display: inline-block;}
+.THIS .bar-title{ display:block;line-height: normal;}
+.THIS .bar-title h5{ display:inline-block; color:#333; font-family:LatoRegular; font-size:13px;}
+.THIS .bar-title h6{color:#333; font-family:LatoRegular; font-size:13px; text-align: right;}
+.THIS .call{ margin:0; padding:0;text-align: right;line-height: normal;}
+.THIS .call h4{ color:#333; font-family:LatoRegular; font-size:13px; margin:12px 54px 5px 0;}
+.THIS .call h3{ color:#282828; font-family:LatoRegular; font-size:18px;}
+/*header css end*/
+/*footer css start*/
+.THIS .footer-full{ padding:26px 0; margin:0;}
+.THIS .footerbottom{background: #212b3d;width: 100%;}
+.THIS .footer-part{ margin:0; padding:0; display:inline-block;}
+.THIS .footer-part p{color:#a8b3c6; margin:0 ;font-size:14px; font-family:LatoRegular;  display:inline-block; }
+.THIS .footer-part p a{color:#a8b3c6; margin:0 40px 0 0 ;font-size:14px; font-family:LatoRegular;  display:inline-block; }
+.THIS .footer-part p.copy{   text-align: right;    display: block;}
+/*footer css end*/
+/*content css start*/
+.THIS .Successful{ margin:8% auto 10%; text-align:center;}
+.THIS .Successful img{}
+.THIS .Successful h3{font-family:LatoBold; font-size:20px;color:#333; margin:10px 0 0px;padding:0;line-height: normal;}
+.THIS .Successful h4{font-family:LatoBold; font-size:20px;color:#333; margin:0px 0 5px;padding:0;line-height: normal;}
+.THIS .Successful h5{font-family:LatoRegular; font-size:16px;color:#282828; margin:0 0 5px;padding:0;line-height: normal;}
+.THIS .Successful p{font-family:LatoRegular; font-size:16px;color:#282828; margin:0 0 20px;padding:0;line-height: normal;}
+.THIS .spaceline3{ margin:20px 0 14px 0;border-bottom:1px solid #ccc; }
+.THIS .slds-button_brand{ border-radius:0; color:#fff;border:1px solid #fe4602; font-size:14px; padding:10px 30px; background:#fe4602; font-family:LatoRegular;}
+.THIS .slds-button_brand:hover{border:1px solid #fe4602;color:#fe4602;background:#fff;}
+.THIS .slds-button_brand:active{border:1px solid #fe4602;color:#fe4602;background:#fff;}
+.THIS .slds-button_brand:focus{border:1px solid #fe4602;color:#fe4602;background:#fff;outline: 0; box-shadow: none;}
+/*footer css end*/

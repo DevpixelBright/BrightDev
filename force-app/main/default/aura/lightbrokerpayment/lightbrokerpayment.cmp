@@ -1,0 +1,181 @@
+<aura:component>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <ltng:require styles="{!$Resource.headerpart }"></ltng:require>
+   <ltng:require styles="{!$Resource.side }"></ltng:require> 
+   <ltng:require styles="{!$Resource.body }"></ltng:require>
+ <aura:attribute name="popup1" type="boolean" default="false"/>
+   
+   <div class="c-container">
+      <div class="fullpage slds-scope">
+         <div class="slds-grid slds-wrap">
+            <lightning:layout multipleRows="true">
+               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage header-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:header />
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+               <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                    <c:mobilemenu />
+                   <lightning:layout>
+                     <div class="new-containerpage">
+                        <div class="slds-container--x-large new-container">
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <c:sidebarnew />
+                           </lightning:layoutItem>
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                              <div class="page-section page-main">
+                                 <div class="middlebar1">
+                                    <h2>Brokerage Payment Methods</h2>
+                           
+                                         <lightning:button class="brand" variant="brand" label="Add New Payment Method" title="Brand action" onclick="{! c.openModel }" />
+                         </div>
+                                 <div class="dev">
+                                     <p class="recent">Welcome to My Payment Methods. To add a new Visa, Mastercard, American Express, Discover card or Direct Debit, click “Add New Payment Method.” </p>
+                                     <p class="recent">Need to manage your current payment methods? You can edit and delete payment methods below by using the Edit and Delete icons located in the right corner when you hover over any existing payment method. From this edit screen, you can update Expiration Date, Cardholder Name and Address, and you can select or remove a card as your auto-payment method.</p>
+                                     <p class="recent"> If you need to change a card number, please delete the current card on file and add the new card using the “Add New Payment Method” option.</p>
+                                     <div class="view"></div>
+                                     <div class="lake1">
+            <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="5" largeDeviceSize="5">
+                 <div class="visa">
+                                     
+                        <div class="leftvisa">
+                     <img  src="{!$Resource.bright + '/bright-3.0/images/visa.svg'}" alt="Bright" />
+                     <h4>**** **** **** 1234</h4>
+                        <h5>Expires on 12/2020</h5>    
+                     </div>
+                     
+                     <div class="rightvisa">
+                     <div class="visar">
+                          <img class="edit" src="{!$Resource.bright + '/bright-3.0/images/material-edit.svg'}" alt="Bright" />
+                         <img  src="{!$Resource.bright + '/bright-3.0/images/material-delete.svg'}" alt="Bright" />
+                         
+                         <h6 class="green1"> Active</h6>
+                         
+                         </div>
+                         
+                     </div>
+                     <div class="view"></div>
+                              <div class="slds-form-element__control">
+    <div class="slds-checkbox">
+      <input type="checkbox" name="options" id="checkbox-unique-id-78" value="checkbox-unique-id-78" checked="" />
+      <label class="slds-checkbox__label" for="checkbox-unique-id-78">
+        <span class="slds-checkbox_faux"></span>
+        <span class="slds-form-element__label">Use this payment method to automatically pay all future fees and charges accrued or associated with your MLS brokerage.</span>
+      </label>
+    </div>
+   
+  </div>
+                                     </div>
+                                     </lightning:layoutItem>    
+                     </div>
+                        
+                                 </div>
+                              </div>
+                           </lightning:layoutItem>
+                        </div>
+                     </div>
+                  </lightning:layout>
+               </lightning:layoutItem>
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage footer-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:footer />
+                         
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+            </lightning:layout>
+         </div>
+      </div>
+    <!-- PopUp 1 start -->
+       <aura:if isTrue="{!v.popup1}">
+           <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- ###### MODAL BOX HEADER Start ######-->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModel }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate email">Delete Payment Method</h2>
+                    </header>
+                    <!--###### MODAL BOX BODY Part Start######-->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                         <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                              <div class="page-section page-main page-main2">
+                       <p>Please confirm that you would like to delete the following payment method.</p>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                                          <div class="layer part1 ">
+                                             <h4>Card Type</h4>
+                                            <h5>
+                                                Mastercard
+                                             </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                                          <div class="layer part2 log">
+                                             <h4>Card Number </h4>
+                                             <h5>
+                                              **** **** **** 1111
+                                             </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                    
+                                    </lightning:layoutItem>
+                                  
+                                  
+                                  
+                                  <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                                          <div class="layer part1">
+                                             <h4>Cardholder Name</h4>
+                                            <h5>
+                                               John Smith
+                                             </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                                          <div class="layer part2 ">
+                                             <h4>Expiration Date </h4>
+                                             <h5>
+                                              12/20
+                                             </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                      
+                                    </lightning:layoutItem>
+                                  
+                                                                         
+                                             
+                                        
+                                    
+                                 
+                                  
+                              
+                                    
+                             
+                              </div>
+                           </lightning:layoutItem>
+                    </div>
+                    <!--###### MODAL BOX FOOTER Part Start ######-->
+                     <footer class="slds-modal__footer">
+                         <lightning:button class="brand" variant="brand" label="Submit" title="Brand action" onclick="{! c.handleClick }" />
+                       
+                        <lightning:button variant="neutral" 
+                                          label="Cancel"
+                                          title="Cancel"
+                                           class="newCancel"
+                                          onclick="{! c.closeModel1 }"/>
+                        
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+       </aura:if>
+       <!-- PopUp 1 end -->
+   </div>
+</aura:component>

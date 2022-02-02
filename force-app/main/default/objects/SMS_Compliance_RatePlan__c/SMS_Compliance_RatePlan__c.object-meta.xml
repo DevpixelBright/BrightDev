@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>Lists the Product Id and Product Rate Plan that is to be used while creating a compliance in Zuora</description>
+    <enableFeeds>false</enableFeeds>
+    <label>SMS Compliance RatePlan</label>
+    <visibility>Public</visibility>
+</CustomObject>

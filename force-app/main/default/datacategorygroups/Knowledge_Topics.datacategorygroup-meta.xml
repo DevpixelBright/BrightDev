@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataCategoryGroup xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <dataCategory>
+        <dataCategory>
+            <label>Agents</label>
+            <name>Agents</name>
+        </dataCategory>
+        <dataCategory>
+            <label>Brokers</label>
+            <name>Brokers</name>
+        </dataCategory>
+        <dataCategory>
+            <label>Training</label>
+            <name>Training</name>
+        </dataCategory>
+        <dataCategory>
+            <label>Conversion Information</label>
+            <name>Conversion_Information</name>
+        </dataCategory>
+        <dataCategory>
+            <label>Account &amp; Payment Options</label>
+            <name>Account_Payment_Options</name>
+        </dataCategory>
+        <dataCategory>
+            <label>Accuracy and Policy</label>
+            <name>Accuracy_and_Policy</name>
+        </dataCategory>
+        <label>All</label>
+        <name>All</name>
+    </dataCategory>
+    <description>This is list of topics that will be used for topic assignments in knowledge bases</description>
+    <label>Knowledge Topics</label>
+    <objectUsage>
+        <object>KnowledgeArticleVersion</object>
+    </objectUsage>
+</DataCategoryGroup>

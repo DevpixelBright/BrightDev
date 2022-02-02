@@ -1,0 +1,103 @@
+<aura:component controller="EZJoin_AutoCompleteController">
+    <!-- attributes to be received from parent component-->
+    <aura:attribute name="label" type="String" />
+    <aura:attribute name="results" type="List" default="[]" />
+    <aura:attribute name="openDropDown" type="Boolean" default="false" />
+    <aura:attribute name="selectedOption" type="String" />
+    <aura:attribute name="inputValue" type="String" />
+    <aura:attribute name="inputSearchFunction" type="Object" />
+    <aura:attribute name="placeHolder" type="String" default="Start typing the broker code..." />
+    <aura:attribute name="cmpType" type="String" />
+    <aura:attribute name="brokerCode" type="Object" default="{}" />
+    <aura:attribute name="agents" type="List" default="[]" />
+    <aura:attribute name="selectedObj" type="Object" default="{}" />
+    <aura:attribute name="applicationType" type="String" default="" />
+    <aura:attribute name="transaction" type="String" default="NewApplication" />
+    <aura:attribute name="subscriptionType" type="String" default="" />
+    <aura:attribute name="association" type="Object" default="{}" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}" />
+    
+    <!-- Events -->
+    <aura:registerEvent name="cmpEvent" type="c:EZJoin_AutoCompleteSelectionEvt" />
+    <aura:registerEvent name="cmpEvent1" type="c:EZJoin_AutoCompleteClearEvent" />
+    
+    <div class="{!(v.transaction == 'NewApplication' ? (v.cmpType != 'Association' ? 'slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 flow1' : 'slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 flow1')  : (v.cmpType == 'Agents' ? 'slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_10-of-12 slds-large-size_10-of-12 flow1 auto-left' : 'slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 flow1'))}">
+        <div class="slds-form-element">
+            <label class="slds-form-element__label" for="combobox-id-21" style="{! empty(v.label) ? 'display:hidden;' : 'display:block;'}">{!v.label}</label>
+            <div class="slds-form-element__control">
+                <div class="slds-combobox_container">
+                    <div class="{! v.openDropDown ? 'slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open' : 'slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click'}" aria-expanded="true" aria-haspopup="listbox" role="combobox">
+                        <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                            <input type="text"
+                                   class="slds-input slds-combobox__input slds-combobox__input-value" aura:id="AutoInput"
+                                   id="{!'combobox-id-21-' + v.cmpType}" aria-autocomplete="list" aria-controls="listbox-id-11"
+                                   autocomplete="false" onkeyup="{!c.searchHandler}" role="textbox" placeholder="{!v.placeHolder}"
+                                   value="{!v.inputValue}" />
+                            <aura:if isTrue="{! empty(v.selectedOption)}">
+                                <span
+                                      class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
+                                    <lightning:icon iconName="utility:search" size="x-small" />
+                                </span>
+                                <aura:set attribute="else">
+                                    <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right"
+                                            title="Clear the text input" onclick="{!c.clearOption}">
+                                        <lightning:icon iconName="utility:clear" size="x-small" />
+                                    </button>
+                                </aura:set>
+                            </aura:if>
+                        </div>
+                        <div id="listbox-id-11" class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid" role="listbox">
+                            <aura:if isTrue="{!v.results.length > 0}">
+                                <ul class="slds-listbox slds-listbox_vertical options-list" role="presentation">
+                                    <aura:iteration items="{!v.results}" var="result">
+                                        <li role="presentation" class="slds-listbox__item" data-id="{!result.id}" data-value="{!result.value}" onclick="{!c.optionClickHandler}">
+                                            <div id="{!result.id}"
+                                                 class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small"
+                                                 role="option">
+                                                <span class="slds-media__figure slds-listbox__option-icon"></span>
+                                                <span class="slds-media__body">
+                                                    <span class="slds-truncate" title="{!result.value}">
+                                                        <span>{!result.value}</span>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </aura:iteration>
+                                </ul>
+                            </aura:if>
+                            <aura:if isTrue="{!v.results.length == 0}">
+                                <div class="exampleHolder" style="height:30px;">
+                                    <lightning:spinner alternativeText="Loading" size="small" />
+                                </div>
+                            </aura:if>                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <aura:if isTrue="{!(v.transaction == 'NewApplication')}">
+        <aura:if isTrue="{!and(v.cmpType == 'BrokerCode', v.selectedObj.Name)}">
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 flow2">
+                <p><img src="{!$Resource.ejoin + '/ejoinimages/ejoincorrect.jpg'}" />{!(v.selectedObj.Name + ' ' + v.selectedObj.Account_Name__c + ' ' + v.selectedObj.City__c + ' ' + v.selectedObj.State__c + ' ' + v.selectedObj.Zip__c)}</p>
+            </div>
+        </aura:if>
+        <aura:if isTrue="{!v.cmpType == 'Agents'}">
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 flow2">
+                <p class="plus"><img src="{!$Resource.ejoin + '/ejoinimages/ejoinplus.jpg'}" onclick="{!c.addAgentEvtClickHandler}" /></p>
+            </div>
+        </aura:if>        
+    </aura:if>
+    
+    <aura:if isTrue="{!(v.transaction == 'Reinstatement')}">
+        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_2-of-12 slds-large-size_2-of-12 flow2 auto-right">
+            <aura:if isTrue="{!v.cmpType == 'Agents'}">
+                <p class="plus">
+                    <img src="{!$Resource.ejoin + '/ejoinimages/ejoinplus.jpg'}" onclick="{!c.addAgentEvtClickHandler}" style="margin-left:10px; width:35px;" />
+                </p>
+            </aura:if>
+        </div>
+    </aura:if>
+</aura:component>

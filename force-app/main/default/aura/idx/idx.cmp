@@ -1,0 +1,191 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+        <ltng:require styles="{!$Resource.brightcss }"></ltng:require>
+   <ltng:require styles="{!$Resource.sidemenu }"></ltng:require> 
+   <ltng:require styles="{!$Resource.bodycontainer }"></ltng:require>
+
+    
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <div class="fullpage slds-scope">
+      <div class="slds-grid slds-wrap">
+         <div class="new-containerpage">
+            <div class="slds-container--x-large new-container">
+               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12  header-full">
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 header-part">
+                     <div class="logo"> 
+                         <img src="{!$Resource.bright + '/bright-3.0/images/brightlogolightning.png'}" alt="Bright" />
+                     </div>
+                  </div>
+                   <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 header-part">
+                     <div class="account">
+                      <h3>Accounts &amp; Settings</h3>
+                     </div>
+                  </div>
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 header-part header-part1">
+                      <div class="all">
+                          <h5>AL</h5>
+                          </div>
+                      <div class="call">
+                         
+                        <h4>Amanda Lynn </h4>
+                        <h3>Subscriber ID: 8987987 &nbsp;<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" />  | <a href="#">Active</a></h3>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="slds-container--x-large new-container">
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 sidebar">
+                <ul class="menuside">
+                    <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/AccountsHome-black.svg'}" alt="Accounts Home" />Accounts Home</a></li>
+                    <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                    <li onclick="{!c.treeMenu}"><a><img src="{!$Resource.bright + '/bright-3.0/images/Brokerage.svg'}" alt="Brokerage" />Brokerage<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                      <ul class="submenu submenu1">
+                         <li><a  class="active" href="#">Office Roster</a></li>
+                        <li><a href="#">Office Statement </a></li>
+                        <li><a href="#">W-9 Forms </a></li>
+                        <li><a href="#">Office Information </a></li>
+                        <li><a href="#">Responsible Broker </a></li>
+                         <li><a href="#">Authorized Signers</a></li>
+                        <li><a href="#">Office Managers</a></li>
+                        <li><a href="#">Accuracy Notifications</a></li>
+                        <li><a href="#">Data Licensing</a></li>
+                        </ul>
+                    
+                    </li>
+                    <li onclick="{!c.treeMenu1}"><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Subscription.svg'}" alt="Subscription" />Subscription<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                     <ul class="submenu submenu2">
+                         <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                        </ul>
+                    </li>
+                    <li onclick="{!c.treeMenu2}"><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Requests.svg'}" alt="Requests" />Requests<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                    <ul class="submenu submenu3">
+                         <li><a href="#">Office Roster</a></li>
+                        <li><a href="#">Office Statement </a></li>
+                        <li><a href="#">W-9 Forms </a></li>
+                        <li><a href="#">Office Information </a></li>
+                        <li><a href="#">Responsible Broker </a></li>
+                         <li><a href="#">Authorized Signers</a></li>
+                        <li><a href="#">Office Managers</a></li>
+                        <li><a href="#">Accuracy Notifications</a></li>
+                        <li><a href="#">Data Licensing</a></li>
+                        </ul>
+                    </li>
+                    <li onclick="{!c.treeMenu3}"><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Finance.svg'}" alt="Finance" />Finance<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                    <ul class="submenu submenu4">
+                         <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Notification-Preferences.svg'}" alt="Notification" />Notification Preferences</a></li>
+                    <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Settings-Permissions.svg'}" alt="Settings" />Settings &amp; Permissions</a></li>
+                     <li class="logout"><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Logout.svg'}" alt="Logout" />Logout</a></li>
+                </ul>
+                
+                </div>
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_9-of-12 slds-large-size_9-of-12 middlebar">
+                 
+                   <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 middlebar1">
+                   <h2><b>IDX &amp; VOW Licensing Request</b></h2> 
+                       
+                       <lightning:button class="brand pdf" variant="brand " label="Cancel" title="Brand action"  />
+                       <lightning:button class="brand brand2" variant="brand " label="Submit" title="Brand action"  />
+                   </div>    
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bottombar bottombar1">
+                     <div class="dev dev1">
+                      
+                         <h6>  Request an IDX or VOW listing feed for your website from an approved third-party vendor. See <a href="#">Product Pricing</a>.</h6>
+                         
+                         
+                        
+                            <fieldset class="slds-form-element">
+  
+  <div class="slds-form-element__control">
+    <span class="slds-radio">
+      <input type="radio" id="radio-43" value="radio-43" name="default" checked="" />
+      <label class="slds-radio__label" for="radio-43">
+        <span class="slds-radio_faux"></span>
+        <span class="slds-form-element__label">IDX Website <img src="{!$Resource.bright + '/bright-3.0/images/information.svg'}" alt="Bright" /></span>
+      </label>
+    </span>
+    <span class="slds-radio">
+      <input type="radio" id="radio-44" value="radio-44" name="default" />
+      <label class="slds-radio__label" for="radio-44">
+        <span class="slds-radio_faux"></span>
+        <span class="slds-form-element__label">VOW Website</span>
+      </label>
+    </span>
+  </div>
+</fieldset>
+                         
+                       
+              <div class="review">
+                        
+                           <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part24">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 layer part1"> 
+                               <h4>Vendor Name<span class="star">*</span></h4>
+                            
+                                   <h5>
+                                       <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_11-of-12 slds-large-size_11-of-12 layer part5">
+                                  <lightning:input type="text" name="input3" placeholder="Start Typing for list"  variant = "label-hidden" />
+                                       </div>
+                                       <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 layer part5">
+                                           <img src="{!$Resource.bright + '/bright-3.0/images/information.svg'}" alt="Bright" /></div>
+                                   </h5>
+                             </div>
+                                                  
+                                
+                  
+                        </div>
+                   <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part24">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 layer part1"> 
+                               <h4>Vendor Office ID <span class="star">*</span></h4>
+                            
+                                   <h5>
+                                       <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_11-of-12 slds-large-size_11-of-12 layer part5">
+                                  <lightning:input type="text" name="input3" placeholder="Type Vendor ID"  variant = "label-hidden" />
+                                       </div>
+                                       <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 layer part5">
+                                          </div>
+                                   </h5>
+                             </div>
+                                                  
+                                
+                  
+                        </div>
+                   <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part24">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 layer part1"> 
+                               <h4>Website URL <span class="star">*</span></h4>
+                            
+                                   <h5>
+                                       <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_11-of-12 slds-large-size_11-of-12 layer part5">
+                                  <lightning:input type="text" name="input3" placeholder="Enter URL of website where the IDX or VOW data will appear"  variant = "label-hidden" />
+                                       </div>
+                                       <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 layer part5">
+                                           <img src="{!$Resource.bright + '/bright-3.0/images/information.svg'}" alt="Bright" /></div>
+                                   </h5>
+                             </div>
+                                                  
+                                
+                  
+                        </div>
+                  
+                             
+                                
+                              
+                               
+                     </div>           
+                         
+                  </div>
+                  
+               </div>
+            </div>
+                
+            </div>
+         </div>
+      
+      </div>
+       
+      
+       
+   </div>
+</aura:component>

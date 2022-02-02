@@ -1,0 +1,275 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="SMS_GenericPaymentProcess_Controller" id="HPMPage" lightningstylesheets="true">
+    <apex:composition template="Bootstrap_Framed">
+        
+        <apex:define name="content">
+            <apex:form >
+                <div class="instructions">
+                    <p>Select whether you will use an existing payment method already on file or add a new payment method to submit today’s payment, then follow the prompts to complete your transaction.</p>
+                    <p><i>If adding a new payment method, enter the required information needed for payment processing, and click Submit to continue with your payment.</i></p>
+                </div>
+
+                <apex:actionFunction action="{!loadPreviewPage}" name="loadPreviewPage" /> 
+
+                <apex:actionFunction action="{!chooseExistingPaymentMethod}" name="chooseExistingPaymentMethod" reRender="paymentSelection" /> 
+                <apex:actionFunction action="{!enterNewPaymentMethod}" name="enterNewPaymentMethod" reRender="paymentSelection" /> 
+
+                <apex:actionFunction action="{!selectPaymentMethod}" name="selectPaymentMethod" reRender="paymentDetails">
+                    <apex:param name="id" value="" />
+                </apex:actionFunction>
+
+                <apex:actionFunction action="{!chargePayment}" name="chargePayment" reRender="payment"> 
+                    <apex:param name="use_as_default" value="" />
+                </apex:actionFunction>
+
+                <apex:actionFunction action="{!chargeNewPaymentMethod}" name="chargeNewPaymentMethod" reRender="manualChargeTrigger">
+                    <apex:param name="id" value="" />
+                    <!-- <apex:param name="type" value="" /> -->
+                    <apex:param name="save" value="" />
+                    <apex:param name="use_as_default" value="" />
+                </apex:actionFunction>
+
+                <apex:actionFunction action="{!completeOrder}" name="completeOrder" /> 
+
+                <apex:actionFunction action="{!paymentMethodFailed}" name="paymentMethodFailed" reRender="payment"> 
+                    <apex:param name="message" value="" />
+                </apex:actionFunction>
+
+                <apex:outputPanel id="payment">  
+                    <div class="row" id="loadingBlock" style="display: none">
+                        <div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-5">
+                            <div class="progress progress-striped active">
+                                <div class="progress-bar" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <apex:outputPanel rendered="{!!finalizeOrder}">
+                        <style>
+                            .input-group {
+                                margin-bottom: 20px;
+                            }
+                        </style>
+                        
+                        <div class="row" id="paymentBlock">
+                            <div class="col-md-6 col-md-offset-3">
+
+                                <apex:outputPanel layout="none" rendered="{!hasError}" >
+                                    <div class="alert alert-danger" role="alert">
+                                        <div><apex:outputText escape="false" value="{!getError}" /></div>
+                                        <div style="display: none;"><apex:pageMessages escape="false" /></div>
+                                    </div>
+                                </apex:outputPanel>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <apex:outputPanel layout="none" rendered="{!showPaymentOptions}">  
+                                            <button id="existingPaymentMethodButton" class="btn btn-default btn-block" value="existing" onclick="paymentOptionChanged(this); return false;">Use an existing payment method</button>
+                                            <button id="newPaymentMethodButton" class="btn btn-default btn-block" value="new" onclick="paymentOptionChanged(this); return false;">Enter a new payment method</button>
+                                        </apex:outputPanel>
+                                        <button class="btn btn-default btn-block" onclick="loadPreviewPage(); return false;">Back to invoice</button>
+                                    </div>
+                                        
+                                    <apex:outputPanel id="paymentSelection">  
+                                        <script>$("#loadingBlock").hide();</script>
+
+                                        <apex:outputPanel rendered="{!showExistingPayment}" >
+                                            <script>
+                                                $("#existingPaymentMethodButton")
+                                                    .attr("disabled", "disabled")
+                                                    .removeClass("btn-default")
+                                                    .addClass("btn-primary");
+                                            </script>
+
+                                            <div class="panel-footer">
+                                                <select class="form-control" onchange="paymentMethodChanged(this);">
+                                                    <option value="NONE">Select an existing payment method</option>
+                                                    <apex:repeat value="{!Payment.PaymentMethods}" var="m">
+                                                        <option value="{!m.Id}">{!m.DisplayText}</option>
+                                                    </apex:repeat>
+                                                    <apex:repeat value="{!Payment.LegacyACHs}" var="m">
+                                                        <option value="{!m.Id}">{!m.DisplayText}</option>
+                                                    </apex:repeat>
+                                                </select>
+
+                                                <apex:outputPanel id="paymentDetails">
+                                                    <apex:outputPanel rendered="{!showExistingPaymentDetails && selectedCredit}">
+                                                        <ul class="list-group default_gap">
+                                                            <li class="list-group-item"><span class="info_label">Card Type</span>{!Payment.Selected.Type}</li>
+                                                            <li class="list-group-item"><span class="info_label">Name on Card</span>{!Payment.Selected.NameOnCard}</li>
+                                                            <li class="list-group-item"><span class="info_label">Card Number</span>********{!Payment.Selected.LastFourDigits}</li>
+                                                            <li class="list-group-item"><span class="info_label">Expiration</span>{!Payment.Selected.ExpirationFormated}</li>
+                                                        </ul>                                       
+                                                        <apex:outputPanel rendered="{!!Payment.Selected.IsDefault}">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">
+                                                                    <input type="checkbox" id="use-existing-method-as-default" />
+                                                                </span>
+                                                                <span class="form-control">Use this payment method to automatically pay all future fees and charges accrued or associated with your MLS subscription</span>
+                                                            </div>
+                                                        </apex:outputPanel>
+                                                        <div class="btn-group btn-group-justified">
+                                                            <a href="#" class="btn btn-primary" onclick="chargeExistingPaymentMethod(); return false;">Use this payment method</a>
+                                                        </div>                                  
+                                                    </apex:outputPanel>
+                                                    <apex:outputPanel rendered="{!showExistingPaymentDetails && selectedACH}">
+                                                        <ul class="list-group default_gap">
+                                                            <li class="list-group-item"><span class="info_label">Type</span>{!Payment.SelectedACH.AccountType}</li>
+                                                            <li class="list-group-item"><span class="info_label">Holder Name</span>{!Payment.SelectedACH.HolderName}</li>
+                                                            <li class="list-group-item"><span class="info_label">Routing #</span>{!Payment.SelectedACH.ABACode}</li>
+                                                            <li class="list-group-item"><span class="info_label">Account #</span>********{!Payment.SelectedACH.AccountNumber}</li>
+                                                        </ul>                                       
+                                                        <apex:outputPanel rendered="{!!Payment.SelectedACH.IsDefault}">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">
+                                                                    <input type="checkbox" id="use-existing-method-as-default" />
+                                                                </span>
+                                                                <span class="form-control">Use this payment method to automatically pay all future fees and charges accrued or associated with your MLS subscription</span>
+                                                            </div>
+                                                        </apex:outputPanel>
+                                                        <div class="btn-group btn-group-justified">
+                                                            <a href="#" class="btn btn-primary" onclick="chargeExistingPaymentMethod(); return false;">Use this payment method</a>
+                                                        </div>                                  
+                                                    </apex:outputPanel>
+                                                </apex:outputPanel>
+                                            
+                                            </div>
+                                        </apex:outputPanel>
+
+                                        <apex:outputPanel rendered="{!showNewPayment}">
+                                            <script>
+                                                $("#newPaymentMethodButton")
+                                                    .attr("disabled", "disabled")
+                                                    .removeClass("btn-default")
+                                                    .addClass("btn-primary");
+                                            </script>
+
+                                            <div class="panel-footer">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item" style="padding: 1px 0px;">
+                                                        <iframe id="z_hppm_iframe" name="z_hppm_iframe" style="width: 100%; height: 330px; margin-bottom: -5px;" src="{!hpmUrl}" frameBorder="0"></iframe>
+                                                    </li>
+                                                </ul>
+                                                <apex:outputPanel layout="none" rendered="{!showSavePayment}">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <input type="checkbox" id="save-payment-method" />
+                                                    </span>
+                                                    <span class="form-control">Save this payment method</span>
+                                                </div>
+                                                </apex:outputPanel>
+                                                <div class="input-group" style="display: none;">
+                                                    <span class="input-group-addon">
+                                                        <input type="checkbox" id="use-new-method-as-default" />
+                                                    </span>
+                                                    <span class="form-control">Use this payment method to automatically pay all future fees and charges accrued or associated with your MLS subscription</span>
+                                                </div>
+                                                <div class="btn-group btn-group-justified">
+                                                    <a href="#" class="btn btn-primary" onclick="submitPaymentMethod(); return false;">Submit</a>
+                                                </div>
+
+                                                <script>
+                                                    $("#save-payment-method").change(function () {
+                                                        $("#use-new-method-as-default")
+                                                            .removeAttr("checked")
+                                                            .parent()
+                                                            .parent()
+                                                            .toggle($(this).filter(":checked").length != 0);
+                                                    });             
+                                                </script>
+                                                
+                                            </div>
+                                        </apex:outputPanel>
+
+                                    </apex:outputPanel>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <apex:outputPanel id="manualChargeTrigger">  
+                            <apex:outputPanel rendered="{!manuallyChargePayment}">
+                                <script>chargePayment();</script>
+                            </apex:outputPanel>
+                        </apex:outputPanel>
+
+                    </apex:outputPanel>
+
+                    <apex:outputPanel rendered="{!finalizeOrder}">
+                        <script>
+                            $("#loadingBlock").show();
+                            completeOrder();
+                        </script>
+                    </apex:outputPanel>
+                    
+                </apex:outputPanel>
+                
+                <script>
+                    function paymentOptionChanged(source) {
+                        $("#errorMessage").hide();
+                        
+                        source = $(source);
+                        var siblings = source.siblings();
+                        
+                        source
+                            .attr("disabled", "disabled")
+                            .removeClass("btn-default")
+                            .addClass("btn-primary");
+                            
+                        siblings
+                            .removeAttr("disabled")
+                            .removeClass("btn-primary")
+                            .addClass("btn-default");
+                            
+                        var option = source.attr("value");
+
+                        if (option == "existing")
+                            chooseExistingPaymentMethod();
+                        else
+                            enterNewPaymentMethod();                        
+                    }
+
+                    function paymentMethodChanged(source) {
+                        $("#errorMessage").hide();
+                        
+                        source = $(source);
+
+                        selectPaymentMethod(source.find(":selected").attr("value"));
+                    }
+                    
+                    function chargeExistingPaymentMethod() {
+                        $("#errorMessage").hide();
+                        $("#loadingBlock").show();
+                        $("#paymentBlock").hide();
+
+                        chargePayment($("#use-existing-method-as-default:checked").length != 0);
+                    }
+                    
+                    function submitPaymentMethod() {
+                        $("#errorMessage").hide();
+                        $("#loadingBlock").show();
+                        $("#paymentBlock").hide();
+                    
+                        var iframe = document.getElementById("z_hppm_iframe");
+                        var src = iframe.src + '#' + encodeURIComponent(document.location.href);
+        
+                        iframe.src = src;
+                        ZXD.postMessage("submit", src, iframe.contentWindow);
+                    }
+            
+                    function callbackSuccess(pmid) {
+                        chargeNewPaymentMethod(
+                            pmid,
+                            $("#save-payment-method:checked").length != 0,
+                            $("#use-new-method-as-default:checked").length != 0
+                        );
+                    }
+            
+                    function callbackFail(errorMessage) {
+                        paymentMethodFailed(errorMessage);
+                    }
+                </script>
+            </apex:form>
+        </apex:define>
+
+    </apex:composition>  
+</apex:page>

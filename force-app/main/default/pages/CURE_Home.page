@@ -1,0 +1,495 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false" controller="CURE_Home" lightningstylesheets="true">
+
+    <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/jquery.min.js')}"></script>
+    <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/bootstrap.min.js')}"></script>
+    <apex:stylesheet value="{!URLFOR($Resource.Bootstrap_Layout_Library, '/css/bootstrap.min.css')}"/>
+    <script src="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/jquery.dataTables.min.js')}"></script>
+    <script src="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/dataTables.bootstrap.min.js')}"></script>
+    <link href="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/dataTables.bootstrap.min.css')}" rel="stylesheet" type="text/css" />   
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"/>
+    <style>
+        .header { background-color:#e6f3ff; }
+        .nav {border-bottom: 1px solid #388EDD;}
+        .nav-left { color:#3a8ede; padding:30px; font-size:25px; font-weight:400; padding-left:20px; }
+        .nav-middle { padding:20px; text-align:right; }
+        .nav-middle lable { color:#ccc; }
+        .nav-middle h3 { margin:0px; }
+        .nav-right { padding:25px; text-align:right; padding-right:0px; }
+        .nav-right button { margin-right:20px; border-radius:0px; }
+        .listing { padding-left:30px; }
+        .panel { border-radius:0px; }
+        .panel-heading { border-radius:0px; }
+        .reports { padding:30px; padding-top:7px; }
+        .reports a { margin-bottom:5px; }
+        .modal-row {border:1px solid #ddd; border-bottom:none; margin: 0 0 0 0; padding:15px;}
+        .modal-last-row {border:1px solid #ddd; margin: 0 0 0 0; padding:15px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;}
+        .modal-first-row {border:1px solid #ddd; border-top-left-radius:5px; border-top-right-radius:5px; border-bottom:none; margin: 0 0 0 0; padding:15px;}                                                                   
+        .table {table-layout: fixed;word-wrap: break-word; width:100%;}
+        tfoot input {width:100%; font-weight:100; font-size:12px;}
+        .table>tbody>tr>td { border-top:none; padding: 10px 15px; }
+        .table>thead>tr>th { border-bottom:none; padding: 10px 15px; }
+        .table-bordered {border: 1px solid #fff;}
+        .table-striped>tbody>tr:nth-child(odd)>td, .table-striped>tbody>tr:nth-child(odd)>th { background-color: #eee;}
+        .table-bordered>thead>tr>th, .table-bordered>tbody>tr>td {border:1px solid #fff;} 
+        .footer {background-color:#666666; padding:30px; padding-left:10px; padding-right:10px; margin-top:30px; color:#E4E4E4; }
+        .form-row { padding-left:0px; padding-right:0px;}
+        .view-row {padding:10px; padding-bottom:0px;  border-bottom:1px solid #eee;} 
+        .last {border-bottom:none;}
+        .cure-customer select {    
+            display: block;
+            width: 100%;
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        }
+        textarea.form-control {height:150px;}
+        .clear {clear:both;} 
+        #messages {padding:15px;}
+        .form-inline .form-control { width:100%; }              
+    </style>
+    
+    <apex:form styleClass="form-horizonta">
+        <div class="header">
+            <img src="{!URLFOR($Resource.CURE,'/CURE/logo2.png')}" />
+        </div>
+        
+        <div class="col-md-12 nav">
+            <div class="col-md-4 nav-left">
+                TICKETS
+            </div>
+            <div class="col-md-5 nav-middle">
+                <div class="col-md-6">
+                    <lable>HIGH SEVERITY TICKETS</lable>
+                    <h3>{!highCasesCount}</h3>
+                </div>
+                
+                <div class="col-md-6">
+                    <lable>OPEN TICKETS</lable>
+                    <h3>{!openCasesCount}</h3>
+                </div>                
+            </div>
+            <div class="col-md-3 nav-right">
+                <apex:commandButton id="CreateButton" styleClass="btn btn-success" value="Create Ticket" action="{!createTicket}" />
+            </div>
+            <div class="clear"></div>                        
+        </div>
+        <div class="clear"></div> 
+        <div id="messages">
+            <apex:pagemessages ></apex:pagemessages>
+        </div>        
+        <div class="clear"></div> 
+        <div class="col-md-12">
+            <!-- Table display block -->
+                <table id="Cases" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>CASE</th>
+                            <th>TITLE</th>
+                            <th>REQUEST TYPE</th>
+                            <th>DATE</th>
+                            <th>CONSUMER NAME</th>
+                            <th>STATUS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <apex:repeat value="{!cases}" var="case">
+                            <tr>
+                                <td>#{!case.CaseNumber}</td>
+                                <td>
+                                    <apex:commandLink action="{!viewCase}">
+                                        {!case.Subject}
+                                        <apex:param value="{!case.Id}" name="newLicense" assignTo="{!viewCaseId}"/>
+                                    </apex:commandLink>                                    
+                                </td>
+                                <td>{!case.Request_Type__c}</td>
+                                <td>
+                                    <apex:outputText value="{0,date,MM/dd/yyyy}"> 
+                                        <apex:param value="{!case.CreatedDate}" /> 
+                                    </apex:outputText>                                
+                                </td>
+                                <td>{!case.Contact.FirstName} {!case.Contact.LastName}</td>
+                                <td>{!case.Status}</td>
+                            </tr>
+                        </apex:repeat>                                                                                                                                                                                                                                                                                                                                     
+                    </tbody> 
+                    <tfoot>
+                        <tr>
+                            <th>CASE</th>
+                            <th>TITLE</th>
+                            <th>REQUEST TYPE</th>
+                            <th>DATE</th>
+                            <th>CONSUMER NAME</th>
+                            <th>STATUS</th>
+                        </tr>
+                    </tfoot>                                                           
+                </table>           
+            
+            <!-- Reports panel
+            <div class="col-md-3 reports">
+                <div class="panel panel-default">
+                  <div class="panel-heading"><a>REPORTS</a></div>
+                  <div class="panel-body">
+                      <a>Recent Reports Month (2016)</a><br/><br/>
+                      <a>Opened Tickets</a><br/><br/>
+                      <a>High Severity Tickets</a><br/><br/>
+                      <a>SLA Expired Tickets</a><br/><br/>
+                      <a>Advanced Reports</a><br/><br/>
+                  </div>
+                </div>            
+            </div> 
+             -->           
+        </div>
+        
+        <!-- Case Modal -->
+        <apex:outputPanel id="CaseModal" rendered="{!isCreateCase}">
+            <div class="modal fade" id="Case-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="false">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="window.location='';">&times;</button>
+                            <h4 class="modal-title" id="modal-label">Create Ticket</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Please enter the necessary information below and press "Submit" when done.</p>
+                            
+                            <div class="col-md-12 form-row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="Case">Title</label>
+                                        <apex:inputField value="{!newCase.Subject}" styleClass="form-control" />
+                                    </div>                                
+                                </div>
+                                <div class="clear"></div>                                
+                            </div>                             
+                            
+                            <div class="col-md-12 form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Case">Name</label><br/>
+                                        {!cureCustomer.Contact.Name}
+                                    </div>                                
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Case">Request Type</label>
+                                        <apex:inputField value="{!newCase.Request_Type__c}" styleClass="form-control" />
+                                    </div>                                 
+                                </div>
+                                <div class="clear"></div>                                
+                            </div>                          
+                            
+                            <div class="col-md-12 form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Case">CURE Group</label>
+                                        <apex:inputField value="{!newCase.CURE_Group__c}" styleClass="form-control" />
+                                    </div>                                
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group cure-customer">
+                                        <label for="Case">CURE Customer</label>
+                                        <apex:inputField value="{!newCase.CURE_Customer__c}" styleClass="form-control" />
+                                    </div>                                 
+                                </div>
+                                <div class="clear"></div>                                
+                            </div>
+                            
+                            <div class="col-md-12 form-row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="Case">Description</label>
+                                        <apex:inputField value="{!newCase.Description}" styleClass="form-control" />
+                                    </div>                                
+                                </div>
+                                <div class="clear"></div>                                
+                            </div>                                                         
+                            
+                            <div class="col-md-12 form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Case">Category Resource</label>
+                                        <apex:inputField value="{!newCase.Category_Resource__c}" styleClass="form-control" />
+                                    </div>                                
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Case">Component Function</label>
+                                        <apex:inputField value="{!newCase.Component_Function__c}" styleClass="form-control" />
+                                    </div>                                 
+                                </div>
+                                <div class="clear"></div>                                
+                            </div>
+                            
+                            <div class="col-md-12 form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Case">Environment</label>
+                                        <apex:inputField value="{!newCase.Environment__c}" styleClass="form-control" />
+                                    </div>                                
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Case">Reload/Data Refresh</label>
+                                        <apex:inputField value="{!newCase.Reload_Data_Refresh__c}" styleClass="form-control" />
+                                    </div>                                 
+                                </div>
+                                <div class="clear"></div>                                
+                            </div>
+                            
+                            <div class="col-md-12 form-row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="Case">Reload Details</label>
+                                        <apex:inputField value="{!newCase.Reload_Details__c}" styleClass="form-control" />
+                                    </div>                                
+                                </div>
+                                <div class="clear"></div>                                
+                            </div>                             
+                            
+                            <div class="col-md-12 form-row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="Case">Impact VIP</label>
+                                        <apex:inputField value="{!newCase.Impact_VIP__c}" styleClass="form-control" />
+                                    </div>                                
+                                </div>
+                                <!--
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Case">Requirements Attached</label><br/>
+                                        <apex:inputField value="{!newCase.Requirements_Attached__c}" />
+                                    </div>                                 
+                                </div>
+                                -->
+                                <div class="clear"></div>                                
+                            </div>                                                                                     
+
+                            
+                            <div class="col-md-12 form-row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="Case">Attachment</label>
+                                        <apex:inputFile id="Document" value="{!attachment.Body}" filename="{!attachment.Name}" />
+                                    </div>                                
+                                </div>
+                                <div class="clear"></div>                                
+                            </div>                                                                                       
+                            
+                            <div class="clear"></div>                                                                                                                                    
+                        </div>
+                        <div class="clear"></div>
+                        <div class="modal-footer">
+                            <button class="btn btn-default" data-dismiss="modal" onclick="window.location='';">Cancel</button>
+                            <apex:commandButton id="LicenseButton" styleClass="btn btn-primary" value="Submit" action="{!submitCase}" />
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </apex:outputPanel> 
+        
+        <!-- Case Modal -->
+        <apex:outputPanel id="CaseModal2" rendered="{!isViewCase}">
+            <div class="modal fade" id="ViewCase-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="false">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="window.location='';">&times;</button>
+                            <h4 class="modal-title" id="modal-label"><i class="fa fa-id-card"></i> &nbsp; #{!viewCase.CaseNumber}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-md-12 view-row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="Case">Title</label><br/>
+                                        {!viewCase.Subject}
+                                    </div>                                
+                                </div>
+                                <div class="clear"></div>                                
+                            </div>                             
+                            
+                            <div class="col-md-12 view-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Case">Name</label><br/>
+                                        {!cureCustomer.Contact.Name}
+                                    </div>                                
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Case">Request Type</label><br/>
+                                        {!viewCase.Request_Type__c}
+                                    </div>                                 
+                                </div>
+                                <div class="clear"></div>                                
+                            </div>                          
+                            
+                            <div class="col-md-12 view-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Case">CURE Group</label><br/>
+                                        {!viewCase.CURE_Group__c}
+                                    </div>                                
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group cure-customer">
+                                        <label for="Case">CURE Customer</label><br/>
+                                        {!viewCase.CURE_Customer__c}
+                                    </div>                                 
+                                </div>
+                                <div class="clear"></div>                                
+                            </div>
+                            
+                            <div class="col-md-12 view-row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="Case">Description</label><br/>
+                                        {!viewCase.Description}
+                                    </div>                                
+                                </div>
+                                <div class="clear"></div>                                
+                            </div>                                                         
+                            
+                            <div class="col-md-12 view-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Case">Category Resource</label><br/>
+                                        {!viewCase.Category_Resource__c}
+                                    </div>                                
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Case">Component Function</label><br/>
+                                        {!viewCase.Component_Function__c}
+                                    </div>                                 
+                                </div>
+                                <div class="clear"></div>                                
+                            </div>
+                            
+                            <div class="col-md-12 view-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Case">Environment</label><br/>
+                                        {!viewCase.Environment__c}
+                                    </div>                                
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Case">Reload/Data Refresh</label><br/>
+                                        {!viewCase.Reload_Data_Refresh__c}
+                                    </div>                                 
+                                </div>
+                                <div class="clear"></div>                                
+                            </div>
+                            
+                            <div class="col-md-12 view-row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="Case">Reload Details</label><br/>
+                                        {!viewCase.Reload_Details__c}
+                                    </div>                                
+                                </div>
+                                <div class="clear"></div>                                
+                            </div>                             
+                            
+                            <div class="col-md-12 view-row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="Case">Impact VIP</label><br/>
+                                        {!viewCase.Impact_VIP__c}
+                                    </div>                                
+                                </div>
+                                <!--
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Case">Requirements Attached</label><br/>
+                                        <apex:inputField value="{!newCase.Requirements_Attached__c}" />
+                                    </div>                                 
+                                </div>
+                                -->
+                                <div class="clear"></div>                                
+                            </div>                                                                                     
+                            
+
+                            <div class="clear"></div> 
+                            <div class="modal-footer">
+                                <button class="btn btn-default" data-dismiss="modal" onclick="window.location='';">Cancel</button>
+                                <apex:commandLink action="{!editTicket}" styleClass="btn btn-primary">
+                                    Edit
+                                </apex:commandLink>                                 
+                            </div>                                                                                                                                                                                              
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </apex:outputPanel>               
+        
+        <script>
+            $(document).ready(function() {
+                var casesTable = $('#Cases').DataTable({
+                    "columns": [
+                        { "width": "10%" },
+                        null,
+                        { "width": "15%" },
+                        { "width": "10%" },
+                        { "width": "20%" },
+                        { "width": "10%" }
+                    ],
+                    "order": [[ 0, "desc" ]]                                    
+                });
+                
+                $('#Cases tfoot th').each( function () {
+                    var title = $(this).text();
+                    $(this).html( '<input type="text" class="form-control" placeholder="SEARCH '+title+'" />' );
+                });
+                
+                casesTable.columns().every( function () {
+                    var that = this;
+                
+                    $( 'input', this.footer() ).on( 'keyup change', function () {
+                        if ( that.search() !== this.value ) {
+                            that
+                                .search( this.value )
+                                .draw();
+                        }
+                    } );
+                } );                                
+                
+                $("#Cases_length").hide();
+                $("#Cases_filter").hide();
+                $(".errorM3").addClass("alert alert-danger");
+                $(".infoM3").addClass("alert alert-info");
+                $(".confirmM3").addClass("alert alert-success");                          
+            });         
+        </script>
+        
+        <apex:outputPanel id="createCase" rendered="{!isCreateCase}">
+            <script>
+                $(document).ready(function(){
+                    $('#Case-modal').modal('show');
+                });
+            </script>
+        </apex:outputPanel> 
+        <apex:outputPanel id="viewCase" rendered="{!isViewCase}">
+            <script>
+                $(document).ready(function(){
+                    $('#ViewCase-modal').modal('show');
+                });
+            </script>
+        </apex:outputPanel>
+        <div style="clear:both;" />
+        <div class="footer">
+            Copyright © 2017 Metropolitan Regional Information Systems, Inc
+        </div>
+               
+    </apex:form>
+</apex:page>

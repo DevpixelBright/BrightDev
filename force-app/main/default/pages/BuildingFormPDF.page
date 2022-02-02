@@ -1,0 +1,8 @@
+<apex:page controller="SubdivisionBuilding_Form" renderas="pdf" showHeader="false" applyHtmlTag="false" applyBodyTag="false">
+    <h4 style="text-align: center;">Thank you for submitting a Building Name request</h4>
+    <p style="text-align: center;">Your request has been submitted to Bright. Thank you for helping us enhance the data integrity of our Multiple Listing Service. We will contact you as soon as your request for the new Building Name is validated and is available in Bright.</p>
+    <h5 style="text-align: center;">Building Name: </h5>
+    <h5 style="text-align: center;">Date of Request: <apex:outputText value="{0, date,  MM / dd / yyyy}">
+        <apex:param value="{!NOW()}" />
+        </apex:outputText></h5>
+</apex:page>

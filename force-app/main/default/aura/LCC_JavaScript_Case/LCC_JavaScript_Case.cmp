@@ -1,0 +1,16 @@
+<aura:component extends="c:LCC_GenericLightningComponent" >
+    <aura:attribute name="partiallyConfirm" type="boolean" default="false"/>
+    
+    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+        <aura:renderIf isTrue="{!v.partiallyConfirm}">
+            <div class="slds-m-bottom_x-large">
+                <span><lightning:icon iconName="utility:warning" size="small"/></span><span class="slds-m-left_xx-small">This Js Button has been partially migrated. Contact with your System Administrator to review the functionality.</span>
+            </div>
+        </aura:renderIf>
+        <p>'Are you sure want to archive case and related objects?'</p>
+    </div>
+    <div class="slds-modal__footer">
+        <lightning:button class="slds-button_neutral" onclick="{!c.yesResponse}" label="Yes" />
+        <lightning:button class="slds-button_brand" onclick="{!c.noResponse}" label="No"/>
+    </div>
+</aura:component>

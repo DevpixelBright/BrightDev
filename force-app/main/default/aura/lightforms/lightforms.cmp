@@ -1,0 +1,293 @@
+<aura:component>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <ltng:require styles="{!$Resource.headerpart }"></ltng:require>
+   <ltng:require styles="{!$Resource.side }"></ltng:require> 
+   <ltng:require styles="{!$Resource.body }"></ltng:require>
+ <aura:attribute name="popup1" type="boolean" default="false"/>
+   
+   <div class="c-container">
+      <div class="fullpage slds-scope">
+         <div class="slds-grid slds-wrap">
+            <lightning:layout multipleRows="true">
+               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage header-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:header />
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+               <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                   <c:mobilemenu />
+                   <lightning:layout>
+                     <div class="new-containerpage">
+                        <div class="slds-container--x-large new-container">
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <c:sidebarnew />
+                           </lightning:layoutItem>
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                              <div class="page-section page-main">
+                                 <div class="middlebar1 titlebar">
+                                    <h2>W-9 Forms</h2>
+                                     <lightning:button class="brand make" variant="brand " label="Submit Completed W-9 Form" title="Brand action" onclick="{! c.openModel }" />
+                       <lightning:button class="brand brand2" variant="brand " label="Download W-9 IRS Form" title="Brand action" onclick="{! c.handleClick }" />
+                   
+                         </div>
+                                 <div class="dev">
+                                    <p class="recent">A W-9 form is required for any brokerage receiving a Broker Reward over $600 at the end of the year. A copy of the W-9 form and information we have on file for your company is included below.</p>
+                                    <p class="recent"> Please note: If no W-9 information is displayed, you will need to follow the links to complete an IRS W-9 form, save it as an attached PDF, and then submit the signed form to Bright MLS.</p>
+                                     <div class="view"></div>
+           
+                                     <div class="lake">
+                         <img src="{!$Resource.bright + '/bright-3.0/images/LakeMountain.svg'}" alt="Lake Mountain" />
+                         <p>No W-9 Information yet.</p>
+                         </div>
+                                    
+                            <div class="lake1">
+                                <div class="table-form">
+                         <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped newtin">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            
+                                            
+                                           
+                                            
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Opportunity Name">TIN (Taxpayer Identifier Number)     </div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Broker Office ID</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Close Date">Broker Office Name</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Stage">Submitted On</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Confidence">Submitted By</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Amount">View W-9</div>
+                                            </th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="slds-hint-parent blue">
+                                   
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TIN -1234567</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">BRIGHT1</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Bright Realty, Inc</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">05/18/2020</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">John Smith</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k"><a href="#">View</a></div>
+                                            </td>
+                              
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                    
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TIN -1234567</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">BRIGHT1</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Bright Realty, Inc</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">05/18/2020</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">John Smith</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k"><a href="#">View</a></div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                             
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">TIN -1234567</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">BRIGHT1</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Bright Realty, Inc</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">05/18/2020</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">John Smith</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k"><a href="#">View</a></div>
+                                            </td>
+                                        </tr>
+                                        
+                                        
+                                    </tbody>
+                                </table>
+                                </div>
+                         </div>        
+                                    
+                                  
+                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                <div class="part0">
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">               
+                <div class="layer part1"> 
+                           
+                            
+                                   <h5 class="search1">
+                                  Showing 1 to 10 of 34 entries
+                                   </h5>
+                             </div>
+                </lightning:layoutItem>   
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                                <div class="layer part3"> 
+                             
+                                   <h5 class="onechoose1">           
+                                    <div class="pagination">
+  <a href="#">Previous</a>
+  <a href="#" class="active">1</a>
+  <a href="#" >2</a>
+  
+  <a href="#">Next</a>
+</div>
+                                    </h5>
+                    </div></lightning:layoutItem>
+                </div>
+                        </lightning:layoutItem>        
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                  
+                                   
+                                    
+                                 </div>
+                              </div>
+                           </lightning:layoutItem>
+                        </div>
+                     </div>
+                  </lightning:layout>
+               </lightning:layoutItem>
+                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage footer-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:footer />
+                         
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+            </lightning:layout>
+         </div>
+      </div>
+    <!-- PopUp 1 start -->
+       <aura:if isTrue="{!v.popup1}">
+           <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- ###### MODAL BOX HEADER Start ######-->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModel }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate email">Submit Completed W-9 Form</h2>
+                    </header>
+                    <!--###### MODAL BOX BODY Part Start######-->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                        <div class=" bodyline">
+                      
+                        <h3>Fill out the fields below and attach a PDF copy of the completed IRS W-9 form.</h3>
+                        
+                      
+                        
+                        
+       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="11" largeDeviceSize="11">
+                            <div class="bodylinefull">
+                       <div class="bodyline1 ask">
+                            <h6>Taxpayer Identifier Number <span>*</span></h6>
+                         <lightning:input type="text" name="input3" placeholder="Enter TIN"  variant = "label-hidden" />
+                      
+                        </div>
+                           </div>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="11" largeDeviceSize="11">
+                           <div class=" bodylinefull">
+                       <div class="bodyline1 ask">
+                            <h6>Broker Office Name <span>*</span></h6>
+                         <lightning:input type="text" name="input3" placeholder="Enter Name"  variant = "label-hidden" />
+                      
+                        </div>
+                           </div>
+                            </lightning:layoutItem>
+                            
+                           <div class=" bodylinefull">
+                               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="11" largeDeviceSize="11">
+                        <div class="bodyline1 ask">
+                            <h6>Office ID</h6>
+                         <lightning:input type="text" name="input3" placeholder="Enter postal code"  variant = "label-hidden" />
+                               </div>
+                               </lightning:layoutItem>
+                               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="1" largeDeviceSize="1">
+                                <div class="bodyline1 ask">
+                          
+                                     <img  class="ask1" src="{!$Resource.bright + '/bright-3.0/images/info-outline.svg'}" alt="info" />
+                          </div>
+                               </lightning:layoutItem>
+                        </div>
+                            <div class=" bodylinefull">
+                                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="11" largeDeviceSize="11">
+                       <div class=" bodyline1 ask">
+                           <p>Please attach an electronic copy of the completed IRS W-9 Form below:</p> 
+                           
+                           <h6 class="add">Add Attachment <span>*</span></h6>
+                           
+                           <div class="file"><a href=""><span>Choose File</span> No file chosen</a></div>
+                         
+                        </div>
+                                </lightning:layoutItem>
+                           </div>
+                    </div>
+                        </lightning:layoutItem>
+                    </div>
+                    <!--###### MODAL BOX FOOTER Part Start ######-->
+                    <footer class="slds-modal__footer">
+                         <lightning:button class="brand" variant="brand" label="Submit" title="Brand action" onclick="{! c.handleClick }" />
+                       
+                        <lightning:button variant="neutral" 
+                                          label="Cancel"
+                                          title="Cancel"
+                                           class="newCancel"
+                                          onclick="{! c.closeModel }"/>
+                        
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+       </aura:if>
+       <!-- PopUp 1 end -->
+   </div>
+</aura:component>

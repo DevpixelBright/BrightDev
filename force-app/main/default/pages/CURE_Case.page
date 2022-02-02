@@ -1,0 +1,34 @@
+<apex:page standardController="Case" extensions="CURE_Case" lightningstylesheets="true">
+<apex:form >
+    <apex:sectionHeader title="CURE Case" subtitle="Home"/>
+    <apex:outputLabel value="View :" style="font-weight:bold;">        
+                <apex:selectList value="{!selectedView}" size="1">
+                    <apex:selectOptions value="{!filterId}">                  
+                    </apex:selectOptions>                        
+                </apex:selectList> 
+            </apex:outputLabel>
+     <apex:commandButton action="{!listView}" value=" Go!" />
+     <br/><br/>
+     
+     <apex:pageBlock title="Recent Cases" mode="edit">
+         <apex:pageBlockButtons location="Top">
+             <apex:commandButton value="New" action="{!newCase}"/>
+         </apex:pageBlockButtons>
+         <apex:pageBlockTable value="{!recentCases}" var="rc"> 
+             <apex:column headerValue="Case Number"> 
+                 <apex:outputLink value="/{!rc.Id}">{!rc.CaseNumber}</apex:outputLink>
+             </apex:column> 
+             <apex:column value="{!rc.Subject}"/>   
+             <apex:column value="{!rc.CreatedDate}"/>   
+             <apex:column value="{!rc.Priority}"/>    
+         </apex:pageBlockTable>
+     </apex:pageBlock>
+     
+     <apex:pageBlock title="Reports">
+         <apex:repeat value="{!caseReports}" var="rc">               
+                 <apex:outputLink value="/{!rc.Id}">{!rc.Name}</apex:outputLink>   <br/>    <br/>          
+         </apex:repeat>
+         <b><apex:outputLink value="/00O/o">Go To Reports</apex:outputLink></b>
+     </apex:pageBlock>
+</apex:form>  
+</apex:page>

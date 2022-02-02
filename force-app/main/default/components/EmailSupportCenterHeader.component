@@ -1,0 +1,5 @@
+<apex:component access="global">
+<tr>
+<td colspan="5" height="174"><img style="" src="http://www.cgbmedia.com/demo/helpdesknew/helpdesk.jpg"/><br/></td></tr>
+
+</apex:component>

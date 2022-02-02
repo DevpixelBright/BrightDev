@@ -1,0 +1,10 @@
+<apex:page standardStylesheets="false" lightningstylesheets="true"> 
+        
+        
+        <apex:pageBlock title="Statement Preview">
+            <div style="width:80%; margin:auto; margin-top:10px;">
+                <c:SMS_CloudCMA_SignupEmailTemplate rId="a17J0000001ey9DIAQ"></c:SMS_CloudCMA_SignupEmailTemplate>
+            </div>
+        </apex:pageBlock>
+                 
+</apex:page>

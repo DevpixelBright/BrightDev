@@ -1,0 +1,986 @@
+<apex:page controller="Communities_MyAccount_Controller" docType="html-5.0" 
+
+showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" lightningstylesheets="true">
+    <apex:composition template="Communities_Base">
+    <apex:define name="content">
+        
+<apex:form >
+<c:Bootstrap_Resources />   
+    <script>
+        markUserId("{!displayName}");
+        markOptionPanel("subscription");
+    </script>
+        
+        <apex:pageBlock title="Subscription Id - {!subscription.Name}" id="details" >
+            <apex:includeScript value="/soap/ajax/25.0/connection.js" />
+            <apex:includeScript value="/soap/ajax/25.0/apex.js" />
+            
+            <style>
+                .two_buttons{text-align:right; margin-bottom:-44px; margin-top:40px;}
+                h2{font-size:22px !important; margin:5px 0px !important;}
+                .tertiaryPalette{display:none !important;}
+                .for_inputs h4{border-bottom: 1px solid #69A61F; padding-bottom: 10px;}
+                h2{display:none;}
+                label{padding-top:0px !important;}
+                //#input1, #input2{display:none;}
+                //.two_buttons .my_cancel, .two_buttons .my_reset, .two_buttons .my_save{display:none;}
+                .margin{margin:20px 0 10px 0;}
+                #content-container{margin-top:0px !important;}
+                
+                
+                @media(min-width:400px){
+               .detailList th{width:30% !important;}
+               .mandatory{color:red; font-weight:bold; font-size:18px;}
+                }
+                
+                
+                
+              i.fa {margin: auto 20px;
+                position: relative;
+                top: 5px;}
+                
+                .fa-2x {
+                        font-size: 2em;
+                        }
+                        
+                        .fa {
+                        display: inline-block;
+                        font-family: FontAwesome;
+                        font-style: normal;
+                        font-weight: normal;
+                        line-height: 1;
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        }
+            </style>  
+
+            <script>
+             $(document).ready(function(){
+                 
+                $("form").addClass("form-horizontal");
+                $("label").addClass("col-sm-3 control-label");
+                $(".for_inputs input").addClass("form-control");
+                $("select").addClass("form-control");
+                $(".errorM3").addClass("alert alert-danger");
+                $(".infoM3").addClass("alert alert-info");
+                $(".confirmM3").addClass("alert alert-success");
+                
+               
+                
+            });
+            </script>
+            <script src="https://online.qas.com/SalesForceV3/Scripts/all_sf_with_jQuery-2.0.min.js"> </script>
+
+            <div class="row">
+                <c:Communities_Definition pageTitle="Contact Information" pageTitleClass="fa fa-pencil-square-o fa-2x" hasDefinitions="false">
+                    <p><b class="term">Term</b> Definition goes here.</p>
+                </c:Communities_Definition>
+
+                <div class="col-xs-12 instructions">
+                    <apex:outputPanel rendered="{!subscription.Service_Jurisdiction__c != 'TREND'}">
+                    <p>Have your contact details recently changed? Update the contact information for your MRIS Subscription.​</p>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!subscription.Service_Jurisdiction__c == 'TREND'}">
+                    <p>Have your contact details recently changed? Update the contact information for your TREND Subscription.​</p>
+                    </apex:outputPanel>                    
+                </div>
+            </div>
+
+            
+            <div id="messages">
+                <apex:pagemessages ></apex:pagemessages>
+            </div>
+            
+            <div class="two_buttons">                
+                <apex:commandButton styleClass="btn btn-default my_cancel" action="{!cancel}" value="Cancel" rendered="{!isEdit}" reRender="details" immediate="true" />
+                <apex:commandButton styleClass="btn btn-default my_reset" value="Reset" action="{!reset}" rendered="{!isEdit}" reRender="details" immediate="true" />
+                <apex:commandButton styleClass="btn btn-primary my_save" value="Save" action="{!save}" rendered="{!isEdit}" reRender="details"/>
+                <apex:commandLink styleClass="btn btn-default my_edit"  action="{!Edit}" rendered="{!!isEdit}" reRender="details">
+                    <span class="glyphicon glyphicon-edit"></span> Edit
+                </apex:commandLink>                
+             </div> 
+            
+              <div class="row for_inputs">
+                 <div>
+                 <apex:outputPanel rendered="{!subscription.Service_Jurisdiction__c == 'TREND'}">
+                <apex:outputPanel rendered="{!!isEdit}"> 
+                <h4><i class="fa fa-user fa-2x"></i>Personal Information</h4>
+                   
+                   <div id="output1">
+                   
+                      <div class="form-group"> 
+                        <apex:outputLabel value="Title"/>
+                           <div class="col-sm-7">
+                            <apex:outputField value="{!subscription.Contact__r.Title}" id="Title"/>
+                          </div>
+                      </div>                   
+                   
+                      <div class="form-group"> 
+                        <apex:outputLabel value="Login Name"/>
+                           <div class="col-sm-7">
+                            <apex:outputField value="{!subscription.TREND_Login_Name__c}" id="LoginName"/>
+                          </div>
+                      </div>                   
+                       
+                       <div class="form-group">
+                          <apex:outputLabel value="First Name"/>
+                            <div class="col-sm-7">
+                               <apex:outputField value="{!subscription.Contact__r.FirstName}" id="FirstName"/>
+                            </div>
+                        </div>
+                            
+                       <div class="form-group">
+                          <apex:outputLabel value="Middle Initial"/>
+                            <div class="col-sm-7">
+                               <apex:outputField value="{!subscription.Contact__r.Middle_Name__c}" id="MiddleName"/>
+                            </div>
+                        </div>                             
+                             
+                         <div class="form-group">    
+                             <apex:outputLabel value="Last Name"/>
+                             <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.Contact__r.LastName}" id="LastName"/>
+                             </div>
+                          </div>
+                          
+                         <div class="form-group">    
+                             <apex:outputLabel value="Generation/Suffix"/>
+                             <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.Contact__r.Suffix__c}" id="Suffix"/>
+                             </div>
+                          </div>                          
+                          
+                         <div class="form-group">    
+                             <apex:outputLabel value="Nickname"/>
+                             <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.Contact__r.Nickname__c}" id="NickName"/>
+                             </div>
+                          </div>
+                          
+                         <div class="form-group">    
+                             <apex:outputLabel value="Website"/>
+                             <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.Contact__r.Website__c}" id="Website"/>
+                             </div>
+                          </div>                                                      
+                   
+                     </div>
+                 </apex:outputPanel>
+                 
+                <apex:outputPanel rendered="{!isEdit}">
+                    <h4><i class="fa fa-user fa-2x"></i>Personal Information</h4>       
+                     <div id="input1">
+                     
+                         <div class="form-group">
+                            <apex:outputLabel value="Title">
+
+                            </apex:outputLabel>
+                            <div class="col-sm-7">
+                             <apex:inputField value="{!subscription.Contact__r.Title}" />
+                             </div>
+                          </div>                      
+                     
+                         <div class="form-group">
+                            <apex:outputLabel value="Login Name">
+                            <span class="mandatory">*</span>
+                            </apex:outputLabel>
+                            <div class="col-sm-7">
+                             <apex:inputField value="{!subscription.TREND_Login_Name__c}" />
+                             </div>
+                          </div>                      
+                     
+                         <div class="form-group">
+                            <apex:outputLabel value="First Name">
+                            <span class="mandatory">*</span>
+                            </apex:outputLabel>
+                            <div class="col-sm-7">
+                             <apex:inputField value="{!subscription.Contact__r.FirstName}" />
+                             </div>
+                          </div>
+                          
+                         <div class="form-group">
+                            <apex:outputLabel value="Middle Initial">
+                            </apex:outputLabel>
+                            <div class="col-sm-7">
+                             <apex:inputField value="{!subscription.Contact__r.Middle_Name__c}" />
+                             </div>
+                          </div>                          
+                          
+                         <div class="form-group">
+                            <apex:outputLabel value="Last Name">
+                            <span class="mandatory">*</span>
+                            </apex:outputLabel>
+                            <div class="col-sm-7">
+                             <apex:inputField value="{!subscription.Contact__r.LastName}" />
+                             </div>
+                          </div>
+                          
+                         <div class="form-group">
+                            <apex:outputLabel value="Generation/Suffix">
+                            </apex:outputLabel>
+                            <div class="col-sm-7">
+                             <apex:inputField value="{!subscription.Contact__r.Suffix__c}" />
+                             </div>
+                          </div>
+                          
+                         <div class="form-group">
+                            <apex:outputLabel value="Nickname">
+                            </apex:outputLabel>
+                            <div class="col-sm-7">
+                             <apex:inputField value="{!subscription.Contact__r.Nickname__c}" />
+                             </div>
+                          </div>
+                          
+                         <div class="form-group">
+                            <apex:outputLabel value="Website">
+                            </apex:outputLabel>
+                            <div class="col-sm-7">
+                             <apex:inputField value="{!subscription.Contact__r.Website__c}" />
+                             </div>
+                          </div>                                                                                                          
+                          
+                     </div>
+                 </apex:outputPanel>                 
+                 </apex:outputPanel>
+                 <h4 style="margin-top:40px;"><i class="fa fa-phone-square fa-2x"></i>Telephone and Contact Information</h4>
+                  <apex:outputPanel rendered="{!!isEdit}"> 
+                   <div id="output1">
+                       
+                       <div class="form-group">
+                          <apex:outputLabel value="Contact Phone"/>
+                            <div class="col-sm-7">
+                               <apex:outputField value="{!subscription.Primary_Phone__c}" id="primary"/>
+                            </div>
+                        </div>
+                             
+                        <apex:outputPanel rendered="{!subscription.Service_Jurisdiction__c != 'TREND'}">    
+                         <div class="form-group">    
+                             <apex:outputLabel value="Voicemail"/>
+                             <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.Voicemail__c}"/>
+                             </div>
+                          </div>
+                          
+                          <div class="form-group"> 
+                            <apex:outputLabel value="Voice Mail Extension"/>
+                               <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.VM_Ext__c}"/>
+                              </div>
+                          </div>  
+                        </apex:outputPanel>   
+                          
+                          <div class="form-group">
+                            <apex:outputLabel value="Mobile"/>
+                            <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.Mobile_Phone__c}"/>
+                             </div>
+                          </div>
+                          
+                          <div class="form-group">
+                            <apex:outputLabel value="Home Fax"/>
+                            <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.Home_Fax__c}"/>
+                            </div>
+                          </div>
+                          
+                          <apex:outputPanel rendered="{!subscription.Service_Jurisdiction__c != 'TREND'}"> 
+                          <div class="form-group">
+                            <apex:outputLabel value="Pager"/>
+                            <div class="col-sm-7">
+                            <apex:outputField value="{!subscription.Pager__c}"/>
+                           </div>
+                          </div> 
+                          </apex:outputPanel>
+                          <div class="form-group">
+                            <apex:outputLabel value="Agent Office Phone"/>
+                            <div class="col-sm-7">
+                            <apex:outputField value="{!subscription.Agent_Office_Phone__c}"/>
+                           </div>
+                          </div> 
+                          
+                          <div class="form-group">
+                            <apex:outputLabel value="Agent Office Fax"/>
+                            <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.Fax__c}"/>
+                            </div>
+                          </div>
+                          
+                          
+                            <div class="col-md-11 col-md-offset-1 alert alert-info">
+                               This information WILL appear in your listings
+                            </div>
+                          
+                          
+                          <apex:outputPanel rendered="{!subscription.Service_Jurisdiction__c != 'TREND'}">
+                          <div class="form-group">                              
+                            <apex:outputLabel value="Website"/>
+                           <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.Website__c}"/>
+                           </div>
+                          </div> 
+                          </apex:outputPanel>
+                          <div class="form-group">
+                            <apex:outputLabel value="Public Email"/>
+                              <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.Public_Email__c}"/>
+                              </div>
+                          </div>
+                          
+                           <div class="col-md-11 col-md-offset-1 alert alert-info">
+                                This information WILL <strong>NOT</strong> appear in your listings
+                            </div>
+                            
+                          <div class="form-group">                           
+                            <apex:outputLabel value="Private Email"/>
+                            <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.Private_Email__c}"/>
+                           </div>
+                          </div>
+                          
+                          <div class="form-group"> 
+                            <apex:outputLabel value="NRDS ID"/>
+                            <div class="col-sm-5">
+                                <apex:outputField value="{!subscription.NRDS_ID__c}"/>
+                            </div>
+                            
+                          
+                          <div class="col-sm-2">
+                            <apex:outputLink target="NRDS" value="https://reg.realtor.org/roreg.nsf/retrieveID?OpenForm" styleClass="label label-primary">Find my NRDS ID</apex:outputLink>                              
+                          </div>
+                          
+                          </div>
+                          
+                          
+                     </div>
+                     </apex:outputPanel>
+                     <apex:outputPanel rendered="{!isEdit}">       
+                     <div id="input1">
+                     
+                         <div class="form-group">
+                            <apex:outputLabel value="Contact Phone">
+                            <span class="mandatory">*</span>
+                            </apex:outputLabel>
+                            <div class="col-sm-7">
+                             <apex:inputField value="{!subscription.Primary_Phone__c}" />
+                             </div>
+                          </div>
+                          <apex:outputPanel rendered="{!subscription.Service_Jurisdiction__c != 'TREND'}">
+                          <div class="form-group">
+                             <apex:outputLabel value="Voicemail"/>
+                             <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.Voicemail__c}"/>
+                             </div>
+                          </div>
+                          
+                          <div class="form-group"> 
+                            <apex:outputLabel value="Voice Mail Extension"/>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.VM_Ext__c}"/>
+                            </div>
+                          </div>
+                          </apex:outputPanel>
+                          <div class="form-group"> 
+                            <apex:outputLabel value="Mobile">
+                            <span class="mandatory">*</span>
+                            </apex:outputLabel>
+                              <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.Mobile_Phone__c}" />
+                              </div>
+                          </div>
+                          
+                          <div class="form-group"> 
+                            <apex:outputLabel value="Home Fax"/>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.Home_Fax__c}"/>
+                            </div>
+                          </div>
+                          
+                         <apex:outputPanel rendered="{!subscription.Service_Jurisdiction__c != 'TREND'}"> 
+                         <div class="form-group"> 
+                            <apex:outputLabel value="Pager"/>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.Pager__c}"/>
+                            </div>
+                          </div>
+                          </apex:outputPanel>
+                          <div class="form-group">   
+                            <apex:outputLabel value="Agent Office Phone"/>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.Agent_Office_Phone__c}"/>
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">  
+                            <apex:outputLabel value="Agent Office Fax"/>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.Fax__c}"/>
+                            </div>
+                          </div>
+                          
+                           <div class="col-md-11 col-md-offset-1 alert alert-info">
+                                This information WILL appear in your listings
+                            </div>
+                          <apex:outputPanel rendered="{!subscription.Service_Jurisdiction__c != 'TREND'}"> 
+                          <div class="form-group">  
+                            <apex:outputLabel value="Website"/>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.Website__c}"/>
+                            </div>
+                          </div>
+                          </apex:outputPanel>
+                          <div class="form-group">  
+                            <apex:outputLabel value="Public Email">
+                            <span class="mandatory">*</span>
+                            </apex:outputLabel>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.Public_Email__c}" />
+                            </div>
+                          </div>
+                          
+                           <div class="col-md-11 col-md-offset-1 alert alert-info">
+                               This information WILL <strong>NOT</strong> appear in your listings
+                            </div>
+                            
+                          <div class="form-group">                             
+                            <apex:outputLabel value="Private Email"> 
+                            <span class="mandatory">*</span>
+                            </apex:outputLabel>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.Private_Email__c}"  />
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">
+                            <apex:outputLabel value="NRDS ID"/>
+                            <div class="col-sm-5">
+                                <apex:inputField value="{!subscription.NRDS_ID__c}"/>
+                          </div>
+                          
+                          
+                          <div class="col-sm-2">  
+                            <apex:outputLink target="NRDS" value="https://reg.realtor.org/roreg.nsf/retrieveID?OpenForm" styleClass="label label-primary">Find my NRDS ID</apex:outputLink>
+                           </div>
+                          
+                          </div>
+                          
+                     </div>
+                     </apex:outputPanel> 
+                     
+                     
+                     <h4 style="margin-top:40px;"><i class="fa fa-envelope fa-2x"></i>Mailing Address</h4>                      
+                      <apex:outputPanel rendered="{!!isEdit}">
+                      <div id="output2">
+                      
+                          <div class="form-group">
+                          <apex:outputLabel value="Street Number"/>
+                              <div class="col-sm-7">
+                                 <apex:outputField value="{!subscription.Street_Number__c}"   />
+                             </div>
+                          </div>
+                          
+                          <div class="form-group">
+                             <apex:outputLabel value="Street Name"/>
+                             <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.Street_Name__c}"  />
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">  
+                            <apex:outputLabel value="Street Type"/>
+                            <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.QAS_Mailing_Street_Type__c}"  />
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">  
+                            <apex:outputLabel value="Street Direction"/>
+                            <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.QAS_Mailing_Street_Direction__c}" />
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">  
+                            <apex:outputLabel value="Unit Type"/>
+                            <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.QAS_Mailing_Unit_Type__c}"  />
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">  
+                            <apex:outputLabel value="Unit #"/>
+                             <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.Unit__c}" />
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">  
+                            <apex:outputLabel value="Addl Display Name"/>
+                            <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.Addl_Display_Name__c}"/>
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">  
+                            <apex:outputLabel value="City"/>
+                            <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.City__c}"  />
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">  
+                            <apex:outputLabel value="County"/>
+                            <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.QAS_Mailing_County__c}" />
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">  
+                            <apex:outputLabel value="State"/>
+                            <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.State__c}" />
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">
+                            <apex:outputLabel value="Zip"/>
+                            <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.Zip__c}"  />
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">  
+                            <apex:outputLabel value="Zip + 4"/>
+                            <div class="col-sm-7">
+                            <apex:outputField value="{!subscription.Zip_4__c}"  />
+                          </div>
+                          </div>
+                      </div>  
+                     </apex:outputPanel> 
+               <apex:outputPanel rendered="{!isEdit}">       
+               <div id="input2">
+                       <script>
+            
+                QASNA.typedown.sfdc._isEditMode = function _isEditMode() { return true; };  //Override the isEditMode function to always return false
+                 
+                jQuery.noConflict();
+            
+                jQuery(document).ready(function () { //Make sure that the DOM is loaded
+               
+                var sys = QASNA.system;
+                var td = QASNA.typedown;
+                var xd = QASNA.typedown.XD;
+                var sfdc = QASNA.typedown.sfdc;
+                
+                td.jQuery = jQuery; //Tell typedown which jQuery to use.
+                
+                sforce.connection.sessionId = '{!$Api.Session_ID}'; //Initialize the sforce connection session
+                
+                var settings = {};
+                
+                settings[xd.Proxy.ProxyUrlParameterKey] = "{!$Label.MRIS_QASTypedownProxy_URL}"; //Url to the Salesforce proxy page.
+                settings[xd.PostMessage.TargetDomainParameterKey] = "{!$Label.MRIS_TargetDomainParameterKey_URL}";
+                
+                // packagePrefix: "QAS_NA",
+               
+                settings[xd.ISDTP] = "mn"; //Tell Typedown to load the proxy page without home page components on the left.
+               
+                var configurations = getConfigurations(); //Create configuration.
+                
+                window.typedownClient = new sfdc.Client(configurations, settings); //Create and initialize the typedown object.
+                window.typedownClient.initialize(true);
+                 
+                 jQuery('iframe#qasPage').load(function() {alert('focus() called.');});
+                       
+                        td.jQuery('.btn').each(function () {        
+                            if(this.value !== 'Continue' && jQuery.trim(this.value) !== 'Continue') { return; };
+                       
+                            td.jQuery(this).click(function (event) {
+                                if(!sys.isNull(typedownClient)) { 
+                                    window.typedownClient.fixValidationStatus(); };
+                                
+                            });
+                        });
+                });
+               
+                function getConfigurations() {
+                    
+                    var td = QASNA.typedown;
+                    var config = new td.Configuration();
+                            
+                    config.isUpperCase = false;
+                    config.defaultCountry = 'USA';
+                    config.addressValidationKey = "{!QASTypedownSessionToken}"; //You have to supply this parameter from your controller.
+                           
+                    var StreetNumber = jQuery('input[id$="StreetNumber"]').attr('id');
+                    var StreetName = jQuery('input[id$="StreetName"]').attr('id');
+                    var StreetType = jQuery('input[id$="StreetType"]').attr('id');
+                    var StreetDirection = jQuery('input[id$="StreetDirection"]').attr('id');
+                    var UnitType = jQuery('input[id$="UnitType"]').attr('id');
+                    var Unit = jQuery('input[id$="Unit"]').attr('id');
+                    var City = jQuery('input[id$="City"]').attr('id');
+                    var County = jQuery('input[id$="County"]').attr('id');
+                    var StateProvince = jQuery('select[id$="StateProvince"]').attr('id');  
+                    var Country = jQuery('input[id$="Country"]').attr('id');
+                    var Zip = jQuery('input[id$="Zip"]').attr('id');
+                    var PlusFour = jQuery('input[id$="Plusfour"]').attr('id');
+                    var ValidationStatus = jQuery('input[id$="ValidationStatus"]').attr('id')
+                    var ValidationTimestamp = jQuery('input[id$="ValidationTimestamp"]').attr('id');
+                    var AddlDispName = jQuery('input[id$="AddlDispName"]').attr('id');
+                    var POBox = jQuery('input[id$="POBox"]').attr('id');
+                    var RType = jQuery('input[id$="RType"]').attr('id');        
+                    var BStreetNumber = jQuery('input[id$="BStreetNumber"]').attr('id');
+                    var BStreetName = jQuery('input[id$="BStreetName"]').attr('id');
+                    var BStreetType = jQuery('input[id$="BStreetType"]').attr('id');
+                    var BStreetDirection = jQuery('input[id$="BStreetDirection"]').attr('id');
+                    var BUnitType = jQuery('input[id$="BUnitType"]').attr('id');
+                    var BUnit = jQuery('input[id$="BUnit"]').attr('id');
+                    var BCity = jQuery('input[id$="BCity"]').attr('id');
+                    var BCounty = jQuery('input[id$="BCounty"]').attr('id');
+                    var BStateProvince = jQuery('select[id$="BStateProvince"]').attr('id');
+                    var BCountry = jQuery('input[id$="BCountry"]').attr('id');  
+                    var BZip = jQuery('input[id$="BZip"]').attr('id');
+                    var BPlusFour = jQuery('input[id$="BPlusfour"]').attr('id');
+                    var BPOBox = jQuery('input[id%="BPOBox"]').attr('id'); 
+                    var BValidationStatus = jQuery('input[id$="BValidationStatus"]').attr('id');
+                    var BValidationTimestamp = jQuery('input[id%="BValidationTimestamp"]').attr('id');
+                    var BAddlDispName = jQuery('input[id$="BAddlDispName"]').attr('id');
+                    var BRType = jQuery('input[id$="BRType"]').attr('id');
+                     
+                    config.addOutputMapping(StreetNumber, td.PrimaryNumber);
+                    config.addOutputMapping(StreetName, td.PreDirectional);
+                    config.addOutputMapping(StreetName, td.StreetName);        
+                    config.addOutputMapping(StreetType, td.StreetSuffix);
+                    config.addOutputMapping(StreetDirection, td.PostDirectional);
+                    config.addOutputMapping(UnitType, td.SecondaryName);
+                    config.addOutputMapping(Unit, td.SecondaryNumber);
+                    config.addOutputMapping(City, td.City);
+                    config.addOutputMapping(County, td.CountyName);
+                    config.addOutputMapping(Country, td.ThreecharacterISOcountrycode);
+                    config.addOutputMapping(StateProvince, td.StateOrProvince);
+                    config.addOutputMapping(Zip, td.ZIPOrPostalCode);
+                    config.addOutputMapping(PlusFour, td.ZipAddon);
+                    config.addOutputMapping(ValidationStatus, td.ValidationStatus);
+                    config.addOutputMapping(ValidationTimestamp, td.LastValidated);
+                    config.addOutputMapping(AddlDispName, td.DeliveryLine1); 
+                    config.addOutputMapping(POBox, td.DeliveryLine1);
+                    config.addOutputMapping(RType, td.RecType);               
+                    
+                    var billconfig = new td.Configuration();
+                           
+                    billconfig.isUpperCase = false;
+                    billconfig.defaultCountry = 'USA';
+                    billconfig.addressValidationKey = "{!QASTypedownSessionToken}"; //You have to supply this parameter from your controller.
+                
+                    billconfig.addOutputMapping(BStreetNumber, td.PrimaryNumber);
+                    billconfig.addOutputMapping(BStreetName, td.StreetName);        
+                    billconfig.addOutputMapping(BStreetType, td.StreetSuffix);
+                    billconfig.addOutputMapping(BStreetDirection, td.PostDirectional);
+                    billconfig.addOutputMapping(BUnitType, td.SecondaryName);
+                    billconfig.addOutputMapping(BUnit, td.SecondaryNumber);
+                    billconfig.addOutputMapping(BCity, td.City);
+                    billconfig.addOutputMapping(BCounty, td.CountyName);
+                    billconfig.addOutputMapping(BStateProvince, td.StateOrProvince);
+                    billconfig.addOutputMapping(BCountry, td.ThreecharacterISOcountrycode);
+                    billconfig.addOutputMapping(BZip, td.ZIPOrPostalCode);
+                    billconfig.addOutputMapping(BPlusFour, td.ZipAddon);
+                    billconfig.addOutputMapping(BValidationStatus, td.ValidationStatus);
+                    billconfig.addOutputMapping(BValidationTimestamp, td.LastValidated);
+                    billconfig.addOutputMapping(BAddlDispName, td.DeliveryLine1);
+                    billconfig.addOutputMapping(BPOBox, td.DeliveryLine1);
+                    billconfig.addOutputMapping(BRType, td.RecType);        
+                    
+                    return [config, billconfig];
+            
+                }
+           
+            </script>
+            
+                         <div class="form-group">
+                             <apex:outputLabel value="Street Number"/>
+                             <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.Street_Number__c}" id="StreetNumber"/>
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">  
+                             <apex:outputLabel value="Street Name"/>
+                             <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.Street_Name__c}" id="StreetName"/> 
+                            </div>
+                          </div> 
+                          
+                           <div class="form-group">                            
+                            <apex:outputLabel value="Street Type"/>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.QAS_Mailing_Street_Type__c}" id="StreetType"/>
+                            </div>
+                          </div>
+                          
+                          <div class="form-group"> 
+                            <apex:outputLabel value="Street Direction"/>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.QAS_Mailing_Street_Direction__c}" id="StreetDirection"/>
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">  
+                            <apex:outputLabel value="Unit Type"/>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.QAS_Mailing_Unit_Type__c}" id="UnitType"/>
+                            </div>
+                          </div>
+                          
+                          <div class="form-group"> 
+                            <apex:outputLabel value="Unit #"/>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.Unit__c}" id="Unit"/>
+                            </div>
+                          </div>
+                          
+                       <div class="form-group">     
+                            <apex:outputLabel value="Addl Display Name"/>
+                         <div class="col-sm-7">
+                            <apex:inputField value="{!subscription.Addl_Display_Name__c}" id="AddlDispName"/>
+                         </div>
+                       </div>   
+                       
+                       <div class="form-group"> 
+                            <apex:outputLabel value="City">
+                            <span class="mandatory">*</span>
+                            </apex:outputLabel>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.City__c}" id="City" />
+                            </div>
+                       </div>
+                       
+                       <div class="form-group">     
+                            <apex:outputLabel value="County">
+                            <span class="mandatory">*</span>
+                            </apex:outputLabel>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.QAS_Mailing_County__c}" id="County" />
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">    
+                            <apex:outputLabel value="State">
+                            <span class="mandatory">*</span>
+                            </apex:outputLabel>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.State__c}" id="StateProvince" />
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">    
+                            <apex:outputLabel value="Zip">
+                            <span class="mandatory">*</span>
+                            </apex:outputLabel>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.Zip__c}" id="Zip" />
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">    
+                            <apex:outputLabel value="Zip + 4"/>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.Zip_4__c}" id="Plusfour"/>
+                             </div>
+                        </div>
+                    </div>
+                   </apex:outputPanel> 
+                   <apex:outputPanel rendered="{!subscription.Service_Jurisdiction__c == 'TREND'}">
+        <h4 style="margin-top:40px;"><i class="fa fa-envelope fa-2x"></i>Home Address</h4>                      
+                      <apex:outputPanel rendered="{!!isEdit}">
+                      <div id="output2">
+                      
+                          <div class="form-group">
+                          <apex:outputLabel value="Street Number"/>
+                              <div class="col-sm-7">
+                                 <apex:outputField value="{!subscription.Billing_Street_Number__c}"   />
+                             </div>
+                          </div>
+                          
+                          <div class="form-group">
+                             <apex:outputLabel value="Street Name"/>
+                             <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.Billing_Street_Name__c}"  />
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">  
+                            <apex:outputLabel value="Street Type"/>
+                            <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.QAS_Billing_Street_Type__c}"  />
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">  
+                            <apex:outputLabel value="Street Direction"/>
+                            <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.QAS_Billing_Street_Direction__c}" />
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">  
+                            <apex:outputLabel value="Unit Type"/>
+                            <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.QAS_Billing_Unit_Type__c}"  />
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">  
+                            <apex:outputLabel value="Unit #"/>
+                             <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.Billing_Unit_Number__c}" />
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">  
+                            <apex:outputLabel value="Addl Display Name"/>
+                            <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.Billing_Addl_Display_Name__c}"/>
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">  
+                            <apex:outputLabel value="City"/>
+                            <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.Billing_City__c}"  />
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">  
+                            <apex:outputLabel value="County"/>
+                            <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.QAS_Billing_County__c}" />
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">  
+                            <apex:outputLabel value="State"/>
+                            <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.Billing_State__c}" />
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">
+                            <apex:outputLabel value="Zip"/>
+                            <div class="col-sm-7">
+                                <apex:outputField value="{!subscription.Billing_Zip__c}"  />
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">  
+                            <apex:outputLabel value="Zip + 4"/>
+                            <div class="col-sm-7">
+                            <apex:outputField value="{!subscription.Billing_Zip_4__c}"  />
+                          </div>
+                          </div>        
+                     </div>  
+                     </apex:outputPanel> 
+        <apex:outputPanel rendered="{!isEdit}">       
+               <div id="input2">
+
+                         <div class="form-group">
+                             <apex:outputLabel value="Street Number"/>
+                             <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.Billing_Street_Number__c}" id="BStreetNumber"/>
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">  
+                             <apex:outputLabel value="Street Name"/>
+                             <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.Billing_Street_Name__c}" id="BStreetName"/> 
+                            </div>
+                          </div> 
+                          
+                           <div class="form-group">                            
+                            <apex:outputLabel value="Street Type"/>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.QAS_Billing_Street_Type__c}" id="BStreetType"/>
+                            </div>
+                          </div>
+                          
+                          <div class="form-group"> 
+                            <apex:outputLabel value="Street Direction"/>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.QAS_Billing_Street_Direction__c}" id="BStreetDirection"/>
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">  
+                            <apex:outputLabel value="Unit Type"/>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.QAS_Billing_Unit_Type__c}" id="BUnitType"/>
+                            </div>
+                          </div>
+                          
+                          <div class="form-group"> 
+                            <apex:outputLabel value="Unit #"/>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.Billing_Unit_Number__c}" id="BUnit"/>
+                            </div>
+                          </div>
+                          
+                       <div class="form-group">     
+                            <apex:outputLabel value="Addl Display Name"/>
+                         <div class="col-sm-7">
+                            <apex:inputField value="{!subscription.Billing_Addl_Display_Name__c}" id="BAddlDispName"/>
+                         </div>
+                       </div>   
+                       
+                       <div class="form-group"> 
+                            <apex:outputLabel value="City">
+                            <span class="mandatory">*</span>
+                            </apex:outputLabel>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.Billing_City__c}" id="BCity" />
+                            </div>
+                       </div>
+                       
+                       <div class="form-group">     
+                            <apex:outputLabel value="County">
+                            <span class="mandatory">*</span>
+                            </apex:outputLabel>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.QAS_Billing_County__c}" id="BCounty" />
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">    
+                            <apex:outputLabel value="State">
+                            <span class="mandatory">*</span>
+                            </apex:outputLabel>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.Billing_State__c}" id="BStateProvince" />
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">    
+                            <apex:outputLabel value="Zip">
+                            <span class="mandatory">*</span>
+                            </apex:outputLabel>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.Billing_Zip__c}" id="BZip" />
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">    
+                            <apex:outputLabel value="Zip + 4"/>
+                            <div class="col-sm-7">
+                                <apex:inputField value="{!subscription.Billing_Zip_4__c}" id="BPlusfour"/>
+                             </div>
+                        </div>
+                    </div>
+                   </apex:outputPanel>
+                   </apex:outputPanel> 
+                </div>
+              </div>
+          
+           
+        </apex:pageBlock>           
+</apex:form>
+</apex:define>       
+</apex:composition>     
+</apex:page>

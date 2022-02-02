@@ -1,0 +1,83 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<div class="fullpage slds-scope">
+		<div class="slds-grid slds-wrap">
+			<div class="new-containerpage">
+				<div class="slds-container--x-large new-container">
+					<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12  header-full">
+						<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 header-part">
+							<div class="logo">
+								<img src="{!$Resource.brightlogolightning}" />
+							</div>
+						</div>
+
+						<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 header-part">
+							<div class="call">
+								<h4>Looking for support? </h4>
+								<h3>Call: 1-844-552-7444</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="slds-container--x-large new-container">
+				<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+					<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_10-of-12 slds-large-size_10-of-12 landing">
+                   <h2>Choose a role to join MLS</h2>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 linkpointmain">
+                        <div class="slds-col linkpoint">
+                            <div class="select-home">
+                            <img src="{!$Resource.EZJoin_AppType_Agent}" />
+                            <h4>Agent</h4>
+                                </div>
+                        </div>
+                             <div class="slds-col linkpoint">
+                            <div class="select-home">
+                            <img src="{!$Resource.e2}" />
+                            <h4>Office Secretary</h4>
+                                </div>
+                        </div>
+                             <div class="slds-col linkpoint">
+                            <div class="select-home">
+                            <img src="{!$Resource.e3}" />
+                            <h4>Associate Broker</h4>
+                                </div>
+                        </div>
+                             <div class="slds-col linkpoint">
+                            <div class="select-home">
+                            <img src="{!$Resource.e4}" />
+                            <h4>Broker of Record</h4>
+                                </div>
+                        </div>
+                             <div class="slds-col linkpoint linkpoint1">
+                            <div class="select-home">
+                            <img src="{!$Resource.e5}" />
+                            <h4>Personal Assistant</h4>
+                                </div>
+                        </div>
+                       
+                            </div>
+                        <button class="slds-button slds-button_brand">Proceed to apply</button>
+                    </div>
+				</div>
+			</div>
+			<div class="footerbottom">
+				<div class="slds-container--x-large new-container">
+					<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 footer-full">
+						<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 footer-part">
+							<p><a href="#">Privacy</a> 
+							</p>
+							<p><a href="#">Terms of Use</a>
+							</p>
+							<p><a href="#">Copyright</a>
+							</p>
+						</div>
+						<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 footer-part">
+							<p class="copy">Copyright © 2020 Bright MLS, Inc.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</aura:component>

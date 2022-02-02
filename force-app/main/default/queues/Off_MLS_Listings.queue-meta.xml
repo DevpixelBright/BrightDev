@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <name>Off MLS Listings</name>
+    <queueMembers>
+        <users>
+            <user>gail.kern@mris.net</user>
+            <user>ginnette.lee@brightmls.com</user>
+            <user>kbeditcreate@bright.com</user>
+            <user>marc.duverneuil@brightmls.com</user>
+            <user>michelle.yam@brightmls.com</user>
+            <user>monica.williams@mris.net</user>
+            <user>monique.howell@mris.net</user>
+            <user>sandra.hilliard@mris.net</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>Case</sobjectType>
+    </queueSobject>
+</Queue>

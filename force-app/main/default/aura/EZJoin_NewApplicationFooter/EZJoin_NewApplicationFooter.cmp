@@ -1,0 +1,19 @@
+<aura:component >
+    <aura:handler name="init" action="{!c.init}" value="{!this}" />
+    <aura:attribute name="today" type="Date" />
+    <!--<ui:outputDate value="{!v.today}" />-->
+    <div class="footerbottom" id="footer-container">
+        <div class="slds-container--x-large new-container">
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 footer-full">
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 footer-part">
+                    <p><a href="https://www.brightmls.com/#/privacy" target="_blank">Privacy</a> </p>
+                    <p><a href="https://www.brightmls.com/#/terms" target="_blank">Terms of Use</a></p>
+                    <p><a href="https://www.brightmls.com/#/copyright" target="_blank">Copyright</a></p>
+                </div>
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 footer-part">
+                    <p class="copy">Copyright © <ui:outputDate value="{!v.today}"/> Bright MLS, Inc.</p>
+                </div>
+            </div>
+        </div>
+    </div> 
+</aura:component>

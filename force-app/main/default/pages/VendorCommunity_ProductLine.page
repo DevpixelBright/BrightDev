@@ -1,0 +1,225 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="VendorCommunity_ProductLine_Controller" lightningstylesheets="true">
+    <apex:composition template="VendorCommunity_Base">
+        
+        <apex:define name="content">
+                        
+            <apex:form id="portal">
+                <apex:actionFunction action="{!getRetsSubProducts}" name="initBillingInfoPortal" reRender="portal" />
+                
+                <c:Bootstrap_Resources />
+                <div class="row">
+                    <c:Communities_Definition pageTitle="Products You Offer" pageTitleClass="fa fa-search fa-2x" hasDefinitions="false">
+                        <p><b class="term">Term</b> Definition goes here.</p>
+                    </c:Communities_Definition>
+                </div>
+                
+                <div class="row" id="loading-block">
+                    <div class="col-xs-4 col-xs-offset-4 col-xs-2 col-xs-offset-5">
+                        <div class="progress progress-striped active">
+                            <div class="progress-bar" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    var loading_block = $("#loading-block");
+                </script>
+                
+                <apex:outputPanel layout="none" rendered="{!initialLoad}" >
+                    <script>$(initBillingInfoPortal);</script>
+                </apex:outputPanel>
+
+                <apex:outputPanel layout="none" rendered="{!!initialLoad && hasError}" >
+                    <div id="error-block" style="display: none;">
+                        <div class="alert alert-danger">
+                            <p>We’re sorry. The connection has timed out.</p>
+                            <p>If this issue persists, please contact the Customer Support Center for assistance at 1-844-55-BRIGHT (1-844-552-7444) or via email at <a href="mailto:support@brightmls.com">support@brightmls.com</a>.</p>
+                            <apex:outputPanel layout="none" rendered="{!debugMode}" >
+                                <div><apex:pageMessages /></div>
+                            </apex:outputPanel>
+                        </div>
+                        <div class="row" style="margin-top: 30px;">
+                            <div class="col-xs-2 col-xs-offset-5">
+                                <div class="btn-group btn-group-justified">
+                                    <a href="{!cancelUrl}" class="btn btn-primary" role="button">Back</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <script>
+                            loading_block.hide();
+                            $("#error-block").show();
+                        </script>
+                    </div>
+                </apex:outputPanel>
+                
+                <apex:outputPanel layout="none" rendered="{!!initialLoad && !hasError}" >
+                    <style>
+                        .sp {
+                        }
+
+                            .sp .list {
+                            }
+                            
+                            .sp .list + .list {
+                                margin-top: 50px;
+                            }
+
+                                .sp .list .emphasised {
+                                    font-weight: bold;
+                                }
+                            
+                                .sp .list .row {
+                                    display: table;
+                                    width: 100%;
+                                    margin-left: 0px;
+                                    margin-right: 0px;
+                                }
+                                
+                                .sp .list .row:nth-child(even) {
+                                    background-color: #F5F5F5;
+                                }
+                                
+                                .sp .list .row + .row {
+                                    border-top: 1px solid #F5F5F5;
+                                }
+
+                                .sp .list .row > div {
+                                    display: table-cell;
+                                    float: none;
+                                    vertical-align: middle;
+                                    padding: 10px 15px;
+                                }
+                                
+                                .sp .list .row > div + div {
+                                    border-left: 1px solid #fff;
+                                }
+                                
+                        // .sp .list .product {
+                        //      }
+                                
+                        /*      .sp .list .term {
+                                    text-align: center;
+                                }
+                                
+                        
+                                .sp .list .date {
+                                    text-align: center;
+                                }
+                                
+                                .sp .list .amount {
+                                    text-align: right;
+                                }
+                        */      
+                                .sp .list .line-item.historical {
+                                    display: none;
+                                    opacity: 0.6;
+                                }
+                                
+                                .sp .list .line-item.historical .product {
+                                    text-decoration: line-through;
+                                }
+
+                                .sp .list .line-item.historical.unhide {
+                                    display: table;
+                                }
+                                
+                                .sp .list .alert.historical {
+                                    display: block;
+                                    text-align: center;
+                                    margin: 30px 40% 0px 40%;
+                                    border-radius: 0px;
+                                    cursor: pointer;
+                                    background-color: #FFFFFF;
+                                    border-color: #FE4602;
+                                    color: #FE4602;
+                                }
+
+                                .sp .list .show-items.historical.unhide {
+                                    display: none;
+                                }
+
+                                .sp .list .hide-items.historical {
+                                    display: none;
+                                }
+
+                                .sp .list .hide-items.historical.unhide {
+                                    display: block;
+                                }
+                        
+                    </style>
+                    
+                    <div id="content-block" style="display: none;">
+                       <!-- <div class="row">
+                            <div class="col-xs-12 instructions">
+                                <p> Below is a list of products you currently offer to Bright MLS subscribers.</p>
+                                <apex:outputPanel layout="none" rendered="{!debugMode}" >
+                                    <div><apex:pageMessages /></div>
+                                </apex:outputPanel>
+                            </div>
+                        </div>
+                        -->
+                        <div class="row">
+                            <div class="col-xs-12 instructions">
+                               <p>Below is a list of products you currently offer to Bright MLS subscribers.</p>
+                               <p style="visibility:hidden;">this paragraph is to remove screen blink &nbsp;</p>
+                               <!-- <p>If you are using this statement of account for tax reporting purposes and a tax professional will be assisting you, you may want to share this information with them. Click the Download as PDF button for a printer-friendly copy.</p>-->
+                                <apex:outputPanel layout="none" rendered="{!debugMode}" >
+                                    <div><apex:pageMessages /></div>
+                                </apex:outputPanel>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="sp" style="width:40%; padding-left:5%; ">
+                            <div class="row ">
+                                <apex:outputPanel styleclass="col-xs-12 instructions alert alert-success" rendered="{!if(subProducts.size > 0, false, true )}"> 
+                                    <p>No Products available </p>
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{!if(subProducts.size > 0, true, false )}">
+                                    <apex:variable var="count" value="{!1}"   />
+                                    <table class="table">
+                                        <tr>
+                                            <th> #</th>
+                                            <th> Product </th>
+                                        </tr>
+                                        <tbody>
+                                            <apex:repeat value="{!subProducts}" var="sub"> 
+                                                <tr>
+                                                    <td>{!count}</td>
+                                                    <td>{!sub.Name}</td>
+                                                    <apex:variable value="{!count+1}" var="count"/>
+                                                </tr>
+                                            </apex:repeat>        
+                                        </tbody>
+                                    </table>
+                                </apex:outputPanel>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="instructions" style="padding-top:3%; padding-left:4%;">
+                        <!--<p>Apply for a new Product offering to BrightMLS subscribers</p>-->
+                        <!--<apex:commandButton value="Bright Data Access Questionnaire" onclick="window.open('{!$Label.BrightQuestLink}');" />-->
+                        <!--<button type="button" class="btn btn-primary" style="width:30%;" onclick="window.open('{!$Label.BrightQuestLink}');">Bright Data Access Questionnaire</button>-->
+                        <p>
+                            Have a new product you'd like to offer Bright MLS subscribers? Start the application process by filling out our &nbsp;
+                            <u><apex:outputLink style="color:#FE4602" onclick="window.open('{!$Label.BrightQuestLink}');">Bright Data Access Questionnaire.</apex:outputLink></u>
+                        </p>
+                    </div>
+
+                    <script>
+                        loading_block.hide();
+                        $("#content-block").show();
+                    </script>
+                </apex:outputPanel>
+        
+                <script>
+                    markUserId("{!displayName}");
+                    markOptionPanel("managevendor");
+                </script>
+            </apex:form>
+        </apex:define>
+
+    </apex:composition> 
+</apex:page>

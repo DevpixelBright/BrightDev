@@ -1,0 +1,64 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    
+    <div class="fullpage slds-scope step2">
+        <div class="slds-grid slds-wrap">
+            <div class="bodytop">
+                <div class="slds-container--x-large new-container">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 timepoint">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication">
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_8-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 Edit">
+                                    <h2 class="email">Confirm termination </h2>
+                                </div>
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_4-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 Edit Edit1">
+                                    <img class="close" src="{!$Resource.close}" />  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bodycontainer">
+                <div class="slds-container--x-large new-container">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodyline">
+                      
+                        <h3>The selected user will be terminated in MLS system and will no longer be able to access MLS. The action does not Affect the status of their Real Estate License not does it inform the Stakeholding Board</h3>
+                         <h2>Please select a reason for the termination and click terminate</h2>
+             
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_8-of-12 slds-medium-size_8-of-12 slds-large-size_12-of-12 bodyline2">
+                            <lightning:select name="select1" label="" required="false" variant = "label-hidden">
+        <option value="">choose one...</option>
+        <option value="1">one</option>
+        <option value="2">two</option>
+        <option value="3">three</option>
+    </lightning:select>
+                                    
+                                    
+                                   
+          
+                        </div>
+                  
+           
+                        
+                        
+                    </div>
+                </div>
+            </div>
+             <div class="bodytop1">
+                <div class="slds-container--x-large new-container">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 timepoint">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication">
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+              <lightning:button class="brand" variant="brand" label="Terminate" title="Brand action" onclick="{! c.handleClick }" />
+          <lightning:button class="brand cancel" variant="brand" label="Cancel" title="Brand action" onclick="{! c.handleClick }" />
+          
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

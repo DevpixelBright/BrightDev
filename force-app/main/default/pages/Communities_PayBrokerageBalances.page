@@ -1,0 +1,125 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false"  controller="Communities_PayBrokerageBalances_Cls" lightningstylesheets="true">
+    <apex:composition template="Communities_Base">
+        <apex:define name="content">
+        <apex:form id="portal">
+            <c:Bootstrap_Resources />
+        
+            <apex:actionFunction action="{!initPaymentPortal}" name="initPaymentPortal" reRender="portal" />
+        
+            <style>
+                 .dropdown-block {
+                                width:10%;
+                                float:right;
+                                margin-top:-65px;
+                            }
+            </style>
+        
+            <div class="row">
+                <c:Communities_Definition pageTitle="Brokerage Office Fees" pageTitleClass="fa fa-money fa-2x" hasDefinitions="false">
+                <p><b class="term">Term</b> Definition goes here.</p>
+            </c:Communities_Definition>
+            </div>
+             <div class="dropdown-block">
+                            <apex:selectList size="1" styleClass="form-control" value="{!officeId}" multiselect="false" >
+                                <apex:actionSupport event="onchange" action="{!reloadBrokerages}"/>
+                                <apex:selectOptions value="{!options}"/>
+                            </apex:selectList> 
+                        </div>     
+            <div class="row" id="loadingBlock">
+            <div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-5">
+                <div class="progress progress-striped active">
+                    <div class="progress-bar" style="width: 100%"></div>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            var loading_block = $("#loadingBlock");
+        </script>
+        
+        <apex:outputPanel rendered="{!initialLoad}" >
+            <script>$(initPaymentPortal)</script>
+        </apex:outputPanel>
+        
+        <apex:outputPanel rendered="{!!initialLoad}" >
+        
+            <apex:outputPanel rendered="{!hasError}" >
+            
+                <apex:outputPanel rendered="{!!hasBalance}" >
+                    <apex:outputPanel rendered="{!!hasErrorMessage}">
+                       <div class="alert alert-success">There are no outstanding balances for this MLS Brokerage.</div>
+                    </apex:outputPanel>     
+                </apex:outputPanel>
+                    
+                <apex:outputPanel rendered="{!hasBalance}" >
+                    <apex:outputPanel rendered="{!!hasErrorMessage}">
+                        <div class="alert alert-danger" >
+                          <p>We’re sorry. The connection has timed out.</p>
+                          <p>If this issue persists, please contact the Customer Support Center for assistance at 1-844-55-BRIGHT (1-844-552-7444) or via email at <a href="mailto:support@brightmls.com">support@brightmls.com</a>.</p>
+                       </div>
+                  </apex:outputPanel>
+                                                                                                                                 
+                </apex:outputPanel>
+        <apex:outputPanel rendered="{!hasErrorMessage}">
+                <div class="alert alert-danger" >                                                                                                               
+                        <div><apex:pageMessages /></div>
+                    </div> 
+        </apex:outputPanel>
+                <div class="row" style="margin-top: 30px;">
+                    <div class="col-md-2 col-md-offset-5">
+                        <div class="btn-group btn-group-justified">
+                            <a href="{!cancelUrl}" class="btn btn-primary" role="button">Back</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <script>
+                    loading_block.hide();
+                </script>
+            </apex:outputPanel>
+                
+            <apex:outputPanel rendered="{!!hasError}" >
+                <style>
+                    #gpp_iframe {
+                        visibility: hidden;
+                    }
+                </style>
+                
+                <iframe id="gpp_iframe" src="{!iframeUrl}" scrolling="no" frameBorder="0"></iframe>
+                <script>
+                    var gpp_iframe = $("#gpp_iframe");
+                    
+                    function resize_iframe(height) {
+                        loading_block.hide();
+                            
+                        gpp_iframe
+                        .height(height)
+                        .css("visibility", "visible");
+                    }
+                    
+                    ZXD.receiveMessage(function (e) {
+                        var data = JSON.parse(e.data);
+                        
+                        if (data.operation == "resize_iframe")
+                            resize_iframe(data.params.height);
+                        else if (data.operation == "payment_success") {
+                        }
+                        else if (data.operation == "generic_payment_complete")
+                            top.window.location.href = "{!redirectUrl}";
+                        else if (data.operation == "generic_payment_cancel")
+                            top.window.location.href = "{!cancelUrl}";
+                           
+                    }, "{!iframeDomain}");
+                </script>
+            </apex:outputPanel>
+        
+        </apex:outputPanel>
+        
+        <script>
+            markUserId("{!displayName}");
+            markOptionPanel("brokerage");
+        </script>
+    </apex:form>
+    </apex:define>
+    </apex:composition> 
+</apex:page>

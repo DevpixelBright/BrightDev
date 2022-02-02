@@ -1,0 +1,487 @@
+<apex:page id="thePage" Controller="VendorCommunity_Case_Controller" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0" applyBodyTag="false"  lightningstylesheets="true">
+    <apex:composition template="VendorCommunity_Base">
+        <apex:define name="content">
+            <style>
+                .form-group span {
+                font-weight:bold;
+                }
+                a {
+                color:#e33636;
+                text-decoration:none;
+                }
+                a:hover {
+                color:red;
+                }
+                #errorMessage {
+                color:red;
+                }
+                /* style class to vertically centered the boostrap modal popup */
+                .modal-vertical-centered {
+                transform: translate(0, 50%) !important;
+                -ms-transform: translate(0, 50%) !important; /* IE 9 */
+                -webkit-transform: translate(0, 50%) !important; /* Safari and Chrome */
+                }
+            </style>
+            <script>
+            var caseId;     // Capture the case id after case submitted succesfully
+            var fileId = 1; // Current file processing
+            
+            
+            
+            /* Validate and remote calls function to submit a case and attachments */
+            function validateData(){
+                var vError = '';
+                var dept, subject, desc;
+                //var dept1, subject, desc;
+                
+                $(".form-control").each(function() {
+                    
+                    /* Validating field values */
+                    var id = this.id;
+                    
+                    if (id.indexOf("dept") >= 0) {
+                        if ($(this).val() != '') {
+                            dept = $(this).val();
+                        }
+                        else
+                            vError = vError + "* Please select department<br/>";
+                    }
+                    
+                    
+                    if (id.indexOf("subject") >= 0) {
+                        if ($(this).val() != '') {
+                            subject = $(this).val();   
+                        }
+                        else
+                            vError = vError + "* Please enter subject<br/>";
+                        
+                    }
+                    
+                    if (id.indexOf("desc") >= 0) {
+                        if ($(this).val() != '')
+                            desc= $(this).val();
+                        else
+                            vError = vError + "* Please enter description<br/>";
+                    }
+                });
+                
+                
+                if (vError != '') {
+                    $("#errorMessage").html(vError);
+                    return;
+                }
+                
+                /* Bootstrap modal popup display and the parameters are to disable the background click */
+                var modal = $("#subscription-option-modal");
+                modal.modal({
+                    backdrop: 'static',
+                    keyboard: false
+                })
+                modal.modal("show"); 
+                
+                /* Remote call to submit case */
+                VendorCommunity_Case_Controller.remoteCreateCase(dept, subject, desc, function(result,event){
+                    
+                    if (event.status == true) {
+                        /* Case result success message */
+                        caseId = result;
+                        $(".caseResult").html("<center>Case submitted successfully</center><br/>");
+                        $(".uploadBox").show();
+                        
+                        /* Displaying list of attachments with intial status */
+                        var html = "Uploading attachments. Please Wait ...<br/><br/><table width='100%' cellspacing='10' cellpadding='5' style='backgound-color:#cccccc;'>";
+                        for(var i=0; i<parseInt($("#filecount").val()); i++) {
+                            
+                            if (document.getElementById(i) != null) {
+                                
+                                /* Calculate size of attachment */
+                                var displaySize;
+                                if(document.getElementById(i).files[0].size < 1000000){
+                                    displaySize = Math.floor(document.getElementById(i).files[0].size/1000) + 'K';
+                                }else{
+                                    displaySize  = Math.round((document.getElementById(i).files[0].size / 1000000)*10)/10 + 'MB';
+                                }
+                                
+                                html = html + "<tr>";
+                                html = html + "<td style='padding:3px;'>" + document.getElementById(i).files[0].name + "</td>";
+                                html = html + "<td>" + displaySize + "</td>";
+                                html = html + "<td id='status_"+i+"'> Pending </td>";
+                                html = html + "</tr>";
+                                
+                            }
+                            
+                        }
+                        html = html + "</table>";
+                        $(".uploadBox").html(html);
+                        
+                        /* File upload process start */
+                        prepareFileUploads(fileId);                    
+                    }
+                    else {
+                        alert("Failed to submit case: " + event.message);
+                    }
+                    
+                });            
+            }
+            
+            markOptionPanel("vendorsupport");
+            markUserId("{!displayName}");
+            
+            var byteChunkArray; 
+            var files;
+            var currentFile;
+            var $upload;
+            var CHUNK_SIZE = 180000; //Must be evenly divisible by 3, if not, data corruption will occur
+            var VIEW_URL = '/servlet/servlet.FileDownload?file=';
+            
+            /* Executes when start Upload button is selected */
+            function prepareFileUploads(id) {
+                /* Checking if atachment id exists or not */
+                if (document.getElementById(id) != null) {
+                    /* Get the file(s) from the input field */
+                    files = document.getElementById(id).files;
+                    
+                    /* Only proceed if there are files selected and if null it would be end of attachments */
+                    if(files.length == 0){
+                        window.location = 'VendorCommunity_Cases_View';
+                        return;
+                    }     
+                    
+                    /* Updating status to processing file in file listing */
+                    $("#status_"+id).html('Processing');
+                    
+                    /* Once elements have been added to the page representing the uploads, start the actual upload process */
+                    checkForUploads();  
+                }
+                else {
+                    /* If not process next attachment */
+                    fileId = parseInt(fileId) + 1;
+                    prepareFileUploads(fileId);       
+                }
+            }
+            
+            function checkForUploads() {
+                /* Based on index of the div, get correct file from files array */
+                currentFile = files[0];
+                
+                /* 
+                        Build the byteChunkArray array for the current file we are processing. This array is formatted as:
+                        ['0-179999','180000-359999',etc] and represents the chunks of bytes that will be uploaded individually.
+                    */
+                
+                byteChunkArray = new Array();  
+                
+                /* First check to see if file size is less than the chunk size, if so first and only chunk is entire size of file */
+                if(currentFile.size <= CHUNK_SIZE) {
+                    byteChunkArray[0] = '0-' + (currentFile.size - 1);
+                }else{
+                    /* Determine how many whole byte chunks make up the file */
+                    var numOfFullChunks = Math.floor(currentFile.size / CHUNK_SIZE); // i.e. 1.2MB file would be 1000000 / CHUNK_SIZE
+                    var remainderBytes = currentFile.size % CHUNK_SIZE; // would determine remainder of 1200000 bytes that is not a full chunk
+                    var startByte = 0;
+                    var endByte = CHUNK_SIZE - 1;
+                    
+                    /* Loop through the number of full chunks and build the byteChunkArray array */
+                    for(i = 0; i < numOfFullChunks; i++) {
+                        byteChunkArray[i] = startByte+'-'+endByte;
+                        
+                        /* Set new start and stop bytes for next iteration of loop */
+                        startByte = endByte + 1;
+                        endByte += CHUNK_SIZE;
+                    }
+                    
+                    /* Add the last chunk of remaining bytes to the byteChunkArray */
+                    startByte = currentFile.size - remainderBytes;
+                    endByte = currentFile.size;
+                    byteChunkArray.push(startByte+'-'+endByte);
+                }
+                
+                /* 
+                        Start processing the byteChunkArray for the current file, parameter is '' because this is the first chunk 
+                        being uploaded and there is no attachment Id
+                    */
+                
+                processByteChunkArray('');
+                
+                
+            }
+            
+            /* Uploads a chunk of bytes, if attachmentId is passed in it will attach the bytes to an existing attachment record */
+            function processByteChunkArray(attachmentId) {
+                
+                /* Proceed if there are still values in the byteChunkArray, if none, all piece of the file have been uploaded */
+                if(byteChunkArray.length > 0) {
+                    
+                    /* Determine the byte range that needs to uploaded, if byteChunkArray is like... ['0-179999','180000-359999'] */
+                    var indexes = byteChunkArray[0].split('-'); //... get the first index range '0-179999' -> ['0','179999']
+                    var startByte = parseInt(indexes[0]);       //0
+                    var stopByte = parseInt(indexes[1]);        //179999
+                    
+                    /* Slice the part of the file we want to upload, currentFile variable is set in checkForUploads() method that is called before this method */
+                    if(currentFile.webkitSlice) {
+                        var blobChunk = currentFile.webkitSlice(startByte , stopByte + 1);
+                    }else if (currentFile.mozSlice) {
+                        var blobChunk = currentFile.mozSlice(startByte , stopByte + 1);
+                    }else if (currentFile.slice) {
+                        var blobChunk = currentFile.slice(startByte , stopByte + 1);
+                    }
+                    
+                    /* Create a new reader object, part of HTML5 File API */
+                    var reader = new FileReader();
+                    
+                    /* Read the blobChunk as a binary string, reader.onloadend function below is automatically called after this line */
+                    reader.readAsArrayBuffer(blobChunk);
+                    
+                    /* Create a reader.onload function, this will execute immediately after reader.readAsBinaryString() function above; */
+                    reader.onloadend = function(evt) { 
+                        if(evt.target.readyState == FileReader.DONE) {  
+                            /*
+                                    Make sure read was successful, DONE == 2
+                                    Base 64 encode the data for transmission to the server with JS remoting, window.btoa currently on support by some browsers
+                                */
+                            
+                            var binary = "";
+                            var bytes = new Uint8Array(evt.target.result);
+                            var length = bytes.byteLength;
+                            
+                            for (var i = 0; i < length; i++) {
+                                binary += String.fromCharCode(bytes[i]);
+                            }
+                            
+                            /* Remote function call to start uploading process */
+                            VendorCommunity_Case_Controller.attachFile(caseId,attachmentId,currentFile.name,currentFile.type,window.btoa(binary),function(result,event) {
+                                
+                                if (event.status == true) {
+                                    
+                                    /* Calculate percent uploaded and updating in files listing */
+                                    var percentComplete = Math.round((stopByte / currentFile.size) * 100);
+                                    $("#status_" + fileId).html(percentComplete + '%');
+                                    
+                                    /* Remove the index information from the byteChunkArray array for the piece just uploaded. */
+                                    byteChunkArray.shift(); //removes 0 index
+                                    
+                                    /* Set the attachmentId of the file we are now processing */
+                                    attachmentId = result;
+                                    
+                                    /* Call process byteChunkArray to upload the next piece of the file */
+                                    processByteChunkArray(attachmentId);
+                                    
+                                    /* Update final status and start process next attachment */
+                                    if(processByteChunkArray.length <= 0) {
+                                        $("#status_" + fileId).html("Completed");
+                                        fileId = parseInt(fileId) + 1;
+                                        prepareFileUploads(fileId);
+                                    }
+                                }
+                                else {
+                                    /* Update failed status and start processing next attachment */
+                                    $("#status_" + fileId).html("<span style='color:red;'>Failed: "+event.message+"</span>");
+                                    fileId = parseInt(fileId) + 1;
+                                    prepareFileUploads(fileId);                      
+                                }
+                            });
+                        }
+                        else {
+                            /* Error handling for bad read */
+                            alert('Could not read file');
+                        }
+                    };
+                    
+                }else{
+                    /* Update status for completed file and start processing next file */
+                    $("#status_" + fileId).html("Completed");
+                    fileId = parseInt(fileId) + 1;
+                    prepareFileUploads(fileId);
+                }
+            }  
+            
+            /* Function to add new input file element */
+            function AddAnother() {
+                var previousFileId = $("#filecount").val();
+                var files = document.getElementById(previousFileId).files;
+                if (files[0].size < 5000000) {
+                    $("#" + previousFileId).hide();
+                    $("#fileContainer" + previousFileId).append('<a onclick="DeleteAttachment('+previousFileId+')" class="glyphicon glyphicon-minus-sign"></a> &nbsp;' + files[0].name);
+                    var filecount = parseInt($("#filecount").val()) + 1;
+                    $("#filesContainer").append('<div style="margin-bottom:5px;" id="fileContainer'+filecount+'"><input class="filesclass" type="file" id="'+filecount+'" name="'+filecount+'" onchange="AddAnother()" /></div>');
+                    $("#filecount").val(filecount);
+                }
+                else{
+                    alert("Maximum upload size 5MB.");
+                    $("#" + previousFileId).val('');
+                }
+            }
+            
+            /* Function to delete attachment from list */
+            function DeleteAttachment(id) {
+                $("#fileContainer"+id).remove();
+            }
+            
+            </script>
+            
+            <c:Bootstrap_Resources /> 
+            <apex:stylesheet value="{!URLFOR($Resource.Communities_Ideas,'/ideas_css.css')}"/>  
+            <apex:form id="theForm">
+                <apex:actionFunction name="updateSearchKey" action="{!updateSearchKey}" oncomplete="searchOncomplete();" reRender="theSearchResults,errorMessage">
+                    <apex:param name="updatedKey" value=""/>
+                </apex:actionFunction>
+            </apex:form>
+            
+            <div class="modal fade" id="subscription-option-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-vertical-centered">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="caseResult">
+                                Please wait while case is being submitted.<br/><br/>
+                                <div class="row" id="loading-block">
+                                    <div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-5">
+                                        <div class="progress progress-striped active">
+                                            <div class="progress-bar" style="width: 100%">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uploadBox" style="display:none;">
+                                <div class="row" id="loading-block">
+                                    <div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-5">
+                                        <div class="progress progress-striped active">
+                                            <div class="progress-bar" style="width: 100%">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                        
+                            </div>                        
+                        </div>     
+                    </div>
+                </div>
+            </div>            
+            
+            
+            <!--Page Title Start-->
+            <c:Communities_Definition pageTitle="Submit New Case" pageTitleClass="fa fa-envelope-o fa-2x" hasDefinitions="false">
+                <p><b class="term">Term</b> Definition goes here.</p>
+            </c:Communities_Definition>
+            
+            <div class="col-sm-6" style="padding:0px;">
+                <!--Form Start-->
+                <apex:form styleClass="form-horizontal post_your_idea" enctype="multipart/form-data" id="form" onsubmit="return false;">  
+                    
+                    <apex:outputPanel id="MyPanel">
+                        
+                    </apex:outputPanel>
+                    <div class="form-group">
+                        <label for="" class="col-sm-2 control-label"></label>
+                        <div class="col-sm-6">
+                            <div id="errorMessage"></div>
+                        </div>
+                    </div> 
+                    
+                    
+                    
+                    <div class="form-group">
+                        <span for="" class="col-sm-3 control-label"><font color="red">*</font> Submit a Case to</span> 
+                        <div class="col-sm-6">
+                            <!--<apex:inputField value="{!newCase.Department__c}" id="dept" styleClass="form-control department" />-->
+                            
+                            <apex:selectList id="dept" styleClass="form-control department" value="{!selDepartments}" multiselect="false" size="1">
+                                <apex:selectOptions value="{!Items}"/>
+                            </apex:selectList><p/>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <span for="" class="col-sm-3 control-label"><font color="red">*</font> Subject</span>
+                        <div class="col-sm-8">
+                            <apex:inputText styleClass="form-control" id="subject" onblur="updateSearchKey(value);return false;" value="{!newCase.Subject}">
+                            </apex:inputText>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="form-group">
+                        <span for="" class="col-sm-3 control-label"><font color="red">*</font> Description</span>
+                        <div class="col-sm-8">
+                            <apex:inputTextarea styleClass="form-control" id="desc" rows="7" onkeyup="updateSearchKeyHelper(value);" value="{!newCase.Description}"/>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="form-group">
+                        <span for="" class="col-sm-3 control-label">
+                            Add Attachment(s)
+                            <input type="hidden" name="filecount" id="filecount" value="1" />
+                        </span>
+                        
+                        <div class="col-sm-8" style="padding-top:7px;" id="filesContainer">
+                            <div id="fileContainer1" style="margin-bottom:5px;">
+                                <input class="filesclass" type="file" id="1" name="file" onchange="AddAnother()" />
+                            </div>
+                        </div>            
+                    </div>
+                    
+                    <div class="form-group">
+                        <span for="" class="col-sm-3 control-label"> &nbsp;</span>
+                        <div class="col-sm-6">
+                            <apex:outputLink value="/apex/VendorCOmmunity_Cases_View" styleClass="btn btn-default" style="margin-right:10px">Cancel</apex:outputLink> 
+                            <apex:outputLink value="#" styleClass="btn btn-primary" onclick="validateData()">Submit Case</apex:outputLink>
+                        </div>
+                    </div>
+                </apex:form>    
+                <!--Form Start-->
+            </div>
+            <apex:panelGroup id="theSearchResults">
+                <div class="col-sm-6" style="border: 1px solid #ccc; border-radius: 7px; padding-top:10px; padding-bottom:10px;margin-top: 20px;">
+                    <h4 style="font-weight:400;"><span class="glyphicon glyphicon-file"></span>&nbsp;Suggested Articles to help resolve your case</h4>
+                    
+                    <div class="KB">
+                        <div class="panel-group" id="accordion">
+                            <knowledge:articleList articleVar="article" keyword="{!searchKey}" hasMoreVar="false">  
+                                <div class="panel panel-default">
+                                    <div id="articleHeadId" class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a id="atid-{!article.Id}" data-toggle="collapse" data-parent="#accordion" href="#collapse-{!article.Id}"><span id="spt" class="glyphicon glyphicon-plus" style="margin-right: 8px;"></span>{!article.title}</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse-{!article.Id}" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <!--<p>{!article.abstract}</p>-->
+                                            <apex:outputText value="{!left(article.abstract, 300)}"></apex:outputText> {!if(len(article.abstract) > 300, "..","")}
+                                            <a Target="_blank" href="{!$Label.LearnBrightMlsCommURL}/article/{!article.URLname}">Read full article</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <script>
+                                function searchOncomplete(){
+                                    
+                                    var articleExist = document.getElementById("articleHeadId");
+                                    console.log('--head--',articleExist); 
+                                    if(articleExist == null)
+                                        document.getElementById("messageId").style.display = 'block';
+                                    else
+                                        document.getElementById("messageId").style.display = 'none';
+                                }
+                                </script>
+                                <script>
+                                $(document).ready(function(){
+                                    $('#atid-{!article.Id}').click(function() {
+                                        $("#spt", this).toggleClass("glyphicon-plus glyphicon-remove");
+                                    });        
+                                });
+                                </script>
+                            </knowledge:articleList>
+                        </div>
+                    </div>
+                    
+                </div>
+            </apex:panelGroup>
+            
+            
+        </apex:define>
+    </apex:composition>  
+    <script>
+    function updateSearchKeyHelper(value){
+        updateSearchKey(value);
+    }
+    </script>
+</apex:page>

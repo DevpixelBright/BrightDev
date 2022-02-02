@@ -1,0 +1,137 @@
+<!--<aura:component implements="flexipage:availableForAllPageTypes" access="global" >-->
+<aura:component access="GLOBAL" implements="flexipage:availableForAllPageTypes" >
+    <aura:attribute name="oBrightApplication" type="MRIS_Application__c" default="{sObject : 'MRIS_Application__c'}"/>
+    <aura:attribute name="AgentList" type="list" default="[{'name':'', 'brokerOffice' : '', 'sub' : ''}]"/>
+    <aura:attribute name="code" type="String" default=""/>
+    <aura:attribute name="city" type="String" default=""/>
+    <aura:attribute name="state" type="String" default=""/>    
+    <aura:attribute name="zip" type="String" default=""/> 
+    <aura:attribute name="brokerCode" type="String" default=""/> 
+    <aura:attribute name="brokerCodeName" type="String" default=""/>
+    <!-- <aura:attribute name="AgentList" type="list" default="[]"/>-->
+    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12  breadgram">
+        <span>
+            <!--  <a href="{!$resource.HomeRedirection}" target="_blank">{!$resource.HomeRedirection}</a>-->
+            <lightning:icon iconName="utility:home" alternativeText="home" title="Home"/>
+            
+        </span>
+        <a href='https://dev-mrisonboarding.cs10.force.com/eProcess/'>Home</a> / APPLICATION DETAILS    
+    </div>
+    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12  Approvedgreen">
+        <lightning:icon iconName="action:approval" alternativeText="Approved" title="Approved" />
+        <p>Application Submitted Successfully</p>
+    </div>                
+    <lightning:accordion aura:id="accordion" activeSectionName="A">
+        <lightning:accordionSection class="active-application" name="A" label="Application Details">
+            <aura:set attribute="body">
+                <fieldset class="slds-form-element">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                        <div class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_5-of-12 slds-large-size_2-of-12 field-side1 ">
+                            <h5>Office ID</h5>
+                        </div>
+                        <div class="slds-col slds-size_7-of-12 slds-small-size_7-of-12 slds-medium-size_7-of-12 slds-large-size_3-of-12 field-side1">
+                            <h6>{!v.code}&nbsp;</h6>
+                        </div>
+                        <div class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_5-of-12 slds-large-size_3-of-12 field-side1 ">
+                            <h5>Account Name</h5>
+                        </div>
+                        <div class="slds-col slds-size_7-of-12 slds-small-size_7-of-12 slds-medium-size_7-of-12 slds-large-size_3-of-12 field-side1 ">
+                            <h6>{!v.brokerCodeName}&nbsp;</h6>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                        <div class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_5-of-12 slds-large-size_2-of-12 field-side1 ">
+                            <h5>City</h5>
+                        </div>
+                        <div class="slds-col slds-size_7-of-12 slds-small-size_7-of-12 slds-medium-size_7-of-12 slds-large-size_3-of-12 field-side1">
+                            <h6>{!v.city}&nbsp;</h6>
+                        </div>
+                        <div class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_5-of-12 slds-large-size_3-of-12 field-side1 ">
+                            <h5>State</h5>
+                        </div>
+                        <div class="slds-col slds-size_7-of-12 slds-small-size_7-of-12 slds-medium-size_7-of-12 slds-large-size_3-of-12 field-side1 ">
+                            <h6>{!v.state}&nbsp;</h6>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                        <div class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_5-of-12 slds-large-size_2-of-12 field-side1 ">
+                            <h5>Zip</h5>
+                        </div>
+                        <div class="slds-col slds-size_7-of-12 slds-small-size_7-of-12 slds-medium-size_7-of-12 slds-large-size_3-of-12 field-side1">
+                            <h6>{!v.zip}&nbsp;</h6>
+                        </div>
+                        <div class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_7-of-12 slds-large-size_3-of-12 field-side1 ">
+                            <h5>Saluation</h5>
+                        </div>
+                        <div class="slds-col slds-size_7-of-12 slds-small-size_7-of-12 slds-medium-size_7-of-12 slds-large-size_3-of-12 field-side1 ">
+                            <h6>{!v.oBrightApplication.Salutation__c}&nbsp;</h6>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                        <div class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_5-of-12 slds-large-size_2-of-12 field-side1 ">
+                            <h5>First Name</h5>
+                        </div>
+                        <div class="slds-col slds-size_7-of-12 slds-small-size_7-of-12 slds-medium-size_7-of-12 slds-large-size_3-of-12 field-side1">
+                            <h6>{!v.oBrightApplication.First_Name__c }&nbsp;</h6>
+                        </div>
+                        <div class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_5-of-12 slds-large-size_3-of-12 field-side1 ">
+                            <h5>Last Name</h5>
+                        </div>
+                        <div class="slds-col slds-size_7-of-12 slds-small-size_7-of-12 slds-medium-size_7-of-12 slds-large-size_3-of-12 field-side1 ">
+                            <h6>{!v.oBrightApplication.Last_Name__c}&nbsp;</h6>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                        <div class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_5-of-12 slds-large-size_2-of-12 field-side1 ">
+                            <h5>Middle Name</h5>
+                        </div>
+                        <div class="slds-col slds-size_7-of-12 slds-small-size_7-of-12 slds-medium-size_7-of-12 slds-large-size_3-of-12 field-side1">
+                            <h6>{!v.oBrightApplication.Middle_Name__c}&nbsp;</h6>
+                        </div>
+                        <div class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_5-of-12 slds-large-size_3-of-12 field-side1 ">
+                            <h5>Nick Name</h5>
+                        </div>
+                        <div class="slds-col slds-size_7-of-12 slds-small-size_7-of-12 slds-medium-size_7-of-12 slds-large-size_3-of-12 field-side1 ">
+                            <h6>{!v.oBrightApplication.Nickname__c}&nbsp;</h6>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                        <div class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_5-of-12 slds-large-size_2-of-12 field-side1 ">
+                            <h5>Primary Phone</h5>
+                        </div>
+                        <div class="slds-col slds-size_7-of-12 slds-small-size_7-of-12 slds-medium-size_7-of-12 slds-large-size_3-of-12 field-side1">
+                            <h6>{!v.oBrightApplication.Primary_Phone__c }&nbsp;</h6>
+                        </div>
+                        <div class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_5-of-12 slds-large-size_3-of-12 field-side1 ">
+                            <h5>Email</h5>
+                        </div>
+                        <div class="slds-col slds-size_7-of-12 slds-small-size_7-of-12 slds-medium-size_7-of-12 slds-large-size_3-of-12 field-side1 ">
+                            <h6>{!v.oBrightApplication.Private_Email__c}&nbsp;</h6>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                        <div class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_5-of-12 slds-large-size_2-of-12 field-side1 ">
+                            <h5>Suffix</h5>
+                        </div>
+                        <div class="slds-col slds-size_7-of-12 slds-small-size_7-of-12 slds-medium-size_7-of-12 slds-large-size_3-of-12 field-side1">
+                            <h6>{!v.oBrightApplication.Suffix__c}&nbsp;</h6>
+                        </div>
+                    </div>
+                    <div style=" clear:both;" class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_2-of-12 field-side1 ">
+                            <h4>Agents Selected</h4> 
+                        </div></div>
+                    
+                    
+                    <aura:iteration items="{!v.AgentList}" var="item" indexVar="idx">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side1">
+                            
+                            <h3>  {!item.Agent_Name__c}  {!idx + 1}. {!item.sub} &nbsp;{!item.name}</h3>
+                        </div>
+                    </aura:iteration>
+                    
+                </fieldset>
+            </aura:set>
+        </lightning:accordionSection>
+    </lightning:accordion>
+</aura:component>

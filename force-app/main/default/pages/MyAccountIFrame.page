@@ -1,0 +1,50 @@
+<apex:page showHeader="false" standardStylesheets="false" docType="html-5.0" title="myAccount" lightningstylesheets="true">
+<apex:includeScript value="{!URLFOR($Resource.jquery_1_8_2_min)}"  />
+<html style="height: 100%">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=8, IE=9, IE=10" ></meta>
+        <script type="text/javascript">
+            $(function () {
+                var count = 0;
+                
+                var interval = window.setInterval(function () {
+                    var text = "";
+                    
+                    for (var i = 0; i < count; i++)
+                        text += " ."
+                    
+                    $("#loader").text(text);
+                    
+                    count++;
+                    count = count % 4;
+                }, 500);
+                
+                var msie = navigator.userAgent.indexOf("MSIE") >= 0;
+                var timeout = msie ? 2000 : 1500;
+                
+                var loadMyAccount = function () {
+                    var target = "{!$Label.MRIS_MY_ACCOUNT_URL}";
+                    
+                    if (msie)
+                        location.href = target;
+                    else
+                        $("body").append($("<iframe src='" + target + "' frameborder='0' height='100%' width='100%'></iframe>"));
+                    
+                    $("#loader").parent().hide();    
+                    window.clearInterval(interval);
+                };
+        
+                window.setTimeout(loadMyAccount, timeout);
+            })
+        </script>
+    </head>
+
+    <body style="height: 100%; margin:0px; padding:0px; overflow:hidden">
+        <iframe src="(!$Label.MRIS_SALESFORCE_LOGOUT}" frameborder='0' height='100%' width='100%' style="display: none"></iframe>
+        <div style="width: 300px; margin: 100px auto; font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 18px;">
+            <span>Establishing secured session</span>
+            <span id="loader"></span>
+        </div>
+    </body>
+</html>
+</apex:page>

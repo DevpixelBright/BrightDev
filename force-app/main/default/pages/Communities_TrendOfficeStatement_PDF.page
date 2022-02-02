@@ -1,0 +1,126 @@
+<apex:page docType="html-5.0" renderAs="pdf" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="Communities_OfficeBillingInformation" lightningstylesheets="true">
+    <apex:composition template="Communities_TrendBase_PDF">
+        <apex:define name="head">
+            <style>
+            table {width:100%; color:#777; font-style: italic; margin-bottom:50px; }
+            th {padding:10px;}
+            td {padding:10px; border-top:1px solid #ccc;}
+            .main-list {width:100%; color:black; margin-bottom:50px;}
+            </style>
+        </apex:define>
+        <apex:define name="title">
+            Office Statement
+        </apex:define>
+        <apex:define name="content">
+         <div style=" margin:auto; margin-top:5px;  font-size:14px; padding:10px;"> 
+            <div style=" padding:10px; width:35%; float:left;font-weight:bold;font-size:13px;">
+                {!UPPER(subscription.Contact__r.Name)}<br/>
+                {!UPPER(subscription.Contact__r.Street_Number__c)} {!UPPER(subscription.Contact__r.Street_Name__c)}<br/>
+                {!UPPER(subscription.Contact__r.City__c)} {!UPPER(subscription.Contact__r.State__c)}<br/>
+                {!UPPER(subscription.Contact__r.County__c)} {!UPPER(subscription.Contact__r.Zip__c)}
+            </div>          
+            <div style=" padding:10px; width:35%; float:right;font-weight:bold;font-size:13px;">
+
+                        <u>Pay By Mail</u><br/><br/>
+                        MRIS<br/>
+                        P.O. Box 37093<br/>
+                        Baltimore, MD<br/>
+                        21297-3093
+             
+            </div> 
+            <div style="clear:both;"></div>   
+        </div>
+                    
+         <div style="margin:auto; margin-top:5px;  font-size:14px; padding:10px;"> 
+            <div style="border:1px solid #ddd; padding:10px;">
+            <b>Did you know that you can set up automatic payments for your MRIS account?</b><br/><br/>
+            Reduce your chances of missing a payment by designating a credit card as your Auto Pay method. Visit <b>MRIS.com/MyAccount</b> and click <b>Update Billing and Make Payments</b> with MRIS Connect to get started.    
+            </div>    
+        </div> 
+        <br/> <br/>       
+            <div style=" padding-bottom:50px;page-break-after:always; ">
+            <apex:variable value="{!0}" var="totalInvoice"/>
+            <table class="main-list">
+                <tr>
+                    <th>Name</th>
+                    <th>Subscription Id</th>
+                    <th>Office Id</th>
+                    <th>Oldest Invoice Date</th>
+                    <th style="text-align:right;">Balance Due</th>
+                                                            
+                </tr>
+                <apex:repeat value="{!selectedAccounts}" var="key">
+                    <tr>
+                        <td>{!selectedAccounts[key].Subscription__r.Contact__r.Name}</td>
+                        <td><a style="text-decoration:none; cursor:pointer; color:#388EDD;" href="#{!selectedAccounts[key].Id}">{!selectedAccounts[key].Subscription__r.Name}</a></td>
+                        <td>{!selectedAccounts[key].Subscription__r.Related_Location_Broker_Office__r.Name}</td>
+                        <td>
+                            <apex:outputText value="{0, date, MM/dd/yyyy}">
+                                <apex:param value="{!selectedAccounts[key].Oldest_Invoice_Due__c}" /> 
+                            </apex:outputText>                        
+                        </td>                        
+                        <td style="text-align:right;">$ {!selectedAccounts[key].Zuora__Balance__c}</td>
+                        <apex:variable value="{!totalInvoice + selectedAccounts[key].Zuora__Balance__c}" var="totalInvoice"/>
+                    </tr>    
+                </apex:repeat>
+                <tr>
+                    <td colspan="4" style="text-align:right;"><b>Total</b></td>
+                    <td style="text-align:right;"><b>$ {!totalInvoice}</b></td>
+                </tr>
+            </table>
+            </div>
+            
+
+            
+            <apex:variable value="{!0}" var="invoiceCount"/>            
+            <apex:repeat value="{!zInvoicesMap}" var="key">
+                <div style="{!if(invoiceCount < zInvoiceCount-1, 'page-break-after:always;', '')} padding-bottom:50px; ">
+                <a name="{!selectedAccounts[key].Id}"></a> 
+                <div style="color:black; font-weight:bold; font-size:17px; position: absolute; padding-left:20px; padding-right:10px; padding-bottom:10px; ">
+                    <div style="width:50%; float:left;font-weight:bold;">{!selectedAccounts[key].Name}</div>              
+                    <div style="width:50%; float:right;font-weight:bold; text-align:right;">
+                           Balance Due: $ {!selectedAccounts[key].Zuora__Balance__c}                         
+
+                    </div>
+                    <div style="clear:both"></div>
+                    
+                </div>
+                <div style="clear:both"></div>
+                    <br/><br/><br/>         
+                    <table>
+                        <tr>
+                            <th>Invoice Number</th>
+                            <th>Invoice Date</th>
+                            <th>Due Date</th>
+                            <th style="text-align:right;">Total Amount</th>
+                            <th style="text-align:right;">Balance Due</th>
+                            
+                        </tr>
+                    
+                        <apex:repeat value="{!zInvoicesMap[key]}" var="zi">
+                            <tr>
+                                <td class="table-col">{!zi.Name}</td>
+                                <td>
+                                    <apex:outputText value="{0, date, MM/dd/yyyy}">
+                                        <apex:param value="{!zi.Zuora__InvoiceDate__c}" /> 
+                                    </apex:outputText>                                 
+                                </td>
+                                <td class="table-col">
+                                    <apex:outputText value="{0, date, MM/dd/yyyy}">
+                                        <apex:param value="{!zi.Zuora__DueDate__c}" /> 
+                                    </apex:outputText>                                
+                                </td>
+                                <td style="text-align:right;">$ {!zi.Zuora__TotalAmount__c}</td>
+                                <td style="text-align:right;">$ {!zi.Zuora__Balance2__c}</td>
+                                
+                            </tr>
+                        </apex:repeat>
+                    </table>
+                    <div style="clear:both"></div>
+                </div>
+                <apex:variable value="{!invoiceCount + 1}" var="invoiceCount"/>
+                <div style="clear:both"></div>
+            </apex:repeat>   
+        </apex:define> 
+    </apex:composition> 
+</apex:page>

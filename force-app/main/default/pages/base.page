@@ -1,0 +1,334 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="Base_Controller" lightningstylesheets="true">
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title>Account and Settings | Bright MLS</title>
+    <link rel="shortcut icon" href="{!URLFOR($Resource.Communities_Favicon)}" type="image/vnd.microsoft.icon" />
+    <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/jquery.min.js')}"></script>
+    <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/jquery.sticky.js')}"></script>
+    <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/stringformat.js')}"></script>
+    <c:Bootstrap_IE_Detection />
+</head>
+
+<body>
+    <script>
+        function freezeScreen() {
+            var overlay = $("<div>");
+            overlay
+                .css({
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    zIndex: 9999,
+                    width: $(window).width() > $(document).width() ? $(window).width() : $(document).width(),
+                    height: $(window).height() > $(document).height() ? $(window).height() : $(document).height(),
+                    backgroundColor: "#fff",
+                    opacity: 0,
+                    cursor: "wait"
+                })
+                .appendTo("body")
+                .fadeTo(500, 0.8);
+                
+            return overlay;
+        }
+        
+        function headerTopHeight(height) {
+            $("#header-top").height(height < 60 ? height : 60);
+        }
+        
+        function headerBottomHeight(height) {
+            $("#header-bottom").height(height);
+            
+            /*
+            $("#content-container").css({
+                marginTop: height + 30
+            });
+            */
+        }
+        
+        function headerBottomWidth(width) {
+            $("#content-container").css({
+                width: width,
+                height: "auto",
+                overflow: "visible"
+            });
+
+            $("footer").css({
+                display: "block"
+            });
+            
+            repositionFooter();
+        }
+
+        function markUserId(id) {
+            var mark = $("#header-top").get(0).contentWindow.markUserId;
+            
+            if (!mark)
+                window.setTimeout(function () { markUserId(id); }, 100);
+            else
+                mark(id);
+
+            mark = $("#header-bottom").get(0).contentWindow.markUserId;
+            
+            if (!mark)
+                window.setTimeout(function () { markUserId(id); }, 100);
+            else
+                mark(id);
+        }
+        
+        function markOptionPanel(panel) {
+            var mark = $("#header-bottom").get(0).contentWindow.markOptionPanel;
+            
+            if (!mark)
+                window.setTimeout(function () { markOptionPanel(panel); }, 100);
+            else
+                mark(panel);
+        }
+        
+        function repositionFooter() {
+            try {            
+                var oversized = $(window).height() > (content.offset().top + content.outerHeight() + footer.outerHeight());
+                
+                footer.css("position", oversized ? "fixed" : "relative");
+                
+                content.css("margin-bottom", (oversized ? footer.outerHeight() : 0) + 50 + "px");
+            }
+            catch (e) {}
+        }
+        
+        window.setInterval(repositionFooter, 100);
+        
+        $(window).resize(repositionFooter);
+        
+        $(function(){
+            $("#header-bottom")
+                .sticky({ topSpacing: 0 })
+                .parent()
+                .css({ height: "auto" });
+        });
+    </script>
+    
+    <style>
+        #header-top, #header-bottom {
+            display: block;
+            width: 100%;
+            height: 0px;
+            border: 0;
+            z-index: 1000;
+        }
+        
+        #content-container {
+            width: 0px;
+            height: 0px;
+            margin: auto;
+            margin-top: 30px;
+            overflow: hidden;
+        }
+        
+        .jumbotron.landing_instructions {
+            background-color: transparent;
+            margin-bottom: 0px;
+        }
+        
+        .instructions {
+            margin-bottom: 25px;
+        }
+        
+        .action-panels > div {
+            margin-bottom: 30px;
+            opacity: 0;
+        }
+            
+            .action-panels > div > a, .action-panels > div > div {
+                display: block;
+                margin: 10px;
+                padding: 10px;
+                color: #333;
+            }
+
+            .action-panels > div > div {
+                border: 10px solid #F5F5F5;
+            }
+
+            .ie .action-panels > div > a, .ie .action-panels > div > div {
+                border-top: 1px solid #ddd;
+            }
+
+            .ie8 .action-panels > div > a, .ie8 .action-panels > div > div {
+                border: 1px solid #ddd;
+            }
+
+            .action-panels > div > a {
+                cursor: pointer;
+                height: 200px;
+            }
+
+            .action-panels > div > a:hover {
+                text-decoration: none;
+            }
+        
+            .action-panels > div > div {
+                cursor: default;
+            }
+
+        .action-panels h4 {
+            border-bottom: 1px solid #00A7B0;
+            padding-bottom: 10px;                   
+        }
+
+        .action-panels i.fa {
+            margin: auto 10px;
+            position: relative;
+            top: 5px;
+        }
+
+        .action-panels p {
+            margin: auto 10px;
+        }
+        
+        .action-panels p + p {
+            margin-top: 10px;
+        }
+            
+        footer {
+            display: none;
+            padding: 50px 0px;
+            background-color: #212B3D;
+            color: #fff;
+        }
+        
+        footer a {
+            color: #fff !important;
+            text-decoration: underline;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        footer a + a {
+            margin-left: 20px;
+        }
+
+        footer .container .row {
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .action-panels > div {
+                display: block;
+                margin-bottom: 0px;
+            }
+                
+                .action-panels > div + div{
+                    margin-top: 20px;
+                }
+        }
+     </style>
+    
+    <iframe id="header-top" src="header_top" scrolling="no" frameBorder="0"></iframe>
+    <iframe id="header-bottom" src="Communities_Header_Bottom" scrolling="no" frameBorder="0"></iframe>
+    <div id="content-container">
+        <div class="container">
+            <apex:outputPanel layout="none" rendered="{!isValidAndInActiveSubscription}" >
+                <div class="row">
+                    <apex:insert name="content"/>
+                </div>
+            </apex:outputPanel>
+
+            <apex:outputPanel layout="none" rendered="{!!isValidAndInActiveSubscription}" >
+                <c:Bootstrap_Resources />
+                <div class="alert alert-danger">
+                    <p>We’re sorry, but you do not appear to have access to this page.</p>
+                </div>
+            </apex:outputPanel>
+        </div>
+
+        <script>
+            var panels = $(".action-panels > div");
+            
+            panels
+                .mouseenter(function () {
+                    $(this).siblings().stop().fadeTo(200, 0.30);
+                })
+                .mouseleave(function () {
+                    panels.stop().fadeTo(200, 1.00);
+                })
+                .each(function () {
+                    var panel = $(this).children(".alert");
+                    var target = panel.attr("data-target");
+                    
+                    if (target == null) return;
+                    
+                    panel.click(function () {
+                        $(target).modal("show");
+                    });
+                });
+            
+            function init_action_panels() {
+                var ie8 = $("html.ie8").size() > 0;
+                var panels = $(".action-panels > div");
+
+                panels
+                    .unbind("mouseenter")
+                    .mouseenter(function () {
+                        var targets = $(this).siblings();
+                        
+                        if (ie8)
+                            targets = targets.find(".fa").andSelf();
+                            
+                        targets.stop().fadeTo(200, 0.30);
+                    })
+                    .unbind("mouseleave")
+                    .mouseleave(function () {
+                        var targets = panels;
+                        
+                        if (ie8)
+                            targets = targets.find(".fa").andSelf();
+                            
+                        targets.stop().fadeTo(200, 1.00);
+                    });
+                
+                for (var i = 0; i < panels.length; i++) {
+                    window.setTimeout(function (i) {
+                        return function () {
+                            $(panels[i]).animate({
+                                opacity: 1.00
+                            }, 500);
+                        }
+                    }(i), 100 * i);
+                }
+            }
+            
+            $(init_action_panels);
+        </script>       
+    </div>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <p>Keep your MLS account information secure! Don’t forget to log out before you leave Account &amp; Settings.</p>
+                <p>
+                    <!--<a href="http://www.mris.com/mris-feedback" target="_blank">Feedback</a>-->
+                    <a href="https://www.brightmls.com/#/privacy" target="_blank">Privacy</a>
+                    <a href=" https://www.brightmls.com/#/terms" target="_blank">Terms of Use</a>
+                    <a href="https://www.brightmls.com/#/copyright" target="_blank">Copyright</a>
+                </p>
+                <p>
+                    Copyright © 
+                    <apex:outputText value="{0, date, yyyy}">
+                        <apex:param value="{!NOW()}" />
+                    </apex:outputText> 
+                    Bright MLS, Inc.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/respond.js')}"></script>
+
+    <script>
+        var content = $("#content-containercontent-container");
+        var footer = $("footer");
+    </script>
+</body>
+</html>
+</apex:page>

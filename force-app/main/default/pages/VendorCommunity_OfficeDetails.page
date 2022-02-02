@@ -1,0 +1,383 @@
+<apex:page controller="VendorCommunity_OfficeDetails_Controller" docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" lightningstylesheets="true">
+    <apex:composition template="VendorCommunity_Base">
+        <apex:define name="content">
+            <apex:form >
+                <c:Bootstrap_Resources />   
+
+                <link href="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/css/font-awesome.min.css')}" rel="stylesheet" type="text/css" />
+                <apex:pageBlock title="Account Id - {!Office.Name}" id="details" >
+                    <style>
+                        .two_buttons{
+                            text-align:right; 
+                            margin-bottom:-44px; 
+                            margin-top:40px;
+                        }                        
+                        h2{
+                            font-size:22px !important; 
+                            margin:5px 0px !important;
+                        }                        
+                        .tertiaryPalette{
+                            display:none !important;
+                        }                        
+                        .for_inputs h4{
+                            border-bottom: 1px solid #69A61F; 
+                            padding-bottom: 10px;
+                        }                                                
+                        label{
+                            padding-top:0px !important;
+                        }                        
+                        .margin{
+                            margin:20px 0 10px 0;
+                        }                        
+                        #content-container{
+                            margin-top:0px !important;
+                        }                        
+                        @media(min-width:400px){
+                        
+                            .detailList th{
+                                width:30% !important;
+                            }
+                        
+                            .mandatory{
+                                color:red; font-weight:bold; font-size:18px;
+                            }
+                        }                        
+                        i.fa {
+                            margin: auto 20px;
+                            position: relative;
+                            top: 5px;
+                        }                        
+                        .fa-2x {
+                            font-size: 2em;
+                        }
+                        .fa-1x { 
+                            font-size: 1.5em; 
+                        }
+                        .fa {
+                            display: inline-block;
+                            font-family: FontAwesome;
+                            font-style: normal;
+                            font-weight: normal;
+                            line-height: 1;
+                            -webkit-font-smoothing: antialiased;
+                            -moz-osx-font-smoothing: grayscale;
+                        }
+                        .inlineEditModified {
+                            font-size:14px;
+                            color: #ff6a00;
+                            font-weight: bold;
+                            margin-left:20px;                            
+                        }
+                        input[type=text] {
+                            width: 90%;
+                        }
+                        .two_buttons {
+                            text-align: center;
+                            margin-bottom: 0px;
+                            margin-top: 10px;
+                        }                        
+                        .inlineEditUndoLink {position:absolute; left:35px;}
+                        .inlineEditWrite { padding-left:20px;}
+                        .inlineEditWriteOn{
+                            padding-left:20px;
+                            background:url({!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/pencil_16.png')}) no-repeat left 2px; 
+                            background-size: 16px 16px;
+                            }
+                        .inlineEditUndo{
+                            margin-top:-3px; 
+                            background-image:url({!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/refresh_16_1.png')});
+        
+                            width:16px;
+                            height:16px;
+                            vertical-align:middle;
+                            background-position: left; 
+                         
+                        }
+                        .inlineEditDiv {margin-left:20px;} 
+                        .inlineEditDiv input {height:20px;} 
+                        .dropdown-block {
+                            width:10%;
+                            float:right;
+                            margin-top:-115px;
+                        }
+                        .page_messages h4 {
+                            border-bottom:none;
+                        }
+                        .NamedivStyle {
+                            margin-left: 20px;
+                        }
+                        input[type=file] {
+                            border:none; box-shadow:none;
+                        }  
+                        #InlineEditDialog_buttons {
+                            display:none;
+                        }                                         
+                    </style>  
+
+                    <apex:actionFunction name="saveContactDetails" action="{!saveContactInfo}" reRender="details" />       
+                        
+                    <apex:outputPanel id="address_update">                   
+
+                    <script>
+                        $(document).ready(function(){
+                            $("form").addClass("form-horizontal");
+                            $("label").addClass("col-sm-3 control-label");
+                            $(".for_inputs input").addClass("form-control");
+                            $("select").addClass("form-control");
+                            $(".errorM3").addClass("alert alert-danger");
+                            $(".infoM3").addClass("alert alert-info");
+                            $(".confirmM3").addClass("alert alert-success");
+                            $(".inlineEditUndoLink").addClass('fa fa-undo')
+                                                        
+                            var errorMsg;
+                            $('[id$=contactSaveButton]').click(function() {
+                                errorMsg = '';
+                                var regx = /^\([0-9]{3}\) [0-9]{3}-[0-9]{4}$/;
+
+                                if(typeof $('input[id$=Phone]').val() != 'undefined' && (!regx.test($('input[id$=Phone]').val()) || $('input[id$=Phone]').val() == null)) {
+                                    errorMsg = '<div>Invalid phone number</div>';                                  
+                                }
+                                
+                                if(typeof $('input[id$=Fax]').val() != 'undefined' && !regx.test($('input[id$=Fax]').val()) && $('input[id$=Fax]').val() != null) {
+                                    errorMsg += '<div>Invalid Fax number</div>';                                  
+                                }                                                               
+
+                                if(errorMsg != '') {    
+                                    var errorBlock = '<div class="alert alert-danger" role="alert"><h4>Error</h4>' + errorMsg + '</div>';
+                                    $('#contactMessages').html(errorBlock);
+                                    return false;
+                                }
+                                else {
+                                    $('#contactMessages').html('');
+                                    //alert('--'+$('input[id$=Phone]').val());
+                                    //saveContactDetails();
+                                    return true;
+                                }
+                            });
+                          
+                            $('[id$=AddressInformation] :hidden').change(function(e) {
+                                $('#documentGroup').show();
+                            });                                                        
+                        });                                     
+                    </script>
+                    
+                    </apex:outputPanel>
+                    
+                    <div class="row">
+                        <c:Communities_Definition pageTitle="Office Information" pageTitleClass="fa fa-shield fa-2x" hasDefinitions="false">
+                            <p><b class="term">Term</b> Definition goes here.</p>
+                        </c:Communities_Definition>
+
+                        <div class="col-xs-12 instructions">
+                            <p> Have your main office details recently changed? Update that information below. </p>
+                        </div>
+                                            
+                    </div>
+                    
+                    <div id="messages">
+                        <apex:pagemessages rendered="{!message}"></apex:pagemessages>
+                    </div> 
+                    
+                    <apex:pageBlock mode="inlineEdit" id="contact_details">
+       
+                    <div class="row for_inputs">
+                        <div>
+                            <h4>
+                                <i class="fa fa-phone-square fa-2x"></i>Telephone and Contact Information                                
+                            </h4>
+                            
+                            <apex:outputPanel >
+                            
+                                <div id="contactMessages" class="page_messages">
+                                    <apex:pagemessages rendered="{!contactMessage}"></apex:pagemessages>
+                                </div>                            
+                             
+                                <div id="output1">
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Phone" />
+                                        <div class="col-sm-5">
+                                            <apex:outputField value="{!office.Phone}" id="Phone">
+                                                <apex:inlineEditSupport event="ondblClick" showOnEdit="contactSaveButton, contactCancelButton" />
+                                            </apex:outputField>
+                                        </div>
+                                    </div> 
+
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Fax"/>
+                                        <div class="col-sm-5">
+                                            <apex:outputField value="{!office.Fax}" id="Fax">
+                                                <apex:inlineEditSupport event="ondblClick" showOnEdit="contactSaveButton, contactCancelButton" />
+                                            </apex:outputField>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </apex:outputPanel>                           
+                        </div>
+                    </div>
+                    <div class="two_buttons">                
+                        <apex:commandButton id="contactCancelButton" styleClass="btn btn-default" action="{!cancelContactEdit}" value="Cancel" style="display:none;" />
+                        <apex:commandButton id="contactSaveButton" styleClass="btn btn-primary" action="{!saveContactInfo}" value="Save" style="display:none;" />
+                    </div>                     
+                    </apex:pageBlock>
+                    
+                    
+                    <!-- Address information block -->
+                    <apex:pageBlock mode="inlineEdit2" id="AddressInformation">
+        
+                    <div class="row for_inputs">
+                        <div>
+                            <h4>
+                                <i class="fa fa-envelope fa-1x"></i>Office Address                                
+                            </h4>
+
+                            <div id="addressMessages" class="page_messages">
+                                <apex:pagemessages rendered="{!addressMessage}"></apex:pagemessages>
+                            </div>                            
+                                                        
+                            <div id="output1">
+                                <div class="form-group">
+                                    <apex:outputLabel value="Account Name"/>
+                                    <div class="col-sm-7 NamedivStyle" >
+                                        <apex:outputField value="{!office.Account_Name__c}" >
+                                            <!--<apex:inlineEditSupport event="ondblClick" showOnEdit="addressSaveButton, addressCancelButton" />-->
+                                        </apex:outputField>
+                                    </div>
+                                </div>                                
+                            
+                                <div class="form-group">
+                                    <apex:outputLabel value="Street Number"/>
+                                    <div class="col-sm-7">
+                                        <apex:outputField value="{!office.Street_Number__c}">
+                                            <apex:inlineEditSupport event="ondblClick" showOnEdit="addressSaveButton, addressCancelButton," />
+                                        </apex:outputField>                                            
+                                    </div>
+                                </div> 
+
+                                <div class="form-group">
+                                    <apex:outputLabel value="Street Name"/>
+                                    <div class="col-sm-7">
+                                        <apex:outputField value="{!office.Street_Name__c}">
+                                            <apex:inlineEditSupport event="ondblClick" showOnEdit="addressSaveButton, addressCancelButton" />
+                                        </apex:outputField>                                            
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <apex:outputLabel value="Street Type"/>
+                                    <div class="col-sm-7">
+                                        <apex:outputField value="{!office.QAS_Mailing_Street_Type__c}">
+                                            <apex:inlineEditSupport event="ondblClick" showOnEdit="addressSaveButton, addressCancelButton" />
+                                        </apex:outputField>                                            
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <apex:outputLabel value="Street Number Suffix"/>
+                                    <div class="col-sm-7">
+                                        <apex:outputField value="{!office.Street_Number_Suffix__c}">
+                                            <apex:inlineEditSupport event="ondblClick" showOnEdit="addressSaveButton, addressCancelButton" />
+                                        </apex:outputField>                                            
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <apex:outputLabel value="Street Direction"/>
+                                    <div class="col-sm-7">
+                                        <apex:outputField value="{!office.QAS_Mailing_Street_Direction__c}">
+                                            <apex:inlineEditSupport event="ondblClick" showOnEdit="addressSaveButton, addressCancelButton" />
+                                        </apex:outputField>                                            
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <apex:outputLabel value="Unit Type"/>
+                                    <div class="col-sm-7">
+                                        <apex:outputField value="{!office.QAS_Mailing_Unit_Type__c}">
+                                            <apex:inlineEditSupport event="ondblClick" showOnEdit="addressSaveButton, addressCancelButton" />
+                                        </apex:outputField>                                            
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <apex:outputLabel value="Unit #"/>
+                                    <div class="col-sm-7">
+                                        <apex:outputField value="{!office.Unit__c}">
+                                            <apex:inlineEditSupport event="ondblClick" showOnEdit="addressSaveButton, addressCancelButton" />
+                                        </apex:outputField>                                            
+                                    </div>
+                                </div>
+                                                                 
+                                <div class="form-group">
+                                    <apex:outputLabel value="Zip"/>
+                                    <div class="col-sm-7">
+                                        <apex:outputField value="{!office.Zip__c}">
+                                            <apex:inlineEditSupport event="ondblClick" showOnEdit="addressSaveButton, addressCancelButton" />
+                                        </apex:outputField>                                            
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <apex:outputLabel value="Zip+4"/>
+                                    <div class="col-sm-7">
+                                        <apex:outputField value="{!office.Zip_4__c}">
+                                            <apex:inlineEditSupport event="ondblClick" showOnEdit="addressSaveButton, addressCancelButton" />
+                                        </apex:outputField>                                            
+                                    </div>
+                                </div> 
+                                
+                                <div class="form-group">
+                                    <apex:outputLabel value="City"/>
+                                    <div class="col-sm-7">
+                                        <apex:outputField value="{!office.City__c}">
+                                            <apex:inlineEditSupport event="ondblClick" showOnEdit="addressSaveButton, addressCancelButton" />
+                                        </apex:outputField>                                            
+                                    </div>
+                                </div> 
+                                
+                                <div class="form-group">
+                                    <apex:outputLabel value="State"/>
+                                    <div class="col-sm-7">
+                                        <apex:outputField value="{!office.State__c}" id="State" >
+                                            <apex:inlineEditSupport event="ondblClick" showOnEdit="addressSaveButton, addressCancelButton" />
+                                        </apex:outputField>                                            
+                                    </div>
+                                </div> 
+                                
+                                <div class="form-group">
+                                    <apex:outputLabel value="County" />
+                                    <div class="col-sm-7">
+                                        <apex:outputField value="{!office.QAS_Mailing_County__c}">
+                                            <apex:inlineEditSupport event="ondblClick" showOnEdit="addressSaveButton, addressCancelButton" />
+                                        </apex:outputField>                                            
+                                    </div>
+                                </div>
+                                                                                                                                                                                                                                                                                                                                                                                                      
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="two_buttons" id="address-info-buttons">                
+                        <apex:commandButton id="addressCancelButton" styleClass="btn btn-default" action="{!cancelAddressEdit}" value="Cancel" style="display:none;"/>
+                        <apex:commandButton id="addressSaveButton" styleClass="btn btn-primary" action="{!saveAccount}" value="Save"  style="display:none;"/>         
+                    </div> 
+                    
+                    <div class="row" id="loading-block" style="display:none;">
+                        <div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-5">
+                            <div class="progress progress-striped active">
+                                <div class="progress-bar" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>                                        
+                    </apex:pageBlock>
+                                               
+                </apex:pageBlock>           
+            </apex:form>
+            
+            <script>
+                markUserId("{!Office.Name}");
+                markOptionPanel("manageVendor");
+            </script>            
+            
+        </apex:define>       
+    </apex:composition>     
+</apex:page>

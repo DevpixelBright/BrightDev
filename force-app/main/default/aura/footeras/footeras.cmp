@@ -1,0 +1,17 @@
+<aura:component >
+	<div class="page-section page-footer">
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                               <div class="fmenu">
+                               <ul>
+                                   <li><a href="#">Contact Us </a></li>
+                                   <li><a href="#">Support</a></li>
+                                   </ul>
+                               </div>
+                             </lightning:layoutItem>
+                             <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                             <div class="copy">
+                                <p>© 2021 Bright MLS, Inc. All Rights Reserved.</p> 
+                                 </div>
+                             </lightning:layoutItem>
+                        </div>
+</aura:component>

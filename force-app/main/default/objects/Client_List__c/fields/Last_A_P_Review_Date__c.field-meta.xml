@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Last_A_P_Review_Date__c</fullName>
+    <description>Date field that indicates the last Accuracy and Policy department reviewed this site&apos;s URL</description>
+    <externalId>false</externalId>
+    <label>Last A&amp;P Review Date</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

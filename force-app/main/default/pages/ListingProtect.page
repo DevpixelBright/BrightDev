@@ -1,0 +1,191 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="ListingProtect_Controller" lightningstylesheets="true">
+    <head>
+        <title>MRIS {!Title}</title>
+    </head>
+
+    <apex:composition template="Bootstrap_Single">
+        
+        <apex:define name="title">
+            {!Title}
+        </apex:define>
+
+        <apex:define name="instructions">
+            <h3><i>Select to Protect</i></h3>
+            <p>The MRIS {!Title}, a component of Smart Syndication, supports the tools and strategies MRIS uses to fight against theft and other unauthorized uses of MRIS-sourced content, including listing photos and information. As part of this program, MRIS is updating our copyright assignment and registration practices for listing information and images uploaded into the MRIS database. We are asking MRIS Brokers of Record to choose, going forward, whether or not they wish their new listing information and photos to be covered under the MRIS {!Title}.</p>
+            <p>Please check the box below to OPT-IN to the {!Title}. Once you make a choice, you may not change it for {!$Setup.Listing_Protect_LockDown_Period__c.No_of_Days__c} days after your selection is made. <a href="{!$Label.MRIS_LISTING_PROTECT_DESCRIPTION_URL}">Click here</a> for more information about the program. <i>Please be aware that the choice to OPT-IN or OPT-OUT of the {!Title} is not a condition of your obtaining or maintaining participatory rights in the MRIS service.</i></p>
+        </apex:define>
+
+        <apex:define name="content">
+            <apex:pageBlock rendered="{!!Allowed}">
+                 You do not have sufficient privileges to change the election for the MRIS {!Title}.
+            </apex:pageBlock>
+            
+            <apex:pageBlock mode="edit" rendered="{!Allowed}">
+                
+                <apex:outputPanel >
+                    <div class="row-fluid">
+                        <div class="span2">
+                            <apex:outputLabel value="MRIS ID" />
+                        </div>
+                        <div class="span10">
+                            {!SubscriptionId}
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span2">
+                            <apex:outputLabel value="Name" />
+                        </div>
+                        <div class="span10">
+                            {!Name}
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span2">
+                            <apex:outputLabel value="Office ID" />
+                        </div>
+                        <div class="span10">
+                            {!Office}
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span2">
+                            <apex:outputLabel value="Opt-In" />
+                        </div>
+                        <div class="span1">
+                            <apex:inputCheckbox id="optin" value="{!OptIn}" disabled="{!OptChangeDisabled}">
+                                <apex:actionSupport event="onclick" action="{!Clear}" reRender="form" />
+                            </apex:inputCheckbox>
+                            <div id="opt-loading" class="progress progress-striped active hide">
+                                <div class="bar" style="width: 100%;"></div>
+                            </div>
+                            <script>
+                                $(function () {
+                                    var optin = $(document.getElementById("{!$Component.optin}"));
+                                    var remarks = $("#remarks");
+                                    var back = $("#back");
+                                    var bar = $("#opt-loading");
+                                    
+                                    optin.click(function () {
+                                        optin.hide();
+                                        remarks.hide();
+                                        back.hide();
+                                        bar.show();
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    
+                    <apex:outputPanel rendered="{!!OptingIn && !OptingOut}">
+                        <div id="remarks" class="row-fluid">
+                            <div class="span2">
+                                <apex:outputLabel value="Remarks" />
+                            </div>
+                            <div class="span10">
+                                <apex:outputText value="{!Remarks}" />
+                            </div>
+                        </div>            
+                        
+                        <div id="back" class="row-fluid row-buttons">
+                            <div class="span10 offset2">
+                               <input type="button" class="btn" value="Back" onclick="top.location = '{!$Label.MRIS_MANAGE_MY_LISTING_URL}';" />
+                            </div>
+                        </div>
+                        
+                    </apex:outputPanel>
+                </apex:outputPanel>
+                
+                <apex:outputPanel rendered="{!OptingIn || OptingOut}">
+                    <div class="row-fluid">
+                        <div class="span12 legal_box">
+                            <apex:composition template="Bootstrap_Legal">
+                                <apex:define name="terms">
+                                    <apex:outputPanel rendered="{!OptingIn}">
+                                        <c:LEPAddendum />
+                                    </apex:outputPanel>
+                                    
+                                    <apex:outputPanel rendered="{!OptingOut}">
+                                        <c:LEPAddendum />
+                                    </apex:outputPanel>
+                                </apex:define>
+                                
+                                <apex:define name="confirmation">
+                                    <div class="row-fluid">
+                                        <div class="span4">
+                                            <apex:outputLabel value="Yes, I agree to the Terms of Use"/>
+                                        </div>
+                                        <div class="span1">
+                                            <apex:inputCheckbox id="agreed" value="{!Agreed}"/>
+                                            <script>var agreed = $(document.getElementById("{!$Component.agreed}"));</script>
+                                        </div>
+                                        <div class="span1">
+                                            <apex:outputLabel value="Initials"/>
+                                        </div>
+                                        <div class="span1">
+                                            <apex:inputText id="initials" maxlength="3" value="{!Initials}" />
+                                            <script>
+                                                var initials = $(document.getElementById("{!$Component.initials}"));
+                                                initials.attr("autocomplete", "off");
+                                            </script>
+                                        </div>
+                                    </div>
+                                </apex:define>
+                            </apex:composition>
+                        </div>
+                    </div>
+        
+                    <apex:outputPanel id="form-buttons">
+                        <div id="submit-buttons" class="row-fluid row-buttons">
+                            <div class="span10 offset2">
+                                <apex:commandButton id="submit" styleClass="btn" value="{!SubmitText}" action="{!Submit}" disabled="{!SubmitDisabled}" />
+                                <script>var submit = $(document.getElementById("{!$Component.submit}"));</script>
+                                <apex:commandButton styleClass="btn" value="Cancel" action="{!Cancel}" />
+                            </div>
+                        </div>            
+                        <div id="submit-loading" class="row-fluid row-buttons hide">
+                            <div class="span1 offset2">
+                                <div id="opt-loading" class="progress progress-striped active">
+                                    <div class="bar" style="width: 100%;"></div>
+                                </div>    
+                            </div>
+                        </div>            
+                    </apex:outputPanel>
+                    
+                    <apex:actionFunction action="{!Refresh}" name="RerenderFormButtons" reRender="form-buttons"/>
+        
+                    <script>
+                        $(function () {                        
+                            var refresh = function () {
+                                if (agreed == undefined || initials == undefined || submit == undefined)
+                                    return;
+                                
+                                var checked = agreed.is(":checked");
+                                var initialed = initials.val().length >= 2;
+                                var enabled = submit.is(":enabled");
+                                
+                                if (checked && initialed && enabled) return;
+                                if ((!checked || !initialed) && !enabled) return;
+                                
+                                $("#submit-buttons").hide();
+                                $("#submit-loading").show();
+                                    
+                                RerenderFormButtons();
+                            };
+                            
+                            if (initials != undefined)
+                                initials
+                                    .keypress(function (event) { return Utilities.Events.Keys.IsAlpha(event); })
+                                    .keyup(refresh)
+                                    .change(refresh);
+                            
+                            if (agreed != undefined)
+                                agreed.click(refresh);
+                        });
+                    </script>
+                </apex:outputPanel>
+                        
+            </apex:pageBlock>
+        </apex:define>
+        
+    </apex:composition> 
+</apex:page>

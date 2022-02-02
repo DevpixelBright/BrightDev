@@ -1,0 +1,564 @@
+<apex:page id="thePage" controller="NewAgentApplication" showHeader="false" cache="false" standardStylesheets="true" lightningstylesheets="true">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/jquery.min.js')}"></script>
+        <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/bootstrap.min.js')}"></script>   
+        <apex:stylesheet value="{!URLFOR($Resource.Bootstrap_Layout_Library, '/css/bootstrap.min.css')}"/>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+    </head>
+    <style>
+        .Main {
+            margin-top:1%;
+        }
+        .initial {
+            border:none;
+            border-bottom:1px solid green;
+            box-shadow: none; 
+        }
+        body{margin:0px; padding:0px; background-color:#ECECEC}  
+        //.header_row{ padding:12px; background-color:#388edd;}
+        .header_row{ padding:8px; background-color:#ffffff;}
+        .header_row img.logo{padding: 12px 0px; padding-left: inherit; margin-left:20px;}
+        .body_content { color:#565656; padding: 20px 35px 20px 35px;}
+        .body_content h3{ font-size:22px; margin:0px; padding:4px 0px;}
+        .body_content p{ padding-top:5px; line-height:18px; font-size:13px; color:#727272;}
+        .form_style{background-color:#fff; border:1px solid #e7e7e7; padding-top:15px; margin-top:22px; border-radius:4px; -o-border-radius:4px; -webkit-border-radius:4px; -moz-border-radius:4px; -ms-border-radius:4px;}            
+        .panel-default { border:none; }
+        .panel-default>.panel-heading { background-color:#fff; color:#565656; border:none; }
+        .panel-group .panel-heading+.panel-collapse .panel-body { border:none; }
+        .col-sm-1 { width:1.3333%; }
+        .panel-heading { padding:0px;}
+        .menu-header {padding:10px;}
+        .menu-header-right { border-top:1px solid #ccc;}
+        .menu-header-left { padding-right:30px;}
+        h3 {padding:10px;}
+        .menu-header p { margin:0px;}
+        .menu-header p { text-decoration:none; }
+        .panel {box-shadow:none; border-radius:0px; }
+        .panel-group {margin-top:20px;}
+        .panel-group .panel { border-radius:5px; margin-bottom:12px;}
+        .active { background-color: #E4F0FB;}
+        .sectionheader { color:#ff6f6f; font-weight:bold;}	// background-color:#ffffff;
+        .panel-body {padding:10px;}
+        td a { color:#565656; text-decoration:none; }
+
+        label { color: #565656;}
+        td { color:#565656;}
+        .button {
+          background: #3498db !important;
+          background-image: -webkit-linear-gradient(top, #3498db, #2980b9) !important;
+          background-image: -moz-linear-gradient(top, #3498db, #2980b9) !important;
+          background-image: -ms-linear-gradient(top, #3498db, #2980b9) !important;
+          background-image: -o-linear-gradient(top, #3498db, #2980b9) !important;
+          background-image: linear-gradient(to bottom, #3498db, #2980b9) !important;
+          -webkit-border-radius: 3 !important;
+          -moz-border-radius: 3 !important;
+          border-radius: 17px !important;
+          font-family: Arial !important;
+          color: #ffffff !important;
+          font-size: 13px !important;
+          padding: 10px 20px 10px 20px !important;
+          text-decoration: none !important;
+          float:right;
+          font-weight : normal;
+        }
+        
+        .cancel {
+            background: #fff !important;
+            color:#3498db;
+        }
+        
+        .button:hover {
+          background: #3cb0fd;
+          background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+          background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+          background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+          background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+          background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+          text-decoration: none;
+        }
+        .buttonGroup {
+            margin-top:10px; margin-bottom:10px;
+        }
+        
+        .inputFiledsCss{
+			border: none;
+			background: #ececec;
+			//width: 85%;
+			height: 40px;
+			//border-left: 2px solid red;
+			border-radius: 0px;
+        }
+        
+        .date_field {
+            display:inline;
+        }
+        
+        .dateFormat{float:left;}
+        .dateOnlyInput input { width:100%;} // width:13em;
+        .bPageBlock { border:none; background-color:none;}
+        .message h4 { padding:0px; }
+        .ui-autocomplete-loading {
+            background: white url("http://jqueryui.com/resources/demos/autocomplete/images/ui-anim_basic_16x16.gif") right center no-repeat;
+        }
+        .progress {margin-bottom:0px; border-radius: 17px; height: 25px;}
+    </style>
+    
+    <script>
+        $(document).ready(function() {
+            $(".errorM3").addClass("alert alert-danger");
+            $(".infoM3").addClass("alert alert-info");
+            $(".confirmM3").addClass("alert alert-success");
+            
+            $(".step-heading").click(function(){
+                $('[id$=SubmitApplicationButton]').hide();
+                $(this).css('pointer-events', 'none');    
+            }); 
+            
+            $("#SubscriberId").change(function() {
+                alert("ok");
+            });
+            
+            
+            var date_input=$('input[name="date"]'); //our date input has the name "date"
+		      var container=$('.theForm form').length>0 ? $('.theForm form').parent() : "body";
+		      var options={
+		        format: 'mm/dd/yyyy',
+		        container: container,
+		        todayHighlight: true,
+		        autoclose: true,
+		      };
+		      date_input.datepicker(options);
+		      
+        });
+        
+        function validateLicenseDetails() {
+            var errorMsg = '';
+            console.log('----test--');
+            if($('[id$=SubscriberId]').val() == '' && $('[id$=applicationId]').val() == '') {
+                var licenseNumber = $('[id$=LicenseNumber]').val();
+                if(licenseNumber == '')
+                    errorMsg += ' <li>Required field missing: License Number </li>';
+                if($('[id$=LicenseState]').val() == '')
+                   errorMsg += ' <li>Required field missing: License State </li>';
+                if($('[id$=LicenseType]').val() == '')
+                    errorMsg += ' <li>Required field missing: License Type </li>';
+                if($('[id$=LicenseExpiration]').val() == '')
+                    errorMsg += ' <li>Required field missing: License Expiration </li>'; 
+                                             
+                if(licenseNumber != '' && (licenseNumber.length < 5 || licenseNumber.length > 14))
+                    errorMsg += ' <li>Invalid Data: License number must contain 5 to 14 characters </li>'; 
+                
+                var regx = /^[A-Za-z0-9]+$/;
+                if (licenseNumber != '' && !regx.test(licenseNumber) ) 
+                    errorMsg += ' <li>Invalid Data: License number must be alpha-numeric </li>';                                                                          
+                
+                var dateParts = $('[id$=LicenseExpiration]').val().split('/');
+                var expirationDate = new Date(parseInt(dateParts[2]), parseInt(dateParts[0])-1, parseInt(dateParts[1]));
+                if(expirationDate - new Date().getTime() <= 0) 
+                    errorMsg += ' <li>Invalid Data: License Expiration Date must be greater than today </li>';   
+            }
+            if(errorMsg != '') {
+            	console.log('--errorMsg--'+errorMsg);
+                var errorBlock = '<div class="message errorM3 alert alert-danger" role="alert"><ul>' + errorMsg + '</ul></div>';
+                $('#messages').html(errorBlock);
+                return false;
+            }
+            else {
+            	console.log('--errorMsg--'+errorMsg);
+                $('#messages').html('');
+                return true;
+            }                       
+        }
+        
+        function validateBrokerDetails() {
+            var errorMsg = '';
+            var nrdsid = $('[id$=NRDSId]').val();
+            var association = $('[id$=association]').val();
+           
+            
+            //var el = $('[id$=association]');
+                   
+            var el =  document.getElementById('thePage:theForm:association');
+            var associationName = el.options[el.selectedIndex].innerHTML;
+            console.log('---associationName---'+associationName);
+            
+            //alert(association.toLowerCase().indexOf("none"));
+            //console.log('--associ--', $('[id$=association]'));
+            
+            
+            if(nrdsid != '' && association == '')
+                errorMsg += '<li>Please select Association along with NRDS ID </li>';
+            
+            if(association != '' && nrdsid == '' && associationName.toLowerCase().indexOf("none") == -1)
+                errorMsg += '<li>Please enter NRDS ID along with Association</li>';
+                        
+            var brokerCode = $('[id$=BrokerCode]').val();
+            if(brokerCode == '')
+                errorMsg += ' <li>Required Field Missing: Broker Code</li>'; 
+            
+            if(errorMsg != '') {    
+                var errorBlock = '<div class="message errorM3 alert alert-danger" role="alert"><ul>' + errorMsg + '</ul></div>';
+                $('#messages').html(errorBlock);
+                return false;
+            }
+            else {
+                $('#messages').html('');
+                return true;
+            }                                       
+        }
+        
+        function validateContactDetails() {
+            var errorMsg = '';
+
+            if($('[id$=FirstName]').val() == '')
+                errorMsg += '<li>Required Field Missing: First Name</li>';
+            if($('[id$=LastName]').val() == '')
+                errorMsg += '<li>Required Field Missing: Last Name</li>';
+            //  if($('[id$=NickName]').val() == '')
+            // errorMsg += '<li>Required Field Missing: Nick Name</li>';
+            if($('[id$=NickName]').val().trim().toLowerCase() == 'none')
+                errorMsg += '<li>Nickname cannot be none.</li>';
+            if($('[id$=Salutation]').val() == '')
+                errorMsg += '<li>Required Field Missing: Salutation</li>';
+            if($('[id$=PrivateEmail]').val() == '')
+                errorMsg += '<li>Required Field Missing: Private Email</li>';                       
+            if($('[id$=Phone]').val() == '')
+               errorMsg += '<li>Required Field Missing: Phone</li>';
+                
+            if($('[id$=PrivateEmail]').val() != ''){
+                var expr = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;    
+                if(!expr.test($('[id$=PrivateEmail]').val()))
+                     errorMsg += ' <li>Invalid Data: Invalid email address' + '</li>';
+                     
+                if($('[id$=PrivateEmail]').val() != $('[id$=ConfirmEmail]').val())
+                   errorMsg += ' <li>Invalid Data: Emails entered does not match' + '</li>';
+                                         
+            }
+            
+            if($('[id$=Phone]').val() != ''){  
+                var regex = /^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$/;
+                if(!regex.test($('[id$=Phone]').val()))
+                     errorMsg += ' <li>Invalid Data:Invalid Phone number' + '</li>';
+                                         
+            }                    
+                                     
+            if(errorMsg != '') {    
+                var errorBlock = '<div class="message errorM3 alert alert-danger" role="alert"><ul>' + errorMsg + '</ul></div>';
+                $('#messages').html(errorBlock);
+                return false;
+            }
+            else {
+                $('#messages').html('');
+                return true;
+            }                         
+        }   
+        
+        function resetContinue() {
+            $('[id$=LicenseDetailsButton]').show();
+            $('[id$=ViewApplicationButton]').hide();
+            $('[id$=ReinstateButton]').hide();
+            $('.status-message').hide();
+        }
+        
+        //To mainatain state of URL for MRIS and TREND
+        window.history.replaceState({}, document.title, '/eProcess/NewAgentApplication?mls={!mls}');
+    </script>
+    
+    <header>
+        <div class="header_row">
+            	<img class="logo" src="{!if(mls == 'TREND', URLFOR($Resource.eProcess, '/images/TREND.png'), if(mls == 'BRIGHT', URLFOR($Resource.eProcess, '/images/BRIGHT.png'),URLFOR($Resource.eProcessNewlogos, '/images/MRIS-Bright-Logo.jpg')))}" alt="logo" height="70" />
+            
+            <div class="col-sm-2" style="float:right; margin-right:20px;">
+                <span style="color:#565656; font-weight: bold; font-size: 12px; ">Subscription Progress</span>
+                <div class="progress" >
+                  <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="{!progressValue}" aria-valuemin="0" aria-valuemax="100" style="width:{!progressValue}% ; line-height: 25px;">
+                    <span style="{!if(progressValue == 0, 'padding-left:10px;', '')}; color:grey; font-size: 15px;">{!progressValue}%</span>
+                  </div>
+                </div>
+                <apex:outputPanel rendered="{!licenseBlockState == 'Completed'}"><a href="/eProcess/NewAgentApplication?mls={!mls}" style="font-size:11px;">Cancel Subscription</a> </apex:outputPanel>           
+            </div>
+        </div>
+    </header>
+    
+    <apex:form id="theForm">
+        <div class="body_content col-sm-12">
+            <div style="float:left; padding-top: 10px;"><!-- class="col-sm-8" -->
+                <h4>Subscribe to the MLS</h4>
+            </div>
+            
+            <div style="float:right;"><!-- class="col-sm-4" -->
+            	<apex:commandLink styleClass="button" style="margin-left:10px;" value="Application status"/>
+            </div>
+             
+            <div style="clear:both;"></div>
+            <div id="messages">
+                <apex:pagemessages ></apex:pagemessages>
+            </div>            
+            <script>
+                $( function() {
+                    var availableTags = [];
+                    $("#BrokerCodeInput").autocomplete({
+                        source: function( request, response ) {
+                            $("[id$=BrokerCode]").val('');
+                            $("#BrokerInfo").html('');                        
+                            
+                            Visualforce.remoting.Manager.invokeAction(
+                                '{!$RemoteAction.NewAgentApplication.searchBroker}', 
+                                request.term, "{!mls}",
+                                function(result, event) {                                    
+                                    availableTags = [];
+                                    for(var i=0; i<result.length; i++) {
+                                        var parser = new DOMParser;
+                                        var dom = parser.parseFromString('<!doctype html><body>' + result[i].Account_Name__c, 'text/html');
+                                        var decodedString = dom.body.textContent;                        
+                                        availableTags.push({value:decodedString + ' - ' + result[i].Name, id:result[i].Id, name:result[i].Name, accountName:result[i].Account_Name__c, city:result[i].City__c, state:result[i].State__c, zip:result[i].Zip__c});    
+                                    }
+                                    response(availableTags);                                                                         
+                                }, 
+                                {buffer: false, escape: true, timeout: 120000}
+                            );        
+                        },
+                        minLength: 2,
+                        select: function( event, ui ) {
+                            console.log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+                            $("[id$=BrokerCode]").val(ui.item.id);
+                            $("#BrokerInfo").html(ui.item.name + ' ' + ui.item.accountName + '<br/>' + ui.item.city + ' ' + ui.item.state + ' ' + ui.item.zip);
+                        }
+                    });
+                });
+              </script>
+
+
+            <div class="panel-group " id="accordion" role="tablist" aria-multiselectable="true">
+                <!-- License information -->
+                <div class="panel panel-default "><!-- {!if(licenseBlockState == 'Started', 'active', 'inactive')} -->
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <div class="col-sm-12 menu-header "><!-- menu-header-right -->
+                            <h3 class="panel-title">
+                                <table style="width:100%;">
+                                    <tr>
+                                        <td style="width:50px; vertical-align:top; text-align:center; font-size:17px; " class="{!if(licenseBlockState == 'Started', 'sectionheader', 'inactive')}">
+                                            01.
+                                        </td>
+                                        <td style="{!if(licenseBlockState == 'Started', ' padding-bottom:7px;', '')}" ><!-- border-bottom:1px solid #95D1E6; -->
+                                            <a class="step-heading {!if(licenseBlockState == 'Started', 'sectionheader', 'inactive')}" style="font-size:17px;" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                License Information
+                                            </a>
+                                            <p>Enter your State Real Estate License Information or Subscriber ID or Application ID</p>
+                                        </td>
+                                        <td style="width:3%; color:#5cb85c;">
+                                            <apex:outputText rendered="{!if(licenseBlockState == 'Completed', true, false)}">
+                                                <i class="glyphicon glyphicon-ok" />
+                                            </apex:outputText>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </h3>
+                        </div>
+                    </div>
+                    <apex:outputPanel rendered="{!licenseBlock}">
+                        <div id="collapseOne" class="panel-collapse  {!if(licenseBlockState == 'Started', 'collapse in', 'collapse')}" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <table style="width:100%;">
+                                    <tr>
+                                        <td style="width:30px; vertical-align:top; text-align:center;">
+        
+                                        </td>
+                                        <td>                    
+                                            <div class="col-sm-13" style="border-bottom:1px solid #fff;">
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+<!--                                                         <label for="exampleInputEmail1">License Number <span style="color:red;">*</span></label> -->
+                                                        <apex:inputField styleClass="form-control inputFiledsCss" style="border-left: 2px solid red;" id="LicenseNumber" value="{!license.Name}" html-placeholder="License Number "/>
+<!--                                                         <input type="text" Class="form-control" id="LicenseNumber" value="{!license.Name}" placeholder="License Number"/> -->
+                                                    </div>                            
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+<!--                                                         <label for="exampleInputEmail1">License Expiration <span style="color:red;">*</span></label><br/> -->
+                                                        <apex:inputField styleClass="form-control date_field inputFiledsCss" style="border-left: 2px solid red;" id="LicenseExpiration" value="{!license.License_Expiration_Date__c}" html-placeholder="License Expiration "/>
+                                                        
+                                                        
+                                                        <!-- <div class="form-group">
+													        <input class="form-control" id="date" name="date" placeholder="License Expiration MM/DD/YYY" type="text" value="{!license.License_Expiration_Date__c}"/>
+													      </div>
+													       -->
+                                                       <!--  <div class='input-group date' id='datetimepicker1'>
+										                    <input type='text' class="form-control" />
+										                    <span class="input-group-addon">
+										                        <span class="glyphicon glyphicon-calendar"></span>
+										                    </span>
+										                </div>
+										                
+										                 -->
+                                                    </div>                            
+                                                </div> 
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+<!--                                                         <label for="exampleInputEmail1">License State <span style="color:red;">*</span></label> -->
+                                                        <!-- <apex:inputField styleClass="form-control" id="LicenseState" value="{!license.License_State__c}"/> -->
+                                                        <apex:selectList styleClass="form-control custom-select inputFiledsCss"  style="height:40px; border-left: 2px solid red;" id="LicenseState" value="{!license.License_State__c}" multiselect="false" size="1" html-placeholder="License State">
+                                                            <apex:selectOptions value="{!states}"/>
+                                                        </apex:selectList>
+                                                    </div>                            
+                                                </div> 
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+<!--                                                         <label for="exampleInputEmail1">License Type <span style="color:red;">*</span></label> -->
+                                                        <!--<apex:inputField styleClass="form-control" id="LicenseType" value="{!license.License_Type__c}"/>-->
+                                                        <apex:selectList styleClass="form-control inputFiledsCss" style="height:40px; border-left: 2px solid red;" id="LicenseType" value="{!license.License_Type__c}" multiselect="false" size="1">
+                                                            <apex:selectOptions value="{!types}"/>
+                                                        </apex:selectList>
+                                                    </div>                            
+                                                </div>
+                                                <div style="clear:both;"></div>                                                                                        
+                                            </div>
+                                            <div class="col-sm-13" style="padding-right: 12px;"><!-- padding:12px; -->
+                                                <apex:commandLink onclick="return validateLicenseDetails();" styleClass="button" id="LicenseDetailsButton" value="Continue" action="{!verifyLicenseDetails}" style="{!if(licenseStatus != 'Existing' && licenseStatus != 'Terminated' && licenseStatus != 'ReinstateExist', '', 'display:none;')}" />    
+                                                <apex:commandLink styleClass="button" value="View Application" id="ViewApplicationButton" action="{!redirectToPayment}" style="{!if(licenseStatus == 'Existing' || licenseStatus == 'ReinstateExist', '', 'display:none;')}" /> 
+                                                <apex:commandLink styleClass="button" value="Reinstate" id="ReinstateButton" action="{!redirectToReinstate}" style="{!if(licenseStatus == 'Terminated', '', 'display:none;')}" />                                                                                                                                                                                                                     
+                                            </div>                                        
+                                        </td>
+                                        <td style="width:3%;"></td>
+                                    </tr>
+                                </table>                        
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+                </div>
+                
+                
+                
+                <!-- Contact Information -->
+                <div class="panel panel-default "><!-- {!if(contactBlockState == 'Started', 'active', 'inactive')} -->
+                    <div class="panel-heading" role="tab" id="headingThree">
+                        <div class="col-sm-12 menu-header "><!-- menu-header-right -->
+                            <h3 class="panel-title">
+                                <table style="width:100%;">
+                                    <tr>
+                                        <td style="width:50px; vertical-align:top; text-align:center; font-size:17px;" class="{!if(contactBlockState == 'Started', 'sectionheader', 'inactive')}">
+                                            03.
+                                        </td>
+                                        <td style="{!if(contactBlockState == 'Started', ' padding-bottom:7px;', '')}">
+                                            <a class="step-heading {!if(contactBlockState == 'Started', 'sectionheader', 'inactive')}" style="font-size:17px;" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseOne">
+                                                Contact Information
+                                            </a>
+                                            <p>Provide your contact information.</p>
+                                        </td>
+                                        <td style="width:3%; color:#5cb85c;">
+                                            <apex:outputText rendered="{!if(contactBlockState == 'Completed', true, false)}">
+                                                <i class="glyphicon glyphicon-ok" />
+                                            </apex:outputText>    
+                                        </td>
+                                    </tr>
+                                </table>
+                            </h3>
+                        </div>
+                    </div>
+                    <apex:outputPanel rendered="{!contactBlock}">
+                        <div id="collapseThree" class="panel-collapse {!if(contactBlockState == 'Started', 'collapse in', 'collapse')}" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body">
+                                <table style="width:100%;">
+                                    <tr>
+                                        <td style="width:30px; vertical-align:top; text-align:center;">
+        
+                                        </td>
+                                        <td>                    
+                                            <div class="col-sm-13" style="border-bottom:1px solid #fff;">
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+<!--                                                         <label for="exampleInputEmail1">First Name <span style="color:red;">*</span></label> -->
+                                                        <apex:inputField styleClass="form-control inputFiledsCss" style="border-left: 2px solid red;" id="FirstName" value="{!agentContact.FirstName }" html-placeholder="First Name"/>
+                                                    </div>                            
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+<!--                                                         <label for="exampleInputEmail1">Middle Name</label> -->
+                                                        <apex:inputField styleClass="form-control inputFiledsCss" id="MiddleName" value="{!agentContact.Middle_Name__c}" html-placeholder="Middle Name"/>
+                                                    </div>                            
+                                                </div> 
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+<!--                                                         <label for="exampleInputEmail1">Last Name <span style="color:red;">*</span></label> -->
+                                                        <apex:inputField styleClass="form-control inputFiledsCss" style="border-left: 2px solid red;" id="LastName" value="{!agentContact.LastName}" html-placeholder="Last Name"/>
+                                                    </div>                            
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+<!--                                                         <label for="exampleInputEmail1">Nickname</label> -->
+                                                        <apex:inputField styleClass="form-control inputFiledsCss" id="NickName" value="{!agentContact.Nickname__c}" html-placeholder="Nickname"/>
+                                                    </div>                            
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+<!--                                                         <label for="exampleInputEmail1">Suffix</label> -->
+<!--                                                         <apex:inputField styleClass="form-control inputFiledsCss" id="Suffix" value="{!agentContact.Suffix__c}" html-placeholder="Suffix" /> -->
+<!--                                                         <apex:inputText styleClass="form-control inputFiledsCss" id="Suffix" value="{!agentContact.Suffix__c}" html-placeholder="Suffix" /> -->
+                                                        
+                                                        <apex:selectList styleClass="form-control inputFiledsCss" style="height:40px;" id="Suffix" value="{!agentContact.Suffix__c}" multiselect="false" size="1">
+                                                            <apex:selectOptions value="{!Suffix}"/>
+                                                        </apex:selectList>
+                                                        
+                                                    </div>                            
+                                                </div> 
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+<!--                                                         <label for="exampleInputEmail1">Salutation <span style="color:red;">*</span></label> -->
+<!--                                                         <apex:inputField styleClass="form-control inputFiledsCss" style="border-left: 2px solid red;" id="Salutation" value="{!agentContact.Salutation}" html-placeholder="Salutation" /> -->
+<!--                                                         <apex:inputText styleClass="form-control inputFiledsCss" style="border-left: 2px solid red;" id="Salutation" value="{!agentContact.Salutation}" html-placeholder="Salutation" /> -->
+                                                        
+                                                        <apex:selectList styleClass="form-control inputFiledsCss" style="height:40px; border-left: 2px solid red;" id="Salutation" value="{!agentContact.Salutation}" multiselect="false" size="1">
+                                                            <apex:selectOptions value="{!Salutation}"/>
+                                                        </apex:selectList>
+                                                        
+                                                    </div>                            
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+<!--                                                         <label for="exampleInputEmail1">Primary Phone <span style="color:red;">*</span></label> -->
+                                                        <apex:inputField styleClass="form-control inputFiledsCss" style="border-left: 2px solid red;" id="Phone" value="{!agentContact.Phone}" html-placeholder="Primary Phone"/>
+                                                    </div>                            
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+<!--                                                         <label for="exampleInputEmail1">Email <span style="color:red;">*</span></label> -->
+                                                        <apex:inputField styleClass="form-control inputFiledsCss" style="border-left: 2px solid red;" id="PrivateEmail" value="{!agentContact.Email}" html-placeholder="Email"/>
+                                                    </div>                            
+                                                </div> 
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+<!--                                                         <label for="exampleInputEmail1">Confirm Email <span style="color:red;">*</span></label> -->
+                                                        <apex:inputField styleClass="form-control inputFiledsCss" style="border-left: 2px solid red;" id="ConfirmEmail" value="{!agentContact.Email}" html-placeholder="Confirm Email" />
+                                                    </div>                            
+                                                </div>                                                                                                   
+                                                <div style="clear:both;"></div>                                                                                        
+                                            </div>
+
+                                            <div class="col-sm-13" style="padding:12px;">
+                                                <apex:commandLink onclick="return validateContactDetails();" styleClass="button" id="ContactDetailsButton" value="Continue" action="{!continueContactSave}" />                                                                                                               
+                                            </div>                                        
+                                        </td>
+                                        <td style="width:3%;"></td>
+                                    </tr>
+                                </table>                                 
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+                </div>
+                
+                
+            </div>
+			<div style="text-align:center; color:#949393; margin-top:20px;"> 
+				Copyright © 2017 Bright MLS, Inc.
+			</div>    
+        </div>
+        <div style="clear:both;" />
+
+    </apex:form>
+</apex:page>

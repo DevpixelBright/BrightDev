@@ -1,0 +1,231 @@
+<apex:page id="thepage" Controller="VendorCommunity_ReconciliationFile" showHeader="false"  standardStylesheets="false" docType="html-5.0" applyBodyTag="false"  lightningstylesheets="true">
+    <apex:composition template="VendorCommunity_Base">
+        <apex:define name="content">
+            <apex:form styleClass="form-horizontal" id="theform" onsubmit="return false;">                  
+                <c:Bootstrap_Resources />
+                <apex:stylesheet value="{!URLFOR($Resource.Communities_Ideas,'/ideas_css.css')}"/> 
+                <style>
+                    .form-group span {
+                        font-weight:bold;
+                    }
+                                        
+                    #errorMessage {
+                        color:red;
+                    }
+                    /* style class to vertically centered the boostrap modal popup */
+                    .modal-vertical-centered {
+                        transform: translate(0, 50%) !important;
+                        -ms-transform: translate(0, 50%) !important; /* IE 9 */
+                        -webkit-transform: translate(0, 50%) !important; /* Safari and Chrome */
+                    }
+                    
+                    .fileType {
+                        display: block;
+                        position: relative;
+                        margin: auto;
+                        cursor: pointer;
+                        border: 0;
+                        height: 45px;
+                        border-radius: 5px;
+                        outline: 0;
+                    }
+                    .fileType:hover:after {
+                    //background: #FE4602;
+                    }
+                    .fileType:after {
+                        transition: 200ms all ease;
+                        border-bottom: 3px solid rgba(0,0,0,.2);
+                        background: #f9f9fb;
+                        border: 1px solid;
+                        text-align: center;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        display: block;
+                        content: 'UPLOAD EXCEL FILE';
+                        line-height: 34px;
+                        border-radius: 5px;
+                        box-shadow: 0px 0px 5px 0px;
+                    }
+                    
+                    .disButtonCls {
+                        display: block;
+                        position: relative;
+                        margin: auto;
+                        border: 0;
+                        height: 45px;
+                        border-radius: 5px;
+                        outline: 0;
+                    }
+                    .disButtonCls:after{
+                        transition: 200ms all ease;
+                        border-bottom: 3px solid rgba(0,0,0,.2);
+                        background: #e4e4df;
+                        border: 1px solid;
+                        text-align: center;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        display: block;
+                        content: 'UPLOAD EXCEL FILE';
+                        line-height: 34px;
+                        border-radius: 5px;
+                        cursor: text;
+                    }
+                                        
+                </style>    
+                
+                <div class="form-group row" id="loading-block">
+                    <div class="col-xs-4 col-xs-offset-4 col-xs-2 col-xs-offset-5">
+                        <div class="progress progress-striped active">
+                            <div class="progress-bar" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <script>
+                    var loading_block = $("#loading-block");
+                </script>
+                
+                
+                <div class="container" >
+                    
+                    <!--Page Title Start-->
+                    <c:Communities_Definition pageTitle="Upload Reconciliation Files " pageTitleClass="fa fa-files-o fa-2x" hasDefinitions="false">
+                        <p><b class="term">Term</b> Definition goes here.</p>
+                    </c:Communities_Definition>
+                                                            
+                    <apex:actionFunction name="firstQuaterFileUpload" action="{!firstQuaterFileUpload}" />
+                    <apex:actionFunction name="secQuaterFileUpload" action="{!secondQuaterFileUpload}" />
+                    <apex:actionFunction name="thirdQuaterFileUpload" action="{!thirdQuaterFileUpload}" />
+                    <apex:actionFunction name="fourQuaterFileUpload" action="{!fourQuaterFileUpload}" />
+                    
+                    <div class="form-group">
+                        <label for="" class="col-sm-2 control-label"></label>
+                        <div class="col-sm-6">
+                            <div id="errorMessage"></div>
+                        </div>
+                    </div>
+                    <apex:pageBlock id="pb" >
+                        <div class="form-group row" id="sec1">
+                            <div class="col-sm-3 control-label" style="text-align:left;">
+                                1st Quarter reconciliation due no later than December 10 of previous year
+                            </div>
+                            <div class="col-sm-2 control-label" style="text-align:center;">
+                                {!vendAttachment1.Name}
+                                
+                                    <!--<apex:outputPanel rendered="{!if(vendAttachment1 != null && vendAttachment1.Id != null, true, false )}">
+                                    <apex:outputLink value="{!URLFOR($Action.Attachment.Download, vendAttachment1.Id)}" target="_blank" >
+                                    </apex:outputLink>
+                                    </apex:outputPanel>-->
+                            </div>
+                            <div class="col-sm-5" style="padding-top:7px;" id="filesContainer">
+                                <label Class=" btn btn-block {!if(q1Button == false, 'fileType', 'disButtonCls')}" style="width:55%; height:35px;" >
+                                    <apex:inputFile id="file1Id" style="visibility: hidden;" disabled="{!q1Button}" value="{!vendAttachment1.body}" fileName="{!vendAttachment1.Name}" onchange="UploadFile(this, 1)" >
+                                    </apex:inputFile>
+                                </label>
+                            </div>     
+                        </div>
+                        
+                        <div class="form-group row" id="sec2">
+                            <div class="col-sm-3 control-label" style="text-align:left;">
+                                2nd Quarter reconciliation due no later than March 10
+                            </div>
+                            <div class="col-sm-2 control-label" style="text-align:center;">
+                                {!vendAttachment2.Name}
+                            </div>
+                            <div class="col-sm-5" style="padding-top:7px;" id="filesContainer2">
+                                
+                                <!--<apex:inputFile id="file2Id" styleClass="{!if(q2Button == false, 'fileType', 'disButtonCls')}" style="width:50%; height:35px;" disabled="{!q2Button}" fileSize="5" value="{!vendAttachment2.body}" fileName="{!vendAttachment2.Name}" onchange="UploadFile(this, 2)" >
+                                </apex:inputFile>-->
+                                <label Class=" btn btn-block {!if(q2Button == false, 'fileType', 'disButtonCls')}" style="width:55%; height:35px;" >
+                                    <apex:inputFile id="file2aId" style="visibility: hidden;" disabled="{!q2Button}" value="{!vendAttachment2.body}" fileName="{!vendAttachment2.Name}" onchange="UploadFile(this, 2)" >
+                                    </apex:inputFile>
+                                </label>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row" id="sec3">
+                            <div class="col-sm-3 control-label" style="text-align:left;">
+                                3rd Quarter reconciliation due no later than July 10
+                            </div>
+                            <div class="col-sm-2 control-label" style="text-align:center;">
+                                {!vendAttachment3.Name} 
+                            </div>
+                            <div class="col-sm-5" style="padding-top:7px;" id="filesContainer3">
+                                <label Class=" btn btn-block {!if(q3Button == false, 'fileType', 'disButtonCls')}" style="width:55%; height:35px;" >
+                                    <apex:inputfile id="file3Id" style="visibility: hidden;" disabled="{!q3Button}" value="{!vendAttachment3.body}" fileName="{!vendAttachment3.Name}" onchange="UploadFile(this, 3)" >
+                                    </apex:inputfile>
+                                </label>
+                            </div>  
+                        </div>
+                        
+                        
+                        <div class="form-group row" id="sec4">
+                            <div class="col-sm-3 control-label" style="text-align:left;">
+                                4th Quarter reconciliation due no later than October 10
+                            </div>
+                            <div class="col-sm-2 control-label" style="text-align:center;">
+                                {!vendAttachment4.Name}
+                            </div>
+                            <div class="col-sm-5" style="padding-top:7px;" id="filesContainer4">
+                                <label Class=" btn btn-block {!if(q4Button == false, 'fileType', 'disButtonCls')}" style="width:55%; height:35px;" >
+                                    <apex:inputFile id="file4Id" style="visibility: hidden;" disabled="{!q4Button}" value="{!vendAttachment4.body}" fileName="{!vendAttachment4.Name}" fileSize="" onchange="UploadFile(this, 4)" >
+                                    </apex:inputFile>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <script>
+                        /* Function to add new input file element */
+                        function UploadFile(fileCont, fileNo) {
+                            console.log('---id--'+fileCont.id);
+                            var files = document.getElementById(fileCont.id).files;
+                            console.log('---files[0]--',files[0]);
+                            if (files != null && files[0] != undefined && files[0].size < 5000000) {
+                                //if(files[0].name.endsWith(".xlsx") || files[0].name.endsWith(".xls") )
+                                if(files[0].name.includes(".xls"))
+                                {
+                                    loading_block.show();
+                                    console.log('---size--'+files[0].size+'--'+files[0].body+'---'+files[0].name);   
+                                    console.log('----fileNo-'+fileNo);
+                                    if(fileNo == 1)
+                                        firstQuaterFileUpload();
+                                    else if(fileNo == 2)
+                                        secQuaterFileUpload();
+                                        else if(fileNo == 3)
+                                            thirdQuaterFileUpload();
+                                            else if(fileNo == 4)
+                                                fourQuaterFileUpload();
+                                                else{
+                                                    
+                                                }
+                                }
+                                else{
+                                    alert('Please upload Excel file');
+                                }
+                            }
+                            else {
+                                alert("Maximum upload size 5MB.");
+                                document.getElementById("thepage:j_id0:theform").reset();
+                                }
+                          
+                        }
+                        markUserId("{!displayName}");
+                        markOptionPanel("manageVendor");
+                        loading_block.hide();
+                        
+                        </script>
+                    </apex:pageBlock>
+                    
+                </div>
+               
+            </apex:form>
+        </apex:define>
+    </apex:composition>  
+</apex:page>

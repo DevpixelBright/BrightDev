@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>JobTitle__c</fullName>
+    <externalId>false</externalId>
+    <label>JobTitle</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Appraiser</fullName>
+                <default>false</default>
+                <label>Appraiser</label>
+            </value>
+            <value>
+                <fullName>Assistant</fullName>
+                <default>false</default>
+                <label>Assistant</label>
+            </value>
+            <value>
+                <fullName>Associate Broker</fullName>
+                <default>false</default>
+                <label>Associate Broker</label>
+            </value>
+            <value>
+                <fullName>Broker / Manager</fullName>
+                <default>false</default>
+                <label>Broker / Manager</label>
+            </value>
+            <value>
+                <fullName>Broker of Record</fullName>
+                <default>false</default>
+                <label>Broker of Record</label>
+            </value>
+            <value>
+                <fullName>Broker Owner</fullName>
+                <default>false</default>
+                <label>Broker Owner</label>
+            </value>
+            <value>
+                <fullName>Certified Appraiser</fullName>
+                <default>false</default>
+                <label>Certified Appraiser</label>
+            </value>
+            <value>
+                <fullName>Corporate Officer</fullName>
+                <default>false</default>
+                <label>Corporate Officer</label>
+            </value>
+            <value>
+                <fullName>Executive Vice President</fullName>
+                <default>false</default>
+                <label>Executive Vice President</label>
+            </value>
+            <value>
+                <fullName>Listing Administrator</fullName>
+                <default>false</default>
+                <label>Listing Administrator</label>
+            </value>
+            <value>
+                <fullName>Manager</fullName>
+                <default>false</default>
+                <label>Manager</label>
+            </value>
+            <value>
+                <fullName>Office Administrator</fullName>
+                <default>false</default>
+                <label>Office Administrator</label>
+            </value>
+            <value>
+                <fullName>Office Broker / Manager</fullName>
+                <default>false</default>
+                <label>Office Broker / Manager</label>
+            </value>
+            <value>
+                <fullName>Office Manager</fullName>
+                <default>false</default>
+                <label>Office Manager</label>
+            </value>
+            <value>
+                <fullName>Office Sales Manager</fullName>
+                <default>false</default>
+                <label>Office Sales Manager</label>
+            </value>
+            <value>
+                <fullName>Other Association Staff</fullName>
+                <default>false</default>
+                <label>Other Association Staff</label>
+            </value>
+            <value>
+                <fullName>Principal Broker</fullName>
+                <default>false</default>
+                <label>Principal Broker</label>
+            </value>
+            <value>
+                <fullName>Processor</fullName>
+                <default>false</default>
+                <label>Processor</label>
+            </value>
+            <value>
+                <fullName>REALTOR</fullName>
+                <default>false</default>
+                <label>REALTOR</label>
+            </value>
+            <value>
+                <fullName>REALTOR - Associate</fullName>
+                <default>false</default>
+                <label>REALTOR - Associate</label>
+            </value>
+            <value>
+                <fullName>Regional Vice President</fullName>
+                <default>false</default>
+                <label>Regional Vice President</label>
+            </value>
+            <value>
+                <fullName>Sales Associate</fullName>
+                <default>false</default>
+                <label>Sales Associate</label>
+            </value>
+            <value>
+                <fullName>Salesperson</fullName>
+                <default>false</default>
+                <label>Salesperson</label>
+            </value>
+            <value>
+                <fullName>Vice President / Sales Manager</fullName>
+                <default>false</default>
+                <label>Vice President / Sales Manager</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

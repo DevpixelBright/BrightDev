@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <name>CURE Dispatch</name>
+    <queueMembers>
+        <users>
+            <user>adam.iobst@mris.net</user>
+            <user>chris.busi@mris.net</user>
+            <user>rique.santiestevan@mris.net</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>Case</sobjectType>
+    </queueSobject>
+</Queue>

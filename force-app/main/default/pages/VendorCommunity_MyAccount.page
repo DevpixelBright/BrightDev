@@ -1,0 +1,312 @@
+<apex:page controller="VendorCommunity_MyAccount_Controller" docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" lightningstylesheets="true">
+    <apex:composition template="VendorCommunity_Base">
+    <apex:define name="content">
+        
+    <apex:form >
+    <c:Bootstrap_Resources />   
+    <script>
+        markUserId("{!displayName}");
+        markOptionPanel("managevendor");
+    </script>
+
+    <apex:pageBlock title="Account Id - {!accountId}" id="details" >
+            <apex:includeScript value="/soap/ajax/25.0/connection.js" />
+            <apex:includeScript value="/soap/ajax/25.0/apex.js" />
+            
+            <style>
+                .pbHeader {
+                    display: none;
+                }
+
+                .pbBody {
+                    position: relative;
+                }
+
+                .for_inputs {
+                    position: relative;
+                }
+
+                .action_buttons {
+                    position: absolute;
+                    top: 7px;
+                    right: 0px;
+                }
+
+                .action_buttons input {
+                    width: auto;
+                    margin-right: 0px !important;
+                }
+
+                .action_buttons input + input {
+                    margin-left: 10px;
+                }
+
+                .info-group {
+                    padding-left: 15px;
+                    padding-right: 15px;
+                }
+
+                .info-group + .info-group {
+                    margin-top: 40px;
+                }
+
+                .info-group h4 {
+                    margin-bottom: 20px;
+                    color: #00A7B0;
+                }
+
+                .info-group .form-group.required label:after {
+                    content: "*";
+                    color: #F00;
+                    font-weight: 700;
+                }
+
+                .info-group .form-group span {
+                    display: inline-block;
+                    padding-top: 7px;
+                }
+
+                .info-group .form-group input {
+                    border-radius: 0px;
+                    border-color: #E1E2E3;
+                    box-shadow: none;
+                }
+
+                .info-group .well {
+                    border: none;
+                    border-radius: 0px;
+                    box-shadow: none;
+                    padding: 20px 0px;
+                }
+
+                .info-group .well.public {
+                    background-color: #FFBE9F;
+                }
+
+                .info-group .well.private {
+                    background-color: #B1E4E3;
+                }
+
+                .info-group .well .instructions {
+                    margin: 10px 15px 15px 30px;
+                }
+
+                .info-group .well a {
+                    color: #212B3D;
+                }
+
+                .info-group .well a:hover {
+                    text-decoration: none;
+                }
+
+                .info-group .well .form-group input {
+                    border: none;
+                }
+
+                .nrds-lookup {
+                    display: inline-block;
+                    color: #FFFFFF !important;
+                    border: 1px solid #FFFFFF;
+                    padding: 5px 10px;
+                    font-weight: 500;
+                }
+
+                .nrds-lookup:hover {
+                    background-color: #FE4602 !important;
+                }
+
+                span + .nrds-lookup {
+                    margin-left: 20px;
+                }
+
+                @media (max-width: 767px) {
+                    .action_buttons {
+                        position: fixed;
+                        top: 50%;
+                        right: -1px;
+                        z-index: 100;
+                    }
+
+                    .action_buttons input {
+                        float: right;
+                        clear: both;
+                        width: 100px;
+                        height: 75px;
+                        border: 1px solid rgba(254, 70, 2, 0.7);
+                    }
+
+                    .action_buttons input.btn-default {
+                        background-color: rgba(245, 245, 245, 0.3);
+                    }
+
+                    .action_buttons input.btn-default[disabled] {
+                        border-color: rgba(227, 227, 227, 0.7);
+                        color: rgba(227, 227, 227, 1);
+                    }
+
+                    .action_buttons input.btn-primary {
+                        background-color: rgba(254, 70, 2, 0.7);
+                    }
+
+                    .action_buttons input.btn-primary[disabled] {
+                        border-color: rgba(227, 227, 227, 0.7);
+                        background-color: rgba(227, 227, 227, 0.7);
+                    }
+
+                    .info-group .form-group input {
+                        margin-top: 10px;
+                    }
+
+                    .info-group .well {
+                        margin-left: -15px;
+                        margin-right: -15px;
+                        padding: 15px;
+                    }
+
+                    .info-group .well .instructions {
+                        margin: 10px 0px 15px 0px;
+                    }
+
+                    .nrds-lookup {
+                        margin-top: 10px;
+                    }
+                }
+            </style>  
+
+             <script>
+             $(document).ready(function(){
+                 
+                $("form").addClass("form-horizontal");
+                $("label").addClass("col-sm-3 control-label");
+                $(".for_inputs input").addClass("form-control");
+                $("select").addClass("form-control");
+                $(".errorM3").addClass("alert alert-danger");
+                $(".infoM3").addClass("alert alert-info");
+                $(".confirmM3").addClass("alert alert-success");
+                
+                $(".PreferredName_Element").change(function() {
+                    var preferredNameTxt = '';
+                    
+                    $(".PreferredName_Element").each(function() {
+                        if($(this).val() != "NONE")
+                            preferredNameTxt += $(this).val() + ' ';
+                    });                            
+                                                                                         
+                });                
+            });
+            </script>
+             
+            <script src="https://online.qas.com/SalesForceV3/Scripts/all_sf_with_jQuery-2.0.min.js"> </script>
+
+            <div class="action_buttons">                
+                <apex:commandButton styleClass="btn btn-default my_cancel" value="Cancel" action="{!cancel}" rendered="{!isEdit}" reRender="details" immediate="true" />
+                <apex:commandButton styleClass="btn btn-default my_reset" value="Reset" action="{!reset}" rendered="{!isEdit}" reRender="details" immediate="true" />
+                <apex:commandButton styleClass="btn btn-primary my_save" value="Save" action="{!save}" rendered="{!isEdit}" reRender="details" />
+                <apex:commandButton styleClass="btn btn-primary my_edit" value="Edit"  action="{!Edit}" rendered="{!!isEdit}" reRender="details" />
+            </div> 
+        
+            <div class="row">
+                <!--<c:Communities_Definition pageTitle="Contact Information for your organization" pageTitleClass="fa fa-pencil-square-o fa-2x" hasDefinitions="false">-->
+                <c:Communities_Definition pageTitle="Vendor Contact Information" pageTitleClass="fa fa-pencil-square-o fa-2x" hasDefinitions="false">    
+                <p><b class="term">Term</b> Definition goes here.</p>
+                </c:Communities_Definition>
+
+                <div class="col-xs-12 instructions">
+                    <!--<p>BrightMLS requires information about your organization's contacts. Please review this contact information and update where necessary.</p>-->
+                    <p>Below is the information we have on file for your organization's contacts. Please review this information and update when needed.</p>
+                </div>
+            </div>
+            
+            <div id="messages">
+                <apex:pagemessages ></apex:pagemessages>
+            </div>
+                        
+            <div class="row for_inputs">
+                <div class="info-group">
+                    
+                    <apex:outputPanel rendered="{!!isEdit && haveContacts}">
+                         
+                        <table class="table">
+                            <tr>
+                                <th></th>
+                                <th>Name of Contact</th>
+                                <th>Phone Number</th>
+                                <th>Email Address</th>
+                            </tr>
+<!--                            <apex:repeat value="{!conactTypes}" var="key"> -->
+                            <apex:repeat value="{!mapContacts}" var="key">
+                                <tr>
+                                    
+                                    <td><b>{!key}</b></td>
+                                    <td>
+                                        <apex:outputText value="{!mapContacts[key].FirstName}"/>&nbsp;
+                                        <!-- <apex:outputField value="{!mapContacts[key].FirstName}"/>&nbsp; -->
+                                        <apex:outputText value="{!mapContacts[key].LastName}"/>
+                                    </td>
+                                    <td><apex:outputField value="{!mapContacts[key].Phone}" /></td>
+                                    <td><apex:outputField value="{!mapContacts[key].Email}"/></td>
+                                </tr>
+                            </apex:repeat>
+<!--                            </apex:repeat> -->
+                        </table>
+                    </apex:outputPanel>
+                    
+                    
+                    <apex:outputPanel rendered="{!isEdit}">   
+                        
+                         <table class="table">
+                            <tr>
+                                <th></th>
+                                <!-- <th>Name of Contact</th> -->
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Phone Number</th>
+                                <th>Email Address</th>
+                            </tr>
+<!--                            <apex:repeat value="{!conactTypes}" var="key"> -->
+                            <apex:repeat value="{!mapContacts}" var="key">
+                                <tr>
+                                    
+                                    <td><b>{!key}</b></td>
+                                    <td><apex:inputText value="{!mapContacts[key].FirstName}" disabled="true" /></td>
+                                    <td><apex:inputText value="{!mapContacts[key].LastName}" disabled="true" /></td> 
+                                    <td><apex:inputField value="{!mapContacts[key].Phone}" /></td>
+                                    <td><apex:inputField value="{!mapContacts[key].Email}"/></td>
+                                    
+                                </tr>
+                            </apex:repeat>
+<!--                            </apex:repeat> -->
+                        </table>
+                        
+                        <!-- 
+                        <div class="form-group required">
+                            <apex:outputLabel value="Name"/>
+                            <div class="col-sm-7">
+                            <apex:inputField value="{!contactDetails.FirstName}" />
+                            <apex:inputField value="{!contactDetails.LastName}" /> 
+                            </div>
+                        </div>
+                        
+                        <div class="form-group required">
+                            <apex:outputLabel value="Contact Phone"/>
+                            <div class="col-sm-7">
+                            <apex:inputField value="{!contactDetails.Phone}" />
+                            </div>
+                        </div>
+                        
+                        <div class="form-group required"> 
+                            <apex:outputLabel value="Email"/>
+                            <div class="col-sm-7">
+                            <apex:inputField value="{!contactDetails.Email}" />
+                            </div>
+                        </div>
+                         -->
+                    </apex:outputPanel>
+                </div>
+            </div>
+    </apex:pageBlock>
+    </apex:form>
+    
+    </apex:define>       
+    </apex:composition>     
+</apex:page>

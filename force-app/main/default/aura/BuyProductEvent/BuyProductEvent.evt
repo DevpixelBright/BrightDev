@@ -1,0 +1,9 @@
+<aura:event type="APPLICATION">
+    <aura:attribute name="productName" type="String"/>
+    <aura:attribute name="ratePlanId" type="String"/>
+    <aura:attribute name="setupFeeId" type="String"/>
+    <aura:attribute name="ratePlanName" type="String"/>
+    <aura:attribute name="setupFeeName" type="String"/>
+    <aura:attribute name="oneTimeAmount" type="String"/>
+    <aura:attribute name="recurringAmount" type="String"/>
+</aura:event>

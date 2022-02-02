@@ -1,0 +1,21 @@
+.THIS.spinnerContainer{
+    
+    display: inline-block;
+   
+    text-align: center;
+}
+
+.THIS .spinnerwidget{
+    position: static !important;
+}
+
+.THIS .qacontainer{
+    position: static !important;
+}
+
+.THIS .slds-theme_error{text-align: center; display: block; margin:20px;}
+.THIS .slds-form-element .slds-form-element__label span{padding: 0 0 05px 0;
+    display: block;
+    font-size: 14px;}
+.THIS .slds-select{ padding:8px;}
+.THIS .modal-body {max-height: auto !important;}

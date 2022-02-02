@@ -1,0 +1,28 @@
+<aura:component >
+    <!-- Aura Attributes -->
+    <aura:attribute name="appConfig" type="List" default="[]" />
+    
+    <!-- Aura Actions -->
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}" /> 
+	<aura:handler event="c:EZJoin_NewApplicationAppConfigEvent" action="{!c.getAppConfigChanges}" phase="bubble" />
+    
+    <!-- Events -->
+    <aura:registerEvent name="cmpEvent" type="c:EZJoin_LoadComponentEvent" />    
+    
+    <ul class="slds-vertical-tabs__nav" role="tablist" aria-orientation="vertical">
+        <aura:iteration items="{!v.appConfig}" var="config" indexVar="index">
+            <li class="{!(config.status == 'In Progress' ? 'slds-vertical-tabs__nav-item slds-is-active' : 'slds-vertical-tabs__nav-item ')}" title="{!config.name}" role="presentation">
+                <a class="slds-vertical-tabs__link" role="tab" data-index="{!index}" onclick="{!c.navClickEvtHandler}"> 
+                    <span class="slds-vertical-tabs__left-icon"></span>
+                    <span class="slds-truncate" title="{!config.name}">{!config.name}
+                        <p>{!config.description}</p>      
+                    </span>
+                    <span class="slds-vertical-tabs__right-icon"></span>
+                    <div class="arrow-left">
+                        <img src="{!$Resource.ejoinactivetab}" />
+                    </div>
+                </a>
+            </li>
+        </aura:iteration>
+    </ul>    
+</aura:component>

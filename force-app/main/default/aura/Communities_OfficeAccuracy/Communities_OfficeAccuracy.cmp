@@ -1,0 +1,286 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,force:appHostable,lightning:isUrlAddressable" controller="Communities_OfficeAccuracy" access="global">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    
+    <aura:attribute name="complianceFines" type="List"/>
+    <aura:attribute name="complianceFinesDisplay" type="List"/>
+    <aura:attribute name="complianceFinesByOffice" type="Map"/>
+    <aura:attribute name="subscriptionId" type="String" default=""/>
+    <aura:attribute name="offices" type="List" default="[]"/>
+    <aura:attribute name="SelectedOffices" type="List" />
+    <aura:attribute name="searchKey" type="String" />
+    
+    <aura:attribute type="Boolean" name="sortAsc" default="true"/>
+    <aura:attribute type="String" name="sortField" />
+    
+    <!-- pagination-->
+    <aura:attribute name="options" type="List" default="[
+                                                        {'label': 'New', 'value': 'new'},
+                                                        {'label': 'In Progress', 'value': 'inProgress'},
+                                                        {'label': 'Finished', 'value': 'finished'},
+                                                        ]"/>
+    <aura:attribute name="pageSizeOptions" type="List" default="[
+                                                                {'label': '10', 'value': '10'},
+                                                                {'label': '25', 'value': '25'},
+                                                                {'label': '50', 'value': '50'},
+                                                                {'label': '100', 'value': '100'}
+                                                                ]"/>
+    
+    <aura:attribute name="selectedPageSize" type="string" default="10"/>
+    <aura:attribute name="recordsPerPage" type="Integer" default="10"/>
+    <aura:attribute name="pagination" type="Integer" default="0"/>
+    <aura:attribute name="pages" type="List" default="[]"/>
+    <aura:attribute name="currentPage" type="Integer" default="0"/>
+    
+    
+    <!-- handlers -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.SelectedOffices}" action="{!c.handleOfficeFilter}"/>
+    
+    <div class="c-container">
+        <div class="fullpage slds-scope">
+            <div class="slds-grid slds-wrap">
+                <lightning:layout multipleRows="true">
+                    <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                        <lightning:layout>
+                            <div class="new-containerpage">
+                                <div class="slds-container--x-large new-container">
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                        <div class="page-section page-main">
+                                            <div class="dev">
+                                                <div class="top">
+                                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="7" largeDeviceSize="7">
+                                                        <h2><img src="{!$Resource.acc + '/acc/images/user.svg'}" alt="" /><span>Brokerage Accuracy Notifications</span></h2>
+                                                    </lightning:layoutItem>
+                                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="5" largeDeviceSize="5">
+                                                        <div class="line">
+                                                            <lightning:button class="brand" variant="brand " label="Print" title="Brand action" onclick="{!c.print}"/>
+                                                            <lightning:button class="brand" variant="brand " label="Export" title="Brand action" onclick="{!c.export}" />                                                            
+                                                        </div>
+                                                    </lightning:layoutItem>
+                                                </div>
+                                                <div class="view"></div>
+                                                <div class="middle">
+                                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                                        <p class="recent">Below is a summary of the violation email notifications and fines issued to agents within your brokerage for the last 60 days. Please note, fine notices with a status of Pending will not be billed until after the appeal timeframe has expired. Any fine notices listed with a status of Billed will appear on the agent’s account statement.
+                                                        </p>
+                                                        <p class="recent">To learn about fines and our appeal process visit <a href="https://brightmls.com/accuracy" target="_blank">brightmls.com/accuracy</a>.</p>
+                                                        <p class="recent">Please note: A notification may take up to 24 hours to show below.</p>
+                                                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                                                            <h5 class="new">
+                                                                <lightning:input type="text"  name="input3" placeholder="Search by Agent Name, Subscriber ID, MLS#, Violation Type or Status (Pending, Billed, Under Appeal, etc.)  "  
+                                                                                 variant = "label-hidden" value="{!v.searchKey}" onchange="{!c.search}"/>
+                                                                <img src="{!$Resource.acc + '/acc/images/search1.svg'}" alt=""/>
+                                                            </h5></lightning:layoutItem>
+                                                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                                                            <div class="point">
+                                                                <c:MultiSelectCombobox options="{!v.offices}" values="{!v.SelectedOffices}"
+                                                                                       showPills="false" aura:id="officeFilter"
+                                                                                       allValue = "All Offices"/>
+                                                            </div>
+                                                        </lightning:layoutItem>
+                                                    </lightning:layoutItem>
+                                                </div>
+                                                <aura:if isTrue="{!v.complianceFinesDisplay.length>0}">
+                                                    <div class="view"></div>
+                                                    <div class="middle">
+                                                        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped newtin">
+                                                            <thead>
+                                                                <tr class="slds-line-height_reset">
+                                                                    <th class="" scope="col" >
+                                                                        <div class="slds-truncate"  title="" data-fld ="agent" onclick="{!c.sortByField}">
+                                                                            Agent<br/>Name
+                                                                            <c:SortIcon sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="agent"/>   
+                                                                            <br/></div>
+                                                                    </th>
+                                                                    <th class="" scope="col">
+                                                                        <div class="slds-truncate"  title="" data-fld ="subscriptionId" onclick="{!c.sortByField}">
+                                                                            Subscriber<br/>ID
+                                                                            <c:SortIcon sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="subscriptionId"/>
+                                                                        </div>
+                                                                    </th>
+                                                                    <th class="" scope="col">
+                                                                        <div class="slds-truncate" title="" data-fld ="officeId" onclick="{!c.sortByField}">
+                                                                            Office<br/>ID
+                                                                            <c:SortIcon sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="officeId"/>
+                                                                        </div>
+                                                                    </th>
+                                                                    <th class="" scope="col">
+                                                                        <div class="slds-truncate" title="" data-fld ="mlsNumber" onclick="{!c.sortByField}">
+                                                                            MLS#
+                                                                            <c:SortIcon sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="mlsNumber"/>
+                                                                        </div>
+                                                                    </th>
+                                                                    <th class="" scope="col">
+                                                                        <div class="slds-truncate" title="" data-fld ="violationType" onclick="{!c.sortByField}">
+                                                                            Violation<br/>Type
+                                                                            <c:SortIcon sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="violationType"/>
+                                                                        </div>
+                                                                    </th>
+                                                                    <th class="" scope="col">
+                                                                        <div class="slds-truncate" title="" data-fld ="violationNo" onclick="{!c.sortByField}">
+                                                                            Violation<br/>Number
+                                                                            <c:SortIcon sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="violationNo"/>
+                                                                        </div>
+                                                                    </th>
+                                                                    <th class="" scope="col">
+                                                                        <div class="slds-truncate" title="" data-fld ="notificationType" onclick="{!c.sortByField}">Notification<br/>Type
+                                                                            <c:SortIcon sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="notificationType"/>
+                                                                        </div>
+                                                                    </th>
+                                                                    <th class="" scope="col">
+                                                                        <div class="slds-truncate" title="" data-fld ="notificationDate" onclick="{!c.sortByField}">Notification<br/>Date
+                                                                            <c:SortIcon sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="notificationDate"/>
+                                                                        </div>
+                                                                    </th>
+                                                                    <th class="" scope="col">
+                                                                        <div class="slds-truncate" title="" data-fld ="fineAmount" onclick="{!c.sortByField}">Fine<br/>Amount
+                                                                            <c:SortIcon sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="fineAmount"/>
+                                                                        </div>
+                                                                    </th>
+                                                                    <th class="" scope="col">
+                                                                        <div class="slds-truncate" title="" data-fld ="status" onclick="{!c.sortByField}">Status
+                                                                            <c:SortIcon sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="status"/>
+                                                                            
+                                                                        </div>
+                                                                    </th>
+                                                                    <th class="" scope="col">
+                                                                        <div class="slds-truncate" title="" data-fld ="lastDayToAppeal" onclick="{!c.sortByField}">Last Date<br/>to Appeal
+                                                                            <c:SortIcon sortColumn="{!v.sortField}"  descending="{!v.sortAsc}" column="lastDayToAppeal"/>
+                                                                        </div>
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <aura:iteration items="{!v.complianceFinesDisplay}" var="violation" >
+                                                                    <tr class="slds-hint-parent blue">
+                                                                        <td data-label="Opportunity Name" scope="row">
+                                                                            <div class="slds-truncate" title="">{!violation.agent}</div>
+                                                                        </td>
+                                                                        <td data-label="Account Name">
+                                                                            <div class="slds-truncate" title="">{!violation.subscriptionId}</div>
+                                                                        </td>
+                                                                        <td data-label="Close Date">
+                                                                            <div class="slds-truncate" title="">{!violation.officeId}</div>
+                                                                        </td>
+                                                                        <td data-label="Prospecting">
+                                                                            <div class="slds-truncate" title="">{!violation.mlsNumber}</div>
+                                                                        </td>
+                                                                        <td  class="data" data-label="Confidence">
+                                                                            <aura:if isTrue="{!violation.childViolations.length>1}">
+                                                                                <div class="slds-truncate" title="" onclick="{!c.toggleOldfines}" data-value ="{!violation.violationId}">
+                                                                                    <lightning:input aura:id="toggleBox" class="slds-hide" type="checkbox" 
+                                                                                                     name="{!violation.violationId}" checked="{!violation.showOldFines}"/>
+                                                                                    <a href="#">{!violation.violationType}</a>
+                                                                                </div>
+                                                                                <aura:set attribute="else">
+                                                                                    {!violation.violationType}
+                                                                                </aura:set>
+                                                                            </aura:if>
+                                                                        </td>
+                                                                        <td data-label="Amount">
+                                                                            <div class="slds-truncate" title="">{!violation.violationNo}</div>
+                                                                        </td>
+                                                                        <td data-label="Amount2">
+                                                                            <div class="slds-truncate" title="">{!violation.notificationType}</div>
+                                                                        </td>
+                                                                        <td data-label="Amount3">
+                                                                            <div class="slds-truncate" title="">{!violation.notificationDateStr}
+                                                                            </div>
+                                                                        </td>
+                                                                        <td data-label="Amount4">
+                                                                            <div class="slds-truncate" title="">
+                                                                                <lightning:formattedNumber value="{!violation.fineAmount}" style="currency" currencyCode="USD"/>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td data-label="Amount5">
+                                                                            <div class="slds-truncate" title="">{!violation.status}</div>
+                                                                        </td>
+                                                                        <td data-label="Amount5">
+                                                                            <div class="slds-truncate" title="">{!violation.lastDayToAppealStr}
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <aura:if isTrue="{!and(violation.childViolations.length>1,violation.showOldFines)}">
+                                                                        <td style="text-align: right;" data-label="Opportunity Name" scope="row" colspan="5" rowspan="{!violation.childViolations.length}">
+                                                                            List of violations
+                                                                        </td>
+                                                                        <aura:iteration items="{!violation.childViolations}" var="oldFine" indexVar="varIdx" >
+                                                                            <aura:if isTrue="{!varIdx!=0}">
+                                                                                <tr class="slds-hint-parent white">
+                                                                                    <td data-label="Amount">
+                                                                                        <div class="slds-truncate" title="">{!oldFine.Violation_Number_Formatted__c}</div>
+                                                                                    </td>
+                                                                                    <td data-label="Amount2">
+                                                                                        <div class="slds-truncate" title="">{!oldFine.Notification_Type__c}</div>
+                                                                                    </td>
+                                                                                    <td data-label="Amount3">
+                                                                                        <div class="slds-truncate" title="">{!oldFine.Listing_Status__c}</div>
+                                                                                    </td>
+                                                                                    <td data-label="Amount4">
+                                                                                        <div class="slds-truncate" title="">
+                                                                                            <lightning:formattedNumber value="{!oldFine.Fine_Amount__c}" style="currency" currencyCode="USD"/>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td data-label="Amount5">
+                                                                                        <div class="slds-truncate" title="">{!oldFine.Status__c}</div>
+                                                                                    </td>
+                                                                                    <td data-label="Amount5">
+                                                                                        <div class="slds-truncate" title="">{!oldFine.QC_Fine_Code__c}</div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </aura:if>
+                                                                        </aura:iteration>
+                                                                    </aura:if>
+                                                                </aura:iteration>
+                                                            </tbody>
+                                                        </table>
+                                                        
+                                                    </div>
+                                                    <div class="view"></div>
+                                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                                                            <div class="show">
+                                                                <h4>Show</h4> 
+                                                                <lightning:combobox style="width:100px;display:inline-block;margin:0 5px;" value="{!v.selectedPageSize}" 
+                                                                                    options="{!v.pageSizeOptions}" 
+                                                                                    onchange="{!c.handlePageSize}"/>
+                                                                <h4>entries</h4> 
+                                                            </div>
+                                                        </lightning:layoutItem>
+                                                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                                                            <div class="linepoint">
+                                                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication3">
+                                                                    <div class="pagination">
+                                                                        <!--<a href="javascript:void(0);" onclick="{!c.firstPage}">First</a>-->
+                                                                        <a href="javascript:void(0);" onclick="{!c.previousPage}">Previous</a>
+                                                                        <aura:iteration items="{!v.pages}" var="page">
+                                                                            <aura:if isTrue="{!page != 9999}">
+                                                                                <a  href="javascript:void(0);" class="{!(page == v.currentPage)?'active':''}"  onclick="{!c.getPage}" data-offset="{!page}">{!page}</a>
+                                                                            </aura:if>
+                                                                        </aura:iteration>
+                                                                        <a href="javascript:void(0);" onclick="{!c.nextPage}">Next</a>
+                                                                        <!--<a href="javascript:void(0);" onclick="{!c.lastPage}">Last</a>-->
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                        </lightning:layoutItem>
+                                                    </lightning:layoutItem>
+                                                    <aura:set attribute="else">
+                                                        <div class="alert alert-warning">
+                                                            No violation information to display.
+                                                        </div>
+                                                    </aura:set>
+                                                </aura:if>
+                                            </div>
+                                        </div>
+                                    </lightning:layoutItem>
+                                </div>
+                            </div>
+                        </lightning:layout>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </div>
+        </div>
+    </div>
+</aura:component>

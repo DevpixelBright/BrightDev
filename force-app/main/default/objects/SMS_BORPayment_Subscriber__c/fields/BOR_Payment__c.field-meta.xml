@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BOR_Payment__c</fullName>
+    <externalId>false</externalId>
+    <label>BOR Payment</label>
+    <referenceTo>SMS_BORPayment__c</referenceTo>
+    <relationshipLabel>SMS BORPayment Subscribers</relationshipLabel>
+    <relationshipName>SMS_BORPayment_Subscribers</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cannot_Edit_Field_if_Inactive</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND ( 
+NOT( ISPICKVAL ( PRIORVALUE (Status__c), &quot;Active&quot; ) ), 
+ISPICKVAL ( Status__c ,&quot;Inactive&quot;), 
+OR( 
+ISCHANGED (MDS_Status__c), 
+ISCHANGED (Notes__c), 
+ISCHANGED (PrismSubRoleID__c), 
+ISCHANGED (Role__c), 
+ISCHANGED (Role_Group__c), 
+ISCHANGED (Role_Start_Date__c), 
+ISCHANGED (Subscription__c), 
+ISCHANGED (SysPrRoleKey__c), 
+
+AND( NOT( ISBLANK ( PRIORVALUE (Role_End_Date__c) ) ), 
+ISCHANGED ( Role_End_Date__c) ) 
+) 
+)
+&amp;&amp; NOT( $Setup.Bypass_Validation_rules__c.Disable_Validation_Rules__c )</errorConditionFormula>
+    <errorMessage>When Status is Inactive, only the the Role End Date may be edited (and only if it&apos;s blank)</errorMessage>
+</ValidationRule>

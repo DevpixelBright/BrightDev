@@ -1,0 +1,24 @@
+<aura:component >
+    <aura:attribute name="errMsg" type="String" default=""/>
+    <aura:attribute name="hasError" type="Boolean" default="false"/>
+    
+    <div style="height:4rem">
+        <div class="slds-notify_container slds-is-relative">
+            <div class="slds-notify slds-notify_toast slds-theme_error" role="status">
+                <span class="slds-assistive-text">error</span>
+                <span class="slds-icon_container slds-icon-utility-error slds-m-right_small slds-no-flex slds-align-top">
+                    <lightning:icon iconName="utility:error" alternativeText="error" variant="inverse" size="small"/>
+                </span>
+                <div class="slds-notify__content">
+                    {!v.errMsg}
+                </div>
+                <div class="slds-notify__close">
+                    <button class="slds-button slds-button_icon slds-button_icon-inverse" title="Close" onclick="{!c.closeToast}">
+                        <lightning:icon iconName="utility:close" alternativeText="close" variant="inverse" size="small"/>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

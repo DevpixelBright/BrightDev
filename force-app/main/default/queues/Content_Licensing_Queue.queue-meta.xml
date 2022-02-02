@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <email>noemail@mris.net</email>
+    <name>Content Licensing Queue</name>
+    <queueMembers>
+        <users>
+            <user>adam.iobst@mris.net</user>
+            <user>danielle.blanchard@mris.net</user>
+            <user>jackie.colon-boone@mris.net</user>
+            <user>jeff.jennings@mris.net</user>
+            <user>karen.moore@mris.net</user>
+            <user>michelle.yam@brightmls.com</user>
+            <user>monique.howell@mris.net</user>
+            <user>sandra.truque@mris.net</user>
+            <user>sean.gallagher@mris.net</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>Case</sobjectType>
+    </queueSobject>
+</Queue>

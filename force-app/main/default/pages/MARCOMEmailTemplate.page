@@ -1,0 +1,15 @@
+<apex:page controller="PrintEmailTemplate" showHeader="false" standardStylesheets="false" renderAs="pdf">
+    <apex:includeLightning />
+    <div id="dataTable" />
+    <script>
+    $Lightning.use("c:MARCOMTemplateControllerApp", function() {
+          $Lightning.createComponent("c:MARCOMEmailTemplate",
+              { emailParams : '{!recordId}' },
+              "dataTable",
+              function(cmp) {
+                console.log("button was created");
+              }
+          );
+        });
+    </script>
+</apex:page>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Product Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Authentisign</fullName>
+                <default>false</default>
+                <label>Authentisign</label>
+            </value>
+            <value>
+                <fullName>XactSite Agent</fullName>
+                <default>false</default>
+                <label>XactSite Agent</label>
+            </value>
+            <value>
+                <fullName>XactSite Office</fullName>
+                <default>false</default>
+                <label>XactSite Office</label>
+            </value>
+            <value>
+                <fullName>realPING</fullName>
+                <default>false</default>
+                <label>realPING</label>
+            </value>
+            <value>
+                <fullName>MRIS XactSite Agent</fullName>
+                <default>false</default>
+                <label>MRIS XactSite Agent</label>
+            </value>
+            <value>
+                <fullName>MRIS XactSite Office</fullName>
+                <default>false</default>
+                <label>MRIS XactSite Office</label>
+            </value>
+            <value>
+                <fullName>CloudCMA</fullName>
+                <default>false</default>
+                <label>CloudCMA</label>
+            </value>
+            <value>
+                <fullName>Social Pro</fullName>
+                <default>false</default>
+                <label>Social Pro</label>
+            </value>
+            <value>
+                <fullName>Sphere by Bright MLS</fullName>
+                <default>false</default>
+                <label>Sphere by Bright MLS</label>
+            </value>
+            <value>
+                <fullName>Sphere by Bright MLS Office IDX</fullName>
+                <default>false</default>
+                <label>Sphere by Bright MLS Office IDX</label>
+            </value>
+            <value>
+                <fullName>Sphere by Bright MLS Agent IDX</fullName>
+                <default>false</default>
+                <label>Sphere by Bright MLS Agent IDX</label>
+            </value>
+            <value>
+                <fullName>Sphere Office by Bright MLS</fullName>
+                <default>false</default>
+                <label>Sphere Office by Bright MLS</label>
+            </value>
+            <value>
+                <fullName>Social Pro Office</fullName>
+                <default>false</default>
+                <label>Social Pro Office</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

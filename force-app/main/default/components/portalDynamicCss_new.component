@@ -1,0 +1,284 @@
+<apex:component >
+<style>
+  
+body{
+    background-image:url({!URLFOR($Resource.MRIS,'MRIS/bg-main.png')});
+}
+
+#innerwrapper{
+    background-image:url({!URLFOR($Resource.MRIS,'MRIS/bg-internal-pages.png')});
+    background-repeat:repeat-y;
+}
+
+#headerwrapper{
+    background-repeat:no-repeat;
+    background-position: 0px 0px;
+    height:116px;
+    width:1004px;
+    background-image: url({!URLFOR($Resource.MRIS,'MRIS/bg-portal-header.png')});
+}
+
+#nav ul{
+    background-image: url({!URLFOR($Resource.MRIS,'MRIS/bg-navdrop.png')});
+    background-position: left bottom;
+    left: -7px;
+    top: 25px;
+    float: left;
+    padding-bottom: 10px;
+    padding-top: 5px;
+    visibility: hidden;
+    background-repeat: no-repeat;
+}
+
+#mris_status {
+    float:left;
+    margin-left:570px;
+    margin-top:11px;
+    background-image: url({!URLFOR($Resource.MRIS,'MRIS/sprite_home.png')});
+    width:20px;
+    height:20px;
+}
+
+#footer{
+    background-image:url({!URLFOR($Resource.MRIS,'MRIS/sprite_home.png')});
+    background-position: -15px -1361px;
+    background-repeat:no-repeat;
+    color:#2189EE;
+    float:left;
+    font-size:11px;
+    height:30px;
+    padding-right:26px;
+    padding-top:36px;
+    text-align:right;
+    width:980px;
+    margin-left:8px !important;
+}
+
+#login, #join {
+    background-image:url({!URLFOR($Resource.MRIS,'MRIS/sprite_home.png')});
+    background-repeat:no-repeat;
+    color:#FFF;
+    float:left;
+    font-size:20px;
+    height:34px;
+    text-align:center;
+    width:138px;
+    padding-top:7px;
+    margin-left:20px;
+}
+
+#headingleftnav{
+    background-image:url({!URLFOR($Resource.MRIS,'MRIS/sprite_home.png')});
+    background-repeat:no-repeat;
+    background-position: -18px -244px;
+    color:#333;
+    height:39px;
+    width:170px;
+    margin-top:2px;
+    padding-left:10px;
+    padding-top:10px;
+    /*padding:10px 0 12px 10px;*/
+}
+
+#sidenav{
+    background-image: url({!URLFOR($Resource.MRIS,'MRIS/sprite_home.png')});
+    background-position: -7px -1720px;
+    background-repeat:no-repeat;
+    float:left;
+    padding:1px 35px 20px 15px;
+    width:170px;
+}
+
+
+#content form #button{
+    /*background-image:url(http://www.mris.com/_res/graphics/icons/button-orange-white.gif);*/
+    background-image:url({!URLFOR($Resource.MRIS,'MRIS/sprite_home.png')});
+    background-repeat:no-repeat;
+    background-position: -479px -750px;
+    border-style:none;
+    color:#FFF;
+    font-size:13px;
+    font-weight:700;
+    height:34px;
+    margin:0;
+    text-align:center;
+    width:138px;
+}
+
+#content #links #button a{
+    background-image:url({!URLFOR($Resource.MRIS,'MRIS/sprite_home.png')});
+    background-repeat:no-repeat;
+    background-position: -486px -753px;
+    color:#FFF;
+    float:right;
+    font-weight:700;
+    height:35px;
+    padding-top:6px;
+    text-align:center;
+    text-transform:capitalize;
+    width:140px;
+}
+
+#content #leaders li a{
+    background-image:url(http://www.mris.com/_res/graphics/backgrounds/spacer.gif);
+    color:#FFF;
+    float:left;
+    font-size:1px;
+    height:165px;
+    left:0;
+    top:-5px;
+    width:114px;
+}
+
+
+#content #leaders li a:hover{
+    background-image:url({!URLFOR($Resource.MRIS,'MRIS/sprite_home.png')});
+    background-repeat:no-repeat;
+    background-position: -238px -560px;
+    bottom:auto;
+    color:#FFF;
+    float:left;
+    font-size:11px;
+    height:40px;
+    left:-20px;
+    overflow:visible;
+    padding:129px 5px 4px;
+    text-align:center;
+    top:0;
+    width:145px;
+}
+
+
+#right{
+    background-image: url({!URLFOR($Resource.MRIS,'MRIS/sprite_home.png')});
+    background-position: -962px -1720px;
+    background-repeat:no-repeat;
+    float:right;
+    height:200px;
+}
+
+#quick-links {
+    /*background-image:url(http://www.mris.com/_res/graphics/backgrounds/bg-quicklinks-top3.gif);*/
+    background-image:url({!URLFOR($Resource.MRIS,'MRIS/sprite_home.png')});
+    background-position:-226px -337px;
+    background-repeat:no-repeat;
+    height:184px;
+    width:148px;
+}
+
+#sign-in {
+    background-image:url({!URLFOR($Resource.MRIS,'MRIS/sprite_home.png')});
+    background-position: -15px -536px;
+    background-repeat:no-repeat;    
+}
+#testimonials{
+    /*background-image:url(http://www.mris.com/_res/graphics/backgrounds/bg-right-panel.gif);
+    background-position:right bottom;*/
+    background-image:url({!URLFOR($Resource.MRIS,'MRIS/sprite_home.png')});
+    background-position: -820px -361px;
+    background-repeat:no-repeat;
+    float:left;
+    font-size:11px;
+    margin-top:10px;
+    padding-bottom:5px;
+    padding-left:24px;
+    padding-right:24px;
+    width:194px;
+    height:360px;
+}
+#testimonials h4, .mris_teaser h4, #quiz h4 {
+    /*background-image:url(http://www.mris.com/_res/graphics/backgrounds/bg-quotes-top.gif);*/
+    background-image:url({!URLFOR($Resource.MRIS,'MRIS/sprite_home.png')});
+    background-position: -820px -160px;
+    background-repeat:no-repeat;
+    font-size:18px;
+    height:30px;
+    left:0;
+    padding-left:25px;
+    padding-top:19px;
+    top:0;
+    width:194px;
+}
+
+#base{
+    clear:both;
+    background-image:url({!URLFOR($Resource.MRIS,'MRIS/sprite_home.png')});
+    background-position: -15px -1466px;
+    background-repeat:no-repeat;
+    height:36px;
+    margin-left:8px;
+}
+
+div.slideshow div.ctrl a.next, div.slideshow div.ctrl a.prev {
+    background-image:url({!URLFOR($Resource.MRIS,'MRIS/sprite_home.png')});
+    background-position:-315px -228px;
+    background-repeat:no-repeat;
+    border:0;height:25px;width:25px;
+    display:block;
+    float:left;
+}
+
+div.slideshow div.ctrl span.pagination a img{
+    background-image:url({!URLFOR($Resource.MRIS,'MRIS/sprite_home.png')});
+    background-position:-823px -781px;
+    background-repeat:no-repeat;
+    border:0;
+    height:7px;
+    width:7px;
+}
+
+
+#content form #button:hover,#content #links #button a:hover{
+    /*background-image:url(http://www.mris.com/_res/graphics/icons/button-green-white.gif);*/
+    background-image:url({!URLFOR($Resource.MRIS,'MRIS/sprite_home.png')});
+    background-position: -642px -753px;
+    width:140px;
+    height:35px;
+}
+.mris_teaser,#quiz{
+    /*background-image:url(http://www.mris.com/_res/graphics/backgrounds/bg-right-panel.gif);
+    background-position:right bottom;*/
+    background-image:url({!URLFOR($Resource.MRIS,'MRIS/sprite_home.png')});
+    background-position: -820px -570px;
+    background-repeat:no-repeat;
+    float:left;
+    font-size:11px;
+    margin-left:0;
+    margin-top:6px;
+    padding:47px 24px 20px;
+    width:145px;
+    height:90px;
+}
+#crumbs{
+    background-image: url({!URLFOR($Resource.MRIS,'MRIS/sprite_home.png')});
+    background-position: -10px -1647px;
+    background-repeat:no-repeat;
+    color:#FFF;
+    font-size:12px;
+    font-weight:700;
+    height:25px;
+    padding-left:25px;
+    padding-top:3px;
+}
+.btn, .button, .formulaButton, .btnWhatsNew {
+    background-image: url("/img/bgButton.gif");
+    background-position: left top;
+    background-repeat: repeat-x;
+    border-style: none solid solid none;
+    border-width: medium 1px 1px medium;
+    color: black;
+    cursor: pointer;
+    display: inline;
+    font-family: 'Verdana','Geneva',sans-serif;
+    font-size: 80%;
+    font-weight: bold;
+    height: 25px;
+    padding: 1px 3px 0px 0px;
+    width: 51px;
+}
+
+/* put blank for h2 tag*/
+#content h2{
+ }
+</style>
+</apex:component>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>License_on_a_subscription_is_15_days_from_expiring</fullName>
+        <description>License on a subscription is 15 days from expiring</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact__c</field>
+            <type>contactLookup</type>
+        </recipients>
+        <senderAddress>no-reply@brightmls.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Subscriber_License_Expiring_15_days</template>
+    </alerts>
+    <alerts>
+        <fullName>License_on_a_subscription_is_15_days_from_expiringSF</fullName>
+        <ccEmails>emailtosalesforce@z-lh9dypma9adpo2pq0q6zgoeut46ejmjs7k17uk5g001ihkri0.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>License on a subscription is 15 days from expiringSF</description>
+        <protected>false</protected>
+        <senderAddress>no-reply@brightmls.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Subscriber_License_Expiring_15_days</template>
+    </alerts>
+    <alerts>
+        <fullName>License_on_a_subscription_is_1_day_from_expiring</fullName>
+        <description>License on a subscription is 1 day from expiring</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact__c</field>
+            <type>contactLookup</type>
+        </recipients>
+        <senderAddress>no-reply@brightmls.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Subscriber_License_Expiring_1_day</template>
+    </alerts>
+    <alerts>
+        <fullName>License_on_a_subscription_is_1_day_from_expiringSF</fullName>
+        <ccEmails>emailtosalesforce@z-lh9dypma9adpo2pq0q6zgoeut46ejmjs7k17uk5g001ihkri0.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>License on a subscription is 1 day from expiringSF</description>
+        <protected>false</protected>
+        <senderAddress>no-reply@brightmls.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Subscriber_License_Expiring_1_day</template>
+    </alerts>
+    <alerts>
+        <fullName>License_on_a_subscription_is_30_days_from_expiring</fullName>
+        <description>License on a subscription is 30 days from expiring</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact__c</field>
+            <type>contactLookup</type>
+        </recipients>
+        <senderAddress>no-reply@brightmls.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Subscriber_License_Expiring_30_days</template>
+    </alerts>
+    <alerts>
+        <fullName>License_on_a_subscription_is_30_days_from_expiringSF</fullName>
+        <ccEmails>emailtosalesforce@z-lh9dypma9adpo2pq0q6zgoeut46ejmjs7k17uk5g001ihkri0.j-3oj9omag.cs10.le.sandbox.salesforce.com</ccEmails>
+        <description>License on a subscription is 30 days from expiringSF</description>
+        <protected>false</protected>
+        <senderAddress>no-reply@brightmls.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Subscriber_License_Expiring_30_days</template>
+    </alerts>
+</Workflow>

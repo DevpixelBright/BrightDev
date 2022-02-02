@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AppraisersActive</fullName>
+    <columns>NAME</columns>
+    <columns>Status__c</columns>
+    <columns>Contact_Type__c</columns>
+    <columns>Subscription_Type__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Contact_Type__c</field>
+        <operation>equals</operation>
+        <value>Appraiser</value>
+    </filters>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Active</value>
+    </filters>
+    <label>AppraisersActive</label>
+</ListView>

@@ -1,0 +1,40 @@
+<apex:page renderAs="pdf" lightningstylesheets="true">
+<html>
+<head>
+
+<title>Broker Designation of Authorized Signer Form</title>
+</head>
+
+<body>
+<strong><center>Broker Designation of Authorized Signer Form<br/>
+Metropolitan Regional Information Systems, Inc.</center></strong><br/>
+Rockville, MD 20850<br/>
+Designee Name: _________________________________________<br/>
+Designee MRIS ID: __________________(leave blank if not applicable)<br/>
+Email address: _________________________________________<br/>
+Signature: _________________________________________<br/>
+==============================================================<br/>
+Broker/Firm Name: _________________________________________<br/>
+Broker Code: _________________________________________<br/>
+Broker Address: _________________________________________<br/>
+Broker Office Phone: _________________________________________<br/>
+Broker Email: _________________________________________<br/>
+===============================================================<br/>
+I certify that I am the Broker of Record and I understand that the privileges and authority I grant to<br/>
+an authorized signer are broad. By signing below, I approve the selected individual to act for me as<br/>
+if I had taken the action directly. As the responsible Broker, I understand that it is my responsibility<br/>
+to revoke the authorized signer privileges and to promptly notify MRIS® if the individual is no<br/>
+longer affiliated with me or my Firm (NOTE: the privileges and authority granted to the authorized<br/>
+signer can be revoked at any time, by logging on to the MRIS® website and removing the individual<br/>
+as authorized signer). I acknowledge and agree that the selection of an authorized signer does not<br/>
+negate, diminish or revoke any duties or responsibilities that I have as the Broker of Record.<br/>
+By: _________________________________________<br/>
+(Broker Signature)<br>
+Printed Name: _________________________________________<br/>
+Date: _________________________________________<br/>
+Note: This form to be used for any Authorized Signer that does not currently have an MRIS User ID</br>
+and credentials to access MRIS systems. This designee will have limited access to the Pending<br/>
+Applications and not all MRIS systems. Fax the completed form to 1-301-838-7171 for processing
+</body>
+</html>
+</apex:page>

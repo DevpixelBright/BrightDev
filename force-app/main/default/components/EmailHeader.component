@@ -1,0 +1,13 @@
+<apex:component access="global">
+<tr>
+<td colspan="5" height="174">
+<img border="0" src="http://images.publicaster.com/ImageLibrary/account3611/images/New-Blue.jpg" usemap="#rade_img_map_1325784709198"/>
+<map id="rade_img_map_1325784709198" name="rade_img_map_1325784709198">
+<area href="https://www.facebook.com/MRISonFB" shape="RECT" target="_blank" coords="408,75,459,122"/>
+<area href="http://Twitter.com/mris_real_news" shape="RECT" target="_blank" coords="469,74,516,119"/>
+<area href="http://mrisblog.com/" shape="RECT" target="_blank" coords="533,74,580,121"/>
+<area href="http://www.mris.com/" shape="RECT" target="_blank" coords="436,131,561,148"/></map>
+
+<br/></td></tr>
+
+</apex:component>

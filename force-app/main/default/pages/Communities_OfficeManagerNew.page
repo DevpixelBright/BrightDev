@@ -1,0 +1,971 @@
+<apex:page controller="Communities_OfficeManagernew" docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" lightningstylesheets="true">
+    <apex:composition template="Communities_Base">
+        <apex:define name="content">
+            <apex:form id="regID">
+                
+                <c:Bootstrap_Resources />
+                <link href="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/font-awesome.min.css')}" rel="stylesheet" type="text/css" />
+                
+                <apex:pageBlock title="" id="error_details" rendered="{!hasInitialError}">
+                    <div id="messages">
+                        <apex:pagemessages ></apex:pagemessages>
+                    </div>                    
+                </apex:pageBlock>
+                <apex:outputPanel rendered="{!hasError}">
+                    <style>
+                        .alert-danger{
+                        margin-top:30px;
+                        }
+                    </style>
+                    <p class="alert alert-danger">
+                        Only your Broker of Record can assign an Office Manager. If you are the Broker of Record and unable to access this component, please contact our support team at support@brightmls.com.
+                    </p>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!!hasError}">
+                    <apex:pageBlock title="" id="details" rendered="{!!hasInitialError}">
+                        
+                        <style>
+                            .two_buttons{text-align:right; margin-bottom:-44px; margin-top:40px;}
+                            h2{font-size:22px !important; margin:5px 0px !important;}
+                            .tertiaryPalette{display:none !important;}
+                            .for_inputs h4{border-bottom: 1px solid #69A61F; padding-bottom: 10px;}
+                            h2{display:none;}
+                            label{padding-top:0px !important;}
+                            .margin{margin:20px 0 10px 0;}
+                            #content-container{margin-top:0px !important;}
+                            @media(min-width:400px){
+                            .detailList th{width:30% !important;}
+                            .mandatory{color:red; font-weight:bold; font-size:18px;}
+                            }
+                            i.fa {margin: auto 5px;
+                            position: relative;
+                            top: 0px;}
+                            .fa-2x {
+                            font-size: 2em;
+                            }
+                            .fa {
+                            display: inline-block;
+                            font-family: FontAwesome;
+                            font-style: normal;
+                            font-weight: normal;
+                            line-height: 1;
+                            -webkit-font-smoothing: antialiased;
+                            -moz-osx-font-smoothing: grayscale;
+                            }
+                            .form-horizontal .form-group { margin:0px; }                       
+                            .terminateReason {
+                            margin:0px;
+                            height:28px;
+                            font-size:12px;
+                            }
+                            #terminateButtonGroup { display:none; }
+                            input[type=checkbox] { margin-top: 4px !important; }
+                            .table>tbody>tr>td { border-top:none; padding: 10px 15px; }
+                            .table>thead>tr>th { border-bottom:none; padding: 10px 15px; }
+                            .amount-type {text-align:right;}
+                            #Offices_filter {text-align:left; padding-left:0px; margin-top:-34px; padding-right:0px;}
+                            #Offices_filter input { width:100%; height:35px; margin-left:0px;}
+                            #Offices_info {text-align:right; padding-right:0px; color:#ccc; font-size:12px;}
+                            #Offices_length { padding-top:3px; padding-left:0px; }
+                            #Offices_paginate { padding-right:0px;}
+                            .search_help {color:#ccc; font-size:12px;}
+                            .top {margin-bottom:10px; border-bottom: 1px solid #388EDD; padding-bottom:20px; }
+                            .bottom{margin-top:10px; border-top: 1px solid #388EDD; padding-top:20px; }
+                            input[type=search] {width:100%;}
+                            .table-bordered {border: 1px solid #fff;}
+                            .dropdowns { text-align:right; }
+                            .dropdowns select {width:100px; display:inline;}
+                            .table-striped>tbody>tr:nth-child(odd)>td, .table-striped>tbody>tr:nth-child(odd)>th {
+                            background-color: #f5f5f5;
+                            }
+                            .table-bordered>thead>tr>th, .table-bordered>tbody>tr>td {border:1px solid #fff;}
+                            /* enable absolute positioning */
+                            .inner-addon {
+                            position: relative;
+                            width:70%;
+                            margin:auto;
+                            }
+                            
+                            /* style glyph */
+                            .inner-addon .glyphicon {
+                            position: absolute;
+                            padding: 10px;
+                            pointer-events: none;
+                            }
+                            
+                            /* align glyph */
+                            .left-addon .glyphicon  { left:  0px;}
+                            .right-addon .glyphicon { right: 0px;}
+                            
+                            /* add padding  */
+                            .left-addon input  { padding-left:  30px; }
+                            .right-addon input { padding-right: 30px; }  
+                            .alertPanel{margin-top:20px;}
+                            .view-row {padding:10px;border-bottom:1px solid #eee;}
+                            .last {border-bottom:none;}
+                            .clear {clear:both;}
+                            .step-header {font-size:16px; color:#388edd;}
+                            
+                            .arrow-up {
+                            margin:auto;
+                            width: 0; 
+                            height: 0; 
+                            border-left: 7px solid transparent;
+                            border-right: 7px solid transparent;
+                            border-bottom: 7px solid #3c90dd;
+                            } 
+                            .slide-down {
+                            border:2px solid #3c90dd;
+                            border-radius:2px;
+                            padding:10px;
+                            } 
+                            .slide-down table {
+                            margin-bottom:0px;
+                            color:#383535;
+                            }
+                            .slide-down table>thead>tr>th {
+                            vertical-align: bottom;
+                            border-bottom: 2px solid #ddd !important;
+                            
+                            }
+                            .slide-down table>tbody>tr>td {
+                            vertical-align: top;
+                            border-top: 1px solid #ddd !important;
+                            }
+                            .slide-down h3 { 
+                            margin-top: 10px;
+                            margin-bottom: 15px;
+                            color: #3c90dd;
+                            margin-left: 5px;
+                            font-size:17px; 
+                            } 
+                            a {
+                            cursor:pointer !important;
+                            text-decoration:underline;
+                            }
+                            td[colspan="7"] { 
+                            background-color: #fff !important;
+                            }                                                                                                                                        
+                        </style>                                                      
+                        
+                        <div class="row content-block">
+                            <div class="col-sm-12">
+                                <c:Communities_Definition pageTitle="Office Managers" pageTitleClass="fa fa-user fa-2x" hasDefinitions="false">
+                                    <p><b class="term">Term</b> Definition goes here.</p>
+                                </c:Communities_Definition>                 
+                            </div>
+                            
+                            <div class="col-xs-12 instructions" style="padding-top:20px; padding-bottom:20px;">
+                                <div class="col-xs-10">
+                                    <p>To add a new Office Manager, click "Assign an Office Manager". To view or modify an individual currently assigned as an Office Manager for your office(s), click the number located underneath the "Managers" column below. </p>
+                                </div>
+                                <div class="col-xs-2">
+                                    <apex:commandButton style="margin-top:-150px;" onclick="resetDefaults()" action="{!addNewManager}" styleClass="btn btn-primary" value="Assign an Office Manager" />
+                                </div>                            
+                            </div>                          
+                        </div>                                                            
+                        <br/>
+                        
+                        <apex:actionFunction name="SelectIndividual" action="{!individualSelected}" reRender="Steps, out" oncomplete="checkExistingOfficesNew()">
+                            <apex:param name="Parameter" assignTo="{!subscriberSelected}" value="" />
+                        </apex:actionFunction>
+                        
+                        <apex:actionFunction name="AssignAuthority" action="{!assignAuthority}" reRender="Steps">
+                            <apex:param name="Parameter" assignTo="{!selectedOfficesStr}" value="" />
+                        </apex:actionFunction> 
+                        
+                        <apex:actionFunction name="ReviewChanges" action="{!reviewChanges}" reRender="Steps">
+                        </apex:actionFunction>
+                        
+                        <apex:actionFunction name="SaveManagers" action="{!saveManagers}" reRender="Steps">
+                        </apex:actionFunction>
+                        
+                        <apex:actionFunction name="accordian1" action="{!accordian1}" reRender="Steps">
+                        </apex:actionFunction>                          
+                        
+                        <apex:outputPanel id="out">
+                            <script>
+                            function checkExistingOffices() {
+                                var officeIdsStr = '{!existingOfficesStr}';
+                                var officeIds = officeIdsStr.split(',');
+                                var isModify = '{!!isEdit}';
+                                console.log('{!subscriberSelected}');
+                                console.log(officeIdsStr);
+                                clearValues();
+                                
+                                for(var i=0; i<officeIds.length; i++) {
+                                    $('#' + officeIds[i]).prop("checked", true);
+                                    
+                                    if(isModify == 'true'){
+                                        $('#' + officeIds[i]).prop("checked", true);   
+                                        console.log('entered modify' + officeIds);
+                                    }
+                                    else{
+                                        if($('#' + officeIds[i]).is(":checked")){                                        
+                                            $('#' + officeIds[i]).prop("disabled", true);
+                                            console.log('entered else modify' + officeIds);
+                                        }
+                                    }                                   
+                                }
+                            }
+                            function checkExistingOfficesNew() {
+                                var officeIdsStr = '{!existingOfficesStr}';
+                                var officeIds = officeIdsStr.split(',');
+                                console.log('{!subscriberSelected}');
+                                console.log(officeIdsStr);
+                                clearValues();
+                                
+                                for(var i=0; i<officeIds.length; i++) {
+                                    $('#' + officeIds[i]).prop("checked", true);
+                                    if($('#' + officeIds[i]).is(":checked")){                                        
+                                        $('#' + officeIds[i]).prop("disabled", true);
+                                        console.log('entered else modify' + officeIds);
+                                    }                                  
+                                }                                    
+                            }
+                            </script>
+                        </apex:outputPanel>
+                        
+                        <apex:outputPanel id="contentPanel">
+                            <div id="messages">
+                                <apex:pagemessages ></apex:pagemessages>
+                            </div>
+                            
+                            <script>                       
+                            var activeTable;
+                            var dataSet = {!officesStr};
+                            $(document).ready(function() {                    
+                                $(".errorM3").addClass("alert alert-danger");
+                                $(".infoM3").addClass("alert alert-info");
+                                $(".confirmM3").addClass("alert alert-success");
+                                
+                                activeTable = $('#Offices').DataTable( {
+                                    "data": dataSet,
+                                    "columns": [
+                                        {
+                                            "className":      'details-control',
+                                            "orderable":      true,
+                                            "data":           "officeId",
+                                            "defaultContent": ''
+                                        },
+                                        { "data": "name" },
+                                        { 
+                                            "className":      'details-control',
+                                            "orderable":      true,
+                                            "data": "signersCount",
+                                            "defaultContent": ''                                        
+                                        },
+                                        { "data": "street" },
+                                        { "data": "city" },
+                                        { "data": "state" },
+                                        { "data": "zip" },                                        
+                                    ],
+                                        "order": [[1, 'asc']],
+                                    "dom": '<"top"fi>rt<"bottom"lp><"clear">'
+                                } );
+                                
+                                // Add event listener for opening and closing details
+                                $('#Offices tbody').on('click', 'td.details-control', function () {
+                                    
+                                    var tr = $(this).closest('tr');
+                                    var row = activeTable.row( tr );
+                                    
+                                    if ( row.child.isShown() ) {
+                                        // This row is already open - close it
+                                        row.child.hide();
+                                        tr.removeClass('shown');
+                                    }
+                                    else {
+                                        // Open this row
+                                        row.child( format(row.data()) ).show();
+                                        tr.addClass('shown');
+                                    }
+                                    $('[data-toggle="tooltip"]').tooltip();
+                                } ); 
+                                
+                                $('#Offices_filter').addClass('col-sm-12');
+                                $('#Offices_info').addClass('col-sm-12');
+                                $("#Offices_info").after( "<div style='clear:both;'></div>" );
+                                $('#Offices_length').addClass('col-sm-6');
+                                $('#Offices_paginate').addClass('col-sm-6');
+                                $("#Offices_paginate").after( "<div style='clear:both;'></div>" );
+                                $('[data-toggle="tooltip"]').tooltip();
+                            });
+                            
+                            function format ( d ) {
+                                /* `d` is the original data object for the row
+                                return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+                                    '<tr>'+
+                                        '<td>Full name:</td>'+
+                                        '<td>'+d.Id+'</td>'+
+                                    '</tr>'+
+                                    '<tr>'+
+                                        '<td>Extension number:</td>'+
+                                        '<td>'+d.Name+'</td>'+
+                                    '</tr>'+
+                                    '<tr>'+
+                                        '<td>Extra info:</td>'+
+                                        '<td>And any further details here (images etc)...</td>'+
+                                    '</tr>'+
+                                '</table>'; */
+                                return d.signers;
+                            }                            
+                            
+                            function continueStep2() {
+                                var selectedOffices = [];
+                                $('.authorityCheckbox').each(function() {
+                                    if($(this).is(':checked')) {
+                                        selectedOffices.push($(this).val());    
+                                    }
+                                });
+                                var jsonString = JSON.stringify(selectedOffices);
+                                AssignAuthority(jsonString);
+                            }
+                            
+                            function enableContinue() {
+                                if($("#termsCheckbox").is(':checked'))
+                                    $("#ContinueStep4").removeAttr('disabled');
+                                else
+                                    $("#ContinueStep4").attr('disabled', 'disabled');
+                            }
+                            
+                            function clearValues() {
+                                var url = new URL(window.location);
+                                var subId = url.searchParams.get("subid");
+                                if(subId == null) {
+                                    $('.authorityCheckbox').each(function() {
+                                        if ($(this).is(':checked') && !($(this).is('[disabled=disabled]'))) {
+                                            $(this).prop('checked', false);
+                                        }
+                                    });
+                                }
+                            }
+                            
+                            function checkAccordian1() {
+                                var url = new URL(window.location);
+                                var subId = url.searchParams.get("subid");
+                                if(subId == null) {
+                                    accordian1();
+                                }
+                            }
+                            </script> 
+                            
+                            <!-- Results display panel -->                        
+                            <apex:outputPanel id="OfficeResults"> 
+                                <div class="row content-block listing-block">
+                                    <div class="col-sm-12">                                        
+                                        <table class="table table-striped table-bordered" id="Offices">
+                                            <thead>
+                                                <tr>
+                                                    <th>Office ID</th>
+                                                    <th>Name</th>
+                                                    <th>Managers</th>
+                                                    <th>Street Address</th>
+                                                    <th>City</th>
+                                                    <th>State</th>
+                                                    <th>Zip</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </apex:outputPanel>
+                            <!-- End of results display panel -->
+                            
+                            <!-- Add new Office Manager modal -->
+                            <style>
+                                .header_row{ padding:12px; background-color:#388edd;}
+                                .header_row img.logo{padding: 12px 0px;}
+                                .body_content { padding-top: 20px; padding-bottom: 20px; color:#565656;}
+                                .body_content h3{ font-size:22px; margin:0px; padding:4px 0px;}
+                                .body_content p{ padding-top:5px; line-height:18px; font-size:13px; color:#727272;}
+                                .form_style{background-color:#fff; border:1px solid #e7e7e7; padding-top:15px; margin-top:22px; border-radius:4px; -o-border-radius:4px; -webkit-border-radius:4px; -moz-border-radius:4px; -ms-border-radius:4px;}            
+                                .panel-default { border:none; }
+                                .panel-default>.panel-heading { background-color:#fff; color:#565656; border:none; }
+                                .panel-group .panel-heading+.panel-collapse .panel-body { border:none; }
+                                .col-sm-1 { width:1.3333%; }
+                                .panel-heading { padding:0px;}
+                                .menu-header {padding:10px;}
+                                .menu-header-right { border-top:1px solid #ccc;}
+                                .menu-header-left { padding-right:30px;}
+                                h3 {padding:10px;}
+                                .menu-header p { margin:0px;}
+                                .menu-header p { text-decoration:none; }
+                                .panel {box-shadow:none; border-radius:0px; }
+                                .panel-group .panel { border-radius:0px; }
+                                .active { background-color: #f5f5f5;}
+                                .panel-body {padding:10px;}
+                                .panel-title a {
+                                color: #565656;
+                                text-decoration: none;                            
+                                }
+                                .panel-title {
+                                font-size: 22px;
+                                margin: 0px;
+                                padding: 4px 0px;                            
+                                }                        
+                            </style>
+                            
+                            <apex:outputPanel id="AddNewManagerModal" rendered="{!isAddNewManager}">
+                                <div class="modal fade" id="AddNewManager-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="false">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <!--<apex:outputPanel rendered="{!isEdit}">
+<apex:commandLink action="{!closeModal}" rerender="regID">-->
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="resetDefaults()">&times;</button>
+                                                <!--</apex:commandLink>
+</apex:outputPanel>-->
+                                                <!--
+<apex:outputPanel rendered="{!!isEdit}">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="window.location='/customers/Communities_OfficeManagerNew?id={!subscriptionId}';">&times;</button>
+</apex:outputPanel>                                                
+
+<h4 class="modal-title" id="modal-label"><i class="fa fa-user"></i> Assign an Office Manager</h4>-->
+                                                <apex:outputPanel rendered="{!isContent}">
+                                                    <h4 class="modal-title" id="modal-label"><i class="fa fa-user"></i> Modify an Office Manager</h4>
+                                                </apex:outputPanel>
+                                                <apex:outputPanel rendered="{!!isContent}">
+                                                    <h4 class="modal-title" id="modal-label"><i class="fa fa-user"></i> Assign an Office Manager</h4>
+                                                </apex:outputPanel>
+                                            </div>
+                                            <apex:outputPanel id="Steps">
+                                                <div class="modal-body body_content">                        
+                                                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                                        
+                                                        <!-- License information -->
+                                                        <div class="panel panel-default {!if(searchBlockState == 'Started', 'active', 'inactive')}">
+                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                <div class="col-sm-12 menu-header menu-header-right" style="border-top:none;">
+                                                                    <table style="width:100%;" class="panel-title">
+                                                                        <tr>
+                                                                            <td style="width:50px; vertical-align:top; text-align:center;">
+                                                                                1.
+                                                                            </td>
+                                                                            <td style="{!if(searchBlockState == 'Started', 'border-bottom:1px solid #95D1E6; padding-bottom:7px;', '')}" onclick = "clearValues()">
+                                                                                <a onclick="checkAccordian1()">
+                                                                                    Select Individual
+                                                                                </a>
+                                                                                
+                                                                                <p>Search by Subscriber ID, Name or Office ID to select the individual you want to assign as an Office Manager.</p>
+                                                                            </td>
+                                                                            <td style="width:3%; color:#5cb85c;">
+                                                                                <apex:outputText rendered="{!if(searchBlockState == 'Completed', true, false)}">
+                                                                                    <i class="glyphicon glyphicon-ok" />
+                                                                                </apex:outputText>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div id="collapseOne" class="panel-collapse  {!if(searchBlockState == 'Started', 'collapse in', 'collapse')}" role="tabpanel" aria-labelledby="headingOne">
+                                                                <div class="panel-body">
+                                                                    <table style="width:100%;">
+                                                                        <tr>
+                                                                            <td style="width:50px; vertical-align:top; text-align:center;">
+                                                                                
+                                                                            </td>
+                                                                            <td>                    
+                                                                                <div class="col-sm-12" style="border-bottom:1px solid #fff;">
+                                                                                    <div class="col-sm-12">
+                                                                                        <div class="form-group">
+                                                                                            <label for="Search">Subscriber Id</label>
+                                                                                            <apex:inputText value="{!search.subscriberId}" styleClass="form-control" id="sub"/>
+                                                                                        </div>                            
+                                                                                    </div>                                                                                      
+                                                                                </div>
+                                                                                <div class="col-sm-12" style="padding-top:10px; border-bottom:1px solid #fff;">
+                                                                                    <div class="col-sm-6">
+                                                                                        <div class="form-group">
+                                                                                            <label for="Search">First Name</label>
+                                                                                            <apex:inputText value="{!search.firstName}" styleClass="form-control" id="fn"/> 
+                                                                                        </div>                            
+                                                                                    </div>
+                                                                                    <div class="col-sm-6">
+                                                                                        <div class="form-group">
+                                                                                            <label for="Search">Last Name</label>
+                                                                                            <apex:inputText value="{!search.lastName}" styleClass="form-control" id="ln"/> 
+                                                                                        </div>                            
+                                                                                    </div>                                                                            
+                                                                                    <div style="clear:both;"></div>                                       
+                                                                                </div>
+                                                                                <div class="col-sm-12" style="padding-top:10px; border-bottom:1px solid #fff;">
+                                                                                    <div class="col-sm-12">
+                                                                                        <div class="form-group">
+                                                                                            <label for="Search">Office ID</label>
+                                                                                            <apex:inputText value="{!search.officeId}" styleClass="form-control" id="ofcid"/>
+                                                                                        </div>                            
+                                                                                    </div>                                        
+                                                                                </div>                                            
+                                                                                <div class="col-sm-12" style="padding:12px;">
+                                                                                    <div class="col-sm-12">
+                                                                                        <apex:commandButton id="Search" value="Search" styleClass="btn btn-primary" action="{!getSearchResults}" style="float:right;" />                                                                                                              
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div style="clear:both;"></div>
+                                                                                <!-- Search Results -->
+                                                                                <apex:outputPanel rendered="{!searchResults.Size > 0 && !ham}" >
+                                                                                    <div id="table1">
+                                                                                        <h5 style="color:#a9a9a9;border-top:1px solid #95D1E6; padding-top:15px; padding-bottom:10px;"><b>Search Results:</b></h5>
+                                                                                        <table class="table table-striped table-bordered" >
+                                                                                            <thead>
+                                                                                                <tr>
+                                                                                                    <th>Subscriber ID</th>
+                                                                                                    <th>First Name</th>
+                                                                                                    <th>Last Name</th>
+                                                                                                    <th>Office ID</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                                <apex:repeat value="{!searchResults}" var="result">
+                                                                                                    <tr>
+                                                                                                        <td>
+                                                                                                            <a onclick="SelectIndividual('{!result.Id}')">
+                                                                                                                {!result.Name}
+                                                                                                            </a>                                                                           
+                                                                                                        </td>
+                                                                                                        <td>{!result.Contact__r.FirstName}</td>
+                                                                                                        <td>{!result.Contact__r.LastName}</td>
+                                                                                                        <td>{!result.Related_Location_Broker_Office__r.Name}</td>
+                                                                                                    </tr>
+                                                                                                </apex:repeat>
+                                                                                            </tbody>        
+                                                                                        </table>
+                                                                                    </div>   
+                                                                                </apex:outputPanel>                                                                        
+                                                                                
+                                                                                <apex:outputPanel layout="none" rendered="{!searchResults.Size <= 0 && !ham}">
+                                                                                    <table width="100%">
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <div class="alert alert-danger" role="alert">
+                                                                                                    No individuals available to assign as an Office Manager. 
+                                                                                                </div>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </table> 
+                                                                                </apex:outputPanel>
+                                                                            </td>
+                                                                            <td style="width:3%;"></td>
+                                                                        </tr>
+                                                                    </table>                        
+                                                                </div>
+                                                            </div>                                                    
+                                                            
+                                                        </div>
+                                                        
+                                                        <!-- License information -->
+                                                        <div class="panel panel-default {!if(assignBlockState == 'Started', 'active', 'inactive')}">
+                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                <div class="col-sm-12 menu-header menu-header-right">
+                                                                    
+                                                                    <table style="width:100%;" class="panel-title">
+                                                                        <tr>
+                                                                            <td style="width:50px; vertical-align:top; text-align:center;">
+                                                                                2.
+                                                                            </td>
+                                                                            <td style="{!if(assignBlockState == 'Started', 'border-bottom:1px solid #95D1E6; padding-bottom:7px;', '')}">
+                                                                                
+                                                                                <apex:outputPanel rendered="{!isContent}">
+                                                                                    <apex:commandLink action="{!accordian2}" reRender="Steps" >
+                                                                                        Modify Office Manager  
+                                                                                    </apex:commandLink> 
+                                                                                </apex:outputPanel>
+                                                                                <apex:outputPanel rendered="{!!isContent}">
+                                                                                    <apex:commandLink action="{!accordian2}" reRender="Steps" >
+                                                                                        Assign Office Manager  
+                                                                                    </apex:commandLink>                                                 
+                                                                                </apex:outputPanel>
+                                                                                <p>Please select or uncheck the office(s) assigned to this Office Manager.</p>
+                                                                            </td>
+                                                                            <td style="width:3%; color:#5cb85c;">
+                                                                                <apex:outputText rendered="{!if(assignBlockState == 'Completed', true, false)}">
+                                                                                    <i class="glyphicon glyphicon-ok" />
+                                                                                </apex:outputText>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div id="collapseTwo" class="panel-collapse  {!if(assignBlockState == 'Started', 'collapse in', 'collapse')}" role="tabpanel" aria-labelledby="headingOne">
+                                                                <div class="panel-body">
+                                                                    <table style="width:100%;">
+                                                                        <tr>
+                                                                            <td style="width:50px; vertical-align:top; text-align:center;">
+                                                                                
+                                                                            </td>
+                                                                            <td>                    
+                                                                                <div class="col-md-12" style="padding-top:10px; padding-bottom:15px; border-bottom:1px solid #fff;">
+                                                                                    <div class="col-md-6">
+                                                                                        <b>{!subscriber.Contact__r.FirstName} {!subscriber.Contact__r.LastName}</b><br/>
+                                                                                        Phone: {!subscriber.Contact__r.Phone}<br/>
+                                                                                        Email: {!subscriber.Contact__r.Email}
+                                                                                    </div>
+                                                                                    <div class="col-md-6">
+                                                                                        <b>{!subscriber.Related_Location_Broker_Office__r.Account_Name__c} ({!subscriber.Related_Location_Broker_Office__r.Name})</b><br/>
+                                                                                        {!subscriber.Related_Location_Broker_Office__r.Street_Number__c} {!subscriber.Related_Location_Broker_Office__r.Street_Name__c}<br/>
+                                                                                        {!subscriber.Related_Location_Broker_Office__r.City__c} {!subscriber.Related_Location_Broker_Office__r.State__c} {!subscriber.Related_Location_Broker_Office__r.Zip__c}
+                                                                                    </div>
+                                                                                    <div style="clear:both;" />
+                                                                                </div>
+                                                                                <div style="clear:both;" /><br/>
+                                                                                <div class="col-md-12">
+                                                                                    <p style="margin-left:10px;"><b>Use the check boxes below to add or remove office(s) assigned to this individual and then click Continue.</b></p>
+                                                                                </div>                                                    
+                                                                                <div class="col-md-12" style="padding-top:10px; padding-bottom:15px; border-bottom:1px solid #fff;">
+                                                                                    
+                                                                                    <apex:repeat var="officeRecord" value="{!officeRecords}">
+                                                                                        <div class="col-md-4" style="padding:5px; padding-left:10px;">
+                                                                                            <input type="checkbox" value="{!officeRecord.id}" id="{!officeRecord.id}" class="authorityCheckbox" onchange="removalCheckbox();"/>  {!SUBSTITUTE(SUBSTITUTE(officeRecord.officeId, '</a>', ''), '<a>', '')} ({!officeRecord.city}, {!officeRecord.state})
+                                                                                        </div>
+                                                                                    </apex:repeat>
+                                                                                    <apex:outputPanel rendered="{!!isEdit}">
+                                                                                        <script>
+                                                                                        function removalCheckbox(){
+                                                                                            var url = new URL(window.location);
+                                                                                            var subId = url.searchParams.get("subid"); 
+                                                                                            if(subId == null) {
+                                                                                                var len = $('.authorityCheckbox:checked:not(:disabled)').length;
+                                                                                                if(len && len > 0){
+                                                                                                    $('#ContinueStep2').prop( "disabled", false );
+                                                                                                }else{
+                                                                                                    $('#ContinueStep2').prop( "disabled", true );
+                                                                                                }
+                                                                                            }
+                                                                                            else {
+                                                                                                var officeIdsStr = '{!existingOfficesStr}';
+                                                                                                var officeIds = officeIdsStr.split(',');
+                                                                                                var existing = [''];
+                                                                                                $.each($('.authorityCheckbox:checked'), function(){
+                                                                                                    existing.push($(this).attr('id'));
+                                                                                                });
+                                                                                                
+                                                                                                officeIds.sort();
+                                                                                                existing.sort();
+                                                                                                if(JSON.stringify(officeIds) === JSON.stringify(existing)){
+                                                                                                    $('#ContinueStep2').prop( "disabled", true );
+                                                                                                }else{
+                                                                                                    $('#ContinueStep2').prop( "disabled", false );
+                                                                                                }
+                                                                                                
+                                                                                            }
+                                                                                        }
+                                                                                        </script>
+                                                                                        <apex:outputPanel rendered="{!selectedOfficesStr != null}">
+                                                                                            <script>
+                                                                                            try {
+                                                                                                var url = new URL(window.location);
+                                                                                                var subId = url.searchParams.get("subid");
+                                                                                                var officeIdsStr = '{!existingOfficesStr}';
+                                                                                                var officeIds = officeIdsStr.split(',');
+                                                                                                
+                                                                                                $('#ContinueStep2').prop( "disabled", true );
+                                                                                                var officeIdsStr2 = {!selectedOfficesStr};
+                                                                                                for(var i=0; i<officeIdsStr2.length; i++) {
+                                                                                                    $('#' + officeIdsStr2[i]).attr('checked', 'checked');
+                                                                                                    if(subId == null && officeIds.indexOf(officeIdsStr2[i]) >= 0)
+                                                                                                        $('#' + officeIdsStr2[i]).prop( "disabled", true );
+                                                                                                    
+                                                                                                    $('#ContinueStep2').prop( "disabled", false );
+                                                                                                } 
+                                                                                                
+                                                                                                //if(subId != null)
+                                                                                                //    $('#ContinueStep2').prop( "disabled", false );
+                                                                                            } 
+                                                                                            catch(ex) { 
+                                                                                                console.log(ex) 
+                                                                                            }
+                                                                                            </script>
+                                                                                        </apex:outputPanel>
+                                                                                        <apex:outputPanel rendered="{!selectedOfficesStr == null}">
+                                                                                            <script>
+                                                                                            $('#ContinueStep2').prop( "disabled", true );
+                                                                                            checkExistingOffices();
+                                                                                            </script>
+                                                                                        </apex:outputPanel>
+                                                                                        
+                                                                                    </apex:outputPanel>
+                                                                                </div>
+                                                                                <div style="clear:both;" />
+                                                                                
+                                                                                <div class="col-sm-12">
+                                                                                    <div class="col-sm-12" style="padding-top:10px;">
+                                                                                        <input type="button" class="btn btn-primary" id="ContinueStep2" value="Continue" onclick="continueStep2()"  style="float:right;" />                                                                                                              
+                                                                                    </div>
+                                                                                </div>                                                                                                                                                       
+                                                                            </td>
+                                                                            <td style="width:3%;"></td>
+                                                                        </tr>
+                                                                    </table>                        
+                                                                </div>
+                                                            </div>                                                    
+                                                        </div>
+                                                        
+                                                        <!-- License information -->
+                                                        <div class="panel panel-default {!if(reviewBlockState == 'Started', 'active', 'inactive')}">
+                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                <div class="col-sm-12 menu-header menu-header-right">
+                                                                    <table style="width:100%;" class="panel-title">
+                                                                        <tr>
+                                                                            <td style="width:50px; vertical-align:top; text-align:center;">
+                                                                                3.
+                                                                            </td>
+                                                                            <td style="{!if(reviewBlockState == 'Started', 'border-bottom:1px solid #95D1E6; padding-bottom:7px;', '')}">
+                                                                                <apex:commandLink action="{!accordian3}" rerender="Steps">
+                                                                                    Review Changes
+                                                                                </apex:commandLink>
+                                                                                <p>Please verify your changes before proceeding.</p>
+                                                                            </td>
+                                                                            <td style="width:3%; color:#5cb85c;">
+                                                                                <apex:outputText rendered="{!if(reviewBlockState == 'Completed', true, false)}">
+                                                                                    <i class="glyphicon glyphicon-ok" />
+                                                                                </apex:outputText>      
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div id="collapseThree" class="panel-collapse  {!if(reviewBlockState == 'Started', 'collapse in', 'collapse')}" role="tabpanel" aria-labelledby="headingOne">
+                                                                <div class="panel-body">
+                                                                    <table style="width:100%;">
+                                                                        <tr>
+                                                                            <td style="width:50px; vertical-align:top; text-align:center;">
+                                                                                
+                                                                            </td>
+                                                                            <td>                    
+                                                                                <div class="col-md-12" style="padding-top:10px; padding-bottom:15px; border-bottom:1px solid #fff;">
+                                                                                    <div class="col-md-6">
+                                                                                        <b>{!subscriber.Contact__r.FirstName} {!subscriber.Contact__r.LastName}</b><br/>
+                                                                                        Phone: {!subscriber.Contact__r.Phone}<br/>
+                                                                                        Email: {!subscriber.Contact__r.Email}
+                                                                                    </div>
+                                                                                    <div class="col-md-6">
+                                                                                        <b>{!subscriber.Related_Location_Broker_Office__r.Account_Name__c} ({!subscriber.Related_Location_Broker_Office__r.Name})</b><br/>
+                                                                                        {!subscriber.Related_Location_Broker_Office__r.Street_Number__c} {!subscriber.Related_Location_Broker_Office__r.Street_Name__c}<br/>
+                                                                                        {!subscriber.Related_Location_Broker_Office__r.City__c} {!subscriber.Related_Location_Broker_Office__r.State__c} {!subscriber.Related_Location_Broker_Office__r.Zip__c}
+                                                                                    </div>
+                                                                                    <div style="clear:both;" />
+                                                                                </div>
+                                                                                <div style="clear:both;" /><br/>
+                                                                                <div class="col-md-12" style="padding-top:10px; padding-bottom:15px; border-bottom:1px solid #fff;">
+                                                                                    <div class="col-md-3">
+                                                                                        <h5 style="padding-bottom:10px; border-bottom:1px solid white;"><b>Previous</b></h5>
+                                                                                        <apex:repeat value="{!selectedOffices}" var="officeRecord">
+                                                                                            <div style="{!if(officeRecord.status != 'New', '', 'display:none;')}">{!SUBSTITUTE(SUBSTITUTE(officeRecord.officeId, '</a>', ''), '<a>', '')}</div>
+                                                                                        </apex:repeat>
+                                                                                    </div>
+                                                                                    <div class="col-md-3">
+                                                                                        <h5 style="padding-bottom:10px; border-bottom:1px solid white;"><b>Added</b></h5>
+                                                                                        <apex:repeat value="{!selectedOffices}" var="officeRecord">
+                                                                                            <div style="{!if(officeRecord.status == 'New', '', 'display:none;')}">{!SUBSTITUTE(SUBSTITUTE(officeRecord.officeId, '</a>', ''), '<a>', '')}</div>
+                                                                                        </apex:repeat>                                                            
+                                                                                    </div>
+                                                                                    <div class="col-md-3">
+                                                                                        <h5 style="padding-bottom:10px; border-bottom:1px solid white;"><b>Removed</b></h5>
+                                                                                        <apex:repeat value="{!selectedOffices}" var="officeRecord">
+                                                                                            <div style="{!if(officeRecord.status == 'Remove', '', 'display:none;')}">{!SUBSTITUTE(SUBSTITUTE(officeRecord.officeId, '</a>', ''), '<a>', '')}</div>                                                                                    
+                                                                                        </apex:repeat>
+                                                                                    </div>
+                                                                                    <div class="col-md-3">
+                                                                                        <h5 style="padding-bottom:10px; border-bottom:1px solid white;"><b>Current</b></h5>
+                                                                                        <apex:repeat value="{!selectedOffices}" var="officeRecord">
+                                                                                            <div style="{!if(officeRecord.status != 'Remove', '', 'display:none;')}">{!SUBSTITUTE(SUBSTITUTE(officeRecord.officeId, '</a>', ''), '<a>', '')}</div>                                                                                    
+                                                                                        </apex:repeat>                                                                                    
+                                                                                    </div>                                                                                                                                                                                                                                                                                                                                                                                                                 
+                                                                                </div>
+                                                                                <div style="clear:both;" />                                                                            
+                                                                                
+                                                                                <div class="col-sm-12">
+                                                                                    <div class="col-sm-12" style="padding-top:10px; text-align:right;">
+                                                                                        
+                                                                                        <input type="button" class="btn btn-primary" id="ContinueStep3" value="Continue" onclick="ReviewChanges()"  />                                                                                                               
+                                                                                    </div>
+                                                                                </div>                                                                                                                                                       
+                                                                            </td>
+                                                                            <td style="width:3%;"></td>
+                                                                        </tr>
+                                                                    </table>                        
+                                                                </div>
+                                                            </div>                                                         
+                                                        </div>
+                                                        
+                                                        <!-- License information -->
+                                                        <div class="panel panel-default {!if(termsBlockState == 'Started', 'active', 'inactive')}">
+                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                <div class="col-sm-12 menu-header menu-header-right">
+                                                                    <table style="width:100%;" class="panel-title">
+                                                                        <tr>
+                                                                            <td style="width:50px; vertical-align:top; text-align:center;">
+                                                                                4.
+                                                                            </td>
+                                                                            <td style="{!if(termsBlockState == 'Started', 'border-bottom:1px solid #95D1E6; padding-bottom:7px;', '')}">
+                                                                                <apex:commandLink action="{!accordian4}" rerender="Steps">
+                                                                                    Terms &amp; Conditions
+                                                                                </apex:commandLink>
+                                                                                <p>Additional terms for Broker designating an Office Manager.</p>
+                                                                            </td>
+                                                                            <td style="width:3%; color:#5cb85c;">
+                                                                                <apex:outputText rendered="{!if(termsBlockState == 'Completed', true, false)}">
+                                                                                    <i class="glyphicon glyphicon-ok" />
+                                                                                </apex:outputText>      
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div id="collapseFour" class="panel-collapse  {!if(termsBlockState == 'Started', 'collapse in', 'collapse')}" role="tabpanel" aria-labelledby="headingOne">
+                                                                <div class="panel-body">
+                                                                    <table style="width:100%;">
+                                                                        <tr>
+                                                                            <td style="width:50px; vertical-align:top; text-align:center;">
+                                                                                
+                                                                            </td>
+                                                                            <td>                    
+                                                                                <div class="col-md-12" style="padding-top:10px; padding-bottom:15px; border-bottom:1px solid #fff;">
+                                                                                    <p>
+                                                                                        I certify I am the Broker of Record and understand the privileges and authority I grant to an Office Manager. By clicking my acceptance, I approve the selected individual to act for me as if I had taken the action directly.
+                                                                                    </p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+                                                                                </div>
+                                                                                
+                                                                                <div style="clear:both;" />                                                                            
+                                                                                
+                                                                                <div class="col-sm-12">
+                                                                                    <div class="col-sm-12" style="padding-top:10px; text-align:right;">
+                                                                                        <input type="checkbox" id="termsCheckbox" onclick="enableContinue()" /> I accept the additional Terms for Designating an Office Manager &nbsp; &nbsp;
+                                                                                        <input type="button" disabled="disabled" class="btn btn-primary" id="ContinueStep4" value="Continue" onclick="SaveManagers()" /> 
+                                                                                    </div>
+                                                                                </div>                                                                                                                                                       
+                                                                            </td>
+                                                                            <td style="width:3%;"></td>
+                                                                        </tr>
+                                                                    </table>                        
+                                                                </div>
+                                                            </div>                                                         
+                                                            
+                                                        </div>
+                                                        
+                                                        <!-- License information -->
+                                                        <div class="panel panel-default {!if(summaryBlockState == 'Started', 'active', 'inactive')}">
+                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                <div class="col-sm-12 menu-header menu-header-right">
+                                                                    <table style="width:100%;" class="panel-title">
+                                                                        <tr>
+                                                                            <td style="width:50px; vertical-align:top; text-align:center;">
+                                                                                5.
+                                                                            </td>
+                                                                            <td style="{!if(summaryBlockState == 'Started', 'border-bottom:1px solid #95D1E6; padding-bottom:7px;', '')}">
+                                                                                <apex:commandLink action="{!accordian5}" rerender="Steps">
+                                                                                    Summary
+                                                                                </apex:commandLink>
+                                                                                <p>Your changes have been made.</p>
+                                                                            </td>
+                                                                            <td style="width:3%; color:#5cb85c;">
+                                                                                <apex:outputText rendered="{!if(summaryBlockState == 'Completed', true, false)}">
+                                                                                    <i class="glyphicon glyphicon-ok" />
+                                                                                </apex:outputText>      
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div id="collapseFive" class="panel-collapse  {!if(summaryBlockState == 'Started', 'collapse in', 'collapse')}" role="tabpanel" aria-labelledby="headingOne">
+                                                                <div class="panel-body">
+                                                                    <table style="width:100%;">
+                                                                        <tr>
+                                                                            <td style="width:50px; vertical-align:top; text-align:center;">
+                                                                                
+                                                                            </td>
+                                                                            <td>                    
+                                                                                <div class="col-md-12" style="padding-top:10px; padding-bottom:15px;">
+                                                                                    <apex:outputPanel rendered="{!errorMessage == ''}">
+                                                                                        <div class="alert alert-success" role="alert">
+                                                                                            <strong>
+                                                                                                <apex:outputPanel rendered="{!isContent}">
+                                                                                                        Office Manager Modified
+                                                                                                    </apex:outputPanel>
+                                                                                                    <apex:outputPanel rendered="{!!isContent}">
+                                                                                                        Office Manager Assigned
+                                                                                                    </apex:outputPanel>
+                                                                                            </strong><br/><br/>
+                                                                                            Thank you, the saved changes are now effective.
+                                                                                        </div>
+                                                                                    </apex:outputPanel>
+                                                                                    
+                                                                                    <apex:outputPanel rendered="{!errorMessage != ''}">
+                                                                                        <div class="alert alert-danger" role="alert">
+                                                                                            <strong>Office Manager Update Failed</strong><br/><br/>
+                                                                                            {!errorMessage}
+                                                                                        </div>
+                                                                                    </apex:outputPanel>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+                                                                                </div>
+                                                                                <button type="button" class="btn btn-primary" onclick="resetDefaults()" style="float:right; margin-right: 40px !important" html-data-dismiss="modal">Done</button>
+                                                                                <!-- <apex:commandButton value="Done" styleClass="btn btn-primary" action="{!closeModal}" onclick="resetDefaults()" style="float:right; margin-right: 40px !important" html-data-dismiss="modal" reRender="regID"/> -->
+                                                                                <div style="clear:both;" />                                                                                                                                                                                                                           
+                                                                            </td>
+                                                                            <td style="width:3%;"></td>
+                                                                        </tr>
+                                                                    </table>                        
+                                                                </div>
+                                                            </div>                                                         
+                                                            
+                                                        </div>                                                                                                    
+                                                        
+                                                    </div>
+                                                </div> 
+                                            </apex:outputPanel>                                       
+                                        </div>
+                                    </div>
+                                </div>
+                            </apex:outputPanel>   
+                            <script>
+                            
+                            function resetDefaults() {
+                                $('[id$=sub]').val('');
+                                $('[id$=fn]').val('');
+                                $('[id$=ln]').val('');
+                                $('[id$=ofcid]').val('');
+                                ham = true;
+                                window.location = '/customers/Communities_OfficeManagerNew?id={!subscriptionId}';                               
+                            }
+                            
+                            </script>
+                            <apex:outputPanel id="AddNewManager" rendered="{!isAddNewManager}">
+                                <script>
+                                $(document).ready(function(){
+                                    $('#AddNewManager-modal').modal('show');                                
+                                });
+                                </script>
+                            </apex:outputPanel>
+                            
+                            <apex:outputPanel id="AddNewManager1" rendered="{!subscriberSelected != null}">
+                                <script>
+                                checkExistingOffices();   
+                                </script>
+                            </apex:outputPanel>                        
+                        </apex:outputPanel>
+                    </apex:pageBlock>
+                    <script>
+                    markOptionPanel("Brokerage");                  
+                    </script>    
+                </apex:outputPanel>
+            </apex:form>                
+        </apex:define>                
+    </apex:composition>
+    
+    <script src="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/jquery.dataTables.min.js')}"></script>
+    <script src="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/dataTables.bootstrap.min.js')}"></script>
+    <link href="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/dataTables.bootstrap.min.css')}" rel="stylesheet" type="text/css" />
+    <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet" />
+    <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script> 
+    <script>
+        $(document).ready(function() {
+        $('#ContinueStep2').prop( "disabled", true );
+    });
+    </script>
+</apex:page>

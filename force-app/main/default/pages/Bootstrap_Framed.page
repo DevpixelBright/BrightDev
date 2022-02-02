@@ -1,0 +1,43 @@
+<apex:page standardStylesheets="false"  lightningstylesheets="true">
+<html>
+<head>
+    <c:Bootstrap_Resources />
+    <style>
+        html, body {
+            min-width: 0px;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <article class="container" style="padding: 0px; margin: 0px; width: 100%;">
+        <apex:insert name="content"/>
+    </article>
+
+    <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/respond.js')}"></script>
+
+    <script>
+        var container = $(".container");
+        var interval;
+        var last_height = -1;
+        
+        var resize_handler = function () {
+            try {
+                var height = container.outerHeight();
+                
+                if (height != last_height) {
+                    last_height = height;
+                    parent.resize_iframe(height);
+                }
+            }
+            catch (e) {
+                window.clearInterval(interval);
+            }
+        };
+        
+        interval = window.setInterval(resize_handler, 100);
+    </script>
+</body>
+</html>    
+</apex:page>

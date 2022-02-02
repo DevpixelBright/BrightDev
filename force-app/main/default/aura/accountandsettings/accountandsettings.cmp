@@ -1,0 +1,444 @@
+<aura:component>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  
+    
+  <div class="c-container">
+    <div class="fullpage slds-scope">
+      <div class="slds-grid slds-wrap">
+        <lightning:layout multipleRows="true">
+          
+          <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+            <lightning:layout>
+              <div class="new-containerpage">
+                <div class="slds-container--x-large new-container">
+                  <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                    <div class="page-section page-main">
+                      <div class="dev">
+                          <div class="top">
+                          <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="7" largeDeviceSize="7">
+                        <h2><img src="{!$Resource.acc + '/acc/images/user.svg'}" alt="" /><span>Brokerage Accuracy Notifications</span></h2>
+                          </lightning:layoutItem>
+                          <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="5" largeDeviceSize="5">
+                          <div class="line">
+                                <lightning:button class="brand" variant="brand " label="Print" title="Brand action"  />
+                        
+                                 <lightning:button class="brand" variant="brand " label="Export" title="Brand action"  />
+                           
+                                 </div>
+                          </lightning:layoutItem>
+                              </div>
+                        <div class="view"></div>
+                           <div class="middle">
+                                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                        <p class="recent">Below is a summary of the violation email notifications and fines issued to agents within your brokerage for the last 60 days. Please note, fine notices with a status of Pending will not be billed until after the appeal timeframe has expired. Any fine notices listed with a status of Billed will appear on the agent’s account statement.
+                               </p>
+                               <p class="recent">To learn about fines and our appeal process visit <a href="#">brightmls.com/accuracy</a>.</p>
+                                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                               <h5 class="new">
+                                  <lightning:input type="text"  name="input3" placeholder="Search by Agent Name, Subscriber ID, MLS#, Violation Type or Status (Pending, Billed, Under Appeal, etc.)  "  variant = "label-hidden" />
+                                    <img src="{!$Resource.acc + '/acc/images/search1.svg'}" alt="" />
+                                    </h5></lightning:layoutItem>
+                                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                                   <div class="point">
+                                    <lightning:select name="select1" label="" required="false" variant = "label-hidden">
+                                                   <option value="">All Offices</option>
+                                                   <option value="1">one</option>
+                                                   <option value="2">two</option>
+                                                   <option value="3">three</option>
+                                                </lightning:select></div>
+                               </lightning:layoutItem>
+                               </lightning:layoutItem>
+                          </div>
+                        <div class="view"></div>
+                          <div class="middle">
+                              <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped newtin">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            
+                                            
+                                           
+                                            
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="">Agent<br />Name    </div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="">Subscription<br />ID</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="">Office<br />ID</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="">MLS#</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="">Violation<br/>Type</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="">Violation<br/>Number</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="">Notification<br/>Type</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="">Notification<br/>Date</div>
+                                            </th>
+                                               <th class="" scope="col">
+                                                <div class="slds-truncate" title="">Fine<br/>Amount</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="">Status</div>
+                                            </th>
+                                             <th class="" scope="col">
+                                                 <div class="slds-truncate" title="">Late Date<br/>to Appeal</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="slds-hint-parent blue">
+                                   
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="">Jeff Asmith</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="">1234</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="">LNG33</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="">PADE540944</div>
+                                            </td>
+                                            <td  class="data" data-label="Confidence">
+                                                <div class="slds-truncate" title=""><a href="#">Deliquent Active Under Contract<br/>Expiration Date(System)</a></div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="">1234567-0</div>
+                                            </td>
+                                             <td data-label="Amount2">
+                                                <div class="slds-truncate" title="">Fine Notice</div>
+                                            </td>
+                                            <td data-label="Amount3">
+                                                <div class="slds-truncate" title="">05/24/2021</div>
+                                            </td>
+                                            <td data-label="Amount4">
+                                                <div class="slds-truncate" title="">$500.00</div>
+                                            </td>
+                                               <td data-label="Amount5">
+                                                <div class="slds-truncate" title="">Billed</div>
+                                            </td>
+                                            <td data-label="Amount5">
+                                                <div class="slds-truncate" title="">6/13/2021</div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                    
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="">Jeff Asmith</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="">1234</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="">LNG33</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="">PADE540944</div>
+                                            </td>
+                                            <td class="data" data-label="Confidence">
+                                                <div class="slds-truncate" title=""><a href="#">Deliquent Settlement<br/>Date</a></div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="">1234567-0</div>
+                                            </td>
+                                            <td data-label="Amount2">
+                                                <div class="slds-truncate" title="">Fine Notice</div>
+                                            </td>
+                                            <td data-label="Amount3">
+                                                <div class="slds-truncate" title="">05/24/2021</div>
+                                            </td>
+                                            <td data-label="Amount4">
+                                                <div class="slds-truncate" title="">$500.00</div>
+                                            </td>
+                                               <td data-label="Amount5">
+                                                <div class="slds-truncate" title=""></div>
+                                            </td>
+                                            <td data-label="Amount5">
+                                                <div class="slds-truncate" title=""></div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                    
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="">Jeff Asmith</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="">1234</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="">LNG33</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="">PADE540944</div>
+                                            </td>
+                                            <td class="data" data-label="Confidence">
+                                                <div class="slds-truncate" title=""><a href="#">Deliquent Settlement<br/>Date</a></div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="">1234567-0</div>
+                                            </td>
+                                            <td data-label="Amount2">
+                                                <div class="slds-truncate" title="">Fine Notice</div>
+                                            </td>
+                                            <td data-label="Amount3">
+                                                <div class="slds-truncate" title="">05/24/2021</div>
+                                            </td>
+                                            <td data-label="Amount4">
+                                                <div class="slds-truncate" title="">$500.00</div>
+                                            </td>
+                                               <td data-label="Amount5">
+                                                <div class="slds-truncate" title=""></div>
+                                            </td>
+                                            <td data-label="Amount5">
+                                                <div class="slds-truncate" title=""></div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                    
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="">Jeff Asmith</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="">1234</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="">LNG33</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="">PADE540944</div>
+                                            </td>
+                                            <td class="data" data-label="Confidence">
+                                                <div class="slds-truncate" title=""><a href="#">Deliquent Settlement<br/>Date</a></div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="">1234567-0</div>
+                                            </td>
+                                            <td data-label="Amount2">
+                                                <div class="slds-truncate" title="">Fine Notice</div>
+                                            </td>
+                                            <td data-label="Amount3">
+                                                <div class="slds-truncate" title="">05/24/2021</div>
+                                            </td>
+                                            <td data-label="Amount4">
+                                                <div class="slds-truncate" title="">$500.00</div>
+                                            </td>
+                                               <td data-label="Amount5">
+                                                <div class="slds-truncate" title=""></div>
+                                            </td>
+                                            <td data-label="Amount5">
+                                                <div class="slds-truncate" title=""></div>
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr class="slds-hint-parent blue">
+                                    
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="">Jeff Asmith</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="">1234</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="">LNG33</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="">PADE540944</div>
+                                            </td>
+                                            <td class="data" data-label="Confidence">
+                                                <div class="slds-truncate" title=""><a href="#">Deliquent Settlement<br/>Date</a></div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="">1234567-0</div>
+                                            </td>
+                                            <td data-label="Amount2">
+                                                <div class="slds-truncate" title="">Fine Notice</div>
+                                            </td>
+                                            <td data-label="Amount3">
+                                                <div class="slds-truncate" title="">05/24/2021</div>
+                                            </td>
+                                            <td data-label="Amount4">
+                                                <div class="slds-truncate" title="">$500.00</div>
+                                            </td>
+                                               <td data-label="Amount5">
+                                                <div class="slds-truncate" title=""></div>
+                                            </td>
+                                            <td data-label="Amount5">
+                                                <div class="slds-truncate" title=""></div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                    
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title=""></div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title=""></div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title=""></div>
+                                            </td>
+                                            <td class="open" colspan="2" data-label="Prospecting">
+                                                <div class="slds-truncate" title="">List of Violations for the Type No Photo (System) 
+</div>
+                                            </td>
+                                           
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="">1234567-0</div>
+                                            </td>
+                                            <td data-label="Amount2">
+                                                <div class="slds-truncate" title="">Fine Notice</div>
+                                            </td>
+                                            <td data-label="Amount3">
+                                                <div class="slds-truncate" title="">05/24/2021</div>
+                                            </td>
+                                            <td data-label="Amount4">
+                                                <div class="slds-truncate" title="">$500.00</div>
+                                            </td>
+                                               <td data-label="Amount5">
+                                                <div class="slds-truncate" title="">Pending</div>
+                                            </td>
+                                            <td data-label="Amount5">
+                                                <div class="slds-truncate" title="">6/13/2021</div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                    
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title=""></div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title=""></div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title=""></div>
+                                            </td>
+                                            <td  colspan="2" data-label="Prospecting">
+                                                <div class="slds-truncate" title=""> 
+</div>
+                                            </td>
+                                           
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="">1234567-0</div>
+                                            </td>
+                                            <td data-label="Amount2">
+                                                <div class="slds-truncate" title="">Fine Notice</div>
+                                            </td>
+                                            <td data-label="Amount3">
+                                                <div class="slds-truncate" title="">05/24/2021</div>
+                                            </td>
+                                            <td data-label="Amount4">
+                                                <div class="slds-truncate" title="">$500.00</div>
+                                            </td>
+                                               <td data-label="Amount5">
+                                                <div class="slds-truncate" title="">Pending</div>
+                                            </td>
+                                            <td data-label="Amount5">
+                                                <div class="slds-truncate" title="">6/13/2021</div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                    
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title=""></div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title=""></div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title=""></div>
+                                            </td>
+                                            <td  colspan="2" data-label="Prospecting">
+                                                <div class="slds-truncate" title="">
+</div>
+                                            </td>
+                                           
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="">1234567-0</div>
+                                            </td>
+                                            <td data-label="Amount2">
+                                                <div class="slds-truncate" title="">Fine Notice</div>
+                                            </td>
+                                            <td data-label="Amount3">
+                                                <div class="slds-truncate" title="">05/24/2021</div>
+                                            </td>
+                                            <td data-label="Amount4">
+                                                <div class="slds-truncate" title="">$500.00</div>
+                                            </td>
+                                               <td data-label="Amount5">
+                                                <div class="slds-truncate" title="">Pending</div>
+                                            </td>
+                                            <td data-label="Amount5">
+                                                <div class="slds-truncate" title="">6/13/2021</div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                    
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="">Jeff Asmith</div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="">1234</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="">LNG33</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="">PADE540944</div>
+                                            </td>
+                                            <td class="data" data-label="Confidence">
+                                                <div class="slds-truncate" title=""><a href="#">Deliquent Settlement<br/>Date</a></div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="">1234567-0</div>
+                                            </td>
+                                            <td data-label="Amount2">
+                                                <div class="slds-truncate" title="">Fine Notice</div>
+                                            </td>
+                                            <td data-label="Amount3">
+                                                <div class="slds-truncate" title="">05/24/2021</div>
+                                            </td>
+                                            <td data-label="Amount4">
+                                                <div class="slds-truncate" title="">$500.00</div>
+                                            </td>
+                                               <td data-label="Amount5">
+                                                <div class="slds-truncate" title=""></div>
+                                            </td>
+                                            <td data-label="Amount5">
+                                                <div class="slds-truncate" title=""></div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                          </div>
+                            <div class="view"></div>
+                      </div>
+                    </div>
+                  </lightning:layoutItem>
+                </div>
+              </div>
+            </lightning:layout>
+          </lightning:layoutItem>
+          
+        </lightning:layout>
+      </div>
+    </div>
+  </div>
+</aura:component>

@@ -1,0 +1,73 @@
+<apex:page renderAs="pdf" controller="Communities_OfficeRoster_Export" readOnly="true" lightningstylesheets="true">  
+    <apex:pagemessages ></apex:pagemessages>
+    <table style="font-size:9px;width:100%;">
+        <apex:outputText rendered="{!and(status.size == 1, status[0] == 'Active')}">
+            <thead>
+                <tr style="width:100%;">
+                    <th style="min-width:25px;"><input type="checkbox" id="activeSelectAll" /></th>
+                    <th style="min-width:25px;">Name</th>
+                    <th style="min-width:25px;">Subscription Id</th>
+                    <th style="min-width:25px;">Type</th>
+                    <th style="min-width:25px;">Sub Type</th>
+                    <th style="min-width:25px;">Status</th>
+                    <th style="min-width:25px;">Team Lead</th>
+                    <th style="min-width:25px;">Team Name</th>
+                    <th style="min-width:25px;">License Number on File</th>
+                    <th style="min-width:25px;">License State</th>
+                    <th style="min-width:25px;">License Expiration</th>
+                    <th style="min-width:25px;">Office Id</th>
+                    <th style="min-width:25px;">Association Affiliation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <apex:repeat value="{!activeSubscriptions}" var="subscription" id="ActiveSubscriptions">
+                    <tr style="width:100%;">
+                        <td style="min-width:25px;"><input type="checkbox" class="activeBox" value="{!subscription.subscriptionId}" /></td>
+                        <td style="min-width:25px;">{!subscription.contactName}</td>
+                        <td style="min-width:25px;">{!subscription.subscriptionName}</td>
+                        <td style="min-width:25px;">{!subscription.type}</td>
+                        <td style="min-width:25px;">{!subscription.subType}</td>
+                        <td style="min-width:25px;">{!subscription.status}</td>
+                        <td style="min-width:25px;">{!subscription.isTeamLead}</td>
+                        <td style="min-width:25px;">{!subscription.TeamName}</td>
+                        <td style="min-width:25px;">{!subscription.licenseNumber}</td>
+                        <td style="min-width:25px;">{!subscription.licenseState}</td>
+                        <td style="min-width:25px;"><apex:outputText value="{0,date,MM/dd/yyyy}"> <apex:param value="{!subscription.licenseExpiration}" /> </apex:outputText></td>
+                        <td style="min-width:25px;">{!subscription.officeId}</td>
+                        <td style="min-width:25px;">{!subscription.associationAffiliation}</td>
+                    </tr>
+                </apex:repeat>                                                                                       
+            </tbody> 
+        </apex:outputText>
+        <apex:outputText rendered="{!and(status.size == 1, status[0] == 'Inactive')}">
+            <thead>
+                <tr style="width:100%;">
+                    <th style="min-width:50px;"><input type="checkbox" id="activeSelectAll" /></th>
+                    <th style="min-width:50px;">Name</th>
+                    <th style="min-width:50px;">Subscription Id</th>
+                    <th style="min-width:50px;">Type</th>
+                    <th style="min-width:50px;">Sub Type</th>
+                    <th style="min-width:50px;">Status</th>
+                    <th style="min-width:50px;">Status Change Reason</th>
+                    <th style="min-width:50px;">Date of Termination</th>
+                    <th style="min-width:50px;">Office Id</th>
+                </tr>
+            </thead>
+            <tbody>
+                <apex:repeat value="{!activeSubscriptions}" var="subscription" id="InActiveSubscriptions">
+                    <tr style="width:100%;">
+                        <td style="min-width:50px;"><input type="checkbox" class="activeBox" value="{!subscription.subscriptionId}" /></td>
+                        <td style="min-width:50px;">{!subscription.contactName}</td>
+                        <td style="min-width:50px;">{!subscription.subscriptionName}</td>
+                        <td style="min-width:50px;">{!subscription.type}</td>
+                        <td style="min-width:50px;">{!subscription.subType}</td>
+                        <td style="min-width:50px;">{!subscription.status}</td>
+                        <td style="min-width:50px;">{!subscription.statusChangeReason}</td>
+                        <td style="min-width:50px;"><apex:outputText value="{0,date,MM/dd/yyyy}"> <apex:param value="{!subscription.dateTerminated}" /> </apex:outputText></td>
+                        <td style="min-width:50px;">{!subscription.officeId}</td>
+                    </tr>
+                </apex:repeat>                                                                                       
+            </tbody>
+        </apex:outputText>
+    </table>  
+</apex:page>

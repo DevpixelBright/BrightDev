@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Subscription_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Subscription Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Type__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Association Staff</fullName>
+                <default>false</default>
+                <label>Association Staff</label>
+            </value>
+            <value>
+                <fullName>Broker Staff</fullName>
+                <default>false</default>
+                <label>Broker Staff</label>
+            </value>
+            <value>
+                <fullName>CURE</fullName>
+                <default>false</default>
+                <label>CURE</label>
+            </value>
+            <value>
+                <fullName>Government Agency</fullName>
+                <default>false</default>
+                <label>Government Agency</label>
+            </value>
+            <value>
+                <fullName>Government Agency/PA - N/C</fullName>
+                <default>false</default>
+                <label>Government Agency/PA - N/C</label>
+            </value>
+            <value>
+                <fullName>Government Agency - N/C</fullName>
+                <default>false</default>
+                <label>Government Agency - N/C</label>
+            </value>
+            <value>
+                <fullName>Licensed Appraiser/Non Realtor</fullName>
+                <default>false</default>
+                <label>Licensed Appraiser/Non Realtor</label>
+            </value>
+            <value>
+                <fullName>Licensee</fullName>
+                <default>false</default>
+                <label>Licensee</label>
+            </value>
+            <value>
+                <fullName>Licensee/Non Realtor</fullName>
+                <default>false</default>
+                <label>Licensee/Non Realtor</label>
+            </value>
+            <value>
+                <fullName>MDS</fullName>
+                <default>false</default>
+                <label>MDS</label>
+            </value>
+            <value>
+                <fullName>MRIS Consultant</fullName>
+                <default>false</default>
+                <label>MRIS Consultant</label>
+            </value>
+            <value>
+                <fullName>MRIS Manager</fullName>
+                <default>false</default>
+                <label>MRIS Manager</label>
+            </value>
+            <value>
+                <fullName>MRIS Staff</fullName>
+                <default>false</default>
+                <label>MRIS Staff</label>
+            </value>
+            <value>
+                <fullName>MRIS Vendor</fullName>
+                <default>false</default>
+                <label>MRIS Vendor</label>
+            </value>
+            <value>
+                <fullName>Non-Subscribing Consultant</fullName>
+                <default>false</default>
+                <label>Non-Subscribing Consultant</label>
+            </value>
+            <value>
+                <fullName>Non-Subscribing Manager</fullName>
+                <default>false</default>
+                <label>Non-Subscribing Manager</label>
+            </value>
+            <value>
+                <fullName>Office Secretary</fullName>
+                <default>false</default>
+                <label>Office Secretary</label>
+            </value>
+            <value>
+                <fullName>Office Secretary - NC</fullName>
+                <default>false</default>
+                <label>Office Secretary - NC</label>
+            </value>
+            <value>
+                <fullName>Personal Assistant</fullName>
+                <default>false</default>
+                <label>Personal Assistant</label>
+            </value>
+            <value>
+                <fullName>Personal Assistant to Appraiser</fullName>
+                <default>false</default>
+                <label>Personal Assistant to Appraiser</label>
+            </value>
+            <value>
+                <fullName>Realtor/Appraiser Non Shareholder</fullName>
+                <default>false</default>
+                <label>Realtor/Appraiser Non Shareholder</label>
+            </value>
+            <value>
+                <fullName>Realtor/Appraiser Shareholder</fullName>
+                <default>false</default>
+                <label>Realtor/Appraiser Shareholder</label>
+            </value>
+            <value>
+                <fullName>Realtor/Non Shareholder</fullName>
+                <default>false</default>
+                <label>Realtor/Non Shareholder</label>
+            </value>
+            <value>
+                <fullName>Realtor/Shareholder</fullName>
+                <default>false</default>
+                <label>Realtor/Shareholder</label>
+            </value>
+            <value>
+                <fullName>RETS</fullName>
+                <default>false</default>
+                <label>RETS</label>
+            </value>
+            <value>
+                <fullName>RETS/MDS</fullName>
+                <default>false</default>
+                <label>RETS/MDS</label>
+            </value>
+            <value>
+                <fullName>VT Vendor</fullName>
+                <default>false</default>
+                <label>VT Vendor</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>CURE</controllingFieldValue>
+            <valueName>CURE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Agent</controllingFieldValue>
+            <controllingFieldValue>Office Manager</controllingFieldValue>
+            <controllingFieldValue>Staff</controllingFieldValue>
+            <valueName>Broker Staff</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Agent</controllingFieldValue>
+            <controllingFieldValue>Broker</controllingFieldValue>
+            <controllingFieldValue>Appraiser</controllingFieldValue>
+            <controllingFieldValue>Office Manager</controllingFieldValue>
+            <valueName>Licensed Appraiser/Non Realtor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Agent</controllingFieldValue>
+            <controllingFieldValue>Broker</controllingFieldValue>
+            <controllingFieldValue>Appraiser</controllingFieldValue>
+            <controllingFieldValue>Office Manager</controllingFieldValue>
+            <valueName>Licensee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Agent</controllingFieldValue>
+            <controllingFieldValue>Broker</controllingFieldValue>
+            <controllingFieldValue>Appraiser</controllingFieldValue>
+            <controllingFieldValue>Office Manager</controllingFieldValue>
+            <valueName>Licensee/Non Realtor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Agent</controllingFieldValue>
+            <controllingFieldValue>Office Manager</controllingFieldValue>
+            <controllingFieldValue>Staff</controllingFieldValue>
+            <valueName>Office Secretary - NC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Agent</controllingFieldValue>
+            <controllingFieldValue>Assistant</controllingFieldValue>
+            <valueName>Personal Assistant</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Agent</controllingFieldValue>
+            <controllingFieldValue>Broker</controllingFieldValue>
+            <controllingFieldValue>Appraiser</controllingFieldValue>
+            <controllingFieldValue>Office Manager</controllingFieldValue>
+            <valueName>Realtor/Appraiser Non Shareholder</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Agent</controllingFieldValue>
+            <controllingFieldValue>Broker</controllingFieldValue>
+            <controllingFieldValue>Appraiser</controllingFieldValue>
+            <controllingFieldValue>Office Manager</controllingFieldValue>
+            <valueName>Realtor/Appraiser Shareholder</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Agent</controllingFieldValue>
+            <controllingFieldValue>Broker</controllingFieldValue>
+            <controllingFieldValue>Appraiser</controllingFieldValue>
+            <controllingFieldValue>Office Manager</controllingFieldValue>
+            <valueName>Realtor/Non Shareholder</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Agent</controllingFieldValue>
+            <controllingFieldValue>Broker</controllingFieldValue>
+            <controllingFieldValue>Appraiser</controllingFieldValue>
+            <controllingFieldValue>Office Manager</controllingFieldValue>
+            <controllingFieldValue>Employee</controllingFieldValue>
+            <valueName>Realtor/Shareholder</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Assistant</controllingFieldValue>
+            <valueName>Personal Assistant to Appraiser</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Office Manager</controllingFieldValue>
+            <controllingFieldValue>Staff</controllingFieldValue>
+            <valueName>Association Staff</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Office Manager</controllingFieldValue>
+            <controllingFieldValue>Government Agency</controllingFieldValue>
+            <valueName>Government Agency</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Office Manager</controllingFieldValue>
+            <controllingFieldValue>Staff</controllingFieldValue>
+            <valueName>Office Secretary</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Employee</controllingFieldValue>
+            <valueName>MRIS Manager</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Employee</controllingFieldValue>
+            <valueName>MRIS Staff</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Government Agency</controllingFieldValue>
+            <valueName>Government Agency/PA - N/C</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Government Agency</controllingFieldValue>
+            <valueName>Government Agency - N/C</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Staff</controllingFieldValue>
+            <valueName>Non-Subscribing Manager</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Vendor</controllingFieldValue>
+            <valueName>MDS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Vendor</controllingFieldValue>
+            <valueName>MRIS Vendor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Vendor</controllingFieldValue>
+            <valueName>RETS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Vendor</controllingFieldValue>
+            <valueName>RETS/MDS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Vendor</controllingFieldValue>
+            <valueName>VT Vendor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Consultant</controllingFieldValue>
+            <valueName>MRIS Consultant</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

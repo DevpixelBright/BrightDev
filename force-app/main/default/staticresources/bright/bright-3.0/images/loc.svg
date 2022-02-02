@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="31" height="36" viewBox="0 0 31 36">
+  <defs>
+    <clipPath id="clip-Custom_Size_1">
+      <rect width="31" height="36"/>
+    </clipPath>
+  </defs>
+  <g id="Custom_Size_1" data-name="Custom Size – 1" clip-path="url(#clip-Custom_Size_1)">
+    <g id="Icon_feather-map-pin" data-name="Icon feather-map-pin" transform="translate(-2.5)">
+      <path id="Path_22" data-name="Path 22" d="M31.5,15C31.5,25.5,18,34.5,18,34.5S4.5,25.5,4.5,15a13.5,13.5,0,1,1,27,0Z" fill="none" stroke="#cad6e2" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+      <path id="Path_23" data-name="Path 23" d="M22.5,15A4.5,4.5,0,1,1,18,10.5,4.5,4.5,0,0,1,22.5,15Z" fill="none" stroke="#cad6e2" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    </g>
+  </g>
+</svg>

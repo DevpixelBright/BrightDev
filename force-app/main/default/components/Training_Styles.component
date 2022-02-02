@@ -1,0 +1,997 @@
+<apex:component layout="none"><style>
+html,
+body {
+  height: auto;
+  overflow-y:hidden;
+}
+div.courses {
+  width: 100%;
+  padding:0 50px;
+}
+
+@media (max-width: 1440px) {
+  div.courses {
+    padding: 0px 20px;
+  }
+}
+div.courses > h2 {
+  margin-bottom: 20px;
+  display: inline-block;
+  font-family: Lato;
+  font-size: 20px !important;
+  font-weight: 300;
+  line-height: 150%;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #383838;
+  padding: 0px 0px 30px 0px;
+  margin: 0px;
+  border: 0px;
+}
+@media (max-width: 768px) {
+  div.courses > h2 {
+    font-size: 16px !important;
+  }
+}
+@media (max-width: 768px) {
+  div.courses > h2 {
+    padding-bottom: 22px;
+  }
+}
+div.courses > h2 b {
+  color: #fe5000;
+  font-weight: 300;
+}
+.course-listing div.ng-table-pager {
+  text-align: center;
+
+}
+div.courses div.ng-table-pager {
+    text-align: center; 
+    }
+
+div.courses div.ng-table-pager ul.pagination {
+  margin: 30px auto !important;
+  }
+div.courses div.ng-table-pager ul.pagination li {
+  margin: 0;
+}
+div.courses div.course-listing a.course-entry {
+  display: inline-block;
+  position: relative;
+  height: 0px;
+  border: 1px solid rgba(0, 131, 138, 0.3);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  width: 19%;
+  padding-top: 19%;
+  margin: 0px 1.25% 1.25% 0%;
+}
+div.courses div.course-listing a.course-entry:nth-child(5n),
+div.courses div.course-listing a.course-entry:nth-last-of-type(1) {
+  margin-right: 0px;
+}
+@media (max-width: 1024px) {
+  div.courses div.course-listing a.course-entry {
+   /* border: 1px solid #00838a;*/
+    width: 24%;
+    padding-top: 24%;
+    margin: 0px 1.33333333% 1.33333333% 0%;
+  }
+  div.courses div.course-listing a.course-entry div.course-entry-image {
+    /*opacity: 1 !important;*/
+  }
+  div.courses div.course-listing a.course-entry:nth-child(5n) {
+    margin-right: 1.33333333%;
+  }
+  div.courses div.course-listing a.course-entry:nth-child(4n) {
+    margin-right: 0px;
+  }
+}
+@media (max-width: 768px) {
+  div.courses div.course-listing a.course-entry {
+    width: 32%;
+    padding-top: 32%;
+    margin: 0px 2% 2% 0%;
+  }
+  div.courses div.course-listing a.course-entry:nth-child(5n) {
+    margin-right: 2%;
+  }
+  div.courses div.course-listing a.course-entry:nth-child(4n) {
+    margin-right: 2%;
+  }
+  div.courses div.course-listing a.course-entry:nth-child(3n) {
+    margin-right: 0px;
+  }
+}
+@media (max-width: 500px) {
+  div.courses div.course-listing a.course-entry {
+    display: block;
+    padding: 10px 0px;
+    margin: 0px;
+    width: unset;
+    height: unset;
+    border: 0px;
+    border-bottom: 1px solid #00838a;
+  }
+  div.courses div.course-listing a.course-entry:hover {
+    border: 0px;
+    border-bottom: 1px solid #00838a;
+  }
+  div.courses div.course-listing a.course-entry:nth-child(first) {
+    padding-top: 0px;
+  }
+  div.courses div.course-listing a.course-entry:nth-child(last) {
+    padding-bottom: 0px;
+  }
+}
+div.courses div.course-listing a.course-entry:hover {
+  border: 1px solid #00838a;
+}
+div.courses div.course-listing a.course-entry:hover div.course-entry-image {
+  opacity: 1 !important;
+}
+div.courses div.course-listing a.course-entry div.course-entry-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+@media (max-width: 500px) {
+  div.courses div.course-listing a.course-entry div.course-entry-content {
+    position: relative;
+  }
+}
+div.courses div.course-listing a.course-entry div.course-entry-content div.course-entry-image {
+  height: 40%;
+  width: 101%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  transition: all 0.3s ease;
+  opacity: 0.1;
+}
+@media (max-width: 768px) {
+  div.courses div.course-listing a.course-entry div.course-entry-content div.course-entry-image {
+    height: 30%;
+  }
+}
+@media (max-width: 500px) {
+  div.courses div.course-listing a.course-entry div.course-entry-content div.course-entry-image {
+    display: none;
+  }
+}
+div.courses div.course-listing a.course-entry div.course-entry-content div.course-entry-type {
+  position: absolute;
+  top: 10%;
+  right: 0;
+  color: #00838a;
+  background-color: #f9f9f9;
+  text-align: center;
+  padding: 5px 20px;
+  font-weight: 500;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.3);
+}
+@media (max-width: 768px) {
+  div.courses div.course-listing a.course-entry div.course-entry-content div.course-entry-type {
+    top: 7.5%;
+  }
+}
+@media (max-width: 500px) {
+  div.courses div.course-listing a.course-entry div.course-entry-content div.course-entry-type {
+    display: block;
+    position: relative;
+    font-size: 12px;
+    font-weight: 300;
+    padding: 0px;
+    text-align: left;
+    box-shadow: none;
+    background-color: transparent;
+    color: #252525;
+  }
+}
+div.courses div.course-listing a.course-entry div.course-entry-content div.course-entry-title {
+  display: table-cell;
+  vertical-align: middle;
+  height: 60px;
+  padding: 10px;
+  text-align: left;
+  font-size: 20px;
+  color: #00838a;
+  transition: all 0.3s ease;
+  /*
+                    .generate-heights(@i) when (@i >= 320px) {
+                        @width: (@i - 40px) * 0.49;
+
+                        .screen(@i; {
+                            height: @width * 0.70;
+                        });
+
+                          .generate-heights(@i - 5px);
+                    }
+
+                    .generate-heights(500px);
+                    */
+}
+@media (max-width: 1024px) {
+  div.courses div.course-listing a.course-entry div.course-entry-content div.course-entry-title {
+    font-size: 16px;
+  }
+}
+@media (max-width: 500px) {
+  div.courses div.course-listing a.course-entry div.course-entry-content div.course-entry-title {
+    display: block;
+    position: relative;
+    font-weight: 500;
+    padding: 0px 0px 10px 0px;
+    height: unset;
+  }
+}
+div.courses div.course-listing a.course-entry div.course-entry-content div.course-entry-description {
+  padding: 0px 10px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 300;
+  color: #00838a;
+}
+@media (max-width: 1024px) {
+  div.courses div.course-listing a.course-entry div.course-entry-content div.course-entry-description {
+    line-height: 16px;
+  }
+}
+@media (max-width: 500px) {
+  div.courses div.course-listing a.course-entry div.course-entry-content div.course-entry-description {
+    display: block;
+    position: relative;
+    font-size: 12px;
+    font-weight: 300;
+    padding: 0px;
+    color: #252525;
+  }
+}
+div.class-filters {
+  padding: 10px 0px 30px 0px;
+}
+@media (max-width: 425px) {
+  div.class-filters {
+    background-color: #f9f9f9;
+    padding: 10px 0px;
+    margin-bottom: 20px;
+  }
+}
+div.class-filters > div + div {
+  margin-top: 5px;
+}
+@media (max-width: 425px) {
+  div.class-filters > div + div {
+    margin-top: 30px;
+  }
+}
+div.class-filters div.audience:before,
+div.class-filters div.medium:before,
+div.class-filters div.status:before,
+div.class-filters div.audience:after,
+div.class-filters div.medium:after,
+div.class-filters div.status:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+div.class-filters div.audience div.label,
+div.class-filters div.medium div.label,
+div.class-filters div.status div.label {
+  display: block;
+  float: left;
+  width: 137px;
+  font-size: 100%;
+  text-align: right;
+  padding: 5px 14px 5px 0px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #00838a;
+}
+@media (max-width: 1440px) {
+  div.class-filters div.audience div.label,
+  div.class-filters div.medium div.label,
+  div.class-filters div.status div.label {
+    width: 107px;
+  }
+}
+div.class-filters div.audience div.options,
+div.class-filters div.medium div.options,
+div.class-filters div.status div.options {
+  display: block;
+  float: left;
+}
+div.class-filters div.audience div.options label,
+div.class-filters div.medium div.options label,
+div.class-filters div.status div.options label {
+  font-weight: 300;
+  margin-right: 10px;
+  padding: 2px 10px;
+  border-radius: 10px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+div.class-filters div.audience div.options label:hover,
+div.class-filters div.medium div.options label:hover,
+div.class-filters div.status div.options label:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+div.class-filters div.audience div.options label input[type=checkbox],
+div.class-filters div.medium div.options label input[type=checkbox],
+div.class-filters div.status div.options label input[type=checkbox] {
+  width: 15px;
+  height: 15px;
+  margin: 0px 5px 0px 0px !important;
+  padding: 0px;
+  cursor: pointer;
+}
+div.class-filters div.audience div.options label input[type=radio],
+div.class-filters div.medium div.options label input[type=radio],
+div.class-filters div.status div.options label input[type=radio] {
+  position: relative;
+  top: -1px;
+  margin: 0px 10px 0px 0px !important;
+}
+@media (max-width: 1024px) {
+  div.class-filters div.audience div.options label input[type=checkbox],
+  div.class-filters div.medium div.options label input[type=checkbox],
+  div.class-filters div.status div.options label input[type=checkbox] {
+    position: relative;
+    top: 3px;
+  }
+  div.class-filters div.audience div.options label input[type=radio],
+  div.class-filters div.medium div.options label input[type=radio],
+  div.class-filters div.status div.options label input[type=radio] {
+    top: 2px;
+  }
+}
+@media (max-width: 425px) {
+  div.class-filters div.audience div.options,
+  div.class-filters div.medium div.options,
+  div.class-filters div.status div.options {
+    width: 70%;
+  }
+  div.class-filters div.audience div.options label,
+  div.class-filters div.medium div.options label,
+  div.class-filters div.status div.options label {
+    width: 100%;
+  }
+}
+@media (max-width: 375px) {
+  div.class-filters div.audience div.options,
+  div.class-filters div.medium div.options,
+  div.class-filters div.status div.options {
+    width: 60%;
+  }
+}
+div.classes {
+  width: 100%;
+  padding:0 50px;
+}
+@media (max-width: 1440px) {
+  div.classes {
+    padding: 0px 20px !important;
+  }
+}
+div.classes > h2 {
+  margin-bottom: 20px;
+  display: inline-block;
+  font-family: Lato;
+  font-size: 20px !important;
+  font-weight: 300;
+  line-height: 150%;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #383838;
+  padding: 0px 0px 30px 0px;
+  margin: 0px;
+  border: 0px;
+}
+@media (max-width: 768px) {
+  div.classes > h2 {
+    font-size: 16px !important;
+  }
+}
+@media (max-width: 768px) {
+  div.classes > h2 {
+    padding-bottom: 22px;
+  }
+}
+div.classes > h2 b {
+  color: #fe5000;
+  font-weight: 300;
+}
+div.classes div.ng-table-pager {
+  text-align: center;
+
+}
+div.classes div.ng-table-pager ul.pagination {
+  margin: 30px auto !important;
+}
+div.classes div.ng-table-pager ul.pagination li {
+  margin: 0;
+}
+div.classes > h2 {
+  padding: 0px;
+}
+@media (max-width: 425px) {
+  div.classes > h2 {
+    padding-bottom: 22px;
+  }
+}
+div.classes div.class-listing div.class-entry {
+  display: block;
+  font-size: 12px;
+  color: #252525;
+  padding: 40px 0px;
+}
+div.classes div.class-listing div.class-entry:nth-child(first) {
+  padding-top: 0px;
+}
+div.classes div.class-listing div.class-entry:hover {
+  text-decoration: none;
+  border-color: #00838a;
+}
+div.classes div.class-listing div.class-entry.closed > * {
+  opacity: 0.5;
+}
+div.classes div.class-listing div.class-entry.closed a.class-entry-registration:hover {
+  opacity: 1;
+}
+div.classes div.class-listing div.class-entry.closed div.class-entry-date {
+  color: #252525;
+}
+div.classes div.class-listing div.class-entry.closed div.class-entry-title {
+  color: #252525;
+}
+div.classes div.class-listing div.class-entry.closed div.class-entry-seats {
+  color: #252525;
+  border-color: #252525;
+}
+div.classes div.class-listing div.class-entry:before,
+div.classes div.class-listing div.class-entry:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+div.classes div.class-listing div.class-entry + div {
+  border-top: 1px solid #00b0b9;
+}
+div.classes div.class-listing div.class-entry > * {
+  float: left;
+}
+div.classes div.class-listing div.class-entry div.class-entry-date {
+  clear: left;
+  font-size: 150%;
+  font-weight: 300;
+  color: #00838a;
+  width: 150px;
+}
+div.classes div.class-listing div.class-entry div.class-entry-title {
+  font-size: 150%;
+  font-weight: 700;
+  color: #00838a;
+}
+    
+div.classes div.class-listing div.class-entry div.class-entry-title a.title-anchor{
+  color: #00838a;
+}
+    
+div.classes div.class-listing div.class-entry div.class-entry-seats {
+  margin-left: 20px;
+  padding: 2px 10px;
+  border: 1px solid #227f36;
+  border-top: 0px;
+  border-bottom: 0px;
+  border-radius: 5px;
+  font-weight: 300;
+  color: #227f36;
+}
+div.classes div.class-listing div.class-entry a.class-entry-registration {
+  margin-left: 20px;
+  padding: 2px 0px;
+  color: #fe5000;
+  text-transform: uppercase;
+}
+div.classes div.class-listing div.class-entry div.class-entry-type {
+  clear: left;
+  margin-left: 150px;
+}
+div.classes div.class-listing div.class-entry div.class-entry-location:before {
+  content: "@";
+  display: inline-block;
+  padding: 0px 5px;
+}
+div.classes div.class-listing div.class-entry div.class-entry-time {
+  clear: left;
+  margin-left: 150px;
+}
+div.classes div.class-listing div.class-entry div.class-entry-description {
+  clear: left;
+  margin-left: 150px;
+  padding-top: 10px;
+  font-size: 120%;
+}
+@media (max-width: 425px) {
+  div.classes div.class-listing div.class-entry {
+    padding: 20px 0px;
+  }
+  div.classes div.class-listing div.class-entry > * {
+    clear: left;
+    margin-left: 0px !important;
+    font-size: 12px;
+    line-height: 16px;
+  }
+  div.classes div.class-listing div.class-entry div.class-entry-date {
+    font-size: 12px;
+  }
+  div.classes div.class-listing div.class-entry div.class-entry-title {
+    padding: 0px;
+    font-size: 16px;
+    line-height: 20px;
+  }
+  div.classes div.class-listing div.class-entry div.class-entry-seats {
+    border: 0px;
+    padding: 0px;
+  }
+  div.classes div.class-listing div.class-entry a.class-entry-registration {
+    clear: none;
+    float: right;
+    padding: 0;
+  }
+  div.classes div.class-listing div.class-entry div.class-entry-type {
+    padding-top: 10px;
+  }
+  div.classes div.class-listing div.class-entry div.class-entry-description {
+    font-size: 12px;
+  }
+}
+div.course-detail {
+  width: 100%;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+@media (max-width: 1440px) {
+  div.course-detail {
+    padding: 0px 20px !important;
+  }
+}
+div.course-detail > h2 {
+  margin-bottom: 20px;
+  display: inline-block;
+  font-family: Lato;
+  font-size: 20px !important;
+  font-weight: 300;
+  line-height: 150%;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #383838;
+  padding: 0px 0px 30px 0px;
+  margin: 0px;
+  border: 0px;
+}
+@media (max-width: 768px) {
+  div.course-detail > h2 {
+    font-size: 16px !important;
+  }
+}
+@media (max-width: 768px) {
+  div.course-detail > h2 {
+    padding-bottom: 22px;
+  }
+}
+div.course-detail > h2 b {
+  color: #fe5000;
+  font-weight: 300;
+}
+div.course-detail div.ng-table-pager {
+  text-align: center;
+}
+div.course-detail div.ng-table-pager ul.pagination {
+  margin: 30px auto !important;
+}
+div.course-detail div.ng-table-pager ul.pagination li {
+  margin: 0;
+}
+@media (max-width: 1440px) {
+  div.course-detail {
+    padding-left: unset;
+    padding-right: unset;
+  }
+}
+div.course-detail > h2 {
+  padding: 0px;
+}
+@media (max-width: 425px) {
+  div.course-detail > h2 {
+    padding-bottom: 15px;
+  }
+}
+div.course-detail div.no-classes {
+  padding-top: 40px;
+}
+div.course-detail div.class-listing div.class-entry {
+  display: block;
+  font-size: 12px;
+  color: #252525;
+  padding: 40px 0px;
+}
+div.course-detail div.class-listing div.class-entry:nth-child(first) {
+  padding-top: 0px;
+}
+div.course-detail div.class-listing div.class-entry:hover {
+  text-decoration: none;
+  border-color: #00838a;
+}
+div.course-detail div.class-listing div.class-entry.closed {
+  opacity: 0.5;
+}
+div.course-detail div.class-listing div.class-entry.closed:hover {
+  border-color: rgba(0, 131, 138, 0.3);
+}
+div.course-detail div.class-listing div.class-entry.closed div.class-entry-date {
+  color: #252525;
+}
+div.course-detail div.class-listing div.class-entry.closed div.class-entry-title {
+  color: #252525;
+}
+div.course-detail div.class-listing div.class-entry.closed div.class-entry-seats {
+  color: #252525;
+  border-color: #252525;
+}
+div.course-detail div.class-listing div.class-entry:before,
+div.course-detail div.class-listing div.class-entry:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+div.course-detail div.class-listing div.class-entry + div {
+  border-top: 1px solid #00b0b9;
+}
+div.course-detail div.class-listing div.class-entry > * {
+  float: left;
+}
+div.course-detail div.class-listing div.class-entry div.class-entry-date {
+  clear: left;
+  font-size: 150%;
+  font-weight: 300;
+  color: #00838a;
+  width: 150px;
+}
+div.course-detail div.class-listing div.class-entry div.class-entry-time {
+  font-size: 150%;
+}
+div.course-detail div.class-listing div.class-entry div.class-entry-seats {
+  margin-left: 20px;
+  padding: 2px 0px;
+  border: 1px solid #227f36;
+  border-top: 0px;
+  border-bottom: 0px;
+  border-radius: 5px;
+  font-weight: 300;
+  color: #227f36;
+  text-align: center;
+  width: 130px;
+}
+div.course-detail div.class-listing div.class-entry a.class-entry-registration {
+  margin-left: 20px;
+  padding: 2px 0px;
+  color: #fe5000;
+  text-transform: uppercase;
+}
+div.course-detail div.class-listing div.class-entry div.class-entry-location {
+  clear: left;
+  margin-left: 150px;
+  font-size: 120%;
+}
+@media (max-width: 425px) {
+  div.course-detail div.class-listing div.class-entry > * {
+    clear: left;
+    margin-left: 0px !important;
+  }
+  div.course-detail div.class-listing div.class-entry div.class-entry-title {
+    padding: 20px 0px 0px 0px;
+  }
+  div.course-detail div.class-listing div.class-entry div.class-entry-seats {
+    border: 0px;
+    padding: 0px;
+    text-align: left;
+    width: unset;
+  }
+  div.course-detail div.class-listing div.class-entry a.class-entry-registration {
+    clear: none;
+    float: right;
+    margin-top: -21px;
+  }
+  div.course-detail div.class-listing div.class-entry div.class-entry-type {
+    padding-top: 10px;
+  }
+}
+div.class-detail {
+  padding-left: 50px;
+  padding-right: 50px;
+  width: 100%;
+}
+@media (max-width: 1440px) {
+  div.class-detail {
+    padding-left: unset;
+    padding-right: unset;
+  }
+}
+div.class-detail:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+@media (max-width: 1440px) {
+  div.class-detail {
+    padding: 0px 20px;
+  }
+}
+div.class-detail > h2 {
+  margin-bottom: 20px;
+  display: inline-block;
+  font-family: Lato;
+  font-size: 20px !important;
+  font-weight: 300;
+  line-height: 150%;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #383838;
+  padding: 0px 0px 30px 0px;
+  margin: 0px;
+  border: 0px;
+}
+@media (max-width: 768px) {
+  div.class-detail > h2 {
+    font-size: 16px !important;
+  }
+}
+@media (max-width: 768px) {
+  div.class-detail > h2 {
+    padding-bottom: 22px;
+  }
+}
+div.class-detail > h2 b {
+  color: #fe5000;
+  font-weight: 300;
+}
+div.class-detail div.ng-table-pager {
+  text-align: center;
+}
+div.class-detail div.ng-table-pager ul.pagination {
+  margin: 30px auto !important;
+}
+div.class-detail div.ng-table-pager ul.pagination li {
+  margin: 0;
+}
+div.class-detail > h2 {
+  padding: 0px;
+  word-spacing: 7px;
+}
+@media (max-width: 425px) {
+  div.class-detail > h2 {
+    padding-bottom: 15px;
+  }
+}
+div.class-detail > h2 b {
+  color: #fe5000;
+  font-weight: 300;
+  border-left: 1px solid #00838a;
+  margin-left: 15px;
+  padding-left: 15px;
+}
+@media (max-width: 500px) {
+  div.class-detail > h2 b {
+    font-size: 12px;
+    display: block;
+    padding-top: 5px;
+    border-left: 0;
+    margin-left: 0;
+    padding-left: 0;
+  }
+}
+div.class-detail div.class-time {
+  padding-top: 40px;
+  font-size: 20px;
+}
+div.class-detail div.class-time i {
+  display: inline-block;
+  margin: 0px 10px;
+  font-size: 80%;
+  font-style: normal;
+  color: #00838a;
+}
+@media (max-width: 500px) {
+  div.class-detail div.class-time i {
+    display: block;
+    margin: 10px 24px;
+  }
+}
+div.class-detail div.class-location {
+  margin-top: 5px;
+}
+div.class-detail div.class-registration {
+  margin-top: 40px;
+}
+div.class-detail div.class-registration a {
+  display: inline-block;
+  text-align: center;
+  padding: 5px 20px 5px 0px;
+  color: #fe5000;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+div.class-detail div.class-registration a:hover {
+  text-decoration: none;
+  box-shadow: 0px 2px 7px -1px rgba(0, 0, 0, 0.2);
+  padding-left: 15px;
+}
+div.class-detail div.class-registration a:before {
+  content: "»";
+  display: inline-block;
+  margin-right: 10px;
+  position: relative;
+  top: -1px;
+}
+div.class-detail div.class-registration div.deadlinemsg{
+ color: #fe5000;   
+ }
+@media (max-width: 425px) {
+  div.class-detail div.class-registration a {
+    font-size: 14px;
+  }
+}
+div.class-detail div.class-instructor {
+  padding-top: 40px;
+}
+div.class-detail div.class-instructor label,
+div.class-detail div.class-seats-remaining label {
+  width: 100px;
+  text-align: left;
+  text-transform: uppercase;
+  font-weight: 300;
+  color: #4d4d4d;
+}
+div.class-detail div.class-map {
+  position: relative;
+  margin-top: 50px;
+  padding-top: 62.5%;
+}
+@media (max-width: 500px) {
+  div.class-detail div.class-map {
+    padding-top: 100%;
+  }
+}
+div.class-detail div.class-map > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+div.class-detail popups {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+div.class-detail popups > div {
+  display: none;
+  overflow: hidden;
+  box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.1);
+  width: 700px;
+  margin: 0px auto;
+  background-color: #f9f9f9;
+  border: 1px solid #00838a;
+}
+@media (max-width: 768px) {
+  div.class-detail popups > div {
+    width: 95%;
+  }
+}
+div.class-detail popups > div div.popup-message {
+  margin: 20px 50px;
+  font-size: 16px;
+}
+div.class-detail popups > div div.popup-message p + p {
+  margin-top: 10px;
+}
+div.class-detail popups > div div.popup-message b {
+  color: #fe5000;
+  font-weight: 300;
+}
+@media (max-width: 425px) {
+  div.class-detail popups > div div.popup-message {
+    margin: 20px;
+    font-size: 12px;
+  }
+}
+div.class-detail popups > div div.popup-buttons {
+  display: table;
+  width: 101%;
+}
+div.class-detail popups > div div.popup-buttons > a {
+  display: table-cell;
+  padding: 10px;
+  text-align: center;
+  color: #f9f9f9;
+  letter-spacing: 0.05em;
+  border-top: 1px solid #00838a;
+  vertical-align: middle;
+  cursor: pointer;
+}
+div.class-detail popups > div div.popup-buttons > a:hover {
+  text-decoration: none;
+}
+div.class-detail popups > div div.popup-buttons a.popup-button-secondary {
+  width: 40%;
+  font-size: 12px;
+  font-weight: 500;
+  color: #00838a;
+}
+div.class-detail popups > div div.popup-buttons a.popup-button-secondary:hover {
+  color: #00b0b9;
+}
+div.class-detail popups > div div.popup-buttons a.popup-button-primary {
+  width: 60%;
+  font-size: 14px;
+  font-weight: 700;
+  background-color: #00838a;
+}
+div.class-detail popups > div div.popup-buttons a.popup-button-primary:hover {
+  background-color: #00b0b9;
+}
+div.class-detail popups.registration {
+  display: block;
+}
+div.class-detail popups.registration div#popup-registration {
+  display: block;
+}
+div.class-detail popups.registration-confirmation {
+  display: block;
+}
+div.class-detail popups.registration-confirmation div#popup-registration-confirmation {
+  display: block;
+}
+div.class-detail popups.cancellation {
+  display: block;
+}
+div.class-detail popups.cancellation div#popup-cancellation {
+  display: block;
+}
+div.class-detail popups.cancellation-confirmation {
+  display: block;
+}
+div.class-detail popups.cancellation-confirmation div#popup-cancellation-confirmation {
+  display: block;
+}
+@media (max-width: 425px) {
+  div.class-detail > h2 b {
+    padding-top: 0px;
+  }
+  div.class-detail div.class-description,
+  div.class-detail div.class-registration,
+  div.class-detail div.class-instructor,
+  div.class-detail div.class-seats-remaining {
+    font-size: 12px;
+  }
+}
+div.unauthenticated {
+  padding-left: 50px;
+}
+@media (max-width: 1440px) {
+  div.unauthenticated {
+    padding-left: 20px;
+  }
+}
+
+</style></apex:component>

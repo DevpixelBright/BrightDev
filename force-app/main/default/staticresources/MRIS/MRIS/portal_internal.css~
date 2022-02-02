@@ -1,0 +1,586 @@
+
+p{
+	display:block;
+	margin:0;
+	padding-top:12px;
+}
+h1,h2,h3,h4,h5,h6,hr,table,form{
+	margin:0;
+	padding:0;
+}
+#header{
+  	background-position: -10px -1197px;
+  	margin-left:7px;
+}
+
+#crumbs a:hover{
+	color:#000;
+}
+.welcome {
+	float:right;
+	margin-right:40px;	
+}
+#innerwrap{
+/*
+	background-image:url(http://www.mris.com/_res/graphics/backgrounds/bg-internal-pages.png);
+	background-repeat:repeat-y;
+*/
+}
+#sidenav ul{
+	list-style-type:none;
+	margin:0;
+	padding:0;
+}
+#sidenav li{
+	border-bottom-color:#B0B0B0;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	display:block;
+	float:left;
+	padding-bottom:12px;
+	padding-top:6px;
+	width:170px;
+}
+#sidenav li a{
+	color:#000;
+	display:block;
+	float:left;
+	font-size:13px;
+	padding-left:10px;
+	width:100%;
+}
+#sidenav li a:hover{
+	color:#63b10c;
+}
+#sidenav .current a{
+	background-image: url(http://www.mris.com/_res/graphics/backgrounds/sprite_home.png);
+  	background-position: -929px -750px;
+	background-repeat:no-repeat;
+	color:#424F84;
+	/*width:3px;*/
+}
+#sidenav li li{
+	border-style:none;
+	padding-bottom:4px;
+	padding-left:10px;
+	padding-top:4px;
+	width:160px;
+}
+#sidenav li li a{
+	font-size:12px;
+	width:150px;
+}
+#sidenav li li li{
+	padding-bottom:3px;
+	padding-top:3px;
+}
+#content{
+	float:left;
+	padding-top:25px;
+}
+#content p{
+	line-height:17px;
+	margin:0;
+	padding:0 0 15px;
+}
+#content ul{
+	list-style-type:disc;
+	margin:0 0 15px;
+	padding:0 0 0 25px;
+}
+#content ul ul,#content ol ul{
+	color:#666;
+	font-size:12px;
+	margin:0;
+	padding:2px 0 2px 22px;
+}
+#content ol{
+	margin:0 0 15px;
+	padding:0 0 0 30px;
+}
+#content ol ol{
+	color:#666;
+	font-size:12px;
+	list-style-type:upper-alpha;
+	margin:0;
+	padding-bottom:2px;
+	padding-left:33px;
+	padding-top:2px;
+}
+#content ul.bulletNone{
+	list-style:none;
+	margin-top:5px;
+}
+#content ul.bulletNone li{
+	margin-bottom:5px;
+	margin-top:5px;
+}
+#content h1{
+	border-bottom-color:#424F84;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	color:#424F84;
+	font-size:30px;
+	font-weight:400;
+	margin-bottom:15px;
+	padding-bottom:5px;
+}
+#content h2{
+	color:#63b10c;
+	font-size:21px;
+	padding-bottom:15px;
+	padding-top:6px;
+}
+#content h3{
+	border-bottom-color:#B0B0B0;
+	border-bottom-style:dotted;
+	border-bottom-width:1px;
+	clear:both;
+	color:#194A8F;
+	font-size:15px;
+	padding-bottom:2px;
+	padding-top:5px;
+}
+#content h4{
+	color:#194A8F;
+	font-size:15px;
+	padding-bottom:15px;
+	padding-top:3px;
+}
+#content h5{
+	color:#000;
+	font-size:14px;
+	padding-top:10px;
+}
+#content h6{
+	background-color:#424f84;
+	color:#FFF;
+	font-size:14px;
+	padding:5px;
+}
+#content u{
+	border-bottom-color:#22B4F9;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	text-decoration:none;
+}
+#content strong{
+	color:#333;
+}
+#content strong em,#content em strong{
+	color:#2189EE;
+	font-size:14px;
+	font-style:normal;
+}
+#content hr{
+	background-color:#FFF;
+	border-bottom-color:#B0B0B0;
+	border-bottom-width:1px;
+	border-style:none none dotted;
+	height:0;
+}
+#content form p{
+	padding-bottom:6px;
+}
+#content .inputz,#content textarea{
+	background-color:#E8EAEA;
+	border:1px solid #BFC3C4;
+	color:#666;
+	font-size:12px;
+	margin:0;
+	padding-bottom:3px;
+}
+
+#content #links{
+	border-left-color:#B0B0B0;
+	border-left-style:solid;
+	border-left-width:1px;
+	float:right;
+	list-style-type:none;
+	margin-left:20px;
+	padding-left:20px;
+	width:150px;
+}
+#content #links li{
+	display:block;
+	float:left;
+	padding-bottom:13px;
+	width:150px;
+}
+#content #links a{
+	float:right;
+}
+
+#content #leaders{
+	clear:both;
+	display:block;
+	list-style-type:none;
+	margin-left:0;
+	margin-right:0;
+	margin-top:15px;
+	padding-left:0;
+	padding-right:0;
+	width:735px;
+}
+#content #leaders li{
+	color:#FFF;
+	display:inline;
+	float:left;
+	height:162px;
+	margin-bottom:22px;
+	width:147px;
+}
+#content #leaders li img{
+	border:1px solid #9BCD63;
+	height:160px;
+	left:0;
+	top:0;
+	width:112px;
+}
+
+
+#content #leaders li a:hover strong{
+	color:#FFF;
+	display:block;
+	font-size:12px;
+}
+.wide{
+	width:735px;
+}
+.narrow{
+	width:567px;
+}
+
+.forwide{
+	width:51px;
+}
+.fornarrow{
+	width:186px;
+}
+#right #rightwrap{
+	right:-11px;
+	top:-54px;
+	width:193px;
+}
+#top-mods{
+	color:#FFF;
+	float:left;
+	font-size:18px;
+	padding-bottom:18px;
+}
+#top-mods h2{
+	color:#FFF;
+	font-size:18px;
+	margin:0;
+	padding:0;
+}
+#top-mods div {
+	background-repeat:no-repeat;
+	float:left;
+	padding-left:22px;
+	padding-right:22px;
+	padding-top:24px;
+	width:149px;
+}
+#quick-links hr{
+	border:solid 1px #fff;
+	margin-left:-12px;
+	margin-top:6px;
+	padding:0;
+	width:173px;
+}
+#quick-links h3 {
+	margin-bottom:6px;	
+}
+#quick-links ul {
+	list-style-type:none;
+	margin:0;
+	padding:5px 0 0;
+}
+#quick-links li {
+	font-size:12px;
+	margin:0;
+	padding-bottom:2px;
+	padding-top:2px;
+	width:148px;
+}
+#quick-links li a{
+	color:#FFF;
+	margin:0;
+	padding:0;
+}
+#quick-links li a:hover{
+	color:#EF6C01;
+	font-weight:700;
+}
+/*#signin{
+	background-image:url(http://www.mris.com/_res/graphics/backgrounds/bg-login-top.gif);
+	background-position:center top;
+	line-height:normal;
+}
+
+#signin #login{
+	margin-top:18px;
+}*/
+/*#testimonials-content{
+	background-image:url(http://www.mris.com/_res/graphics/backgrounds/features_body.gif);
+	background-repeat:repeat-y;
+	float:left;
+	padding-left:25px;
+	width:193px;
+}
+#testimonials-bottom{
+	background-image:url(http://www.mris.com/_res/graphics/backgrounds/features_bottom.gif);
+	background-repeat:no-repeat;
+	float:left;
+	height:40px;
+	width:193px;
+}*/
+.mris_teaser h4{
+	/*background-image:url(http://www.mris.com/_res/graphics/backgrounds/bg-subscribe-top.gif);*/
+	background-position: -820px -284px;
+	font-size:16px;
+	height:29px;
+	padding-top:10px;
+	padding-left:20px;
+}
+
+#footer {
+	margin-left:7px;
+}
+#quiz p{
+	margin:0;
+	padding:9px 0 0;
+}
+#quiz h4{
+	/*background-image:url(http://www.mris.com/_res/graphics/backgrounds/bg-quiz-top.gif);*/
+	background-position: -820px -220px;
+	height:26px;
+}
+#quiz input{
+	clear:left;
+}
+#quiz input[type=radio]{
+	cursor:pointer;
+	font-weight:400;
+	vertical-align:middle;
+}
+#quiz #submit{
+	/*background-image:url(http://www.mris.com/_res/graphics/icons/button-orange-white.gif);
+	border-style:none;
+	float:left;
+	font-weight:700;
+	height:33px;
+	margin:10px 0 0;
+	text-transform:uppercase;
+	width:100px;*/
+}
+#quiz #submit:hover{
+	/*background-image:url(http://www.mris.com/_res/graphics/icons/button-green-white.gif);
+	border-style:none;*/
+}
+.calendarBG{
+	background-color:#FFF;
+}
+.calendarBlank{
+	background-color:#A7CADF;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	font-weight:700;
+	height:80px;
+	text-align:center;
+	vertical-align:middle;
+	width:20%;
+}
+.calendarHeader{
+	background-color:#424F84;
+	color:#fff;
+	font-weight:700;
+	text-align:center;
+}
+.calendarMonthLinks{
+	background-color:transparent;
+	color:#fff;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:25px;
+	font-weight:700;
+	letter-spacing:.1em;
+	text-decoration:none;
+}
+.calendarMonthLinks a:hover{
+	background-color:transparent;
+	color:#ccc;
+	text-decoration:underline;
+}
+.calendarDayHeading{
+	background-color:#4A89B4;
+	color:#fff;
+	font-size:11px;
+	font-weight:700;
+	text-align:center;
+	vertical-align:middle;
+	width:20%;
+}
+.calendarToday{
+	background-color:#59798F;
+	color:#FFF;
+	font-size:11px;
+	font-weight:700;
+	letter-spacing:.1em;
+	text-align:center;
+	text-decoration:none;
+	vertical-align:middle;
+}
+.calendarCell{
+	background-color:#DFDFDF;
+	color:#666;
+	font-size:11px;
+	font-weight:700;
+	height:80px;
+	letter-spacing:.1em;
+	text-align:center;
+	text-decoration:none;
+	vertical-align:middle;
+	width:20%;
+}
+.calendarCell a{
+	background-color:transparent;
+	color:#424F84;
+	font-size:11px;
+	font-weight:400;
+	text-decoration:none;
+}
+.calendarCell a:visited{
+	background-color:transparent;
+	color:#000;
+	text-decoration:underline;
+}
+.calendarCell a:hover{
+	background-color:transparent;
+	color:#63B10C;
+	text-decoration:none;
+}
+div.slideshow{
+	width:200px;
+}
+div.slideshow ul.slides{
+	background-color:#FFF;
+	height:275px;
+	list-style:none;
+	margin-top:47px;
+	overflow:hidden;
+	padding:0;
+	width:150px;
+}
+div.slideshow ul.slides li.slide{
+	display:none;
+	height:275px;
+	left:0;
+	margin:0;
+	overflow:hidden;
+	padding:0;
+	top:0;
+	width:150px;
+}
+div.slideshow ul.slides li.slide div.img{
+	margin-bottom:10px;
+}
+div.slideshow ul.slides li.slide div.txt h2{
+	margin-bottom:-10px;
+}
+div.slideshow div.ctrl{
+	/*padding:1px 0 10px;*/
+	text-align:center;
+	width:120px;
+	margin:0;
+	padding:0;
+	margin-left:16px;
+}
+div.slideshow div.ctrl img{
+	vertical-align:middle;
+}
+div.slideshow div.ctrl a.next:hover{
+	background-position:-315px -203px;
+}
+div.slideshow div.ctrl a.prev {
+	background-position:-333px -228px;
+}
+div.slideshow div.ctrl a.prev:hover{
+	background-position:-333px -203px;
+}
+div.slideshow div.ctrl span.pagination{
+	display:block;
+	float:left;
+	padding:0 7px;
+}
+div.slideshow div.ctrl span.pagination a{
+	margin:0 3px;
+	text-decoration:none;
+}
+div.slideshow div.ctrl span.pagination a.activeSlide img{
+	background-position:-807px -781px;
+	border:0;
+}
+h1.plain,h3.plain{
+	border-bottom-style:none;
+	font-size:17px;
+	margin-bottom:0px;
+}
+.border1{
+	border:thin solid #000;
+}
+.border1 td{
+	border-top:thin solid #000;
+	text-align:center;
+}
+.border1 td,.border1 th{
+	border-right:thin solid #000;
+}
+.border1 th{
+	background-color:#ccc;
+	color:#FF7504;
+}
+.border1 th.borderNo{
+	border:none;
+}
+.border1 td.borderNo{
+	border:none;
+	border-top:thin solid #000;
+}
+#crumbs a,#leaders li strong{
+	color:#FFF;
+}
+#sidenav li li li a,#content form{
+	font-size:11px;
+}
+#content form #button:hover,#content #links #button a:hover{
+	/*background-image:url(http://www.mris.com/_res/graphics/icons/button-green-white.gif);*/
+	background-image:url(http://www.mris.com/_res/graphics/backgrounds/sprite_home.png);
+	background-position: -642px -753px;
+	width:140px;
+	height:35px;
+}
+.mris_teaser,#quiz{
+	/*background-image:url(http://www.mris.com/_res/graphics/backgrounds/bg-right-panel.gif);
+	background-position:right bottom;*/
+	background-image:url(http://www.mris.com/_res/graphics/backgrounds/sprite_home.png);
+	background-position: -820px -570px;
+	background-repeat:no-repeat;
+	float:left;
+	font-size:11px;
+	margin-left:0;
+	margin-top:6px;
+	padding:47px 24px 20px;
+	width:145px;
+	height:90px;
+}
+#quiz {
+	background-position: -820px -550px;
+	height:110px;
+}
+.calendarMonthLinks a,.calendarMonthLinks a:visited{
+	background-color:transparent;
+	color:#fff;
+	text-decoration:none;
+}
+div.slideshow ul.slides li.slide:first-child,div.slideshow ul.slides li.first,body.with-js div.slideshow div.ctrl,body.with-js div.slideshow ul.slides li.slide{display:block;}

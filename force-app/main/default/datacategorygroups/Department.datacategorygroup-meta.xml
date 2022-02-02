@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataCategoryGroup xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <dataCategory>
+        <dataCategory>
+            <label>CURE</label>
+            <name>CURE</name>
+        </dataCategory>
+        <dataCategory>
+            <label>Compliance</label>
+            <name>Compliance</name>
+        </dataCategory>
+        <dataCategory>
+            <dataCategory>
+                <label>RETS/IDX</label>
+                <name>RETS_IDX_FAQ</name>
+            </dataCategory>
+            <label>AMS</label>
+            <name>AMS</name>
+        </dataCategory>
+        <dataCategory>
+            <label>Helpdesk</label>
+            <name>Helpdesk</name>
+        </dataCategory>
+        <dataCategory>
+            <label>Membership</label>
+            <name>Membership</name>
+        </dataCategory>
+        <dataCategory>
+            <label>Public Records</label>
+            <name>Public_Records</name>
+        </dataCategory>
+        <dataCategory>
+            <label>Billing</label>
+            <name>Billing</name>
+        </dataCategory>
+        <label>All</label>
+        <name>All</name>
+    </dataCategory>
+    <label>Department</label>
+    <objectUsage>
+        <object>KnowledgeArticleVersion</object>
+    </objectUsage>
+</DataCategoryGroup>

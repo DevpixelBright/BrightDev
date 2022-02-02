@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SynonymDictionary xmlns="http://soap.sforce.com/2006/04/metadata">
+    <groups>
+        <languages>en_US</languages>
+        <terms>CMA</terms>
+        <terms>Comp</terms>
+        <terms>Comparable</terms>
+        <terms>Comparables</terms>
+    </groups>
+    <label>_Default</label>
+</SynonymDictionary>

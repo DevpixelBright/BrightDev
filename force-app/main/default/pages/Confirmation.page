@@ -1,0 +1,69 @@
+<apex:page showHeader="false" sidebar="false" standardController="MRIS_Application__c" extensions="ConfirmationExtension" lightningstylesheets="true">
+<style>
+    .orange
+    {
+        background-color:orange;
+        color:white;
+        text-align:center;
+    }
+    #main
+    {    
+        width:500px;
+        border-width:5px;
+        border-style:groove;
+    }
+</style>
+<script>
+    function sendConfirmation(c)
+    {
+        try
+        {
+            window.parent.opener.Confirmed(c);
+        }
+        catch (err)
+        {
+            window.opener.Confirmed(c);
+        }        
+        window.close();
+    }
+</script>
+<table id='main'>
+    <tr>
+        <td colspan='2' class='orange'>
+        PLEASE CONFIRM THE FOLLLOWING INFORMATION<br></br>NOTE: Just click once the CONFIRM button to avoid multiple subscriptions
+        </td>
+    </tr>
+    <tr>
+        <td class='orange' style='width:150px;'>
+            Subscription Type:
+        </td>
+        <td>
+        {!SubscriptionType}
+        </td>
+    </tr>
+    <tr>
+        <td class='orange' style='width:150px;'>
+            Subscription Fee:
+        </td>
+        <td>
+        {!SubscriptionFee}
+        </td>
+    </tr>
+        <tr>
+        <td class='orange' style='width:150px;'>
+            Quarterly Fee:
+        </td>
+        <td>
+        {!SubscriptionQuarterlyFee}
+        </td>
+    </tr>
+</table>
+<apex:form >
+<table style='width:500px;'>
+    <tr>
+        <td style='width:50%;text-align:right'><apex:commandButton value="CONFIRM" onclick="sendConfirmation(true);"/></td>
+        <td style='width:50%;text-align:left'><apex:commandButton value="CHANGE INFORMATION" onclick="sendConfirmation(false);"/></td>
+    </tr>
+</table>
+</apex:form>
+</apex:page>

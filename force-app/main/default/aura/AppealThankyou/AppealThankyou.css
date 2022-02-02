@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'Acronym-Regular';
+    src: url(/resource/bright/bright-3.0/fonts/Acronym-Regular.ttf);  
+}
+@font-face {
+    font-family: 'Acronym-Bold';
+    src: url(/resource/bright/bright-3.0/fonts/Acronym-Bold.ttf);
+}
+
+.THIS.slds-scope{ background:#fff;}
+.THIS .fullpage { background:#fff;  margin:0;  padding:0;}
+.THIS .slds-box_x-small{ padding:0; border:none;}
+
+
+/*content css start*/
+
+ 
+.THIS .new-container { margin: 0 auto; border: none; width: -webkit-fill-available;width:100%;}
+.THIS .new-containerpage { box-shadow: 0 6px 6px -6px #ccc; margin: 0 auto; width: -webkit-fill-available;width:100%; background:#fff;}
+
+.THIS .thank{ padding:100px 0 ;}
+
+
+
+
+.THIS .thank h3{font-size:22px; font-family: 'Acronym-Bold'; margin:0 0 10px;padding:0;color: #4f5a65;}
+.THIS .thank h4{font-size:16px; font-family: 'Acronym-Bold';margin:0 0 10px;padding:0;color: #4f5a65;}
+.THIS .thank p{font-size:12px; font-family: 'Acronym-Regular';margin:0 0 10px;padding:0;color: #4f5a65;}
+.THIS .thank p a{ color:#fc2900;    text-decoration: underline;}
+.THIS .thank p a:hover{text-decoration: none;}

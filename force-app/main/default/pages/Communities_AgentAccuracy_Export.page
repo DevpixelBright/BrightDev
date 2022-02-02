@@ -1,0 +1,6 @@
+<apex:page contentType="application/octet-stream#complianceFines.csv" controller="Communities_AgentAccuracy_Print_export" readOnly="true" lightningstylesheets="true">    
+MLS Number,Violation Type ,Violation No ,Notification Type ,Notification Date,Fine Amount,Status,Last Day To Appeal
+<apex:repeat value="{!lstcomplianceFinesWrapper}" var="Cfines">
+{!Cfines.mlsNumber}, {!Cfines.ViolationType}, {!Cfines.ViolationNo}, {!Cfines.NotificationType},{!Cfines.NotificationDate} ,{!Cfines.FineAmount},{!Cfines.Status},{!Cfines.LastDayToAppeal}
+</apex:repeat>
+</apex:page>

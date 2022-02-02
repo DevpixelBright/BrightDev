@@ -1,0 +1,656 @@
+<apex:component layout="none">
+    <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/jquery.min.js')}"></script>
+    <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/jquery.sticky.js')}"></script>
+    <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/stringformat.js')}"></script>
+    <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/bootstrap.min.js')}"></script>
+    <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/postmessage.js')}"></script>
+    <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/html5shiv.js')}"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet"/>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"/>
+    <apex:stylesheet value="{!URLFOR($Resource.Bootstrap_Layout_Library, '/css/bootstrap.min.css')}"/>
+    
+    <style>
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100%;
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 300;
+            font-family: 'Lato', sans-serif;
+            padding: 0px;
+            margin: 0px; 
+            border: 0px;
+            color: #212B3D;
+        }
+        
+        form {
+            padding: 0px;
+            margin: 0px; 
+            border: 0px;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-weight: 300;
+        }
+        
+        span.info_label {
+            display: inline-block;
+            text-align: right;
+            font-weight: bold;
+            width: 100px;
+            margin-right: 20px;
+        }
+        
+        label {
+            font-weight: bold;
+            text-align: right;
+            margin-bottom: 0px;
+        }
+        
+        input[type=text] {
+            width: 100%;
+        }
+        
+        input[type=checkbox] {
+            margin-top: -2px !important;
+            margin-right: 10px !important;
+        }
+
+            .input-group input[type=checkbox] {
+                margin-right: 0px !important;
+            }
+    
+        input[type=radio] {
+            margin-top: 3px !important;
+        }
+        
+        input[type=submit] {
+            margin-right: 10px !important;
+        }
+        
+        iframe {
+            width: 100%;
+            border: 0px;
+            padding: 0px;
+            margin: 0px;
+        }
+        
+        .progress-bar {
+            background-color: #00A7B0;
+        }
+
+        header {
+            position: relative;
+            background: #212B3D;
+        }
+
+        header + article {
+            margin-top: 10px;
+        }
+
+            header nav {
+                border-top: 0px !important;
+                border-bottom: 0px !important;
+                background: #212B3D !important;
+                color: #fff !important;
+            }
+
+                header nav a {
+                    color: #fff !important;
+                }
+
+                header nav a:hover {
+                    text-decoration: none;
+                }
+
+            header .navbar-info {
+                width: 100%;
+            }
+            
+                header .navbar-info .row {
+                    padding: 20px 0px;
+                }
+                
+                    header .navbar-info .row > div {
+                        height: 100px;
+                    }
+
+                header .navbar-info .option_panel {
+                    text-align: center;
+                }
+
+                    header .navbar-info .option_panel > a, header .navbar-info .option_panel > span {
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                        font-size: 200%;
+                        line-height: 100px;
+                    }
+
+                    header .navbar-info .option_panel > a:hover {
+                        background-color: #75b7e7;
+                    }
+
+                    header .navbar-info .option_panel > span {
+                        background-color: #75b7e7;
+                        cursor: default;
+                    }
+
+                header .navbar-info h3 {
+                    margin: 4px 0px 6px 0px !important;
+                }
+            
+            header h1 {
+                color: #555;
+            }
+                    
+        article {}
+
+        article.last {
+            padding-bottom: 100px;
+        }
+        
+        article + article {
+            padding-top: 100px;
+        }
+
+            article .navigation {
+                padding-bottom: 20px;
+            }
+                
+            article .instructions {
+                margin-bottom: 25px;
+            }
+            
+            article .content {
+            }
+            
+                article .content .jumbotron .row {
+                    padding-top: 20px;
+                }
+
+                article .content .jumbotron .panel-body {
+                    font-size: 70%;
+                }
+
+                article .content .action-panels {
+                    font-size: 21px;
+                    font-weight: 200;
+                }
+
+                article .content .action-panels .alert > span {
+                    top: 2px;
+                    margin-right: 10px;
+                }
+
+                article .content .action-panels > .row > div {
+                    opacity: 0.00;
+                    cursor: pointer;
+                }
+
+                @media screen and (min-width: 768px) {
+                    article .content .action-panels .modal-dialog {
+                        margin: 200px auto;
+                    }
+                }
+                
+            article .bPageBlock {
+                background-color: #fafafa;
+                border: 1px solid #eaeaea;
+                border-top: 1px solid #008af3 !important;
+                border-radius: 0px 0px 6px 6px !important;
+            }
+            
+            article .pbSubsection {
+                margin-top: 20px !important;
+            }
+            
+            article .pbBody {
+                padding: 10px !important;
+            }
+        
+        footer {
+            position: fixed;
+            bottom: 0px;
+            width: 100%;
+            font-size: 85%;
+        }
+        
+            footer a {
+                color: #333;
+            }
+            
+            footer a:hover {
+                color: #333;
+            }
+        
+            footer .fade-buffer {
+                border-top: 1px solid #008af3;
+                background-color: #fff;
+                height: 20px;
+                background: -moz-linear-gradient(top,  rgba(255,255,255,0.6) 0%, rgba(255,255,255,1) 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.6)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(top,  rgba(255,255,255,0.6) 0%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(top,  rgba(255,255,255,0.6) 0%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(top,  rgba(255,255,255,0.6) 0%,rgba(255,255,255,1) 100%); /* IE10+ */
+                background: linear-gradient(to bottom,  rgba(255,255,255,0.6) 0%,rgba(255,255,255,1) 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#99ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */                
+            }
+
+            footer ul {
+                background-color: #fff;
+                margin: 0px;
+            }
+            
+            footer li {
+                display: inline-block;
+                padding: 0px 10px 20px 10px;
+            }
+            
+            footer li.copyright {
+                float: right;
+            }
+           
+        [class*="span"] {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            min-height: 0px !important;
+        }
+        
+        .default_gap {
+            margin-top: 20px;
+        }
+        
+        .progress {
+            margin-bottom: 0px;
+        }
+        
+        .legal_box {
+            height: 400px;
+            border: 1px solid #aaa;
+            padding: 0px;
+        }
+        
+        .invoice {
+            line-height: 40px;
+        }
+            
+            .invoice-header {}
+            
+                .invoice-header > div {
+                    font-weight: bold;
+                }
+                
+                .invoice-header .product {
+                    text-align: left;
+                }
+                
+                .invoice-header .invoice_number {
+                    text-align: left;
+                }
+                
+                .invoice-header .posted_date {
+                    text-align: center;
+                }
+                
+                .invoice-header .amount {
+                    text-align: right;
+                }
+                
+            .invoice-row {
+                padding-top: 1px;
+            }
+            
+                .invoice-row > div {
+                    background-color: #f5f5f5;
+                }
+
+                .invoice-row .product {
+                    border-right: 1px solid #fff;
+                }
+                    
+                    .invoice-row .product span {
+                        display: inline-block;
+                        width: 20px;
+                        text-align: center;
+                        font-weight: bold;
+                    }
+                    
+                    .invoice-row .product span.add {
+                        color: #373;
+                    }
+                    
+                    .invoice-row .product span.remove {
+                        color: #733;
+                    }
+                    
+                .invoice-row .invoice_number {
+                    border-right: 1px solid #fff;
+                }
+                    
+                .invoice-row .posted_date {
+                    border-right: 1px solid #fff;
+                    text-align: center;
+                }
+                    
+                .invoice-row .amount {
+                    text-align: right;
+                    white-space: nowrap;
+                }
+
+                .invoice-row .label-xs {
+                    border-right: 1px solid #fff;
+                    text-align: right;
+                    font-weight: bold;
+                }
+
+                .invoice-row .value-xs {
+                    text-align: right;
+                    padding-right: 10px;
+                    z-index: 1;
+                    white-space: nowrap;
+                }
+
+                
+            .invoice-row-2 {
+                padding-top: 1px;
+            }
+            
+                .invoice-row-2 > div {
+                    font-size: 12px;
+                    line-height: 20px;
+                    background-color: #f9f9f9;
+                }
+
+                .invoice-row-2 .product {
+                    padding-left: 50px;
+                }
+        
+                .invoice-row-2 .amount {
+                    text-align: right;
+                    white-space: nowrap;
+                }
+
+            .invoice-row-3 {
+                padding-top: 1px;
+            }
+            
+                .invoice-row-3 > div > div {
+                    color: #555;
+                    font-size: 12px;
+                    line-height: 20px;
+                    background-color: #f9f9f9;
+                }
+
+                .invoice-row-3 .product {
+                    padding-left: 70px;
+                }
+
+                .invoice-row-3 .amount {
+                    text-align: right;
+                    padding-right: 50px;
+                    white-space: nowrap;
+                }
+        
+                .invoice-row-3 .sub-details {
+                    display: table;
+                    width: 100%;
+                    margin: 0;
+                }
+
+                .invoice-row-3 .sub-details > div {
+                    display: table-cell;
+                    float: none;
+                    vertical-align: middle;
+                    padding: 5px 10px;
+                }
+
+                .invoice-row-3 .sub-indicator {
+                    text-align: right;
+                    border-right: 1px solid #fff;
+                }
+
+                .invoice-row-3 .sub-indicator > span {
+                    visibility: hidden;
+                    display: inline-block;
+                    border: 1px solid #aaa;
+                    border-radius: 15px;
+                    color: #999;
+                    font-weight: bold;
+                    min-width: 30px;
+                    text-align: center;
+                    padding: 0px 10px;
+                    box-shadow: 0px 1px 3px #999;
+                    background-color: #fff;
+                }
+
+                .invoice-row-3 .sub-amount {
+                    text-align: right;
+                    border-right: 1px solid #fff;
+                }
+
+                .invoice-row-3 .sub-description {
+                }
+
+            .invoice-footer {}
+            
+                .invoice-footer.first {
+                    border-top: 1px solid #222;
+                    margin-top: 20px;
+                }
+                
+                .invoice-footer > div {
+                    font-weight: bold;
+                    text-align: right;
+                }
+                
+                .invoice-footer .total {}
+                
+                .invoice-footer .amount {
+                    white-space: nowrap;
+                }
+
+                @media (max-width: 991px) {
+                    .invoice-footer .amount {
+                        padding-right: 30px;
+                    }
+                }
+        
+        .hpm-container {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            border-radius: 0px;
+        }
+
+        .btn[disabled] {
+            background-color: #E3E3E3;
+            border-color: #E3E3E3;
+            color: #FFFFFF;
+        }
+                
+        .btn-primary {
+            background-color: #FE4602;
+            border-color: #FE4602;
+            color: #FFFFFF;
+        }
+
+        .btn-primary:hover {
+            background-color: #EA4A0F;
+            border-color: #EA4A0F;
+        }
+
+        .btn-primary:active,
+        .btn-primary:focus {
+            background-color: #FF7947;
+            border-color: #FF7947;
+        }
+
+        .btn-default {
+            background-color: #FFFFFF;
+            border-color: #FE4602;
+            color: #FE4602;
+        }
+
+        .btn-default:hover,
+        .btn-default:active,
+        .btn-default:focus {
+            background-color: #FFBE9F;
+            border-color: #FE4602;
+            color: #FE4602;
+        }
+
+        .full-screen-buttons {
+        }
+
+        .full-screen-buttons .btn + .btn {
+            margin-left: 5px;
+        }
+
+        .input-group {
+            border: 1px solid #E1E2E3;
+        }
+
+        .ie8 .input-group {
+            filter: inherit;
+        }
+
+        .input-group > span {
+            border-radius: 0px;
+            box-shadow: none;
+            border: none;
+        }
+
+        .input-group > span.input-group-addon {
+            background-color: #F5F5F5;
+        }
+
+        .input-group input[type=checkbox] {
+            cursor: pointer;
+        }
+
+        .input-group .form-control {
+            height: auto;
+        }
+
+        .ie8 .input-group .form-control {
+            position: static;
+        }
+
+        .modal-header {
+            padding: 20px 20px 19px 20px;
+            border-bottom: 1px solid #E1E2E3;
+        }
+
+        .modal-header * {
+            line-height: 34px;
+        }
+
+        .modal-body {
+            padding: 30px 20px 50px 20px;
+            background-color: #F5F5F5;
+        }
+
+        .modal-footer {
+            border-top: 1px solid #E1E2E3;
+            margin-top: 0px;
+        }
+
+        @media (min-width: 768px) {
+            .full-screen-buttons {
+                padding: 0px;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 991px) {            
+                [class*="span"], .uneditable-input[class*="span"], .row-fluid [class*="span"] {
+                    float: none;
+                    display: block;
+                    width: 100%;
+                    margin-left: 0;
+                }
+                
+                label {
+                    text-align: left;
+                }
+                
+                input[type=submit] {
+                    margin-top: 10px !important;
+                }
+
+                    header .navbar-info .option_panel > a, header .navbar-info .option_panel > span {
+                        font-size: 150%;
+                    }
+                
+                footer li.copyright {
+                    float: none;
+                }  
+        }
+            
+        @media (max-width: 767px) {
+            body {
+                padding: 0px;
+            }
+            
+            label {
+                text-align: left;
+            }
+            
+            input[type=submit] {
+                margin-top: 10px !important;
+            }
+            
+            header h1 {
+                padding: 50px 0px 0px 0px;
+                margin: 0px;
+                text-align: center;
+            }
+            
+            header .container .content {
+                background-position: center 10px;
+            }
+            
+                header .navbar-info .option_panel > a, header .navbar-info .option_panel > span {
+                        font-size: 150%;
+                    }
+                    
+            article {
+                padding-bottom: 0px;
+            }
+            
+            footer {
+                position: relative;
+            }
+            
+                footer li.copyright {
+                    float: none;
+                }  
+                
+            .container {
+                margin: 0px 20px;
+            }
+        }
+            
+    </style>
+    
+    <script>
+        var Utilities = {
+            Events: {
+                Keys: {
+                    IsSystem: function(event) { return event.which < 32 || event.which == 127; },
+                    IsAlpha: function(event) { return this.IsSystem(event) || String.fromCharCode(event.which).match(/[A-Z]/i) != null; }
+                }
+            }
+        }
+    </script>
+</apex:component>

@@ -1,0 +1,10 @@
+<apex:page controller="SMS_EmailPDF_Controller"  cache="true" renderAs="pdf" showHeader="false" sidebar="false" standardStylesheets="false"  lightningstylesheets="true">
+    Hi {!email},
+    Welcome to the creative and visual world of Lucidchart! Your username is {!email}.
+    What You Get
+    To welcome you to Lucidchart, we've upgraded you to a free Pro trial account. With this trial, you can create unlimited diagrams with unlimited collaborators! You also have access to premium features like revision history, Visio import/export, and wireframes/mockups.
+    Full flexibility
+    At the end of your trial, you will be automatically downgraded to a Free account while retaining access to your documents. There's no risk or obligation. If you would like to use Lucidchart's premium features on a permanent basis, upgrade by logging in and clicking on the Account tab.
+    Get Started!
+    Start clicking and dragging. Experiment with the rich tools and features. If you're not sure where to start, check out our tutorials and learn the basics. And please feel free to post in our forums or contact customer support.       
+</apex:page>

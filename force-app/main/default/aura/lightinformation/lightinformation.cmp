@@ -1,0 +1,227 @@
+<aura:component>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <ltng:require styles="{!$Resource.headerpart }"></ltng:require>
+   <ltng:require styles="{!$Resource.side }"></ltng:require> 
+   <ltng:require styles="{!$Resource.body }"></ltng:require>
+
+   <div class="c-container">
+      <div class="fullpage slds-scope">
+         <div class="slds-grid slds-wrap">
+            <lightning:layout multipleRows="true">
+               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage header-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:header />
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+               <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                     <c:mobilemenu />
+                   <lightning:layout>
+                     <div class="new-containerpage">
+                        <div class="slds-container--x-large new-container">
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <c:sidebarnew />
+                           </lightning:layoutItem>
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                              <div class="page-section page-main">
+                                 <div class="middlebar1">
+                                    <h2>Office Information</h2>
+                                 <lightning:button class="brand" variant="brand " label="Edit" title="Brand action" onclick="{! c.handleClick }" />
+                      </div>
+                                 <div class="dev">
+                                    <p class="recent">Have your office details recently changed? Update the office information for your MLS Subscription.</p>
+                                      <div class="view"></div>
+                                     <h2 class="notes">
+                                      <img src="{!$Resource.bright + '/bright-3.0/images/contact-calendar.svg'}" alt="Account &amp; Settings Notifications" />Telephone and Contact Information
+                                    </h2>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                                            <h4>Phone</h4>
+                                   <h5> <lightning:input type="text" name="input3" placeholder="Enter phone number"  variant = "label-hidden" />
+                                  </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                          <h4>Fax </h4>
+                                   <h5> <lightning:input type="text" name="input3" placeholder="Enter fax number"  variant = "label-hidden" />
+                                  </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                     
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                            <h4>Email Address</h4>
+                                   <h5> <lightning:input type="text" name="input3" placeholder="Enter email"  variant = "label-hidden" />
+                                  </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                            <h4>Website </h4>
+                                   <h5> <lightning:input type="text" name="input3" placeholder="Enter url"  variant = "label-hidden" />
+                                  </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       
+                                    </lightning:layoutItem>
+                                    
+                                    
+                              
+                                    <div class="view"></div>
+                                    <h2 class="notes">
+                                       <img src="{!$Resource.bright + '/bright-3.0/images/Office-License.svg'}" alt="Office License Information" />Office License Information
+                                    </h2>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                            <h4>License Number</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter license number"  variant = "label-hidden" /></h5>
+                            
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                              <h4>Expiration Date</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter expiration date"  variant = "label-hidden" /></h5>
+                          
+                                          </div>
+                                       </lightning:layoutItem>
+                                    </lightning:layoutItem>
+                                    
+                                   
+                                 
+                                    
+                                 
+                                    <div class="view"></div>
+                                    <h2 class="notes">
+                                      <img src="{!$Resource.bright + '/bright-3.0/images/location.svg'}" alt="Account &amp; Settings Notifications" />Office Address
+                                    </h2>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                              <h4>License Number</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter license number"  variant = "label-hidden" /></h5>
+                             
+                                         
+                                          </div>
+                                       </lightning:layoutItem>
+                                     
+                                    </lightning:layoutItem>
+                                     <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                     <h4>Street Number</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter street number"  variant = "label-hidden" /></h5>
+                                                                       </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                          <h4>Street Name</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter street name"  variant = "label-hidden" /></h5>
+                             
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part2">
+                                        <h4>Street Type</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter street type"  variant = "label-hidden" /></h5>
+                             
+                                          </div>
+                                       </lightning:layoutItem>
+                                    </lightning:layoutItem>
+                                     <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                     <h4>Street Number Suffix</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter street number suffix"  variant = "label-hidden" /></h5>
+                                                              </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                        <h4>Street Direction</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter street direction"  variant = "label-hidden" /></h5>
+                           
+                                          </div>
+                                       </lightning:layoutItem>
+                                     
+                                    </lightning:layoutItem>
+                                     <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                      <h4>Unit Type</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter unit type"  variant = "label-hidden" /></h5>
+                                                    </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                       <h4>Unit #</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter unit #"  variant = "label-hidden" /></h5>
+                             
+                                          </div>
+                                       </lightning:layoutItem>
+                                     
+                                    </lightning:layoutItem>
+                                      <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                     <h4>Zip</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter zip"  variant = "label-hidden" /></h5>
+                              </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                        <h4>Zip+4</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter Zip"  variant = "label-hidden" /></h5>
+                             
+                                          </div>
+                                       </lightning:layoutItem>
+                                     
+                                    </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                    <h4>City</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter city"  variant = "label-hidden" /></h5>
+                             </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                         <h4>State</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter state"  variant = "label-hidden" /></h5>
+                             
+                                          </div>
+                                       </lightning:layoutItem>
+                                      <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part2">
+                                         <h4>County</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter county"  variant = "label-hidden" /></h5>
+                             
+                                          </div>
+                                       </lightning:layoutItem>
+                                    </lightning:layoutItem>
+                                 </div>
+                              </div>
+                           </lightning:layoutItem>
+                        </div>
+                     </div>
+                  </lightning:layout>
+               </lightning:layoutItem>
+                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage footer-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:footer />
+                         
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+            </lightning:layout>
+         </div>
+      </div>
+      
+   </div>
+</aura:component>

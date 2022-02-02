@@ -1,0 +1,714 @@
+<apex:page controller="Communities_OfficeDetails" docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" lightningstylesheets="true">
+    <apex:composition template="Communities_Base">
+        <apex:define name="content">
+            <apex:form >
+                <c:Bootstrap_Resources />   
+                
+                <link href="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/css/font-awesome.min.css')}" rel="stylesheet" type="text/css" />
+                <apex:pageBlock title="Subscription Id - {!subscription.Name}" id="details" >
+                    <style>
+                        .two_buttons {
+                        text-align:right;
+                        margin-bottom:-44px; 
+                        margin-top:40px;
+                        }
+                        h2 {
+                        font-size:22px !important; 
+                        margin:5px 0px !important;
+                        } 
+                        .tertiaryPalette {
+                        display:none !important;
+                        }
+                        .for_inputs h4 {
+                        border-bottom: 1px solid #69A61F; 
+                        padding-bottom: 10px;
+                        }
+                        h2 {
+                        display:none;
+                        }
+                        label {
+                        padding-top:0px !important;
+                        }
+                        .margin {
+                        margin:20px 0 10px 0;
+                        }
+                        #content-container {
+                        margin-top:0px !important;
+                        }
+                        @media(min-width:400px) {
+                        .detailList th {
+                        width:30% !important;
+                        }
+                        .mandatory {
+                        color:red; font-weight:bold; 
+                        font-size:18px;
+                        }
+                        }
+                        i.fa {
+                        margin: auto 20px;
+                        position: relative;
+                        top: 5px;
+                        }
+                        .fa-2x {
+                        font-size: 2em;
+                        }
+                        .fa-1x {
+                        font-size: 1.5em;
+                        }
+                        .fa {
+                        display: inline-block;
+                        font-family: FontAwesome;
+                        font-style: normal;
+                        font-weight: normal;
+                        line-height: 1;
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        } 
+                        .inlineEditModified {
+                        font-size:14px;
+                        color: #ff6a00;
+                        font-weight: bold;
+                        margin-left:20px;                            
+                        }
+                        input[type=text] {
+                        width: 90%;
+                        }
+                        .two_buttons {
+                        text-align: center;
+                        margin-bottom: 0px;
+                        margin-top: 10px;
+                        }                        
+                        .inlineEditUndoLink {
+                        position:absolute; 
+                        left:35px;
+                        }
+                        .inlineEditWrite {
+                        padding-left:20px;
+                        }
+                        .inlineEditWriteOn {
+                        padding-left:20px;
+                        background:url({!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/pencil_16.png')}) no-repeat left 2px; 
+                        background-size: 16px 16px;
+                        }
+                        .inlineEditUndo {
+                        margin-top:-3px; 
+                        background-image:url({!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/refresh_16_1.png')});
+                        width:16px;
+                        height:16px;
+                        vertical-align:middle;
+                        background-position: left; 
+                        }
+                        .inlineEditDiv {
+                        margin-left:20px;
+                        } 
+                        .inlineEditDiv input {
+                        height:20px;
+                        } 
+                        .dropdown-block {
+                        width:10%;
+                        float:right;
+                        margin-top:-115px;
+                        }
+                        .page_messages h4 {
+                        border-bottom:none;
+                        }
+                        input[type=file] {
+                        border:none; 
+                        box-shadow:none;
+                        }  
+                        #InlineEditDialog_buttons {
+                        display:none;
+                        }
+                    </style>  
+                    
+                    <apex:actionFunction name="saveContactDetails" action="{!saveContactInfo}" reRender="details" />       
+                    <apex:actionFunction name="saveAddressDetails" action="{!saveAddressInfo}" reRender="address_update" oncomplete="startUploadProcess()" />       
+                    <apex:actionFunction name="refreshAddressDetails" action="{!addressUpdated}" reRender="details" oncomplete="uploadProcessCompleted()" />        
+                    
+                    <apex:outputPanel id="address_update">                   
+                        
+                        <script>
+                        $(document).ready(function(){
+                            $("form").addClass("form-horizontal");
+                            $("label").addClass("col-sm-3 control-label");
+                            $(".for_inputs input").addClass("form-control");
+                            $("select").addClass("form-control");
+                            $(".errorM3").addClass("alert alert-danger");
+                            $(".infoM3").addClass("alert alert-info");
+                            $(".confirmM3").addClass("alert alert-success");
+                            $(".inlineEditUndoLink").addClass('fa fa-undo')
+                            
+                            var errorMsg;
+                            $('[id$=contactSaveButton]').click(function() {
+                                errorMsg = '';
+                                var regx = /^\([0-9]{3}\) [0-9]{3}-[0-9]{4}$/;
+                                var regxEmail = /^[^@]+@[^@]+\.[^@]{2,3}$/;
+                                var urlFormat = /^((ftp|http|https):\/\/)?www\.([A-z0-9]+)\.([A-z]{2,})$/;
+                                
+                                if(typeof $('input[id$=Phone]').val() != 'undefined' && (!regx.test($('input[id$=Phone]').val()) || $('input[id$=Phone]').val() == null)) {
+                                    errorMsg = '<div>Invalid phone number</div>';                                  
+                                }
+                                
+                                if($('input[id$=websiteid]').val() != '' && !urlFormat.test($('input[id$=websiteid]').val()) && $('input[id$=websiteid]').val() != null) {
+                                    errorMsg += '<div>Invalid URL</div>';                                  
+                                } 
+                                
+                                if(typeof $('input[id$=Fax]').val() != 'undefined' && !regx.test($('input[id$=Fax]').val()) && $('input[id$=Fax]').val() != null) {
+                                    errorMsg += '<div>Invalid Fax number</div>';                                  
+                                }                                                               
+                                
+                                if(typeof $('input[id$=Email]').val() != 'undefined' && !regxEmail.test($('input[id$=Email]').val()) && $('input[id$=Email]').val() != null) {
+                                    errorMsg += '<div>Invalid Email Address</div>';                                  
+                                } if(errorMsg != '') {    
+                                    var errorBlock = '<div class="alert alert-danger" role="alert"><h4>Error</h4>' + errorMsg + '</div>';
+                                    $('#contactMessages').html(errorBlock);
+                                    return false;
+                                }
+                                else {
+                                    $('#contactMessages').html('');
+                                    //alert('--'+$('input[id$=Phone]').val());
+                                    //saveContactDetails();
+                                    return true;
+                                }
+                            });
+                            $('[id$=addressSaveButton_Trend]').click(function() {
+                                errorMsg = '';
+                                var urlFormat = /^((ftp|http|https):\/\/)?www\.([A-z0-9]+)\.([A-z]{2,})$/;
+                                var regx = /^\([0-9]{3}\) [0-9]{3}-[0-9]{4}$/;
+                                
+                                if($('input[id$=websiteid]').val() != '' && !urlFormat.test($('input[id$=websiteid]').val()) && $('input[id$=websiteid]').val() != null) {
+                                    errorMsg += '<div>Invalid URL</div>';                                  
+                                }
+                                
+                                if(typeof $('input[id$=Phone]').val() != 'undefined' && (!regx.test($('input[id$=Phone]').val()) || $('input[id$=Phone]').val() == null)) {
+                                    errorMsg = '<div>Invalid phone number</div>';                                  
+                                }
+                                
+                                if(errorMsg != '') {    
+                                    var errorBlock = '<div class="message errorM3 alert alert-danger" role="alert"><h4>Errors</h4>' + errorMsg + '</div>';
+                                    $('#contactMessages').html(errorBlock);
+                                    return false;
+                                }
+                            });
+                            
+                            $('[id$=addressSaveButton]').click(function() {
+                                errorMsg = '';
+                                var urlFormat = /^((ftp|http|https):\/\/)?www\.([A-z0-9]+)\.([A-z]{2,})$/;
+                                if($('input[id$=websiteid]').val() != '' && !urlFormat.test($('input[id$=websiteid]').val()) && $('input[id$=websiteid]').val() != null) {
+                                    errorMsg += '<div>Invalid URL</div>';                                  
+                                } 
+                                
+                                /*
+                                if($('[id$=Zip]').val() == '')
+                                    errorMsg += '<li>Required field missing: Zip</li>';
+                                if($('[id$=City]').val() == '')
+                                    errorMsg += '<li>Required field missing: City</li>';  
+                                if($('[id$=State]').val() == '')
+                                    errorMsg += '<li>Required field missing: State</li>';
+                                */ 
+                                if($('input[id$=Document]').val() == ''){
+                                    //if('{!office.Primary_Service_Jurisdiction__c}' != 'BRIGHT')
+                                    errorMsg += '<div>Required field missing: Office License</div>';
+                                } else {      
+                                    var fileSize = document.getElementById("Document").files[0].size;       
+                                    if(((fileSize/1024)/1024) > 4)      
+                                        errorMsg += '<div>File size limit: File size should be less than 4 MB</div>';                                           
+                                }                                                                                                                                              
+                                
+                                if(errorMsg != '') {    
+                                    var errorBlock = '<div class="message errorM3 alert alert-danger" role="alert"><h4>Errors</h4>' + errorMsg + '</div>';
+                                    $('#addressMessages').html(errorBlock);
+                                    return false;
+                                }
+                                else {
+                                    $('#addressMessages').html('');
+                                    $("#address-info-buttons").hide();
+                                    $("#loading-block").show();
+                                    saveAddressDetails();
+                                    return false;
+                                }    
+                            });
+                            
+                            
+                            $('[id$=AddressInformation] :hidden').change(function(e) {
+                                $('#documentGroup').show();
+                            });                                                        
+                        });
+                        
+                        /* Logic to upload large size file */       
+                        var byteChunkArray;         
+                        var files;      
+                        var currentFile;        
+                        var $upload;        
+                        var CHUNK_SIZE = 180000; //Must be evenly divisible by 3, if not, data corruption will occur        
+                        var VIEW_URL = '/servlet/servlet.FileDownload?file=';       
+                        var caseId = '';        
+                        
+                        
+                        function startUploadProcess() {     
+                            caseId = "{!c.Id}";     
+                            files = document.getElementById("Document").files;  
+                            var modal = $("#subscription-option-modal");        
+                            modal.modal({       
+                                backdrop: 'static',       
+                                keyboard: false       
+                            });                                     
+                            modal.modal("show");                                    
+                            checkForUploads();  
+                            
+                        }       
+                        
+                        function uploadProcessCompleted() { 
+                            
+                            var modal = $("#subscription-option-modal");        
+                            modal.modal("hide");        
+                            $('html,body').animate({scrollTop: $("#addressMessages").offset().top},'slow');     
+                        }       
+                        
+                        function checkForUploads() {        
+                            /* Based on index of the div, get correct file from files array */      
+                            currentFile = files[0];     
+                            
+                            /*      
+                                Build the byteChunkArray array for the current file we are processing. This array is formatted as:      
+                                ['0-179999','180000-359999',etc] and represents the chunks of bytes that will be uploaded individually.     
+                            */      
+                            
+                            byteChunkArray = new Array();       
+                            
+                            /* First check to see if file size is less than the chunk size, if so first and only chunk is entire size of file */        
+                            if(currentFile.size <= CHUNK_SIZE) {        
+                                byteChunkArray[0] = '0-' + (currentFile.size - 1);      
+                            }else{      
+                                /* Determine how many whole byte chunks make up the file */     
+                                var numOfFullChunks = Math.floor(currentFile.size / CHUNK_SIZE); // i.e. 1.2MB file would be 1000000 / CHUNK_SIZE       
+                                var remainderBytes = currentFile.size % CHUNK_SIZE; // would determine remainder of 1200000 bytes that is not a full chunk      
+                                var startByte = 0;      
+                                var endByte = CHUNK_SIZE - 1;       
+                                
+                                /* Loop through the number of full chunks and build the byteChunkArray array */     
+                                for(i = 0; i < numOfFullChunks; i++) {      
+                                    byteChunkArray[i] = startByte+'-'+endByte;      
+                                    
+                                    /* Set new start and stop bytes for next iteration of loop */       
+                                    startByte = endByte + 1;        
+                                    endByte += CHUNK_SIZE;      
+                                }       
+                                
+                                /* Add the last chunk of remaining bytes to the byteChunkArray */       
+                                startByte = currentFile.size - remainderBytes;      
+                                endByte = currentFile.size;     
+                                byteChunkArray.push(startByte+'-'+endByte);     
+                            }       
+                            
+                            /*      
+                                Start processing the byteChunkArray for the current file, parameter is '' because this is the first chunk       
+                                being uploaded and there is no attachment Id        
+                            */      
+                            
+                            processByteChunkArray('');      
+                            
+                            
+                        } 
+                        
+                        /* Uploads a chunk of bytes, if attachmentId is passed in it will attach the bytes to an existing attachment record */      
+                        function processByteChunkArray(attachmentId) {      
+                            
+                            /* Proceed if there are still values in the byteChunkArray, if none, all piece of the file have been uploaded */        
+                            if(byteChunkArray.length > 0) {     
+                                
+                                /* Determine the byte range that needs to uploaded, if byteChunkArray is like... ['0-179999','180000-359999'] */        
+                                var indexes = byteChunkArray[0].split('-'); //... get the first index range '0-179999' -> ['0','179999']        
+                                var startByte = parseInt(indexes[0]);       //0     
+                                var stopByte = parseInt(indexes[1]);        //179999        
+                                
+                                /* Slice the part of the file we want to upload, currentFile variable is set in checkForUploads() method that is called before this method */       
+                                if(currentFile.webkitSlice) {       
+                                    var blobChunk = currentFile.webkitSlice(startByte , stopByte + 1);      
+                                }else if (currentFile.mozSlice) {       
+                                    var blobChunk = currentFile.mozSlice(startByte , stopByte + 1);     
+                                }else if (currentFile.slice) {      
+                                    var blobChunk = currentFile.slice(startByte , stopByte + 1);        
+                                }       
+                                
+                                /* Create a new reader object, part of HTML5 File API */        
+                                var reader = new FileReader();      
+                                
+                                /* Read the blobChunk as a binary string, reader.onloadend function below is automatically called after this line */        
+                                reader.readAsArrayBuffer(blobChunk);        
+                                
+                                /* Create a reader.onload function, this will execute immediately after reader.readAsBinaryString() function above; */      
+                                reader.onloadend = function(evt) {      
+                                    if(evt.target.readyState == FileReader.DONE) {          
+                                        /*      
+                                            Make sure read was successful, DONE == 2        
+                                            Base 64 encode the data for transmission to the server with JS remoting, window.btoa currently on support by some browsers      
+                                        */      
+                                        
+                                        var binary = "";        
+                                        var bytes = new Uint8Array(evt.target.result);      
+                                        var length = bytes.byteLength;      
+                                        
+                                        for (var i = 0; i < length; i++) {      
+                                            binary += String.fromCharCode(bytes[i]);        
+                                        }       
+                                        
+                                        /* Remote function call to start uploading process */       
+                                        Communities_OfficeDetails.attachFile(caseId,attachmentId,currentFile.name,currentFile.type,window.btoa(binary),function(result,event) {     
+                                            
+                                            if (event.status == true) {     
+                                                
+                                                /* Calculate percent uploaded and updating in files listing */      
+                                                var percentComplete = Math.round((stopByte / currentFile.size) * 100);      
+                                                //$("#status_" + fileId).html(percentComplete + '%');       
+                                                
+                                                /* Remove the index information from the byteChunkArray array for the piece just uploaded. */       
+                                                byteChunkArray.shift(); //removes 0 index       
+                                                
+                                                /* Set the attachmentId of the file we are now processing */        
+                                                attachmentId = result;      
+                                                
+                                                /* Call process byteChunkArray to upload the next piece of the file */      
+                                                processByteChunkArray(attachmentId);        
+                                                
+                                                /* Update final status and start process next attachment */     
+                                                if(processByteChunkArray.length <= 0) {     
+                                                    
+                                                }       
+                                            }       
+                                            else {      
+                                                
+                                            }       
+                                        });     
+                                    }       
+                                    else {      
+                                        /* Error handling for bad read */       
+                                        alert('Could not read file');       
+                                    }       
+                                };      
+                                
+                            }       
+                            else{                                                                           
+                                refreshAddressDetails();                                    
+                            }       
+                        }                          
+                        </script>
+                    </apex:outputPanel>
+                    
+                    <div class="row">
+                        <c:Communities_Definition pageTitle="Office Information" pageTitleClass="fa fa-shield fa-2x" hasDefinitions="false">
+                            <p><b class="term">Term</b> Definition goes here.</p>
+                        </c:Communities_Definition>
+                        
+                        <div class="col-xs-12 instructions">
+                            <p>Have your office details recently changed? Update the office information for your MLS Subscription.​</p>
+                        </div>
+                        
+                        <div class="dropdown-block">
+                            <apex:selectList size="1" styleClass="form-control" value="{!officeId}" multiselect="false" >
+                                <apex:actionSupport event="onchange" action="{!reloadAccount}"/>
+                                <apex:selectOptions value="{!options}"/>
+                            </apex:selectList> 
+                        </div>                       
+                    </div>
+                    
+                    <div id="messages">
+                        <apex:pagemessages rendered="{!message}"></apex:pagemessages>
+                    </div> 
+                    
+                    <apex:pageBlock mode="inlineEdit" id="contact_details">
+                        
+                        <div class="row for_inputs">
+                            <div>
+                                <h4>
+                                    <i class="fa fa-phone-square fa-2x"></i>Telephone and Contact Information                                
+                                </h4>
+                                
+                                <apex:outputPanel >
+                                    
+                                    <div id="contactMessages" class="page_messages">
+                                        <apex:pagemessages rendered="{!contactMessage}"></apex:pagemessages>
+                                    </div>                            
+                                    
+                                    <div id="output1">
+                                        <div class="form-group">
+                                            <apex:outputLabel value="Phone" />
+                                            <div class="col-sm-5">
+                                                <apex:outputField value="{!office.Phone}" id="Phone">
+                                                    <apex:inlineEditSupport event="ondblClick" showOnEdit="contactSaveButton, contactCancelButton" />
+                                                </apex:outputField>
+                                            </div>
+                                        </div> 
+                                        
+                                        <div class="form-group">
+                                            <apex:outputLabel value="Fax"/>
+                                            <div class="col-sm-5">
+                                                <apex:outputField value="{!office.Fax}" id="Fax">
+                                                    <apex:inlineEditSupport event="ondblClick" showOnEdit="contactSaveButton, contactCancelButton" />
+                                                </apex:outputField>                                            
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <apex:outputLabel value="Email Address"/>
+                                            <div class="col-sm-5">
+                                                <apex:outputField value="{!office.Office_Email__c}" id="Email">
+                                                    <apex:inlineEditSupport event="ondblClick" showOnEdit="contactSaveButton, contactCancelButton" />
+                                                </apex:outputField>                                            
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        
+                                        <div class="form-group">
+                                            <apex:outputLabel value="Website"/>
+                                            <div class="col-sm-5">
+                                                <apex:outputField value="{!office.Website}" id="websiteid">
+                                                    <apex:inlineEditSupport event="ondblClick" showOnEdit="contactSaveButton, contactCancelButton" />
+                                                </apex:outputField>                                            
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        
+                                    </div>
+                                </apex:outputPanel>                           
+                            </div>
+                        </div>
+                        <div class="two_buttons">                
+                            <apex:commandButton id="contactCancelButton" styleClass="btn btn-default" action="{!cancelContactEdit}" value="Cancel" style="display:none;" />
+                            <apex:commandButton id="contactSaveButton" styleClass="btn btn-primary" action="{!saveContactInfo}" value="Save" style="display:none;" />
+                        </div>                     
+                    </apex:pageBlock>
+                    
+                    <!-- License Information Block -->
+                    
+                    <apex:pageBlock mode="inlineEdit" >
+                        
+                        <div class="row for_inputs">
+                            <div>
+                                <h4>
+                                    <i class="fa fa-id-card fa-1x"></i>Office License Information                              
+                                </h4>
+                                
+                                <apex:outputPanel >
+                                    
+                                    <div id="contactMessages" class="page_messages">
+                                        <apex:pagemessages rendered="{!licenseMessage}"></apex:pagemessages>
+                                    </div>                            
+                                    
+                                    <div id="output1">
+                                        <div class="form-group">
+                                            <apex:outputLabel value="License Number" />
+                                            <div class="col-sm-5">
+                                                <apex:outputField value="{!office.Office_License_Number__c}" id="OfficeLicenseNumber">
+                                                    <apex:inlineEditSupport event="ondblClick" showOnEdit="licenseSaveButton, licenseCancelButton" />
+                                                </apex:outputField>
+                                            </div>
+                                        </div> 
+                                        
+                                        <div class="form-group">
+                                            <apex:outputLabel value="Expiration Date"/>
+                                            <div class="col-sm-5">
+                                                <apex:outputField value="{!office.Office_License_Expiration_Date__c}" id="OfficeLicenseExpirationDate">
+                                                    <apex:inlineEditSupport event="ondblClick" showOnEdit="licenseSaveButton, licenseCancelButton" />
+                                                </apex:outputField>                                            
+                                            </div>
+                                        </div>
+                                    </div>
+                                </apex:outputPanel>                           
+                            </div>
+                        </div>
+                        <div class="two_buttons">                
+                            <apex:commandButton id="licenseCancelButton" styleClass="btn btn-default" action="{!cancelContactEdit}" value="Cancel" style="display:none;" />
+                            <apex:commandButton id="licenseSaveButton" styleClass="btn btn-primary" action="{!saveLicenseInfo}" value="Save" style="display:none;" />
+                        </div>                     
+                    </apex:pageBlock>
+                    
+                    <!-- Address information block -->
+                    <apex:pageBlock mode="inlineEdit2" id="AddressInformation">
+                        
+                        <div class="row for_inputs">
+                            <div>
+                                <h4>
+                                    <i class="fa fa-envelope fa-1x"></i>Office Address                                
+                                </h4>
+                                
+                                <div class="alert alert-info">
+                                    <strong>Info !</strong> Changes to office address is not affected immediately.<apex:outputText rendered="{!office.Primary_Service_Jurisdiction__c != 'TREND' && office.Primary_Service_Jurisdiction__c != 'BRIGHT'}">  Please upload your license copy document using the attachment option below.</apex:outputText>
+                                </div>
+                                
+                                <div id="addressMessages" class="page_messages">
+                                    <apex:pagemessages rendered="{!addressMessage}"></apex:pagemessages>
+                                </div>                            
+                                
+                                <div id="output1">
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Account Name"/>
+                                        <div style="margin-left:20px" class="col-sm-7">
+                                            <apex:outputField value="{!office.Account_Name__c}" html-disabled="true">
+                                                <!-- <apex:inlineEditSupport event="ondblClick" showOnEdit="addressSaveButton, addressCancelButton, addressSaveButton_Trend" />-->
+                                            </apex:outputField>
+                                        </div>
+                                    </div>                               
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Street Number"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.Street_Number__c}">
+                                                <apex:inlineEditSupport event="ondblClick" showOnEdit="addressSaveButton, addressCancelButton, addressSaveButton_Trend" />
+                                            </apex:outputField>                                            
+                                        </div>
+                                    </div> 
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Street Name"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.Street_Name__c}">
+                                                <apex:inlineEditSupport event="ondblClick" showOnEdit="addressSaveButton, addressCancelButton, addressSaveButton_Trend" />
+                                            </apex:outputField>                                            
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Street Type"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.QAS_Mailing_Street_Type__c}">
+                                                <apex:inlineEditSupport event="ondblClick" showOnEdit="addressSaveButton, addressCancelButton, addressSaveButton_Trend" />
+                                            </apex:outputField>                                            
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Street Number Suffix"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.Street_Number_Suffix__c}">
+                                                <apex:inlineEditSupport event="ondblClick" showOnEdit="addressSaveButton, addressCancelButton, addressSaveButton_Trend" />
+                                            </apex:outputField>                                            
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Street Direction"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.QAS_Mailing_Street_Direction__c}">
+                                                <apex:inlineEditSupport event="ondblClick" showOnEdit="addressSaveButton, addressCancelButton, addressSaveButton_Trend" />
+                                            </apex:outputField>                                            
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Unit Type"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.QAS_Mailing_Unit_Type__c}">
+                                                <apex:inlineEditSupport event="ondblClick" showOnEdit="addressSaveButton, addressCancelButton, addressSaveButton_Trend" />
+                                            </apex:outputField>                                            
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Unit #"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.Unit__c}">
+                                                <apex:inlineEditSupport event="ondblClick" showOnEdit="addressSaveButton, addressCancelButton, addressSaveButton_Trend" />
+                                            </apex:outputField>                                            
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Addl Display Name"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.Addl_Display_Name__c}">
+                                                <apex:inlineEditSupport event="ondblClick" showOnEdit="addressSaveButton, addressCancelButton, addressSaveButton_Trend" />
+                                            </apex:outputField>                                            
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Zip"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.Zip__c}">
+                                                <apex:inlineEditSupport event="ondblClick" showOnEdit="addressSaveButton, addressCancelButton, addressSaveButton_Trend" />
+                                            </apex:outputField>                                            
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Zip+4"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.Zip_4__c}">
+                                                <apex:inlineEditSupport event="ondblClick" showOnEdit="addressSaveButton, addressCancelButton, addressSaveButton_Trend" />
+                                            </apex:outputField>                                            
+                                        </div>
+                                    </div> 
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="City"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.City__c}">
+                                                <apex:inlineEditSupport event="ondblClick" showOnEdit="addressSaveButton, addressCancelButton, addressSaveButton_Trend" />
+                                            </apex:outputField>                                            
+                                        </div>
+                                    </div> 
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="State"/>
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.State__c}">
+                                                <apex:inlineEditSupport event="ondblClick" showOnEdit="addressSaveButton, addressCancelButton, addressSaveButton_Trend" />
+                                            </apex:outputField>                                            
+                                        </div>
+                                    </div> 
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="County" />
+                                        <div class="col-sm-7">
+                                            <apex:outputField value="{!office.QAS_Mailing_County__c}">
+                                                <apex:inlineEditSupport event="ondblClick" showOnEdit="DocumentSection, addressSaveButton, addressCancelButton, addressSaveButton_Trend" />
+                                            </apex:outputField>                                            
+                                        </div>
+                                    </div>
+                                    
+                                    <apex:outputPanel rendered="{!office.Primary_Service_Jurisdiction__c != 'TREND' && office.Primary_Service_Jurisdiction__c != 'BRIGHT'}">
+                                        <div class="form-group" id="documentGroup">
+                                            <apex:outputLabel value="Office License Copy" />
+                                            <div class="col-sm-7">
+                                                <!-- <apex:inputFile id="Document" value="{!license.Body}" filename="{!license.Name}" /> -->
+                                                <input class="filesclass" type="file" id="Document" name="file" /> 
+                                                <p style="padding-left:10px;"><span style="color:red;">*</span> Maximum file size: 4 MB</p>
+                                            </div>
+                                        </div>
+                                    </apex:outputPanel>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="two_buttons" id="address-info-buttons">                
+                            <apex:commandButton id="addressCancelButton" styleClass="btn btn-default" action="{!cancelAddressEdit}" value="Cancel" style="{!if(office.Primary_Service_Jurisdiction__c != 'TREND', '', 'display:none;')}" />
+                            <apex:commandButton id="addressSaveButton" styleClass="btn btn-primary" value="Save" rendered="{!office.Primary_Service_Jurisdiction__c != 'TREND' && office.Primary_Service_Jurisdiction__c != 'BRIGHT'}" style="{!if(office.Primary_Service_Jurisdiction__c != 'TREND' && office.Primary_Service_Jurisdiction__c != 'BRIGHT', '', 'display:none;')}" />
+                            <apex:commandButton id="addressSaveButton_Trend" styleClass="btn btn-primary" action="{!saveTrendOrBrightAccount}" value="Save" rendered="{!office.Primary_Service_Jurisdiction__c == 'TREND' || office.Primary_Service_Jurisdiction__c == 'BRIGHT'}" style="{!if(office.Primary_Service_Jurisdiction__c == 'TREND', 'display:none;', '')}" /> 
+                            
+                        </div> 
+                        
+                        <div class="row" id="loading-block" style="display:none;">
+                            <div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-5">
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </div>                                        
+                    </apex:pageBlock>
+                    
+                </apex:pageBlock>           
+            </apex:form>
+            
+            <script>
+            //markUserId("{!subscription.Name}");
+            markOptionPanel("Brokerage");
+            window.history.replaceState({}, document.title, '/customers/Communities_OfficeDetails?sid={!subscription.Name}');
+            </script>            
+            
+        </apex:define>       
+    </apex:composition>     
+</apex:page>

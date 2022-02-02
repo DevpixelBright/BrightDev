@@ -1,0 +1,469 @@
+<aura:component controller="PersonalAssistant" implements="flexipage:availableForAllPageTypes" access="global" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <aura:attribute name="Constants" type="Object" default="{}" />
+    <aura:attribute name="Suffix" type="List" default="[]" />
+    <aura:attribute name="Salutation" type="List" default="[]" />
+    <aura:attribute name="saved" type="Boolean" default="false" />
+    <aura:attribute name="showSpinner" type="Boolean" default="false" />
+     <aura:attribute name="disabledSave" type="Boolean" default="false" />
+    <aura:attribute name="disabled" type="Boolean" default="true" />
+    <aura:attribute name="currentStep" type="String" default="Step_1" />
+    <aura:attribute name="validationError" type="Boolean" default="false" />
+    <aura:attribute name="validationErrorMsg" type="String" default="" />
+    <aura:attribute name="captcha" type="String" default="" />
+    <aura:attribute name="recTypeId" type="String" default="" />
+    <aura:attribute name="initCatptchaDone" type="Boolean" default="false"/>
+    <aura:attribute name="PAsection" type="String" default="A"/>
+    <aura:attribute name="previousPAsection" type="String" default="A"/>
+    <aura:attribute name="brokerCode" type="String" default=""/>
+    <aura:attribute name="brokerCodeName" type="String" default=""/>
+    <aura:attribute name="brokerName" type="String" default=""/>
+    <aura:attribute name="AgentName" type="String" default=""/>
+    <aura:attribute name="SubscriptionName" type="String" default=""/>
+    <aura:attribute name="SubId" type="String" default=""/>
+    <aura:attribute name="code" type="String" default=""/>
+    <aura:attribute name="city" type="String" default=""/> 
+    <aura:attribute name="state" type="String" default=""/>    
+    <aura:attribute name="contactInfo" type="String" default="" description="test8" />
+    <aura:attribute name="Phonenumber" type="String" default=""/>
+    <aura:attribute name="EmailAddress" type="String" default=""/>
+    <aura:attribute name="zip" type="String" default=""/>
+    <aura:attribute name="Brokerlist" type="List" default="[]"/>
+    <aura:attribute name="AgentNameList" type="List" default="[]"/>
+    <aura:attribute name="SubIdList" type="List" default="[]"/>
+    <aura:attribute name="salutationlist" type="List" default="[]"/>
+    <aura:attribute name="suffixList" type="List" default="[]"/>
+    <aura:attribute name="brokerCodeAddress" type="String" default=""/>
+    <aura:attribute name="AgentList" type="List" default="[{'name':'', 'brokerOffice' : '', 'sub' : '','agentid': ''}]"/>
+    <aura:attribute name="AgentListDisplay" type="List" default="[]"/>
+    <aura:attribute name="idx" type="Integer" default="0"/>
+    <aura:attribute name="secA" type="Boolean" default="false"/>
+    <aura:attribute name="secB" type="Boolean" default="false"/>
+    <aura:attribute name="secC" type="Boolean" default="false"/>
+    <aura:attribute name="secD" type="Boolean" default="false"/>
+    <aura:attribute name="secE" type="Boolean" default="false"/>
+    <aura:attribute name="secF" type="Boolean" default="false"/>
+    <aura:attribute name="oBrightApplication" type="MRIS_Application__c" default="{sObject : 'MRIS_Application__c'}"/>
+    <aura:attribute name="subscriptionOptions" type="List" default="[]"/>
+    <aura:attribute name="selectedBrkrCode" type="string"/>
+    <aura:attribute name="selectedAgentCode" type="string"/>
+    <aura:attribute name="width" type="string" default="10px"/>
+    
+    <!-- ********************** handler ************************ -->
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <div class="fullpage slds-scope">
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside newsideheader">
+                <div class="slds-container--x-large new-container">
+                    <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small new-contain new-containnew">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 field-side ">
+                            <div class="logo"><img src="{!$Resource.brightlogolightning}"/>
+                                
+                            </div>
+                        </div>
+                        <aura:html tag="style">
+                            :root {
+                            --backgroundWidth: {!((v.secA == true)?20:0) + ((v.secB == true)?20:0) + ((v.secC == true)?20:0) + ((v.secD == true)?20:0) + ((v.secE == true)?20:0) + ((v.secF == true)?20:0) }%;
+                            --backgroundColor: {!(((v.secA == true)?20:0) + ((v.secB == true)?20:0) + ((v.secC == true)?20:0) + ((v.secD == true)?20:0) + ((v.secE == true)?20:0) + ((v.secF == true)?20:0))== 0?'black':'white' };
+                            }
+                        </aura:html>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 field-side4 ">
+                            <aura:if isTrue="{!!v.saved}">
+                                <div  aura:id="progressID" class="progressright">
+                                    
+                                    <span class="head-sub">{!v.Constants.SUBSCRIPTION_PROGRESS}</span>
+                                    <div class="progress">
+                                        <div class="progressView" >
+                                            <span class="ProgressValue" id="ProgressValue">{!((v.secA == true)?20:0) + ((v.secB == true)?20:0) + ((v.secC == true)?20:0) + ((v.secD == true)?20:0) + ((v.secE == true)?20:0) + ((v.secF == true)?20:0) }%</span>
+                                        </div>
+                                    </div>           
+                                    
+                                </div>
+                            </aura:if>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slds-container--x-large new-container">
+                
+                <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small new-contain new-containnew">
+                    <aura:if isTrue="{!!v.saved}">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                            <div class="slds-container--x-large new-container">
+                                <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small new-contain new-containnew2">
+                                    <div class="slds-col slds-size_12-of-12 slds-sma/ll-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 field-side ">
+                                        <div class="sub-header">
+                                            
+                                            <h4>{!v.Constants.SUBSCRIBE_REACTIVE}</h4> 
+                                            <p>{!v.Constants.START_APPLICATION_BUTTON}</p>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 field-side4 ">
+                                        <div class="progressright">
+                                            <button class="slds-button buttonpoint buttonpoint1" data-aura-rendered-by="72:0">{!v.Constants.RE_ACTIVATE}</button>
+                                            <button class="slds-button buttonpoint" data-aura-rendered-by="72:0">{!v.Constants.APPLICATION_STATUS}</button>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </aura:if>
+                    
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                        
+                        
+                        <aura:if isTrue="{!!v.saved}">
+                            <lightning:accordion aura:id="accordion" activeSectionName="{!v.PAsection}" onsectiontoggle="{!c.accordionValidate}">
+                                <lightning:accordionSection class="{!(v.PAsection == 'A')?'active-application':''}" name="A" label="{!v.Constants.APPLICATION_TYPE}">
+                                    <aura:set attribute="actions">
+                                        <aura:if isTrue="{!v.PAsection != 'A' &amp;&amp; v.secA}">
+                                            <lightning:icon iconName="action:approval" alternativeText="Approved" class=""/>
+                                        </aura:if>
+                                    </aura:set>
+                                    <h5>{!v.Constants.TYPE_OF_APPLICATION}</h5>
+                                    <fieldset class="slds-form-element">
+                                        
+                                        <div class="slds-form-element__control">
+                                            <lightning:radioGroup name="radioGroup"
+                                                                  options="{! v.subscriptionOptions }"
+                                                                  value="{! v.oBrightApplication.Subscription_Type__c}"
+                                                                  type="radio"
+                                                                  onchange="{!c.selectSubscriptionType}"/>
+                                            
+                                        </div>
+                                    </fieldset>
+                                    
+                                    <lightning:button onclick="{!c.Section1}" label="Continue" disabled="{!v.oBrightApplication.Subscription_Type__c == null}" class="slds-button buttonpoint"/>
+                                    
+                                </lightning:accordionSection>
+                                <lightning:accordionSection class="{!(v.PAsection == 'B')?'active-application':''}" name="B" label="{!v.Constants.BROKER_CODE}">
+                                    <h5>{!v.Constants.BROKER_CODE_LABEL}</h5> 
+                                    <aura:set attribute="actions">
+                                        <aura:if isTrue="{!v.PAsection != 'B' &amp;&amp; v.secB}">
+                                            <lightning:icon iconName="action:approval" alternativeText="Approved" class=""/>
+                                        </aura:if>
+                                    </aura:set>
+                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                                        <div aura:id="brokerCodeDiv" class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 field-side1">
+                                            <div onkeyup="{!c.handleBrokerOffice}">
+                                                <lightning:input class="{!(v.brokerCodeName != null &amp;&amp; v.brokerCodeName != '')?'activebox':''}" aura:id="brokerCode" autocomplete="off" type="input" name="input1" variant="label-hidden" placeholder="{!v.Constants.TYPE_BROKERCODE}"  value="{!v.brokerCodeName}"/>
+                                            </div>
+                                            <aura:if isTrue="{!v.Brokerlist.length != 0}">
+                                                <div aura:id="itemContainer" class="slds-box itemContainer" style="{!'width:'+v.width}">
+                                                    <aura:iteration items="{!v.Brokerlist}" var="item">
+                                                        <div class="slds-p-medium listItem"  data-name="{!item.Account_Name__c}" data-id="{!item.Id}" data-city="{!item.City__c}" data-state="{!item.State__c}" data-zip="{!item.Zip__c}" data-code="{!item.Name}" onclick="{!c.selBrokerCode}">
+                                                            {!item.Account_Name__c} - {!item.Name}
+                                                        </div>
+                                                    </aura:iteration>
+                                                </div>
+                                            </aura:if>	
+                                        </div>
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 field-side3">
+                                            
+                                            <p>{!v.brokerCodeAddress}</p>
+                                        </div>
+                                    </div>
+                                    <lightning:button class="slds-button buttonpoint" label="Verify" disabled="{!v.brokerCodeName == null}" onclick="{!c.Section2}"/>
+                                </lightning:accordionSection>
+                                <aura:if isTrue="{!v.oBrightApplication.Subscription_Type__c != 'Office Secretary'}">
+                                    <lightning:accordionSection class="{!(v.PAsection == 'C')?'active-application':''}" name="C" label="{!v.Constants.SELECT_AGENTS}">
+                                        <aura:set attribute="actions">
+                                            <aura:if isTrue="{!v.PAsection != 'C' &amp;&amp; v.secC}">
+                                                <lightning:icon iconName="action:approval" alternativeText="Approved" class=""/>
+                                            </aura:if>
+                                        </aura:set> 
+                                        <h5>{!v.Constants.ENTER_AGENT_SUBSCRIPTION}</h5>
+                                        <aura:iteration items="{!v.AgentList}" var="item" indexVar="index">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside newsidelinenew">
+                                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_4-of-12 field-side">
+                                                    <div aura:id="agentDiv" class="{!item.name != ''?'activebox':''}">
+                                                        <lightning:input class="{!index}" autocomplete="off" aura:id= "AgentName" type="input" name="input1" label="{!v.Constants.AGENT_NAME}"  placeholder="{!v.Constants.AGENT_NAME_PLACEHOLDER}" onkeyup="{!c.handleAgentName}" value=""/>
+                                                    </div>
+                                                    <aura:if isTrue="{!v.AgentNameList.length != 0 &amp;&amp; index == v.idx}">
+                                                        <div class="slds-box itemContainer" style="{!'width:'+v.width}">
+                                                            <aura:iteration items="{!v.AgentNameList}" var="item">
+                                                                <div class="slds-p-medium listItem" data-name="{!item.Contact__r.Name}" data-Id="{!item.Contact__c}" data-index="{!idx}" onclick="{!c.selAgentName}">
+                                                                    {!item.Contact__r.Name}
+                                                                </div>
+                                                            </aura:iteration>
+                                                        </div>
+                                                    </aura:if>
+                                                </div>
+                                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_4-of-12 field-side activeallways">
+                                                    <div class="activebox">
+                                                    <lightning:input type="input" name="input1" label="{!v.Constants.BROKER_CODE_LABEL}" placeholder="{!v.Constants.BROKER_CODE_PLACEHOLDER}" value="{!v.brokerCode}" readonly = "true"/>
+                                                    </div>
+                                                    </div>
+                                                
+                                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_4-of-12 field-side1">
+                                                    <div class="slds-col slds-size_11-of-12 slds-small-size_11-of-12 slds-medium-size_11-of-12 slds-large-size_11-of-12 field-side1"> 
+                                                        <div aura:id="subDiv"  class="{!item.sub != ''?'activebox':''}">
+                                                            <lightning:input class="{!index}" autocomplete="off" aura:id="SubscriptionName" type="input" name="input1" label="{!v.Constants.SUBSCRIPTION_ID}" placeholder="{!v.Constants.SUBSCRIPTION_ID_PLACEHOLDER}" onkeyup="{!c.handleSubId}" value=""/>
+                                                        </div>
+                                                        <aura:if isTrue="{!v.SubIdList.length != 0 &amp;&amp; index == v.idx}">
+                                                            <div class="slds-box itemContainer" style="{!'width:'+v.width}">
+                                                                <aura:iteration items="{!v.SubIdList}" var="item">
+                                                                    <div class="slds-p-medium listItem" data-name="{!item.Name}" data-index="{!idx}" onclick="{!c.selSubId}">
+                                                                        {!item.Name}
+                                                                    </div>
+                                                                </aura:iteration>
+                                                            </div>
+                                                        </aura:if>
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-12 slds-small-size_1-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 field-side1">
+                                                        <aura:if isTrue="{!v.AgentList.length > 1}">
+                                                            
+                                                            <div class="delete"><!--img src="{!$Resource.DeleteButton}"  class="{!index}" onclick="{!c.deleteRow}"/-->
+                                                                <span class="{!index}" onclick="{!c.deleteRow}">
+                                                                    <lightning:icon iconName="utility:delete" alternativeText="Delete"/>
+                                                                </span>
+                                                                
+                                                            </div>
+                                                        </aura:if>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </aura:iteration>
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside newsideline">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_6-of-12 field-side1">
+                                                &nbsp;
+                                                <aura:if isTrue="{!v.AgentList.length != 5}">
+                                                    <lightning:button variant="base" label="+ Add New Agent" title="Add New Agents" class="addAgent" aura:id="AddAgentBtn" onclick="{!c.addAgent }"/>
+                                                </aura:if>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_6-of-12 field-side1">
+                                                <lightning:button class="slds-button buttonpoint" label="Continue" onclick="{!c.Section3}"/>
+                                            </div>
+                                        </div>
+                                    </lightning:accordionSection>
+                                </aura:if>
+                                <lightning:accordionSection class="{!(v.PAsection == 'D')?'active-application':''}" name="D" label="04. Contact Information">
+                                    <aura:set attribute="actions">
+                                        <aura:if isTrue="{!v.PAsection != 'D' &amp;&amp; v.secD}">
+                                            <lightning:icon iconName="action:approval" alternativeText="Approved" class=""/>
+                                        </aura:if>
+                                    </aura:set>
+                                    <h5>{!v.Constants.CONTACT_INFORMATION}</h5> 
+                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side2 fieldline field-side21 Suffix">
+                                            
+                                            <lightning:combobox  aura:id = "Salutation" placeholder="{!v.Constants.SALUTATION}" value="{!v.oBrightApplication.Salutation__c}" options="{!v.salutationlist}" class="{!(v.oBrightApplication.Salutation__c != null &amp;&amp; v.oBrightApplication.Salutation__c != '')?'activebox':''}"/>
+                                            
+                                            
+                                        </div>
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side2 fieldline">
+                                            <lightning:input autocomplete="off" aura:id="FirstName" type="input" name="input1" variant="label-hidden" placeholder="{!v.Constants.FIRST_NAME}" value="{!v.oBrightApplication.First_Name__c }" class="{!(v.oBrightApplication.First_Name__c != null &amp;&amp; v.oBrightApplication.First_Name__c != '')?'activebox':''}"/>
+                                        </div>
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side2">
+                                            
+                                            <lightning:input type="input" autocomplete="off" aura:id="MiddleName" name="input1" variant="label-hidden" placeholder="{!v.Constants.MIDDLE_NAME}" value="{!v.oBrightApplication.Middle_Name__c}" class="{!(v.oBrightApplication.Middle_Name__c != null &amp;&amp; v.oBrightApplication.Middle_Name__c != '')?'activebox':''}"/>
+                                        </div>
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side1 fieldline">
+                                            
+                                            <lightning:input autocomplete="off" aura:id="LastName" type="input" name="input1" variant="label-hidden" placeholder="{!v.Constants.LAST_NAME}" value="{!v.oBrightApplication.Last_Name__c}" class="{!(v.oBrightApplication.Last_Name__c != null &amp;&amp; v.oBrightApplication.Last_Name__c != '')?'activebox':''}"/>
+                                        </div>
+                           
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside newsideline">
+                                          <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side2">
+                                            <lightning:input type="input" name="input1" autocomplete="off" aura:id="NickName" variant="label-hidden" placeholder="{!v.Constants.NICK_NAME}" value="{!v.oBrightApplication.Nickname__c}" class="{!(v.oBrightApplication.Nickname__c != null &amp;&amp; v.oBrightApplication.Nickname__c != '')?'activebox':''}"/>
+                                        </div>
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side2  field-side21 Suffix">
+                                            
+                                            <lightning:combobox aura:id = "Suffix" placeholder="{!v.Constants.SUFFIX}" value="{!v.oBrightApplication.Suffix__c}" options="{!v.suffixList}" class="{!(v.oBrightApplication.Suffix__c != null &amp;&amp; v.oBrightApplication.Suffix__c != '')?'activebox':''}"/>
+                                            
+                                        </div>
+                                        
+                                           <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side2 fieldline">
+                                            <lightning:input autocomplete="off" aura:id = "Phone" type="tel" name="input1" variant="label-hidden" placeholder="{!v.Constants.PRIMARY_PHONE}" value="{!v.oBrightApplication.Primary_Phone__c}" maxlength="10" class="{!(v.oBrightApplication.Primary_Phone__c != null &amp;&amp; v.oBrightApplication.Primary_Phone__c != '')?'activebox':''}"/>
+                                        </div>
+                                         <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side1">
+                                            <lightning:input autocomplete="off" aura:id = "MobilePhone" type="tel" name="input1" variant="label-hidden" placeholder="{!v.Constants.MOBILE_PHONE}" value="{!v.oBrightApplication.Mobile_Phone__c}" class="{!(v.oBrightApplication.Mobile_Phone__c != null &amp;&amp; v.oBrightApplication.Mobile_Phone__c != '')?'activebox':''}"/>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside newsideline">
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side2 fieldline">
+                                            
+                                            <lightning:input autocomplete="off" aura:id = "Email" type="email" name="input1" variant="label-hidden" placeholder="{!v.Constants.EMAIL}" value="{!v.oBrightApplication.Private_Email__c  }" class="{!(v.oBrightApplication.Private_Email__c != null &amp;&amp; v.oBrightApplication.Private_Email__c != '')?'activebox':''}"/>
+                                        </div>
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side2 fieldline">
+                                            
+                                            <lightning:input autocomplete="off" aura:id = "confirmEmail" type="email" name="input1" variant="label-hidden" placeholder="{!v.Constants.CONFIRM_EMAIL}" class="{!(v.oBrightApplication.Private_Email__c != null &amp;&amp; v.oBrightApplication.Private_Email__c != '')?'activebox':''}"/>
+                                        </div>
+                                    </div>
+                                    <lightning:button onclick="{!c.Section4}" label="Continue" class="slds-button buttonpoint"/>
+                                </lightning:accordionSection>
+                                <lightning:accordionSection class="{!(v.PAsection == 'E')?'active-application':''}" name="E" label="{!v.Constants.LICENSE_AGREEMENT_LABEL}">
+                                    <aura:set attribute="actions">
+                                        <aura:if isTrue="{!v.PAsection != 'E' &amp;&amp; v.secE}">
+                                            <lightning:icon iconName="action:approval" alternativeText="Approved" class=""/>
+                                        </aura:if>
+                                    </aura:set>
+                                    <h5> {!v.Constants.LICENSE_AGREEMENT}</h5>
+                                     <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 frame">
+                                    <!--  <iframe src="{NewAgentApplication_BRIGHTAgreement}"/>-->
+                                    <iframe src="{! 'https://dev-mrisonboarding.cs10.force.com/eProcess/apex/NewAgentApplication_BRIGHTAgreement' }" style="" />
+                                    </div>
+                                   <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_10-of-12 slds-large-size_10-of-12 field-side1 frame">
+                                    <p style="">{!v.Constants.IAGREE_AGREEMENT} </p>
+                                    </div>
+                                     <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_2-of-12 slds-large-size_2-of-12 field-side1">
+                                    <lightning:button onclick="{!c.Section5}" label="Accept" class="slds-button buttonpoint"/>
+                                    </div>
+                                </lightning:accordionSection>
+                                <lightning:accordionSection class="{!(v.PAsection == 'F')?'active-application':''}" name="F" label="{!v.Constants.SUBMISSION_SEC6}"> 
+                                    <h5>{!v.Constants.CONFIRM_DETAILS}</h5> 
+                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_2-of-12 field-side1 ">
+                                            <h2>Selected Agents:</h2>
+                                        </div>
+                                        <aura:iteration items="{!v.AgentList}" var="agent" indexVar="ad">
+                                            <aura:if isTrue="">
+                                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side1">
+                                                    &nbsp;
+                                                </div>
+                                            </aura:if>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12 field-side1">
+                                                <h3> {!(ad+1) + '. ' + agent.sub + ' ' + agent.name}</h3> 
+                                            </div>
+                                        </aura:iteration>
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                                        <div class="line"></div>
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                                        <div class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_5-of-12 slds-large-size_2-of-12 field-side1 ">
+                                            <h5>{!v.Constants.OFFICE_ID}</h5>
+                                        </div>
+                                        <div class="slds-col slds-size_7-of-12 slds-small-size_7-of-12 slds-medium-size_7-of-12 slds-large-size_3-of-12 field-side1">
+                                            
+                                            <h6>{!v.code}</h6>
+                                        </div>
+                                        <div class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_5-of-12 slds-large-size_3-of-12 field-side1 ">
+                                            
+                                            <h5>{!v.Constants.ACCOUNT_NAME}</h5> 
+                                        </div>
+                                        <div class="slds-col slds-size_7-of-12 slds-small-size_7-of-12 slds-medium-size_7-of-12 slds-large-size_3-of-12 field-side1 ">
+                                            
+                                            <h6>{!v.brokerName}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                                        <div class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_5-of-12 slds-large-size_2-of-12 field-side1 ">
+                                            <h5>{!v.Constants.CITY}</h5>
+                                        </div>
+                                        <div class="slds-col slds-size_7-of-12 slds-small-size_7-of-12 slds-medium-size_7-of-12 slds-large-size_3-of-12 field-side1">
+                                            
+                                            <h6>{!v.city}</h6>
+                                        </div>
+                                        <div class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_5-of-12 slds-large-size_3-of-12 field-side1 ">
+                                            
+                                            <h5>{!v.Constants.STATE}</h5>
+                                        </div>
+                                        <div class="slds-col slds-size_7-of-12 slds-small-size_7-of-12 slds-medium-size_7-of-12 slds-large-size_3-of-12 field-side1 ">
+                                            
+                                            <h6>{!v.state}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                                        <div class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_5-of-12 slds-large-size_2-of-12 field-side1 ">
+                                            <h5>{!v.Constants.ZIP}</h5>
+                                        </div>
+                                        <div class="slds-col slds-size_7-of-12 slds-small-size_7-of-12 slds-medium-size_7-of-12 slds-large-size_3-of-12 field-side1">
+                                            
+                                            <h6>{!v.zip}</h6>
+                                        </div>
+                                        <div class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_5-of-12 slds-large-size_3-of-12 field-side1 ">
+                                            
+                                            <h5>{!v.Constants.SALUTATION}</h5>
+                                        </div>
+                                        <div class="slds-col slds-size_7-of-12 slds-small-size_7-of-12 slds-medium-size_7-of-12 slds-large-size_3-of-12 field-side1 ">
+                                            
+                                            <h6>{!v.oBrightApplication.Salutation__c}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                                        <div class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_5-of-12 slds-large-size_2-of-12 field-side1 ">
+                                            <h5>{!v.Constants.FIRST_NAME}</h5>
+                                        </div>
+                                        <div class="slds-col slds-size_7-of-12 slds-small-size_7-of-12 slds-medium-size_7-of-12 slds-large-size_3-of-12 field-side1">
+                                            
+                                            <h6>{!v.oBrightApplication.First_Name__c }</h6>
+                                        </div>
+                                        <div class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_5-of-12 slds-large-size_3-of-12 field-side1 ">
+                                            
+                                            <h5>{!v.Constants.LAST_NAME}</h5>
+                                        </div>
+                                        <div class="slds-col slds-size_7-of-12 slds-small-size_7-of-12 slds-medium-size_7-of-12 slds-large-size_3-of-12 field-side1 ">
+                                            
+                                            <h6>{!v.oBrightApplication.Last_Name__c}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                                        <div class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_5-of-12 slds-large-size_2-of-12 field-side1 ">
+                                            <h5>{!v.Constants.MIDDLE_NAME}</h5>
+                                        </div>
+                                        <div class="slds-col slds-size_7-of-12 slds-small-size_7-of-12 slds-medium-size_7-of-12 slds-large-size_3-of-12 field-side1">
+                                            
+                                            <h6>{!v.oBrightApplication.Middle_Name__c}&nbsp;</h6>
+                                        </div>
+                                        <div class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_5-of-12 slds-large-size_3-of-12 field-side1 ">
+                                            
+                                            <h5>{!v.Constants.NICK_NAME}</h5>
+                                        </div>
+                                        <div class="slds-col slds-size_7-of-12 slds-small-size_7-of-12 slds-medium-size_7-of-12 slds-large-size_3-of-12 field-side1 ">
+                                            
+                                            <h6>{!v.oBrightApplication.Nickname__c}&nbsp;</h6>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                                        <div class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_5-of-12 slds-large-size_2-of-12 field-side1 ">
+                                            <h5>{!v.Constants.PRIMARY_PHONE}</h5>
+                                        </div>
+                                        <div class="slds-col slds-size_7-of-12 slds-small-size_7-of-12 slds-medium-size_7-of-12 slds-large-size_3-of-12 field-side1">
+                                            
+                                            <h6>{!v.oBrightApplication.Primary_Phone__c }</h6>
+                                        </div>
+                                        <div class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_5-of-12 slds-large-size_3-of-12 field-side1 ">
+                                            
+                                            <h5>{!v.Constants.EMAIL}</h5>
+                                        </div>
+                                        <div class="slds-col slds-size_7-of-12 slds-small-size_7-of-12 slds-medium-size_7-of-12 slds-large-size_3-of-12 field-side1 ">
+                                            
+                                            <h6>{!v.oBrightApplication.Private_Email__c}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                                        <div class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_5-of-12 slds-large-size_2-of-12 field-side1 ">
+                                            <h5>{!v.Constants.SUFFIX}</h5>
+                                        </div>
+                                        <div class="slds-col slds-size_7-of-12 slds-small-size_7-of-12 slds-medium-size_7-of-12 slds-large-size_3-of-12 field-side1">
+                                            
+                                            <h6>{!v.oBrightApplication.Suffix__c}&nbsp;</h6>
+                                        </div>
+                                        <lightning:button disabled="{!v.disabledSave}" onclick="{!c.handleSubmit}" aura:id="buttonSubmit" label="Submit" class="slds-button buttonpoint"/>
+                                    </div>
+                                </lightning:accordionSection>
+                            </lightning:accordion>
+                            
+                            <aura:set attribute="else">
+                                <c:EzjoinPASubmit oBrightApplication="{!v.oBrightApplication}" code="{!v.code}" city="{!v.city}" state="{!v.state}" zip="{!v.zip}" brokerCodeName="{!v.brokerName}" AgentList="{!v.AgentList}"/>
+                            </aura:set>
+                        </aura:if>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newside">
+                    <div class="footer"><p>{!v.Constants.COPYRIGHT}</p></div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</aura:component>

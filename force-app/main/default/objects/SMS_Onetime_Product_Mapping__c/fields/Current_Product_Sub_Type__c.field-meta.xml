@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Current_Product_Sub_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Current Product Sub Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>XactSite Office IDX Orig</fullName>
+                <default>false</default>
+                <label>XactSite Office IDX Orig</label>
+            </value>
+            <value>
+                <fullName>XactSite Agent IDX Orig</fullName>
+                <default>false</default>
+                <label>XactSite Agent IDX Orig</label>
+            </value>
+            <value>
+                <fullName>XactSite Office Website Orig</fullName>
+                <default>false</default>
+                <label>XactSite Office Website Orig</label>
+            </value>
+            <value>
+                <fullName>XactSite Premium Orig</fullName>
+                <default>false</default>
+                <label>XactSite Premium Orig</label>
+            </value>
+            <value>
+                <fullName>XactSite Total Orig</fullName>
+                <default>false</default>
+                <label>XactSite Total Orig</label>
+            </value>
+            <value>
+                <fullName>XactSite Select Orig</fullName>
+                <default>false</default>
+                <label>XactSite Select Orig</label>
+            </value>
+            <value>
+                <fullName>realPING</fullName>
+                <default>false</default>
+                <label>realPING</label>
+            </value>
+            <value>
+                <fullName>Authentisign</fullName>
+                <default>false</default>
+                <label>Authentisign</label>
+            </value>
+            <value>
+                <fullName>Does Not Exist</fullName>
+                <default>false</default>
+                <label>Does Not Exist</label>
+            </value>
+            <value>
+                <fullName>XactSite Office IDX 2016</fullName>
+                <default>false</default>
+                <label>XactSite Office IDX 2016</label>
+            </value>
+            <value>
+                <fullName>XactSite Office Website 2016</fullName>
+                <default>false</default>
+                <label>XactSite Office Website 2016</label>
+            </value>
+            <value>
+                <fullName>XactSite Agent IDX 2016</fullName>
+                <default>false</default>
+                <label>XactSite Agent IDX 2016</label>
+            </value>
+            <value>
+                <fullName>XactSite Premium 2016</fullName>
+                <default>false</default>
+                <label>XactSite Premium 2016</label>
+            </value>
+            <value>
+                <fullName>XactSite Total 2016</fullName>
+                <default>false</default>
+                <label>XactSite Total 2016</label>
+            </value>
+            <value>
+                <fullName>XactSite Select 2016</fullName>
+                <default>false</default>
+                <label>XactSite Select 2016</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

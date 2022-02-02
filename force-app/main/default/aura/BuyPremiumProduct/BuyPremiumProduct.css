@@ -1,0 +1,38 @@
+@font-face {
+  font-family: 'Acronym-Regular';
+  src: url(/resource/brightas/brightas/fonts/Acronym-Regular.ttf);
+}
+.THIS {
+    width:100%
+}
+.THIS #auraErrorMessage {
+    display:none !important;
+}
+.THIS .slds-scope .slds-large-size_6-of-12{
+    width:30%;
+}
+.THIS .blueline {
+    background: #F0B5BD;
+}
+.THIS .blueline h2{
+    margin: 0;
+    color: rgb(97, 26, 21) !important;
+    font-weight: normal;
+    font-size: 14px !important;
+    font-family: Acronym-Regular;
+}
+.THIS .blueline h2 img{
+    margin: 0 10px 0 0;
+}
+.THIS .blueline h2 a{
+    text-decoration: underline;
+    margin: 0 0 0 5px;
+    line-height: 18px;
+    color: #2E343B !important;
+}
+.THIS .cma{    width: 170px;
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+    margin-bottom: 10px;}
+.THIS p.newpo b{font-weight:bold;}

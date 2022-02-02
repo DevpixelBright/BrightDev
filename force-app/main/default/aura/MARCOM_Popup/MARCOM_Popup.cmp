@@ -1,0 +1,183 @@
+<aura:component controller="MARCOM_LandingPageController" implements="flexipage:availableForAllPageTypes" access="global">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <aura:attribute name="emailTemplateId" type="Object" default="{}"/>
+    <aura:attribute name="emailDetails" type="Object" default="{}"/>
+    <aura:attribute name="request" type="String" default=""/>
+    <aura:attribute name="currentTab" type="String" default="Add"/>
+    <aura:attribute name="notes" type="List" default="[]"/>
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="note" type="String" default=""/>
+    <aura:attribute name="dueDate" type="String" default=""/>
+    <aura:attribute name="priority" type="String" default=""/>
+    <aura:attribute name="options" type="List" default="[]"/>
+    <aura:attribute name="minDate" type="String" default=""/>
+    <aura:attribute name="dateValidationError" type="boolean" default="false"/>
+    <aura:attribute name="dateValidationErrorMsg" type="String" default=""/>
+    <aura:attribute name="tempLabelAttr" type="Object" default=""/>
+    
+    
+    <div class="fullpage slds-scope step2">
+        <div class="slds-grid slds-wrap">
+            <div class="bodytop">
+                <div class="slds-container--x-large new-container">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 timepoint">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 newapplication">
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_8-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 Edit">
+                                    <h2 class="email">Email Template </h2>
+                                </div>
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_4-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 Edit Edit1">
+                                    <img class="close" src="{!$Resource.close}" onclick="{!c.closePopup}"/> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bodycontainer">
+                <div class="slds-container--x-large new-container">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodyline">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_4-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 bodyline1">
+                            <p class="copy">Email Template Name </p>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_8-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 bodyline2">
+                            <p class="copy1">{!v.emailDetails.Name}</p>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_4-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 bodyline1">
+                            <p class="copy">Email Subject </p>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_8-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 bodyline2">
+                            <p class="copy1">{!v.emailDetails.Subject}</p>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_4-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 bodyline1">
+                            <p class="copy">Body of Template </p>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_8-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 bodyline2">
+                            <aura:if isTrue="{!v.emailDetails.TemplateType == 'text'}">
+                                <p class="copy1">{!v.emailDetails.Body}</p>
+                                <!--p class="copy1"><lightning:formattedRichText value="{!v.emailDetails.Body}"/></p-->
+                                <aura:set attribute="else">
+                                    <p class="copy1"><lightning:formattedRichText value="{!v.emailDetails.HtmlValue}"/></p>
+                                </aura:set>
+                            </aura:if>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bodybottom">
+                <div class="slds-container--x-large new-container">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 footer-full">
+                        <lightning:tabset selectedTabId="{!v.currentTab}">
+                            <lightning:tab label="Add Note" id="Add">
+                                <lightning:recordEditForm objectApiName="MARCOM_Notes__c" onsuccess="{!c.handleSuccess}" onsubmit="{!c.handleSubmit}">
+                                    <lightning:messages />
+                                    <div style="display: none;">
+                                        <lightning:inputField fieldName="Email_Template_ID__c" variant="label-hidden" value="{!v.emailDetails.Id}"/>
+                                        <lightning:inputField fieldName="Subject__c" variant="label-hidden" value="{!v.emailDetails.Subject}"/>
+                                        <lightning:inputField fieldName="Email_Template_Name__c" variant="label-hidden" value="{!v.emailDetails.Name}"/>
+                                        <lightning:inputField fieldName="Note__c" variant="label-hidden" value="{!v.note}"/>
+                                        <lightning:inputField fieldName="Due_Date__c"  variant="label-hidden" value="{!v.dueDate}"/>
+                                        <lightning:inputField fieldName="Priority__c" variant="label-hidden" value="{!v.priority}"/>
+                                    </div>
+                                    
+                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 "> 
+                                        <div class="slds-form-element">
+                                            <div class="slds-form-element__control">
+                                                <div>
+                                                	<lightning:inputRichText value="{!v.note}" placeholder="Start typing your notes..." aura:id="noteField" messageWhenBadInput="Enter your notes"/>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part4">
+                                        <div class="middleonenew">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_4-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 newlogopart">
+                                            	<lightning:input type="date" placeholder="Due Date" value="{!v.dueDate}" aura:id="dueDateField" min="{!v.minDate}" dateStyle="short" messageWhenBadInput ="Please enter the Due Date (mm/dd/yyyy) you need these email content updates completed."/>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_2-of-12 slds-medium-size_2-of-12 slds-large-size_2-of-12 newlogopart">
+                                                <lightning:combobox name="progress" value="{!v.priority}" placeholder="Priority" options="{! v.options }" aura:id="priorityField" dropdownAlignment="auto"/>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 sub2 slds-m-top_medium">   
+                                                <lightning:button type="submit" name="Submit" label="Submit" class="slds-button slds-button_brand sub"/>
+                                                <button class="slds-button slds-button_brand sub1" onclick="{!c.closePopup}">Cancel</button>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </lightning:recordEditForm>
+                            </lightning:tab>
+                            <lightning:tab label="Past Notes" id="All">
+                                <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped new">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Opportunity Name">Note ID</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Stage">Request Status</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Confidence">Priority</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Amount">Due Date</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Contact">Created On</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Contact">Created By</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <aura:iteration items="{!v.notes}" var="note">
+                                            <tr class="slds-hint-parent blue">
+                                                
+                                                <th scope="row">
+                                                    <div class="slds-truncate"><a href="{!'/'+note.Id}" target="_blank">{!note.Name}</a></div>
+                                                </th>
+                                                <td>
+                                                    <div class="slds-truncate">{!note.Request_Status__c}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate">{!note.Priority__c}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate">
+                                                        <lightning:formattedDateTime value="{!note.Due_Date__c}"
+                                                                                     month="2-digit"
+                                                                                     day="2-digit"
+                                                                                     year="2-digit"
+                                                                                     timeZone="{!$Locale.timezone}"/>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate">
+                                                        <lightning:formattedDateTime value="{!note.CreatedDate}"
+                                                                                     month="2-digit"
+                                                                                     day="2-digit"
+                                                                                     year="2-digit"
+                                                                                     timeZone="{!$Locale.timezone}"/>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate">
+                                                        {!note.CreatedBy.Name}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </aura:iteration>
+                                    </tbody>
+                                </table>
+                            </lightning:tab>
+                        </lightning:tabset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

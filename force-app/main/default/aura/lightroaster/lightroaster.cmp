@@ -1,0 +1,629 @@
+<aura:component>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <ltng:require styles="{!$Resource.headerpart }"></ltng:require>
+   <ltng:require styles="{!$Resource.side }"></ltng:require> 
+   <ltng:require styles="{!$Resource.body }"></ltng:require>
+    <aura:attribute name="popup1" type="boolean" default="false"/>
+   
+   <div class="c-container">
+      <div class="fullpage slds-scope">
+         <div class="slds-grid slds-wrap">
+            <lightning:layout multipleRows="true">
+               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage header-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:header />
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+               <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <c:mobilemenu />
+                   <lightning:layout>
+                     <div class="new-containerpage">
+                        <div class="slds-container--x-large new-container">
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <c:sidebarnew />
+                           </lightning:layoutItem>
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                              <div class="page-section page-main">
+                                 <div class="middlebar1">
+                                    <h2>Office Roster</h2>
+                                <lightning:button class="brand pdf" variant="brand " label="Export to CSV" title="Brand action" onclick="{! c.handleClick }" />
+                    
+                       <lightning:button class="brand brand2 pdf" variant="brand " label="Print PDF" title="Brand action" onclick="{! c.handleClick }" />
+                       <lightning:button class="brand" variant="brand" label="Terminate" title="Brand action" onclick="{! c.openModel }" />
+                    </div>
+                                 <div class="dev">
+                                    
+                                    
+                                   <div class="bodybottom">
+          
+                
+                
+                <div class="slds-container--x-large new-container">
+                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                    <div class="footer-full">
+                              <lightning:tabset>
+        <lightning:tab label="Active Subscribers">
+            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+            <div class="part0">
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                               <div class="layer part1"> 
+                           
+                            
+                                   <h5 class="search">
+                                  <lightning:input type="text" name="input3" placeholder="Type your search terms here"  variant = "label-hidden" />
+                                    <img src="{!$Resource.bright + '/bright-3.0/images/search.svg'}" alt="Bright" />
+                                   </h5>
+                             </div>
+                </lightning:layoutItem>  
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                                <div class="layer part3"> 
+                             
+                                   <h5 class="onechoose">  <lightning:select name="select1" label="" required="false" variant = "label-hidden">
+        <option value="">choose one...</option>
+        <option value="1">one</option>
+        <option value="2">two</option>
+        <option value="3">three</option>
+    </lightning:select> </h5>
+                             </div>
+                </lightning:layoutItem>
+                        </div>
+            
+            </lightning:layoutItem>
+<div class="table-form">
+       
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped new">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            
+                                            
+                                            <th class="" scope="col" style="width: 32px;">
+                                                <div class="slds-form-element">
+  
+  <div class="slds-form-element__control">
+    <span class="slds-checkbox slds-checkbox_standalone">
+      <input type="checkbox" id="checkbox-unique-id-75" name="label" value="option" />
+      <span class="slds-checkbox_faux"></span>
+    </span>
+  </div>
+</div>
+                      
+                                               </th>
+                                            
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Opportunity Name">Name     </div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">ID</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Close Date">Type</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Stage">Sub Type</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Confidence">Status</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Amount">Number</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Contact"> State</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Contact"> Expiration</div>
+                                            </th>
+                                                           <th class="" scope="col">
+                                                <div class="slds-truncate" title="Contact"> Affliation</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="slds-hint-parent blue">
+                                            <th data-label="Opportunity Name" scope="row">
+                                                                                                                      <div class="slds-form-element">
+  
+  <div class="slds-form-element__control">
+    <span class="slds-checkbox slds-checkbox_standalone">
+      <input type="checkbox" id="checkbox-unique-id-75" name="label" value="option" />
+      <span class="slds-checkbox_faux"></span>
+    </span>
+  </div>
+</div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Assoc_test </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">5050125</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Agent</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">Realtor/ Shareholder</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">Active</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">123245</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">PA</div>
+                                            </td>
+                                            <td data-label="Contact">
+                                                <div class="slds-truncate" title="jrogers@cloudhub.com">
+                                                   01/01/2020
+                                                </div>
+                                            </td>
+                                                      <td data-label="Contact">
+                                                <div class="slds-truncate" title="jrogers@cloudhub.com">
+                                                  Northern Virginia Association<br />of REALTORS-o
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                          <th data-label="Opportunity Name" scope="row">
+                                                                                                                      <div class="slds-form-element">
+  
+  <div class="slds-form-element__control">
+    <span class="slds-checkbox slds-checkbox_standalone">
+      <input type="checkbox" id="checkbox-unique-id-75" name="label" value="option" />
+      <span class="slds-checkbox_faux"></span>
+    </span>
+  </div>
+</div> </th>
+     
+                                           <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Assoc_test </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">5050125</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Agent</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">Realtor/ Shareholder</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">Active</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">123245</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">PA</div>
+                                            </td>
+                                            <td data-label="Contact">
+                                                <div class="slds-truncate" title="jrogers@cloudhub.com">
+                                                   01/01/2020
+                                                </div>
+                                            </td>
+                                                      <td data-label="Contact">
+                                                <div class="slds-truncate" title="jrogers@cloudhub.com">
+                                                  Northern Virginia Association<br />of REALTORS-o
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                            <th data-label="Opportunity Name" scope="row">
+                                                                                                                      <div class="slds-form-element">
+  
+  <div class="slds-form-element__control">
+    <span class="slds-checkbox slds-checkbox_standalone">
+      <input type="checkbox" id="checkbox-unique-id-75" name="label" value="option" />
+      <span class="slds-checkbox_faux"></span>
+    </span>
+  </div>
+</div> </th>
+     
+                                           <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Assoc_test </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">5050125</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Agent</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">Realtor/ Shareholder</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">Active</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">123245</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">PA</div>
+                                            </td>
+                                            <td data-label="Contact">
+                                                <div class="slds-truncate" title="jrogers@cloudhub.com">
+                                                   01/01/2020
+                                                </div>
+                                            </td>
+                                                      <td data-label="Contact">
+                                                <div class="slds-truncate" title="jrogers@cloudhub.com">
+                                                  Northern Virginia Association<br />of REALTORS-o
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        
+                                        
+                                    </tbody>
+                                </table>
+                                  </div>
+            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                <div class="part0">
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">               
+                <div class="layer part1"> 
+                           
+                            
+                                   <h5 class="search1">
+                                  Showing 1 to 10 of 34 entries
+                                   </h5>
+                             </div>
+                </lightning:layoutItem>   
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                                <div class="layer part3"> 
+                             
+                                   <h5 class="onechoose1">           
+                                    <div class="pagination">
+  <a href="#">Previous</a>
+  <a href="#" class="active">1</a>
+  <a href="#" >2</a>
+  
+  <a href="#">Next</a>
+</div>
+                                    </h5>
+                    </div></lightning:layoutItem>
+                </div>
+                        </lightning:layoutItem>
+        </lightning:tab>
+        <lightning:tab label="Inactive Subscribers" title="2nd tab extended title">
+            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+          
+                <div class=" part0">
+                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                               <div class=" layer part1"> 
+                           
+                            
+                                   <h5 class="search">
+                                  <lightning:input type="text" name="input3" placeholder="Type your search terms here"  variant = "label-hidden" />
+                                    <img src="{!$Resource.bright + '/bright-3.0/images/search.svg'}" alt="Bright" />
+                                   </h5>
+                             </div>
+                    </lightning:layoutItem>   
+                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                                <div class="layer part3"> 
+                             
+                                   <h5 class="onechoose">  <lightning:select name="select1" label="" required="false" variant = "label-hidden">
+        <option value="">choose one...</option>
+        <option value="1">one</option>
+        <option value="2">two</option>
+        <option value="3">three</option>
+    </lightning:select>
+                                    
+                                    
+                                    </h5>
+                             </div>
+                    </lightning:layoutItem>
+                        </div>
+            </lightning:layoutItem>
+      <div class="table-form">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped new">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            
+                                            
+                                            <th class="" scope="col" style="width: 32px;">
+                                                <div class="slds-form-element">
+  
+  <div class="slds-form-element__control">
+    <span class="slds-checkbox slds-checkbox_standalone">
+      <input type="checkbox" id="checkbox-unique-id-75" name="label" value="option" />
+      <span class="slds-checkbox_faux"></span>
+    </span>
+  </div>
+</div>
+                      
+                                               </th>
+                                            
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Opportunity Name">Name     </div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">ID</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Close Date">Type</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Stage">Sub Type</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Confidence">Status</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Amount">Number</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Contact"> State</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Contact"> Expiration</div>
+                                            </th>
+                                                           <th class="" scope="col">
+                                                <div class="slds-truncate" title="Contact"> Affliation</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="slds-hint-parent blue">
+                                            <th data-label="Opportunity Name" scope="row">
+                                                                                                                      <div class="slds-form-element">
+  
+  <div class="slds-form-element__control">
+    <span class="slds-checkbox slds-checkbox_standalone">
+      <input type="checkbox" id="checkbox-unique-id-75" name="label" value="option" />
+      <span class="slds-checkbox_faux"></span>
+    </span>
+  </div>
+</div> </th>
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Assoc_test </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">5050125</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Agent</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">Realtor/ Shareholder</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">Active</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">123245</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">PA</div>
+                                            </td>
+                                            <td data-label="Contact">
+                                                <div class="slds-truncate" title="jrogers@cloudhub.com">
+                                                   01/01/2020
+                                                </div>
+                                            </td>
+                                                      <td data-label="Contact">
+                                                <div class="slds-truncate" title="jrogers@cloudhub.com">
+                                                  Northern Virginia Association<br />of REALTORS-o
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                          <th data-label="Opportunity Name" scope="row">
+                                                                                                                      <div class="slds-form-element">
+  
+  <div class="slds-form-element__control">
+    <span class="slds-checkbox slds-checkbox_standalone">
+      <input type="checkbox" id="checkbox-unique-id-75" name="label" value="option" />
+      <span class="slds-checkbox_faux"></span>
+    </span>
+  </div>
+</div> </th>
+     
+                                           <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Assoc_test </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">5050125</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Agent</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">Realtor/ Shareholder</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">Active</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">123245</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">PA</div>
+                                            </td>
+                                            <td data-label="Contact">
+                                                <div class="slds-truncate" title="jrogers@cloudhub.com">
+                                                   01/01/2020
+                                                </div>
+                                            </td>
+                                                      <td data-label="Contact">
+                                                <div class="slds-truncate" title="jrogers@cloudhub.com">
+                                                    Northern Virginia Association<br />of REALTORS-o
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                            <th data-label="Opportunity Name" scope="row">
+                                                                                                                      <div class="slds-form-element">
+  
+  <div class="slds-form-element__control">
+    <span class="slds-checkbox slds-checkbox_standalone">
+      <input type="checkbox" id="checkbox-unique-id-75" name="label" value="option" />
+      <span class="slds-checkbox_faux"></span>
+    </span>
+  </div>
+</div> </th>
+     
+                                           <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Assoc_test </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">5050125</div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Agent</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">Realtor/ Shareholder</div>
+                                            </td>
+                                            <td data-label="Confidence">
+                                                <div class="slds-truncate" title="20%">Active</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">123245</div>
+                                            </td>
+                                            <td data-label="Amount">
+                                                <div class="slds-truncate" title="$25k">PA</div>
+                                            </td>
+                                            <td data-label="Contact">
+                                                <div class="slds-truncate" title="jrogers@cloudhub.com">
+                                                   01/01/2020
+                                                </div>
+                                            </td>
+                                                      <td data-label="Contact">
+                                                <div class="slds-truncate" title="jrogers@cloudhub.com">
+                                                  Northern Virginia Association<br />of REALTORS-o
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        
+                                        
+                                    </tbody>
+                                </table>
+          </div>
+              <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+             <div class=" part0">
+                   <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                               <div class=" layer part1"> 
+                           
+                            
+                                   <h5 class="search1">
+                                  Showing 1 to 10 of 34 entries
+                                   </h5>
+                             </div>
+                 </lightning:layoutItem>
+                   <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                                <div class="layer part3"> 
+                             
+                                   <h5 class="onechoose1">           
+                                    <div class="pagination">
+  <a href="#">Previous</a>
+  <a href="#" class="active">1</a>
+  <a href="#" >2</a>
+  
+  <a href="#">Next</a>
+</div>
+                                    </h5>
+                             </div>
+                 </lightning:layoutItem>
+                  
+                        </div>
+            </lightning:layoutItem>
+        </lightning:tab>
+        
+    </lightning:tabset>
+                        
+                    </div>
+                    
+                </lightning:layoutItem>    
+                    
+                </div></div> 
+                                    
+                                    
+                                    
+                                    
+                                  
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                  
+                                   
+                                    
+                                 </div>
+                              </div>
+                           </lightning:layoutItem>
+                        </div>
+                     </div>
+                  </lightning:layout>
+               </lightning:layoutItem>
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage footer-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:footer />
+                         
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+            </lightning:layout>
+         </div>
+      </div>
+      <!-- PopUp 1 start -->
+      <aura:if isTrue="{!v.popup1}">
+         <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+               <!-- ###### MODAL BOX HEADER Start ######-->
+               <header class="slds-modal__header">
+                  <lightning:buttonIcon iconName="utility:close"
+                     onclick="{! c.closeModel }"
+                     alternativeText="close"
+                     variant="bare-inverse"
+                     class="slds-modal__close"/>
+                  <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate email">Confirm termination </h2>
+               </header>
+               <!--###### MODAL BOX BODY Part Start######-->
+               <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                     <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                         <div class="bodyline">
+                                    <h3>The selected user will be terminated in MLS system and will no longer be able to access MLS. The action does not Affect the status of their Real Estate License not does it inform the Stakeholding Board</h3>
+                         <h2>Please select a reason for the termination and click terminate</h2>
+                         </div>
+                         <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                          <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                         <div class="bodyline2">
+                            
+                             <lightning:select name="select1" label="" required="false" variant = "label-hidden">
+        <option value="">choose one...</option>
+        <option value="1">one</option>
+        <option value="2">two</option>
+        <option value="3">three</option>
+    </lightning:select>
+                           
+                             </div>  
+                             </lightning:layoutItem>
+                         </lightning:layoutItem>
+                        
+                   </lightning:layoutItem>
+                  
+               </div>
+               <!--###### MODAL BOX FOOTER Part Start ######-->
+               <footer class="slds-modal__footer">
+                  <lightning:button class="brand" variant="brand" label="Terminate" title="Brand action" onclick="{! c.handleClick }" />
+                  <lightning:button variant="neutral" 
+                     label="Cancel"
+                     title="Cancel"
+                     class="newCancel"
+                     onclick="{! c.closeModel }"/>
+               </footer>
+            </div>
+         </section>
+         <div class="slds-backdrop slds-backdrop_open"></div>
+      </aura:if>
+      <!-- PopUp 1 end -->
+    
+   </div>
+</aura:component>

@@ -1,0 +1,147 @@
+			
+            .menu_new span{line-height:36px; font-weight:bold;}
+            .menu_new span:hover{color:#1797c0;}			
+            .main_pic img{border-radius:6px;  -moz-border-radius:6px;  -webkit-border-radius:6px; width:180px; height:180px; margin-bottom:16px;}
+            .badge{margin-left:10px;}
+            h4{margin-top:4px !important; font-size:20px;}
+			.left_bar h4{font-size:18px;}			
+            .left_bar {font-size:100%; text-align:left !important; color:#000000 !important;}			
+            .my_ul{margin:1px 0px 0px 0px; padding:0px !important; list-style-type:none; font-size:14px;}
+            .my_ul li{display:inline; margin-right:18px; line-height:29px; font-weight:bold; }
+            .my_ul .active a{ background-color:#388edd; border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px; padding:6px 6px; }
+            .my_ul .active a{color:#ffffff; text-decoration:none;}
+            .my_li:hover{background-color:#f8f8f8;}
+            .my_li  .my_anchor a{color:#333333; font-weight:bold;}    
+            .ideas-detail-title a{color:#388edd; font-size:20px; font-weight:normal; text-decoration:none; } 
+            .my_li  .my_anchor a:hover, .ideas-detail-title a:hover{color:#69A61F;}   
+            .small{font-size:10px !important;}
+            .left_bar{border:1px solid #e0e0e0; padding: 10px 12px; font-size:12px; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px;}
+            .list-group-item{border:0px !important; padding:10px 26px !important;}
+            .list-group-item ul{list-style-type:none; margin:0px; padding:0px}
+            .ideas-main-list{border:0px;}
+            .my_li{border:1px solid #E0E0E0 !important; margin-bottom:10px; border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px;}
+            .my_thumb{width:64px;}
+            .ideas-detail-photo{margin-bottom:10px;}
+            .my_pg{line-height:22px; margin:20px 0px; color:#333333; font-family:sans-serif;}
+            .ideas-detail-photo a img{border:2px solid #388edd; width: 64px;height: 64px;border-radius: 3px;-moz-border-radius: 3px;-webkit-border-radius: 3px;}
+            .my_thumb .btn{padding:2px 12px !important;}
+            .mydevider{clear:both; display:none;}
+            .add_comment{margin-left:10px; cursor:pointer;}
+            .myaddcomments{display:none; margin-top:10px;}
+            .myaddcomments textarea{margin-bottom:5px;}          
+            .vote_count{width:64px; text-align:center;}
+            .left_bar .row{border-bottom:1px solid #e4e4e4; margin-bottom:10px; line-height:22px; margin:0px !important;}
+            .pic_width{width:10%; float:left;}
+            .pic_text{width:90%;float:left;} 
+            .nopadding{padding:5px 0px !important; line-height:20px}
+            .mynav{border-bottom:1px solid #69A61F; padding-bottom:22px; margin-bottom:22px;}
+          
+			 	@media (max-width: 600px){    
+				.container{margin:0px;}
+				.my_ul li{margin-right:10px;}
+				}
+				
+				@media (max-width: 360px){
+				.my_ul{margin-top:10px;}
+				.dropdown-menu{ margin-left:-126px !important;}
+				#arrow, #innertext{display:none;}
+				body{ font-size:16px !important;}
+				.small{font-size:13px !important;}
+				}
+				
+				@media (max-width: 800px){
+				.ideas-detail-photo{width:30%; float:left;}
+				.my_vote{float:right;}
+				.my_vote div{width:60px; float:left;}
+				.my_thumb{margin-left:8px;}
+				.ideas-detail-photo a img{height:46px; width:46px;}
+				.my_thumb .btn{padding:6px 12px !important;}
+				.mydevider{clear:both; display:block;}
+				.pic_width{width:100%; float:none;}
+				.pic_text{width:100%;float:none;}	
+						
+				
+				  }
+				
+				@media (max-width: 1000px){
+				.my_ul{margin-top:10px;}
+				.mynav #searchico{margin-top:10px}
+				.bottom_space{margin-bottom:12px;}
+				.my_ul{margin-left:20px;}
+				.post_idea_bt{margin-top:10px;}
+				}
+			
+				@media (min-width: 1024px){
+				.my_ul{float:right;}
+			
+				}
+				
+				@media (max-width: 1024px){
+						.small{font-size:12px !important;}
+						body{ font-size:16px !important;}
+				}
+				
+				@media (max-width: 1200px){
+				.main_pic img{width:146px; height:146px;}
+				 }
+
+/* -----------------------------------------------------------profile and some css to all in MRIS IDEAS pages- */
+
+
+    .ideas-detail-title .label-default{background-color:#F3F30C !important; color:#585858!important;}    
+    .right_nav{liststyle-type:none; margin-top:20px;}
+    .navbar-default{border:0px !important; back-ground:none !important;}    
+    .navbar-static-top{z-index:0;}    
+    .dropdown-menu{ margin-left:-66px !important;}
+    .container{padding:0px !important;}
+    .btn-group .dropdown-menu li{line-height:25px;  margin:0px; padding:0px;}
+    .btn-group .dropdown-menu li a{border-top:1px solid #cccccc;}
+    .dropdown-menu>li>a{padding:3px 4px !important;}
+    .btn-group .dropdown-menu li a .plus{right:0px;}
+    .btn-group .dropdown-menu ul li{border-top:1px solid #cccccc;}
+    .btn-group .dropdown-menu ul li:hover{background-color:#c5c5c5;}
+    .btn-group .dropdown-menu ul li a{border:0px; text-decoration:none;}
+    #firstul, #secondul{display:none;}   
+    .messageText {color:red;}
+    .my_sidebar {border: 1px solid #E0E0E0 !important;margin-bottom: 10px; border-radius: 5px;-moz-border-radius: 5px;-webkit-border-radius: 5px;}
+    .my_sidebar h4,.my_sidebar h4 a {color:#333333;  }
+    .my_sidebar h4 a{cursor:pointer;}
+    .my_sidebar ul{margin:10px;}
+    .my_sidebar ul li{padding-left:10px;}
+    .my_sidebar h4{border-bottom: 1px solid #dddddd; padding:10px 12px; font-size:17px; margin:0px !important;}
+    .my_sidebar li a{color:#333333; line-height:22px; font-size:14px;}
+    .my_sidebar li a:hover,.my_sidebar h4 a:hover, .my_sidebar h4:hover{ color:#388edd; text-decoration:none;}
+    .my_go, .input_browser{padding:4px 4px !important; height:30px !important;}
+    .panel-body{padding:0px 15px;}
+    .active1 {background-color:#e2e2e2;padding:0px 6px}
+    .active2 h4 {background-color:#e2e2e2;}
+    .active1 a{color:#333333 !important;} 
+	a.morelink {text-decoration:none;outline: none;}
+	.morecontent span {display: none;}
+
+
+/* -------------------------------------------------------mris ideas ext----- */
+
+
+	.idea_detailbox{ background-color:#f8f8f8; border:0px !important; margin-top:-22px;}
+    .idea_detailbox  .my_anchor a{color:#333333; font-weight:bold; cursor: pointer;}    
+    .ideas-detail-title a{color:#388edd; font-size:20px; font-weight:normal; text-decoration:none; } 
+    .idea_detailbox  .my_anchor a:hover, .ideas-detail-title a:hover{color:#69A61F;}
+    h2{font-size: 20px;padding-bottom: 12px; border-bottom: 1px solid #69A61F; margin-bottom:22px;}
+	.mycomments_page h2{ margin-bottom: 0px; margin-top:0px;}
+    .mycomments_page h4{border-bottom:1px solid #E0E0E0; border-top:1px solid #E0E0E0; padding:4px 5px;}
+    .mycomments_divs{border-bottom:1px solid #E0E0E0; padding:10px 5px;}
+    .mycomments_divs:hover{ background-color:#f4f4f4;}
+    .add_a_comment{padding:10px; background-color:#f8f8f8; border-top:1px solid #c5c5c5; margin-top:20px;}
+
+/* -------------------------------------------------------Detail page----- */
+	
+	 
+     .post_your_idea label{width:120px; margin-right:30px;} 
+	 .label-default{ color:#000000 !important; background-color:#ffffff !important;}
+	 .left_bar .label{ padding-left:0px !important; font-size:100% !important; text-align:left !important;}
+	 .panel-footer{ padding:0px 0px 5px 0px !important;}
+	 input[type=submit]{margin-top:0px !important;}
+	 
+/* -------------------------------------------------------Post Idea page----- */ 
+

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RETS_Sub_Product__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>RETS Sub Product</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>RETS_Sub_Products__c.Vendor_Product__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.Vendor_Product__c</valueField>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>RETS_Sub_Products__c</referenceTo>
+    <relationshipLabel>RETS Product Orders</relationshipLabel>
+    <relationshipName>RETS_Product_Orders</relationshipName>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

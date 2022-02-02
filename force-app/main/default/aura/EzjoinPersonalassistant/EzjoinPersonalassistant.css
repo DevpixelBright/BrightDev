@@ -1,0 +1,236 @@
+@font-face {
+    font-family: 'MontserratLight';
+    src: url(/resource/MontserratLight);
+}
+.THIS.slds-scope{ background:#f2f3f7;}
+.THIS .fullpage { 
+    background:#f2f3f7; 
+    margin:0; 
+    padding:0;
+}
+.THIS .new-container { 
+    margin:0px auto; 
+    border:none;
+    width:-webkit-fill-available;
+    width:fill-available;
+}
+.THIS .new-contain { 
+    border:0; 
+    overflow:inherit; 
+    padding:0px;
+    margin:0;
+}
+.THIS .newsideheader{ background:#fff; margin:0 0 20px; padding:8px 0;}
+.THIS .head-sub {
+    color: #565656;
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+}
+
+
+.THIS .progressView {
+    margin: 0px;
+    border-radius: 17px;
+    height: 24px;
+    line-height: 24px;
+}
+
+
+
+.THIS .progressView1 .ProgressValue{color:#666;}
+.THIS .field-side .logo{ text-align:left;float:left;}
+.THIS .field-side .logo img{ width:92px;}
+.THIS .field-side4{float:left;text-align: left; padding-right:0px;}
+.THIS .field-side4 .progressright{ text-align:left;float:right;}
+.THIS .newside .footer{ text-align:center; margin-bottom:20px;}
+.THIS .newside .footer p{ color:#9d9d9d; font-size:14px; }
+.THIS .delete{ margin-top:42px; text-align:right;}
+.THIS .new-containnew svg:not(:root) { display:none;}
+
+.THIS .new-containnew .slds-truncate {
+    color: #666;font-size: 18px;
+}
+.THIS .new-containnew2{ margin-bottom:10px;}
+.THIS .active-application{-moz-box-shadow: 0 0 20px 0px rgba(136, 136, 136, 0.2);
+    -webkit-box-shadow: 0 0 20px 0px rgba(136, 136, 136, 0.2);
+    box-shadow: 0 0 20px 0px rgba(136, 136, 136, 0.2);}
+.THIS .sub-header{ margin:0 0 20px; padding:0;}
+.THIS .sub-header h4{ color:#0f0f0f; font-weight:normal; font-size:18px; margin-bottom:5px;}
+.THIS .sub-header p{
+    
+    line-height: 18px;
+    font-size: 13px;
+    color: #464747;}
+.THIS .progressright .buttonpoint1{ margin-right:10px; float:left;}
+.THIS .slds-is-open>.slds-accordion__summary{ margin-bottom:0;}
+.THIS .active-application .slds-truncate{font-size: 18px; color: #fc7f4e; font-weight: 600; font-style:none;}
+.THIS .slds-accordion__section{ padding:0;}
+.THIS .slds-accordion__list-item:hover{font-style:none;}
+.THIS .slds-accordion__list-item{ border:none; padding: 20px; margin:5px 2px 20px; background:#fff;border-radius: 5px;overflow:hidden;}
+.THIS .slds-is-open>.slds-accordion__content{ margin-left:34px; text-align:left;}
+.THIS .slds-accordion__content h5{color:#737373; font-size:14px; margin:5px 0 10px;}
+.THIS .slds-radio{ margin-bottom:8px;}
+.THIS .slds-radio .slds-form-element__label{ color:#303030; font-size:16px;}
+.THIS .slds-radio .slds-radio_faux{ width:1.2rem; height:1.2rem;background: #f2f3f7; border:none;}
+.THIS .slds-radio [type=radio]:checked+.slds-radio__label .slds-radio_faux:after{ width:1.2rem; height:1.2rem;box-shadow:none;}
+.THIS .buttonpoint{
+    background: #0099cc;
+    -webkit-border-radius: 3 ;
+    -moz-border-radius: 3;
+    border-radius: 40px ;
+    color: #ffffff ;
+    font-size: 14px;
+    padding: 5px 20px 5px 20px ;
+    text-decoration: none;
+    float: right;
+    font-weight: normal;
+    border: none;
+    min-width:120px;
+    text-align:center;
+    display:block;
+}
+
+.THIS .slds-button:focus{box-shadow: none;} 
+.THIS .buttonpoint1:focus{ color:#fff;box-shadow: none; background: #0099cc;}           
+.THIS .buttonpoint:focus{ color:#fff;box-shadow: none; background: #0099cc;}
+.THIS .buttonpoint:not([disabled]):hover{
+    background: #0099cc;
+}
+.THIS .buttonpoint:disabled{
+    background: lightgrey;
+    color: #ffffff;
+}
+.THIS .slds-select{border: 1px solid #f2f3f7;
+    border: 1px solid #f2f3f7;
+    padding: 11px 10px !important;
+    color: #666;
+    background: #f2f3f7;
+    width: 100%;
+    border-radius: .25rem;
+    width: 100%;
+    height: auto;}
+.THIS .Salutation .slds-truncate{ color:#000; font-size:14px; text-align:left; padding:0px;}
+.THIS .Salutation .slds-listbox__option_plain{ padding:0;}
+.THIS .field-side21 .slds-form-element label{ display:none;}
+.THIS .slds-select:focus{ border:1px solid #666;box-shadow: none;outline:none;background:#fff;}
+.THIS .slds-input {    border-radius: inherit;border: 1px solid #f2f3f7; padding: 5px 10px;color:#666; background: #f2f3f7;}
+.THIS .slds-input:focus{ border:1px solid #666;box-shadow: none;}
+.THIS .slds-input:active{ border:1px solid #666;box-shadow: none;}
+.THIS .activebox input{ border:1px solid #e8e9ec;box-shadow: none;background-color: white;}
+.THIS .activeallways .slds-input{ border:1px solid #666;box-shadow: none;background-color: white;padding: 5px 10px;}
+.THIS .slds-form-element__label{ color:#666; font-size:14px;font-weight: 600;margin-bottom: 5px;}
+.THIS .newsidebottom{ margin-bottom:10px;}
+.THIS .newside{ display: inline-block;}
+.THIS .newsideline{ margin-top:20px;}
+.THIS .newsidelinenew{ margin-bottom:16px;}
+.THIS .slds-textarea{ border: 1px solid #666; padding: 5px 10px;color:#666; background: #fff; height:100px;}
+.THIS .slds-textarea:focus{ border:1px solid #666;box-shadow: none;}
+.THIS .field-side{float:left; text-align: left; padding-right:20px; }
+.THIS .field-side1{float:left;text-align: left; padding-right:0px;}
+.THIS .field-side2{float:left; text-align: left; padding-right:40px; }
+.THIS .field-side3{float:left; text-align: left; padding-left:20px; }
+.THIS .field-side3 p{ color:#666; font-weight:normal; font-size:14px ; line-height:38px;}
+.THIS .fieldline .slds-input{border-left:4px solid #ff0000 !important;}
+.THIS .fieldline .slds-select{border-left:4px solid #ff0000;}
+.THIS .field-side1 p{ line-height:38px; color:#666; font-size:14px;}
+.THIS .field-side1 h6 a{color: #0099cc;font-size: 13px; font-weight: 600; text-decoration: none; line-height: 40px;}
+.THIS .addAgent{color: #0099cc;font-size: 13px; font-weight: 600; text-decoration: none; line-height: 40px;}
+.THIS .line{border: 1px solid #a4a4a4; margin:0 0 20px;}  
+.THIS .field-side1 h2{ font-size:14px; font-weight:600; color:#000; line-height:40px; margin:0;}
+.THIS .field-side1 h3{ font-size:15px; font-weight:normal; color:#000;line-height:40px; margin:0;}
+.THIS .field-side1 h5{ font-size:14px; font-weight:normal; color:#a4a4a4;line-height:30px; margin:0;}
+.THIS .field-side1 h6{ font-size:14px; font-weight:normal; color:#000;line-height:30px; margin:0;}
+.THIS .buttonpoint:not([disabled]):hover{color:#fff;}
+.THIS .listItem:hover{background-color:lightgrey;}
+.THIS .slds-accoazrdion__summary-heading{ width:95%; float:left;}
+.THIS .itemContainer{padding:10px;border-radius: inherit; border-top: none; border-left:1px solid #000;border-right:1px solid #000;
+    z-index:999; position: absolute; background-color:white; border-bottom:1px solid #000; max-height:90px; overflow-x:auto;
+    -webkit-box-shadow: 0 8px 6px -6px rgba(136, 136, 136, 0.6);
+    -moz-box-shadow: 0 8px 6px -6px rgba(136, 136, 136, 0.6);
+    box-shadow: 0 8px 6px -6px rgba(136, 136, 136, 0.6);
+}
+.THIS .Suffix .slds-dropdown{padding:15px;border-radius: inherit; border-top: none; border-left:1px solid #000;border-right:1px solid #000;
+    z-index:999; position: absolute; background-color:white; border-bottom:1px solid #000; max-height:90px; overflow-x:auto;
+    -webkit-box-shadow: 0 8px 6px -6px rgba(136, 136, 136, 0.6);
+    -moz-box-shadow: 0 8px 6px -6px rgba(136, 136, 136, 0.6);
+    box-shadow: 0 8px 6px -6px rgba(136, 136, 136, 0.6);
+}
+.THIS .slds-listbox_vertical .slds-listbox__option_plain{ padding:0 !important;}
+.THIS .Suffix .slds-truncate{ padding:0; font-size:12px; text-align:left;color:#000; font-weight:normal;}
+.THIS .slds-accordion__summary-heading .slds-button:focus{ color:#fff;}
+.THIS .Suffix input[readonly]:focus{border: 1px solid #666;outline:none;
+    box-shadow: none;}
+.THIS .slds-icon-action-approval{ background-color: limegreen}
+.THIS .slds-icon-action-approval svg:not(:root){ display: block; width: 10px; height: 10px;  background-color: limegreen}
+.THIS .slds-icon-utility-home svg:not(:root){ display: block; width: 15px; height: 15px;}
+.THIS .slds-icon-utility-down svg:not(:root){ display: block; width: 15px; height: 15px;}
+.THIS .slds-icon-utility-delete svg:not(:root){ display: block; width: 20px; height: 20px;}
+.THIS .breadgram { text-align:left;}
+.THIS .breadgram .slds-icon-text-default {
+    fill: #0097cb;    margin: 0 5px 0 0;}
+.THIS .Approvedgreen{display: block;margin:10px 0 14px;padding:14px 20px;
+    text-align: left;
+    background: #bdf6bc; }
+.THIS .activebox input[readonly]{    border: 1px solid #e8e9ec;
+    box-shadow: none;}
+.THIS .Approvedgreen .slds-icon-action-approval svg:not(:root) {
+    background-color: #209c1d;
+}
+.THIS .Approvedgreen .slds-icon-action-approval {
+    background-color: #209c1d;display: inline-block;
+    margin: 0 10px 0 0;
+}
+
+.THIS .Approvedgreen p{
+    display: inline-block;
+    vertical-align: top;
+    line-height: 26px;
+    color: #209c1d;
+    font-weight: 600;
+    font-size: 16px;
+}
+.THIS .ProgressValue {
+    color : var(--backgroundColor);
+            }
+            .THIS .progress {
+                margin: 0px 0 0px;
+                border-radius: 17px;
+                height: 24px;
+                overflow: hidden;
+                background-color: #e1e2e4;
+                width:240px;
+                line-height: 28px;
+                padding: 0 10px;
+                background: linear-gradient(90deg, limegreen var(--backgroundWidth), #f5f5f5 0%);
+                        }
+                        .THIS .slds-dropdown-trigger_click .slds-listbox_vertical{ padding:0;}
+                        .THIS .frame iframe{ padding:10px 0;width:100%; height:197px; border:1px solid #000; margin:0 0 20px;}   
+                        .THIS .frame p{ font-size:12px; line-height:normal;color:#000;}
+  @media (max-width: 768px){
+.THIS .slds-input { margin-top:10px;  } 
+.THIS .field-side .logo { text-align: center; float:none;margin:0 0 5px 0;}
+.THIS .field-side4 .progressright {text-align: center; float:none;display: table;margin: 0 auto 10px;}
+.THIS .progress {margin: 0 auto 5px;}   
+                            .THIS .progressView{ text-align:left;}
+.THIS .field-side {float: left;text-align: center;padding-right: 0px;} 
+.THIS .sub-header { margin: 10px 0 0;}  
+.THIS .newsideheader { margin:0;}
+.THIS .new-containnew2 { margin-bottom: 0;}                           
+.THIS .field-side3{ padding-left:0;}  
+                            .THIS .field-side label{    float: left; margin:10px 0 0 0;}  
+                             .THIS .field-side1 label{    float: left; margin:10px 0 0 0;}  
+                            .THIS .listItem{ text-align:left;}
+                            .THIS .field-side2{ padding-right:0;}
+                            .THIS .buttonpoint{ margin:10px 0 0 0;} 
+                            .THIS .buttonpoint1{ margin:10px 0 0 0;}  
+                            .THIS .delete{ margin-top:52px;}
+                            .THIS .newsideline {
+    margin-top: 0;
+}.THIS .newsidelinenew {
+    margin-bottom: 0;
+}
+                            .THIS .slds-has-error .slds-form-element__help{ text-align:left}
+                            .THIS .breadgram{ margin:10px 0 0 10px;}
+                            .THIS .new-contain{ margin:0 5px;}
+                        }

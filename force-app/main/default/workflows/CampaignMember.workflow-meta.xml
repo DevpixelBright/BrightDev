@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Sends_out_email_template_with_RealtyTrac_survey_link</fullName>
+        <description>Sends out email template with RealtyTrac survey link in it once campaign status is &quot;Attended&quot;</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>API_Names/Clicktools_office_meeting_RealtyTrac_survey_send_out</template>
+    </alerts>
+    <alerts>
+        <fullName>Sends_out_email_template_with_survey_link_in_it_once_campaign_status_is_Attended</fullName>
+        <description>Sends out email template with survey link in it once campaign status is &quot;Attended&quot;</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>API_Names/Clicktools_office_meeting_survey_send_out</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>RealtyTrack_Survey_Field_Update</fullName>
+        <field>Survey_Status__c</field>
+        <literalValue>Sent</literalValue>
+        <name>RealtyTrack Survey Field Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Survey_Status_update</fullName>
+        <description>Updates the field to sent once contact has been checked as attended.</description>
+        <field>Survey_Status__c</field>
+        <literalValue>Sent</literalValue>
+        <name>Survey Status update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>RealtyTrac Survey send out for campaign</fullName>
+        <actions>
+            <name>Sends_out_email_template_with_RealtyTrac_survey_link</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>RealtyTrack_Survey_Field_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5</booleanFilter>
+        <criteriaItems>
+            <field>Campaign.Type</field>
+            <operation>equals</operation>
+            <value>Office Meeting</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>CampaignMember.Status</field>
+            <operation>equals</operation>
+            <value>Attended</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>CampaignMember.Survey_Status__c</field>
+            <operation>notEqual</operation>
+            <value>Responded</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contact.Office_meeting_opt_out__c</field>
+            <operation>notEqual</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Campaign.Name</field>
+            <operation>contains</operation>
+            <value>RealtyTrac</value>
+        </criteriaItems>
+        <description>Sends a Clicktools survey to the campaign member when status is changed to Attended.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Survey send out for campaign</fullName>
+        <actions>
+            <name>Sends_out_email_template_with_survey_link_in_it_once_campaign_status_is_Attended</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Survey_Status_update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6</booleanFilter>
+        <criteriaItems>
+            <field>Campaign.Type</field>
+            <operation>equals</operation>
+            <value>Office Meeting</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>CampaignMember.Status</field>
+            <operation>equals</operation>
+            <value>Attended</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>CampaignMember.Survey_Status__c</field>
+            <operation>notEqual</operation>
+            <value>Responded</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contact.Last_Survey_Response_Date__c</field>
+            <operation>notEqual</operation>
+            <value>LAST 30 DAYS</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contact.Office_meeting_opt_out__c</field>
+            <operation>notEqual</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Campaign.Name</field>
+            <operation>notEqual</operation>
+            <value>RealtyTrac</value>
+        </criteriaItems>
+        <description>Sends a Clicktools survey to the campaign member when status is changed to Attended.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

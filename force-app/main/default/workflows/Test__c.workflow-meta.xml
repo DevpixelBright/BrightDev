@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <outboundMessages>
+        <fullName>Test_Outbound_message_to_requestbin</fullName>
+        <apiVersion>38.0</apiVersion>
+        <endpointUrl>http://requestb.in/ytx0zcyt</endpointUrl>
+        <fields>CreatedById</fields>
+        <fields>CreatedDate</fields>
+        <fields>First_Name__c</fields>
+        <fields>Id</fields>
+        <fields>Last_name__c</fields>
+        <fields>Name</fields>
+        <includeSessionId>true</includeSessionId>
+        <integrationUser>elena.medved@mris.net</integrationUser>
+        <name>Test Outbound message to requestbin</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>Test Outbound message to requestbin for test object</fullName>
+        <actions>
+            <name>Test_Outbound_message_to_requestbin</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Test__c.First_Name__c</field>
+            <operation>contains</operation>
+            <value>Santa</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingOwnerRules>
+        <fullName>Expansion_Group_Leads</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Leads are shared across members of the Expansion group.</description>
+        <label>Expansion Group Leads</label>
+        <sharedTo>
+            <group>Expansion</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Expansion</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

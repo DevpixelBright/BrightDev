@@ -1,0 +1,147 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false" lightningstylesheets="true">
+    <style>
+        .container {color:#727272;}
+        .container h3 {margin:5px;}
+        .space {width:20px;} 
+        .sub-para {margin-left:2%;} 
+    </style>
+    <div class="container">
+        <center>
+            <h3>MRIS LLC, A BRIGHT MLS, INC. COMPANY</h3>
+            <h3>SUBSCRIBER LICENSE AND ACCESS AGREEMENT</h3>
+        </center>
+        <p>
+            This Subscriber License and Access Agreement ("Agreement"), made as of the Effective Date that your application is approved by your designated Principal Broker, is between (i) MRIS LLC, A BRIGHT MLS, INC. COMPANY ("MRIS®"), a Delaware corporation with offices at 9707 Key West Avenue, Rockville, Maryland 20850-3915, and (ii) the undersigned Subscriber described in Exhibit A, who, intending to be legally bound, hereby agrees as follows:        
+        </p>
+        <span><b>1. INTRODUCTION.</b></span>
+        <p>
+            MRIS® offers a computer online, interactive regional real estate information service (the " MRIS® Service"), which is accessible through personal computers using MRIS® supplied proprietary computer software (the " MRIS® Software"), and an appropriate modem and telecommunications line. Subscriber wishes to obtain, and MRIS® agrees to make available to Subscriber, the MRIS® Software and access to the MRIS® Service all in accordance with the terms and conditions of this Agreement. REALTOR® Subscriber agrees to comply with the NATIONAL ASSOCIATION OF REALTORS® Code of Ethics and Standards of Practice. In the event Subscriber is a member of a local board or association Subscriber shall also comply with the regulations of the REALTOR® board or association to which Subscriber is a member as well as all MRIS® Bylaws, Policies and Procedures Manual and all MRIS® Rules and Regulations provided to Subscriber in connection with Subscriber's use of the MRIS® Software and MRIS® Service.        
+        </p>
+        <span><b>2. MRIS® SERVICE.</b></span>
+        <p> 
+            2.1 Information. MRIS® maintains regional real estate information, as more fully described in Section 4, in electronic form on one or more centralized computers, (the " MRIS® System") and makes such information available for access and retrieval by Subscribers and other authorized users through the MRIS® Service. MRIS® does not review or edit the information or exercise any other form of editorial control over the information. Subscriber agrees that the information obtained through the MRIS® Service shall not be reproduced or electronically manipulated for any other purpose than the selling, listing or appraising of real estate, and may not be resold, licensed or otherwise distributed without the written consent of MRIS®. Under no circumstance shall Subscriber receive any form of compensation for this
+            information from third parties.        
+        </p>
+        <p>
+            2.2 Evaluation of Information. Subscriber acknowledges that MRIS® does not investigate or confirm any information which may be accessed and retrieved through the MRIS® Service and, as more fully provided in Section 5, MRIS® neither warrants nor endorses any such information for any purpose.            
+        </p>
+        <p>
+            2.3 Help Desk. MRIS® shall maintain a help-desk to answer questions regarding the MRIS® Software and MRIS® Service. Telephone support will be made available during normal business hours. MRIS® shall also monitor its e-mail box during normal business hours for inquiries and support requests and respond to such inquiries and requests as soon as practicable under the circumstances.
+        </p> 
+        <p>2.4 User ID &amp; Password. Upon execution of this Agreement and the Introduction to MRIS® course, MRIS® shall assign to Subscriber one (1) unique User ID &amp; Password. The assigned Password shall be confidential to Subscriber and may not be used by any other person. The Subscriber shall be responsible for properly using the User ID &amp; Password with the appropriate MRIS® Software, equipment and telecommunications connection to access and use the MRIS® Service, and Subscriber shall be responsible for payment of all fees specified in this Agreement which result from such use.</p>
+         
+        <p>2.5 Security. Subscriber is responsible for safeguarding and maintaining the confidentiality of the Password and is liable for any consequences that may result from its disclosure, including but not limited to immediate termination of this Agreement and liability for liquidated damages in accordance with Section 9 in connection with use of the MRIS® Service by any unauthorized person through Subscriber's Password.</p> 
+         
+        <p>2.6 Equipment. Subscriber is responsible for obtaining all personal computers, modems,
+        telecommunications connections and computer software other than the MRIS® Software, that may be necessary or useful for accessing and using the MRIS® Service and for the proper use thereof.</p>
+         
+        <p>2.7 Modifications. MRIS® reserves the right to modify the MRIS® Service and/or make access to and use of any information available through the MRIS® Service subject to additional terms or conditions. Subscriber shall have the right to terminate this Agreement at any time without refund or pro rata fee adjustment if any modification to the MRIS® Service or to the terms and conditions under which information is made available are unacceptable to Subscriber.</p>
+         
+        <p>2.8 Authorized User Prospecting Files. The MRIS® Service allows Subscriber to store particular items of information within the MRIS® Service for access and use in later online sessions. MRIS® and its licensor(s) have configured the MRIS® Service so as to make such stored information unavailable, insofar as possible, for access and use by any unauthorized users of the MRIS® Service. MRIS® shall not be responsible for unauthorized access to, or loss of,
+        the stored information of Subscriber, and Subscriber is responsible for retention of any information that may be necessary to reconstruct any stored information that may be lost or destroyed for any reason.</p>
+         
+        <p>2.9 Subscriber Information. MRIS® reserves the right to distribute to prospective subscribers and other third parties certain nonconfidential information concerning Subscriber such as name and address. In addition, MRIS® may collect and compile information regarding frequency of use or specific uses of the MRIS® Service by all users, but will not distribute, publish or disclose any information concerning frequency of use of, or specific uses, of the MRIS® Service specifically by Subscriber.</p>
+         
+        <p>2.10 MRIS® Service Marks and Logos. Subscriber shall have the right, during the term of this Agreement, to use the MRIS® trade name and the service mark and logo for the MRIS® Service in advertising, promotion and marketing materials solely for the purpose of announcing Subscriber's use of the MRIS® Service to prospective customers.  Subscriber may republish any description of the MRIS® Service which has been published by MRIS, provided the description is republished on a verbatim basis; but shall not, under any circumstances, make any nauthorized
+        representations or warranties regarding the MRIS® Service or any information which may be accessed and retrieved through the MRIS® Service. The MRIS® Service Mark License Agreement must be signed prior to use of MRIS® Service Marks and Logos.</p>
+         
+        <p>2.11 Limited Publication. Subscriber shall not knowingly publish any information about the MRIS® Service to competitors or potential competitors of MRIS.</p>
+         
+        <p>2.12 Eligibility. Only Subscribers who are capable of offering and accepting cooperation and/or compensation to and from other Subscribers may enter and retrieve listing information. The Principal Broker must subscribe to MRIS® prior to any licensees in his/her firm subscribing to MRIS.</p>
+        <span><b>3. MRIS® SOFTWARE.</b></span>
+        <p>
+            3.1 License Grant. MRIS® hereby grants to Subscriber, for the term set forth in Section 8, a personal nonexclusive, nontransferable license to:                   
+        </p>
+        <p class="sub-para">
+            (a) make such copies of the MRIS® Software, in machine-readable, object-code form only, as are necessary to install and operate the MRIS® Software on one or more personal computers used only by Subscriber for business purposes, which personal computers are located in the regional geographic area served by MRIS® (the "Region"); provided, however, that any such personal computer may be located outside the Region temporarily consistent with Subscriber's reasonable incidental use outside the Region;        
+        </p>
+        <p class="sub-para">(b) use the MRIS® Software for the purpose of accessing and using the MRIS® Service and the information thereon;</p>
+        <p class="sub-para"> (c) access, download and store in such personal computers any information available on the MRIS® Service;</p>
+        <p class="sub-para">(d) display and/or print out a paper copy of any information available on the MRIS® service for prospective real estate purchasers and sellers only; and</p>
+        <p class="sub-para"> (e) make a reasonable number of copies of the MRIS® Software and information available through the MRIS® Service for backup and archival purposes only.</p>
+<p>3.2 License Restrictions. Subscriber is expressly prohibited from:</p>
+<p class="sub-para">(a) removing the MRIS® Software from the Region except for reasonable incidental use outside the Region;</p>
+<p class="sub-para">(b) transferring or duplicating the MRIS® Software except for (i) Subscriber's own internal or personal use and (ii) preparation of a reasonable number of backup or archival copies;</p>
+<p class="sub-para"> (c) assigning, timesharing, selling, leasing, lending or renting the MRIS® Software;</p>
+<p class="sub-para"> (d) using the MRIS® Software for any purpose other than accessing, using and retrieving information from the MRIS® Service;</p>
+<p class="sub-para"> (e) causing or permitting the reverse engineering, reformatting, recasting, disassembly or decompilation of the MRIS® Software; and</p>
+<p class="sub-para"> (f) disclosing, demonstrating or displaying the MRIS® Software to anyone except bona fide prospective home buyers and sellers.</p>
+<p>3.3 Title. Title to the MRIS® Software is retained by MRIS® or its licensor(s) as applicable, and shall not pass to Subscriber.</p>
+<span><b>4. REGIONAL REAL ESTATE INFORMATION.</b></span>
+<p>4.1 Listing Information. If Subscriber is a listing agent for real property, Subscriber shall be entitled to submit to MRIS® listing information for listed properties and Subscriber's personal listing agent information. The listing information is provided to MRIS® for the purpose of informing other subscribers of the listing. Such information shall include the particular data specified on Exhibit A and shall be submitted in the format, and according to the procedures
+set forth on Exhibit A. The Subscriber shall obtain written consent to include any photographs, floor plans or other information pertaining to listed properties that the Subscriber includes in the MRIS® System from the owner of such photographs, floor plans or other information. The Subscriber authorizes MRIS® to reproduce, display and distribute such listing information through the MRIS® Service electronically and in such other form or manner as MRIS® deems
+appropriate. Subscriber shall use reasonable care to ensure the accuracy of such submitted information and shall be responsible for correcting and updating all information Subscriber has submitted within not more than 48 hours after any change in such information (e.g., sale of listed property or change in asking price). MRIS, may, in its sole discretion, charge special fees for any listing information beyond the standard listing. </p>
+ 
+<p>4.2 Optional Information. From time to time, the MRIS® Service may, but shall not be obligated to, make available information other than real estate listing information, which MRIS® determines is relevant to subscribers. Such information may include, but need not be limited to, public records data (such as property tax, assessment, title, mortgage and census information), mortgage qualification data and amortization schedule data.</p>
+ 
+<p>4.3 MRIS® Database. The term "MRIS® Database" includes, but is not limited to, all information included on the MRIS® Service or any portion thereof, as well as all printouts of information from the MRIS® Database and any publication of information from the MRIS® Database.</p>
+ 
+<p>4.4 Proprietary Rights and Restrictions. Subscriber acknowledges that the information available through the MRIS® Service may include textual, statistical, financial, photographic, video and audio components which are protected by United States Copyright Law. Subscriber acknowledges that this information is confidential and its use is restricted to Subscribers of the MRIS® Service. Except as expressly provided in Section 3.1, Subscriber shall not reproduce, redistribute, publish, display, retransmit, broadcast, sell or license or allow anyone else to reproduce, distribute, publish, display, retransmit, broadcast, sell or license any such MRIS® Database information in any format to anyone. Subscriber agrees to comply with any additional use restrictions which may be announced by MRIS® at any time regarding specific information in the MRIS® Database.</p>
+ 
+<p>4.5 Copyright Ownership. All rights, title and interest in each and every MRIS® Database compilation created by MRIS, and in the ownership of the copyright therein, shall at all times remain vested in MRIS. MRIS® shall have the right to license such compilations or portions thereof to any entity pursuant to the terms agreed upon by the MRIS® Board of Directors. Title to the information supplied by the Subscriber such as listing information shall remain with Subscriber's undersigned Principal Broker Subscriber. All listing information submitted by MRIS® Subscriber to MRIS® for inclusion in the MRIS® System shall be owned by MRIS® Principal Broker Subscriber. To confirm this ownership MRIS® Subscriber hereby irrevocably assigns to MRIS® Principal Broker Subscriber, all right, title and interest in any and all such listing information including the ownership of any copyright rights related to and in any such listing information.</p>
+ 
+<p>4.6 Consent to Use Information. Subscriber acknowledges that information available through the MRIS® Service is provided with the consent of the Principal Broker Subscriber and third-party licensors. MRIS® has the right to remove information from the MRIS® Database at anytime if MRIS® determines the information is or may be infringing or otherwise violates or may violate rights of any third-party or MRIS’s right to include such information in the MRIS®
+Database which has been terminated for any reason.</p>
+<span><b>5. WARRANTY DISCLAIMER.</b></span>
+<p>SUBSCRIBER EXPRESSLY AGREES THAT THE MRIS® SERVICE AND THE INFORMATION AVAILABLE THROUGH THE MRIS® SERVICE ARE PROVIDED ON AN "AS IS," "AS AVAILABLE" BASIS, AND THAT USE OF THE MRIS® SERVICE AND THE INFORMATION AVAILABLE THROUGH THE MRIS® SERVICE ARE AT THE SOLE RISK OF SUBSCRIBER. MRIS® AND ITS LICENSORS DO NOT WARRANT THAT THE MRIS® SERVICE WILL BE UNINTERRUPTED OR ERROR-FREE, AND MRIS, ITS LICENSORS AND THIRDPARTY INFORMATION SUPPLIERS MAKE NO WARRANTY AS TO THE ACCURACY, COMPLETENESS, CURRENCY OR RELIABILITY OF ANY INFORMATION AVAILABLE THROUGH THE MRIS® SERVICE. MRIS, ITS LICENSORS AND THIRD-PARTY INFORMATION SUPPLIERS EXPRESSLY DISCLAIM ANY AND ALL WARRANTIES WITH RESPECT TO THE MRIS® SERVICE AND THE INFORMATION AVAILABLE THROUGH THE MRIS® SERVICE, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</p>
+<span><b>6. SERVICE FEES.</b></span>
+<p>6.1 Fees. In consideration for the rights to access and use the MRIS® Service and the license granted for use of the MRIS® Software, Subscriber shall pay MRIS® the following fees in accordance with the rates set forth on the Schedule of Fees attached hereto as Exhibit B:</p>
+ 
+<p class="sub-para">(a) Initial Subscription Fee. A non-refundable fee assessed for the MRIS® Software and issuance of the Subscriber User ID and Password (not for Personal Assistants or Office Secretaries);</p>
+<p class="sub-para">(b) Quarterly Fee. A flat fee assessed quarterly in advance for Subscriber's right to continuing access to the MRIS® Service;</p>
+<p class="sub-para">(c) Training Fee. A fee assessed to all Personal Assistants and Office Secretary applicants;</p>
+<p class="sub-para">(d) Additional Fees. Other fees and charges as listed on Exhibit B; and</p>
+<p class="sub-para">(e) Reinstatement Fee. A fee shall be assessed to any Subscriber who desires to reactivate his or her access to the MRIS® Service more than thirty (30) days after termination.</p>
+ 
+<p>6.2 Assistants. Personal assistants or administrative support personnel supporting the Subscriber shall be individually assessed quarterly fees. The Principal Broker Subscriber is responsible for assuring all licensed agents and personal assistants subscribe to the MRIS® Service individually.</p>
+ 
+<p>6.3 Payment. Subscriber shall be assessed the Initial Subscription Fee or Training Fee upon application.  A quarterly fee shall be assessed the first day of the month following Subscriber's activation date and quarterly thereafter in advance. Fees are non-refundable.
+6.4 Taxes. All fees described herein are exclusive of all federal, state, municipal or other governmental excise, sales, value-added, use, personal property and occupational taxes, excises, withholding obligations and other levies now in force or enacted in the future and, accordingly, Subscriber will pay all such taxes and levies other than any tax or levy on the net income of MRIS.</p>
+ 
+<p>6.5 Increases. MRIS® may increase the Initial Subscription Fee, Quarterly Fees and any of the Additional Fees at any time by written notice to Subscriber at least thirty (30) days in advance of the effective date of such increase.  If Subscriber objects to such increase, Subscriber may terminate this Agreement by written notice to MRIS® at any time before such effective date.</p>
+<span><b>7. INDEMNIFICATION.</b></span>
+<p>Subscriber shall indemnify and hold MRIS® and its officers, directors, employees, agents, representatives, licensors and shareholders harmless from and against any and all liability, damages, loss or expense (including reasonable fees of attorneys and other professionals) arising from any claim, demand, action or proceeding initiated by any third-party against any of them based upon (a) inaccuracy of any listing information supplied for the MRIS® Service
+by Subscriber or by any of Subscriber's Authorized Users, (b) any unauthorized use of Subscriber's Password, (c) any unauthorized use of the MRIS® Database, or (d) infringement of any proprietary or contract right of any third party as a result of the availability of such information through the MRIS® Service. Subscriber shall assist MRIS, at Subscriber's expense, in the defense or settlement of any claim to which this indemnification obligation applies.</p>
+ 
+<span><b>8. TERM. TERMINATION.</b></span>
+<p>8.1 Term. The initial term of this Agreement shall commence upon the date first written below and shall continue thereafter as long as Subscriber pays the Quarterly Fees and any other Fees to MRIS® when due unless previously terminated in accordance with Section 8.2.</p>
+ 
+<p>8.2 Termination. This Agreement and the licensed rights granted hereunder may be terminated by either party in the event that the other party has not performed any material obligation or has otherwise breached any material term of this Agreement. Any such termination shall become effective thirty (30) days after receipt of written notice thereof if the breach or nonperformance has not then been remedied. Promptly upon any termination or expiration of this Agreement, MRIS® shall deactivate Subscriber's User ID &amp; Password, and Subscriber shall have no further access to the MRIS® Service. Subscriber shall thereupon purge all copies of the MRIS® Software from Subscriber's personal computers. Subscriber acknowledges that MRIS® shall have no obligation to refund any fees or charges or any portion
+thereof paid to MRIS® prior to termination.</p>
+ 
+<p>8.3 Principal Broker Subscriber Termination. Should the Principal Broker Subscriber terminate from MRIS, any MRIS® Subscriber affiliated with that Principal Broker will also be terminated.</p>
+ 
+<span><b>9. UNAUTHORIZED USE OF MRIS® SERVICE.</b></span>
+<p>9.1 Unauthorized Use of Subscriber's Password. Subscriber acknowledges that damages suffered by MRIS® from access to the MRIS® Service by an unauthorized third party as a result of disclosure of Subscriber's Password would be speculative and difficult to quantify. Accordingly, as a material inducement to MRIS® to enter into this Agreement with Subscriber, Subscriber agrees that in the event that any disclosure of Subscriber's Password resulting in access to the MRIS® Service by an unauthorized third party, regardless of whether such disclosure is intentional, negligent or inadvertent, Subscriber shall be liable to MRIS, at the option of MRIS, for liquidated damages as follows:</p>
+ 
+<p class="sub-para"> (a) For the first instance of an unauthorized third-party who gains access to the MRIS® Service by means of Subscriber's Password, liquidated damages in the amount of One Thousand Dollars ($1000.00);</p>
+<p class="sub-para"> (b) For the second instance of an unauthorized third-party who gains access to the MRIS® Service by means of Subscriber's Password, liquidated damages in the amount of Two Thousand Dollars ($2,000.00); and</p>
+<p class="sub-para"> (c) For the third instance of an unauthorized third-party who gains access to the MRIS® Service by means of Subscriber's Password, revocation of Subscriber's right to use the MRIS® Service.</p>
+ 
+<p>9.2 Unauthorized Disclosure of MRIS® Database by Subscriber. Subscriber acknowledges that damages suffered by MRIS® from access to the MRIS® Database by an unauthorized disclosure to a third party by Subscriber would be speculative and difficult to quantify. Accordingly, as an inducement to MRIS® to enter into this Agreement, Subscriber agrees that in the event any Subscriber makes such unauthorized disclosure of this information to any third party, Subscriber shall be liable, at the option of MRIS, for liquidated damages in the amount of five hundred dollars ($500.00) for each real estate listing disclosed.</p>
+<span><b>10. EXCLUSION AND LIMITATION OF LIABILITY.</b></span>
+<p>10.1 Limitations and Exclusions. NEITHER MRIS® NOR ANY OF ITS AFFILIATES, SHAREHOLDERS, OFFICERS, DIRECTORS, EMPLOYEES, AGENTS, REPRESENTATIVES OR LICENSORS SHALL BE LIABLE TO SUBSCRIBER OR ANYONE ELSE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES THAT RESULT FROM THE USE OF, OR INABILITY TO USE, THE MRIS® SERVICE, INCLUDING, BUT NOT LIMITED TO, RELIANCE BY ANY SUBSCRIBER OR AUTHORIZED USER ON ANY INFORMATION OBTAINED THROUGH USE OF THE MRIS® SERVICE OR THAT RESULT FROM MISTAKES, OMISSIONS, DELETIONS OR DELAYS IN TRANSMISSION OF SUCH INFORMATION, INTERRUPTIONS IN TELECOMMUNICATIONS CONNECTIONS TO THE MRIS® SERVICE, VIRUSES OR FAILURES OF PERFORMANCE, WHETHER CAUSED IN WHOLE OR PART BY NEGLIGENCE, ACTS OF GOD, TELECOMMUNICATIONS FAILURE, THEFT OR DESTRUCTION OF, OR UNAUTHORIZED ACCESS TO, THE MRIS® SERVICE OR RELATED INFORMATION, RECORDS OR PROGRAMS.</p>
+ 
+<p>10.2 Maximum Aggregate Liability. IN NO EVENT SHALL THE LIABILITY OF MRIS, ITS AFFILIATES, SHAREHOLDERS, OFFICERS, DIRECTORS, EMPLOYEES, AGENTS, REPRESENTATIVES AND LICENSORS ARISING OUT OF ANY CLAIM RELATED TO THIS AGREEMENT EXCEED THE AGGREGATE AMOUNT PAID BY SUBSCRIBER HEREUNDER IN THE 12 MONTHS IMMEDIATELY PRECEDING THE EVENT GIVING RISE TO SUCH CLAIM.</p>
+ 
+<p>10.3 Acknowledgment. Subscriber acknowledges that MRIS® has set its fees and other charges in reliance on the disclaimers of warranty and limitations and exclusions of liability set forth in this Agreement and that the same form an essential basis of the bargain between the parties. The Subscriber irrevocably waives all claims against MRIS®
+or any of its affiliates, shareholders, officers, directors, employees, agents, representatives and licensors for any action in connection with the MRIS® Service and particularly as to acts imposing liquidated damages upon Subscriber or revoking Subscriber's access to the MRIS® Service.</p>
+ 
+<span><b>11. REMEDIES.</b></span>
+<p>Subscriber acknowledges and agrees that the MRIS® Software and MRIS® Database are confidential and proprietary products of MRIS® and that in the event there is an unauthorized disclosure of such by Subscriber, no remedy at law may be adequate. Therefore, Subscriber agrees that in the event of such unauthorized disclosure of MRIS® Software or MRIS® Database, MRIS® may seek injunctive relief or other equitable remedies against Subscriber in addition to all available remedies at law.</p>
+ 
+<span><b>12. DISPUTE RESOLUTION.</b></span>
+<p>Except for the right of MRIS® to seek injunctive relief or other equitable remedies under Section 11 of this Agreement, all claims, disputes and controversies and other matters in question between the parties to this Agreement, arising out of, or relating to this Agreement, or the breach thereof, which cannot be resolved by the parties, shall be settled by binding arbitration pursuant to the rules then in effect of the American Arbitration Association under its Commercial Arbitration Rules and judgment on the award rendered by the arbitrator(s) may be entered in any court having jurisdiction thereof. Not withstanding any provisions in such rules to the contrary, the arbitrator(s) shall have no authority to add or detract from the agreements of the parties.</p>
+ 
+<span><b>13. LEGAL FEES AND COSTS.</b></span>
+<p>In the event legal action is taken against Subscriber, and MRIS® prevails in obtaining equitable relief or monetary damages, Subscriber will be obligated to reimburse MRIS® for the reasonable attorney's fees, costs and expenses it incurred in pursuing such legal action. Subscriber will also be responsible for any legal fees and costs incurred by MRIS® in enforcing any order or collecting any judgment.</p>
+ 
+<span><b>14. NO THIRD PARTY BENEFICIARIES.</b></span>
+<p>This Agreement is entered into solely between, and may be enforced only by, MRIS® and Subscriber, and this Agreement shall not create or be construed to create any rights in any home owner, home seller, home purchaser or other third parties.</p>
+ 
+<span><b>15. MISCELLANEOUS.</b></span>
+<p>This Agreement may not be amended except by written instrument executed by both parties. This Agreement shall not be contravened by any terms contained in any purchase order, confirmation or acknowledgment signed by the parties hereto, and no modification or amendment of this Agreement shall be deemed effected by any purchase order, confirmation or acknowledgment containing other or different terms. Should any such purchase order, confirmation or acknowledgment contain additional or different terms, those terms shall be considered proposals by Subscriber which are hereby rejected. Neither this Agreement nor any obligations or duties hereunder may be assigned or delegated by either party. This Agreement contains the entire understanding of the parties and supersedes all previous oral and written
+agreements on the subject hereof. This Agreement shall be governed by, and construed in accordance with, the laws of the State of Maryland applicable to contacts made and performed in Maryland.</p>
+         
+    </div>
+</apex:page>

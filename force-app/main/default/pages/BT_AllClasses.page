@@ -1,0 +1,206 @@
+<apex:page sidebar="false" showheader="false" controller="BT_AllClassesController"  lightningstylesheets="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/angular.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/ui-bootstrap-tpls-0.12.0.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.AngularJsTable,'/ng-table.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.AngularJsTable,'/ng-table.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.DataArchive_Library,'js/jquery.min.js')}"/>
+    <c:Bootstrap_Resources />
+    <apex:stylesheet value="{!URLFOR($Resource.BT_Styling,'style.css')}"/>
+    <apex:form >
+        <div id="ContentContainer" ng-app="first" ng-controller="firstcontroller">
+        
+            <div id="mainDiv" class="courses ng-cloak" >
+                <div class="topcorse">                   
+                    <input type="text" ng-model="locationSearch" ng-change="filterResults()" placeholder="Location" name="whatever" id="searchcode" />
+                    <input placeholder="Select Date" class="textbox-n no-spin" ng-model="dateSearch" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" ng-change="filterResults()"/>
+                    
+                    <apex:selectList html-ng-model="delmethodSearch" value="{!selectedDeliveryMethod}" size="1" html-ng-change="filterResults()">
+                        <apex:selectOptions value="{!DeliveryMethods}"/>
+                    </apex:selectList>
+                    
+                     <apex:selectList value="{!selectedAppropriate}" size="1" html-ng-model="searchAppropriate" html-ng-change="filterResults()">
+                        <apex:selectOptions value="{!AppropriateFor}"/>
+                    </apex:selectList> 
+                     
+                    <input type="text" ng-model="classSearch" ng-change="filterResults()" placeholder="Enter Class Name" name="textvalue"  />
+                    
+                    <apex:selectList value="{!selectedFullClassFilter}" size="1" html-ng-model="searchFullClassFilter" html-ng-change="filterResults()">
+                        <apex:selectOptions value="{!IncludeFullClasses}"/>
+                    </apex:selectList>
+                </div>
+                
+                
+                <div class="middlecourse ng-cloak" >
+                    <h2>Classes <span>({{totalClasses}})</span></h2>
+                    <a href="/learnbrightmls/s/classdetail?classId={{cd.btClass.Id}}&p=ac" ng-repeat="cd in tableParams.data" target="_top">
+                        <div class="tablenew" >
+                            <div class="innercoursebox" >
+                                <div class="inner-text">
+                                    <h3>{{cd.btClass.Title__c}} </h3>
+                                    <div class="indiviual-pointnew">
+                                        <div class="deliverynew">
+                                            <label>Location: </label>
+                                            <p>{{cd.btClass.Venue__r.State__c}} {{cd.btClass.Venue__r.City__c}}  {{cd.btClass.Venue__r.Street__c}}</p>
+                                        </div>
+                                    </div>
+                                    <p>{{cd.btClass.AdditionalDescription__c}}</p>
+                                </div>
+                                
+                                <div class="inner-boximg non-boximg" style="text-align: center;width:224px;">
+                                    <label>{{cd.classDate}}</label>
+                                    <label ng-show="cd.classDate != null">{{cd.classStartTime}} - {{cd.classEndTime}}</label>
+                                    <p ng-show="cd.btClass.SeatsRemaining__c > 0">{{cd.btClass.SeatsRemaining__c}} seats available</p>
+                                    <p ng-show="cd.btClass.SeatsRemaining__c == 0 || cd.btClass.SeatsRemaining__c == null" style="color:gray;"> No Seats available</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <table style="display: none;" ng-table="tableParams"><td ng-repeat="cd in $data"></td></table>
+                </div>
+
+            </div>
+            
+            <script>             
+                var app = angular.module('first', ['ngTable']).
+                controller('firstcontroller', function($scope, $filter, NgTableParams) {
+                    
+                    var data = [];
+                    $scope.finalWrap = [];
+                    $scope.totalClasses = 0;
+                    $scope.isAuthenticatedUser = '{!isAuthenticatedUser}';
+                    console.log('---$scope.isAuthenticatedUser--'+$scope.isAuthenticatedUser);
+                    $scope.finalWrap = JSON.parse('{!classDetailsWrapJson}');
+                    data = $scope.finalWrap;
+                    if($scope.finalWrap)
+                        $scope.totalClasses = $scope.finalWrap.length;
+                    
+                    /* Ng-table initiation */
+                    $scope.tableParams = new NgTableParams({
+                        page: 1,
+                        count: 25,
+                        sorting: {
+                            isAvailable: 'asc'
+                        }
+                    }, {
+                        total: data.length,
+                        getData: function($defer, params) {
+                            console.log(params);
+                            var searchedData = searchData();
+                            console.log('---searchedData---',searchedData);
+                            params.total(searchedData.length);
+                            var orderedData = params.sorting() ? $filter('orderBy')(searchedData , params.orderBy()) : searchedData;
+                            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                            
+                        }
+                    });
+                    
+                    $scope.$watch("search", function () {
+                        $scope.tableParams.reload();
+                    });
+                    
+                    var searchData = function(){
+                        if($scope.search){
+                            return $filter('filter')(data, $scope.search, true);
+                        }
+                        return data;
+                    }
+                    
+                    $scope.filterResults = function(){
+                        
+                        
+                        //console.log('---searchFullClassFilter--',$scope.searchFullClassFilter);
+                        
+                        if(!$scope.locationSearch && !$scope.classSearch && !$scope.delmethodSearch && !$scope.dateSearch && !$scope.searchAppropriate && !$scope.searchFullClassFilter){
+                            data = $scope.finalWrap;
+                        }else
+                            data = [];
+                        
+                        for(var i=0; i < $scope.finalWrap.length; i++){
+                            var searchFind = false;
+                            var selectedFiltersMatch = true;
+                            if($scope.locationSearch && $scope.finalWrap[i].classRec.Venue__c){
+                                console.log('-venue----'+$scope.finalWrap[i].classRec.Venue__c);
+                                if($scope.finalWrap[i].classRec.Venue__r.Country__c != null || $scope.finalWrap[i].classRec.Venue__r.State__c != null || $scope.finalWrap[i].classRec.Venue__r.City__c != null || $scope.finalWrap[i].classRec.Venue__r.Street__c != null || $scope.finalWrap[i].classRec.Venue__r.ZipCode__c != null) {
+                                    
+                                    var fullAddress = $scope.finalWrap[i].classRec.Venue__r.Country__c + $scope.finalWrap[i].classRec.Venue__r.State__c + $scope.finalWrap[i].classRec.Venue__r.City__c + $scope.finalWrap[i].classRec.Venue__r.Street__c + $scope.finalWrap[i].classRec.Venue__r.ZipCode__c;
+                                }
+                                console.log('---fullAddress---'+fullAddress); 
+                                if( fullAddress != null && fullAddress != NaN && fullAddress.toUpperCase().match($scope.locationSearch.toUpperCase()) ){
+                                    searchFind = true;
+                                }
+                                else
+                                    selectedFiltersMatch = false;
+                            }
+                            
+                            if($scope.classSearch){
+                                if($scope.finalWrap[i].btClass.Title__c && $scope.finalWrap[i].btClass.Title__c.toUpperCase().match($scope.classSearch.toUpperCase())){
+                                    searchFind = true;
+                                }
+                                else
+                                    selectedFiltersMatch = false;
+                            }
+                            
+                            if($scope.delmethodSearch){
+                                if($scope.finalWrap[i].btClass.DeliveryMethod__c && $scope.finalWrap[i].btClass.DeliveryMethod__c == $scope.delmethodSearch){
+                                    searchFind = true;
+                                }
+                                else
+                                    selectedFiltersMatch = false;
+                            }
+                            
+                            if($scope.searchAppropriate){
+                                if($scope.finalWrap[i].btClass.Course__r.AppropriateFor__c && $scope.finalWrap[i].btClass.Course__r.AppropriateFor__c.toUpperCase().match($scope.searchAppropriate.toUpperCase())){
+                                    searchFind = true;
+                                }
+                                else
+                                    selectedFiltersMatch = false;
+                            }
+                            
+                            if($scope.searchFullClassFilter){
+                                
+                                    if($scope.searchFullClassFilter == 'Hide Full Classes'){
+                                        if($scope.finalWrap[i].btClass.SeatsRemaining__c)
+                                            searchFind = true;
+                                        else
+                                            selectedFiltersMatch = false;
+                                    }
+                                    else if($scope.searchFullClassFilter == 'Show Full Classes'){                                        
+                                            searchFind = true;                                        
+                                    }
+                                                           
+                            }
+                            
+                            if($scope.dateSearch){
+                                if($scope.finalWrap[i].btClass.StartTime__c){
+                                    var classStartDate = $scope.finalWrap[i].btClass.StartTime__c.split("T")[0];
+                                    if(classStartDate && classStartDate == $scope.dateSearch )
+                                        searchFind = true;
+                                    else
+                                        selectedFiltersMatch = false;
+                                }
+                            }
+                            
+                            if(searchFind && selectedFiltersMatch){
+                                data.push($scope.finalWrap[i]);
+                            }
+                        }
+                        console.log('--data after filter--',data);
+                        $scope.totalClasses = data.length;
+                        $scope.tableParams.reload();
+                    }
+                    
+                    adjustContainer();
+                });
+                
+                function adjustContainer() {
+                    setTimeout(function() { 
+                        console.log('**** current height', document.getElementById('ContentContainer').scrollHeight); 
+                        $('iframe', window.parent.document).height(document.getElementById('ContentContainer').scrollHeight + 'px');
+                    }, 1000);
+                }
+            </script>
+        
+        </div>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,4 @@
+<apex:page lightningstylesheets="true">
+<QAS_NA:CARefreshConsoleComponent >
+</QAS_NA:CARefreshConsoleComponent>
+</apex:page>

@@ -1,0 +1,41 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="SMS_GenericPaymentPortal_Controller" lightningstylesheets="true">
+    <apex:composition template="Bootstrap_Styled_Single">
+        
+        <apex:define name="title">Payment</apex:define>
+
+        <apex:define name="content">
+            <style>
+                .content {
+                    margin-bottom: 20px;
+                }
+            </style>
+            
+            <iframe id="gpp_iframe" src="{!iframeUrl}" scrolling="no"></iframe>
+
+            <script>
+                function resize_iframe(height) {
+                    if ($("#gpp_iframe").height() == height) return;
+                    
+                    $("#gpp_iframe").height(height);
+                    
+                    repositionFooter();
+                }
+
+                ZXD.receiveMessage(function (e) {
+                    var data = JSON.parse(e.data);
+                    
+                    if (data.operation == "resize_iframe")
+                        resize_iframe(data.params.height);
+                    else if (data.operation == "payment_success") {
+                    }
+                    else if (data.operation == "generic_payment_complete")
+                        top.window.location.href = "<apex:outputText value="{!redirectUrl}" />";    //location.href = "<apex:outputText value="{!redirectUrl}" />";  
+                    else if (data.operation == "generic_payment_cancel")
+                        top.window.location.href = "<apex:outputText value="{!cancelUrl}" />";       //location.href = "<apex:outputText value="{!cancelUrl}" />";
+                       
+                }, "{!iframeDomain}");
+            </script>
+        </apex:define>
+        
+    </apex:composition> 
+</apex:page>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BRIGHT_IsInHiddenPreview__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( 
+  AND( 
+    BRIGHT_HiddenPreviewStartDate__c &lt;= NOW(), 
+      OR( 
+        OR( 
+          ISBLANK(BRIGHT_HiddenPreviewEndDate__c),
+          ISNULL(BRIGHT_HiddenPreviewEndDate__c) 
+        ), 
+       BRIGHT_HiddenPreviewEndDate__c &gt; NOW()) 
+     ), 
+   TRUE, 
+   FALSE 
+)</formula>
+    <label>Is In Hidden Preview</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,330 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+    <ltng:require styles="{!$Resource.brightcss }"></ltng:require>
+   <ltng:require styles="{!$Resource.sidemenu }"></ltng:require> 
+   <ltng:require styles="{!$Resource.bodycontainer }"></ltng:require>
+    <aura:attribute name="popup1" type="boolean" default="false"/>
+    
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <div class="fullpage slds-scope">
+      <div class="slds-grid slds-wrap">
+         <div class="new-containerpage">
+            <div class="slds-container--x-large new-container">
+               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12  header-full">
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 header-part">
+                     <div class="logo"> 
+                         <img src="{!$Resource.bright + '/bright-3.0/images/brightlogolightning.png'}" alt="Bright" />
+                     </div>
+                  </div>
+                   <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 header-part">
+                     <div class="account">
+                      <h3>Accounts &amp; Settings</h3>
+                     </div>
+                  </div>
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 header-part header-part1">
+                      <div class="all">
+                          <h5>AL</h5>
+                          </div>
+                      <div class="call">
+                         
+                        <h4>Amanda Lynn </h4>
+                        <h3>Subscriber ID: 8987987 &nbsp;<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" />  | <a href="#">Active</a></h3>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="slds-container--x-large new-container">
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 sidebar">
+                <ul class="menuside">
+                    <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/AccountsHome-black.svg'}" alt="Accounts Home" />Accounts Home</a></li>
+                    <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                    <li onclick="{!c.treeMenu}"><a><img src="{!$Resource.bright + '/bright-3.0/images/Brokerage.svg'}" alt="Brokerage" />Brokerage<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                      <ul class="submenu submenu1">
+                         <li><a  class="active" href="#">Office Roster</a></li>
+                        <li><a href="#">Office Statement </a></li>
+                        <li><a href="#">W-9 Forms </a></li>
+                        <li><a href="#">Office Information </a></li>
+                        <li><a href="#">Responsible Broker </a></li>
+                         <li><a href="#">Authorized Signers</a></li>
+                        <li><a href="#">Office Managers</a></li>
+                        <li><a href="#">Accuracy Notifications</a></li>
+                        <li><a href="#">Data Licensing</a></li>
+                        </ul>
+                    
+                    </li>
+                    <li onclick="{!c.treeMenu1}"><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Subscription.svg'}" alt="Subscription" />Subscription<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                     <ul class="submenu submenu2">
+                         <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                        </ul>
+                    </li>
+                    <li onclick="{!c.treeMenu2}"><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Requests.svg'}" alt="Requests" />Requests<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                    <ul class="submenu submenu3">
+                         <li><a href="#">Office Roster</a></li>
+                        <li><a href="#">Office Statement </a></li>
+                        <li><a href="#">W-9 Forms </a></li>
+                        <li><a href="#">Office Information </a></li>
+                        <li><a href="#">Responsible Broker </a></li>
+                         <li><a href="#">Authorized Signers</a></li>
+                        <li><a href="#">Office Managers</a></li>
+                        <li><a href="#">Accuracy Notifications</a></li>
+                        <li><a href="#">Data Licensing</a></li>
+                        </ul>
+                    </li>
+                    <li onclick="{!c.treeMenu3}"><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Finance.svg'}" alt="Finance" />Finance<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></a>
+                    <ul class="submenu submenu4">
+                         <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Profile.svg'}" alt="Profile" />Profile</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Notification-Preferences.svg'}" alt="Notification" />Notification Preferences</a></li>
+                    <li><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Settings-Permissions.svg'}" alt="Settings" />Settings &amp; Permissions</a></li>
+                     <li class="logout"><a href="#"><img src="{!$Resource.bright + '/bright-3.0/images/Logout.svg'}" alt="Logout" />Logout</a></li>
+                </ul>
+                
+                </div>
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_9-of-12 slds-large-size_9-of-12 middlebar">
+                 
+                   <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 middlebar1">
+                   <h2><b>Office Information</b></h2> 
+                  <lightning:button class="brand cancel" variant="brand " label="Cancel" title="Brand action" onclick="{! c.handleClick }" />
+                       <lightning:button class="brand brand2" variant="brand " label="Save" title="Brand action" onclick="{! c.handleClick }" />
+                      </div>    
+                  <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bottombar bottombar1">
+                     <div class="dev dev1">
+                        <p>Have your office details recently changed? Update the office information for your MLS Subscription.</p>
+                         <h2 class="notes"><img src="{!$Resource.bright + '/bright-3.0/images/contact-calendar.svg'}" alt="Account &amp; Settings Notifications" />Telephone and Contact Information</h2>
+                         <div class="review view">
+                        
+                                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1"> 
+                                   <h4>Phone</h4>
+                                   <h5> <lightning:input type="text" name="input3" placeholder="Enter phone number"  variant = "label-hidden" />
+                                  </h5>
+                             </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part2"> 
+                               <h4>Fax </h4>
+                                   <h5> <lightning:input type="text" name="input3" placeholder="Enter fax number"  variant = "label-hidden" />
+                                  </h5>
+                             </div>
+                             
+                  
+                        </div>
+                                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1"> 
+                                   <h4>Email Address</h4>
+                                   <h5> <lightning:input type="text" name="input3" placeholder="Enter email"  variant = "label-hidden" />
+                                  </h5>
+                             </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part2"> 
+                               <h4>Website </h4>
+                                   <h5> <lightning:input type="text" name="input3" placeholder="Enter url"  variant = "label-hidden" />
+                                  </h5>
+                             </div>
+                             
+                  
+                        </div>
+                             
+                                
+                              
+                            
+                     </div>
+                      <h2 class="notes"><img src="{!$Resource.bright + '/bright-3.0/images/Office-License.svg'}" alt="Office License Information" />Office License Information</h2>
+                         <div class="review view">
+                        
+                           <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1"> 
+                               <h4>License Number</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter license number"  variant = "label-hidden" /></h5>
+                             </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part2"> 
+                               <h4>Expiration Date</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter expiration date"  variant = "label-hidden" /></h5>
+                             </div>
+                              
+                  
+                        </div>
+               
+                             
+                         
+                              
+                     </div>
+                         <div class="review">
+                        <h2 class="notes"><img src="{!$Resource.bright + '/bright-3.0/images/location.svg'}" alt="Account &amp; Settings Notifications" />Office Address</h2>
+                       
+                           <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1"> 
+                               <h4>Account Name</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter account name"  variant = "label-hidden" /></h5>
+                             </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part2"> 
+                               <h4>Expiration Date</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter expiration date"  variant = "label-hidden" /></h5>
+                             </div>
+                              
+                  
+                        </div>
+                              <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1"> 
+                               <h4>License Number</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter license number"  variant = "label-hidden" /></h5>
+                             </div>
+                                       
+                  
+                        </div>
+                              <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1"> 
+                               <h4>Street Number</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter street number"  variant = "label-hidden" /></h5>
+                             </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part2"> 
+                               <h4>Street Name</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter street name"  variant = "label-hidden" /></h5>
+                             </div>
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part3"> 
+                               <h4>Street Type</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter street type"  variant = "label-hidden" /></h5>
+                             </div> 
+                  
+                        </div>
+                              <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1"> 
+                               <h4>Street Number Suffix</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter street number suffix"  variant = "label-hidden" /></h5>
+                             </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part2"> 
+                               <h4>Street Direction</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter street direction"  variant = "label-hidden" /></h5>
+                             </div>
+                              
+                  
+                        </div>
+                              <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1"> 
+                               <h4>Unit Type</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter unit type"  variant = "label-hidden" /></h5>
+                             </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part2"> 
+                               <h4>Unit #</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter unit #"  variant = "label-hidden" /></h5>
+                             </div>
+                              
+                  
+                        </div>
+                             
+                              <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1"> 
+                               <h4>Zip</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter zip"  variant = "label-hidden" /></h5>
+                             </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part2"> 
+                               <h4>Zip+4</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter Zip"  variant = "label-hidden" /></h5>
+                             </div>
+                              
+                  
+                        </div>
+                                      <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 part0">
+                               <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part1"> 
+                               <h4>City</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter city"  variant = "label-hidden" /></h5>
+                             </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part2"> 
+                               <h4>State</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter state"  variant = "label-hidden" /></h5>
+                             </div>
+                             <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 layer part3"> 
+                               <h4>County</h4>
+                                   <h5><lightning:input type="text" name="input3" placeholder="Enter county"  variant = "label-hidden" /></h5>
+                             </div> 
+                  
+                        </div>      
+                               
+                     </div>
+                  </div>
+                  
+               </div>
+            </div>
+                
+            </div>
+         </div>
+      
+      </div>
+       
+       <!-- PopUp 1 start -->
+       <aura:if isTrue="{!v.popup1}">
+           <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- ###### MODAL BOX HEADER Start ######-->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModel }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate email">Submit Completed W-9 Form</h2>
+                    </header>
+                    <!--###### MODAL BOX BODY Part Start######-->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                       <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodyline">
+                      
+                        <h3>Fill out the fields below and attach a PDF copy of the completed IRS W-9 form.</h3>
+                        
+                      
+                        
+                        
+       
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_8-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodylinefull">
+                       <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_11-of-12 slds-large-size_11-of-12 bodyline1 ask">
+                            <h6>Taxpayer Identifier Number <span>*</span></h6>
+                         <lightning:input type="text" name="input3" placeholder="Enter TIN"  variant = "label-hidden" />
+                      
+                        </div>
+                           </div>
+                           <div class="slds-col slds-size_12-of-12 slds-small-size_8-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodylinefull">
+                       <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_11-of-12 slds-large-size_11-of-12 bodyline1 ask">
+                            <h6>Broker Office Name <span>*</span></h6>
+                         <lightning:input type="text" name="input3" placeholder="Enter Name"  variant = "label-hidden" />
+                      
+                        </div>
+                           </div>
+                           <div class="slds-col slds-size_12-of-12 slds-small-size_8-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodylinefull">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_11-of-12 slds-large-size_11-of-12 bodyline1 ask">
+                            <h6>Office ID</h6>
+                         <lightning:input type="text" name="input3" placeholder="Enter postal code"  variant = "label-hidden" />
+                               </div>
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 bodyline1 ask">
+                          
+                                     <img  class="ask1" src="{!$Resource.bright + '/bright-3.0/images/info-outline.svg'}" alt="info" />
+                          </div>
+                        </div>
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_8-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 bodylinefull">
+                       <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_11-of-12 slds-large-size_11-of-12 bodyline1 ask">
+                           <p>Please attach an electronic copy of the completed IRS W-9 Form below:</p> 
+                           
+                           <h6 class="add">Add Attachment <span>*</span></h6>
+                           
+                           <div class="file"><a href=""><span>Choose File</span> No file chosen</a></div>
+                         
+                        </div>
+                           </div>
+                    </div>
+                    </div>
+                    <!--###### MODAL BOX FOOTER Part Start ######-->
+                    <footer class="slds-modal__footer">
+                         <lightning:button class="brand" variant="brand" label="Submit" title="Brand action" onclick="{! c.handleClick }" />
+                       
+                        <lightning:button variant="neutral" 
+                                          label="Cancel"
+                                          title="Cancel"
+                                           class="newCancel"
+                                          onclick="{! c.closeModel }"/>
+                        
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+       </aura:if>
+       <!-- PopUp 1 end -->
+       
+   </div>
+</aura:component>

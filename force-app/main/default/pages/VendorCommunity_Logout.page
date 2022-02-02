@@ -1,0 +1,29 @@
+<apex:page showHeader="false" standardStylesheets="false" lightningstylesheets="true">
+    <!--<apex:composition template="Bootstrap_Framed">-->
+        <c:Bootstrap_Resources />
+    <apex:form >
+        
+        <div class="container">
+            <h3><strong>
+                You have been logged out.
+                </strong>
+            </h3>
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <!--<div class="panel-heading">Panel Header</div>-->
+                    <div class="panel-body" style="padding-top:3%; background-color:#f5f5f5;">
+                        <p>
+                            If you would like to sign back into Bright, please &nbsp;<apex:outputlink style="color:red;" value="{!$Label.VendorCommunityLogout_ClickHere_Link}" >click here</apex:outputlink> to return to the log in screen.
+                        </p>
+                        <p>
+                            If you need any assistance, please contact the Customer Support Center at 1-844-55-BRIGHT (1-844-522-7444).
+                        </p> 
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </apex:form>
+    
+    
+</apex:page>

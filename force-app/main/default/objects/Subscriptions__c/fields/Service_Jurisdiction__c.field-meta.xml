@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Service_Jurisdiction__c</fullName>
+    <externalId>false</externalId>
+    <label>Service Jurisdiction</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>BRIGHT</fullName>
+                <default>false</default>
+                <label>BRIGHT</label>
+            </value>
+            <value>
+                <fullName>MRIS</fullName>
+                <default>false</default>
+                <label>MRIS</label>
+            </value>
+            <value>
+                <fullName>TREND</fullName>
+                <default>false</default>
+                <label>TREND</label>
+            </value>
+            <value>
+                <fullName>CURE</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CURE</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

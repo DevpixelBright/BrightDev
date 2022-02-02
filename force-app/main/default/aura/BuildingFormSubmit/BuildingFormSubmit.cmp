@@ -1,0 +1,244 @@
+<aura:component implements="force:appHostable,lightning:isUrlAddressable" controller="SubdivisionBuilding_Form">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <ltng:require styles="{!$Resource.headeras }"></ltng:require>
+    <ltng:require styles="{!$Resource.bodyas }"></ltng:require>
+    <aura:attribute name="showSuccess" type="boolean" default="false"/>
+    <aura:attribute name="stateListOptions" type="List" default="[]" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="caseId" type="String" default="" />
+    <aura:attribute name="files" type="List" default="[]" />
+    <aura:attribute name="disabled" type="Boolean" default="true" />
+    <aura:attribute name="showspinner" type="Boolean" default="false" />
+    <aura:attribute name="hasError" type="Boolean" default="false"/>
+    
+    <aura:attribute name="isUrlRequired" type="Boolean" default="false"/>
+    <aura:attribute name="isBuilderUrlRequired" type="Boolean" default="false"/>
+    <aura:attribute name="isBuilderContactInfoRequired" type="Boolean" default="false"/>
+    <aura:attribute name="isOtherInfoRequired" type="Boolean" default="false"/>
+    
+    <aura:attribute name="Subdivisionname" type="String" default=""/> 
+    <aura:attribute name="County" type="String" default=""/> 
+    <aura:attribute name="State" type="String" default=""/> 
+    <aura:attribute name="URL" type="String" default=""/> 
+    <aura:attribute name="builderURL" type="String" default=""/> 
+    <aura:attribute name="BuilderName" type="String" default=""/> 
+    <aura:attribute name="BuilderPhoneNumber" type="String" default=""/> 
+    <aura:attribute name="BuilderEmailAddress" type="String" default=""/> 
+    <aura:attribute name="otherInformation" type="String" default=""/> 
+    <aura:attribute name="subscription" type="Object"/>
+
+    
+    
+    <div class="c-container">
+        <div class="fullpage slds-scope">
+            <div class="slds-grid slds-wrap">
+                <aura:if isTrue="{!!v.showSuccess}">
+                    <aura:if isTrue="{!v.showspinner}">
+                        <div class="spin">
+                            <lightning:spinner alternativeText="Loading" size="large" />
+                        </div>
+                    </aura:if>
+                    
+                    <lightning:layout multipleRows="true">
+                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                            <div class="new-containerpage header-new-containerpage">
+                                <div class="slds-container--x-large new-container">
+                                    <c:headeras />
+                                </div>
+                            </div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                            <lightning:layout>
+                                <div class="new-containerpage">
+                                    <div class="slds-container--x-large new-container">
+                                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                            <div class="page-section page-main">
+                                                <div class="dev">
+                                                    <h2>Add a New Subdivision Name</h2>
+                                                    <div class="view"></div>
+                                                    <p class="recent">Complete the requested Subdivision information below for Bright Staff to validate. Required fields are indicated with a red asterisk.</p>
+                                                    <div class="part0">
+                                                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                                                <div class="layer part1">
+                                                                    <h4>Subdivision Name <span class="star">*</span></h4>
+                                                                    <h5>
+                                                                        <lightning:input type="text" aura:id="subDivisionForm" name="Subdivisionname" placeholder="Enter the subdivision name" value="{!v.Subdivisionname}" variant = "label-hidden" required="true" maxlength="255"/>
+                                                                    </h5>
+                                                                </div>
+                                                            </lightning:layoutItem>
+                                                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                                                <div class="layer part1">
+                                                                    <h4>County <span class="star">*</span></h4>
+                                                                    <h5>
+                                                                        <lightning:input type="text" aura:id="subDivisionForm" name="County" placeholder="Enter the county"  value="{!v.County}" variant = "label-hidden" required="true" maxlength="255"/>
+                                                                    </h5>
+                                                                </div>
+                                                            </lightning:layoutItem>
+                                                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                                                <div class="layer part2">
+                                                                    <h4>State <span class="star">*</span></h4>
+                                                                    <h5>
+                                                                        <lightning:combobox aura:id="subDivisionForm" name="State" required="true" value="{!v.State}" 
+                                                                                            placeholder="Select State" options="{! v.stateListOptions }"/>
+                                                                        
+                                                                    </h5>
+                                                                </div>
+                                                            </lightning:layoutItem>
+                                                        </lightning:layoutItem>
+                                                        <div class="view"></div>
+                                                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                                                <div class="layer part2">
+                                                                    <h4>Validation Source <span class="star">*</span></h4>
+                                                                    <p class="recent">Please select at least one of the following validation sources and enter the information requested. You may also attach additional supporting documentation files (County record, marketing brochure, etc.)</p>
+                                                                </div>
+                                                            </lightning:layoutItem>
+                                                        </lightning:layoutItem>
+                                                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                                                <div class="layer part1 ">
+                                                                    <h4>
+                                                                        <lightning:input type="checkbox" onclick="{!c.rerenderForm}"
+                                                                                         checked="{!v.isUrlRequired}" label="URL" name="url"/>
+                                                                    </h4>
+                                                                    
+                                                                    <h5>
+                                                                        <lightning:input type="url" aura:id="subDivisionForm" name="urlInput" placeholder="Enter URL (e.g.- www.brightmls.com)" value="{!v.URL}" variant = "label-hidden" disabled="{!!v.isUrlRequired}" required="{!v.isUrlRequired}"/>
+                                                                    </h5>
+                                                                    
+                                                                </div>
+                                                            </lightning:layoutItem>
+                                                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                                                <div class="layer part1">
+                                                                    <h4>
+                                                                        <lightning:input type="checkbox" aura:id="subDivisionFormCheckbox" checked="{!v.isBuilderUrlRequired}" label="Builder URL" name="builderUrlCheckbox"/>
+                                                                    </h4>
+                                                                    <h5>
+                                                                        <lightning:input type="url" aura:id="subDivisionForm" name="builderUrl" placeholder="Enter URL (e.g.- www.brightmls.com)" value="{!v.builderURL}" variant = "label-hidden" disabled="{!!v.isBuilderUrlRequired}" required="{!v.isBuilderUrlRequired}" />
+                                                                    </h5>
+                                                                </div>
+                                                            </lightning:layoutItem>
+                                                        </lightning:layoutItem>
+                                                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                                                <div class="layer part2 part3">
+                                                                    <h4>
+                                                                        <lightning:input type="checkbox" aura:id="subDivisionForm" checked="{!v.isBuilderContactInfoRequired}" label="Builder Contact Information" name="builderContactInfoCheckbox"/>
+                                                                    </h4>
+                                                                </div>
+                                                            </lightning:layoutItem>
+                                                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                                                <div class="inform">
+                                                                    <p class="recent">Enter the Builder’s name and contact information (phone and/or email).</p>
+                                                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                                                        <div class="layer part1 ">
+                                                                            <h4>Builder Name</h4>
+                                                                            <h5>
+                                                                                <lightning:input type="text" aura:id="subDivisionForm" name="input3" placeholder="Enter Builder Name"  value="{!v.BuilderName}"
+                                                                                                 variant = "label-hidden" disabled="{!!v.isBuilderContactInfoRequired}" required="{!v.isBuilderContactInfoRequired}"/>
+                                                                            </h5>
+                                                                        </div>
+                                                                    </lightning:layoutItem>
+                                                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                                                        <div class="layer part1 ">
+                                                                            <h4>Builder Phone Number</h4>
+                                                                            <h5>
+                                                                                <lightning:input type="tel" aura:id="subDivisionForm" name="input3" placeholder="Enter Builder Phone Number"  value="{!v.BuilderPhoneNumber}"
+                                                                                                 variant = "label-hidden" disabled="{!!v.isBuilderContactInfoRequired}" required="{!v.isBuilderContactInfoRequired}"
+                                                                                                 pattern="^\d{10}$|^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$" messageWhenPatternMismatch="Please enter a valid phone number"/>
+                                                                            </h5>
+                                                                        </div>
+                                                                    </lightning:layoutItem>
+                                                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                                                        <div class="layer part2 ">
+                                                                            <h4>Builder Email Address</h4>
+                                                                            <h5>
+                                                                                <lightning:input type="email" aura:id="subDivisionForm" name="input3" placeholder="Enter Builder Email Address"  value="{!v.BuilderEmailAddress}"
+                                                                                                 variant = "label-hidden"  disabled="{!!v.isBuilderContactInfoRequired}" required="{!v.isBuilderContactInfoRequired}"
+                                                                                                 pattern="[A-z0-9._%+-]+@[A-z0-9.-]+\.[A-z]{2,}" messageWhenPatternMismatch="Please enter a valid email address"/>
+                                                                            </h5>
+                                                                        </div>
+                                                                    </lightning:layoutItem>
+                                                                </div>
+                                                            </lightning:layoutItem>
+                                                        </lightning:layoutItem>
+                                                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                                                <div class="layer part2 part3">
+                                                                    <h4>
+                                                                        <lightning:input type="checkbox" aura:id="OtherInfo" checked="{!v.isOtherInfoRequired}" label="Other" name="otherInfoCheckbox"/>
+                                                                    </h4>
+                                                                </div>
+                                                            </lightning:layoutItem>
+                                                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                                                <div class="inform">
+                                                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                                                        <div class="layer part2 part4">
+                                                                            <h5>
+                                                                                <lightning:textarea name="input3" aura:id="subDivisionForm" label="Textarea field with a placeholder" placeholder="Why is this a new Subdivision request and where can Bright Staff validate the information?" variant = "label-hidden" 
+                                                                                                    value="{!v.otherInformation}" disabled="{!!v.isOtherInfoRequired}" required="{!v.isOtherInfoRequired}"/> 
+                                                                            </h5>
+                                                                        </div>
+                                                                    </lightning:layoutItem>
+                                                                </div>
+                                                            </lightning:layoutItem>
+                                                        </lightning:layoutItem>
+                                                        <div class="view"></div>
+                                                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                                            <div class="inform">
+                                                                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="2" largeDeviceSize="2">
+                                                                    <div class="layer part1">
+                                                                        <h4>Add Attachment(s) </h4>
+                                                                        <p class="addr">(Maximum file size: 4 MB)</p>
+                                                                    </div>
+                                                                </lightning:layoutItem>
+                                                                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                                                    <div class="layer part2">
+                                                                        <h4 class="please"><lightning:input aura:id="fuploader" type="file" name="file" multiple="false" onchange="{!c.handleFilesChange}" /></h4>
+                                                                        <h5>
+                                                                            <!--<aura:if isTrue="{!v.files.length==0}"><h6 class="true">No file chosen</h6></aura:if>-->
+                                                                            <aura:iteration items="{!v.files}" var="file">
+                                                                                <p class="file">{!file.name}</p>
+                                                                            </aura:iteration>
+                                                                            <!--<div class="file"><a href=""><span>Choose File</span> No file chosen</a></div>-->
+                                                                        </h5>
+                                                                    </div>
+                                                                </lightning:layoutItem>
+                                                            </div>
+                                                        </lightning:layoutItem>
+                                                        <div class="view"></div>
+                                                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                                            <div class="line">
+                                                                <lightning:button class="brand cancel" variant="brand " label="Cancel" onclick="{!c.returnBackPage}" title="Brand action"  />
+                                                                
+                                                                <lightning:button class="brand" variant="brand " label="Submit" onclick="{!c.saveForm}"/>
+                                                                
+                                                            </div>
+                                                        </lightning:layoutItem>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </lightning:layoutItem>
+                                    </div>
+                                </div>
+                            </lightning:layout>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                            <div class="new-containerpage footer-new-containerpage">
+                                <div class="slds-container--x-large new-container">
+                                    <c:footeras />
+                                </div>
+                            </div>
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </aura:if>
+                <aura:if isTrue="{!v.showSuccess}">
+                    <div class="slds-container--x-large new-container">
+                        <c:SubDivisionBuildFormThankyou/>
+                    </div>
+                </aura:if>
+            </div>
+        </div>
+    </div>
+</aura:component>

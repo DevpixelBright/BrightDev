@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <outboundMessages>
+        <fullName>SFDC_License</fullName>
+        <apiVersion>52.0</apiVersion>
+        <endpointUrl>https://sfdcservices.dev.brightmls.com/license</endpointUrl>
+        <fields>Id</fields>
+        <fields>Subscription__c</fields>
+        <fields>SystemModstamp</fields>
+        <includeSessionId>true</includeSessionId>
+        <integrationUser>mris_sf_api@mris.net</integrationUser>
+        <name>SFDC License</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <outboundMessages>
+        <fullName>Subscription_License_Update</fullName>
+        <apiVersion>39.0</apiVersion>
+        <endpointUrl>http://talend.dev.brightmls.com/services/SFSubscriptionLicense</endpointUrl>
+        <fields>Id</fields>
+        <fields>Subscription__c</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>mris_sf_api@mris.net</integrationUser>
+        <name>Subscription_License_Update</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>Subscription_License_Inactivated</fullName>
+        <actions>
+            <name>SFDC_License</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>true</active>
+        <formula>AND(NOT($User.IsActive),
+ISPICKVAL(Subscription__r.Service_Jurisdiction__c ,&apos;BRIGHT&apos;),
+(License_Type__c &lt;&gt; &apos;Appraiser&apos;),
+(License_Type__c &lt;&gt; &apos;Certified Appraiser&apos;),
+(License_Type__c &lt;&gt; &apos;Licensed Appraiser&apos;)
+)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Subscription_License_Updated</fullName>
+        <actions>
+            <name>SFDC_License</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>true</active>
+        <formula>AND($User.IsActive, 
+ISPICKVAL(Subscription__r.Service_Jurisdiction__c ,&apos;BRIGHT&apos;),
+(License_Type__c &lt;&gt;  &apos;Appraiser&apos;),
+(License_Type__c &lt;&gt; &apos;Certified Appraiser&apos;),
+(License_Type__c &lt;&gt; &apos;Licensed Appraiser&apos;)
+)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

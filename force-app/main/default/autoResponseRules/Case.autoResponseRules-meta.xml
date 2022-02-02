@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AutoResponseRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <autoResponseRule>
+        <fullName>Exception Response</fullName>
+        <active>false</active>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.ContactEmail</field>
+                <operation>notEqual</operation>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>subscribe@mris.net,Helpdesk@mris.net,Billing@mris.net</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <senderEmail>noreply@mris.net</senderEmail>
+            <senderName>MRIS Support Center</senderName>
+            <template>API_Names/Thank_You_for_Contacting_MRIS</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.ContactEmail</field>
+                <operation>equals</operation>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>subscribe@mris.net,Helpdesk@mris.net,Billing@mris.net</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <senderEmail>noreply@mris.net</senderEmail>
+            <senderName>MRIS Support Center</senderName>
+            <template>API_Names/Exception_Auto_Reply</template>
+        </ruleEntry>
+    </autoResponseRule>
+    <autoResponseRule>
+        <fullName>Standard responses</fullName>
+        <active>true</active>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.ContactEmail</field>
+                <operation>notEqual</operation>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>Billing@mris.net,Helpdesk@mris.net,subscribe@mris.net</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <senderEmail>noreply@mris.net</senderEmail>
+            <senderName>MRIS Support Center</senderName>
+            <template>API_Names/Thank_You_for_Contacting_MRIS</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.ContactEmail</field>
+                <operation>equals</operation>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>Billing@mris.net,Helpdesk@mris.net,subscribe@mris.net</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <senderEmail>noreply@mris.net</senderEmail>
+            <senderName>MRIS Support Center</senderName>
+            <template>API_Names/Exception_Auto_Reply</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>RETSbox@mris.net</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>retsbox@mris.net</replyToEmail>
+            <senderEmail>noreply@mris.net</senderEmail>
+            <senderName>RETS/MDS Support</senderName>
+            <template>API_Names/RETS_Auto_Reply</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>MDS-Support@mris.net</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>mds-support@mris.net</replyToEmail>
+            <senderEmail>noreply@mris.net</senderEmail>
+            <senderName>RETS/MDS Support</senderName>
+            <template>API_Names/MDS_Auto_Reply</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>support@brightmls.com,billing@brightmls.com</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <senderEmail>no-reply@brightmls.com</senderEmail>
+            <senderName>BRIGHT Support</senderName>
+            <template>Support_Center_Email_Templates/BRIGHT_MLS_Support_Thank_You_for_Contacting_Bright_MLS</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>praccuracy@trendmls.com</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>publicrecords@mris.net</replyToEmail>
+            <senderEmail>no-reply@brightmls.com</senderEmail>
+            <senderName>Public Records Support</senderName>
+            <template>Support_Center_Email_Templates/BRIGHT_MLS_Support_Thank_You_for_Contacting_Bright_MLS</template>
+        </ruleEntry>
+    </autoResponseRule>
+</AutoResponseRules>

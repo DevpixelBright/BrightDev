@@ -1,0 +1,226 @@
+<apex:page docType="html-5.0" renderAs="pdf" readOnly="true" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="Communities_SOA_Controller" lightningstylesheets="true">
+   <apex:composition template="Communities_Base_PDF">
+        
+        <apex:define name="head">
+            <style>
+                .soa {
+                    margin-top: 50px;
+                }
+
+                    .soa .info {
+                        float: left;
+                        top: 20px;
+                        width: 50%;
+                    }
+                    
+                    .soa .info h4 {
+                        margin-top: 0px;
+                        margin-bottom: 0px;
+                        font-size: 18px;
+                        font-weight: normal;
+                    }
+                    
+                    .soa .info h2 {
+                        margin-top: 5px;
+                        margin-bottom: 10px;
+                        font-weight: bold;
+                        font-size: 30px;
+                    }
+                    
+                    .soa .account-balance {
+                        float: right;
+                        padding-right: 0px;
+                        width: 50%;
+                    }
+                    
+                    .soa .summary {
+                        float: right;
+                        text-align: right;
+                        border-radius: 4px;
+                        line-height: 31px;
+                        border: 1px solid #333;
+                        overflow: hidden;
+                    }
+                    
+                    .soa .summary-row {
+                    }
+
+                    .soa .summary-row + .summary-row {
+                        border-top: 1px solid #555;
+                    }
+
+                    .soa .summary-row .text {
+                        display: inline-block;
+                        width: 205px;
+                        padding-left: 20px;
+                        padding-right: 10px;
+                        background-color: #333;
+                        color: #FFF;
+                    }
+
+                    .soa .summary-row .value {
+                        display: inline-block;
+                        width: 100px;
+                        padding-right: 10px;
+                        color: #222;
+                    }
+
+                    .soa .summary-row .value::before {
+                        content: "$";
+                    }
+                    
+                    .soa .filter {
+                        border-top: 1px solid #388EDD;
+                        border-bottom: 1px solid #388EDD;
+                        padding: 20px;
+                    }
+                    
+                    .soa .list {
+                        margin-top: 50px;
+                    }
+
+                        .soa .list .emphasized {
+                            font-weight: bold;
+                        }
+                    
+                        .soa .list .row {
+                        }
+                        
+                        .soa .list .row:nth-child(even) {
+                        }
+                        
+                        .soa .list .row + .row {
+                            border-top: 1px solid #333;
+                        }
+
+                        .soa .list .row > div {
+                            line-height: 40px;
+                        }
+                        
+                        .soa .list .date {
+                            float: left;
+                            width: 15%;
+                        }
+                        
+                        .soa .list .id {
+                            float: left;
+                            width: 25%;
+                        }
+                        
+                        .soa .list .description {
+                            float: left;
+                            width: 39%;
+                        }
+                        
+                        .soa .list .amount {
+                            float: left;
+                            text-align: right;
+                            width: 20%;
+                        }
+            </style>
+        </apex:define>
+
+        <apex:define name="title">
+            {!dateLimits.maxYear} Statement of Accounts
+        </apex:define>
+
+        <apex:define name="content">        
+            <div class="instructions">
+                <p>The following invoice lists the charges related to your account for the date shown. Where applicable, sales tax has been added. This invoice is due upon receipt. Please pay your balance now to avoid a $25 late fee and potential interruption of service.</p>
+                <p>We encourage you to pay online using our secure payment portal, accessed through the MLS website. For your security, we cannot accept payments by phone.</p>
+                <p>If you prefer to pay by check or money order, please make your check payable to Bright MLS and include your login ID in the memo. Checks should be mailed to:</p>
+                <p>Bright MLS<br/>P.O. Box 37093<br/>Baltimore, MD 21297-3093</p>
+            </div>
+
+            <div class="soa">
+                <div class="info">
+                    <h4>{!mySOAHeader.TodayDateString}</h4>
+                    <h2>{!mySOAHeader.CustomerName}</h2>
+                    <apex:outputText value="{!mySOAHeader.AddressString}" escape="false" />
+                </div>
+                <div class="account-balance">
+                    <div class="summary">
+                        <div class="summary-row">
+                            <span class="text">{!dateLimits.maxYear} Total Subscription Fees</span>
+                            <span class="value">
+                                <apex:outputText value="{0, number, ###,###,###,##0.00}">  
+                                    <apex:param value="{!mySOALineItemData.TotalSubscriptionFees}"/>  
+                                </apex:outputText> 
+                            </span>
+                        </div>
+                        <div class="summary-row">
+                            <span class="text">{!dateLimits.maxYear} Total Credits Applied</span>
+                            <span class="value">
+                                <apex:outputText value="{0, number, ###,###,###,##0.00}">  
+                                    <apex:param value="{!mySOALineItemData.TotalCreditsApplied}"/>  
+                                </apex:outputText> 
+                            </span>
+                        </div>
+                        <div class="summary-row">
+                            <span class="text">{!dateLimits.maxYear} Total Payments Received</span>
+                            <span class="value">
+                                <apex:outputText value="{0, number, ###,###,###,##0.00}">  
+                                    <apex:param value="{!mySOALineItemData.TotalPaymentsReceived}"/>  
+                                </apex:outputText> 
+                            </span>
+                        </div>
+                        <div class="summary-row">
+                            <span class="text">{!dateLimits.maxYear} Total Balance Outstanding</span>
+                            <span class="value"><b>
+                                <apex:outputText value="{0, number, ###,###,###,##0.00}">  
+                                    <apex:param value="{!mySOALineItemData.BalanceDue}"/>  
+                                </apex:outputText></b>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <c/>
+
+                <div class="list">
+                    <div class="row emphasized">
+                        <div class="date">Date</div>
+                        <div class="id">Transaction ID</div>
+                        <div class="description">Description</div>
+                        <div class="amount">Amount</div>
+                        <c/>
+                    </div>
+
+                    <apex:variable var="lineItemCount" value="{!0}"/>
+                    <apex:repeat value="{!mySOALineItemData.LineItems}" var="lineItem">
+                        <apex:outputPanel layout="none" rendered="{!lineItem.ToDisplay}">
+                            <apex:variable var="lineItemCount" value="{!lineItemCount + 1}"/>
+                            <div class="row line-item">
+                                <div class="date">{!lineItem.EffectiveDateTimeString}</div>
+                                <div class="id">{!lineItem.TransactionId}</div>
+                                <div class="description">{!lineItem.ItemDescription}</div>
+                                <div class="amount">
+                                    <apex:outputText value="{0, number, ###,###,###,##0.00}">  
+                                        <apex:param value="{!lineItem.Amount}"/>  
+                                    </apex:outputText> 
+                                </div>
+                                <c/>
+                            </div>
+                        </apex:outputPanel> 
+                    </apex:repeat>
+
+                    <apex:outputPanel layout="none" rendered="{!lineItemCount == 0}">
+                        <div class="alert alert-warning" style="text-align: center; margin-top: 20px;">
+                            No activities found on record
+                        </div>
+                    </apex:outputPanel>
+
+                    <apex:outputPanel layout="none" rendered="{!currentYearTruncated}">
+                        <div class="alert alert-warning" style="text-align: center; margin-top: 20px;">
+                            Activities before
+                            <b><apex:outputText value="{0, date, MMMM', 'yyyy}">
+                                <apex:param value="{!truncationDate}" />
+                            </apex:outputText></b>
+                            are no longer available
+                        </div>
+                    </apex:outputPanel>
+                </div>
+            </div>
+        </apex:define>
+
+   </apex:composition>
+</apex:page>

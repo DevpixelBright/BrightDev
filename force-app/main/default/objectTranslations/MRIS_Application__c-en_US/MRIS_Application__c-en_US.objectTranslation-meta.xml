@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>MRIS Application</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>BRIGHT Applications</value>
+    </caseValues>
+    <fieldSets>
+        <label></label>
+        <name>EZJoin_PA_Step1</name>
+    </fieldSets>
+    <layouts>
+        <layout>Reinstatement Application Layout</layout>
+        <sections>
+            <label></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Standard Layout</layout>
+        <sections>
+            <label></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label></label>
+        <name>MRIS_Reinstatement_Application</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>ApprovedorRejected_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Cannot_change_reinstatement_status</name>
+    </validationRules>
+</CustomObjectTranslation>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <email>noemail@mris.net</email>
+    <name>SC Data Corrections</name>
+    <queueMembers>
+        <publicGroups>
+            <publicGroup>SC_Group_3</publicGroup>
+            <publicGroup>SC_Group_4</publicGroup>
+            <publicGroup>SC_Supervisors</publicGroup>
+            <publicGroup>AllInternalUsers</publicGroup>
+        </publicGroups>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>Case</sobjectType>
+    </queueSobject>
+</Queue>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Listing_Protect_Opt_In_Email_confirmation_to_BOR</fullName>
+        <ccEmails>abhi.kankanala@bltglobalventures.com</ccEmails>
+        <description>Listing Protect Opt In Email confirmation to BOR</description>
+        <protected>false</protected>
+        <recipients>
+            <field>BOR_Email_ID__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>listingprotect@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Listing_Protect_Opt_In_Template</template>
+    </alerts>
+    <alerts>
+        <fullName>Listing_Protect_Opt_Out_Email_confirmation_to_BOR</fullName>
+        <ccEmails>abhi.kankanala@bltglobalventures.com</ccEmails>
+        <description>Listing Protect Opt Out Email confirmation to BOR</description>
+        <protected>false</protected>
+        <recipients>
+            <field>BOR_Email_ID__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>listingprotect@mris.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>API_Names/Listing_Protect_Opt_Out_Template</template>
+    </alerts>
+    <rules>
+        <fullName>Listing Protect Opt In Confirmation Send Email</fullName>
+        <actions>
+            <name>Listing_Protect_Opt_In_Email_confirmation_to_BOR</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Listing_Protect_Program_History__c.Previous_Selection__c</field>
+            <operation>equals</operation>
+            <value>Opt Out</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Listing_Protect_Program_History__c.Current_Selection__c</field>
+            <operation>equals</operation>
+            <value>Opt In</value>
+        </criteriaItems>
+        <description>Sends an email to Broker of Record of the relationship when when a Broker of Record opts in to the Listing Protect program</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Listing Protect Opt Out Confirmation Send Email</fullName>
+        <actions>
+            <name>Listing_Protect_Opt_Out_Email_confirmation_to_BOR</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Listing_Protect_Program_History__c.Current_Selection__c</field>
+            <operation>equals</operation>
+            <value>Opt Out</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Listing_Protect_Program_History__c.Previous_Selection__c</field>
+            <operation>equals</operation>
+            <value>Opt In</value>
+        </criteriaItems>
+        <description>Sends an email to Broker of Record of the relationship when when a Broker of Record opts out of the Listing Protect Program</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+</Workflow>

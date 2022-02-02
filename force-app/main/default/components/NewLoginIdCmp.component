@@ -1,0 +1,95 @@
+<apex:component id="theComp" controller="NewLoginIdCmpClass" allowDML="true">
+    
+    <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/jquery.min.js')}"></script>
+	<style>
+        .field-error {color:red; font-size:12px; display:none;}
+    </style>
+    <apex:attribute name="subscriptionId" type="String" description="Subscription Record Id passed to the page" assignTo="{!subsId}"/>
+   <!-- <apex:form id="fm">-->
+            
+        <div id="apexMsg">
+            <apex:pageMessages id="showmsg"></apex:pageMessages>
+        </div>
+            <div class="form-group"> 
+                <apex:outputLabel value="Enter New Login Name" ></apex:outputLabel>
+                <div class="col-sm-7">
+                    
+                    <apex:inputText style="margin-left: 15px;" value="{!newValue}" id="ipt" onChange="validate(this)"/>
+                    <!--<input type="Text" style="margin-left: 15px;" value="{!newValue}" id="ipt" onChange="validate(this)"/>-->
+                        <label class="field-error" id="loginAvailable" ></label>
+                </div>
+            </div>
+                
+        <!--<apex:commandButton value="Save LoginId" action="{!saveLogin}" rendered="{!available}"/> -->
+                        
+        <apex:actionFunction name="callMethod" action="{!furtherValidate}" reRender="fm, loginAvailable" onComplete="displaymsg();">
+           	<apex:param name="pattern" value=""/>
+        </apex:actionFunction>
+                            
+                            
+        <script>
+                function validate(newLogin) {
+                var newValue = newLogin.value;
+                
+                if(newValue.length < 3 || newValue.length > 25){
+                    $("#loginAvailable").html("Login Name should be a minimum of 3 characters or a maximum of 25 characters.");
+                    $(".field-error").css('display', 'grid');
+                    $("#loginAvailable").show();
+                    $("#apexMsg").hide();
+                }
+                else {
+                    var regex = new RegExp('^[A-Za-z0-9@.-]*$');
+                    var pattern = newValue.match(regex);
+                    console.log('---pattern--'+pattern);
+                    if(pattern) {
+                        if(!isNaN(pattern[0])) {
+                            if(pattern[0] == '{!sub.Name}'){
+                                $("#loginAvailable").html("");
+                                $(".field-error").css('display', 'none');
+                                $("#loginAvailable").hide();
+                                
+                                callMethod(pattern[0]);
+                            }
+                            else{
+                                $("#loginAvailable").html("Login Name with all numbers will not be allowed unless it matches your subscription id.");
+                                $(".field-error").css('display', 'grid');
+                                $("#loginAvailable").show();
+                                $("#apexMsg").hide();
+                            }
+                        }
+                        else if(isNaN(pattern[0])){
+                            $("#loginAvailable").html("");
+                            $(".field-error").css('display', 'none');
+                            $("#loginAvailable").hide();
+                            callMethod(pattern[0]);
+                        }
+                    }
+                    else{
+                        var newlogin = $('[id$=ipt]').val();
+                        console.log('---newlogin--',newlogin);
+                        $("#loginAvailable").html("Login Name can contain one of the following special characters: @ or . or -");
+                        $(".field-error").css('display', 'grid');
+                        $("#loginAvailable").show();
+                        $("#apexMsg").hide();
+                    }
+                }                
+            }
+            function displaymsg() {
+                var bool = '{!available}';
+                console.log('---bool---'+bool);
+                
+                if(bool == 'true') {
+                    $("#loginAvailable").html("Available");
+                    $(".field-error").css('display', 'grid');
+                    $(".field-error").css('color', 'green');
+                    $("#loginAvailable").show();
+                }
+                else {
+                    $("#loginAvailable").html("Unavailable");
+                    $(".field-error").css('display', 'grid');
+                    $("#loginAvailable").show();
+                }
+            }
+    	</script>
+	<!--</apex:form>-->
+</apex:component>

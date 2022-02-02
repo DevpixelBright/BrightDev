@@ -1,0 +1,687 @@
+<apex:page showheader="false" controller="Communities_ListingTransferRequests" action="{!validateListingRequests}"  lightningstylesheets="true">
+    <apex:composition template="Communities_Base">
+        <apex:define name="content">
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+            <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/angular.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/ui-bootstrap-tpls-0.12.0.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.AngularJsTable,'/ng-table.js')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.AngularJsTable,'/ng-table.css')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.DataArchive_Library,'js/jquery.min.js')}"/>
+            <c:Bootstrap_Resources />
+            <apex:stylesheet value="{!URLFOR($Resource.BrokersCSS,'Brokerstylesheet.css')}"/>
+
+            <style>
+                .ng-table-counts { display:none; }
+                .topper{
+                margin: 0 auto;
+    background: #dfe9f0;
+    width: 2000px;
+    margin: -0 0 0 -430px;
+    border-top: 1px solid #00a8af;
+}
+       .disablePointer { pointer-events:none;}
+       .enablePointer { pointer-events:auto;}
+       .get-start1{    margin: 8px 0 0 0;
+    cursor: pointer;
+    color: #fff;
+    background: #ff6920;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 8px 20px;
+    display: inline-block;
+    float: right;}
+    .get-start1:hover {
+    background: #010101;
+    color: #fff;
+    text-decoration: none;
+    }
+    div.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 50px;z-index:999;
+    }
+    .topper .container{width:1200px;}
+    .topper{margin:-0 0 0 -412px;}
+    </style>
+            <apex:outputPanel rendered="{!hasError}">
+            <p class="alert alert-danger">
+                We are sorry. You do not have authority to access this process. Please contact your Broker for assistance.
+            </p>
+        </apex:outputPanel>
+            <apex:outputPanel rendered="{!!hasError}">
+            
+            
+            <div id="resultPanel" ng-app="first" ng-controller="firstcontroller">
+                <!-- Step1 Start -->
+                <div class="steps-part" ng-show="currentScreen == 'requests'">
+                    <div class="header-steps">
+                        <h2><apex:image value="{!URLFOR($Resource.BrokersCSS,'/Brokerstylesheet/arrow-title.png')}"/><span>Listing Transfer Request</span> </h2>
+                    </div> 
+                     <div class="topper">
+                    <div class="container">
+                    
+                    <div class="steps">  
+                        <h2 class="active"><a style="cursor:pointer;" ng-click="currentScreen = 'requests';"><span>Step1 :</span> Select Transfer Type</a></h2>
+                        <h2>
+                            <a ng-show="!step1Completed;" style="cursor:pointer;"><span>Step2 :</span> Approve Transfers</a>
+                            <a ng-show="step1Completed;" style="cursor:pointer;" ng-click="currentScreen = 'listings';"><span>Step2 :</span> Approve Transfers</a>
+                        </h2>
+                        <h2>
+                            <a ng-show="!step2Completed;" style="cursor:pointer;"><span>Step3 :</span> Review &amp; Submit</a>
+                            <a ng-show="step2Completed;" style="cursor:pointer;" ng-click="currentScreen = 'review';"><span>Step3 :</span> Review &amp; Submit</a>
+                        </h2>                    
+                    </div>
+                    </div></div>
+                    <div style="margin-bottom: 20px;" class="content-view">
+                        <div class="comment">
+                           <apex:image value="{!URLFOR($Resource.BrokersCSS,'/Brokerstylesheet/info.jpg')}"/>
+                           <p>Please select the transfer type: Incoming Requests (transfer listings to your office), or Outgoing Requests (transfer listings from your office). Click the number of listings indicated in blue to review the requested transfers.</p>
+                        </div>
+
+                        <div class="steps-point">
+                            <div class="stepleftmenu">
+                                <div class="stepleft">
+                                    <ul>
+                                        <li class="green" style="border-radius: 5px 0 0 0" ng-class="{active: currentListings == 'incoming'}"><a style="cursor:pointer;" ng-click="showListings('incoming')"><p><apex:image value="{!URLFOR($Resource.BrokersCSS,'/Brokerstylesheet/grean.jpg')}"/></p> Incoming Requests </a></li>
+                                        <li class="orange" style="border-radius: 0px 0 0 5px" ng-class="{active: currentListings == 'outgoing'}"><a style="cursor:pointer;" ng-click="showListings('outgoing')"><p><apex:image value="{!URLFOR($Resource.BrokersCSS,'/Brokerstylesheet/red.jpg')}"/></p> Outgoing Requests</a></li>
+                                    </ul>            
+                                </div>
+                            </div>
+
+                            <div class="stepright">
+                                <div>
+                                    <table ng-table="tableParams" class='table' ng-class="{table1: currentListings == 'incoming', table2: currentListings == 'outgoing'}" id='table'>
+                                        <tr ng-repeat="listing in $data">
+                                            <td data-title="'First Name'" sortable="'firstName'">{{listing.firstName}}</td>
+                                            <td data-title="'Last Name'" sortable="'lastName '">{{listing.lastName}}</td>
+                                            <td data-title="'Listing Agent'" sortable="'ListingAgentID '">{{listing.ListingAgentID}}</td>
+                                            <td data-title="getTitle()" sortable="'officeName'">{{listing.officeName}}</td>                                                                   
+                                            <td data-title="'Next Deadline'" sortable="'expirationDate'"><span ng-show="listing.openCount > 0">{{listing.expirationDate}} ({{listing.expirationText}})</span></td>
+                                            <td data-title="'Status'" sortable="'openCount'" class="blue">
+                                                <a ng-class="{zeroOpenList: listing.openCount == 0, NonzeroOpenList: listing.openCount != 0}"  ng-click="getRelatedListings(listing)"><!-- style="cursor:pointer;" -->
+                                                    {{listing.openCount}} Open
+                                                </a> 
+                                                &nbsp; <p>{{listing.closedCount}} Close</p>
+                                            </td>
+                                            <td data-title="'Total'" sortable="'totalCount'">{{listing.totalCount}}</td>                           
+                                        </tr>
+                                    </table>                           
+                                </div>
+                            </div>
+                        </div>       
+                    </div>    
+                </div>
+                <!--------------- Step1 End --------------->
+
+                <!--------------- Step2 Start ------------->
+                <div class="steps-part" ng-show="currentScreen == 'listings';">
+                    <div class="header-steps">
+                        <h2><apex:image value="{!URLFOR($Resource.BrokersCSS,'/Brokerstylesheet/arrow-title.png')}"/><span>Listing Transfer Request</span> </h2>
+                    </div> 
+                     <div class="topper sticky">
+                    <div class="container">
+                    <div class="steps">                        
+                        <h2><a style="cursor:pointer;" ng-click="currentScreen = 'requests';"><span>Step1 :</span> Select Transfer Type</a></h2>
+                        <h2 class="active">
+                            <a ng-show="!step1Completed;" style="cursor:pointer;"><span>Step2 :</span> Approve Transfers</a>
+                            <a ng-show="step1Completed;" style="cursor:pointer;" ng-click="currentScreen = 'listings';"><span>Step2 :</span> Approve Transfers</a>
+                        </h2>
+                        <h2>
+                            <a ng-show="!step2Completed;" style="cursor:pointer;"><span>Step3 :</span> Review &amp; Submit</a>
+                            <a ng-show="step2Completed;" style="cursor:pointer;" ng-click="currentScreen = 'review';"><span>Step3 :</span> Review &amp; Submit</a>
+                        </h2>
+                        <a class="get-start1" ng-click="submitListing()">Continue&nbsp;&nbsp;<apex:image value="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/orangearrow.png')}"/></a> 
+                    </div>
+                       </div></div>   
+                    <div class="list-info">
+                        <div class="steps-point">
+                            <div class="transfer">
+                                <div class="transferleft">
+                                    <h2>Origination Office</h2>
+                                    <div class="transferstatus">
+                                        <p><apex:image value="{!URLFOR($Resource.BrokersCSS,'/Brokerstylesheet/making.jpg')}"/></p> 
+                                        <h3>{{originationOfficeDetails.Name}}</h3>
+                                        <h2>
+                                            {{originationOfficeDetails.Street_Number__c}} {{originationOfficeDetails.Street_Number_Suffix__c}} {{originationOfficeDetails.Street_Name__c}} {{originationOfficeDetails.Street_Type__c}}
+                                            {{originationOfficeDetails.Street_Direction__c}} {{originationOfficeDetails.Unit_Type__c}} {{originationOfficeDetails.Unit__c}}
+                                            <br/>
+                                            {{originationOfficeDetails.City__c}}, {{originationOfficeDetails.State__c}} {{originationOfficeDetails.Zip__c}}
+                                        </h2>
+                                    </div>
+                                </div>
+                                <div class="transfermiddle"><img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/arrow-share.jpg')}"/></div>
+                                <div class="transferleft transferright">
+                                    <h2>Destination Office</h2>
+                                    <div class="transferstatus">
+                                        <p><apex:image value="{!URLFOR($Resource.BrokersCSS,'/Brokerstylesheet/making.jpg')}"/></p> 
+                                        <h3>{{subcriptionDetails.Related_Location_Broker_Office__r.Name}}</h3>
+                                        <h2>
+                                            {{subcriptionDetails.Related_Location_Broker_Office__r.Street_Number__c}} {{subcriptionDetails.Related_Location_Broker_Office__r.Street_Number_Suffix__c}} {{subcriptionDetails.Related_Location_Broker_Office__r.Street_Name__c}} {{subcriptionDetails.Related_Location_Broker_Office__r.Street_Type__c}}
+                                            {{subcriptionDetails.Related_Location_Broker_Office__r.Street_Direction__c}} {{subcriptionDetails.Related_Location_Broker_Office__r.Unit_Type__c}} {{subcriptionDetails.Related_Location_Broker_Office__r.Unit__c}}
+                                            <br/>
+                                            {{subcriptionDetails.Related_Location_Broker_Office__r.City__c}}, {{subcriptionDetails.Related_Location_Broker_Office__r.State__c}} {{subcriptionDetails.Related_Location_Broker_Office__r.Zip__c}}
+                                        </h2>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-popup"><!--  -->
+                                 <h2>
+                                    <!-- To Approve  -->   
+                                    <div class="comment"><!-- class="btn btn-primary tooltip" -->
+                                        <img src="{!URLFOR($Resource.BrokersCSS,'/Brokerstylesheet/info.jpg')}" />
+                                        <!-- <div class="right">
+                                            <p>Approve will keep a listing in your office. 
+                                                If you choose to, you may reassign the 
+                                                listing to another agent in your office by 
+                                                entering the Subscription ID in the Assign 
+                                                to box.
+                                            </p>
+                                            <i></i>
+                                        </div>  -->
+                                        <p>
+                                            Select the radio button next to <b>Approve</b> or <b>Decline</b> for each listing transfer below. When all selections have been made, click <b>Continue</b>.
+                                        </p>
+                                    </div>
+                                </h2>
+                                <!-- <p>Select the radio button next to APPROVE for
+                                    each listing you want to APPROVE and click
+                                    CONTINUE when all selections are made.
+                                </p> -->
+                            </div>
+                            <!-- <div class="info-popup">
+                                <h2>
+                                    To Decline  
+                                    <div class="btn btn-primary tooltip">
+                                        <img src="{!URLFOR($Resource.BrokersCSS,'/Brokerstylesheet/info.jpg')}" />
+                                        <div class="right">
+                                            <p>Declining will keep a listing in your office. 
+                                                If you choose to, you may reassign the 
+                                                listing to another agent in your office by 
+                                                entering the Subscription ID in the Assign 
+                                                to box.
+                                            </p>
+                                            <i></i>
+                                        </div>
+                                    </div>
+                                </h2>
+                                <p>Click  DECLINE against the listings which 
+                                    you want to decline and hit CONTINUE
+                                </p>
+                            </div> -->
+                        </div>
+
+                        <div class="info-list" ng-repeat="listing in listings">
+                            <div class="info-left">
+                                <img ng-src="{{listing.imageURL != null && listing.imageURL || '{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/no-image.jpg')}'}}" alt="Image corrupted"/> 
+                            </div>
+                            <div class="info-middle">
+                                <div class="titlebar">
+                                    <apex:image value="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/mapicon.jpg')}"/>
+                                    <p>{{listing.address}}</p>
+                                </div>
+                                <ul class="middle-left">
+                                    <li><label>MLS# </label>    :   <p>{{listing.ListingId}}</p></li>
+                                    <li><label>Status</label>   :   <p>{{listing.ListingStatus}}</p></li>
+                                    <li><label>List Price</label> :<p>  $ {{listing.ListPrice}}</p></li>
+                                    <li><label> List Office</label> :<p>{{listing.ListOfficeCode}}</p></li>
+                                </ul>
+                                <ul class="middle-right">
+                                    <li><label><p><apex:image value="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/bed.jpg')}"/></p>Bedrooms</label>:<p>{{listing.Beds}}</p></li>
+                                    <li><label><p><apex:image value="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/bed2.jpg')}"/></p>Full Baths</label>:<p>{{listing.BathsFull}}</p></li>
+                                    <li><label><p><apex:image value="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/bed3.jpg')}"/></p>Half Baths</label>:<p>{{listing.BathsHalf}}</p></li>
+                                </ul>
+                            </div>
+                            <div class="info-right" >
+                                <div class="period-status">
+                                    <div class="panel">
+                                        <div class="panel-body">
+                                            <ul class="input-list">
+                                                <li style="width: 100%;float: left;">
+                                                    <div class="pure-radiobutton" ng-click="approveListing(listing, true)">
+                                                        <img ng-show="!listing.approve" src="{!URLFOR($Resource.BrokersCSS,'/Brokerstylesheet/icon-off.jpg')}" />
+                                                        <img ng-show="listing.approve" src="{!URLFOR($Resource.BrokersCSS,'/Brokerstylesheet/icon-on.jpg')}" />
+                                                        <label for="radio1">Approve</label>
+                                                    </div>
+                                                </li>
+                                                <li style="width: 100%;float: left;">
+                                                    <div class="pure-radiobutton" ng-click="declineListing(listing, true)"> 
+                                                        <img ng-show="!listing.decline" src="{!URLFOR($Resource.BrokersCSS,'/Brokerstylesheet/icon-off.jpg')}" />
+                                                        <img ng-show="listing.decline" src="{!URLFOR($Resource.BrokersCSS,'/Brokerstylesheet/icon-on.jpg')}" />                                                        
+                                                        <label for="radio2">Decline</label>
+                                                                                                                
+                                                    </div>
+                                                </li>
+                                                
+                                                <li style="width: 100%;float: left;">
+                                                    <div class="pure-radiobutton pure-radiobutton1" ng-show="listing.reassign" > 
+                                                        <label for="reassignedAgentId">Assign To : </label>
+                                                        <input type="text" id="reasssubid{{listing.ListingKey}}" ng-model="listing.reassignedAgentId" placeholder="Subscription ID" onblur="subscriptionValidate(this.value, '{{listing.ListOfficeCode}}', {{$index}}, this.id)"></input>
+                                                        <span style="color:red;" ng-show="listing.reassignError != null">{{listing.reassignError}}</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <h6 style="padding-left:10px;">{{listing.expirationText}}</h6>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div style="border-top:none;margin-left: -414px" class="topper topper1">
+                    <div style="padding: 0" class="container">
+                    <!--<div class="started-view">
+                        <a ng-click="currentScreen = 'requests';"><apex:image style="margin:-4px 5px 0 0" value="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/orangearrowline.png')}"/>Back</a>
+                        <div>
+                            <a class="cancel" ng-click="cancelReturnHome()">Cancel</a>
+                            <a class="get-con" ng-click="submitListing()">Continue&nbsp;&nbsp;<apex:image value="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/orangearrow.png')}"/></a>
+                        </div>
+                    </div> -->
+                </div>
+                    </div></div>
+                <!----------------- second screen end -------------->
+              
+                <!----------------- third screen start ------------->
+                <div class="steps-part" ng-show="currentScreen == 'review';">
+                    <div class="header-steps">
+                        <h2><apex:image value="{!URLFOR($Resource.BrokersCSS,'/Brokerstylesheet/arrow-title.png')}"/><span>Listing Transfer Request</span> </h2>
+                    </div> 
+                           <div class="topper sticky">
+                    <div class="container">
+                    <div class="steps">                        
+                        <h2><a style="cursor:pointer;" ng-click="currentScreen = 'requests';"><span>Step1 :</span> Select Transfer Type</a></h2>
+                        <h2>
+                            <a ng-show="!step1Completed;" style="cursor:pointer;"><span>Step2 :</span> Approve Transfers</a>
+                            <a ng-show="step1Completed;" style="cursor:pointer;" ng-click="currentScreen = 'listings';"><span>Step2 :</span> Approve Transfers</a>
+                        </h2>
+                        <h2 class="active">
+                            <a ng-show="!step2Completed;" style="cursor:pointer;"><span>Step3 :</span> Review &amp; Submit</a>
+                            <a ng-show="step2Completed;" style="cursor:pointer;" ng-click="currentScreen = 'review';"><span>Step3 :</span> Review &amp; Submit</a>
+                        </h2> 
+                       <a class="get-start1" style="cursor:pointer;" ng-click="submitDetails()">&nbsp;&nbsp;Submit&nbsp;&nbsp;</a>                        
+                    </div></div></div>
+
+                    <div class="content-view">
+                        <div class="comment">
+                            <apex:image value="{!URLFOR($Resource.BrokersCSS,'/Brokerstylesheet/info.jpg')}"/> 
+                            <p>The listings you have requested are shown below for your review. Go back to make any changes or click SUBMIT to finish
+                            </p>
+                        </div>
+                        <div class="steps-point">
+                            <h2>Review transfer</h2>
+                            <div class="transfer">
+                                <div class="transferleft">
+                                    <h2>Originating Office</h2>
+                                    <div class="transferstatus">
+                                        <p><apex:image value="{!URLFOR($Resource.BrokersCSS,'/Brokerstylesheet/making.jpg')}"/></p> 
+                                        <h3>{{originationOfficeDetails.Name}}</h3>
+                                        <h2>
+                                            {{originationOfficeDetails.Street_Number__c}} {{originationOfficeDetails.Street_Number_Suffix__c}} {{originationOfficeDetails.Street_Name__c}} {{originationOfficeDetails.Street_Type__c}}
+                                            {{originationOfficeDetails.Street_Direction__c}} {{originationOfficeDetails.Unit_Type__c}} {{originationOfficeDetails.Unit__c}}
+                                            <br/>
+                                            {{originationOfficeDetails.City__c}}, {{originationOfficeDetails.State__c}} {{originationOfficeDetails.Zip__c}}
+                                        </h2>
+                                    </div>
+                                    
+                                </div>
+                                <div class="transfermiddle">                    
+                                    <apex:image value="{!URLFOR($Resource.BrokersCSS,'/Brokerstylesheet/arrow-share.jpg')}"/> 
+                                </div>  
+                                <div class="transferleft transferright">
+                                    <h2>Destination Office</h2>
+                                    <div class="transferstatus">
+                                        <p><apex:image value="{!URLFOR($Resource.BrokersCSS,'/Brokerstylesheet/making.jpg')}"/></p> 
+                                        <h3>{{subcriptionDetails.Related_Location_Broker_Office__r.Name}}</h3>
+                                        <h2>
+                                            {{subcriptionDetails.Related_Location_Broker_Office__r.Street_Number__c}} {{subcriptionDetails.Related_Location_Broker_Office__r.Street_Number_Suffix__c}} {{subcriptionDetails.Related_Location_Broker_Office__r.Street_Name__c}} {{subcriptionDetails.Related_Location_Broker_Office__r.Street_Type__c}}
+                                            {{subcriptionDetails.Related_Location_Broker_Office__r.Street_Direction__c}} {{subcriptionDetails.Related_Location_Broker_Office__r.Unit_Type__c}} {{subcriptionDetails.Related_Location_Broker_Office__r.Unit__c}}
+                                            <br/>
+                                            {{subcriptionDetails.Related_Location_Broker_Office__r.City__c}}, {{subcriptionDetails.Related_Location_Broker_Office__r.State__c}} {{subcriptionDetails.Related_Location_Broker_Office__r.Zip__c}}
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin: 0 auto;text-align: center;" ng-show="showLoading;">
+                                <img style="margin:auto;" src="{!URLFOR($Resource.BrokersCSS,'/Brokerstylesheet/Loading_icon.gif')}" />
+                            </div>
+                            <div class="select-view" ng-show="selectedListings.length > 0 && !showLoading;">
+                                <h2>Review listing</h2>
+                                
+                                <div id="table">
+                                    <div class="header-row row">
+                                        <span class="cell primary">MLS#</span>
+                                        <span class="cell">Property Address </span>
+                                        <span class="cell">Decision</span>
+                                        <span class="cell">Decision Date</span>
+                                    </div>
+                                    <div class="row" ng-repeat="listing in selectedListings">
+                                        <span class="cell primary" data-label="Vehicle">{{listing.ListingId}}</span>
+                                        <span class="cell" data-label="Exterior">{{listing.address}}</span>
+                                        <span class="cell cell2" data-label="Interior" ng-show="listing.approve">Approve</span>
+                                        <span class="cell cell3" data-label="Interior" ng-show="listing.decline">Decline</span>
+                                        <span class="cell" data-label="Date">05/12/2012</span>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div style="border-top:none;margin-left: -414px" class="topper ">
+                            <div style="padding: 0" class="container">
+                                <!--<div class="started-view">
+                                    <a ng-click="currentScreen = 'listings';"><apex:image style="margin:-4px 5px 0 0" value="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/orangearrowline.png')}"/>Back</a>
+                                    <div>
+                                        <a class="cancel" style="cursor:pointer;" ng-click="cancelReturnHome()">Cancel</a>
+                                        <a class="get-con" style="cursor:pointer;" ng-click="submitDetails()">&nbsp;&nbsp;Submit&nbsp;&nbsp;</a>
+                                    </div>
+                                </div>-->
+                                </div></div>
+                        </div>
+                    
+                </div>
+                <!--------------- third screen end -------------->
+
+                <!--------------- fouth screen end -------------->
+                <div class="steps-part" ng-show="currentScreen == 'Success'">
+                    <div class="header-steps">
+                        <h2><img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/arrow-title.png')}"/> <span>Listing Transfer Reqest</span></h2>
+                    </div>
+                    <div class="topper">
+                    <div class="container">
+                    </div></div>
+
+                    <div class="content-view">
+                    <div class="success">
+                        <img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/success.jpg')}"/>
+                            <h3>Thank you, your decisions have been recorded</h3>
+                                <p>The agent has been notified. If you are the Broker of Record or designated Authorized Signer in both the organization
+                                    and destination offices, an approved listing will automatically be transfered.</p>
+                                <a onclick="window.location = '{!$Site.CurrentSiteUrl}apex/Communities_Brokerage';">Back to home</a>
+                        </div>
+                    </div>
+                </div>
+                <!-------------- fourth screen end ------------>
+            </div>
+
+            <script>
+                var app = angular.module('first', ['ngTable']).
+                controller('firstcontroller', function($scope, $filter, NgTableParams) {
+                    $scope.incomingListings = [];
+                    $scope.outgoingListings = [];
+                    $scope.currentListings = 'incoming';
+                    $scope.currentScreen = 'requests';
+                    
+                    $scope.isBOR = '{!isBOR}';
+                    $scope.decidedBy = '{!subscriptionId}';
+                    $scope.listings = [];
+                    $scope.selectedListings = [];
+                    $scope.subcriptionDetails;
+                    $scope.originationOfficeDetails;
+                    $scope.reassignedDetails;
+
+                    $scope.step1Completed = false;
+                    $scope.step2Completed = false;
+                    $scope.step3Completed = false;
+                    
+                    $scope.showLoading = false;
+                    $scope.isSameOffice ;
+
+                    var incomingsStr = {!incomingListingsStr};
+                    console.log('--incomingsStr--',incomingsStr);
+                    for (x in incomingsStr) {
+                        $scope.incomingListings.push(incomingsStr[x]);
+                    }
+
+                    var outgoingStr = {!outgoingListingsStr};
+                    console.log('outgoingStr-->',outgoingStr);
+                    for (x in outgoingStr) {
+                        $scope.outgoingListings.push(outgoingStr[x]);
+                    }                    
+
+                    var data = $scope.incomingListings;
+
+                    $scope.tableParams = new NgTableParams({
+                        page: 1,
+                        count: 10,
+                        sorting: {
+                            expirationDate: 'asc'
+                        }
+                    }, {
+                        total: data.length,
+                        getData: function($defer, params) {
+                            var searchedData = searchData();
+                            params.total(searchedData.length);
+                            var orderedData = params.sorting() ? $filter('orderBy')(searchedData , params.orderBy()) : searchedData;                     
+                            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                        }
+                    });
+                    
+                    $scope.$watch("search", function () {
+                        $scope.tableParams.reload();
+                    });                
+                    
+                    var searchData = function() {
+                        if($scope.search)
+                            return $filter('filter')(data,$scope.search);
+                        return data;
+                    }
+
+                    $scope.showListings = function(type) {
+                        if(type == 'incoming')
+                            data = $scope.incomingListings;
+                        else if(type == 'outgoing')
+                            data = $scope.outgoingListings;
+                        else    
+                            data = [];
+
+                        $scope.currentListings = type;
+                        $scope.tableParams.data = data;
+                        $scope.tableParams.reload();                            
+                    }
+
+                    $scope.getRelatedListings = function(listing) {
+                        var recordIds = [];
+                        $scope.isSameOffice = listing.isSameOffice;
+                       // if(type == 'Open') {
+                            for(var i=0; i<listing.openRequests.length; i++){
+                                recordIds.push(listing.openRequests[i].Id);
+                            } 
+                        //}
+                        /*
+                        if(type == 'Close') {
+                            for(var i=0; i<listing.closedRequests.length; i++)
+                                recordIds.push(listing.closedRequests[i].Id);   
+                        }  
+                        */
+                        if(recordIds.length > 0) {
+                            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.Communities_ListingTransferRequests.getListingRequestDetails}', recordIds, $scope.currentListings, function(response, event) {
+                                if(event.status) {
+                                    if(response.length > 0) {
+                                        console.log('--response--listing request detials',response);
+                                        for(var i=0; i<response.length; i++) {
+                                            response[i]['approve'] = false;
+                                            response[i]['decline'] = false;
+                                            response[i]['reassign'] = false;
+                                            
+                                        }
+                                        $scope.listings = response;
+                                        $scope.currentScreen = 'listings';
+                                        
+                                        Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.Communities_ListingTransferRequests.getOfficeDetails}', response[0].ListOfficeCode, function(officeDetails, event) {
+                                            if(event.status) {
+                                                try{
+                                                    var textArea = document.createElement('textarea');
+                                                    textArea.innerHTML = officeDetails.Name;
+                                                    officeDetails.Name = textArea.value;
+                                                }catch(ex){console.log('Error')}
+                                                $scope.originationOfficeDetails = officeDetails;
+                                                console.log($scope.originationOfficeDetails);
+                                                //$scope.step1Completed = true;
+                                                $scope.$apply();
+                                            }
+                                        });                                        
+
+                                        Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.Communities_ListingTransferRequests.getSubDetails}', response[0].subscriptionId, function(subDetails, event) {
+                                            if(event.status) {
+                                                $scope.subcriptionDetails = subDetails;
+                                                console.log($scope.subcriptionDetails.Contact__r.Name);
+                                                $scope.step1Completed = true;
+                                                $scope.$apply();
+                                            }
+                                        });
+                                    }
+                                    else    
+                                        alert("Listings not found")
+                                }
+                            }, { buffer: true, escape: true, timeout: 30000 });
+                        }                      
+                    }
+
+                    $scope.submitListing = function() {
+                        $scope.selectedListings = [];
+                        var isValid = false;
+                        var isError = false;
+                        
+                        for(var i=0; i<$scope.listings.length; i++) {
+                            console.log('--scope--',$scope.listings[i]);
+                            if($scope.listings[i].approve || $scope.listings[i].decline) {
+                                if(!$scope.listings[i].reassignError){
+                                    $scope.selectedListings.push($scope.listings[i]);
+                                }
+                                else{
+                                    isError = true;
+                                }
+                                isValid = true;
+                            } 
+                        }
+
+                        if(isValid && !isError) {
+                            $scope.step2Completed = true;
+                            $scope.currentScreen = 'review';
+                        }
+                        else if(!isError)
+                            alert("Please select atleast one listing decision");
+                            
+                        if(isError)
+                            alert("Invalid Subscription. Please review ReAssign Subscription ");
+                    }
+
+                    $scope.approveListing = function(listing, value) {
+                        listing.approve = value;
+                        listing.decline = false;
+                         if($scope.currentListings == 'outgoing'){
+                            listing.reassign = false;
+                            listing.reassignedAgentId = '';
+                        }
+                    } 
+
+                    $scope.declineListing = function(listing, value) {
+                        listing.decline = value;
+                        listing.approve = false;
+                        
+                        console.log('---$scope.currentListings--->'+$scope.currentListings);
+                        if($scope.currentListings == 'outgoing'){
+                            listing.reassign = true;
+                        }
+                    }
+                    
+                    $scope.subscriptionValidate = function(listing) {
+                        console.log('sub valid');
+                        console.log('---reassignedAgentId-->'+listing.reassignedAgentId);
+                    }
+
+                    $scope.submitDetails = function() {
+                        for(var i=0; i<$scope.selectedListings.length; i++) {
+                            if($scope.selectedListings[i].approve)
+                                $scope.selectedListings[i]['decision'] = 'Approved';
+
+                            if($scope.selectedListings[i].decline)
+                                $scope.selectedListings[i]['decision'] = 'Rejected';
+                            
+                            if($scope.currentListings == 'incoming')
+                                $scope.selectedListings[i]['isIncoming'] = true;
+                            else
+                                $scope.selectedListings[i]['isIncoming'] = false;    
+
+                            //var d = new Date($scope.listings[i].expirationDate);
+                            //$scope.listings[i].expirationDate = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+
+                            delete $scope.selectedListings[i].expirationDate;
+                            delete $scope.selectedListings[i].approve;
+                            delete $scope.selectedListings[i].decline;                              
+                        }
+
+                        var json = JSON.stringify( $scope.selectedListings, function( key, value ) {
+                            if( key === "$$hashKey" ) {
+                                return undefined;
+                            }
+                            return value;
+                        }); 
+
+                        console.log('*** submitted Listings:' + JSON.parse(json));                         
+                        $scope.showLoading = true;
+                        
+                        console.log('---$scope.isSameOffice--->'+$scope.isSameOffice);
+                        Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.Communities_ListingTransferRequests.submitBrokerDecisions}', JSON.parse(json), $scope.isBOR, $scope.decidedBy, $scope.isSameOffice, function(response, event) {
+                            if(response == 'success') {
+                                $scope.showLoading = false;
+                                $scope.currentScreen = 'Success';
+                                $scope.$apply();
+                            }
+                            else    
+                                alert(response);
+                        });
+                    }
+                    
+                    $scope.cancelReturnHome = function(){
+                        if(confirm('Are you sure you want to cancel this Transfer request ?')){
+                            window.location = '{!$Site.CurrentSiteUrl}apex/Communities_Home';
+                        }
+                    }
+                    
+                    $scope.getTitle = function(){
+                        if($scope.currentListings == 'incoming')
+                            return 'Origination';
+                        else
+                            return 'Destination';
+                    }
+                });
+                
+                function subscriptionValidate(subId, office, index, id){
+                    console.log('--subid-->'+subId+',---'+office+'---index--'+index+'--id--'+id);
+                    if(subId){
+                        
+                        Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.Communities_ListingTransferRequests.validateSubscription}', subId, office, function(subDetails, event) {
+                            console.log('--reassign response--'+subDetails);
+                            var scope = angular.element(document.getElementById("resultPanel")).scope();                
+                            scope.$apply(function () {
+                                if(subDetails) {
+                                    //$scope.reassignedDetails = response;
+                                    console.log('--reassign response--'+subDetails);
+                                    scope.listings[index]['reassignError'] = null;
+                                    scope.listings[index]['reassignedRId'] = subDetails.split(',')[0];
+                                    scope.listings[index]['reassignedAgentKey'] = subDetails.split(',')[1];
+                                    //console.log('--reassign Bright_Agent_Key__c--'+subDetails.split(',')[1]);
+                                }
+                                else{
+                                    scope.listings[index]['reassignError'] = 'Invalid subscription Id'
+                                    alert("Invalid data. Please review reassign subscription ");
+                                
+                                }
+                            });
+                        });
+                    }
+                    else{
+                        var scope = angular.element(document.getElementById("resultPanel")).scope();                
+                        scope.$apply(function () {
+                            scope.listings[index]['reassignError'] = null;
+                        });
+                    }
+                }
+                
+                markOptionPanel("Brokerage");
+            </script>
+        </apex:outputPanel>
+        </apex:define>
+    </apex:composition>
+</apex:page>

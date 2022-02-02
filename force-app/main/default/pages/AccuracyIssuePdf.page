@@ -1,0 +1,93 @@
+<apex:page controller="AccuracyIssuePdf_Controller" showHeader="false" cache="false" applyBodyTag="false" renderAs="pdf" lightningstylesheets="true" contentType="application/pdf#123.pdf">
+    <head>
+        
+        <style type="text/css"> 
+            
+            @font-face {
+            font-family: 'Acronym-Regular';
+            src: url(/resource/bright/bright-3.0/fonts/Acronym-Regular.ttf);  
+            }
+            @font-face {
+            font-family: 'Acronym-Bold';
+            src: url(/resource/bright/bright-3.0/fonts/Acronym-Bold.ttf);
+            } 
+            
+            p{
+            font-family: 'Acronym-Regular';
+            font-size: 12pt;
+            color:#4F5A65;
+            }
+            p a{
+            text-decoration:underline;
+            }
+            p a:hover{
+            text-decoration:none;
+            }
+            p, label {
+            
+            }
+            .form-group {
+            background-color:#D5CCD1;
+            }
+            label {
+            display: inline-block;
+            margin: 10px 6px 6px 16px;
+            color:#4F5A65;
+            }
+            h4{
+            font-family: 'Acronym-Bold';
+            color:#1f3a93; 
+            font-size:12pt;
+            }
+            table th {font-family: 'Acronym-Bold'; font-size:12pt; color:#4F5A65; width:30%; margin-bottom:5px; vertical-align:Top;}
+            table td {font-family: 'Acronym-Regular'; font-size:12pt; color:#4F5A65; width:70%; margin-bottom:5px; vertical-align:Top; word-break:break-all;}
+        </style>
+    </head> 
+    <header>
+        <div class="header" >
+            <img class="logo" src="{!URLFOR($Resource.BrightRegisterLogo)}" alt="logo" height="86" />
+        </div>
+    </header>
+    
+    <p>
+        Thank you for reporting this potential violation to the Bright MLS Accuracy and Policy team.</p>
+    <p>
+        A case has been created for this report and our staff will begin the process of investigation immediately.</p>
+    <p>
+        For the purposes of efficiency and attention to this potential violation, we ask that you only submit one report about this potential violation. Any additional submissions will open a new case, and create a duplicate investigation for the same potential violation.</p>
+    <p>
+        It is our policy not to disclose the outcome of investigations regarding potential violations. Because of this, you may not receive an update on the resolution of this report.</p>
+    <p>
+        If you have any questions or concerns, please reply to <a href="mailto:apreply@brightmls.com">apreply@brightmls.com</a>.</p>
+    <p>
+        Thank you for helping us maintain the integrity and accuracy of the data within Bright MLS.</p>
+    <div>
+        <h4> Potential Listing Violation Reported:</h4>
+        <table>
+            <!--<tr>
+<th>Case Number:</th>
+<td>{!newcase.caseNumber}</td>
+</tr>-->
+            <tr>
+                <th>MLS Number:</th>
+                <td>{!mlsNumber}</td>
+            </tr>
+            <tr>
+                <th>Property Address:</th>
+                <td>{!propertyAddress}</td>
+            </tr>
+            <tr>
+                <th>From:</th>
+                <td>{!fromName}</td>
+            </tr>
+            <tr>
+                <th>Topic:</th>
+                <td>{!topic}</td>
+            </tr>                                    
+            <tr>
+                <th>Description of Violation:</th>
+                <td>{!description}</td>
+            </tr>
+        </table>
+    </div>
+</apex:page>

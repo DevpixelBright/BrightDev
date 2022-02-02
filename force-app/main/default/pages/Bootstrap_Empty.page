@@ -1,0 +1,12 @@
+<apex:page standardStylesheets="false"  lightningstylesheets="true">
+<html>
+<head>
+    <link rel="shortcut icon" href="{!URLFOR($Resource.Bootstrap_Layout_Library, '/img/favicon.ico')}" type="image/vnd.microsoft.icon" />
+    <c:Bootstrap_Resources />
+</head>
+
+<body>
+    <apex:insert name="content"/>
+</body>
+</html>    
+</apex:page>

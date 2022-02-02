@@ -1,0 +1,261 @@
+<apex:page sidebar="false" showheader="false" controller="Training_AllClassesController" cache="false" lightningstylesheets="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/angular.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/ui-bootstrap-tpls-0.12.0.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.AngularJsTable,'/ng-table.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.AngularJsTable,'/ng-table.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.DataArchive_Library,'js/jquery.min.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.BT_Styling,'style.css')}"/>
+    
+    <c:Bootstrap_Resources />    
+    <c:Training_Styles />
+    
+    <apex:form >
+        <div id="ContentContainer" ng-app="first" ng-controller="AllClassesController">
+            <div class="class-filters ng-cloak">                
+                <div class="audience">
+                    <div class="label">Whom</div>
+                    <div class="options">
+                        <label ng-repeat="role in roles">
+                            <input type="checkbox" ng-model="role.checked" value="{{role.value}}" ng-click="filterResults()" /> {{role.value}}
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="medium">
+                    <div class="label">How</div>
+                    <div class="options">
+                        <label ng-repeat="method in deliveryMethods">
+                            <input type="checkbox" ng-model="method.checked" value="{{method.value}}" ng-click="filterResults()" /> {{method.value}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="classes ng-cloak">
+                <h2>All Classes (<b>{{totalClasses}}</b>)</h2>
+                <div class="no-classes" ng-show="totalClasses <= 0">No Classes Available</div>
+                <div class="class-listing" ng-show="totalClasses > 0">
+                    <div class="class-entry" ng-class="{'closed': ( class.btClass.SeatsRemaining__c == 0 || !class.isAvailable)}" ng-repeat="class in tableParams.data " >
+                        <div class="class-entry-date">{{class.classDate}}</div>
+                        <div class="class-entry-title"><a class="title-anchor" href="{!$Label.LearnBrightMlsCommURL}/classdetail?classId={{class.btClass.Id}}" >{{class.btClass.Title__c}}</a></div>
+                        <div class="class-entry-seats" ng-show="class.isAvailable">{{class.btClass.SeatsRemaining__c}} seat(s) available</div>
+                        <div class="class-entry-seats" ng-show="!class.isAvailable">0 seat(s) available</div>
+                        <a class="class-entry-registration" href="{!$Label.LearnBrightMlsCommURL}/classdetail?classId={{class.btClass.Id}}" target="_top">
+                            View Details
+                        </a>
+                        <div class="class-entry-type">{{class.btClass.DeliveryMethod__c}}</div>
+                        <div class="class-entry-location" ng-show="class.btClass.DeliveryMethod__c == 'In-Person' || class.btClass.DeliveryMethod__c == 'Live'"> {{class.venueAddress}} </div>
+                        <div class="class-entry-time" ng-show="class.classDate != null">{{class.classStartTime}} - {{class.classEndTime}}</div>
+                        <div class="class-entry-description">{{class.btClass.AdditionalDescription__c}}</div>
+                    </div>
+                    <table style="display: none;" ng-table="tableParams"><td ng-repeat="x in $data "></td></table>  
+                </div>     
+            </div>
+            
+            <script>
+                var app = angular.module('first', ['ngTable']);              
+                app.controller('AllClassesController', function($scope, $filter, NgTableParams) {
+                    var data = [];
+                    $scope.finalWrap = [];
+                    $scope.totalClasses = 0;
+                    $scope.isAuthenticatedUser = '{!isAuthenticatedUser}';
+
+                    /* Roles from apex controller */
+                    var whom = '{!appropriateForList}';
+                    var temp = JSON.parse('{!appropriateForJson}');
+                    $scope.roles = [];
+                    for(var i=0; i<temp.length; i++) {
+                         $scope.roles.push({checked: true, value: temp[i]});                    
+                    }
+                    
+                    
+                    /* Delivery methods from apex controller */
+                    var methods = '{!DeliveryMethodsList}';
+                    temp = JSON.parse('{!deliveryMethodJson}');
+                    $scope.deliveryMethods = [];
+                    for(var i=0; i<temp.length; i++) {
+                         $scope.deliveryMethods.push({checked: true, value: temp[i]});                    
+                    }
+
+                    
+                    /* Function to initialize angular data table after VF remoting for all classes */ 
+                    $scope.initializeTable = function(result) {
+                        data = result;
+                        $scope.finalWrap = result; 
+                        console.log('---data-->',$scope.finalWrap);
+                        /* Ng-table initiation */
+                        $scope.tableParams = new NgTableParams({
+                            page: 1,
+                            count: 25
+                          
+                        }, {
+                            counts: [],
+                            total: data.length,
+                            getData: function($defer, params) {
+                                var searchedData = searchData();
+                                params.total(searchedData.length); 
+                                console.log('---searchedData-->',searchedData);
+                                 var orderByExpression = ["btClass.StartTime__c", "btClass.Title__c", "btClass.SeatsRemaining__c"];
+                                 var orderedData = $filter('orderBy')(searchedData , orderByExpression, false);
+                                 $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                                
+                            }
+                        });
+                        
+                        /* Watch table params on change */
+                        $scope.$watch("search", function () {
+                            $scope.tableParams.reload();
+                        });
+                    
+                        /* Search data to angular table if any initial search require */
+                        var searchData = function() {
+                            if($scope.search){
+                                return $filter('filter')(data, $scope.search, true);
+                            }
+                            return data;
+                        }
+                        
+                        /* Count to display exiting classes number */
+                        if($scope.finalWrap)
+                            $scope.totalClasses = $scope.finalWrap.length;                                           
+                    }
+
+                    /* Function to filter results based on roles and delivery methods */
+                    $scope.filterResults = function() {
+                                
+                        $scope.searchAppropriate = false;
+                        for(var i=0; i<$scope.roles.length; i++) {
+                            if($scope.roles[i].checked){
+                                $scope.searchAppropriate = true;
+                            }
+                        }
+
+                        $scope.delmethodSearch = false;
+                        for(var i=0; i<$scope.deliveryMethods.length; i++) {
+                            if($scope.deliveryMethods[i].checked) {
+                                $scope.delmethodSearch = true;
+                            }
+                        }
+                        
+                        if(!$scope.locationSearch && !$scope.classSearch && !$scope.delmethodSearch && !$scope.dateSearch && !$scope.searchAppropriate && !$scope.searchFullClassFilter)
+                            data = $scope.finalWrap;
+                        else
+                            data = [];
+                        
+                        for(var i=0; i < $scope.finalWrap.length; i++) {
+                            var searchFind = false;
+                            var selectedFiltersMatch = true;
+                            if($scope.locationSearch && $scope.finalWrap[i].btClass.Venue__c) {
+                                if($scope.finalWrap[i].btClass.Venue__r.Country__c != null || $scope.finalWrap[i].btClass.Venue__r.State__c != null || $scope.finalWrap[i].btClass.Venue__r.City__c != null || $scope.finalWrap[i].btClass.Venue__r.Street__c != null || $scope.finalWrap[i].btClass.Venue__r.ZipCode__c != null)
+                                    var fullAddress = $scope.finalWrap[i].btClass.Venue__r.Country__c + $scope.finalWrap[i].btClass.Venue__r.State__c + $scope.finalWrap[i].btClass.Venue__r.City__c + $scope.finalWrap[i].btClass.Venue__r.Street__c + $scope.finalWrap[i].btClass.Venue__r.ZipCode__c;
+                                
+                                if( fullAddress != null && fullAddress != NaN && fullAddress.toUpperCase().match($scope.locationSearch.toUpperCase()) )
+                                    searchFind = true;
+                                else
+                                    selectedFiltersMatch = false;
+                            }
+                            
+                            if($scope.classSearch) {
+                                if($scope.finalWrap[i].btClass.Title__c && $scope.finalWrap[i].btClass.Title__c.toUpperCase().match($scope.classSearch.toUpperCase()))
+                                    searchFind = true;
+                                else
+                                    selectedFiltersMatch = false;
+                            }
+                            
+                            if($scope.delmethodSearch){
+                                var delMethodFound = false;
+                                
+                                for(var j=0; j<$scope.deliveryMethods.length; j++) {                                    
+                                    if($scope.deliveryMethods[j].checked) {                                        
+                                        if($scope.finalWrap[i].btClass.DeliveryMethod__c && $scope.finalWrap[i].btClass.DeliveryMethod__c.toUpperCase().match($scope.deliveryMethods[j].value.toUpperCase())) {
+                                            delMethodFound = true;                                            
+                                        }
+                                    }
+                                } 
+                                
+                                if(delMethodFound) 
+                                    searchFind = true;
+                                else
+                                    selectedFiltersMatch = false;
+                                
+                            }
+                            
+                            if($scope.searchAppropriate) {
+                                var appropriateFound = false;
+                                for(var j=0; j<$scope.roles.length; j++) {
+                                    if($scope.roles[j].checked) {
+                                        if($scope.finalWrap[i].btClass.Course__r.AppropriateFor__c && $scope.finalWrap[i].btClass.Course__r.AppropriateFor__c.toUpperCase().match($scope.roles[j].value.toUpperCase())) {
+                                            appropriateFound = true;
+                                        }    
+                                    }
+                                }
+                                
+                                if(appropriateFound)
+                                    searchFind = true;
+                                else
+                                    selectedFiltersMatch = false;                                
+                            }
+                            
+                            if($scope.searchFullClassFilter) {                                
+                                if($scope.searchFullClassFilter == 'Hide Full Classes') {
+                                    if($scope.finalWrap[i].btClass.SeatsRemaining__c)
+                                        searchFind = true;
+                                    else
+                                        selectedFiltersMatch = false;
+                                }
+                                else if($scope.searchFullClassFilter == 'Show Full Classes')
+                                    searchFind = true;                                
+                            }
+                            
+                            
+                            if($scope.dateSearch) {
+                                if($scope.finalWrap[i].btClass.StartTime__c) {
+                                    var classStartDate = $scope.finalWrap[i].btClass.StartTime__c.split("T")[0];
+                                    if(classStartDate && classStartDate == $scope.dateSearch)
+                                        searchFind = true;
+                                    else
+                                        selectedFiltersMatch = false;
+                                }
+                            }
+                            
+                            if(searchFind && selectedFiltersMatch) {
+                                data.push($scope.finalWrap[i]);
+                            }
+                        }
+
+                        $scope.totalClasses = data.length;
+                        $scope.tableParams.reload();
+                    }
+                    
+                    adjustContainer();
+                });
+                
+                /* This function is to remove additional scroll coming from Community builder template */
+                function adjustContainer() {
+                    setInterval(function() {  
+                        $('iframe', window.parent.document).height(document.getElementById('ContentContainer').scrollHeight + 'px');
+                    }, 500);
+                }
+
+                
+                /* Visualforce remoting call to get all classes details on initial load */
+                function getAllClasses() {
+                    Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.Training_AllClassesController.getAllClasses}', function(result, event) {
+                        var scope = angular.element(document.getElementById("ContentContainer")).scope();                
+                        scope.$apply(function () {
+                            console.log('---result getall--',result);
+                            if (event.status) 
+                                scope.initializeTable(result);
+                            else
+                                alert(event.message);
+                                
+                        });                                                
+                    }, {escape: false});
+                }
+                
+                getAllClasses();                
+            </script>
+        </div>
+    </apex:form>
+</apex:page>

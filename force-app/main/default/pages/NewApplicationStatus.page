@@ -1,0 +1,446 @@
+<apex:page controller="NewApplicationStatus" showHeader="false" cache="false" standardstylesheets="true">
+    <head>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/jquery.min.js')}"></script>
+        <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/bootstrap.min.js')}"></script>  
+        <apex:stylesheet value="{!URLFOR($Resource.Bootstrap_Layout_Library, '/css/bootstrap.min.css')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/postmessage.js')}"/>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <apex:stylesheet value="{!URLFOR($Resource.wholestyle, '/fonts/style.css')}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.wholestyle, '/fonts/fonts-style.css')}"/>
+                
+    </head>
+    <style>
+    input[disabled] { background:#ccc !important; }
+        .tableStyle tr td{ line-height:32px; width:25%; }
+        .menu-header h3 table.value-title { 
+            margin-left: 26px;
+        }
+        .value-title{margin-left: 26px;}
+        labal{ font-weight: normal;font-family: MontserratRegular; font-size: 14px;  }
+        #accordion .panel-default {box-shadow: 0 0 30px rgba(0, 0, 0, 0.40);}
+        .body_content {     font-family: MontserratLight;font-size:14px;    line-height: 1.42857143;}
+        .innermsg{ margin:0; padding:0;}
+        .innermsg h2{ color: #fc7f4e;font-family: MontserratBold; font-size:17px;}
+        .innermsg p{ color: #666666;font-family: 'MontserratRegular';font-size: 14px;}
+        .insidemsg { margin:0 0 10px; padding:0;  clear: both;  float: left;    width: 100%;}
+        .firstmsg { margin:0 30px 0 0; padding:0; float:left;display: inline-flex;}
+         .firstmsg input[type="text"] {display: block;width: 100%;height: 40x;padding: 10px 12px; font-size: 14px; line-height: 1.42857143; color: #000; background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+}
+            .firstmsg input[type="text"]::placeholder{ color:#ccc;}
+.innermsg h4{border:1px solid #75af68; border-radius:4px;background:#e1fbdc; color:#75af68; font-size:12px; padding:10px;clear:both; width:46%; margin:10px 0 0 0;}
+.firstmsg input[type="text"]:focus,  .firstmsg input[type="text"]:hover { outline:none;}
+
+.firstmsg input[type="submit"]{padding: 10px 20px 10px 20px; background:#5ba0e5; color:#fff; font-size:12px;    border: none;font-family:MontserratRegular;  }
+.secondmsg{ margin:0; padding:0; float:left}
+ .secondmsg ul{ margin:0; padding:0;}  
+ .secondmsg ul li{ margin:0; padding:0;font-size:10px;}
+ .thirdtmsg{ margin:0; padding:0; float:right}  
+.thirdtmsg input[type="submit"]{padding: 10px 30px 10px 30px; background:#5ba0e5; color:#fff; font-size:12px;font-family:MontserratRegular;    border: none; border-radius:5px;}
+
+    </style>
+    
+    <script>
+        $(document).ready(function() {
+        $(".errorM3").addClass("alert alert-danger");
+        $(".infoM3").addClass("alert alert-info");
+        $(".infoM3").find("h4").hide();
+        $(".confirmM3").addClass("alert alert-success");            
+    });
+    </script>
+    <header>
+        <div class="header_row">
+           <!-- <img class="logo" src="{!if(application.Service_Jurisdiction__c == 'TREND', URLFOR($Resource.eProcessNewlogos, '/images/TREND.png'), if(application.Service_Jurisdiction__c == 'BRIGHT', URLFOR($Resource.eProcessNewlogos, '/images/BRIGHT.png'),URLFOR($Resource.eProcessNewlogos, '/images/MRIS.png')))}" alt="logo" height="70" /> -->
+           <img class="logo" src="{!URLFOR($Resource.eProcessNewlogos, '/images/BRIGHT.png')}" alt="logo" height="70" />
+        </div>
+    </header>
+    <br/>   
+    <apex:form id="theForm">
+        <apex:actionFunction action="{!validateLoginName}" name="validateLoginName" reRender="LoginName"/>
+        
+        <div class="body_content col-sm-12">
+            
+            <div style="float:left; margin-bottom:10px;">
+                <a  class="goback-link"  href="/eProcess/NewAgentApplication?mls={!application.Service_Jurisdiction__c}"><i class="glyphicon glyphicon-home"/>&nbsp; HOME</a> / APPLICATION DETAILS <!-- <img src="{!URLFOR($Resource.eProcess, '/images/Back.gif')}" style="width:20px; margin-top:-4px;"/> -->
+            </div>
+            
+            
+            <div style="clear:both;"></div>
+            <div id="messages">
+                <apex:pagemessages id="page_message"></apex:pagemessages>
+            </div> 
+            <apex:actionFunction action="{!activateSubscription}" name="activateSubscription" reRender="page_message, subscription_Details, PaymentButton, ActivateButton, application_Details">
+            </apex:actionFunction> 
+            <div class="panel-group " id="accordion" role="tablist" aria-multiselectable="true">
+                <!-- Application information -->
+                <apex:outputPanel rendered="{!isValid}" id="applicationDetails">
+                    <div class="panel panel-default ">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <div class="col-sm-12 menu-header ">
+                                <h3 class="panel-title">
+                                    <table class="value-title" style="width:100%;">
+                                        <tr>
+                                            <td class="sectionheader" style=" vertical-align:top; font-size:17px;  " >
+                                                Application details
+                                            </td>
+                                            <td colspan="3"></td>
+                                        </tr>
+                                    </table>
+                                </h3>
+                            </div>
+                        </div>
+                                                
+                        
+                        <div id="applicPanel" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" style="margin-left:30px;">
+                            <div class="panel-body" style="color: #666666; font-family: 'MontserratRegular'; font-size:14px;">
+                                <div class="col-sm-12" style="padding: 0px 35px;">
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">Application ID</div>
+                                        <div class="col-sm-6" style="color:#000;">{!application.Name}</div>
+                                    </div>
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">Salutation</div>
+                                        <div class="col-sm-6" style="color:#000;">{!application.Salutation__c}</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12" style="padding: 0px 35px;">
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">Submitted On</div>
+                                        <div class="col-sm-6" style="color:#000;">
+                                            <apex:outputText value="{0, date, MM/dd/yyyy}"> <apex:param value="{!application.CreatedDate}" /> </apex:outputText>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">Application Expire Date</div>
+                                        <div class="col-sm-6" style="color:#000;">
+                                            <apex:outputText value="{0, date, MM/dd/yyyy}"> <apex:param value="{!application.Application_Expire_Date__c}" /> </apex:outputText>
+                                        </div>
+                                    </div>
+                                </div>  
+
+                                <div class="col-sm-12" style="padding: 0px 35px;">
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">First Name</div>
+                                        <div class="col-sm-6" style="color:#000;">{!application.First_Name__c}</div>
+                                    </div>
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">Last Name</div>
+                                        <div class="col-sm-6" style="color:#000;">{!application.Last_Name__c}</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12" style="padding: 0px 35px;">
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">Middle Name</div>
+                                        <div class="col-sm-6" style="color:#000;">{!application.Middle_Name__c}</div>
+                                    </div>
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">Nickname</div>
+                                        <div class="col-sm-6" style="color:#000;">{!application.Nickname__c}</div>
+                                    </div>
+                                </div>  
+
+                                <div class="col-sm-12" style="padding: 0px 35px;">
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">Application Type</div>
+                                        <div class="col-sm-6" style="color:#000;">{!application.Application_Type__c}</div>
+                                    </div>
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">Status</div>
+                                        <div class="col-sm-6" style="color:#000;">{!application.Status__c}</div>
+                                    </div>
+                                </div>  
+
+                                <div class="col-sm-12" style="padding: 0px 35px;">
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">Suffix</div>
+                                        <div class="col-sm-6" style="color:#000;">{!application.Suffix__c}</div>
+                                    </div>
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">Related Location (Office ID)</div>
+                                        <div class="col-sm-6" style="color:#000;">{!application.Company_Code__r.Name}</div>
+                                    </div>
+                                </div>  
+                                
+                                <div class="col-sm-12" style="padding: 0px 35px;">
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">License#</div>
+                                        <div class="col-sm-6" style="color:#000;">{!application.License_Number__c}</div>
+                                    </div>
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">License Expiration Date</div>
+                                        <div class="col-sm-6" style="color:#000;">
+                                            <apex:outputText value="{0, date, MM/dd/yyyy}"> <apex:param value="{!application.License_Expiration_Date__c}" /> </apex:outputText>                                     
+                                        </div>
+                                    </div>
+                                </div>  
+
+                                <div class="col-sm-12" style="padding: 0px 35px;">
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">License State</div>
+                                        <div class="col-sm-6" style="color:#000;">{!application.License_State__c}</div>
+                                    </div>
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">License Type</div>
+                                        <div class="col-sm-6" style="color:#000;">{!application.License_Type__c}</div>
+                                    </div>
+                                </div>  
+
+                                <div class="col-sm-12" style="padding: 0px 35px;">
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">Primary Phone</div>
+                                        <div class="col-sm-6" style="color:#000;">{!application.Primary_Phone__c}</div>
+                                    </div>
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">Private Email</div>
+                                        <div class="col-sm-6" style="color:#000;">{!application.Private_Email__c}</div>
+                                    </div>
+                                </div>  
+                                
+                               <!-- <apex:outputPanel id="LoginName" rendered="{!application.Application_Type__c == 'New Agent' && (application.Service_Jurisdiction__c == 'TREND' || application.Service_Jurisdiction__c == 'BRIGHT' ) && application.Status__c == 'Approved' && !isSubExist}">
+                                    <div class="col-sm-12" style="padding: 0px 35px;">
+                                        <div class="col-sm-6" style="padding: 10px 0px; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6">Login Name</div>
+                                            <div class="col-sm-6" style="color:#000;"><apex:inputText styleClass="form-control" value="{!trendLoginName}" label="Login Name" onchange="validateLoginName()" /></div>
+                                            <div class="col-sm-6"></div>
+                                            <div class="col-sm-6" style="color:#a94442;">{!loginErrorMessage}</div>
+                                            
+                                        </div>
+                                    </div>  
+                                </apex:outputPanel> -->
+                                
+                                <apex:outputPanel rendered="{!application.Application_Type__c == 'New Agent' && (application.Service_Jurisdiction__c == 'TREND' || application.Service_Jurisdiction__c == 'BRIGHT' ) && application.Status__c == 'Approved' && isSubExist}">
+                                    <div class="col-sm-12" style="padding: 0px 35px;">
+                                        <div class="col-sm-6" style="padding: 10px 0px; border-bottom: 1px solid #ccc;">
+                                            <div class="col-sm-6">Login Name</div>
+                                            <div class="col-sm-6" style="color:#000;">{!trendLoginName}</div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            
+                                        </div>
+                                    </div>  
+                                </apex:outputPanel>
+                                
+                                
+                                
+                                <apex:outputPanel id="LoginName" rendered="{!application.Application_Type__c == 'New Agent' && (application.Service_Jurisdiction__c == 'TREND' || application.Service_Jurisdiction__c == 'BRIGHT' ) && application.Status__c == 'Approved' && !isSubExist}">
+                                
+                                <div>
+                                <div class="col-sm-12" style="padding: 0px 35px;">
+                                <div class="innermsg" style="margin-top:30px;">
+                                    <h2>
+                                         Authenticate Login Name
+                                    </h2>
+                                    <p>
+                                        Please create a login to authenticate and confirm the application
+                                    </p>
+                                   <div class="insidemsg">
+                                       <div class="firstmsg">
+                                           <apex:inputText id="ipt" value="{!trendLoginName}" label="Login Name" style="width:300px;">
+<!--                                                <apex:actionSupport event="onmouseout" action="{!validateLoginName}" reRender="applicationDetails"  /> -->
+                                           </apex:inputText>                                           
+                                           <apex:commandButton action="{!validateLoginName}" value="Validate" reRender="applicationDetails" style="left: 278px;border: none;margin:0;background: #2b85c0;border-radius: 0;padding: 0 10px;color: #fff;"/>
+                                       </div>
+                                       <div class="secondmsg">
+                                           <ul>
+                                               <li>min 3 characters and max 25 characters</li>
+                                               <li>can contain letters and numbers</li>
+                                               <li>only 4 special characters @ or period or space or dash allowed</li>
+                                           </ul>
+                                       </div>
+                                    </div> 
+                                    <div style="clear:both;"></div>
+                                    <apex:outputText style="display:block; width: 55%; padding: 10px; border-radius: 3px;" rendered="{!isLoginNameAvailable}" styleClass="alert-success" value="Login Name is valid, please proceed to confirm"></apex:outputText>                                      
+                                    <apex:outputText style="display:block; width: 55%; padding: 10px; border-radius: 3px;" rendered="{!!isLoginNameAvailable}" styleClass="alert-danger" value="{!loginErrorMessage}"></apex:outputText> 
+                                    
+                                </div>
+                                </div>
+                                </div>
+                                
+                                <script>
+                                  
+                                    $(document).ready(function(){
+                                        var typingTimer;                //timer identifier
+                                        var doneTypingInterval = 500;  //time in ms, 5 second for example
+                                        
+                                        //on keyup, start the countdown
+                                        $("[id$=ipt]").on('keyup', function () {
+                                        $("[id$=Continue]").attr("disabled", "disabled");
+                                            clearTimeout(typingTimer);
+                                            typingTimer = setTimeout(doneTyping, doneTypingInterval);
+                                            console.log('---key up--');
+                                        });
+                                        
+                                        //on keydown, clear the countdown 
+                                        $("[id$=ipt]").on('keydown', function () {
+                                            console.log('--key down--');
+                                            clearTimeout(typingTimer);
+                                        });
+                                            
+                                    });
+                                    
+                                    function doneTyping () {
+                                        console.log('done typing');
+                                    }
+                                    
+                                </script>
+                        
+ 
+                                </apex:outputPanel>                             
+                                
+                                <apex:outputPanel rendered="{!!isLoginNameAvailable}"> 
+                                    <apex:commandButton disabled="{!!isLoginNameAvailable}" action="{!createSubcription}" value="Continue" rendered="{!showcontinue}" styleClass="ezjoinbutton" onclick="$(this).css('pointer-events', 'none');" style="margin:10px 35px; font-family: 'MontserratRegular' !important;" />                        
+                                    <apex:commandButton disabled="{!!isLoginNameAvailable}" action="{!activateWithOutPayment}" value="Confirm Activation" rendered="{!application.Status__c == 'Approved' && isActivateNoPayment}" styleClass="ezjoinbutton" style="margin:10px 35px; font-family: 'MontserratRegular' !important;" />  
+                                </apex:outputPanel> 
+                                <apex:outputPanel rendered="{!isLoginNameAvailable}"> 
+                                   <!-- <apex:commandButton reRender="LoginName,theForm" id="Continue" disabled="{!!isLoginNameAvailable}" action="{!createSubcription}" value="Continue" rendered="{!showcontinue}" styleClass="c button" onclick="$(this).css('pointer-events', 'none');" style="margin:10px 35px; font-family: 'MontserratRegular' !important;" />                        
+                                    -->
+                                  <apex:commandButton id="Continue" disabled="{!!isLoginNameAvailable}" action="{!createSubcription}" value="Continue" rendered="{!showcontinue}" styleClass="c button" onclick="$(this).css('pointer-events', 'none');" style="margin:10px 35px; font-family: 'MontserratRegular' !important;" />                        
+                                    
+                                    <apex:commandButton disabled="{!!isLoginNameAvailable}" id="ActivateButton" action="{!activateWithOutPayment}" value="Confirm Activation" rendered="{!application.Status__c == 'Approved' && isActivateNoPayment}" styleClass="ezjoinbutton" style="margin:10px 35px; font-family: 'MontserratRegular' !important;" />  
+                                </apex:outputPanel> 
+                            </div>
+                        </div>
+                    </div>
+                </apex:outputPanel>                
+                
+                <apex:outputPanel rendered="{!isSubExist}">
+                    <div class="panel panel-default ">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <div class="col-sm-12 menu-header ">
+                                <h3 class="panel-title">
+                                    <table class="value-title" style="width:100%;">
+                                        <tr>
+                                            <td class="sectionheader" style=" vertical-align:top; font-size:17px; " >
+                                                Subscription details
+                                            </td>
+                                            <td colspan="3"></td>
+                                            
+                                        </tr>
+                                    </table>
+                                </h3>
+                            </div>
+                        </div>
+                        
+                        
+                        <div id="subscrPanel1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" style="margin-left:30px;">
+                            <div class="panel-body" style="color: #666666; font-family: 'MontserratRegular'; font-size:14px;">
+                                
+                                <div class="col-sm-12" style="padding: 0px 35px;">
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">Subscription ID</div>
+                                        <div class="col-sm-6" style="color:#000;">{!subscription.Name}</div>
+                                    </div>
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">Contact</div>
+                                        <div class="col-sm-6" style="color:#000;">
+                                            <apex:outputField styleClass="form-control" id="contactid" value="{!subscription.Contact__c}" />
+                                        </div>
+                                    </div>
+                                </div>  
+
+                                <div class="col-sm-12" style="padding: 0px 35px;">
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">Type</div>
+                                        <div class="col-sm-6" style="color:#000;">{!subscription.Contact_Type__c}</div>
+                                    </div>
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">Sub Type</div>
+                                        <div class="col-sm-6" style="color:#000;">{!subscription.Subscription_Type__c}</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12" style="padding: 0px 35px;">
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">Primary phone</div>
+                                        <div class="col-sm-6" style="color:#000;">{!subscription.Primary_Phone__c}</div>
+                                    </div>
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">Private Email</div>
+                                        <div class="col-sm-6" style="color:#000;">{!subscription.Private_Email__c}</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12" style="padding: 0px 35px;">
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">Status</div>
+                                        <div class="col-sm-6" style="color:#000;">{!subscription.Status__c}</div>
+                                    </div>
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">Related Location (Office ID)</div>
+                                        <div class="col-sm-6" style="color:#000;">
+                                            <apex:outputField styleClass="form-control " id="suboffice" value="{!subscription.Related_Location_Broker_Office__c}" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12" style="padding: 0px 35px;">
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">City</div>
+                                        <div class="col-sm-6" style="color:#000;">{!subscription.City__c}</div>
+                                    </div>
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">State</div>
+                                        <div class="col-sm-6" style="color:#000;">{!subscription.State__c}</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12" style="padding: 0px 35px;">
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">County</div>
+                                        <div class="col-sm-6" style="color:#000;">{!subscription.QAS_Mailing_County__c}</div>
+                                    </div>
+                                    <div class="col-sm-6" style="padding: 10px 0; border-bottom: 1px solid #ccc;">
+                                        <div class="col-sm-6">Zip</div>
+                                        <div class="col-sm-6" style="color:#000;">{!subscription.Zip__c}</div>
+                                    </div>
+                                </div>                              
+                                
+                                <apex:commandButton id="PaymentButton" action="{!createOrder}" value="Make Payment" rendered="{!(application.Status__c == 'Approved' || application.Status__c == 'Completed') && subscription.Status__c != 'Active' && showPaymentButton}" styleClass="ezjoinbutton" style="margin:10px 35px; font-family: 'MontserratRegular' !important;" />
+                            </div>
+                        </div>
+                    </div>
+                </apex:outputPanel>    
+
+                
+                <div style="clear:both;" />
+                <apex:outputPanel rendered="{!showPayment}">
+                    <div class="panel panel-default ">
+                        <div style="clear:both;" />
+                        <div class="col-sm-12" style="padding:20px;">
+                            <div style="clear:both;" />
+                            <iframe src="{!wrapperUrl}" style="height: 674px;" width="100%" frameborder="0" height="300" id='gpp_iframe' />
+                            <script>
+                            ZXD.receiveMessage(function (e) {
+                                var data = JSON.parse(e.data);
+                                console.log('in zxd --->'+data.operation);
+                                //if (data.operation == "resize_iframe")
+                                //    resize_iframe(data.params.height);
+                                //else 
+                                if (data.operation == "payment_success"){                         
+                                    activateSubscription();
+                                }
+                                else if (data.operation == "generic_payment_complete")
+                                    top.window.location.href = "<apex:outputText value="{!redirectUrl}" />";   
+                                else if (data.operation == "generic_payment_cancel")
+                                    top.window.location.href = "<apex:outputText value="{!cancelUrl}" />";  
+                                
+                            }, "{!iframeDomain}");
+                            </script>                      
+                        </div>
+                    </div>
+                </apex:outputPanel>                
+            </div>
+            <div style="clear:both;" />
+            <div style=" text-align:center; color:#949393; margin-top:20px;"> 
+                Copyright © 2017 Bright MLS, Inc.
+            </div>
+        </div>
+    </apex:form>     
+</apex:page>

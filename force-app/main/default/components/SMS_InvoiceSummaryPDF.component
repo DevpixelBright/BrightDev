@@ -1,0 +1,355 @@
+<apex:component controller="SMS_InvoiceSummaryPDF" access="global" >
+    <apex:attribute name="rId" type="Id"  assignTo="{!recordId}" description="Record Id of either Subscription or Billing Account"/>
+    <style>
+        @page {
+          @bottom-center {
+            content: "Page " counter(page) " of " counter(pages);
+          }
+        }
+    </style>
+    <div style="font-size:14px; font-family:calibiri;">
+        <div style="width:85%; margin:auto;">
+            
+            <div style="padding:10px; padding-top:0px; padding-bottom:0px;width:48%; float:left; font-size:20px; font-weight:bold; vertical-align:middle;">
+                <img style="width:60%;" src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/img/logo-bright-2.png')}"/>
+            </div>
+            
+            <div style="width:48%; float:right;">
+                <div style="border:1px solid black; padding:10px; font-weight:bold; color:#333433;">
+                    {!sub.CUSTOMERNAME__c}<br/>
+                    {!if(sub.Street_Number__c != "", sub.Street_Number__c,"")} 
+                    {!if(sub.Street_Name__c != "", sub.Street_Name__c,"")}<br/>
+                    {!if(sub.City__c != "", sub.City__c,"")}  
+                    {!if(sub.State__c != "", sub.State__c,"")} 
+                    {!if(sub.Zip__c != "", sub.Zip__c,"")}
+                </div>                
+            </div>
+            
+            <div style="clear:both;"></div>            
+        </div>
+
+        <div style="width:85%; margin:auto; margin-top:5px;  font-size:14px; padding:20px;"> 
+            <div style="border:1px solid #ddd; padding:10px;">
+            <b>Did you know that you can set up automatic payments for your account?</b><br/><br/>
+            Reduce your chances of missing a payment or having your service interrupted by designating an automatic payment option as your Auto Pay method.  Remember, you can always enroll in Auto Pay so you can set it once and never miss a payment again.<br/><br/>
+            To pay your bill and set up Auto Pay please follow the steps at the end of this account statement.  
+            </div>    
+        </div> 
+        <br/>
+        <div style="width:85%; margin:auto; margin-top:10px;">
+            <div style="width:100%; border-bottom:2px solid black; font-weight:bold; font-size:17px; padding-bottom:5px;">
+                STATEMENT OF ACCOUNT
+            </div>
+            <div style="width:100%;">
+                <div style="border-bottom:1px solid #ddd;">
+                    <div style="width:24%; float:left; padding-bottom:5px; padding-top:10px; font-weight:bold; color:#333433;">Statement Date </div>
+                    <div style="width:71%; float:right; padding-bottom:5px; padding-top:10px;">{!StatementDate}</div>
+                    <div style="clear:both;"></div> 
+                </div>
+                <div style="border-bottom:1px solid #ddd;">
+                    <div style="width:24%; float:left; padding-bottom:5px; padding-top:10px; font-weight:bold; color:#333433;">Account# </div>
+                    <div style="width:71%; float:right; padding-bottom:5px; padding-top:10px;">{!InvoiceResult.AccountNumber}</div>
+                    <div style="clear:both;"></div> 
+                </div>
+                <div style="border-bottom:1px solid #ddd; font-size:16px;">
+                    <div style="width:24%; float:left; padding-bottom:5px; padding-top:10px; font-weight:bold; color:black;">Total Due </div>
+                    <div style="width:71%; float:right; padding-bottom:5px; padding-top:10px; font-weight:bold;">$ {!ROUND((InvoiceResult.TotalInvoiceBalance)*1.00,2)}</div>                                   
+                    <div style="clear:both;"></div> 
+                </div>         
+            </div>
+            <div style="clear:both;"></div>         
+        </div>
+        <br/>
+        
+        <div style="width:85%; margin:auto; padding:10px; page-break-after:always;">
+            
+            <div style="font-weight:bold; color:black; font-size:17px;">
+                <div style="width:25%; float:left; border-bottom:2px solid black; padding:10px; padding-left:0px;">INVOICE#</div>
+                
+                <div style="width:23%; float:left; border-bottom:2px solid black; padding:10px;">DATE DUE</div>
+                <div style="width:23%; float:left; border-bottom:2px solid black; padding:10px; text-align:right;">BALANCE DUE</div>
+                
+                <div style="width:15%; float:left; border-bottom:2px solid black; padding:10px;">DETAILS</div>
+                <div style="clear:both"></div>
+            </div>
+            
+            <apex:variable value="{!0}" var="totalInvoice"/>
+            <!-- Invoice details loop -->        
+            <apex:repeat value="{!InvoiceResult.invoices}" var="invoice">
+                                                
+                <div>
+                    <div style="width:25%; float:left; border-bottom:1px solid #ddd; padding:10px; padding-left:0px;">{!invoice.invoiceNumber}</div>
+                    
+                    <div style="width:23%; float:left; border-bottom:1px solid #ddd; padding:10px;">{!invoice.dueDate}</div>
+                    <div style="width:23%; float:left; border-bottom:1px solid #ddd; padding:10px; text-align:right;">$ {!invoice.balance}</div>
+                    
+                    <div style="width:15%; float:left; border-bottom:1px solid #ddd; padding:10px;"><a style="text-decoration:none; cursor:pointer; color:#388EDD;" href="#{!invoice.invoiceNumber}">Show Details</a></div>
+                    <div style="clear:both"></div>
+                </div>            
+
+                <apex:variable value="{!totalInvoice + invoice.balance}" var="totalInvoice"/>
+            </apex:repeat>
+            
+            <div style="font-weight:bold;">
+                <div style="width:25%; float:left; border-bottom:1px solid #ddd; padding:10px; padding-left:0px">&nbsp;</div>
+                
+                <div style="width:23%; float:left; border-bottom:1px solid #ddd; padding:10px; text-align:right;">Total</div>
+                <div style="width:23%; float:left; border-bottom:1px solid #ddd;; padding:10px; text-align:right;">$ {!totalInvoice}</div>
+                
+                <div style="width:15%; float:left; border-bottom:1px solid #ddd; padding:10px; ">&nbsp;</div>
+                <div style="clear:both"></div>
+            </div>             
+        
+        </div>
+        <br/>                   
+        
+        <!-- Invoice details loop -->
+        <apex:repeat value="{!InvoiceResult.invoices}" var="invoice">
+        
+            <div style="page-break-after:always; padding-bottom:50px;">
+                
+                <a name="{!invoice.invoiceNumber}"></a> 
+                <div style="width:85%; color:black; font-weight:bold; font-size:17px; margin:auto; margin-top:30px; margin-bottom:20px; padding-left:20px; padding-right:10px; padding-bottom:10px; border-bottom:2px solid black;">
+                    <div style="width:45%; float:left;font-weight:bold;"><i>Invoice Number: {!invoice.invoiceNumber}</i></div>              
+                    <div style="width:45%; float:right;font-weight:bold; text-align:right;">
+                        <i>
+                           Due Date: {!invoice.dueDate}                          
+                        </i>
+                    </div>
+                    <div style="clear:both"></div>
+                </div> 
+                
+               
+                <br/><br/>
+                <div style="width:85%; margin:auto;">
+                    <div style="width:70%; float:left; padding:10px; border-right:1px solid #ddd; font-weight:bold;">
+                        Product Description
+                    </div>
+                    <div style="width:20%; float:right; text-align:right; padding:10px; padding-right:20px; font-weight:bold;">
+                        Amount
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+                
+                <apex:variable value="" var="prevSubscription" />
+                <apex:variable value="" var="prevProduct" />
+                <apex:variable value="{!0}" var="tax" />
+                <apex:variable value="{!0}" var="subTotal" />
+                <apex:variable value="{!0}" var="flag" />
+                <!-- Invoice items details -->
+                <apex:repeat value="{!invoice.invoiceItems}" var="invoiceItem">
+                    
+                    <div style="width:85%; margin:auto; border-top:{!if(prevSubscription != invoiceItem.subscriptionName, '1px solid #ddd', 'none')};">
+                        <div style="width:70%; float:left; padding:10px; border-right:1px solid #ddd;">
+                            
+                            
+                            {!if(prevSubscription != invoiceItem.subscriptionName, invoiceItem.productName, if(prevProduct != invoiceItem.productName, invoiceItem.productName, ""))}
+                            
+                           
+                            <div style="margin-top:5px;">
+                                <i style="color:#777;">    
+                                    {!if(invoiceItem.isRemoval == true, "(Removal)", "")}
+                                    <apex:outputText escape="false" value="{!invoiceItem.chargeDescription}" />{!if(invoice.invoiceItems.size > 1, ': $ ', '')}
+                                    {!if(invoice.invoiceItems.size > 1, invoiceItem.chargeAmount, '')}<br/>
+                                    {!invoiceItem.serviceStartDate} to {!invoiceItem.serviceEndDate}<br/>
+                                </i>
+                            </div>
+                            
+                        </div>
+                        
+                        <div style="width:20%; float:right; text-align:right; padding:10px; padding-right:20px;">
+                              {!if(prevSubscription != invoiceItem.subscriptionName, "$ ", "")}
+                              {!if(prevSubscription != invoiceItem.subscriptionName, subTotalMap[invoice.invoiceNumber][invoiceItem.subscriptionName], "")}
+                        </div>
+                        
+                        <div style="clear:both"></div>
+                        
+                    </div> 
+                    <apex:variable value="{!invoiceItem.subscriptionName}" var="prevSubscription" />
+                    <apex:variable value="{!invoiceItem.taxAmount + tax}" var="tax" />
+                    <apex:variable value="{!invoiceItem.chargeAmount + subTotal}" var="subTotal" />
+                    <apex:variable value="{!invoiceItem.productName}" var="prevProduct" />
+                    <apex:variable value="{!1}" var="flag" />
+                    
+                </apex:repeat> 
+                
+                <!-- Invoice items details -->
+                <apex:repeat value="{!invoice.invoiceItemAdjustments}" var="invoiceItemAdjustment">
+                    
+                    <div style="width:85%; margin:auto;">
+                        <div style="width:70%; float:left; padding:10px; border-right:1px solid #ddd;">                         
+
+                            <div style="margin-top:{!if(invoice.invoiceItems.size > 1, '15px', '0px')};">
+                                <i style="color:#777;">    
+                                    Invoice Item Adjustment: $ {!invoiceItemAdjustment.Amount}<br/>
+                                    {!invoiceItemAdjustment.Comment}
+                                </i>
+                            </div>
+                            
+                        </div>
+                        
+                        <div style="width:20%; float:right; text-align:right; padding:10px; padding-right:20px;">
+
+                        </div>
+                        
+                        <div style="clear:both"></div>
+                        
+                    </div> 
+ 
+                </apex:repeat> 
+                
+                <!-- Invoice items details -->
+                <apex:repeat value="{!invoice.creditBalanceAdjustments}" var="CBAdjustment">
+                    
+                    <div style="width:85%; margin:auto;">
+                        <div style="width:70%; float:left; padding:10px; border-right:1px solid #ddd;">                         
+
+                            <div style="margin-top:{!if(invoice.invoiceItems.size > 1, '15px', '0px')};">
+                                <i style="color:#777;">    
+                                    Credit Balance Adjustment: $ -{!CBAdjustment.Amount}<br/>
+                                    {!CBAdjustment.Comment}
+                                </i>
+                            </div>
+                            
+                        </div>
+                        
+                        <div style="width:20%; float:right; text-align:right; padding:10px; padding-right:20px;">
+
+                        </div>
+                        
+                        <div style="clear:both"></div>
+                        
+                    </div> 
+ 
+                </apex:repeat>                                  
+                               
+                <div style="width:85%; margin:auto; border-top:1px solid #ddd;">
+                    <div style="width:70%; float:left; padding:10px; border-right:1px solid #ddd; font-weight:bold; text-align:right;">
+                        Sub Total
+                    </div>
+                    <div style="width:20%; float:right; text-align:right; padding:10px; padding-right:20px; font-weight:bold;">
+                        $ {!subTotal}
+                    </div>
+                    <div style="clear:both"></div>
+                </div> 
+                
+                <div style="width:85%; margin:auto; border-top:1px solid #ddd;">
+                    <div style="width:70%; float:left; padding:10px; border-right:1px solid #ddd; font-weight:bold; text-align:right;">
+                        Tax
+                    </div>
+                    <div style="width:20%; float:right; text-align:right; padding:10px; padding-right:20px; font-weight:bold;">
+                        $ {!tax}
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+                
+                <div style="width:85%; margin:auto; border-top:1px solid #ddd;">
+                    <div style="width:70%; float:left; padding:10px; border-right:1px solid #ddd; font-weight:bold; text-align:right;">
+                        Invoice Total
+                    </div>
+                    <div style="width:20%; float:right; text-align:right; padding:10px; padding-right:20px; font-weight:bold;">
+                        $ {!invoice.amount}
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+                
+                <div style="width:85%; margin:auto; border-top:1px solid #ddd;">
+                    <div style="width:70%; float:left; padding:10px; border-right:1px solid #ddd; font-weight:bold; text-align:right;">
+                        Invoice Balance Due
+                    </div>
+                    <div style="width:20%; float:right; text-align:right; padding:10px; padding-right:20px; font-weight:bold;">
+                        $ {!invoice.balance}
+                    </div>
+                    <div style="clear:both"></div>
+                </div>                                                                                 
+                
+            </div> 
+              
+        </apex:repeat>
+        
+        <!--
+        <div style="width:85%; margin:auto;">
+            <div style="width:40%; float:left;">
+                
+                <div style="border:1px solid black; padding:10px; margin-top:20px;">
+                    <center>
+                    <b>IMPORTANT MESSAGES</b><br/>
+                    For your security, we cannot accept
+                    payments by phone.
+                    </center>
+                </div>
+            </div>
+            <div style="width:55%; float:right;margin:auto;">
+                <div style="border:1px solid black; padding:10px; margin-top:5px;"> 
+                    <center><b>PAYMENT OPTIONS:</b></center><br/>
+                    <div style="width:100%; float:left;font-size:13px; ">
+                      <table>
+                      <tr><td style="width:45%; vertical-align: top;"> 1-CREDIT CARD PAY:</td>
+                      <td style="vertical-align: top;">Contact us at 1-844-55-BRIGHT <br/> (1-844-552-7444)</td></tr>
+                        <tr><td style="width:45%; vertical-align: top;">2-ONLINE BILL PAY: </td>
+                        <td style="vertical-align: top;">Please see your bank</td></tr>   
+                      
+                      <tr><td style="width:45%; vertical-align: top;">3-MAIL A CHECK: </td>
+                        <td style="vertical-align: top;" >Payable to Bright MLS<br/>
+                         P.O. BOX 37093<br/>
+                         BALTIMORE, MD 21297‐3093<br/>
+                        </td></tr> 
+                   </table>
+                    </div>
+                                    
+                    <div style="clear:both;"></div> <br/>
+                   
+                </div>               
+            </div>
+            <div style="clear:both;"></div>
+            <br/><br/><center style="font-size:13px;">IF PAYING BY CHECK, PLEASE DETACH AND RETURN THIS PORTION WITH YOUR PAYMENT. PLEASE DON’T STAPLE PAYMENT.</center><br/><br/>         
+        </div> -->
+        
+        <div style="width:85%; margin:auto;">
+            <b>To pay by credit card please follow the simple steps below:</b><br/><br/> 
+            
+            1. Go to www.Brightmls.com <br/>
+            2. Click your Name in upper-right hand corner<br/>
+            3. Choose Billing <br/>
+               
+            <br/>
+            <br/>
+            <b>Mail a check:</b><br/>
+            Payable to Bright MLS<br/>
+            P.O Box 37093<br/>
+            Baltimore, MD  21297-3093<br/><br/>
+            <b>*For your security, we cannot accept payments by phone</b><br/>  
+            <div style="clear:both;"></div>
+                <br/><br/><center style="font-size:13px;">IF PAYING BY CHECK, PLEASE DETACH AND RETURN THIS PORTION WITH YOUR PAYMENT. PLEASE DON’T STAPLE PAYMENT.</center><br/><br/>         
+            </div>
+
+        
+        <div style="width:85%; margin:auto; border:1px solid black; padding:10px; padding-top:20px; padding-bottom:20px;">
+            <div style="width:40%; float:left;">
+                <div style="width:68%; float:left; text-align:right; font-weight:bold;"> ACCOUNT #: &nbsp; </div>
+                <div style="width:32%; float:right;">{!InvoiceResult.AccountNumber}</div>
+            </div>
+            <div style="width:50%; float:right;">
+                <div style="width:68%; float:left; text-align:right; font-weight:bold;">TOTAL BALANCE DUE: &nbsp;</div>
+                <div style="width:32%; float:right; text-align:left;">$ {!ROUND((InvoiceResult.TotalInvoiceBalance)*1.000,2)}</div>            
+            </div>
+            <div style="clear:both;"></div><br/>
+            <div style="width:40%; float:left;">
+                <div style="width:68%; float:left; text-align:right; font-weight:bold;">ACCOUNT NAME: &nbsp; </div>
+                <div style="width:32%; float:right;">{!sub.CUSTOMERNAME__c}</div>
+            </div>
+            <div style="width:50%; float:right;">
+                <div style="width:68%; float:left; text-align:right; font-weight:bold;">STATEMENT DATE: &nbsp;</div>
+                <div style="width:32%; float:right; text-align:left;">{!StatementDate}</div>            
+            </div>
+            <div style="clear:both;"></div> <br/><br/>
+            <div style="width:100%; text-align:center;">
+                MAKE CHECKS PAYABLE TO: <b>BRIGHT MLS</b>
+            </div> 
+            <br/><br/>
+                                    
+        </div>                           
+
+     </div>
+
+</apex:component>

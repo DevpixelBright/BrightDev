@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Notes_without_value</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(ISNULL( Note__c ),  ISBLANK(Note__c) )</errorConditionFormula>
+    <errorDisplayField>Note__c</errorDisplayField>
+    <errorMessage>Please enter notes</errorMessage>
+</ValidationRule>

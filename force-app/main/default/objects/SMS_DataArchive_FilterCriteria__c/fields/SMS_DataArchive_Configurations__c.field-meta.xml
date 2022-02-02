@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SMS_DataArchive_Configurations__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>SMS_DataArchive_Configurations</label>
+    <referenceTo>SMS_DataArchive_Configurations__c</referenceTo>
+    <relationshipLabel>SMS_DataArchive_FilterCriteria</relationshipLabel>
+    <relationshipName>SMS_DataArchive_FilterCriteria</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

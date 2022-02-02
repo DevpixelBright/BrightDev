@@ -1,0 +1,758 @@
+<apex:page controller="BrightQuestionnaire_Controller" showHeader="false" cache="false" lightningstylesheets="true">
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/jquery.min.js')}"></script>   
+        <apex:stylesheet value="{!URLFOR($Resource.Bootstrap_Layout_Library, '/css/bootstrap.min.css')}"/>
+    </head>
+    
+    <style type="text/css">
+        .form-style-1 {
+            margin:10px auto;
+            max-width: 720px;
+            padding: 20px 12px 10px 20px;
+            font: 13px roboto, sans-serif;
+        }
+        .form-style-1 li {
+            padding: 0;
+            display: block;
+            list-style: none;
+            margin: 25px 0 0 0;
+        }
+        .form-style-1 label{
+            margin:0 0 3px 0;
+            padding:0px;
+            display:block;
+            font-weight: bold;
+            color:#2b2b2b;
+        }
+        .form-style-1 input[type=text], 
+        .form-style-1 input[type=date],
+        .form-style-1 input[type=datetime],
+        .form-style-1 input[type=number],
+        .form-style-1 input[type=search],
+        .form-style-1 input[type=time],
+        .form-style-1 input[type=url],
+        .form-style-1 input[type=email],
+        textarea, 
+        select{
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            border:1px solid #BEBEBE;
+            padding: 7px;
+            margin:0px;
+            -webkit-transition: all 0.30s ease-in-out;
+            -moz-transition: all 0.30s ease-in-out;
+            -ms-transition: all 0.30s ease-in-out;
+            -o-transition: all 0.30s ease-in-out;
+            outline: none;  
+        }
+        .form-style-1 input[type=text]:focus, 
+        .form-style-1 input[type=date]:focus,
+        .form-style-1 input[type=datetime]:focus,
+        .form-style-1 input[type=number]:focus,
+        .form-style-1 input[type=search]:focus,
+        .form-style-1 input[type=time]:focus,
+        .form-style-1 input[type=url]:focus,
+        .form-style-1 input[type=email]:focus,
+        .form-style-1 textarea:focus, 
+        .form-style-1 select:focus{
+            -moz-box-shadow: 0 0 8px #88D5E9;
+            -webkit-box-shadow: 0 0 8px #88D5E9;
+            box-shadow: 0 0 8px #88D5E9;
+            border: 1px solid #88D5E9;
+        }
+        .form-style-1 .field-divided{
+            width: 49%;
+        }
+        
+        .form-style-1 .field-long{
+            width: 100%;
+        }
+        .form-style-1 .field-select{
+            width: 100%;
+        }
+        .form-style-1 .field-textarea{
+            height: 100px;
+        }
+        .form-style-1 input[type=submit], .form-style-1 input[type=button]{
+            background: #FF7947;
+            padding: 8px 15px 8px 15px;
+            border: none;
+            color: #fff;
+        }
+        .form-style-1 input[type=submit]:hover, .form-style-1 input[type=button]:hover{
+            background: #FF7947;
+            box-shadow:none;
+            -moz-box-shadow:none;
+            -webkit-box-shadow:none;
+        }
+        .form-style-1 .required, .form-style-1 .required1{
+            color:red;
+        }
+        .header_row{ padding:12px; background-color:#212B3D;}
+        .header_row img.logo{padding: 12px 0px;}
+        body {font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;} 
+        .question1 label { display:inline; font-weight:100; font: 13px roboto, sans-serif !important;}       
+        .submit {            
+            background: #FF7947;
+            padding: 8px 15px 8px 15px;
+            border: none;
+            color: #fff;
+            float:right;
+            text-decoration:none;
+        }
+        .submit:hover {text-decoration:none; color:#fff;}
+        #info-panel, #agreements-panel, #agreements-panel2 { display:none; } 
+        .footer {background-color:#555555; padding:30px; text-align:center; color:#fff; margin-top:20px;}
+        .panel-heading-li { color:#FF7947; padding-bottom:5px; }
+        .panel-heading-li-next {margin-top:10px !important;}
+        .question4 option {margin-bottom:5px;}
+        
+        .error-msg { color:#f53e3e; margin-top:5px; }       
+    </style> 
+    
+    <script>
+        $(document).ready(function() {
+            $("#questions-panel-button").click(function() {
+                var hasError = false; 
+                $(".error-msg").remove();                     
+                $(".required").each(function() {                                                            
+                    if($(this).parent().parent().css('display') != 'none' && $(this).parent().parent().attr('id') != 'cb-li' && ($(this).parent().next().val() == null || $(this).parent().next().val() == '' || $(this).parent().next().val() == 'None')) {
+                        $(this).parent().next().after('<div class="error-msg">* This field is required</div>');
+                        $(this).parent().next().css('border-color', '#f53e3e');
+                        hasError = true;
+                    }
+                    else {
+                        if($(this).parent().next().attr('id')) {
+                            if($(this).parent().next().attr('id').indexOf('website') > 0 && !validateUrl($(this).parent().next().val())) {
+                                $(this).parent().next().css('border-color', '#f53e3e');
+                                $(this).parent().next().after('<div class="error-msg">* Invalid website URL</div>');
+                                hasError = true;                            
+                            } 
+                            else
+                                $(this).parent().next().css('border-color', '#BEBEBE');                                   
+                        }                    
+                        else
+                            $(this).parent().next().css('border-color', '#BEBEBE'); 
+                    }                               
+                });
+                
+                console.log(hasError);    
+                if(hasError) {
+                    $(".errors").show();
+                    $(".alert").html("* Please review below error fields ");
+                    window.scrollTo(100, 100);
+                }
+                else {   
+                    $("#questions-panel").hide();
+                    $("#info-panel").show();
+                    $(".errors").hide();
+                    $(".alert").html("");                    
+                }                             
+            });
+            
+            $("#info-panel-back-button").click(function() {
+                $("#questions-panel").show();
+                $("#info-panel").hide();                 
+            });
+            
+         
+            $("#info-panel-button").click(function() {
+                var hasError = false; 
+                $(".error-msg").remove();                     
+                $(".required1").each(function() {                                        
+                    if($(this).parent().next().val() == '' || $(this).parent().next().val() == 'None') {
+                        $(this).parent().next().css('border-color', '#f53e3e');
+                        $(this).parent().next().after('<div class="error-msg">* This field is required</div>');
+                        hasError = true;
+                    }
+                    else {
+                        if($(this).parent().next().attr('id').indexOf('Email') > 0) {
+                            if(!validateEmail($(this).parent().next().val())) {
+                                $(this).parent().next().css('border-color', '#f53e3e');
+                                $(this).parent().next().after('<div class="error-msg">* Invalid email address</div>');
+                                hasError = true;                            
+                            } 
+                            else
+                                $(this).parent().next().css('border-color', '#BEBEBE');                                   
+                        }
+                        else if($(this).parent().next().attr('id').indexOf('Phone') > 0) {
+                            if(!validatePhone($(this).parent().next().val())) {
+                                $(this).parent().next().css('border-color', '#f53e3e');
+                                $(this).parent().next().after('<div class="error-msg">* Invalid phone number</div>');
+                                hasError = true;                            
+                            } 
+                            else
+                                $(this).parent().next().css('border-color', '#BEBEBE');                                   
+                        }                        
+                        else
+                            $(this).parent().next().css('border-color', '#BEBEBE');
+                    }                                                
+                });             
+            
+                console.log(hasError);    
+                if(hasError) {
+                    $(".errors").show();
+                    $(".alert").html("* Please review below error fields ");
+                    window.scrollTo(100, 100);
+                }
+                else {   
+                    $("#questions-panel").hide();
+                    $("#info-panel").hide();
+                    $("#agreements-panel2").show(); 
+                    
+                    $(".alert").html("");
+                    $(".errors").hide();                    
+                }                
+            });            
+            
+            $("[id$=question3]").change(function() {
+                if($("[id$=question3]").val() != 'Broker Use') {
+                    $(this).parent().next().next().hide();
+                    $(this).parent().next().hide();
+                }
+                else {
+                    $(this).parent().next().next().show();
+                    $(this).parent().next().show();
+                    $("[id$=broker-name]").val('');
+                    $("[id$=broker-information]").val('');             
+                }
+            });
+            
+            $("[id$=question4]").change(function() {
+                var values = $("[id$=question4]").val();
+                if($.inArray('Other', values) > -1) {
+                    $(this).parent().next().show();
+                    $("[id$=other-information]").val('');                                    
+                }
+                else {
+                    $(this).parent().next().hide();                              
+                }
+            });
+            
+            $("[id$=question5]").change(function() {
+                if($("[id$=question5]").val() != 'Yes') {
+                    $(this).parent().next().next().hide();
+                    $(this).parent().next().hide();
+                }
+                else {
+                    $(this).parent().next().next().show();
+                    $(this).parent().next().show();
+                    $("[id$=auth-methods]").val('');
+                    $("[id$=monitor-credentials]").val('');             
+                }
+            });
+            
+            $("[id$=question11]").change(function() {
+                if($("[id$=question11]").val() != 'Yes') {
+                    $(this).parent().next().next().next().hide();
+                    $(this).parent().next().next().hide();
+                    $(this).parent().next().hide();
+                    
+                }
+                else {
+                    $(this).parent().next().show();
+                    $(this).parent().next().next().show();
+                    //$(this).parent().next().next().next().show();
+                    $("[id$=display-plugin]").val('None');
+                    $("[id$=share-data-who]").val(''); 
+                    $("[id$=share-data-who2]").val('');                              
+                }
+            });
+            
+            $("[id$=display-plugin]").change(function() {
+                if($("[id$=display-plugin]").val() != 'Yes') {
+                    $(this).parent().next().hide();
+                }
+                else {
+                    $(this).parent().next().show();
+                    $("[id$=share-data-who2]").val('');
+                }
+            });                                    
+            
+            $("#agreement-check1").change(function() {
+                if ($('#agreement-check1').is(':checked')) {
+                    $("#agreement1-vendor-details").show();
+                    $("[id$=vendor-name-1]").val('');
+                }
+                else {
+                    $("#agreement1-vendor-details").hide();
+                }
+            });
+            
+            $("#agreement-check2").change(function() {
+                if ($('#agreement-check2').is(':checked')) {
+                    $("#agreement2-vendor-details").show();
+                    $("[id$=vendor-name-2]").val('');
+                }
+                else {
+                    $("#agreement2-vendor-details").hide();
+                }
+            });
+            
+            $("#agreement-panel-back-button").click(function() {
+                $("#agreements-panel").hide();
+                $("#info-panel").show();                 
+            });
+            
+            $("#agreement-panel2-back-button").click(function() {
+                $("#agreements-panel").show();
+                $("#agreements-panel2").hide();                 
+            });            
+               
+            $(".phone-number").change(function() {
+                var phoneNumber = $(this).val();
+                phoneNumber = phoneNumber.replace('(','').replace(')','').replace('-','').replace(' ', '');
+                phoneNumber = phoneNumber.replace('-', '');
+
+                if(validatePhone(phoneNumber)) {
+                    var formattedTxt = '(';
+                    for(var i=0; i<phoneNumber.length; i++) {
+                        formattedTxt += phoneNumber[i];
+                        if(i == 2)
+                            formattedTxt += ') '; 
+                        if(i == 5)
+                            formattedTxt += '-';         
+                    }
+                    
+                    $(this).val(formattedTxt);
+                }                               
+            });
+            
+            $(".primary-contact-ele").change(function() {
+                var flag = true;
+                $(".primary-contact-ele").each(function() {
+                    if($(this).val() == '')
+                        flag = false;
+                });
+                
+                if(flag)
+                    $('.copy-checkbox').removeAttr('disabled');                     
+            });
+            
+            $(".copy-checkbox").click(function() {
+                if($(this).is(':checked')) {
+                    $("[id$=" + this.id + "_Name]").val($("[id$=Primary_Contact_Name]").val());
+                    $("[id$=" + this.id + "_Phone_Number]").val($("[id$=Primary_Contact_Phone_Number]").val());
+                    $("[id$=" + this.id + "_Email_Address]").val($("[id$=Primary_Contact_Email_Address]").val());   
+                }    
+            });                            
+        });
+        
+        function validateTerms() {
+            var hasError = false;
+            $(".error-msg").remove(); 
+            if (!$('#agreement-check1').is(':checked') && !$('#agreement-check2').is(':checked')) {
+                $(".alert").html("* Please accept the access agreement"); 
+                hasError = true;           
+            }
+            
+            if($('#agreement-check1').is(':checked')) {
+                if($("[id$=vendor-name-1]").val() == '') {
+                    $(".alert").html("* Please review below error fields"); 
+                    hasError = true;
+                    $("[id$=vendor-name-1]").css('border-color', '#f53e3e'); 
+                    $("[id$=vendor-name-1]").after('<div class="error-msg">* This field is required</div>');                    
+                }
+                else
+                    $("[id$=vendor-name-1]").css('border-color', '#BEBEBE');
+            }
+            
+            if($('#agreement-check2').is(':checked')) {
+                if($("[id$=vendor-name-2]").val() == '') {
+                    $(".alert").html("* Please review below error fields"); 
+                    hasError = true;
+                    $("[id$=vendor-name-2]").css('border-color', '#f5a2a2'); 
+                    $("[id$=vendor-name-2]").after('<div class="error-msg">* This field is required</div>');                     
+                }
+                else
+                    $("[id$=vendor-name-2]").css('border-color', '#BEBEBE');
+            } 
+            
+            if(hasError) {
+                $(".errors").show();
+                window.scrollTo(100, 100);
+                return false;
+            } 
+            else {
+                $(".errors").hide();
+                return true;            
+            }
+                           
+        }
+        
+        function validateEmail(x) {
+            var atpos = x.indexOf("@");
+            var dotpos = x.lastIndexOf(".");
+            if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
+                return false;
+            }
+            else
+                return true;
+        }
+        
+        function validatePhone(inputtxt) {  
+          var phoneno = /^\d{10}$/;  
+          if(inputtxt.match(phoneno))   
+              return true;    
+          else { 
+                var phoneNumberPattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$/;
+                if(phoneNumberPattern.test(inputtxt))
+                    return true;
+                else                          
+                    return false;  
+          }
+        }
+        
+        function validateUrl(input) {
+            var re = /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/;
+            if (!re.test(input)) {               
+                return false;
+            }
+            else 
+                return true;        
+        } 
+        
+        function submitApplication() {
+            var allChecked = true;
+            $(".agreement2-terms").each(function() {
+                if(!($(this).is(':checked'))) {
+                    allChecked = false;         
+                }
+            });
+            
+            if(allChecked) {
+                $(".errors").hide();
+                $("#agreements-panel2").hide();
+                $("#agreements-panel").show();
+                reloadAgreement();             
+            }
+            else {
+                $(".alert").html("* Please accept all agreements");
+                $(".errors").show(); 
+                window.scrollTo(100, 100);           
+            }
+                    
+            return allChecked;        
+        }                 
+    </script>
+    
+    
+    <div style="background-color:#f3f3f3;">
+    <header>
+        <div class="header_row">
+            <img class="logo" src="{!URLFOR($Resource.LogoBright)}" alt="logo" height="60" />
+            <span style="float:right; color:white; font-size:120%; margin-top:1%;">Bright Data Access Questionnaire</span>
+        </div>
+    </header>    
+    
+    <apex:form >
+        <apex:actionFunction name="reloadAgreement" reRender="IDX-Agreement, VOW-Agreement" />
+
+        <div id="questions-panel">
+            
+            <ul class="form-style-1">
+                <li class="panel-heading-li">
+                    <h4>Bright Questionnaire:</h4>
+                </li>
+                <li class="errors" style="display:none;">
+                    <div class="alert alert-danger" role="alert"></div>
+                </li>
+                <li id="cb-li">
+                    <label>1. Are you a <span class="required">*</span></label>
+                    <apex:selectRadio layout="pageDirection" value="{!contact_type}" styleClass="question1">
+                        <apex:selectOption itemValue="Vendor" itemLabel="Vendor (A vendor Provides services for more than one subscriber)"/>
+                        <apex:selectOption itemValue="Subcontractor" itemLabel="Subcontractor, working for a Broker or Agent. Subcontractor only provides services to one Broker or Subscriber"/>
+                        <apex:selectOption itemValue="Broker" itemLabel="Broker (The Broker of record for the firm)"/>
+                        <apex:selectOption itemValue="Agent" itemLabel="Agent (A licensee working for a broker)"/>
+                    </apex:selectRadio>          
+                </li>
+                <li>
+                    <label>2. Please provide name and a description of the product you plan to offer? If there is more than one product, describe each product. <span class="required">*</span></label>
+                    <apex:inputTextarea html-maxlength="1000" styleClass="field-long" value="{!product_offer_details}" />                    
+                </li>
+                <li>
+                    <label>3. Is the product for broker use, public display or both? <span class="required">*</span></label>
+                    <apex:selectList multiselect="false" size="1" id="question3" value="{!product_use}" styleClass="field-select">
+                        <apex:selectOption itemValue="None" itemLabel="-- select one --"/>
+                        <apex:selectOption itemValue="Broker Use" itemLabel="Broker Use"/>
+                        <apex:selectOption itemValue="Public Display" itemLabel="Public Display"/>
+                        <apex:selectOption itemValue="Both" itemLabel="Both"/>
+                    </apex:selectList>
+                </li>
+                <li style="display:none;">
+                    <label>If this is for a specific broker, please provide the broker name and firm information.</label>
+                    <label>Broker Name <span class="required">*</span></label>
+                    <apex:inputText id="broker-name" value="{!Broker_name}" styleClass="field-long"></apex:inputText>
+                </li> 
+                <li style="display:none;">
+                    <label>Brokerage Information <span class="required">*</span></label>
+                    <apex:inputTextArea id="broker-information" styleClass="field-long" value="{!Broker_Information}"></apex:inputTextArea>
+                </li>                
+                <li>
+                    <label>4. Who is the intended audience for the product? <span class="required">*</span></label>
+                    <apex:selectList multiselect="true" id="question4" size="6" value="{!Product_audience}" styleClass="field-select question4">
+                        <apex:selectOption itemValue="None" itemLabel="-- Select all that apply --" />
+                        <apex:selectOption itemValue="Broker" itemLabel="Broker"/>
+                        <apex:selectOption itemValue="Agent" itemLabel="Agent"/>
+                        <apex:selectOption itemValue="Consumer" itemLabel="Consumer"/>
+                        <apex:selectOption itemValue="Other" itemLabel="Other"/>
+                    </apex:selectList>
+                </li>
+                <li style="display:none;">
+                    <label>If Other, please describe <span class="required">*</span></label>
+                    <apex:inputText id="other-information" value="{!otherInfoStr}" styleClass="field-long"></apex:inputText>
+                </li>                 
+                <li>
+                    <label>5. If the product is for public display, Will the consumer need to acquire login credentials to see the listing data?  <span class="required">*</span></label>
+                    <apex:selectList multiselect="false" size="1" value="{!Is_login_required}" styleClass="field-select" id="question5">
+                        <apex:selectOption itemValue="None" itemLabel="-- select one --"/>
+                        <apex:selectOption itemValue="Yes" itemLabel="Yes"/>
+                        <apex:selectOption itemValue="No" itemLabel="No"/>
+                    </apex:selectList>
+                </li>                 
+                <li style="display:none;">
+                    <label>What Method(s) do you use to authenticate the rights to view the data? <span class="required">*</span></label>
+                    <apex:inputTextArea value="{!authentication_methods}" styleClass="field-long" id="auth-methods" />
+                </li>
+                <li style="display:none;">
+                    <label>How will the login credentials be monitored? <span class="required">*</span></label>
+                    <apex:inputTextArea styleClass="field-long"  value="{!monitoring_credentials}" id="monitor-credentials" />
+                </li>
+                <li>
+                    <label>6. Provide detail description of how Bright data will be used in your product? <span class="required">*</span></label>
+                    <apex:inputTextarea html-maxlength="1000" styleClass="field-long" value="{!bright_data_usage}" />
+                </li> 
+                <li>
+                    <label>7. If the product is broker use and not for the public display, what methods do you intend to use to validate or authenticate use only by the broker? <span class="required">*</span></label>
+                    <apex:inputTextarea html-maxlength="1000" styleClass="field-long" value="{!authenticate_broker}" />
+                </li> 
+                <li>
+                    <label>8. If the product is broker use, please provide a description of what services will be provided to the broker. <span class="required">*</span></label>
+                    <apex:inputTextarea html-maxlength="1000" styleClass="field-long" value="{!broker_services}" />
+                </li> 
+                <li>            
+                    <label>9. How often do you intend to pull data? <span class="required">*</span></label>
+                    <apex:inputText styleClass="field-long" value="{!data_pull_period}" />
+                </li> 
+                <li>           
+                    <label>10. Who will have access to the RETS data? <span class="required">*</span></label>
+                    <apex:inputText styleClass="field-long" value="{!RETS_data_access}"/>
+                </li>
+                <li>
+                    <label>11. Do you plan to share the data? <span class="required">*</span></label>
+                    <apex:selectList multiselect="false" size="1" styleClass="field-select" value="{!Is_data_shared}" id="question11">
+                        <apex:selectOption itemValue="None" itemLabel="-- select one --"/>
+                        <apex:selectOption itemValue="Yes" itemLabel="Yes"/>
+                        <apex:selectOption itemValue="No" itemLabel="No"/>
+                    </apex:selectList>
+                </li>
+                <li style="display:none;">           
+                    <label>if yes who? <span class="required">*</span></label>
+                    <apex:inputText id="share-data-who" styleClass="field-long" value="{!shareDataStr1}"/>
+                </li>                 
+                <li style="display:none;">
+                    <label>If yes , will the data provided be displayed as a plug in? <span class="required">*</span></label>
+                    <apex:selectList multiselect="false" size="1" styleClass="field-select" value="{!Is_data_display_plugin}" id="display-plugin">
+                        <apex:selectOption itemValue="None" itemLabel="-- select one --"/>
+                        <apex:selectOption itemValue="Yes" itemLabel="Yes"/>
+                        <apex:selectOption itemValue="No" itemLabel="No"/>
+                    </apex:selectList>
+                </li> 
+                <li style="display:none;">           
+                    <label>if yes who? <span class="required">*</span></label>
+                    <apex:inputText id="share-data-who2" styleClass="field-long" value="{!shareDataStr2}"/>
+                </li>                          
+                <li>           
+                    <label>12. Please provide a sample website URL or provide demo access to your product? <span class="required">*</span></label>
+                    <apex:inputText id="website-url" styleClass="field-long" value="{!website_URL}"/>
+                </li>                                                                 
+                <li>
+                    <input type="button" value="Next" style="float:right;" id="questions-panel-button" />
+                </li>
+            </ul>
+        </div>
+        
+        <div id="info-panel">
+            <ul class="form-style-1">
+                <li class="errors" style="display:none;">
+                    <div class="alert alert-danger" role="alert"></div>
+                </li>
+                <li class="panel-heading-li">
+                    <h4>Primary Contact:</h4>
+                </li>                                           
+                <li class="panel-heading-li-next">
+                    <label>Name <span class="required1">*</span></label>
+                    <apex:inputText styleClass="field-long primary-contact-ele" id="Primary_Contact_Name" value="{!Primary_Contact_Name}"/>         
+                </li>
+                <li>
+                    <div class="col-md-6" style="padding:0px;">
+                        <label>Phone Number <span class="required1">*</span></label>
+                        <apex:inputText id="Primary_Contact_Phone_Number" styleClass="field-long phone-number primary-contact-ele" value="{!Primary_Contact_Phone_Number}"/>         
+                    </div>
+                    <div class="col-md-6" style="padding:0px; padding-left:5px;">
+                        <label>Email Address <span class="required1">*</span></label>
+                        <apex:inputText id="Primary_Contact_Email_Address" styleClass="field-long primary-contact-ele" value="{!Primary_Contact_Email_Address}"/>                             
+                    </div>
+                    <div style="clear:both;" />
+                    <br/><br/>                    
+                </li>
+                <li class="panel-heading-li">
+                    <h4>Technical Contact: </h4>
+                    <span style="float:right; color:#2b2b2b;"><input disabled="disabled" id="Technical_Contact" class="copy-checkbox" type="checkbox" /> Copy Primary Contact info</span>
+                </li>                
+                <li class="panel-heading-li-next">
+                    <label>Name <span class="required1">*</span></label>
+                    <apex:inputText id="Technical_Contact_Name" styleClass="field-long" value="{!Technical_Contact_Name}"/>         
+                </li>
+                <li>
+                    <div class="col-md-6" style="padding:0px;">
+                        <label>Phone Number <span class="required1">*</span></label>
+                        <apex:inputText id="Technical_Contact_Phone_Number" styleClass="field-long phone-number" value="{!Technical_Contact_Phone_Number}"/>        
+                    </div>
+                    <div class="col-md-6" style="padding:0px; padding-left:5px;">
+                        <label>Email Address <span class="required1">*</span></label>
+                        <apex:inputText id="Technical_Contact_Email_Address" styleClass="field-long" value="{!Technical_Contact_Email_Address}"/>                            
+                    </div>
+                    <div style="clear:both;" />
+                    <br/><br/>
+                </li> 
+                <li class="panel-heading-li">
+                    <h4>Billing Contact:</h4>
+                    <span style="float:right; color:#2b2b2b;"><input disabled="disabled" id="Billing_Contact" class="copy-checkbox" type="checkbox" /> Copy Primary Contact info</span>
+                </li>                                           
+                <li class="panel-heading-li-next">                
+                    <label>Name <span class="required1">*</span></label>
+                    <apex:inputText id="Billing_Contact_Name" styleClass="field-long" value="{!Billing_Contact_Name}"/>        
+                </li>
+                <li>
+                    <div class="col-md-6" style="padding:0px;">
+                        <label>Phone Number <span class="required1">*</span></label>
+                        <apex:inputText id="Billing_Contact_Phone_Number" styleClass="field-long phone-number" value="{!Billing_Contact_Phone_Number}"/>        
+                    </div>
+                    <div class="col-md-6" style="padding:0px; padding-left:5px;"> 
+                        <label>Email Address <span class="required1">*</span></label>
+                        <apex:inputText id="Billing_Contact_Email_Address" styleClass="field-long" value="{!Billing_Contact_Email_Address}"/>                            
+                    </div>
+                    <div style="clear:both;" />
+                    <br/><br/>                                  
+                </li>
+
+                <li class="panel-heading-li">
+                    <h4>Administrative Contact:</h4>
+                    <span style="float:right; color:#2b2b2b; disable:disable;"><input type="checkbox" id="Administrative_Contact" class="copy-checkbox" disabled="disabled" /> Copy Primary Contact info</span>
+                </li>                                           
+                <li class="panel-heading-li-next">  
+                    <label>Name <span class="required1">*</span></label>
+                    <apex:inputText id="Administrative_Contact_Name" styleClass="field-long" value="{!Administrative_Contact_Name}"/>        
+                </li>
+                <li>
+                    <div class="col-md-6" style="padding:0px;">
+                        <label>Phone Number <span class="required1">*</span></label>
+                        <apex:inputText id="Administrative_Contact_Phone_Number" styleClass="field-long phone-number" value="{!Administrative_Contact_Phone_Number}"/>        
+                    </div>
+                    <div class="col-md-6" style="padding:0px; padding-left:5px;">
+                    <label>Email Address <span class="required1">*</span></label>
+                    <apex:inputText id="Administrative_Contact_Email_Address" styleClass="field-long" value="{!Administrative_Contact_Email_Address}"/>                            
+                    </div>
+                    <div style="clear:both;" />                                     
+                </li>
+               
+                <li>
+                    <input type="button" value="Back" id="info-panel-back-button" />
+                    <input type="button" value="Next" style="float:right;" id="info-panel-button" />
+                </li>                                                                                                                                                                                               
+            </ul>
+        </div>
+        
+        <div id="agreements-panel" class="form-style-1">
+            <ul class="form-style-1" style="padding-left:0px;">
+                <li class="errors" style="display:none;">
+                    <div class="alert alert-danger" role="alert"></div>
+                </li>
+            </ul>  
+            <div style="{!if(quetionnairType == 'IDX', '', 'display:none;')}">      
+                <apex:outputPanel id="IDX-Agreement">
+                    <span class="panel-heading-li"><h4>IDX Access Agreement:</h4></span><br/>            
+                    <apex:iframe src="/bright/BrightQuestionnaire_Agreement1" height="250px"  />
+                </apex:outputPanel>
+                
+                <p style="margin-top:10px;">            
+                    <input type="checkbox" id="agreement-check1" /> I have read and understand the IDX Agreement 
+                </p>
+                
+                <div id="agreement1-vendor-details" style="display:none;">
+                    <label>Name of the vendor</label>
+                    <apex:inputText id="vendor-name-1" value="{!vendorName1}" styleClass="field-long"></apex:inputText>
+                </div>                
+                <br/>
+            </div>
+            <div style="{!if(quetionnairType == 'VOW', '', 'display:none;')}">
+                <apex:outputPanel id="VOW-Agreement">
+                    <span class="panel-heading-li"><h4>VOW Access Agreement:</h4></span><br/>          
+                    <apex:iframe src="/bright/BrightQuestionnaire_Agreement2" height="250px"  />
+                </apex:outputPanel>
+                <p style="margin-top:10px;">            
+                    <input type="checkbox" id="agreement-check2" /> I have read and understand the VOW Agreement 
+                </p>
+                <div id="agreement2-vendor-details" style="display:none;">
+                    <label>Name of the vendor</label>
+                    <apex:inputText id="vendor-name-2" value="{!vendorName2}" styleClass="field-long"></apex:inputText>
+                </div>
+                <br/>
+            </div>
+            <input type="button" value="Back" id="agreement-panel-back-button" />
+            <apex:commandLink onclick="return validateTerms();"  styleClass="submit" id="ContactDetailsButton" value="Submit" action="{!submitApplication}" />                                                                
+        </div>
+        <div style="clear:both;" />
+        
+        <div id="agreements-panel2" class="form-style-1">
+            <ul class="form-style-1" style="padding-left:0px;">
+                <li class="errors" style="display:none;">
+                    <div class="alert alert-danger" role="alert"></div>
+                </li>
+            </ul>  
+                  
+            <apex:outputPanel id="Pricing-Structure-Agreement">
+                <span class="panel-heading-li"><h4>Pricing Structure:</h4></span><br/>            
+                <apex:iframe src="{!if(documentsMap['Pricing Structure Document'] != null, documentsMap['Pricing Structure Document'], '')}" height="250px"  />
+            </apex:outputPanel>
+            
+            <p style="margin-top:10px;">            
+                <input type="checkbox" class="agreement2-terms" id="agreement2-check1" /> I have read and understand the Pricing Structure document 
+            </p>
+            <br/>
+            
+            <apex:outputPanel id="Display-Rules-Agreement">
+                <span class="panel-heading-li"><h4>Display Rules:</h4></span><br/>                            
+                <apex:iframe src="{!if(documentsMap['Display Rules document'] != null, documentsMap['Display Rules document'], '')}" height="250px"  />
+            </apex:outputPanel>
+            
+            <p style="margin-top:10px;">            
+                <input type="checkbox" class="agreement2-terms" id="agreement2-check2" /> I have read and understand the Display Rules document 
+            </p> 
+            <br/>
+            
+            <apex:outputPanel id="Display-Fields-Agreement">
+                <span class="panel-heading-li"><h4>Display Fields:</h4></span><br/>            
+                <apex:iframe src="{!if(documentsMap['Display Fields Document'] != null, documentsMap['Display Fields Document'], '')}" height="250px"  />
+            </apex:outputPanel>
+            
+            <p style="margin-top:10px;">            
+                <input type="checkbox" class="agreement2-terms" id="agreement2-check3" /> I have read and understand the Display Fields document 
+            </p>
+            <br/>
+            
+            <input type="button" value="Back" id="agreement-panel2-back-button" />
+            <input type="button" onclick="submitApplication()" value="Next" style="float:right;" id="agreement1-panel-button" />                        
+        </div>              
+    </apex:form>       
+    
+    <div style="clear:both;" />
+    <div class="footer"> 
+        Copyright © 2017 Bright MLS, Inc.
+    </div> 
+    </div>    
+</apex:page>

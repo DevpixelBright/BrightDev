@@ -1,0 +1,63 @@
+<aura:component>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <ltng:require styles="{!$Resource.headeras }"></ltng:require>
+  <ltng:require styles="{!$Resource.bodyas }"></ltng:require>
+  <div class="c-container">
+    <div class="fullpage slds-scope">
+      <div class="slds-grid slds-wrap">
+        <lightning:layout multipleRows="true">
+          <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+            <div class="new-containerpage header-new-containerpage">
+              <div class="slds-container--x-large new-container">
+                <c:headeras />
+              </div>
+            </div>
+          </lightning:layoutItem>
+          <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+            <lightning:layout>
+              <div class="new-containerpage">
+                <div class="slds-container--x-large new-container">
+                  <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                    <div class="page-section page-main">
+                      <div class="dev">
+                                   <div class="bodybottom">
+          
+                
+                
+                <div class="slds-container--x-large new-container">
+                     <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                     <div class="footer-full ">
+                        
+                         <div class="sucuss">
+                             
+                         <img src="{!$Resource.brightas + '/brightas/images/success.svg'}" alt="Bright" />
+                             <h4>Thank you for submitting a Subdivision or Building Name request</h4>
+                             <p>Your request has been submitted to Bright. Thank you for helping us enhance the data integrity of our Multiple Listing Service. We will contact you as soon as your request for the new Subdivision or Building Name is validated and is available in Bright.</p>
+                             <h5>Building Name: Office</h5>
+                             <h5>Date of Request: 06/18/2021</h5>
+                             <lightning:button class="brand " variant="brand " label="Download PDF" title="Brand action" onclick="{! c.handleClick }" />
+                         </div>
+                   
+                    </div>
+                    </lightning:layoutItem>
+                </div></div>
+    
+                                 </div>
+                    </div>
+                  </lightning:layoutItem>
+                </div>
+              </div>
+            </lightning:layout>
+          </lightning:layoutItem>
+          <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+            <div class="new-containerpage footer-new-containerpage">
+              <div class="slds-container--x-large new-container">
+                <c:footeras />
+              </div>
+            </div>
+          </lightning:layoutItem>
+        </lightning:layout>
+      </div>
+    </div>
+  </div>
+</aura:component>

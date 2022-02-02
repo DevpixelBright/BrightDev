@@ -1,0 +1,4 @@
+<apex:page controller="Communities_ResponsibleBrokerview">
+  
+   {!mAccountState}
+</apex:page>

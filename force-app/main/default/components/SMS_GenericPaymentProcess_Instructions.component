@@ -1,0 +1,6 @@
+<apex:component layout="none">
+    <p>To submit your payment to MRIS, follow this simple process.</p>
+    <p>Review your current bill to ensure you recognize all charges listed. Each charge is itemized for ease of understanding. <i>If you have questions about your bill, please contact the MRIS Support Center at (301) 838-7200 or (888) 838-8200 or via email at <a href="mailto:helpdesk@mris.net">helpdesk@mris.net</a>.</i></p>
+    <p>Select whether you will use an existing payment method already on file or a new payment method to submit today’s payment. Click “Submit” to pay your bill. <i>If using a new payment method, enter the required information needed for payment processing.</i></p>
+    <p>After submission of payment, you will receive a confirmation of payment which can be printed for your records by clicking the “Print Receipt” button. If you do not want to print a receipt, click “Continue.”</p>
+</apex:component>

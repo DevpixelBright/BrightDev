@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VoiceMail_Required_if_VM_Ext_Entered</fullName>
+    <active>true</active>
+    <description>VoiceMail is Required if VM Ext Field value is eneterd.</description>
+    <errorConditionFormula>AND(ISBLANK(Voicemail__c) , NOT(ISBLANK(VM_Ext__c)))</errorConditionFormula>
+    <errorDisplayField>Voicemail__c</errorDisplayField>
+    <errorMessage>Enter Voicemail</errorMessage>
+</ValidationRule>

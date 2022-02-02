@@ -1,0 +1,8 @@
+<apex:page standardController="Shadow_Case__c" extensions="ComplianceCaseDetailExtension" tabStyle="Case"  lightningstylesheets="true">
+    <apex:detail />
+    <apex:pageBlock >
+        <apex:pageBlockSection >
+            <apex:outputText label="Case Description" value="{!CaseDescription}"/>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>

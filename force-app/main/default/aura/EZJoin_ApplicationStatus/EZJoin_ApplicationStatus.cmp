@@ -1,0 +1,42 @@
+<aura:component controller="EZJoin_NewApplicationStatusController" implements="force:appHostable,lightning:isUrlAddressable">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    
+    <aura:attribute name="applicationId" type="String" default="" description="1" />
+    <aura:attribute name="showSpinner" type="Boolean" default="false" />
+    <aura:attribute name="showServerError" type="Boolean" default="false" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}" />
+    
+    <!-- Loading spinner container -->
+    <aura:if isTrue="{!v.showSpinner}">
+        <div class="slds-is-relative">
+            <lightning:spinner />
+        </div>
+    </aura:if> 
+    
+    <div class="fullpage slds-scope">
+        <div class="slds-grid slds-wrap">
+            
+            <c:EZJoin_NewApplicationHeader appConfig="[]" />
+            
+			<div class="slds-container--x-large new-container" id="content-container">
+				<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+					<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_5-of-12 slds-large-size_5-of-12 status">
+                        <h3>Check Application Status</h3>
+                        <h5>Enter your Application ID to check the status of your application</h5>
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 full-field-line">
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_9-of-12 slds-large-size_9-of-12 application application1">
+                                <lightning:input type="text" value="{!v.applicationId}" name="ApplicationId" aura:id="ApplicationId" required="true" placeholder="Enter Application ID" />
+                            </div>
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 application">
+                                <button class="slds-button slds-button_brand" onclick="{!c.submitClickEvtHandler}">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+			</div>
+            
+            <c:EZJoin_NewApplicationFooter />
+        </div>
+    </div>    
+</aura:component>

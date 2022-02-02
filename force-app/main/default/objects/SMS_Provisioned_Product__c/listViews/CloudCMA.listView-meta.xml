@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CloudCMA</fullName>
+    <columns>NAME</columns>
+    <columns>MRIS_Subscription_Id__c</columns>
+    <columns>Product_Type__c</columns>
+    <columns>Product_Sub_Type__c</columns>
+    <columns>Provisioned_Status__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Service_Jurisdiction__c</columns>
+    <columns>Status_Message__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Product_Type__c</field>
+        <operation>equals</operation>
+        <value>CloudCMA</value>
+    </filters>
+    <label>CloudCMA</label>
+</ListView>

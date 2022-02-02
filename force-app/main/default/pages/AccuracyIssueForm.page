@@ -1,0 +1,470 @@
+<apex:page controller="AccuracyIssueForm_Controller" showHeader="false" cache="false" lightningstylesheets="true">
+    
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/jquery.min.js')}"></script>   
+        <apex:stylesheet value="{!URLFOR($Resource.Bootstrap_Layout_Library, '/css/bootstrap.min.css')}"/>
+            <apex:includeScript value="/support/console/25.0/integration.js"/>
+                
+                </head>
+            
+            <style type="text/css">
+                .form-style-1 {
+                    margin:10px auto;
+                    max-width: 720px;
+                    padding: 20px 12px 10px 20px;
+                    font: 13px roboto, sans-serif;
+                }
+        .form-style-1 li {
+            padding: 0;
+            display: block;
+            list-style: none;
+            margin: 25px 0 0 0;
+        }
+        .form-style-1 label{
+            margin:0 0 3px 0;
+            padding:0px;
+            display:block;
+            font-weight: bold;
+            color:#2b2b2b;
+        }
+        .form-style-1 input[type=text], 
+            .form-style-1 input[type=date],
+                .form-style-1 input[type=datetime],
+                    .form-style-1 input[type=number],
+                        .form-style-1 input[type=search],
+                            .form-style-1 input[type=time],
+                                .form-style-1 input[type=url],
+                                    .form-style-1 input[type=email],
+                                        textarea, 
+                                        select{
+                                            box-sizing: border-box;
+                                            -webkit-box-sizing: border-box;
+                                            -moz-box-sizing: border-box;
+                                            border:1px solid #BEBEBE;
+                                            padding: 7px;
+                                            margin:0px;
+                                            -webkit-transition: all 0.30s ease-in-out;
+                                            -moz-transition: all 0.30s ease-in-out;
+                                            -ms-transition: all 0.30s ease-in-out;
+                                            -o-transition: all 0.30s ease-in-out;
+                                            outline: none;  
+                                        }
+        .form-style-1 input[type=text]:focus, 
+            .form-style-1 input[type=date]:focus,
+                .form-style-1 input[type=datetime]:focus,
+                    .form-style-1 input[type=number]:focus,
+                        .form-style-1 input[type=search]:focus,
+                            .form-style-1 input[type=time]:focus,
+                                .form-style-1 input[type=url]:focus,
+                                    .form-style-1 input[type=email]:focus,
+                                        .form-style-1 textarea:focus, 
+                                            .form-style-1 select:focus{
+                                                -moz-box-shadow: 0 0 8px #88D5E9;
+                                                -webkit-box-shadow: 0 0 8px #88D5E9;
+                                                box-shadow: 0 0 8px #88D5E9;
+                                                border: 1px solid #88D5E9;
+                                            }
+        .form-style-1 .field-divided{
+            width: 49%;
+        }
+        
+        .form-style-1 .field-long{
+            width: 100%;
+        }
+        .form-style-1 .field-select{
+            width: 100%;
+        }
+        .form-style-1 .field-textarea{
+            height: 100px;
+        }
+        .form-style-1 input[type=submit], .form-style-1 input[type=button]{
+            background: #FF7947;
+            padding: 8px 15px 8px 15px;
+            border: none;
+            color: #fff;
+        }
+        .form-style-1 input[type=submit]:hover, .form-style-1 input[type=button]:hover{
+            background: #FF7947;
+            box-shadow:none;
+            -moz-box-shadow:none;
+            -webkit-box-shadow:none;
+        }
+        .form-style-1 .required, .form-style-1 .required1{
+            color:red;
+        }
+        .header_row{ padding:12px; background-color:#212B3D;}
+        .header_row img.logo{padding: 12px 0px;}
+                    body {font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;} 
+                    .question1 label { display:inline; font-weight:100; font: 13px roboto, sans-serif !important;}       
+                    .submit {            
+                        background: #FF7947;
+                        padding: 8px 15px 8px 15px;
+                        border: none;
+                        color: #fff;
+                        float:right;
+                        text-decoration:none;
+                    }
+                    .submit:hover {text-decoration:none; color:#fff;}
+                    #info-panel, #agreements-panel, #agreements-panel2 { display:none; } 
+                    .footer {background-color:#555555; padding:30px; text-align:center; color:#fff; margin-top:20px;}
+                    .panel-heading-li { color:#FF7947; padding-bottom:5px; }
+                    .panel-heading-li-next {margin-top:10px !important;}
+                                       .question4 option {margin-bottom:5px;}
+                                       
+                                       .error-msg { color:#f53e3e; margin-top:5px; }       
+                                       </style> 
+                                       
+                                       <script>
+                                           var caseId;
+                                                   var fileId = 1;
+                                                   var byteChunkArray; 
+                                                   var files;
+                                                   var currentFile;
+                                                   var $upload;
+                                                   var CHUNK_SIZE = 180000;
+                                                   var VIEW_URL = '/servlet/servlet.FileDownload?file='; 
+                                                   
+                                                   function resetForm(url) {
+                                                    window.open(url, '_self');
+                                                   }
+                                                   function validateForm() {
+                                                       var hasError = false; 
+                                                       $(".error-msg").remove();                     
+                                                       $(".required").each(function() {                                                            
+                                                           if($(this).parent().parent().css('display') != 'none' && $(this).parent().parent().attr('id') != 'cb-li' && ($(this).parent().next().val() == null || $(this).parent().next().val() == '' || $(this).parent().next().val() == 'None')) {
+                                                               $(this).parent().next().after('<div class="error-msg">* This field is required</div>');
+                                                               $(this).parent().next().css('border-color', '#f53e3e');
+                                                               hasError = true;
+                                                           }
+                                                           else {
+                                                               $(this).parent().next().css('border-color', '#BEBEBE'); 
+                                                           }                               
+                                                       });
+                                                       
+                                                       console.log(hasError);    
+                                                       if(hasError) {
+                                                           $(".errors").show();
+                                                           $(".alert").html("* Please review below error fields ");
+                                                           window.scrollTo(100, 100);
+                                                           return false;
+                                                       }
+                                                       else {   
+                                                           $("#loader").show();
+                                                           $(".errors").hide();
+                                                           $(".alert").html("hi"); 
+                                                           saveCaseDetails(); 
+                                                           return false;
+                                                       }
+                                                   }
+                                                  
+                                                   function saveCaseDetails() {
+                                                       var mlsNumber = $('[id$=mls_number]').val();
+                                                       var address = $('[id$=property_address]').val();
+                                                       var fromSource = $('[id$=from_source]').val();
+                                                       var topic = $('[id$=topic]').val();
+                                                       var description = $('[id$=description]').val();
+                                                       
+                                                       AccuracyIssueForm_Controller.remoteCreateCase(mlsNumber, address, fromSource, topic, description, function(result,event) {
+                                                           if (event.status == true) {
+                                                               if(result.indexOf('Failed: ') < 0) {
+                                                                   caseId = result;
+                                                                   if(topic == 'Photo Violation')
+                                                                       prepareFileUploads(fileId);
+                                                                   else 
+                                                                       window.location = '/apex/AccuracyIssuePdf?caseId=' + caseId + '&mls=' + $('[id$=mls_number]').val() + '&Address=' + $('[id$=property_address]').val() + '&from=' + $('[id$=from_source]').val() + '&topic=' + $('[id$=topic]').val() + '&description=' + $('[id$=description]').val();
+                                                               }
+                                                               else
+                                                                   alert(result);
+                                                           }
+                                                           else
+                                                               alert('failed');
+                                                       });
+                                                   }
+                                                   
+                                                   function prepareFileUploads(id) {
+                                                       /* Checking if atachment id exists or not */
+                                                       if (document.getElementById(id) != null) {
+                                                           /* Get the file(s) from the input field */
+                                                           files = document.getElementById(id).files;
+                                                           
+                                                           /* Only proceed if there are files selected and if null it would be end of attachments */
+                                                           if(files.length == 0){
+                                                               window.location = '/apex/AccuracyIssuePdf?caseId=' + caseId + '&mls=' + $('[id$=mls_number]').val() + '&Address=' + $('[id$=property_address]').val() + '&from=' + $('[id$=from_source]').val() + '&topic=' + $('[id$=topic]').val() + '&description=' + $('[id$=description]').val();
+                                                               return;
+                                                           }     
+                                                           
+                                                           /* Once elements have been added to the page representing the uploads, start the actual upload process */
+                                                           checkForUploads();  
+                                                       }
+                                                       else {
+                                                           /* If not process next attachment */
+                                                           fileId = parseInt(fileId) + 1;
+                                                           prepareFileUploads(fileId);       
+                                                       }
+                                                   }                    
+                                                   
+                                                   function checkForUploads() {
+                                                       /* Based on index of the div, get correct file from files array */
+                                                       currentFile = files[0];
+                                                       byteChunkArray = new Array();  
+                                                       
+                                                       /* First check to see if file size is less than the chunk size, if so first and only chunk is entire size of file */
+                                                       if(currentFile.size <= CHUNK_SIZE) {
+                                                           byteChunkArray[0] = '0-' + (currentFile.size - 1);
+                                                       }else{
+                                                           /* Determine how many whole byte chunks make up the file */
+                                                           var numOfFullChunks = Math.floor(currentFile.size / CHUNK_SIZE); // i.e. 1.2MB file would be 1000000 / CHUNK_SIZE
+                                                           var remainderBytes = currentFile.size % CHUNK_SIZE; // would determine remainder of 1200000 bytes that is not a full chunk
+                                                           var startByte = 0;
+                                                           var endByte = CHUNK_SIZE - 1;
+                                                           
+                                                           /* Loop through the number of full chunks and build the byteChunkArray array */
+                                                           for(i = 0; i < numOfFullChunks; i++) {
+                                                               byteChunkArray[i] = startByte+'-'+endByte;
+                                                               
+                                                               /* Set new start and stop bytes for next iteration of loop */
+                                                               startByte = endByte + 1;
+                                                               endByte += CHUNK_SIZE;
+                                                           }
+                                                           
+                                                           /* Add the last chunk of remaining bytes to the byteChunkArray */
+                                                           startByte = currentFile.size - remainderBytes;
+                                                           endByte = currentFile.size;
+                                                           byteChunkArray.push(startByte+'-'+endByte);
+                                                       }
+                                                       
+                                                       processByteChunkArray('');
+                                                   } 
+                                                   
+                                                   function processByteChunkArray(attachmentId) {
+                                                       
+                                                       /* Proceed if there are still values in the byteChunkArray, if none, all piece of the file have been uploaded */
+                                                       if(byteChunkArray.length > 0) {
+                                                           
+                                                           /* Determine the byte range that needs to uploaded, if byteChunkArray is like... ['0-179999','180000-359999'] */
+                                                           var indexes = byteChunkArray[0].split('-'); //... get the first index range '0-179999' -> ['0','179999']
+                                                           var startByte = parseInt(indexes[0]);       //0
+                                                           var stopByte = parseInt(indexes[1]);        //179999
+                                                           
+                                                           /* Slice the part of the file we want to upload, currentFile variable is set in checkForUploads() method that is called before this method */
+                                                           if(currentFile.webkitSlice) {
+                                                               var blobChunk = currentFile.webkitSlice(startByte , stopByte + 1);
+                                                           }else if (currentFile.mozSlice) {
+                                                               var blobChunk = currentFile.mozSlice(startByte , stopByte + 1);
+                                                           }else if (currentFile.slice) {
+                                                               var blobChunk = currentFile.slice(startByte , stopByte + 1);
+                                                           }
+                                                           
+                                                           /* Create a new reader object, part of HTML5 File API */
+                                                           var reader = new FileReader();
+                                                           
+                                                           /* Read the blobChunk as a binary string, reader.onloadend function below is automatically called after this line */
+                                                           reader.readAsArrayBuffer(blobChunk);
+                                                           
+                                                           /* Create a reader.onload function, this will execute immediately after reader.readAsBinaryString() function above; */
+                                                           reader.onloadend = function(evt) { 
+                                                               if(evt.target.readyState == FileReader.DONE) {  
+                                                                   /*
+                            Make sure read was successful, DONE == 2
+                            Base 64 encode the data for transmission to the server with JS remoting, window.btoa currently on support by some browsers
+                        */
+                        
+                        var binary = "";
+                        var bytes = new Uint8Array(evt.target.result);
+                        var length = bytes.byteLength;
+                        
+                        for (var i = 0; i < length; i++) {
+                            binary += String.fromCharCode(bytes[i]);
+                        }
+                        
+                        /* Remote function call to start uploading process */
+                        AccuracyIssueForm_Controller.attachFile(caseId,attachmentId,currentFile.name,currentFile.type,window.btoa(binary),function(result,event) {
+                            
+                            if (event.status == true) {
+                                
+                                /* Calculate percent uploaded and updating in files listing */
+                                var percentComplete = Math.round((stopByte / currentFile.size) * 100);
+                                $("#status_" + fileId).html(percentComplete + '%');
+                                
+                                /* Remove the index information from the byteChunkArray array for the piece just uploaded. */
+                                byteChunkArray.shift(); //removes 0 index
+                                
+                                /* Set the attachmentId of the file we are now processing */
+                                attachmentId = result;
+                                
+                                /* Call process byteChunkArray to upload the next piece of the file */
+                                processByteChunkArray(attachmentId);
+                                
+                                /* Update final status and start process next attachment */
+                                if(processByteChunkArray.length <= 0) {
+                                    $("#status_" + fileId).html("Completed");
+                                    fileId = parseInt(fileId) + 1;
+                                    prepareFileUploads(fileId);
+                                }
+                            }
+                            else {
+                                /* Update failed status and start processing next attachment */
+                                $("#status_" + fileId).html("<span style='color:red;'>Failed: "+event.message+"</span>");
+                                fileId = parseInt(fileId) + 1;
+                                prepareFileUploads(fileId);                      
+                            }
+                        });
+                    }
+                    else {
+                        /* Error handling for bad read */
+                        alert('Could not read file');
+                    }
+                };
+                
+            }else{
+                /* Update status for completed file and start processing next file */
+                $("#status_" + fileId).html("Completed");
+                fileId = parseInt(fileId) + 1;
+                prepareFileUploads(fileId);
+            }
+        }                    
+                    </script>           
+        
+        <div style="background-color:#f3f3f3;">
+            <header>
+                <div class="header_row">
+                    <img class="logo" src="{!URLFOR($Resource.LogoBright)}" alt="logo" height="60" />
+                    <span style="float:right; color:white; font-size:120%; margin-top:1%;">Report a Violation</span>
+                </div>
+            </header> 
+            
+            <div id="loader" style="display:none;">
+                <div style="z-index: 1000; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: black; opacity: 0.25">
+                </div>
+                <div style="z-index: 1001; text-align: center; vertical-align: middle; position: fixed; top: 50%; left: 50%; padding: 1em; margin: -2em -10em; width: 20em; background: white; border-radius: 5px">
+                    <img src="/img/loading32.gif" style="vertical-align: middle; padding-right: 1em" />
+                    Please wait...
+                </div>        
+            </div>
+            
+            <apex:form id="theform">
+                <div id="questions-panel">           
+                    <ul class="form-style-1">
+                        <li class="panel-heading-li">
+                            <h4>Report a Violation:</h4>
+                        </li>
+                        <li class="errors" style="display:{!if(msg == null, 'none', 'block')}">
+                            <div class="alert alert-danger" role="alert">{!msg}</div>
+                        </li>
+                        <li>
+                            <label>MLS Number <span class="required">*</span></label>
+                            <apex:inputText id="mls_number" value="{!mlsNumber}" styleClass="field-long"></apex:inputText>
+                        </li>
+                        <li>
+                            <label>Property Address <span class="required">*</span></label>
+                            <apex:inputText id="property_address" value="{!propertyAddress}" styleClass="field-long"></apex:inputText>
+                        </li> 
+                        <li>
+                            <label style="font-weight:100;">The information collected in this form will be used solely to investigate the accuracy of the listing. Your contact information is collected so we may follow-up with you if more information is required for investigation.</label>
+                        </li> 
+                        <li>
+                            <label>From <span class="required">*</span></label>
+                            <apex:inputText id="from_source" value="{!fromName}" styleClass="field-long"></apex:inputText>
+                        </li> 
+                        
+                        <li>
+                            <label>Topic <span class="required">*</span></label>
+                            <apex:selectList id="topic" value="{!topic}" multiselect="false" size="1" styleClass="field-select" onchange="toggleAttachment(this.value)">
+                                <apex:selectOption itemValue="None" itemLabel="-- select one --"/>
+                                <apex:selectOption itemValue="Listing not entered into system within 3 business days excluding weekends and holidays" itemLabel="Listing not entered into system within 3 business days excluding weekends and holidays"/>
+                                <apex:selectOption itemValue="Property advertised prior to entry into Bright" itemLabel="Property advertised prior to entry into Bright"/>
+                                <apex:selectOption itemValue="Unauthorized use of Bright system (Please submit name and circumstance)" itemLabel="Unauthorized use of Bright system (Please submit name and circumstance)"/>
+                                <apex:selectOption itemValue="Incorrect tax identification or legal information" itemLabel="Incorrect tax identification or legal information"/>
+                                <apex:selectOption itemValue="Incorrect data information (i.e. picklist item)" itemLabel="Incorrect data information (i.e. picklist item)"/>
+                                <apex:selectOption itemValue="Incorrect status information" itemLabel="Incorrect status information"/>
+                                <apex:selectOption itemValue="Incorrect settlement information" itemLabel="Incorrect settlement information"/>
+                                <apex:selectOption itemValue="Incorrect Days On Market information (DOM or CDOM)" itemLabel="Incorrect Days On Market information (DOM or CDOM)"/>
+                                <apex:selectOption itemValue="Photo Violation" itemLabel="Photo Violation"/>
+                                <apex:selectOption itemValue="Other" itemLabel="Other"/>
+                                <apex:selectOption itemValue="Duplicate Listing" itemLabel="Duplicate Listing"/>
+                                <apex:selectOption itemValue="Incorrect Contingency" itemLabel="Incorrect Contingency"/>
+                                <apex:selectOption itemValue="Price" itemLabel="Price"/>
+                                <apex:selectOption itemValue="Remarks Violation" itemLabel="Remarks Violation"/>
+                                <apex:selectOption itemValue="Unavailable for Showing" itemLabel="Unavailable for Showing"/>
+                                <apex:selectOption itemValue="Uploaded Document" itemLabel="Uploaded Document"/>
+                                <apex:selectOption itemValue="Virtual Tour" itemLabel="Virtual Tour"/>
+                            </apex:selectList>
+                        </li>
+                        <li class="attmnt" style="display:none">
+                            <div class="form-group">
+                                <div class="col-sm-12" style="padding-left:0px;">
+                                    <span for="" class="col-sm-3 control-label" style="padding-left:0px;">
+                                        <label>Add Attachment(s)</label>
+                                        <input type="hidden" name="filecount" id="filecount" value="1" class="form-control"/>
+                                    </span>
+                                    
+                                    <div class="col-sm-8" id="filesContainer">
+                                        <div id="fileContainer1" style="margin-bottom:5px;">
+                                            <input class="filesclass" type="file" id="1" name="file" onchange="AddAnother()" required = 'true' />
+                                        </div>
+                                    </div>  
+                                    
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <label>Violation Description <span class="required">*</span></label>
+                            <apex:inputTextarea id="description" value="{!description}" html-maxlength="1000" styleClass="field-long" />
+                        </li>
+                        <br/>
+                        
+                        <!--<input class="btn" type="button" value="Cancel" id="agreement-panel2-back-button" onclick="testCloseTab()"/>-->
+                        <apex:commandbutton value="Reset" onclick="return resetForm('{!$Site.BaseUrl}?from={!fromName}&mls={!mlsNumber}&address={!propertyAddress}');" >
+                        </apex:commandbutton>
+                        <apex:commandButton onclick="return validateForm();" value="Submit" style="float:right;"/>
+                    </ul> 
+                </div>
+                <!--apex:actionFunction action="{!updateAttachments}" name="checkAttachments" rerender="fileUploadSection"/-->
+            </apex:form>
+        </div>    
+        <script>
+        function toggleAttachment(val){
+            if(val == 'Photo Violation'){
+                $('.attmnt').show();
+            }else{
+                $('.attmnt input').val('')
+                $('.attmnt').hide();
+            }
+        }
+        
+        /*function checkFileSize(ele){
+            	console.log(ele);
+                console.log($(ele).val());
+                var file = ele.files[0];
+				if(file.size > 4194304) { //4 * 1024 * 1024
+                    alert("File size must be less than 4 MB");
+                }else{
+                    checkAttachments();
+                }             
+            }*/
+        
+        /* Function to add new input file element */
+        function AddAnother() {
+            var previousFileId = $("#filecount").val();
+            var files = document.getElementById(previousFileId).files;
+            
+            if (files[0].size < 4000000) {
+                $("#" + previousFileId).hide();
+                $("#fileContainer" + previousFileId).append('<a onclick="DeleteAttachment('+previousFileId+')" class="glyphicon glyphicon-minus-sign"></a> &nbsp;' + files[0].name);
+                var filecount = parseInt($("#filecount").val()) + 1;
+                $("#filesContainer").append('<div style="margin-bottom:5px;" id="fileContainer'+filecount+'"><input class="filesclass" type="file" id="'+filecount+'" name="'+filecount+'" onchange="AddAnother()"  /></div>');
+                $("#filecount").val(filecount);
+            }
+            else{
+                alert("Maximum upload size 4MB.");
+                $("#" + previousFileId).val('');
+            }
+        }
+        
+        /* Function to delete attachment from list */
+        function DeleteAttachment(id) {
+            $("#fileContainer"+id).remove();
+        }
+        </script>
+    </apex:page>

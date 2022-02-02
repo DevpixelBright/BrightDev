@@ -1,0 +1,133 @@
+<apex:page controller="MetaDataAPIExample" sidebar="false" lightningstylesheets="true">
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/angular.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/ui-bootstrap-tpls-0.12.0.js')}"/>
+    
+    <apex:includeScript value="{!URLFOR($Resource.AngularJsTable,'/ng-table.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.AngularJsTable,'/ng-table.css')}"/>
+    <c:Bootstrap_Resources /> 
+    <apex:form >
+        
+        <div class="col-sm-2" style="font-size:14px; color:#428bca; border: 1px solid #ccc; border-radius: 7px; padding-top:10px; padding-bottom:10px; margin-bottom:2%;">
+            <div style="font-weight:bold;">
+                <span class="glyphicon glyphicon-search"></span> Search
+            </div>            
+            
+            <div class="form-group" style="margin-top:5px;margin-bottom:5px;">
+                <input type="text" class="form-control" placeholder="Search Rules" ng-model="search"  />
+            </div>
+            
+            <br/>
+            <div style="margin-bottom:10px; font-weight:bold;"><!--margin-top:10px;-->
+                <span class="glyphicon glyphicon-filter"></span> Filters
+            </div>            
+            
+            <div class="form-group">
+                <label for="exampleInputEmail1" style="font-weight:200; color:black; font-size:12px; font-weight:bold;">Status</label>
+                <div>
+                    <apex:selectRadio value="{!statusSelected}" onchange="statusFilter();" layout="pageDirection" styleClass="radioOpt" style=" margin-top: -15px;">
+                        <apex:selectOption itemLabel="Active" itemValue="ture" /><br/>
+                        <apex:selectOption itemLabel="Inactive" itemValue="false"/>
+                    </apex:selectRadio>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div>
+                    <label for="exampleInputEmail1" style="font-weight:200; color:black; font-size:12px; font-weight:bold;">Service Jurisdiction</label>
+                </div>
+                <div >
+                    <apex:selectList value="{!selectedSJs}" multiselect="true" size="3" style="border-radius: 4px; color:black;">
+                        <apex:selectOptions value="{!SJOptions}"/>
+                    </apex:selectList>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div >
+                    <label for="exampleInputEmail1" style="font-weight:200; color:black; font-size:12px; font-weight:bold;">Billing Jurisdiction</label>
+                </div>
+                <div >
+                    <apex:selectList value="{!selectedBJs}" multiselect="true" size="3" style="border-radius: 4px; color:black;">
+                        <apex:selectOptions value="{!BJOptions}"/>
+                    </apex:selectList>
+                </div>
+            </div>
+        </div> 
+        
+        
+        <apex:outputPanel id="resultPanel">
+                <div class="col-sm-10" id="balAccId">
+                    <div class="panel panel-default">
+                        
+                        <div class="panel-heading">
+                            <h3 class="panel-title" style="color:#428bca; font-weight:bold; font-size:14px;">
+                                <span class="glyphicon glyphicon-th-list"></span> Workflows
+                            </h3>
+                        </div>    
+                        <div class="panel-body">
+                            <table ng-table="tableParams" class='table' id='table'>
+                                
+                                <tr>
+                                    <th>Workflow Rule </th>
+                                    <th>Object</th>
+                                    <th>Status</th>
+                                    <th>Filter Criteria</th>
+                                    <th>Actions</th>
+                                </tr>
+                                
+                                <apex:repeat value="{!wrapWorkflows}" var="rec">
+                                    <tr>
+                                        <td>
+                                            <apex:outputText >{!rec.Name}</apex:outputText>
+                                        </td>
+                                        <td>
+                                            <apex:outputText value="{!rec.TableEnumOrId}"/>
+                                        </td>
+                                        
+                                        <apex:repeat value="{!rec.Metadata}" var="timetrig">
+                                            <td>
+                                                <apex:outputText value="{!timetrig.active}"/>
+                                            </td>
+                                            
+                                            <td>
+                                                <apex:outputText value="{!timetrig.formula}" />
+                                            </td>
+                                            <td>
+                                                <apex:repeat value="{!timetrig.actions}" var="act">
+                                                    <apex:outputText value="{!act.Name}" /><br/>
+                                                </apex:repeat>
+                                                <apex:repeat value="{!timetrig.workflowTimeTriggers}" var="act">
+                                                    <apex:repeat value="{!act.actions}" var="tmt">
+                                                        <apex:outputText value="{!tmt.Name}" /><br/>
+                                                    </apex:repeat>
+                                                </apex:repeat>
+                                            </td>
+                                        </apex:repeat>
+                                    </tr>
+                                </apex:repeat>
+                            </table>
+                        </div>
+                    </div>
+            </div>
+        </apex:outputPanel>
+        <br/>
+                <!--<apex:pageBlockTable value="{!wrapWorkflows}" var="rec">
+                <!--<apex:pageBlockTable value="{!wrap.records}" var="rec">-->
+                                <!--  <apex:column value="{!rec.Name}" title="Rule" headerValue="Rule"/>
+                
+                <apex:repeat value="{!rec.Metadata}" var="timetrig">
+                <apex:column value="{!timetrig.formula}" title="Formula" headerValue="Formula" />
+                <apex:column headerValue="Time Trigger actions" title="Time Trigger actions">
+                <apex:repeat value="{!timetrig.workflowTimeTriggers}" var="act">
+                <apex:repeat value="{!act.actions}" var="tmt">
+                <apex:outputText value="{!tmt.Name}" /><br/>
+                </apex:repeat>
+                </apex:repeat>
+                </apex:column>
+                </apex:repeat>
+                <!--</apex:pageBlockTable>-->
+                <!--</apex:pageBlockTable>-->
+            
+        
+    </apex:form>
+</apex:page>

@@ -1,0 +1,811 @@
+<apex:page readOnly="true" controller="Communities_OfficeRoster" docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" lightningstylesheets="true">
+    <apex:composition template="Communities_Base">
+          
+        <apex:define name="content">
+            <apex:form >
+                <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/jquery.min.js')}"></script>
+                <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/bootstrap.min.js')}"></script>
+                <apex:stylesheet value="{!URLFOR($Resource.Bootstrap_Layout_Library, '/css/bootstrap.min.css')}"/>
+                <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"/>
+                <apex:pageBlock title="Subscription Id" id="details" >
+                    <style>
+                        .two_buttons{text-align:right; margin-bottom:-44px; margin-top:40px;}
+                        h2{font-size:22px !important; margin:5px 0px !important;}
+                        .tertiaryPalette{display:none !important;}
+                        .for_inputs h4{border-bottom: 1px solid #69A61F; padding-bottom: 10px;}
+                        h2{display:none;}
+                        label{padding-top:0px !important;}
+                        .margin{margin:20px 0 10px 0;}
+                        #content-container{margin-top:0px !important; }
+                        @media(min-width:400px){
+                        .detailList th{width:30% !important;}
+                        .mandatory{color:red; font-weight:bold; font-size:18px;}
+                        }
+                        i.fa {margin: auto 20px;
+                        position: relative;
+                        top: 0px;}
+                        .fa-2x {
+                        font-size: 2em;
+                        }
+                        .fa {
+                        display: inline-block;
+                        font-family: FontAwesome;
+                        font-style: normal;
+                        font-weight: normal;
+                        line-height: 1;
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        }
+                        .form-horizontal .form-group { margin:0px; }                       
+                        .terminateReason {
+                            margin:0px;
+                            height:28px;
+                            font-size:12px;
+                        }
+                        #terminateButtonGroup { display:none; }
+                        input[type=checkbox] { margin-top: 4px !important; }
+                        .table { font-size:12px;}
+                        .table>tbody>tr>td { border-top:none; padding: 10px 15px; }
+                        .table>thead>tr>th { border-bottom:none; padding: 10px 15px; }
+                        .amount-type {text-align:right;}
+                        #ActiveSubscribers_filter {text-align:left; padding-left:0px; padding-right:0px;}
+                        #ActiveSubscribers_filter input { width:100%; height:35px; margin-left:0px;}
+                        #ActiveSubscribers_info {text-align:right; padding-right:0px; color:#ccc; font-size:12px;}
+                        #ActiveSubscribers_length { padding-top:3px; padding-left:0px; }
+                        #ActiveSubscribers_paginate { padding-right:0px;}
+                        #InactiveSubscribers_filter {text-align:left; padding-left:0px; padding-right:0px;}
+                        #InactiveSubscribers_filter input { width:100%; height:35px; margin-left:0px;}
+                        #InactiveSubscribers_info {text-align:right; padding-right:0px; color:#ccc; font-size:12px;}
+                        #InactiveSubscribers_length { padding-top:3px; padding-left:0px; }
+                        #InactiveSubscribers_paginate { padding-right:0px;}                        
+                        .search_help {color:#ccc; font-size:12px;}
+                        .top {margin-bottom:10px; border-bottom: 1px solid #388EDD; padding-bottom:20px; }
+                        .bottom{margin-top:10px; border-top: 1px solid #388EDD; padding-top:20px; }
+                        input[type=search] {width:100%;}
+                        .table-bordered {border: 1px solid #fff;}
+                        .dropdowns { text-align:right; }
+                        .dropdowns select {width:100px; display:inline;}
+                        .table-striped>tbody>tr:nth-child(odd)>td, .table-striped>tbody>tr:nth-child(odd)>th {
+                            background-color: #eee;
+                        }
+                        .table-bordered>thead>tr>th, .table-bordered>tbody>tr>td {border:1px solid #fff;}
+                        /* enable absolute positioning */
+                        .inner-addon {
+                          position: relative;
+                          width:70%;
+                          margin:auto;                          
+                        }
+                        
+                        /* style glyph */
+                        .inner-addon .glyphicon {
+                          position: absolute;
+                          padding: 10px;
+                          pointer-events: none;
+                        }
+                        
+                        /* align glyph */
+                        .left-addon .glyphicon  { left:  0px;}
+                        .right-addon .glyphicon { right: 0px;}
+                        
+                        /* add padding  */
+                        .left-addon input  { padding-left:  30px; }
+                        .right-addon input { padding-right: 30px; }
+                        .button_groups { padding:0px; margin-top:15px;}  
+                        .tr_header div { text-align:center; border-bottom:1px solid #eee;padding-bottom:10px; color:#388EDD;} 
+                        .table { width:100%; } 
+                        .content-block { display:none;}   
+                        .brand {
+                            color: #FF4500;
+                            background: #fff;
+                            font-family: 'Acronym-Regular';
+                            border-radius: 20px;
+                            font-size: 12px;
+                            min-width: 100px;
+                           float:left;
+                            padding: 5px 20px;
+                            border: 2px solid #FF4500;
+                        display:inline-block;
+                        }
+                        .brand:hover {
+                            color: #fff;
+                            background: #FF4500;
+                            border: 2px solid #FF4500;
+                        }
+                        .newCancel {
+                            color: #505050;
+                            background: #D9D9D9;
+                            border: 2px solid #D9D9D9;
+                            float: left;
+                            display: inline-block;
+                            margin: 0 0 0 20px;
+                            font-family: 'Acronym-Regular';
+                            border-radius: 20px;
+                            font-size: 12px;
+                            min-width: 100px;
+                            text-align: center;
+                         padding: 5px 20px;
+                         
+                        }
+                        .newCancel:hover {
+                            color: #D9D9D9;
+                            background: #505050;
+                            border: 2px solid #505050;
+                        }
+                        .modal-body {    overflow: hidden;}
+                        .modal-footer { margin-top: 0;}
+                    </style>  
+                    
+                    <!-- Action functions -->
+                    <apex:actionFunction name="getSubscriptions" status="Status" action="{!subscriptions}" reRender="contentPanel">
+                        <apex:param name="Parameter" assignTo="{!officeId}" value="" />
+                    </apex:actionFunction>
+                    
+                    <apex:actionFunction name="getSubscriptions1" status="Status" action="{!subscriptions}" reRender="contentPanel">
+                        
+                    </apex:actionFunction> 
+                    
+                    <apex:actionFunction name="getSubscriptions3" status="Status1" action="{!subscriptions}" reRender="contentPanel">
+                        <apex:param name="parameter" assignTo="{!statusSelected}" value="" />    
+                    </apex:actionFunction>                                          
+                    
+                    <!--  <apex:actionFunction name="terminate" status="Status" action="{!terminateSubscribers}" oncomplete="terminateStatus()" reRender="contentPanel">
+                        <apex:param name="Parameter" assignTo="{!terminateString}" value="" />
+                    </apex:actionFunction>
+                    -->
+                    
+                    <apex:actionFunction name="getTerminaterSubs" status="Status" action="{!getTerminaterSubs}" reRender="contentPanel" oncomplete="displayTermSubs();" >
+                        <apex:param name="Parameter" assignTo="{!selTermSubs}" value="" />
+                    </apex:actionFunction>
+                    
+                    <apex:actionFunction name="advanceSearch" status="status" action="{!advSearchResults}" rerender="contentPanel">
+                        <apex:param name="Parameter" assignTo="{!advSerchStr}" value="" />
+                    </apex:actionFunction>
+
+                    <div class="row" id="loading-block">
+                        <div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-5">
+                            <div class="progress progress-striped active">
+                                <div class="progress-bar" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row content-block">
+                        <div class="col-sm-12">
+                            <div class="col-sm-8" style="padding-right:0px; padding-left:0px;">
+                                <c:Communities_Definition pageTitle="Broker of Record - {!contactName}" pageTitleClass="fa fa-sign-in fa-2x" hasDefinitions="false">
+
+                                </c:Communities_Definition>
+                            </div>
+
+                            <div class="col-sm-4" style="text-align:right; border-bottom: 1px solid #69A61F; padding-bottom:11px; padding-right:0px; padding-top:11px;">
+                                <select id="officeDropDown" multiple="multiple">
+                                    <apex:repeat value="{!officeIds}" var="officeId" id="OfficeIds">
+                                        <option value="{!officeId}">{!officeIds[officeId]}</option>
+                                    </apex:repeat>
+                                </select>                               
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <apex:actionStatus id="Status">
+                        <apex:facet name="start">
+                            <div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-5">
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </apex:facet>
+                        <apex:facet name="stop">
+                             <div class="alert alert-danger" id="status"  style="display:none;">
+                                 <center>Failed</center>
+                             </div>
+                        </apex:facet>                
+                    </apex:actionStatus>                     
+                                        
+                    <script>
+                    var terminateSubs = [];
+                    var hasTeamLead = false;
+                        $(document).ready(function(){
+                            $('#officeDropDown').multiselect({
+                                includeSelectAllOption: true,
+                                allSelectedText: 'All Selected',
+                                onChange: function(element, checked, select) {
+                                    var values = $('#officeDropDown option:selected');
+                                    var selected = [];
+                                    $(values).each(function(index, values ){
+                                        selected.push([$(this).val()]);
+                                    });
+                                    $('.listing-block').hide();
+                                    getSubscriptions(selected.toString());
+                                    
+                                }                            
+                            });
+                            
+                            $('.multiselect-all').find(':checkbox').click(function() {
+                                $('.listing-block').hide();
+                                if($(this).is(':checked')) 
+                                    getSubscriptions('All');                                                   
+                                else
+                                    getSubscriptions('None');                                        
+                            });
+                            
+                            $("#officeDropDown").multiselect('selectAll', false);
+                            $("#officeDropDown").multiselect('updateButtonText');
+                        });
+                        
+                        function terminate1(jsonString) {
+                            Visualforce.remoting.Manager.invokeAction(
+                                '{!$RemoteAction.Communities_OfficeRoster.terminateSubscribers1}', 
+                                jsonString,
+                                function(result, event){                                       
+                                    if(event.status) {
+                                        if(result == 'Success')
+                                            getSubscriptions1();
+                                        else {
+                                            $("#messages").html('<div class="alert alert-danger" role="alert">' + result + '</div>');
+                                            $("#messages").show();
+                                        }
+                                    }                                                   
+                                }, 
+                                {buffer: false, escape: true, timeout: 120000}
+                            );
+                        } 
+                        function getSubscriptions2(status) {
+                            //console.log('status is '+status);
+                            try{
+                                terminateSubs = [];
+                                hasTeamLead = false;
+                                getSubscriptions3(status);
+                            }
+                            catch(err){
+                                console.log('--error--->'+err.message);
+                                 $("#messages").html('<div class="alert alert-danger" role="alert">' + err.message + '</div>');
+                                 $("#messages").show();
+                            }
+                        }
+                    </script>  
+                    <apex:outputPanel id="contentPanel">
+                        <div id="messages">
+                            <apex:pagemessages ></apex:pagemessages>
+                        </div>
+                        
+                        <script>
+                            var activeTable;
+                            
+                            $(document).ready(function(){                    
+
+                                $("form").addClass("form-horizontal");
+                                $("label").addClass("col-sm-3 control-label");
+                                $(".for_inputs input").addClass("form-control");
+                                $("select").addClass("form-control");
+                                $(".errorM3").addClass("alert alert-danger");
+                                $(".infoM3").addClass("alert alert-info");
+                                $(".confirmM3").addClass("alert alert-success");
+                                
+                                /*
+                                $('#ActiveSubscribers tfoot th').each( function () {
+                                    var title = $(this).text();
+                                    $(this).html( '<input type="text" class="form-group" placeholder="Search '+title+'" />' );
+                                } );
+                                */
+
+                                activeTable = $('#ActiveSubscribers').DataTable({
+                                    "columnDefs": [ 
+                                        {"targets": [0,15], "orderable": false},
+                                        {"targets": [13,14],"searchable": false}                                         
+                                    ],
+                                    "dom": '<"top"fi>rt<"bottom"lp><"clear">',
+                                    "order": [[ 1, "asc" ]]
+                                });
+                                
+
+                                                                    
+                                var column = activeTable.column(13);
+                                column.visible( ! column.visible() );
+                                column = activeTable.column(14);
+                                column.visible( ! column.visible() );
+                                column = activeTable.column(15);
+                                column.visible( ! column.visible() );                                
+                                
+                                $('#ActiveSubscribers_filter').addClass('col-sm-12');
+                                $('#ActiveSubscribers_info').addClass('col-sm-12');
+                                $("#ActiveSubscribers_info").after( "<div style='clear:both;'></div>" );
+                                $('#ActiveSubscribers_length').addClass('col-sm-6');
+                                $('#ActiveSubscribers_paginate').addClass('col-sm-6');
+                                $("#ActiveSubscribers_paginate").after( "<div style='clear:both;'></div>" );
+                                $('#ActiveSubscribers').css('width', '100%');                                                                 
+                                                                
+                                var inactiveTable = $('#InactiveSubscribers').DataTable({
+                                    /*
+                                    "columnDefs": [ {
+                                        "targets": 8,
+                                        "orderable": false
+                                    } ], 
+                                    */                               
+                                    "dom": '<"top"fi>rt<"bottom"lp><"clear">',
+                                });
+                                 
+                                
+                                $('#InactiveSubscribers_filter').addClass('col-sm-12');
+                                $('#InactiveSubscribers_info').addClass('col-sm-12');
+                                $("#InactiveSubscribers_info").after( "<div style='clear:both;'></div>" );
+                                $('#InactiveSubscribers_length').addClass('col-sm-6');
+                                $('#InactiveSubscribers_paginate').addClass('col-sm-6');
+                                $("#InactiveSubscribers_paginate").after( "<div style='clear:both;'></div>" );                                
+                                $("input[type=search]").attr('placeholder', 'Type in your search terms here...');
+                                $("input[type=search]").attr('id', 'searchId');
+                    
+                                $("#inactiveSelectAll").click(function() {          
+                                    var cells = inactiveTable.cells( ).nodes();
+                                    $( cells ).find(':checkbox').prop('checked', $(this).is(':checked')); 
+                                });
+                                $("#activeSelectAll").click(function() {
+                                    var cells = activeTable.cells( ).nodes();
+                                    $( cells ).find(':checkbox').prop('checked', $(this).is(':checked')); 
+                                }); 
+                                
+                                $("#terminateButton").click(function() {
+                                    console.log('---terminateSubs--'+terminateSubs);
+                                    var cells = activeTable.cells('.action_td').nodes();
+                                    hasTeamLead = false;
+                                    terminateSubs = [];
+                                    $( cells ).find(':checkbox').each(function() {
+                                        if($(this).is(':checked')){
+                                            terminateSubs.push($(this).val());
+                                            if($(this).attr("isTeamLead") == "Yes"){
+                                               hasTeamLead = true;
+                                            }
+                                        }else
+                                            $(this).parent().parent().addClass('selected');
+                                    });
+                                    console.log('---terminateSubs--'+terminateSubs);
+
+                                    if(terminateSubs == 'undefined' || terminateSubs == null || terminateSubs == '')
+                                        alert("Please select atleast one subscriber");
+                                    else{
+                                        if(hasTeamLead == true){
+                                            $('#submit-form-modal').modal('show');
+                                        }else{
+                                            getTerminaterSubs(terminateSubs.toString()); 
+                                        }
+                                        
+                                        /*var cells = activeTable.cells( ).nodes();
+                                    var selectedSubcribers = [];
+                                    $( cells ).find(':checkbox').each(function() { 
+                                        if($(this).is(':checked')) {
+                                            var obj = new Object();
+                                            obj.Id = $(this).val();
+                                            obj.ChangeReason = $("#terminateReason_"+obj.Id).val();
+                                            obj.TransferredTo = $("#transferredTo_"+obj.Id).val();
+                                            selectedSubcribers.push(obj);
+                                        } 
+                                        
+                                    }); 
+                                        if(selectedSubcribers.length > 0) {
+                                               if(confirm("Are you sure?\n\nThe selected users will be terminated in MLS systems and will no longer be able to access MLS. This action does not affect the status of their Real Estate License nor does it inform the Stakeholding Board.\n\nClick OK to proceed."))
+
+                                            }*/
+                                        
+                                    }
+
+
+                                    /*
+                                    var cells = activeTable.cells('.action_td').nodes();
+                                    var selectedSubcribers = [];
+                                    var selected = 0;
+                                    /* $( cells ).find(':checkbox').each(function() {
+                                        if($(this).is(':checked')){
+                                            selected = selected +1;
+                                         }
+                                     });
+                                   if(selected == 0){
+                                        alert('Please select atleast one subscriber');
+                                   }else{ */
+                                    /*  
+                                      $( cells ).find(':checkbox').each(function() { 
+                                        if($(this).is(':checked'))
+                                            selectedSubcribers.push($(this).val());
+                                        else 
+                                            $(this).parent().parent().addClass('selected');                                          
+                                    });                                    
+                                    
+                                    console.log('---selectedSubscribers--'+selectedSubcribers);
+                                    if(selectedSubcribers.length > 0) {
+                                        activeTable.rows('.selected').remove().draw( false );
+                                        var colsToHide = [3,4,6,7,8,9,10,11];
+                                        for(var i=0; i<colsToHide.length; i++) {
+                                            var column = activeTable.column(colsToHide[i]);
+                                            column.visible( ! column.visible() );
+                                        }
+                                        $("#terminateButtonGroup").show();
+                                        $("#nonTerminateButtonGroup").hide();
+                                    }
+                                    else
+                                        alert("Please select atleast one subscriber");
+                                   //}
+                                     */                           
+                                });
+                                
+                                
+                                $("#finalTerminateButton").click(function() {
+                                    var cells = activeTable.cells( ).nodes();
+                                    var selectedSubcribers = [];
+                                    $( cells ).find(':checkbox').each(function() { 
+                                        if($(this).is(':checked')) {
+                                            var obj = new Object();
+                                            obj.Id = $(this).val();
+                                            obj.ChangeReason = $("#terminateReason_"+obj.Id).val();
+                                            obj.TransferredTo = $("#transferredTo_"+obj.Id).val();
+                                            selectedSubcribers.push(obj);
+                                        } 
+                                        
+                                    });                                    
+                                
+                                    if(selectedSubcribers.length > 0) {
+                                        var jsonString = JSON.stringify(selectedSubcribers);
+                                        if(confirm("Are you sure?\n\nThe selected users will be terminated in MLS systems and will no longer be able to access MLS. This action does not affect the status of their Real Estate License nor does it inform the Stakeholding Board.\n\nClick OK to proceed."))
+                                            terminate1(jsonString);     
+                                    }                                                                  
+                                });                                
+                                
+                                $("#exportActivePDFButton").click(function() {
+                                    var officeId = $('#officeDropdown').val();
+                                    window.location = 'Communities_OfficeRosterPDF?Status=Active&OfficeId='+officeId;    
+                                }); 
+                                
+                                if(parseInt("{!activeSubsCount}") < 10) {
+                                    $("#ActiveSubscribers_length").hide();
+                                    $("#ActiveSubscribers_paginate").hide();
+                                    $("#ActiveSubscribers_info").hide(); 
+                                } 
+                                if(parseInt("{!inactiveSubsCount}") < 10) {
+                                    $("#InactiveSubscribers_length").hide();
+                                    $("#InactiveSubscribers_paginate").hide();
+                                    $("#InactiveSubscribers_info").hide(); 
+                                }
+                                
+                                $("#loading-block").hide();                               
+                                $(".content-block").show();
+                                /*
+                                var r = $('#ActiveSubscribers tfoot tr');
+                                $('#ActiveSubscribers thead').append(r);
+                                $( activeTable.table().container() ).on( 'keyup', 'thead input', function () {
+                                        activeTable
+                                            .column( $(this).data('index') )
+                                            .search( this.value )
+                                            .draw();
+                                    } ); 
+                                */                                                                                      
+                            });
+                            
+                        	function acceptedTermination(){
+                                if(terminateSubs == 'undefined' || terminateSubs == null || terminateSubs == '')
+                                    alert("Please select atleast one subscriber");
+                                else{
+                                    getTerminaterSubs(terminateSubs.toString());
+                                }
+                            }
+                        
+                            function displayTermSubs(){
+                                activeTable.rows('.selected').remove().draw( false );
+                                
+                                var cells = activeTable.cells('.action_td').nodes();                                    
+                                    $( cells ).find(':checkbox').each(function() { 
+                                        $(this).prop('checked', 'true');
+                                        //if($(this).is(':checked'))
+                                            //terminateSubs.push($(this).val());
+                                        
+                                    });
+                                    
+                                var colsToHide = [3,4,6,7,8,9,10,11,12,13];
+                                for(var i=0; i<colsToHide.length; i++) {
+                                    //activeTable.column(0).prop('checked', 'true');
+                                    
+                                    var column = activeTable.column(colsToHide[i]);
+                                    column.visible( ! column.visible() );
+                                }
+                                $("#terminateButtonGroup").show();
+                                $("#nonTerminateButtonGroup").hide();
+                            }
+                               
+                            function statusChangeReason(id) {
+                                var transferredSubscribers = [];
+                                $('.terminateReason').each(function() {
+                                    if($(this).val() == 'Customer has transferred their license to Referral Company') {
+                                        transferredSubscribers.push(this.id.replace('terminateReason_', ''));
+                                    }
+                                });
+                                var column = activeTable.column(13);
+                                if(transferredSubscribers.length > 0) {
+                                    $('.transferredTo').hide();                                                                 
+                                    column.visible( true );
+                                    for(var i=0; i<transferredSubscribers.length; i++)
+                                        $('#transferredTo_' + transferredSubscribers[i]).show();                                   
+                                }
+                                else
+                                    column.visible( false);   
+                            }
+                            
+                           
+                            function advSearch(){
+                                var advSerchStr = $("#searchId").val();
+                                console.log('--searchStr-->'+advSerchStr);
+                                
+                                if(advSerchStr != null && advSerchStr != ''){
+                                    var cells = activeTable.cells('.action_td').nodes();
+                                    var selected = 0;
+                                      
+                                    $( cells ).find(':checkbox').each(function() { 
+                                        if($(this).is(':checked'))
+                                            terminateSubs.push($(this).val());
+                                        else 
+                                            $(this).parent().parent().addClass('selected');                                          
+                                    });
+                                    
+                                    console.log('---terminateSubs--'+terminateSubs);
+                                    advanceSearch(advSerchStr);
+                                }
+                                else{
+                                    alert('Please enter key to search');
+                                    return false;
+                                }
+                            }
+                                                
+                        </script>                    
+                        
+                        <div class="row content-block listing-block">
+                            <div class="col-sm-12">                                                     
+                                <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                                    <ul id="myTab" class="nav nav-tabs" role="tablist">
+                                        <li role="presentation" class="{!if(statusSelected == 'Active', 'active', '')}"><a href="#activeTab" id="active-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true" onclick="getSubscriptions2('Active');"><span class="label label-info">{!activeSubsCount}</span> Active Subscribers</a></li>
+                                        <li role="presentation" class="{!if(statusSelected == 'Inactive', 'active', '')}"><a href="#inactiveTab" role="tab" id="inactive-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false" onclick="getSubscriptions2('Inactive');"><span class="label label-primary">{!inactiveSubsCount}</span> Inactive Subscribers</a></li>
+                                    </ul>
+                                    <div id="myTabContent" class="tab-content">
+                                    
+                                        <apex:actionStatus id="Status1">
+                                            <apex:facet name="start">
+                                                <div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-5" id="action_start" style="height:500px; padding-top:100px;">
+                                                    <div class="progress progress-striped active">
+                                                        <div class="progress-bar" style="width: 100%"></div>
+                                                    </div>
+                                                </div>
+                                            </apex:facet>
+                                            <apex:facet name="stop">
+                                                 <div class="alert alert-danger" id="status"  style="display:none;">
+                                                     <center>Failed</center>
+                                                 </div>
+                                            </apex:facet>
+                                        </apex:actionStatus>
+                                        
+                                        <!-- Active Subscription panel -->
+                                        <div role="tabpanel" class="tab-pane fade {!if(statusSelected == 'Active', 'active in', '')}" id="activeTab" aria-labelledby="home-tab" style="padding-top:20px;">
+                                            <apex:outputPanel id="active-content-block" rendered="{!if((activeSubsCount > 0 && statusSelected == 'Active'), true, false)}">
+                                                
+                                                <div style="position: absolute; left:85%; z-index:1;">
+                                                <apex:commandLink styleclass="btn btn-default my_cancel" value="Advance Search" onclick="return advSearch(); return false;" rerender="contentPanel"/> <!-- action="{!nextSetResults}" rerender="active-content-block" oncomplete="tableAdjust();"/> -->
+                                                </div>
+                                                
+                                                   
+                                                <table id="ActiveSubscribers" class="table table-striped table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th rowspan="2"><input type="checkbox" id="activeSelectAll" /></th>
+                                                            <th rowspan="2">Name</th>
+                                                            <th colspan="4" class="tr_header"><div>Subscription</div></th>
+                                                            <th colspan="2"></th>
+                                                            <th colspan="3" class="tr_header"><div>License</div></th>
+                                                            <th rowspan="2">Office</th>
+                                                            <th rowspan="2">Affiliation</th>
+                                                            <th rowspan="2">Reason for Termination</th>
+                                                            <th rowspan="2">Transferred To</th>
+                                                            <th rowspan="2"></th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Id</th>
+                                                            <th>Type</th>
+                                                            <th>Sub Type</th>
+                                                            <th>Status</th>
+                                                            <th>Team Lead</th>
+                                                            <th style = "min-width: 80px">Team Name</th>
+                                                            <th>Number</th>
+                                                            <th>State</th>
+                                                            <th>Expiration</th>
+                                                        </tr>                                                        
+                                                    </thead>
+                                                    <!--
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>Id</th>
+                                                            <th>Type</th>
+                                                            <th>Office</th>
+                                                            <th>Age</th>
+                                                            <th>Start date</th>
+                                                            <th>Salary</th>
+                                                            <th>Extn.</th>
+                                                            <th>E-mail</th>
+                                                            <th>E-mail</th>
+                                                            <th>E-mail</th>
+                                                            <th>E-mail</th>
+                                                            <th>E-mail</th>
+                                                            <th>E-mail</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                    -->
+                                                    <tbody>
+                                                        <apex:repeat value="{!activeSubscriptions}" var="subscription" id="ActiveSubscriptions">
+                                                            <tr>
+                                                                <td class="action_td"><input type="checkbox" class="activeBox" value="{!subscription.subscriptionId}" isTeamLead="{!subscription.isTeamLead}"/></td>
+                                                                <td>{!subscription.contactName}</td>
+                                                                <td>{!subscription.subscriptionName}</td>
+                                                                <td>{!subscription.type}</td>
+                                                                <td>{!subscription.subType}</td>
+                                                                <td>{!subscription.status}</td>
+                                                                <td>{!subscription.isTeamLead}</td>
+                                                                <td>{!subscription.TeamName}</td>
+                                                                <td>{!subscription.licenseNumber}</td>
+                                                                <td>{!subscription.licenseState}</td>
+                                                                <td><apex:outputText value="{0,date,MM/dd/yyyy}"> <apex:param value="{!subscription.licenseExpiration}" /> </apex:outputText></td>
+                                                                <td>{!subscription.officeId}</td>
+                                                                <td>{!subscription.associationAffiliation}</td>
+                                                                <td style="padding:3px;">
+                                                                    <select id="terminateReason_{!subscription.subscriptionId}" class="form-group terminateReason" onchange="statusChangeReason('{!subscription.subscriptionId}')">
+                                                                        <option value="Customer has returned their license to the Real Estate Commission/Board">Customer has returned their license to the Real Estate Commission/Board</option>
+                                                                        <option value="Customer has transferred their license to Referral Company">Customer has transferred their license to Referral Company</option>
+                                                                        <option value="Customer is not licensed (i.e. Personal Assistant, Office Secretary) ">Customer is not licensed (i.e. Personal Assistant, Office Secretary) </option>
+                                                                        <option value="Customer is a Principal Broker of Record or a Licensed Appraiser">Customer is a Principal Broker of Record or a Licensed Appraiser</option>
+                                                                        <option value="Customer has transferred to a different Brokerage">Customer has transferred to a different Brokerage</option>
+                                                                        <option value="Customer has transferred to a different Office">Customer has transferred to a different Office</option>
+                                                                        <option value="Other">Other</option>
+                                                                    
+                                                                    </select>
+                                                                </td>
+                                                                <td style="padding:3px;">
+                                                                    <input style="display:none;" type="text" id="transferredTo_{!subscription.subscriptionId}" class="form-control input-sm transferredTo" />
+                                                                </td>                                                                
+                                                                <td><i class="fa fa-user-circle-o" aria-hidden="true"></i></td>
+                                                            </tr>
+                                                        </apex:repeat>                                                                                       
+                                                    </tbody>                                        
+                                                </table>
+                                                <div class="col-sm-12 button_groups" id="nonTerminateButtonGroup">
+                                                    <input type="button" id="terminateButton" class="btn btn-default my_cancel" value="Terminate" />
+                                                    <a traget="_blank" href="Communities_OfficeRosterPDF?id={!subscriptionId}&Status=Active&OfficeId={!officeId}" class="btn btn-default my_cancel">Print PDF</a>
+                                                    <a traget="_blank" href="Communities_OfficeRosterCSV?id={!subscriptionId}&Status=Active&OfficeId={!officeId}" class="btn btn-default my_cancel">Export to CSV</a>
+                                                </div>
+                                                <div class="col-sm-12 button_groups" id="terminateButtonGroup">
+                                                    <input type="button" id="finalTerminateButton" class="btn btn-default my_cancel" value="Terminate" />
+                                                    <a traget="_blank" href="Communities_OfficeRoster?id={!subscriptionId}"  class="btn btn-default my_cancel">Cancel</a>
+                                                   
+                                                </div>                                                
+                                            </apex:outputPanel>
+                                            <apex:outputPanel rendered="{!if(activeSubsCount == 0, true, false)}">
+                                                <div class="alert alert-warning" style="margin:50px;">
+                                                    No active subscriptions under this office
+                                                </div>
+                                            </apex:outputPanel>                                            
+                                        </div>
+                                        <!-- End of active subscription panel -->
+                                        
+                                        <!-- Start inactive subscriptions panel -->    
+                                        <div role="tabpanel" class="tab-pane fade {!if(statusSelected == 'Inactive', 'active in', '')}" id="inactiveTab" aria-labelledby="home-tab" style="padding-top:20px;">
+                                            <apex:outputPanel id="inactive-content-block" rendered="{!if((activeSubsCount > 0 && statusSelected == 'Inactive'), true, false)}">
+                                                
+                                                <div style="position: absolute; left:85%; z-index:1;">
+                                                <apex:commandLink styleclass="btn btn-default my_cancel" value="Advance Search" onclick="return advSearch(); return false;" rerender="contentPanel"/> <!-- action="{!nextSetResults}" rerender="active-content-block" oncomplete="tableAdjust();"/> -->
+                                                </div>
+                                                <table id="InactiveSubscribers" class="table table-striped table-bordered" style="font-size:12px; margin-top:20px;">
+                                                    <thead>
+                                                        <tr>
+                                                            <!-- <th><input type="checkbox" id="inactiveSelectAll" /></th> -->
+                                                            <th>Name</th>
+                                                            <th>Subscription Id</th>
+                                                            <th>Type</th>
+                                                            <th>Sub Type</th>
+                                                            <th>Status</th>
+                                                            <th>Status Change Reason</th>
+                                                            <th>Date of Termination</th>
+                                                            <th>Office Id</th>
+                                                            <!-- <th></th> -->
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <apex:repeat value="{!activeSubscriptions}" var="subscription" id="InactiveSubscriptionsId">
+                                                            <tr>
+                                                                <!-- <td><input type="checkbox" class="inactiveBox" value="{!subscription.Id}" /></td> -->
+                                                                <td>{!subscription.contactName}</td>
+                                                                <td>{!subscription.subscriptionName}</td>
+                                                                <td>{!subscription.type}</td>
+                                                                <td>{!subscription.subType}</td>
+                                                                <td>{!subscription.status}</td>
+                                                                <td>{!subscription.statusChangeReason}</td>
+                                                                <td><apex:outputText value="{0,date,MM/dd/yyyy}"> <apex:param value="{!subscription.dateTerminated}" /> </apex:outputText></td>
+                                                                <td>{!subscription.officeId}</td>
+                                                                <!-- <td><i class="fa fa-user-circle-o" aria-hidden="true"></i></td> -->
+                                                            </tr>
+                                                        </apex:repeat>                                                                                       
+                                                    </tbody>                                        
+                                                </table>
+                                                <div class="col-sm-12 button_groups">
+                                                    <a traget="_blank" href="Communities_OfficeRosterPDF?id={!subscriptionId}&Status=Inactive&OfficeId={!officeId}" class="btn btn-default my_cancel">Print PDF</a>
+                                                    <a traget="_blank" href="Communities_OfficeRosterCSV?id={!subscriptionId}&Status=Inactive&OfficeId={!officeId}" class="btn btn-default my_cancel">Export to CSV</a>
+                                                </div>
+                                            </apex:outputPanel>
+                                            <apex:outputPanel rendered="{!if(inactiveSubsCount == 0, true, false)}">
+                                                <div class="alert alert-warning" style="margin:50px;">
+                                                    No inactive subscriptions under this office
+                                                </div>
+                                            </apex:outputPanel>
+                                        </div>                                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        	<!-- Terminate Subscription popup -->
+                            <apex:outputPanel id="caseform">
+                                <div class="modal fade in" id="submit-form-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" data-backdrop="static" data-keyboard="false">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <h4 class="modal-title" id="modal-label"><i class="fa fa-file-text"></i> Alert: You are about to remove a Team Lead </h4>
+                                            </div>
+                                            
+                                            <!-- Modal Body -->
+                                            <div class="modal-body">
+                                                <apex:outputPanel >
+                                                    <div class="col-md-12">
+                                                        You are about to terminate a subscription that is also assigned to a Team in Bright as the Team Lead. Are you sure you want to proceed?
+                                                    </div>
+                                                </apex:outputPanel>
+                                                
+                                                <!-- Alert to display errors -->
+                                                <div class="alert alert-danger alert-dismissible" id="FormAlert" style="display:none; clear:both;">
+                                                    This alert box could indicate a dangerous or potentially negative action.
+                                                </div>                                                               
+                                            </div>
+                                            
+                                            <!-- Modal Footer -->
+                                            <apex:outputPanel >
+                                                <div class="modal-footer">
+                                                    <button type="button" class="brand" data-dismiss="modal" aria-hidden="true" onclick="okForm()">Ok</button>
+                                                    <button type="button" class="newCancel" data-dismiss="modal" aria-hidden="true" onclick="closeForm()">Cancel</button>
+                                                </div>
+                                            </apex:outputPanel>
+                                        </div>
+                                    </div>
+                                </div>
+                            </apex:outputPanel>
+							<!-- Terminate Subscription popup end-->              
+                    </apex:outputPanel>
+                </apex:pageBlock>   
+                <script>
+                    markOptionPanel("Brokerage");    
+                    function closeForm(){
+                        $('#submit-form-modal').html();
+                        $('#submit-form-modal').hide();                   
+                    }
+                	function okForm(){
+                        $('#submit-form-modal').html();
+                        $('#submit-form-modal').hide(); 
+                        acceptedTermination();
+                    }
+                </script>                        
+            </apex:form>
+        </apex:define>       
+     </apex:composition> 
+    <script src="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/jquery.dataTables.min.js')}"></script>
+    <script src="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/dataTables.bootstrap.min.js')}"></script>
+    <link href="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/dataTables.bootstrap.min.css')}" rel="stylesheet" type="text/css" />
+    <script src="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/bootstrap-multiselect.js')}"></script>
+    <link href="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/bootstrap-multiselect.css')}" rel="stylesheet" type="text/css" />          
+    <style>
+        .multiselect-container { padding-top:10px; }
+        .dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus { color:inherit; }
+     footer{position: relative !important;}
+    </style>
+
+</apex:page>

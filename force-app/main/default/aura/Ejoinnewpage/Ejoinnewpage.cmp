@@ -1,0 +1,306 @@
+<aura:component implements="force:appHostable,lightning:isUrlAddressable" controller="EZJoin_NewApplicationStatus">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<div class="fullpage slds-scope">
+		<div class="slds-grid slds-wrap">
+			<div class="new-containerpage">
+				<div class="slds-container--x-large new-container">
+					<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12  header-full">
+						<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 header-part">
+							<div class="logo">
+								<img src="{!$Resource.brightlogolightning}" />
+							</div>
+						</div>
+						<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_5-of-12 slds-large-size_5-of-12 header-part">
+							<div class="bar">
+								<h2>Joining MLS as Personal Assistant Testing</h2>
+								<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_7-of-12 slds-large-size_7-of-12">
+									<div class="bar-title">
+										<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 bar-title-box">
+											<h5>Progress</h5>
+										</div>
+										<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 bar-title-box">
+											<div class="slds-progress-bar slds-progress-bar_medium" aria-valuemin="0" aria-valuemax="100" aria-valuenow="75" role="progressbar">
+                                            <span class="slds-progress-bar__value" style="width:10%">
+                                            <span class="slds-assistive-text">Progress: 10%</span>
+												</span>
+											</div>
+										</div>
+										<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_2-of-12 slds-large-size_2-of-12 bar-title-box">
+											<h6>10%</h6> 
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 header-part">
+							<div class="call">
+								<h4>Looking for support? </h4>
+								<h3>Call: 1-844-552-7444</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="slds-container--x-large new-container">
+				<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 tab-form">
+					<div class="slds-vertical-tabs">
+						<ul class="slds-vertical-tabs__nav" role="tablist" aria-orientation="vertical">
+							<li class="slds-vertical-tabs__nav-item" title="Tab 1" role="presentation">
+								<a class="slds-vertical-tabs__link" href="javascript:void(0)" role="tab" tabindex="0" aria-selected="true" aria-controls="slds-vertical-tabs-0" id="slds-vertical-tabs-0__nav"> <span class="slds-vertical-tabs__left-icon"></span>
+									<span class="slds-truncate" title="Tab 1">Step: 1
+                                    <p>Verify the broker code and select the agents</p>      
+                                    </span>
+									<span class="slds-vertical-tabs__right-icon"></span>
+									<div class="arrow-left">
+										<img src="{!$Resource.ejoinactivetab}" />
+									</div>
+								</a>
+							</li>
+							<li class="slds-vertical-tabs__nav-item slds-is-active" title="Tab 2" role="presentation">
+								<a class="slds-vertical-tabs__link" href="javascript:void(0)" role="tab" tabindex="-1" aria-selected="false" aria-controls="slds-vertical-tabs-1" id="slds-vertical-tabs-1__nav"> <span class="slds-vertical-tabs__left-icon"></span>
+									<span class="slds-truncate" title="Tab 2">Step: 2
+                                     <p>Fill the required contact information</p>
+                                    </span>
+									<span class="slds-vertical-tabs__right-icon"></span>
+									<div class="arrow-left">
+										<img src="{!$Resource.ejoinactivetab}" />
+									</div>
+								</a>
+							</li>
+							<li class="slds-vertical-tabs__nav-item" title="Tab 3 " role="presentation">
+								<a class="slds-vertical-tabs__link" href="javascript:void(0)" role="tab" tabindex="-1" aria-selected="false" aria-controls="slds-vertical-tabs-2" id="slds-vertical-tabs-2__nav"> <span class="slds-vertical-tabs__left-icon"></span>
+									<span class="slds-truncate" title="Tab 3">Step: 3
+                                    <p>Read the license, review and submit</p>
+                                    </span>
+									<span class="slds-vertical-tabs__right-icon"></span>
+									<div class="arrow-left">
+										<img src="{!$Resource.ejoinactivetab}" />
+									</div>
+								</a>
+							</li>
+						</ul>
+						<div class="slds-vertical-tabs__content slds-hide" id="slds-vertical-tabs-0" role="tabpanel" aria-labelledby="slds-vertical-tabs-0__nav">
+							<div class="slds-text-longform">
+								<h3 class="slds-text-heading_medium">Verify the broker code and select agents</h3>
+								<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+									<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 flow1">
+										<lightning:input type="text" name="input4" label="Enter broker code" placeholder="Start typing the broker code..." />
+									</div>
+									<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 flow2">
+										<p>
+											<img src="{!$Resource.ejoincorrect}" />LNG196 Long &amp; Foster Real Estate Inc Rockvile MD20850</p>
+									</div>
+								</div>
+								<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field1">
+									<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 flow1">
+										<lightning:input type="text" name="input4" label="Select agent(s)" placeholder="Start typing the agents name..." />
+									</div>
+									<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 flow2">
+										<p class="plus">
+											<img src="{!$Resource.ejoinplus}" />
+										</p>
+									</div>
+								</div>
+								<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+									<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 flow2">
+										<p>
+											<img src="{!$Resource.ejoincorrect}" />Coastal association of realtors- 124568
+											<img class="delete" src="{!$Resource.ejoindelete}" />
+										</p>
+									</div>
+								</div>
+								<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 spaceline"></div>
+								<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+									<button class="slds-button slds-button_brand slds-button_brand1">Continue</button>
+								</div>
+							</div>
+						</div>
+						<div class="slds-vertical-tabs__content slds-show" id="slds-vertical-tabs-1" role="tabpanel" aria-labelledby="slds-vertical-tabs-1__nav">
+							<div class="slds-text-longform">
+                                <ui:message title="Error" severity="error" closable="true">
+			                     This is an error message.
+	                             </ui:message>
+								<h3 class="slds-text-heading_medium">Provide your contact information</h3>
+								<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 full-field">
+									<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow1">
+										<lightning:select name="select1" label="Suffix" >
+											<option value="">Select</option>
+											<option value="1">JR</option>
+											<option value="2">SR</option>
+											<option value="3">I</option>
+											<option value="4">II</option>
+											<option value="4">III</option>
+										</lightning:select>
+									</div>
+									<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow1">
+										<lightning:select name="select1" label="Salutation" class="required" required="true">
+											<option value="">Select</option>
+											<option value="1">Mr</option>
+											<option value="2">Miss</option>
+											<option value="3">Mrs</option>
+											<option value="4">Ms</option>
+											<option value="4">DR</option>
+										</lightning:select>
+									</div>
+									<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+										<lightning:input type="text" class="required" name="input4" label="First name" placeholder="Enter first name" required="true"  />
+									</div>
+								</div>
+								<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field1">
+									<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow1">
+										<lightning:input type="text" name="input4" label="Middle name" placeholder="Enter middle name" />
+									</div>
+									<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow1">
+										<lightning:input type="text" name="input4" label="Last name" placeholder="Enter last name" />
+									</div>
+									<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+										<lightning:input type="text" name="input4" label="Nick name" placeholder="Enter nick name" />
+									</div>
+								</div>
+								<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field2 full-field">
+									<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow1">
+										<lightning:input type="email" class="required" name="input4" label="Email" placeholder="Enter Email" required="true"/>
+									</div>
+									<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow1">
+										<lightning:input type="email" class="required" name="input4" label="Confirm email" placeholder="Re enter email" required="true" />
+									</div>
+									<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+										<lightning:input type="number" class="required" name="input4" label="Primary phone" placeholder="Enter primary phone" required="true" />
+									</div>
+								</div>
+								<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field2">
+									<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow1">
+										<lightning:input type="number" name="input4" label="Mobile number" placeholder="Enter mobile number" />
+									</div>
+								</div>
+								<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 spaceline2"></div>
+								<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+									<button class="slds-button slds-button_brand" onclick="{!c.submitBtnEvtHandler}">Continue</button>
+								</div>
+							</div>
+						</div>
+						<div class="slds-vertical-tabs__content slds-hide" id="slds-vertical-tabs-2" role="tabpanel" aria-labelledby="slds-vertical-tabs-2__nav">
+							<div class="slds-text-longform">
+								<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+									<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 flow2 flow3">
+										<h3 class="slds-text-heading_medium">Review application</h3>
+										<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+											<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+												<h6>Office ID	</h6>
+											</div>
+											<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+												<h5>LF10700</h5>
+											</div>
+										</div>
+										<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+											<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+												<h6>City	</h6>
+											</div>
+											<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+												<h5>Rockville</h5>
+											</div>
+										</div>
+										<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+											<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+												<h6>State	</h6>
+											</div>
+											<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+												<h5>MD</h5>
+											</div>
+										</div>
+										<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+											<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+												<h6>Zip	</h6>
+											</div>
+											<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+												<h5>208850</h5>
+											</div>
+										</div>
+										<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+											<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+												<h6>First Name	</h6>
+											</div>
+											<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+												<h5>Jim</h5>
+											</div>
+										</div>
+										<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+											<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+												<h6>Salutation	</h6>
+											</div>
+											<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+												<h5>Mr</h5>
+											</div>
+										</div>
+										<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+											<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+												<h6>Account Name	</h6>
+											</div>
+											<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+												<h5>Long &amp; Foster Real Estate Inc</h5>
+											</div>
+										</div>
+										<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+											<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+												<h6>Primary Email	</h6>
+											</div>
+											<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+												<h5>jim@gmail.com</h5>
+											</div>
+										</div>
+										<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+											<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 flow2">
+												<h6>Primary Number	</h6>
+											</div>
+											<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 flow2">
+												<h5>345-76890</h5>
+											</div>
+										</div>
+										<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 field3">
+											<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 flow2">
+												<h1>Selected Agents</h1>
+											</div>
+											<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 flow2">
+												<h5>Coastal associations - 176677</h5>
+											</div>
+										</div>
+									</div>
+									<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 flow2">
+										<h4 class="slds-text-heading_medium">Accept license</h4>
+										<div class="accept">
+											<iframe src="{! 'https://dev-mrisonboarding.cs10.force.com/eProcess/apex/NewAgentApplication_BRIGHTAgreement' }" style="" />
+										</div>
+										<div class="agree">
+											<lightning:input type="checkbox" label="I have read and accept the terms and conditions" name="input1" />
+										</div>
+									</div>
+									<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 spaceline2"></div>
+									<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+										<button class="slds-button slds-button_brand" onclick="{!c.submitBtnEvtHandler}">Submit123</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footerbottom">
+				<div class="slds-container--x-large new-container">
+					<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 footer-full">
+						<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 footer-part">
+							<p><a href="#">Privacy</a> 
+							</p>
+							<p><a href="#">Terms of Use</a>
+							</p>
+							<p><a href="#">Copyright</a>
+							</p>
+						</div>
+						<div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 footer-part">
+							<p class="copy">Copyright © 2020 Bright MLS, Inc.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</aura:component>

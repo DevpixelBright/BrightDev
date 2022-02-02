@@ -1,0 +1,395 @@
+<apex:component layout="none" controller="Communities_Header_Controller">
+    <c:Bootstrap_IE_Detection />
+    
+    <style>
+        #logo-panel {
+        width: 100%;
+        margin-bottom: 0px;
+        padding-bottom: 15px;
+        box-shadow: none;
+        border: 0px !important;
+        }
+        
+        #navigation-panel {
+        width: 100%;
+        }
+        
+        header nav h3.logo {
+        margin-top: 10px;
+        margin-bottom: 0px;
+        }
+        
+        header nav h3.logo img {
+        height: 25px;
+        }
+        
+        header nav h3.logo .logo-bar {
+        display: inline-block;
+        width: 1px;
+        height: 30px;
+        margin: 0px 8px -10px 10px;
+        background-color: #FE4602;
+        }
+        
+        header nav h3.logo .site-title {
+        font-size: 75%;
+        }
+        
+        header nav .container {
+        position: relative;
+        }
+        
+        header nav .user-info {
+        position: absolute;
+        right: 0px;
+        top: 10px;
+        }
+        
+        header nav .user-picture {
+        float: right;
+        position: relative;
+        height: 40px;
+        width: 40px;
+        border-radius: 20px;
+        margin-top: 3px;
+        overflow: hidden;
+        }
+        
+        header nav .user-picture .user-initials {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background-color: #FE4602;
+        line-height: 40px;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 700;
+        }
+        
+        header nav .user-picture .user-asset {
+        position: relative;
+        display: none;
+        }
+        
+        header nav .user-id {
+        margin: 3px 10px;
+        line-height: 40px;
+        font-size: 14px;
+        font-weight: 300;            
+        }
+        
+        header nav .navbar-toggle,
+        header nav .navbar-toggle:focus {
+        margin-right: 0px;
+        margin-bottom: 10px;
+        margin-top: 12px;
+        background-color: transparent !important;
+        border: none;
+        }
+        
+        header nav .navbar-toggle .icon-bar {
+        background-color: #F5F5F5 !important;
+        width: 20px;
+        height: 1px;
+        }
+        
+        header nav .navbar-toggle .icon-bar + .icon-bar {
+        margin-top: 6px;
+        }
+        
+        header nav .navbar-nav.default {
+        margin-left: -15px;
+        }
+        
+        header nav .navbar-nav li.active > a {
+        background-color: #5F5F5F !important;
+        }
+        
+        header nav .navbar-nav li > a:hover {
+        background-color: #5F5F5F !important;
+        }
+        
+        header nav .navbar-nav li > span {
+        display: block;
+        padding: 15px;
+        background-color: #5F5F5F;
+        cursor: default;
+        }
+        
+        .ie8 header nav .navbar-nav.navbar-right {
+        margin-right: -15px;
+        }
+        
+        @media (min-width: 767px) {
+        #mobile-navigation-menu {
+        display: none !important;
+        }
+        
+        #navigation-panel > ul {
+        margin: 0px;
+        }
+        }
+        
+        @media (max-width: 767px) {
+        form.navbar-form {
+        width: 100% !important;
+        margin-left: 0px;
+        margin-right: 0px;
+        }
+        
+        #logo-panel {
+        padding-bottom: 0px;
+        }
+        
+        header nav #navigation-menu {
+        position: relative;
+        padding: 10px 0px 20px 0px;
+        }
+        
+        header nav h3.logo {
+        margin-top: 12px;
+        margin-bottom: 0px;
+        }
+        
+        header nav .navbar-nav {
+        margin: 0px;
+        }
+        
+        header nav .navbar-nav.default {
+        margin-left: 0px;
+        }
+        
+        header nav .navbar-nav li > span {
+        padding: 10px 15px;
+        }
+        
+        header nav .user-info {
+        top: 7px;
+        }
+        
+        header nav .user-picture {
+        margin-bottom: 10px;
+        }
+        }
+    </style>
+    
+    <!--script>
+    console.log(document);
+(function (p, e, n, d, o) {
+    var v, w, x, y, z;
+    o = p[d] = p[d] || {};
+    o._q = [];
+    v = ['initialize', 'identify', 'updateOptions', 'pageLoad'];
+    for (w = 0, x = v.length; w < x; ++w) (function (m) {
+        o[m] = o[m] || function () {
+            o._q[m === v[0] ? 'unshift' : 'push']([m].concat([].slice.call(arguments, 0)));
+        };
+    })(v[w]);
+    
+    y = e.createElement(n);
+    y.async = !0;
+    y.src = 'https://cdn.pendo.io/agent/static/cfe3c6e1-62b7-419a-7949-c0fcd2685291/pendo.js';
+    z = e.getElementsByTagName(n)[0];
+    z.parentNode.insertBefore(y, z);
+})(window, document, 'script', 'pendo');
+    
+    pendo.initialize({
+        visitor: {
+            id: '{!primaryId}',
+            name: '{!name}',
+            email: '{!email}',
+            role: '{!role}',
+            association: '',
+            county: '{!country}'
+        },
+        account: {
+            id: '{!acc}',
+            name: '{!accName}'
+        }
+    });
+    
+        </script-->
+    <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/respond.js')}"></script>
+    
+    <header>
+        <div class="container">
+            <div class="row">
+                <nav class="hidden-xs navbar navbar-default navbar-static-top" id="logo-panel">
+                    <div class="hidden-xs user-info">
+                        <div class="user-picture">
+                            <div class="user-initials">{!initials}</div>
+                            </div>
+                            <div class="user-id pull-right"></div>
+                            <div class="clearfix"></div>
+                            </div>
+                            <div class="navbar-header">
+                                <h3 class="logo">
+                                    <!--<a href="http://www.brightmls.com" target="_top">-->
+                                        <a href="{!$Label.BRIGHT_Logo_Link}" target="_top">
+                                            <img id="logo" src="{!URLFOR($Resource.LogoBright)}" />
+                                                </a>
+                                            <span class="logo-bar"></span>
+                                            <a class="site-title" href="Communities_Home" target="_top">Account &amp; Settings</a>
+                                            </h3>                                               
+                                            </div>
+                                            </nav>
+                                            <nav class="navbar navbar-default navbar-static-top" role="navigation" id="navigation-panel">
+                                                <div class="visible-xs navbar-header">
+                                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-menu">
+                                                        <span class="icon-bar"></span>
+                                                        <span class="icon-bar"></span>
+                                                        <span class="icon-bar"></span>
+                                                        </button>
+                                                        <h3 class="logo">
+                                                            <!-- <a href="http://www.brightmls.com" target="_top"> -->
+                                                                <a href="{!$Label.BRIGHT_Logo_Link}" target="_top">
+                                                                    <img id="logo" src="{!URLFOR($Resource.LogoBright)}" />
+                                                                        </a>
+                                                                    <span class="logo-bar"></span>
+                                                                    <a class="site-title" href="Communities_Home" target="_top">Account &amp; Settings</a>
+                                                                    </h3>
+                                                                    </div>
+                                                                    <div class="collapse navbar-collapse" id="navigation-menu">
+                                                                        <div class="visible-xs user-info">
+                                                                            <div class="user-picture pull-right">
+                                                                                <div class="user-initials">{!initials}</div>
+                                                                                </div>
+                                                                                <div class="user-id pull-right"></div>
+                                                                                <div class="clearfix"></div>
+                                                                                </div>
+                                                                                <ul class="nav navbar-nav default">
+                                                                                    <li class="home-option-panel single-page-only"><a href="Communities_Home" target="_top">Home</a></li>
+                                                                                        <apex:outputPanel layout="none" rendered="{!isBroker && $Label.MRIS_Communities_Enable_BrokerOptions == 'true'}">
+                                                                                            <li class="brokerage-option-panel"><a href="Communities_Brokerage" target="_top">My Brokerage</a></li>
+                                                                                                </apex:outputPanel>
+                                                                                            <li class="subscription-option-panel"><a href="Communities_Subscription" target="_top">My Subscription</a></li>
+                                                                                                <apex:outputPanel layout="none" rendered="{!isActiveSubscription}">
+                                                                                                    <li class="support-option-panel"><a href="Communities_Support" target="_top">My Support</a></li>
+                                                                                                        </apex:outputPanel>
+                                                                                                    <apex:outputPanel layout="none" rendered="{!isActiveSubscription && $Label.MRIS_Communities_Enable_Ideas == 'true'}">
+                                                                                                        <li class="ideas-option-panel"><a href="Communities_IdeasExt" target="_top">MRIS Ideas</a></li>
+                                                                                                            </apex:outputPanel>
+                                                                                                        <apex:outputPanel layout="none" rendered="{!isActiveSubscription}">
+                                                                                                            <li class="article-option-panel"><a href="{!$Label.LearnBrightMlsCommURL}" target="_blank">Knowledge Articles</a></li>
+                                                                                                                </apex:outputPanel>
+                                                                                                            </ul>
+                                                                                                            <ul class="nav navbar-nav navbar-right">
+                                                                                                                <li><a href="#" onclick="logout(); return false;">Logout</a></li>
+                                                                                                                    </ul>
+                                                                                                                </div>
+                                                                                                                </nav>
+                                                                                                                </div>
+                                                                                                                </div>
+                                                                                                                
+                                                                                                                <script>
+                                                                                                                    <apex:outputPanel layout="none" rendered="{!hasPic}">
+                                                                                                                        var container = $("div.user-picture");
+    var picture = $("<img>");
+    
+    picture
+    .addClass("user-asset")
+    .css({ display: "none" })
+    .load(function() {  
+        var pic = container.find("img.user-asset");
+        var height = pic.height();
+        var width = pic.width();
+        
+        if (height > width) {
+            pic.css({
+                display: "block",
+                width: "100%",
+                top: (width - height) / 2 + "px"
+            });
+        }
+        else {
+            pic.css({
+                display: "block",
+                height: "100%",
+                left: (height - width) / 2 + "px"
+            });
+        }
+    })
+    .attr("src", "{!picUrl}")
+    .appendTo(container);
+    </apex:outputPanel>
+    
+    function logout() {
+        parent.freezeScreen();
+        
+        window.open("{!$Site.Prefix}/secur/logout.jsp", "_top");
+        return;
+        
+        var iframe = $("<iframe>");
+        iframe
+        .css({ display: "none" })
+        .ready(function () {
+            var testRedirect = function () {
+                try {
+                    iframe.contents().get(0).location.href != undefined;
+                    window.setTimeout(testRedirect, 100);
+                }
+                catch (e) {
+                    if (e.name != "SecurityError") // this might be a blank page or the original SF page before impersonated access to communities. The original SF page would do the redirect itself.
+                        window.setTimeout(testRedirect, 100);
+                    else {// now we know the person logged in directly, because SFs own login page is on a different domain as communities and a security error will always result.
+                        window.top.location = "{!$Label.MRIS_Communities_Logout_Redirect_URL}";
+                    }
+                }
+            };
+            
+            testRedirect();
+        })
+        .attr("src", "{!$Site.Prefix}/secur/logout.jsp")
+        .appendTo("body");
+    }
+    
+    function markUserId(id) {
+        var logo = $("#logo");
+        var href = $(logo.parent());
+        
+        if(id.indexOf('BRIGHT:') != -1) {
+            logo.attr("src", "{!URLFOR($Resource.LogoBright)}");
+            //href.attr("href", "http://www.brightmls.com");
+            href.attr("href", "{!$Label.BRIGHT_Logo_Link}");
+        }
+        else if(id.indexOf('TREND:') != -1) {
+            logo.attr("src", "{!URLFOR($Resource.LogoBright)}");
+            //href.attr("href", "http://www.trendmls.com");
+            href.attr("href", "{!$Label.BRIGHT_Logo_Link}");
+        }
+            else if(id != '') {
+                logo.attr("src", "{!URLFOR($Resource.LogoBright)}");
+                //href.attr("href", "http://www.mris.com");
+                href.attr("href", "{!$Label.BRIGHT_Logo_Link}");          
+            }
+                else {
+                    logo.attr("src", "{!URLFOR($Resource.LogoBright)}");
+                    //href.attr("href", "http://www.brightmls.com");
+                    href.attr("href", "{!$Label.BRIGHT_Logo_Link}");
+                }
+        
+        id = id.replace('TREND: ', '');
+        id = id.replace('BRIGHT: ', '');
+        id = id.trim();
+        $(".user-id").text(id);
+    }         
+    
+    function markOptionPanel(panel) {
+        var target = $("." + panel.toLowerCase() + "-option-panel");
+        
+        if (target.length == 0) return;
+        
+        if (panel.toLowerCase() == "home") target.parent().removeClass("default");
+        
+        if (target.filter(".single-page-only").length == 0)
+            target.addClass("active");
+        else {
+            target = target.find("a");
+            
+            target.replaceWith("<span>" + target.first().text() + "</span>");
+        }
+    }          
+    
+    </script>
+</header>
+</apex:component>

@@ -1,0 +1,378 @@
+<apex:page controller="BrightQuestionnaire_Controller" showHeader="false" cache="false" lightningstylesheets="true">
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/jquery.min.js')}"></script>
+        <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/bootstrap.min.js')}"></script>   
+        <apex:stylesheet value="{!URLFOR($Resource.Bootstrap_Layout_Library, '/css/bootstrap.min.css')}"/>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        </head>
+         <script>
+             $(document).ready(function(){
+
+            });
+        </script>
+        <style>
+            .Main {
+            margin-top:1%;
+            }
+            .initial {
+            border:none;
+            border-bottom:1px solid green;
+            box-shadow: none; 
+            }
+            body{margin:0px; padding:0px; font-family: Lato, sans-serif !important;}
+            .header_row{ padding:12px; background-color:#212B3D;}
+            .header_row img.logo{padding: 12px 0px;}
+            .body_content { padding-top: 20px; padding-bottom: 20px; color:#565656;}
+            .body_content h3{ font-size:22px; margin:0px; padding:4px 0px;}
+            .body_content p{ padding-top:5px; line-height:18px; font-size:13px; color:#727272;}
+            .form_style{background-color:#fff; border:1px solid #e7e7e7; padding-top:15px; margin-top:22px; border-radius:4px; -o-border-radius:4px; -webkit-border-radius:4px; -moz-border-radius:4px; -ms-border-radius:4px;}            
+            .panel-default { border:none; }
+            .panel-default>.panel-heading { background-color:#fff; color:#565656; border:none; }
+            .panel-group .panel-heading+.panel-collapse .panel-body { border:none; }
+            .col-sm-1 { width:1.3333%; }
+            .panel-heading { padding:0px;}
+            .menu-header {padding:10px;}
+            .menu-header-right { border-top:1px solid #ccc;}
+            .menu-header-left { padding-right:30px;}
+            h3 {padding:10px;}
+            .menu-header p { margin:0px;}
+            .menu-header p { text-decoration:none; }
+            .panel {box-shadow:none; border-radius:0px; }
+            .panel-group .panel { border-radius:0px; }
+            .active { background-color: #E4F0FB;}
+            .panel-body {padding:10px;}
+            td a { color:#565656; text-decoration:none; }
+            
+            label { color: #565656;}
+            td { color:#565656;}
+            .button {
+            background: #3498db !important;
+            background-image: -webkit-linear-gradient(top, #3498db, #2980b9) !important;
+            background-image: -moz-linear-gradient(top, #3498db, #2980b9) !important;
+            background-image: -ms-linear-gradient(top, #3498db, #2980b9) !important;
+            background-image: -o-linear-gradient(top, #3498db, #2980b9) !important;
+            background-image: linear-gradient(to bottom, #3498db, #2980b9) !important;
+            -webkit-border-radius: 3 !important;
+            -moz-border-radius: 3 !important;
+            border-radius: 3px !important;
+            color: #ffffff !important;
+            font-size: 13px !important;
+            padding: 5px 15px 5px 15px !important;
+            text-decoration: none !important;
+            float:right;
+            }
+            
+            .cancel {
+            background: #fff !important;
+            color:#3498db;
+            }
+            
+            .button:hover {
+            background: #3cb0fd;
+            background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+            background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+            background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+            background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+            background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+            text-decoration: none;
+            }
+            .buttonGroup {
+            margin-top:10px; margin-bottom:10px;
+            } 
+            .date_field {
+            display:inline;
+            }
+            .dateOnlyInput input { width:13em;}
+            .bPageBlock { border:none; background-color:none;}
+            .message h4 { padding:0px; }
+            .ui-autocomplete-loading {
+            background: white url("http://jqueryui.com/resources/demos/autocomplete/images/ui-anim_basic_16x16.gif") right center no-repeat;
+            }
+            .progress {margin-bottom:0px;}   
+            label {
+            display: inline-block;
+            margin: 10px 6px 6px 16px;
+            font-weight: normal; 
+            }
+            .radio-align{margin: 10px 6px 6px 50px;}
+        </style>
+        
+                                                                                                            
+        
+        <header>
+            <div class="header_row">
+                <img class="logo" src="{!URLFOR($Resource.LogoBright)}" alt="logo" height="60" />
+            </div>
+        </header>
+        
+        <apex:form >
+            <div class="body_content col-sm-12">
+                <div class="col-sm-2" style="float:right">
+                    <apex:outputPanel ><a href="">Definitions</a> </apex:outputPanel>           
+                </div>
+                <div style="clear:both;"></div>
+                <div id="messages">
+                    <apex:pagemessages ></apex:pagemessages>
+                </div>            
+                
+                
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <!-- License information -->
+                    <div class="panel panel-default active">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <div class="col-sm-12 menu-header menu-header-right">
+                                <h3 class="panel-title">
+                                    <table style="width:100%;">
+                                        <tr>
+                                            <td style="width:50px; vertical-align:top; text-align:center;">
+                                                1.
+                                            </td>
+                                            <td style="border-bottom:1px solid #95D1E6; padding-bottom:7px;">
+                                                <a class="step-heading" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                    Bright Data Access Questionnaire
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </h3>
+                            </div>
+                        </div>
+                        <apex:outputPanel >
+                            <div id="collapseOne" class="panel-collapse " role="tabpanel" aria-labelledby="headingOne">
+                                <div class="panel-body">
+                                    <table style="width:100%;">
+                                        <tr>
+                                            <td style="width:50px; vertical-align:top; text-align:center;">
+                                                
+                                            </td>
+                                            <td>                    
+                                                <div class="col-sm-12" style="border-bottom:1px solid #fff;">
+                                                    <div>
+                                                        <div class="form-group">
+                                                            <p>
+                                                                1. Are you a
+                                                            </p>
+                                                            <div Class="radio-align">
+                                                                <apex:selectRadio layout="pageDirection" value="{!contact_type}">
+                                                                    <apex:selectOption itemValue="Vendor" itemLabel="Vendor (A vendor Provides services for more than one subscriber)"/>
+                                                                    <apex:selectOption itemValue="Subcontractor" itemLabel="Subcontractor,working for a Broker or Agent.Subcontractor only provides services to one Broker or Subscriber"/>
+                                                                    <apex:selectOption itemValue="Broker" itemLabel="Broker (The Broker of record for the firm)"/>
+                                                                    <apex:selectOption itemValue="Agent" itemLabel="Agent (A licensee working for a broker)"/>
+                                                                </apex:selectRadio>
+                                                                
+                                                            </div>
+                                                        </div> 
+                                                        <div class="form-group">
+                                                            <p>
+                                                                2. Please provide name and a description of the product you plan to offer?If there is more tha none product,describe each product.  
+                                                            </p>
+                                                            <div>
+                                                                <apex:inputTextarea html-maxlength="1000" style="width:80%;" rows="4" styleClass="form-control" value="{!product_offer_details}" />
+                                                            </div>
+                                                        </div> 
+                                                        
+                                                        <div class="form-group">
+                                                            <p>
+                                                                3. Is the product for broker use,public display or both? 
+                                                            </p>
+                                                            <div >
+                                                                <apex:selectList multiselect="false" size="1" style="width:25%" styleClass="form-control" value="{!product_use}">
+                                                                    <apex:selectOption itemValue="None" itemLabel="-- select one --"/>
+                                                                    <apex:selectOption itemValue="Broker Use" itemLabel="Broker Use"/>
+                                                                    <apex:selectOption itemValue="Publice Display" itemLabel="Publice Display"/>
+                                                                    <apex:selectOption itemValue="Both" itemLabel="Both"/>
+                                                                </apex:selectList>
+                                                            </div>
+                                                            <br/>
+                                                            <p>
+                                                                If this is for a specific broker, please provide the broker name and firm information.
+                                                            </p>
+                                                            <div>
+                                                                
+                                                                <label>Broker Name</label>
+                                                                <apex:inputText style="width:30%;margin: 10px 27px 14px 86px;" value="{!Broker_name}"></apex:inputText>
+                                                                
+                                                            </div>
+                                                            <div>
+                                                                <label>Brokerage Information</label>
+                                                                <apex:inputTextArea style="width:30%;margin: 19px 43px -19px 32px;" value="{!Broker_Information}"></apex:inputTextArea>
+                                                            </div>
+                                                            
+                                                        </div> 
+                                                        
+                                                        
+                                                        <div class="form-group">
+                                                            <p>
+                                                                4. Who is the intended audience for the product?
+                                                            </p>
+                                                            <div>
+                                                                <apex:selectList multiselect="false" size="1" style="width:25%" styleClass="form-control" value="{!Product_audience}">
+                                                                    <apex:selectOption itemValue="None" itemLabel="-select all that apply-"/>
+                                                                </apex:selectList>
+                                                            </div>
+                                                            <br/>
+                                                            <div>
+                                                                <apex:inputText style="width:25%" value="{!Product_audience}"/>
+                                                            </div>
+                                                        </div> 
+                                                        
+                                                        <div class="form-group">
+                                                            <p>
+                                                                5. If the product is for public display
+                                                            </p>
+                                                            <p>
+                                                                Will the consumer needs to aquire login credentials to see the data
+                                                            </p>
+                                                            <div>
+                                                                <apex:selectList multiselect="false" size="1" style="width:25%" styleClass="form-control" value="{!Is_login_required}">
+                                                                    <apex:selectOption itemValue="None" itemLabel="-select one-"/>
+                                                                    <apex:selectOption itemValue="Yes" itemLabel="Yes"/>
+                                                                    <apex:selectOption itemValue="No" itemLabel="No"/>
+                                                                </apex:selectList>
+                                                            </div>
+                                                            
+                                                        </div> 
+                                                        
+                                                        <div class="form-group">
+                                                            <p>
+                                                                What Method(s) do you use to authenticate the rights to view the data?
+                                                            </p>
+                                                            <div>
+                                                                <apex:inputTextarea html-maxlength="1000" style="width:80%;" rows="4" styleClass="form-control" value="{!authentication_methods}"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <p>
+                                                                How will the login credentials be monitored?
+                                                            </p>
+                                                            <div>
+                                                                <apex:inputTextarea html-maxlength="1000" style="width:80%;" rows="4"  value="{!monitoring_credentials}"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <p>
+                                                                6. Provide detail description of how Bright data will be used in your product?
+                                                            </p>
+                                                            <div>
+                                                                <apex:inputTextarea html-maxlength="1000" style="width:80%;" rows="4" styleClass="form-control" value="{!bright_data_usage}" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <p>
+                                                                7. If the product is broker use and not for the public display,what methods do you intend to use to validate or authenticate use only by the broker?
+                                                            </p>
+                                                            <div>
+                                                                <apex:inputTextarea html-maxlength="1000" style="width:80%;" rows="4" styleClass="form-control" value="{!authenticate_broker}"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <p>
+                                                                8. If the product is broker use, please provide a description of what services will be provided to the broker.
+                                                            </p>
+                                                            <div>
+                                                                <apex:inputTextarea html-maxlength="1000" style="width:80%;" rows="4" styleClass="form-control" value="{!broker_services}"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <p>
+                                                                9. How often do you intend to pull data?
+                                                            </p>
+                                                            <div>
+                                                                <apex:inputText style="width:25%" styleClass="form-control" value="{!data_pull_period}"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <p>
+                                                                10. Who will have access to the RETS data?
+                                                            </p>
+                                                            <div>
+                                                                <apex:inputText style="width:25%" styleClass="form-control" value="{!RETS_data_access}"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <p>
+                                                                11. Do you plan to share the data ?
+                                                            </p>
+                                                            <div>
+                                                                <apex:selectList multiselect="false" size="1" style="width:25%" styleClass="form-control" value="{!Is_data_shared}">
+                                                                    <apex:selectOption itemValue="None" itemLabel="-select one-"/>
+                                                                    <apex:selectOption itemValue="Yes" itemLabel="Yes"/>
+                                                                    <apex:selectOption itemValue="No" itemLabel="No"/>
+                                                                </apex:selectList>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <p>
+                                                                If yes , will the data provided be displayed as a plug in?
+                                                            </p>
+                                                            <div>
+                                                                <apex:selectList multiselect="false" size="1" style="width:25%" styleClass="form-control" value="{!Is_data_display_plugin}">
+                                                                    <apex:selectOption itemValue="None" itemLabel="-select one-"/>
+                                                                    <apex:selectOption itemValue="Yes" itemLabel="Yes"/>
+                                                                    <apex:selectOption itemValue="No" itemLabel="No"/>
+                                                                </apex:selectList>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <p>
+                                                                12. Please provide a sample website URL or provide demo access to your product?
+                                                            </p>
+                                                            <div>
+                                                                <apex:inputText style="width:25%" styleClass="form-control" value="{!website_URL}"/>
+                                                            </div>
+                                                        </div>
+                                                        <br/><br/><br/>
+                                                        <div width="100%" height="30"></div>
+                                                        <div class="form-group">
+                                                            <p>
+                                                                Please provide the following information: 
+                                                            </p>
+                                                            
+                                                            <div>
+                                                                <table>
+                                                                    
+                                                                    <tr><td><label for="exampleInputEmail1">Primary Contact Name: </label></td><td><apex:inputText styleClass="form-control" value="{!Primary_Contact_Name}"/></td></tr>
+                                                                    <tr><td> <label>Primary Contact Phone Number</label></td><td><apex:inputText styleClass="form-control" value="{!Primary_Contact_Phone_Number}"/></td></tr>
+                                                                    <tr><td> <label>Primary Contact Email Address: </label></td><td><apex:inputText styleClass="form-control" value="{!Primary_Contact_Email_Address}"/></td></tr>
+                                                                    <tr><td colspan="2"><hr/></td></tr>
+                                                                    <tr><td> <label>Technical Contact Name: </label></td><td><apex:inputText styleClass="form-control" value="{!Technical_Contact_Name}"/></td></tr>
+                                                                    <tr><td><label>Technical Contact Phone Number</label></td><td><apex:inputText styleClass="form-control" value="{!Technical_Contact_Phone_Number}"/></td></tr>
+                                                                    <tr><td><label>Technical Contact Email Address</label></td><td><apex:inputText styleClass="form-control" value="{!Technical_Contact_Email_Address}"/></td></tr>
+                                                                    <tr><td colspan="2"><hr/></td></tr>
+                                                                    <tr><td> <label>Billing Contact Name: </label></td><td><apex:inputText styleClass="form-control" value="{!Billing_Contact_Name}"/></td></tr>
+                                                                    <tr><td>  <label>Billing Contact Phone Number</label></td><td><apex:inputText styleClass="form-control" value="{!Billing_Contact_Phone_Number}"/></td></tr>
+                                                                    <tr><td><label>Billing Contact Email Address</label></td><td><apex:inputText styleClass="form-control" value="{!Billing_Contact_Email_Address}"/></td></tr>
+                                                                    <tr><td colspan="2"><hr/></td></tr>
+                                                                    <tr><td> <label>Administrative Contact Name: </label></td><td><apex:inputText styleClass="form-control" value="{!Administrative_Contact_Name}"/></td></tr>
+                                                                    <tr><td>  <label>Administrative Contact Phone Number</label></td><td><apex:inputText styleClass="form-control" value="{!Administrative_Contact_Phone_Number}"/></td></tr>
+                                                                    <tr><td><label>Administrative Contact Email Address</label></td><td><apex:inputText styleClass="form-control" value="{!Administrative_Contact_Email_Address}"/></td></tr>
+
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </td>
+                                            
+                                            <td style="width:3%;"></td>
+                                        </tr>
+                                    </table>                        
+                                </div>
+                            </div>
+                            <div class="col-sm-12" style="padding:12px;">
+                                                <apex:commandLink styleClass="button" id="ContactDetailsButton" value="Submit" action="{!submitApplication}" />                                                                                                               
+                                            </div> 
+                        </apex:outputPanel>
+                    </div>
+                </div>
+                <div style="clear:both;" />
+                <div style="background-color:#555555; padding:30px; text-align:center; color:#fff; margin-top:20px;"> 
+                    Copyright © 2017 Bright MLS, Inc.
+                </div>  
+            </div>     
+        </apex:form>
+    </apex:page>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Subcontractor</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Subcontractors</value>
+    </caseValues>
+    <layouts>
+        <layout>Subcontractor Layout</layout>
+        <sections>
+            <label></label>
+            <section>Billing Contact</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Business Contact</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Company Address</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Primary Contact</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Technical Contact</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

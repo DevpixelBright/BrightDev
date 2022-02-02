@@ -1,0 +1,1632 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <processMetadataValues>
+            <name>emailAlertSelection</name>
+            <value>
+                <stringValue>BRIGHT_Immediate_Failed_Response_Email_Alert</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_1_A1</name>
+        <label>Email to User</label>
+        <locationX>100</locationX>
+        <locationY>200</locationY>
+        <actionName>Zuora__CustomerAccount__c.BRIGHT_Immediate_Failed_Response_Email_Alert</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>myRule_1_A2</targetReference>
+        </connector>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <processMetadataValues>
+            <name>emailAlertSelection</name>
+            <value>
+                <stringValue>BRIGHT_Immediate_Failed_Response_Email_Alert_to_SF</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_1_A2</name>
+        <label>email to SF</label>
+        <locationX>100</locationX>
+        <locationY>300</locationY>
+        <actionName>Zuora__CustomerAccount__c.BRIGHT_Immediate_Failed_Response_Email_Alert_to_SF</actionName>
+        <actionType>emailAlert</actionType>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <processMetadataValues>
+            <name>emailAlertSelection</name>
+            <value>
+                <stringValue>BRIGHT10days_Failed_Response_Email_Alert</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_3_A1</name>
+        <label>Email to User</label>
+        <locationX>300</locationX>
+        <locationY>200</locationY>
+        <actionName>Zuora__CustomerAccount__c.BRIGHT10days_Failed_Response_Email_Alert</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>myRule_3_A2</targetReference>
+        </connector>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <processMetadataValues>
+            <name>emailAlertSelection</name>
+            <value>
+                <stringValue>BRIGHT10days_Failed_Response_Email_Alert_to_SF</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_3_A2</name>
+        <label>Email to SF</label>
+        <locationX>300</locationX>
+        <locationY>300</locationY>
+        <actionName>Zuora__CustomerAccount__c.BRIGHT10days_Failed_Response_Email_Alert_to_SF</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>myWait_myRule_3</targetReference>
+        </connector>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <processMetadataValues>
+            <name>emailAlertSelection</name>
+            <value>
+                <stringValue>BRIGHT_20days_Failed_Response_Email_Alert</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_5_A1</name>
+        <label>Immediate alert to user</label>
+        <locationX>500</locationX>
+        <locationY>200</locationY>
+        <actionName>Zuora__CustomerAccount__c.BRIGHT_20days_Failed_Response_Email_Alert</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>myRule_5_A2</targetReference>
+        </connector>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <processMetadataValues>
+            <name>emailAlertSelection</name>
+            <value>
+                <stringValue>BRIGHT_20days_Failed_Response_Email_Alert_to_SF</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_5_A2</name>
+        <label>Immediate alert to SF</label>
+        <locationX>500</locationX>
+        <locationY>300</locationY>
+        <actionName>Zuora__CustomerAccount__c.BRIGHT_20days_Failed_Response_Email_Alert_to_SF</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>myWait_myRule_5</targetReference>
+        </connector>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <processMetadataValues>
+            <name>emailAlertSelection</name>
+            <value>
+                <stringValue>BRIGHT_30days_Failed_Response_Email_Alert</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_7_A1</name>
+        <label>Immediate alert</label>
+        <locationX>700</locationX>
+        <locationY>200</locationY>
+        <actionName>Zuora__CustomerAccount__c.BRIGHT_30days_Failed_Response_Email_Alert</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>myRule_7_A2</targetReference>
+        </connector>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <processMetadataValues>
+            <name>emailAlertSelection</name>
+            <value>
+                <stringValue>BRIGHT_30days_Failed_Response_Email_Alert_to_SF</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_7_A2</name>
+        <label>Email to SF</label>
+        <locationX>700</locationX>
+        <locationY>300</locationY>
+        <actionName>Zuora__CustomerAccount__c.BRIGHT_30days_Failed_Response_Email_Alert_to_SF</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>myWait_myRule_7</targetReference>
+        </connector>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <processMetadataValues>
+            <name>emailAlertSelection</name>
+            <value>
+                <stringValue>BRIGHT_40days_Failed_Response_Email_Alert</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_9_A1</name>
+        <label>Immediate alert</label>
+        <locationX>900</locationX>
+        <locationY>200</locationY>
+        <actionName>Zuora__CustomerAccount__c.BRIGHT_40days_Failed_Response_Email_Alert</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>myRule_9_A2</targetReference>
+        </connector>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <processMetadataValues>
+            <name>emailAlertSelection</name>
+            <value>
+                <stringValue>BRIGHT_40days_Failed_Response_Email_Alert_to_SF</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_9_A2</name>
+        <label>Email to SF</label>
+        <locationX>900</locationX>
+        <locationY>300</locationY>
+        <actionName>Zuora__CustomerAccount__c.BRIGHT_40days_Failed_Response_Email_Alert_to_SF</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>myWait_myRule_9</targetReference>
+        </connector>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <processMetadataValues>
+            <name>emailAlertSelection</name>
+            <value>
+                <stringValue>BRIGHT10days_Failed_Response_Email_Alert</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myWaitEvent_myWait_myRule_3_event_0_SA1</name>
+        <label>Email to User</label>
+        <locationX>300</locationX>
+        <locationY>200</locationY>
+        <actionName>Zuora__CustomerAccount__c.BRIGHT10days_Failed_Response_Email_Alert</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>myWaitEvent_myWait_myRule_3_event_0_SA2</targetReference>
+        </connector>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <processMetadataValues>
+            <name>emailAlertSelection</name>
+            <value>
+                <stringValue>BRIGHT10days_Failed_Response_Email_Alert_to_SF</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myWaitEvent_myWait_myRule_3_event_0_SA2</name>
+        <label>Email to SF</label>
+        <locationX>300</locationX>
+        <locationY>300</locationY>
+        <actionName>Zuora__CustomerAccount__c.BRIGHT10days_Failed_Response_Email_Alert_to_SF</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>myWaitEvent_myWait_myRule_3_event_0_postWaitExecutionAssignment</targetReference>
+        </connector>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <processMetadataValues>
+            <name>emailAlertSelection</name>
+            <value>
+                <stringValue>BRIGHT_20days_Failed_Response_Email_Alert_to_SF</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myWaitEvent_myWait_myRule_5_event_0_SA1</name>
+        <label>Email to SF</label>
+        <locationX>500</locationX>
+        <locationY>200</locationY>
+        <actionName>Zuora__CustomerAccount__c.BRIGHT_20days_Failed_Response_Email_Alert_to_SF</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>myWaitEvent_myWait_myRule_5_event_0_SA2</targetReference>
+        </connector>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <processMetadataValues>
+            <name>emailAlertSelection</name>
+            <value>
+                <stringValue>BRIGHT_20days_Failed_Response_Email_Alert</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myWaitEvent_myWait_myRule_5_event_0_SA2</name>
+        <label>Email to User</label>
+        <locationX>500</locationX>
+        <locationY>300</locationY>
+        <actionName>Zuora__CustomerAccount__c.BRIGHT_20days_Failed_Response_Email_Alert</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>myWaitEvent_myWait_myRule_5_event_0_postWaitExecutionAssignment</targetReference>
+        </connector>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <processMetadataValues>
+            <name>emailAlertSelection</name>
+            <value>
+                <stringValue>BRIGHT_30days_Failed_Response_Email_Alert</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myWaitEvent_myWait_myRule_7_event_0_SA1</name>
+        <label>Email to User</label>
+        <locationX>700</locationX>
+        <locationY>200</locationY>
+        <actionName>Zuora__CustomerAccount__c.BRIGHT_30days_Failed_Response_Email_Alert</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>myWaitEvent_myWait_myRule_7_event_0_SA2</targetReference>
+        </connector>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <processMetadataValues>
+            <name>emailAlertSelection</name>
+            <value>
+                <stringValue>BRIGHT_30days_Failed_Response_Email_Alert_to_SF</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myWaitEvent_myWait_myRule_7_event_0_SA2</name>
+        <label>Email to SF</label>
+        <locationX>700</locationX>
+        <locationY>300</locationY>
+        <actionName>Zuora__CustomerAccount__c.BRIGHT_30days_Failed_Response_Email_Alert_to_SF</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>myWaitEvent_myWait_myRule_7_event_0_postWaitExecutionAssignment</targetReference>
+        </connector>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <processMetadataValues>
+            <name>emailAlertSelection</name>
+            <value>
+                <stringValue>BRIGHT_40days_Failed_Response_Email_Alert</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myWaitEvent_myWait_myRule_9_event_0_SA1</name>
+        <label>Email to User</label>
+        <locationX>900</locationX>
+        <locationY>200</locationY>
+        <actionName>Zuora__CustomerAccount__c.BRIGHT_40days_Failed_Response_Email_Alert</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>myWaitEvent_myWait_myRule_9_event_0_SA2</targetReference>
+        </connector>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <processMetadataValues>
+            <name>emailAlertSelection</name>
+            <value>
+                <stringValue>BRIGHT_40days_Failed_Response_Email_Alert_to_SF</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myWaitEvent_myWait_myRule_9_event_0_SA2</name>
+        <label>Email to SF</label>
+        <locationX>900</locationX>
+        <locationY>300</locationY>
+        <actionName>Zuora__CustomerAccount__c.BRIGHT_40days_Failed_Response_Email_Alert_to_SF</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>myWaitEvent_myWait_myRule_9_event_0_postWaitExecutionAssignment</targetReference>
+        </connector>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>50.0</apiVersion>
+    <assignments>
+        <name>myWaitAssignment_myWait_myRule_3</name>
+        <label>myWaitAssignment_myWait_myRule_3</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>cancelWaits</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>myWait_myRule_3</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>myDecision</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>myWaitAssignment_myWait_myRule_5</name>
+        <label>myWaitAssignment_myWait_myRule_5</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>cancelWaits</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>myWait_myRule_5</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>myPreWaitDecision_myWait_myRule_3</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>myWaitAssignment_myWait_myRule_7</name>
+        <label>myWaitAssignment_myWait_myRule_7</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>cancelWaits</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>myWait_myRule_7</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>myPreWaitDecision_myWait_myRule_5</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>myWaitAssignment_myWait_myRule_9</name>
+        <label>myWaitAssignment_myWait_myRule_9</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>cancelWaits</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>myWait_myRule_9</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>myPreWaitDecision_myWait_myRule_7</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>myWaitEvent_myWait_myRule_3_event_0_postWaitExecutionAssignment</name>
+        <label>myWaitEvent_myWait_myRule_3_event_0_postWaitExecutionAssignment</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>myWaitEvent_myWait_myRule_3_event_0_postActionExecutionVariable</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>myWait_myRule_3</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>myWaitEvent_myWait_myRule_5_event_0_postWaitExecutionAssignment</name>
+        <label>myWaitEvent_myWait_myRule_5_event_0_postWaitExecutionAssignment</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>myWaitEvent_myWait_myRule_5_event_0_postActionExecutionVariable</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>myWait_myRule_5</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>myWaitEvent_myWait_myRule_7_event_0_postWaitExecutionAssignment</name>
+        <label>myWaitEvent_myWait_myRule_7_event_0_postWaitExecutionAssignment</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>myWaitEvent_myWait_myRule_7_event_0_postActionExecutionVariable</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>myWait_myRule_7</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>myWaitEvent_myWait_myRule_9_event_0_postWaitExecutionAssignment</name>
+        <label>myWaitEvent_myWait_myRule_9_event_0_postWaitExecutionAssignment</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>myWaitEvent_myWait_myRule_9_event_0_postActionExecutionVariable</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>myWait_myRule_9</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <processMetadataValues>
+            <name>index</name>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </processMetadataValues>
+        <name>myDecision</name>
+        <label>myDecision</label>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>myDecision2</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myRule_1</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_1</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_1_pmetdec</targetReference>
+            </connector>
+            <label>Immediate Notification</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <processMetadataValues>
+            <name>index</name>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </processMetadataValues>
+        <name>myDecision2</name>
+        <label>myDecision2</label>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>myDecision4</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myRule_3</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_3</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_3_pmetdec</targetReference>
+            </connector>
+            <label>10 Days Notification</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <processMetadataValues>
+            <name>index</name>
+            <value>
+                <numberValue>2.0</numberValue>
+            </value>
+        </processMetadataValues>
+        <name>myDecision4</name>
+        <label>myDecision4</label>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>myDecision6</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myRule_5</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_5</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_5_pmetdec</targetReference>
+            </connector>
+            <label>20 Days notification</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <processMetadataValues>
+            <name>index</name>
+            <value>
+                <numberValue>3.0</numberValue>
+            </value>
+        </processMetadataValues>
+        <name>myDecision6</name>
+        <label>myDecision6</label>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>myDecision8</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myRule_7</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_7</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_7_pmetdec</targetReference>
+            </connector>
+            <label>30 Days Notification</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <processMetadataValues>
+            <name>index</name>
+            <value>
+                <numberValue>4.0</numberValue>
+            </value>
+        </processMetadataValues>
+        <name>myDecision8</name>
+        <label>myDecision8</label>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myRule_9</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_9</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_9_pmetdec</targetReference>
+            </connector>
+            <label>40 Days Notification</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myPostWaitDecision_myWaitEvent_myWait_myRule_3_event_0</name>
+        <label>myPostWaitDecision_myWaitEvent_myWait_myRule_3_event_0</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>myWaitEvent_myWait_myRule_3_event_0_postWaitExecutionAssignment</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myPostWaitRule_myWaitEvent_myWait_myRule_3_event_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>myVariable_current.Oldest_Invoice_Due__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myWaitEvent_myWait_myRule_3_event_0_SA1</targetReference>
+            </connector>
+            <label>myPostWaitRule_myWaitEvent_myWait_myRule_3_event_0</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myPostWaitDecision_myWaitEvent_myWait_myRule_5_event_0</name>
+        <label>myPostWaitDecision_myWaitEvent_myWait_myRule_5_event_0</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>myWaitEvent_myWait_myRule_5_event_0_postWaitExecutionAssignment</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myPostWaitRule_myWaitEvent_myWait_myRule_5_event_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>myVariable_current.Oldest_Invoice_Due__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myWaitEvent_myWait_myRule_5_event_0_SA1</targetReference>
+            </connector>
+            <label>myPostWaitRule_myWaitEvent_myWait_myRule_5_event_0</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myPostWaitDecision_myWaitEvent_myWait_myRule_7_event_0</name>
+        <label>myPostWaitDecision_myWaitEvent_myWait_myRule_7_event_0</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>myWaitEvent_myWait_myRule_7_event_0_postWaitExecutionAssignment</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myPostWaitRule_myWaitEvent_myWait_myRule_7_event_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>myVariable_current.Oldest_Invoice_Due__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myWaitEvent_myWait_myRule_7_event_0_SA1</targetReference>
+            </connector>
+            <label>myPostWaitRule_myWaitEvent_myWait_myRule_7_event_0</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myPostWaitDecision_myWaitEvent_myWait_myRule_9_event_0</name>
+        <label>myPostWaitDecision_myWaitEvent_myWait_myRule_9_event_0</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>myWaitEvent_myWait_myRule_9_event_0_postWaitExecutionAssignment</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myPostWaitRule_myWaitEvent_myWait_myRule_9_event_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>myVariable_current.Oldest_Invoice_Due__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myWaitEvent_myWait_myRule_9_event_0_SA1</targetReference>
+            </connector>
+            <label>myPostWaitRule_myWaitEvent_myWait_myRule_9_event_0</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myPreWaitDecision_myWait_myRule_3</name>
+        <label>myPreWaitDecision_myWait_myRule_3</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>myWaitAssignment_myWait_myRule_3</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myPreWaitRule_myWait_myRule_3</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_3</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myDecision</targetReference>
+            </connector>
+            <label>myPreWaitRule_myWait_myRule_3</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myPreWaitDecision_myWait_myRule_5</name>
+        <label>myPreWaitDecision_myWait_myRule_5</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>myWaitAssignment_myWait_myRule_5</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myPreWaitRule_myWait_myRule_5</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_5</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myPreWaitDecision_myWait_myRule_3</targetReference>
+            </connector>
+            <label>myPreWaitRule_myWait_myRule_5</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myPreWaitDecision_myWait_myRule_7</name>
+        <label>myPreWaitDecision_myWait_myRule_7</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>myWaitAssignment_myWait_myRule_7</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myPreWaitRule_myWait_myRule_7</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_7</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myPreWaitDecision_myWait_myRule_5</targetReference>
+            </connector>
+            <label>myPreWaitRule_myWait_myRule_7</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myPreWaitDecision_myWait_myRule_9</name>
+        <label>myPreWaitDecision_myWait_myRule_9</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>myWaitAssignment_myWait_myRule_9</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myPreWaitRule_myWait_myRule_9</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_9</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myPreWaitDecision_myWait_myRule_7</targetReference>
+            </connector>
+            <label>myPreWaitRule_myWait_myRule_9</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myRule_1_pmetdec</name>
+        <label>Previously Met Decision</label>
+        <locationX>100</locationX>
+        <locationY>100</locationY>
+        <defaultConnector>
+            <targetReference>myRule_1_A1</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Not Previously Met</defaultConnectorLabel>
+        <rules>
+            <name>myRule_1_pmetnullrule</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>myVariable_old</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_1_A1</targetReference>
+            </connector>
+            <label>Previously Met - Null</label>
+        </rules>
+        <rules>
+            <name>myRule_1_pmetrule</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_1_pmetrule</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <label>Previously Met - Prev</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myRule_3_pmetdec</name>
+        <label>Previously Met Decision</label>
+        <locationX>300</locationX>
+        <locationY>100</locationY>
+        <defaultConnector>
+            <targetReference>myRule_3_A1</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Not Previously Met</defaultConnectorLabel>
+        <rules>
+            <name>myRule_3_pmetnullrule</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>myVariable_old</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_3_A1</targetReference>
+            </connector>
+            <label>Previously Met - Null</label>
+        </rules>
+        <rules>
+            <name>myRule_3_pmetrule</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_3_pmetrule</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <label>Previously Met - Prev</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myRule_5_pmetdec</name>
+        <label>Previously Met Decision</label>
+        <locationX>500</locationX>
+        <locationY>100</locationY>
+        <defaultConnector>
+            <targetReference>myRule_5_A1</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Not Previously Met</defaultConnectorLabel>
+        <rules>
+            <name>myRule_5_pmetnullrule</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>myVariable_old</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_5_A1</targetReference>
+            </connector>
+            <label>Previously Met - Null</label>
+        </rules>
+        <rules>
+            <name>myRule_5_pmetrule</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_5_pmetrule</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <label>Previously Met - Prev</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myRule_7_pmetdec</name>
+        <label>Previously Met Decision</label>
+        <locationX>700</locationX>
+        <locationY>100</locationY>
+        <defaultConnector>
+            <targetReference>myRule_7_A1</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Not Previously Met</defaultConnectorLabel>
+        <rules>
+            <name>myRule_7_pmetnullrule</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>myVariable_old</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_7_A1</targetReference>
+            </connector>
+            <label>Previously Met - Null</label>
+        </rules>
+        <rules>
+            <name>myRule_7_pmetrule</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_7_pmetrule</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <label>Previously Met - Prev</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myRule_9_pmetdec</name>
+        <label>Previously Met Decision</label>
+        <locationX>900</locationX>
+        <locationY>100</locationY>
+        <defaultConnector>
+            <targetReference>myRule_9_A1</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Not Previously Met</defaultConnectorLabel>
+        <rules>
+            <name>myRule_9_pmetnullrule</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>myVariable_old</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_9_A1</targetReference>
+            </connector>
+            <label>Previously Met - Null</label>
+        </rules>
+        <rules>
+            <name>myRule_9_pmetrule</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_9_pmetrule</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <label>Previously Met - Prev</label>
+        </rules>
+    </decisions>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>ISPICKVAL([Zuora__CustomerAccount__c].Subscription__r.Status__c, &apos;Active&apos;) &amp;&amp;
+CONTAINS([Zuora__CustomerAccount__c].Zuora_Status__c, &apos;Error&apos;) &amp;&amp;
+[Zuora__CustomerAccount__c].Zuora__Balance__c &gt; 0 &amp;&amp;
+ISCHANGED([Zuora__CustomerAccount__c].Zuora__Balance__c) &amp;&amp; 
+ISPICKVAL([Zuora__CustomerAccount__c].Subscription__r.Service_Jurisdiction__c, &apos;BRIGHT&apos;) &amp;&amp;
+[Zuora__CustomerAccount__c].Zuora__AutoPay__c = True</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_1</name>
+        <dataType>Boolean</dataType>
+        <expression>ISPICKVAL({!myVariable_current.Subscription__r.Status__c}, &apos;Active&apos;) &amp;&amp;
+CONTAINS({!myVariable_current.Zuora_Status__c}, &apos;Error&apos;) &amp;&amp;
+{!myVariable_current.Zuora__Balance__c} &gt; 0 &amp;&amp;
+ISCHANGED({!myVariable_current.Zuora__Balance__c}) &amp;&amp; 
+ISPICKVAL({!myVariable_current.Subscription__r.Service_Jurisdiction__c}, &apos;BRIGHT&apos;) &amp;&amp;
+{!myVariable_current.Zuora__AutoPay__c} = True</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>ISPICKVAL([Zuora__CustomerAccount__c].Subscription__r.Status__c, &apos;Active&apos;) &amp;&amp;
+CONTAINS([Zuora__CustomerAccount__c].Zuora_Status__c, &apos;Error&apos;) &amp;&amp;
+[Zuora__CustomerAccount__c].Zuora__Balance__c &gt; 0 &amp;&amp;
+ISCHANGED([Zuora__CustomerAccount__c].Zuora__Balance__c) &amp;&amp; 
+ISPICKVAL([Zuora__CustomerAccount__c].Subscription__r.Service_Jurisdiction__c, &apos;BRIGHT&apos;) &amp;&amp;
+[Zuora__CustomerAccount__c].Zuora__AutoPay__c = True</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_1_pmetrule</name>
+        <dataType>Boolean</dataType>
+        <expression>ISPICKVAL({!myVariable_old.Subscription__r.Status__c}, &apos;Active&apos;) &amp;&amp;
+CONTAINS({!myVariable_old.Zuora_Status__c}, &apos;Error&apos;) &amp;&amp;
+{!myVariable_old.Zuora__Balance__c} &gt; 0 &amp;&amp;
+ISCHANGED({!myVariable_old.Zuora__Balance__c}) &amp;&amp; 
+ISPICKVAL({!myVariable_old.Subscription__r.Service_Jurisdiction__c}, &apos;BRIGHT&apos;) &amp;&amp;
+{!myVariable_old.Zuora__AutoPay__c} = True</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>ISPICKVAL([Zuora__CustomerAccount__c].Subscription__r.Status__c, &apos;Active&apos;) &amp;&amp;
+CONTAINS([Zuora__CustomerAccount__c].Zuora_Status__c, &apos;Error&apos;) &amp;&amp;
+[Zuora__CustomerAccount__c].Zuora__Balance__c &gt; 0 &amp;&amp;
+(TODAY() - [Zuora__CustomerAccount__c].Oldest_Invoice_Due__c &lt; 10) &amp;&amp; 
+ISPICKVAL([Zuora__CustomerAccount__c].Subscription__r.Service_Jurisdiction__c, &apos;BRIGHT&apos;) &amp;&amp;
+[Zuora__CustomerAccount__c].Zuora__AutoPay__c = True</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_3</name>
+        <dataType>Boolean</dataType>
+        <expression>ISPICKVAL({!myVariable_current.Subscription__r.Status__c}, &apos;Active&apos;) &amp;&amp;
+CONTAINS({!myVariable_current.Zuora_Status__c}, &apos;Error&apos;) &amp;&amp;
+{!myVariable_current.Zuora__Balance__c} &gt; 0 &amp;&amp;
+(TODAY() - {!myVariable_current.Oldest_Invoice_Due__c} &lt; 10) &amp;&amp; 
+ISPICKVAL({!myVariable_current.Subscription__r.Service_Jurisdiction__c}, &apos;BRIGHT&apos;) &amp;&amp;
+{!myVariable_current.Zuora__AutoPay__c} = True</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>ISPICKVAL([Zuora__CustomerAccount__c].Subscription__r.Status__c, &apos;Active&apos;) &amp;&amp;
+CONTAINS([Zuora__CustomerAccount__c].Zuora_Status__c, &apos;Error&apos;) &amp;&amp;
+[Zuora__CustomerAccount__c].Zuora__Balance__c &gt; 0 &amp;&amp;
+(TODAY() - [Zuora__CustomerAccount__c].Oldest_Invoice_Due__c &lt; 10) &amp;&amp; 
+ISPICKVAL([Zuora__CustomerAccount__c].Subscription__r.Service_Jurisdiction__c, &apos;BRIGHT&apos;) &amp;&amp;
+[Zuora__CustomerAccount__c].Zuora__AutoPay__c = True</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_3_pmetrule</name>
+        <dataType>Boolean</dataType>
+        <expression>ISPICKVAL({!myVariable_old.Subscription__r.Status__c}, &apos;Active&apos;) &amp;&amp;
+CONTAINS({!myVariable_old.Zuora_Status__c}, &apos;Error&apos;) &amp;&amp;
+{!myVariable_old.Zuora__Balance__c} &gt; 0 &amp;&amp;
+(TODAY() - {!myVariable_old.Oldest_Invoice_Due__c} &lt; 10) &amp;&amp; 
+ISPICKVAL({!myVariable_old.Subscription__r.Service_Jurisdiction__c}, &apos;BRIGHT&apos;) &amp;&amp;
+{!myVariable_old.Zuora__AutoPay__c} = True</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>ISPICKVAL([Zuora__CustomerAccount__c].Subscription__r.Status__c, &apos;Active&apos;) &amp;&amp;
+CONTAINS([Zuora__CustomerAccount__c].Zuora_Status__c, &apos;Error&apos;) &amp;&amp;
+[Zuora__CustomerAccount__c].Zuora__Balance__c &gt; 0 &amp;&amp;
+(TODAY() - [Zuora__CustomerAccount__c].Oldest_Invoice_Due__c &lt; 20) &amp;&amp; 
+ISPICKVAL([Zuora__CustomerAccount__c].Subscription__r.Service_Jurisdiction__c, &apos;BRIGHT&apos;) &amp;&amp;
+[Zuora__CustomerAccount__c].Zuora__AutoPay__c = True</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_5</name>
+        <dataType>Boolean</dataType>
+        <expression>ISPICKVAL({!myVariable_current.Subscription__r.Status__c}, &apos;Active&apos;) &amp;&amp;
+CONTAINS({!myVariable_current.Zuora_Status__c}, &apos;Error&apos;) &amp;&amp;
+{!myVariable_current.Zuora__Balance__c} &gt; 0 &amp;&amp;
+(TODAY() - {!myVariable_current.Oldest_Invoice_Due__c} &lt; 20) &amp;&amp; 
+ISPICKVAL({!myVariable_current.Subscription__r.Service_Jurisdiction__c}, &apos;BRIGHT&apos;) &amp;&amp;
+{!myVariable_current.Zuora__AutoPay__c} = True</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>ISPICKVAL([Zuora__CustomerAccount__c].Subscription__r.Status__c, &apos;Active&apos;) &amp;&amp;
+CONTAINS([Zuora__CustomerAccount__c].Zuora_Status__c, &apos;Error&apos;) &amp;&amp;
+[Zuora__CustomerAccount__c].Zuora__Balance__c &gt; 0 &amp;&amp;
+(TODAY() - [Zuora__CustomerAccount__c].Oldest_Invoice_Due__c &lt; 20) &amp;&amp; 
+ISPICKVAL([Zuora__CustomerAccount__c].Subscription__r.Service_Jurisdiction__c, &apos;BRIGHT&apos;) &amp;&amp;
+[Zuora__CustomerAccount__c].Zuora__AutoPay__c = True</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_5_pmetrule</name>
+        <dataType>Boolean</dataType>
+        <expression>ISPICKVAL({!myVariable_old.Subscription__r.Status__c}, &apos;Active&apos;) &amp;&amp;
+CONTAINS({!myVariable_old.Zuora_Status__c}, &apos;Error&apos;) &amp;&amp;
+{!myVariable_old.Zuora__Balance__c} &gt; 0 &amp;&amp;
+(TODAY() - {!myVariable_old.Oldest_Invoice_Due__c} &lt; 20) &amp;&amp; 
+ISPICKVAL({!myVariable_old.Subscription__r.Service_Jurisdiction__c}, &apos;BRIGHT&apos;) &amp;&amp;
+{!myVariable_old.Zuora__AutoPay__c} = True</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>ISPICKVAL([Zuora__CustomerAccount__c].Subscription__r.Status__c, &apos;Active&apos;) &amp;&amp;
+CONTAINS([Zuora__CustomerAccount__c].Zuora_Status__c, &apos;Error&apos;) &amp;&amp;
+[Zuora__CustomerAccount__c].Zuora__Balance__c &gt; 0 &amp;&amp;
+(TODAY() - [Zuora__CustomerAccount__c].Oldest_Invoice_Due__c &lt; 30) &amp;&amp; 
+ISPICKVAL([Zuora__CustomerAccount__c].Subscription__r.Service_Jurisdiction__c, &apos;BRIGHT&apos;) &amp;&amp;
+[Zuora__CustomerAccount__c].Zuora__AutoPay__c = True</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_7</name>
+        <dataType>Boolean</dataType>
+        <expression>ISPICKVAL({!myVariable_current.Subscription__r.Status__c}, &apos;Active&apos;) &amp;&amp;
+CONTAINS({!myVariable_current.Zuora_Status__c}, &apos;Error&apos;) &amp;&amp;
+{!myVariable_current.Zuora__Balance__c} &gt; 0 &amp;&amp;
+(TODAY() - {!myVariable_current.Oldest_Invoice_Due__c} &lt; 30) &amp;&amp; 
+ISPICKVAL({!myVariable_current.Subscription__r.Service_Jurisdiction__c}, &apos;BRIGHT&apos;) &amp;&amp;
+{!myVariable_current.Zuora__AutoPay__c} = True</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>ISPICKVAL([Zuora__CustomerAccount__c].Subscription__r.Status__c, &apos;Active&apos;) &amp;&amp;
+CONTAINS([Zuora__CustomerAccount__c].Zuora_Status__c, &apos;Error&apos;) &amp;&amp;
+[Zuora__CustomerAccount__c].Zuora__Balance__c &gt; 0 &amp;&amp;
+(TODAY() - [Zuora__CustomerAccount__c].Oldest_Invoice_Due__c &lt; 30) &amp;&amp; 
+ISPICKVAL([Zuora__CustomerAccount__c].Subscription__r.Service_Jurisdiction__c, &apos;BRIGHT&apos;) &amp;&amp;
+[Zuora__CustomerAccount__c].Zuora__AutoPay__c = True</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_7_pmetrule</name>
+        <dataType>Boolean</dataType>
+        <expression>ISPICKVAL({!myVariable_old.Subscription__r.Status__c}, &apos;Active&apos;) &amp;&amp;
+CONTAINS({!myVariable_old.Zuora_Status__c}, &apos;Error&apos;) &amp;&amp;
+{!myVariable_old.Zuora__Balance__c} &gt; 0 &amp;&amp;
+(TODAY() - {!myVariable_old.Oldest_Invoice_Due__c} &lt; 30) &amp;&amp; 
+ISPICKVAL({!myVariable_old.Subscription__r.Service_Jurisdiction__c}, &apos;BRIGHT&apos;) &amp;&amp;
+{!myVariable_old.Zuora__AutoPay__c} = True</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>ISPICKVAL([Zuora__CustomerAccount__c].Subscription__r.Status__c, &apos;Active&apos;) &amp;&amp;
+CONTAINS([Zuora__CustomerAccount__c].Zuora_Status__c, &apos;Error&apos;) &amp;&amp;
+[Zuora__CustomerAccount__c].Zuora__Balance__c &gt; 0 &amp;&amp;
+(TODAY() - [Zuora__CustomerAccount__c].Oldest_Invoice_Due__c &lt; 40) &amp;&amp; 
+ISPICKVAL([Zuora__CustomerAccount__c].Subscription__r.Service_Jurisdiction__c, &apos;BRIGHT&apos;) &amp;&amp;
+[Zuora__CustomerAccount__c].Zuora__AutoPay__c = True</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_9</name>
+        <dataType>Boolean</dataType>
+        <expression>ISPICKVAL({!myVariable_current.Subscription__r.Status__c}, &apos;Active&apos;) &amp;&amp;
+CONTAINS({!myVariable_current.Zuora_Status__c}, &apos;Error&apos;) &amp;&amp;
+{!myVariable_current.Zuora__Balance__c} &gt; 0 &amp;&amp;
+(TODAY() - {!myVariable_current.Oldest_Invoice_Due__c} &lt; 40) &amp;&amp; 
+ISPICKVAL({!myVariable_current.Subscription__r.Service_Jurisdiction__c}, &apos;BRIGHT&apos;) &amp;&amp;
+{!myVariable_current.Zuora__AutoPay__c} = True</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>ISPICKVAL([Zuora__CustomerAccount__c].Subscription__r.Status__c, &apos;Active&apos;) &amp;&amp;
+CONTAINS([Zuora__CustomerAccount__c].Zuora_Status__c, &apos;Error&apos;) &amp;&amp;
+[Zuora__CustomerAccount__c].Zuora__Balance__c &gt; 0 &amp;&amp;
+(TODAY() - [Zuora__CustomerAccount__c].Oldest_Invoice_Due__c &lt; 40) &amp;&amp; 
+ISPICKVAL([Zuora__CustomerAccount__c].Subscription__r.Service_Jurisdiction__c, &apos;BRIGHT&apos;) &amp;&amp;
+[Zuora__CustomerAccount__c].Zuora__AutoPay__c = True</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_9_pmetrule</name>
+        <dataType>Boolean</dataType>
+        <expression>ISPICKVAL({!myVariable_old.Subscription__r.Status__c}, &apos;Active&apos;) &amp;&amp;
+CONTAINS({!myVariable_old.Zuora_Status__c}, &apos;Error&apos;) &amp;&amp;
+{!myVariable_old.Zuora__Balance__c} &gt; 0 &amp;&amp;
+(TODAY() - {!myVariable_old.Oldest_Invoice_Due__c} &lt; 40) &amp;&amp; 
+ISPICKVAL({!myVariable_old.Subscription__r.Service_Jurisdiction__c}, &apos;BRIGHT&apos;) &amp;&amp;
+{!myVariable_old.Zuora__AutoPay__c} = True</expression>
+    </formulas>
+    <interviewLabel>Outstanding_Balance_Failed-3_InterviewLabel</interviewLabel>
+    <label>Outstanding Balance Failed</label>
+    <processMetadataValues>
+        <name>ObjectType</name>
+        <value>
+            <stringValue>Zuora__CustomerAccount__c</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>ObjectVariable</name>
+        <value>
+            <elementReference>myVariable_current</elementReference>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OldObjectVariable</name>
+        <value>
+            <elementReference>myVariable_old</elementReference>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>RecursiveCountVariable</name>
+        <value>
+            <elementReference>RecursiveCountVariable</elementReference>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>TriggerType</name>
+        <value>
+            <stringValue>onAllChanges</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Workflow</processType>
+    <startElementReference>myPreWaitDecision_myWait_myRule_9</startElementReference>
+    <status>Active</status>
+    <variables>
+        <name>cancelWaits</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>myVariable_current</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Zuora__CustomerAccount__c</objectType>
+    </variables>
+    <variables>
+        <name>myVariable_old</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Zuora__CustomerAccount__c</objectType>
+    </variables>
+    <variables>
+        <name>myWaitEvent_myWait_myRule_3_event_0_postActionExecutionVariable</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <booleanValue>false</booleanValue>
+        </value>
+    </variables>
+    <variables>
+        <name>myWaitEvent_myWait_myRule_5_event_0_postActionExecutionVariable</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <booleanValue>false</booleanValue>
+        </value>
+    </variables>
+    <variables>
+        <name>myWaitEvent_myWait_myRule_7_event_0_postActionExecutionVariable</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <booleanValue>false</booleanValue>
+        </value>
+    </variables>
+    <variables>
+        <name>myWaitEvent_myWait_myRule_9_event_0_postActionExecutionVariable</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <booleanValue>false</booleanValue>
+        </value>
+    </variables>
+    <variables>
+        <name>RecursiveCountVariable</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <scale>2</scale>
+    </variables>
+    <waits>
+        <name>myWait_myRule_3</name>
+        <label>myWait_myRule_3</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>defaultLabel</defaultConnectorLabel>
+        <waitEvents>
+            <processMetadataValues>
+                <name>inputParameterType</name>
+                <value>
+                    <stringValue>referenced</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>myWaitEvent_myWait_myRule_3_event_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>myWaitEvent_myWait_myRule_3_event_0_postActionExecutionVariable</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myPostWaitDecision_myWaitEvent_myWait_myRule_3_event_0</targetReference>
+            </connector>
+            <eventType>DateRefAlarmEvent</eventType>
+            <inputParameters>
+                <name>TimeTableColumnEnumOrId</name>
+                <value>
+                    <stringValue>Zuora__CustomerAccount__c</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>EntityObjectId</name>
+                <value>
+                    <elementReference>myVariable_current.Id</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeOffsetUnit</name>
+                <value>
+                    <stringValue>Days</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeOffset</name>
+                <value>
+                    <numberValue>10.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeFieldColumnEnumOrId</name>
+                <value>
+                    <stringValue>Oldest_Invoice_Due__c</stringValue>
+                </value>
+            </inputParameters>
+            <label>myWaitEvent_myWait_myRule_3_event_0</label>
+        </waitEvents>
+    </waits>
+    <waits>
+        <name>myWait_myRule_5</name>
+        <label>myWait_myRule_5</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>defaultLabel</defaultConnectorLabel>
+        <waitEvents>
+            <processMetadataValues>
+                <name>inputParameterType</name>
+                <value>
+                    <stringValue>referenced</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>myWaitEvent_myWait_myRule_5_event_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>myWaitEvent_myWait_myRule_5_event_0_postActionExecutionVariable</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myPostWaitDecision_myWaitEvent_myWait_myRule_5_event_0</targetReference>
+            </connector>
+            <eventType>DateRefAlarmEvent</eventType>
+            <inputParameters>
+                <name>TimeTableColumnEnumOrId</name>
+                <value>
+                    <stringValue>Zuora__CustomerAccount__c</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>EntityObjectId</name>
+                <value>
+                    <elementReference>myVariable_current.Id</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeOffsetUnit</name>
+                <value>
+                    <stringValue>Days</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeOffset</name>
+                <value>
+                    <numberValue>20.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeFieldColumnEnumOrId</name>
+                <value>
+                    <stringValue>Oldest_Invoice_Due__c</stringValue>
+                </value>
+            </inputParameters>
+            <label>myWaitEvent_myWait_myRule_5_event_0</label>
+        </waitEvents>
+    </waits>
+    <waits>
+        <name>myWait_myRule_7</name>
+        <label>myWait_myRule_7</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>defaultLabel</defaultConnectorLabel>
+        <waitEvents>
+            <processMetadataValues>
+                <name>inputParameterType</name>
+                <value>
+                    <stringValue>referenced</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>myWaitEvent_myWait_myRule_7_event_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>myWaitEvent_myWait_myRule_7_event_0_postActionExecutionVariable</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myPostWaitDecision_myWaitEvent_myWait_myRule_7_event_0</targetReference>
+            </connector>
+            <eventType>DateRefAlarmEvent</eventType>
+            <inputParameters>
+                <name>TimeTableColumnEnumOrId</name>
+                <value>
+                    <stringValue>Zuora__CustomerAccount__c</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>EntityObjectId</name>
+                <value>
+                    <elementReference>myVariable_current.Id</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeOffsetUnit</name>
+                <value>
+                    <stringValue>Days</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeOffset</name>
+                <value>
+                    <numberValue>30.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeFieldColumnEnumOrId</name>
+                <value>
+                    <stringValue>Oldest_Invoice_Due__c</stringValue>
+                </value>
+            </inputParameters>
+            <label>myWaitEvent_myWait_myRule_7_event_0</label>
+        </waitEvents>
+    </waits>
+    <waits>
+        <name>myWait_myRule_9</name>
+        <label>myWait_myRule_9</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>defaultLabel</defaultConnectorLabel>
+        <waitEvents>
+            <processMetadataValues>
+                <name>inputParameterType</name>
+                <value>
+                    <stringValue>referenced</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>myWaitEvent_myWait_myRule_9_event_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>myWaitEvent_myWait_myRule_9_event_0_postActionExecutionVariable</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myPostWaitDecision_myWaitEvent_myWait_myRule_9_event_0</targetReference>
+            </connector>
+            <eventType>DateRefAlarmEvent</eventType>
+            <inputParameters>
+                <name>TimeTableColumnEnumOrId</name>
+                <value>
+                    <stringValue>Zuora__CustomerAccount__c</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>EntityObjectId</name>
+                <value>
+                    <elementReference>myVariable_current.Id</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeOffsetUnit</name>
+                <value>
+                    <stringValue>Days</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeOffset</name>
+                <value>
+                    <numberValue>40.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeFieldColumnEnumOrId</name>
+                <value>
+                    <stringValue>Oldest_Invoice_Due__c</stringValue>
+                </value>
+            </inputParameters>
+            <label>myWaitEvent_myWait_myRule_9_event_0</label>
+        </waitEvents>
+    </waits>
+</Flow>

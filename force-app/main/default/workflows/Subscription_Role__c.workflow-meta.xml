@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <outboundMessages>
+        <fullName>SFDC_Role</fullName>
+        <apiVersion>52.0</apiVersion>
+        <endpointUrl>https://sfdcservices.dev.brightmls.com/role</endpointUrl>
+        <fields>Id</fields>
+        <fields>Role__c</fields>
+        <fields>Service_Jurisdiction__c</fields>
+        <fields>Subscription__c</fields>
+        <fields>SystemModstamp</fields>
+        <includeSessionId>true</includeSessionId>
+        <integrationUser>mris_sf_api@mris.net</integrationUser>
+        <name>SFDC Role</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <outboundMessages>
+        <fullName>bright_role_obm</fullName>
+        <apiVersion>40.0</apiVersion>
+        <endpointUrl>http://talend.dev.brightmls.com/services/SFSubscriptionRole</endpointUrl>
+        <fields>Id</fields>
+        <fields>Role__c</fields>
+        <fields>Service_Jurisdiction__c</fields>
+        <fields>Subscription__c</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>mris_sf_api@mris.net</integrationUser>
+        <name>bright_role_obm</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>bright_role_create_update</fullName>
+        <actions>
+            <name>SFDC_Role</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Subscription_Role__c.Service_Jurisdiction__c</field>
+            <operation>equals</operation>
+            <value>BRIGHT</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

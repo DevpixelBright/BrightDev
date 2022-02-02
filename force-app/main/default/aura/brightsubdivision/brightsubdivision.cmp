@@ -1,0 +1,87 @@
+<aura:component>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <ltng:require styles="{!$Resource.headeras }"></ltng:require>
+    <ltng:require styles="{!$Resource.bodyas }"></ltng:require>
+    <aura:attribute name="selected" type="String" default="Subdivision"/>
+    <aura:attribute name="options" type="List" default="[
+                                                        {'label': 'Add a new Subdivision', 'value': 'Subdivision'},
+                                                        {'label': 'Add a new Building Name', 'value': 'Building'}
+                                                        ]"/>
+    <div class="c-container">
+        <div class="fullpage slds-scope">
+            <div class="slds-grid slds-wrap">
+                <lightning:layout multipleRows="true">
+                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                        <div class="new-containerpage header-new-containerpage">
+                            <div class="slds-container--x-large new-container">
+                                <c:headeras />
+                            </div>
+                        </div>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                        
+                        <lightning:layout>
+                            <div class="new-containerpage">
+                                <div class="slds-container--x-large new-container">
+                                    
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                        <div class="page-section page-main">
+                                            
+                                            <div class="dev dev1">
+                                                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                                                    <h2>Subdivision or Building Name Request</h2>
+                                                    
+                                                    <p>If the Subdivision or Building Name is not available for the listing you are entering in Bright, please submit this request form for Bright Staff to review and process. Select one of name options below to begin this request form.</p>
+                                                    
+                                                    <lightning:radioGroup name="Subdivision radioGroup"
+                                                                          options="{! v.options }"
+                                                                          value="{!v.selected}"
+                                                                          type="radio"/>     
+                                                    
+                                                    <!--<fieldset class="slds-form-element">
+                                                        
+                                                        <div class="slds-form-element__control">
+                                                            <span class="slds-radio">
+                                                                <input type="radio" id="radio-43" value="radio-43" name="default" checked="" />
+                                                                <label class="slds-radio__label" for="radio-43">
+                                                                    <span class="slds-radio_faux"></span>
+                                                                    <span class="slds-form-element__label">Add a new Subdivision</span>
+                                                                </label>
+                                                            </span>
+                                                            <span class="slds-radio">
+                                                                <input type="radio" id="radio-44" value="radio-44" name="default" />
+                                                                <label class="slds-radio__label" for="radio-44">
+                                                                    <span class="slds-radio_faux"></span>
+                                                                    <span class="slds-form-element__label">Add a new Building Name</span>
+                                                                </label>
+                                                            </span>
+                                                        </div>
+                                                    </fieldset>-->
+                                                    
+                                                    <div class="height"></div>  
+                                                    <lightning:button class="brand" variant="brand " label="Continue" title="Brand action"  />
+                                                </lightning:layoutItem>
+                                                
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                    </lightning:layoutItem>
+                                </div>
+                            </div>
+                        </lightning:layout>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                        <div class="new-containerpage footer-new-containerpage">
+                            <div class="slds-container--x-large new-container">
+                                <c:footeras />
+                                
+                            </div>
+                        </div>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </div>
+        </div>
+        
+    </div>
+</aura:component>

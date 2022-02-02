@@ -1,0 +1,38 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" lightningstylesheets="true">
+    <apex:composition template="Communities_Base">
+        
+        <apex:define name="content">
+            <c:Bootstrap_Resources />
+            
+            <div class="jumbotron landing_instructions">
+                <p>MRIS is committed to helping our customers use our tools and services to their full potential. If you have a question or concern about your MRIS subscription or specific MRIS products, you’ve come to the right place.</p>
+            </div>
+            
+            <div class="row action-panels">
+                <apex:outputPanel layout="none" rendered="{!$Label.MRIS_Communities_Enable_ChatterAnswers == 'true'}" >
+                    <div class="col-sm-6 col-md-4">
+                        <a href="Communities_Chatter_Answers#!/feedtype=POPULAR&dc=All&criteria=ALLQUESTIONS">
+                            <h4><i class="fa fa-comment-o fa-2x" style="top: -1px;"></i>Chatter Q&amp;A</h4>
+                            <p>Sometimes the most helpful advice can come from your fellow real estate professionals. Post your questions here for other MRIS subscribers to answer.</p>
+                        </a>
+                    </div>
+                </apex:outputPanel>
+                <div class="col-sm-6 col-md-4">
+                    <a href="Communities_Cases_View">
+                        <h4><i class="fa fa-archive fa-2x"></i>View My Cases</h4>
+                        <p>Have you previously submitted a case and want to check on its status? View your submitted cases here.</p>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <a href="Communities_Cases_Create">
+                        <h4><i class="fa fa-envelope-o fa-2x"></i>Submit New Case</h4>
+                        <p>Do you have a question about your subscription? Experiencing a technical issue with an MRIS product? Submit a case to the MRIS Support Center.</p>
+                    </a>
+                </div>
+            </div>
+
+            <script>markOptionPanel("support")</script>
+        </apex:define>
+
+    </apex:composition> 
+</apex:page>

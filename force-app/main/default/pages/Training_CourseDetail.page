@@ -1,0 +1,366 @@
+<apex:page id="thePage" sidebar="false" showheader="false" controller="Training_CourseDetailController" cache="false" lightningstylesheets="true">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/angular.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/ui-bootstrap-tpls-0.12.0.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.AngularJsTable,'/ng-table.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.AngularJsTable,'/ng-table.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.DataArchive_Library,'js/jquery.min.js')}"/>
+    <c:Bootstrap_Resources />
+    <apex:stylesheet value="{!URLFOR($Resource.BT_Styling,'style.css')}"/>
+    <c:Training_Styles />
+
+    <apex:form id="theFM">
+    <apex:outputPanel id="test">
+        <div id="ContentContainer" class="classes ng-cloak " ng-app="first" ng-controller="firstcontroller"><!--class="course-detail ng-cloak "-->
+            <h2>{{course.Title__c}} | <b>{{course.AvailableDeliveryMethods__c}}</b></h2>
+            <div class="course-description">{{course.Description__c}}</div>
+            <div class="no-classes" ng-show="totalClasses <= 0">No Classes Available</div>
+            <div class="class-listing" ng-show="totalClasses > 0">
+                <div class="class-entry" ng-class="{'closed': (class.btClass.SeatsRemaining__c == 0 || !class.isAvailable)}" ng-repeat="class in tableParams.data">
+                    <div class="class-entry-date">{{class.classDate}}</div>
+                    <div class="class-entry-title"><a class="title-anchor" href="{!$Label.LearnBrightMlsCommURL}/classdetail?classId={{class.btClass.Id}}" >{{class.btClass.Title__c}}</a></div>
+                    <div class="class-entry-seats" ng-show="class.isAvailable">{{class.btClass.SeatsRemaining__c}} seat(s) available</div>
+                    <div class="class-entry-seats" ng-show="!class.isAvailable">0 seat(s) available</div>
+                    <a class="class-entry-registration" href="{!$Label.LearnBrightMlsCommURL}/classdetail?classId={{class.btClass.Id}}" target="_top">
+                        View Details
+                    </a>
+                    
+                    <div class="class-entry-type">{{class.btClass.DeliveryMethod__c}}</div>
+                    <div class="class-entry-location" ng-show="class.btClass.DeliveryMethod__c == 'In-Person' || class.btClass.DeliveryMethod__c == 'Live'"> {{class.venueAddress}} </div>
+                    <div class="class-entry-time" ng-show="class.classDate != null">{{class.classStartTime}} - {{class.classEndTime}}</div>
+                    <div class="class-entry-description">{{class.btClass.AdditionalDescription__c}}</div>
+                </div>
+                <table style="display: none;" ng-table="tableParams"><td ng-repeat="x in $data"></td></table>
+            </div>
+            <!--
+            <div class="downcourse ng-cloak">                
+                <div class="middlecourse">
+                    <div class="innercourse">
+                        <div class="pointer-class">
+                            <h2>Classes <span>({{totalClasses}})</span></h2>
+                            <div class="btn-radio">
+                                <h4>Show:</h4>
+                                <div class="radio-item">
+                                    <input type="radio" id="ritema" name="ritem" value="all" ng-model="check" ng-change="results()"/> 
+                                    <label for="ritema" id="labelall" >All</label>
+                                </div>
+                                
+                                <div class="radio-item">
+                                    <input type="radio" id="ritemb" name="ritem" value="available" ng-model="check" ng-change="results()"/>
+                                    <label for="ritemb" id="labelavailable">Available</label>
+                                </div>                      
+                            </div>
+                        </div>
+                        <table id="table" class="table" ng-table="tableParams">
+                            <tr ng-repeat="cd in $data">
+                                <td>
+                                    <div class="innercoursebox1">
+                                        <div class="inner-text1" style="width:80%;">
+                                            <apex:commandLink action="/learnbrightmls/s/classes?classId={{cd.btClass.Id}}"><h3>{{cd.btClass.Title__c}}</h3></apex:commandLink>
+                                            <a href="/learnbrightmls/s/classdetail?classId={{cd.btClass.Id}}" target="_top"><h3>{{cd.btClass.Title__c}}</h3></a>
+                                            <ul class="indiviual-point"> 
+                                                <li><label>Delivery: </label>
+                                                    <p>{{cd.btClass.DeliveryMethod__c}}</p>
+                                                </li>   
+                                                <li><label>Duration:</label>
+                                                    <p>{{cd.durationinhours}}</p>
+                                                </li> 
+                                                <li class="delivery"><label>Location: </label>
+                                                    <p>{{cd.btClass.Venue__r.Street__c}} {{cd.btClass.Venue__r.City__c}} {{cd.btClass.Venue__r.State__c}}</p>
+                                                </li>
+                                                <li class="delivery"><label>Date: </label>
+                                                    <p>{{cd.classDate}}, {{cd.classStartTime}} - {{cd.classDate}}, {{cd.classEndTime}}</p>
+                                                </li> 
+                                            </ul> 
+                                            <div class="full-view-width">
+                                                <p>{{cd.btClass.AdditionalDescription__c}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="inner-boximg1" style="text-align: center;">
+                                            <h6 ng-show="cd.isAvailable">{{cd.btClass.SeatsRemaining__c}} Seats available</h6>
+                                            <h6 ng-show="!cd.isAvailable" style="color:gray;">No Seats available</h6>
+
+                                             
+                                            <div ng-show="!cd.isWatchitAgain">
+                                                <a href="" style="cursor:pointer;" ng-show="cd.isRegistration && cd.isAvailable" ng-click="register(cd.btClass.Id, 'reg')" >Register</a>
+                                                <a href="" style="cursor:pointer;" ng-show="cd.isCancelation" ng-click="cancelRegistration(cd.btClass.Id)" >Cancel</a>
+                                                <a href="" style="cursor:pointer;" ng-show="cd.isAddtoClasses && cd.isAvailable" ng-click="register(cd.btClass.Id, 'addcls')" >Add to My Courses</a>
+                                            </div>
+                                            
+                                            <div class="inner-boximgreg" style="text-align: center;" ng-show="cd.isWatchitAgain">
+                                                <a href="{{cd.btClass.PostDeliveryRecording__c}}" style="cursor:pointer;" >Watch it again</a> ng-click="{{cd.btClass.PostDeliveryRecording__c}}"
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <center>
+                    
+                        <div id="cancelConfirmId" class="cancelConfirmPopup" ng-show="cancelConf">
+                            <div class="newpopup">
+                                <div class="alert alert-info" >
+                                    <div style="display:block;">
+                                        <img style="margin: 5px 20px 20px 0;" src="{!URLFOR($Resource.BT_Styling,'/images/mask.png')}" width="35" height="35" alt=""/>
+                                        <label>Are you sure you want to cancel your registration?</label>
+                                    </div>
+                                    <div style="clear:both;"></div>
+                                    <div style="display:block;">
+                                        <a class="btn keepyes" ng-click="closeCancelConfirm()" >No, Keep me registered</a>
+                                        <a style="width:182px;" class="btn keepcancel" ng-click="cancelConfirmed()">Yes, I want to cancel</a>
+                                    </div>
+                                    <div style="clear:both;"></div>
+                                </div>
+                            </div>
+                        </div>
+                            
+                        <div id="successCancelId" class="cancelConfirmPopup" ng-show="successCancel">
+                            <div>
+                                <img src="{!URLFOR($Resource.BT_Styling,'/images/mask2.png')}" width="50" height="50" alt=""/>
+                                <label ng-show="cancelMsg">Your registration has been cancelled</label>
+                                <label ng-show="succMsg">You registered successfully</label>
+                            </div>
+                            
+                            <div>
+                                <a class="btn keepok" ng-click="successCancel = false;" >Ok</a>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        <div id="registerConfirmId" class="cancelConfirmPopup" ng-show="registrationConf" >
+                            <div class="newpopup">
+                                <div class="alert alert-info" >
+                                    <div style="display:block;">
+                                        <img style="margin: 5px 20px 20px 0;" src="{!URLFOR($Resource.BT_Styling,'/images/mask.png')}" width="35" height="35" alt=""/>
+                                        <label ng-show="regConfirmMsg">Are you sure you want to register?</label>
+                                        <label ng-show="!regConfirmMsg">Are you sure you want to add this Class?</label>
+                                    </div>
+                                    <div style="clear:both;"></div>
+                                    <div style="display:block;">                            
+                                        <a class="btn keepyes" ng-click="closeRegistrationConfirm()" >No, don't register</a>
+                                        <a style="width:182px;" class="btn keepcancel" ng-click="registrationConfirmed()">Yes, I want to register</a>
+                                    </div> 
+                                    <div style="clear:both;"></div>
+                                </div>                           
+                            </div>
+                        </div>
+
+                        <div id="successCancelId" class="cancelConfirmPopup" ng-if="successRegistration == true" ng-show="successRegistration == true">
+                            <div>
+                                <img src="{!URLFOR($Resource.BT_Styling,'/images/mask2.png')}" width="50" height="50" alt=""/>
+                                <label >You registered successfully</label>
+                            </div>
+                            <div>
+                                <a class="btn keepok" ng-click="successRegistration = false;" >Ok</a>
+                            </div>
+                        </div>
+                        
+                    </center>
+                </div>
+            </div>
+            -->
+            
+            <script>
+                var app = angular.module('first', ['ngTable']).
+                controller('firstcontroller', function($scope, $filter, NgTableParams) {
+                        
+                    var data = [];
+                    $scope.finalWrap = [];
+                    $scope.check = 'all';
+                    $scope.totalClasses;
+                    $scope.cancelConf = false;
+                    $scope.successCancel = false;
+                    $scope.registrationConf = false;
+                    $scope.successRegistration = false;
+                    $scope.classId;
+                    
+                    $scope.course;
+                    var courseRecord = '{!courseRecordJson}';
+                    if(courseRecord){
+                        //$scope.course = JSON.parse('{!courseRecordJson}');
+                        courseRecord = escapeSpecialChars(courseRecord);
+                        $scope.course = JSON.parse(courseRecord);
+                        console.log('---$course--',$scope.course);
+                    }
+                    
+                    $scope.isAuthenticatedUser = '{!isAuthenticatedUser}';
+                    $scope.finalWrap = JSON.parse('{!courseClassesjson}');
+                    data = $scope.finalWrap;
+                    $scope.totalClasses = $scope.finalWrap.length;
+                    console.log('---$scope.finalWrap-->'+$scope.finalWrap.length+'-->',$scope.finalWrap[0]);
+                    $scope.regConfirmMsg;
+                        
+                    /* Ng-table initiation */
+                    $scope.tableParams = new NgTableParams({
+                        page: 1,
+                        count: 25,
+                        sorting: {
+                            isAvailable: 'asc'
+                        }
+                    }, {
+                        counts: [],
+                        total: data.length,
+                        getData: function($defer, params) {
+                            console.log(params);
+                            var searchedData = searchData();
+                            console.log('---searchedData--->',searchedData);
+                            params.total(searchedData.length);
+                            
+                            //var orderByExpression = ["classDate","classStartTime", "btClass.Title__c", "btClass.SeatsRemaining__c"];
+                            var orderByExpression = ["btClass.StartTime__c", "btClass.Title__c", "btClass.SeatsRemaining__c"];
+                            //var orderedData = params.sorting() ? $filter('orderBy')(searchedData , params.orderBy()) : searchedData;
+                            var orderedData = $filter('orderBy')(searchedData , orderByExpression, false);
+                            
+                            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                        }
+                    });
+                
+                    /* $scope.$watch("search", function () {
+                        $scope.tableParams.reload();
+                    }); */
+                
+                    var searchData = function(){
+                        if($scope.search){
+                            return $filter('filter')(data, $scope.search, true);
+                        }
+                        return data;
+                    }
+                    
+                    
+                    $scope.results = function() {
+                        console.log('---$scope.check-->'+$scope.check);
+                        
+                        if($scope.check && $scope.check == 'all' ){
+                            data = $scope.finalWrap;
+                        }
+                        else if($scope.check && $scope.check == 'available'){
+                            data = [];
+                            for(var i = 0; i < $scope.finalWrap.length; i++){
+                                console.log('--$scope.finalWrap[i].isAvailable--->'+$scope.finalWrap[i].isAvailable);
+                                //if($scope.finalWrap[i].btClass.SeatsRemaining__c && $scope.finalWrap[i].btClass.IsActive__c)
+                                if($scope.finalWrap[i].isAvailable == true)
+                                    data.push($scope.finalWrap[i]);
+                            }  
+                        }
+                        
+                        $scope.totalClasses = data.length;
+                        $scope.tableParams.reload();
+                        console.log(data);
+                    }
+                
+                    // cancellation functions
+                    $scope.cancelRegistration = function(classId){
+                        console.log('---temp--'+classId);
+                        if($scope.isAuthenticatedUser == 'true'){
+                            $scope.cancelConf = true;
+                            $scope.classId = classId;
+                            freezePopup();
+                            console.log('---$scope.classId-->'+$scope.classId);
+                        }
+                        else{
+                            //window.top.location.href = 'https://accounts.brightmls.com/identity/XUI/#login/&realm=/&forward=true&spEntityID=https%3A%2F%2Fwww.brightmls.com%2Fsaml&goto=%2FSSOPOST%2FmetaAlias%2Fidp%3FReqID%3D_a692e615538801ddc2dc1ae6dc073da04ebe436da1%26index%3Dnull%26acsURL%3Dhttps%253A%252F%252Fwww.brightmls.com%252Fsaml%252Fmodule.php%252Fsaml%252Fsp%252Fsaml2-acs.php%252Faccounts_prod%26spEntityID%3Dhttps%253A%252F%252Fwww.brightmls.com%252Fsaml%26binding%3Durn%253Aoasis%253Anames%253Atc%253ASAML%253A2.0%253Abindings%253AHTTP-POST&AMAuthCookie=';
+                             window.top.location.href = '{!$Label.CSODLogin_Redirection_URL}';
+                        }
+                    
+                    }
+                    $scope.cancelConfirmed = function(){
+                        console.log('---$scope.classId-->'+$scope.classId);
+                        var clsId = $scope.classId;
+                        callCancel(clsId);
+                    }
+                    $scope.closeCancelConfirm = function(){
+                        console.log('---$scope.classId-->'+$scope.classId);
+                        $scope.cancelConf = false;
+                        releasePopup();
+                    }
+                
+                    // registration functions
+                    $scope.register = function(classId, regbutton){
+                    
+                        console.log('---regbutton---'+regbutton);
+                        if($scope.isAuthenticatedUser == 'true'){
+                            freezePopup();
+                            $scope.registrationConf = true;
+                            $scope.classId = classId;
+                        
+                            if(regbutton == 'reg')
+                                $scope.regConfirmMsg = true;
+                            else
+                                $scope.regConfirmMsg = false;
+                        }
+                        else{
+                            //window.top.location.href = 'https://accounts.brightmls.com/identity/XUI/#login/&realm=/&forward=true&spEntityID=https%3A%2F%2Fwww.brightmls.com%2Fsaml&goto=%2FSSOPOST%2FmetaAlias%2Fidp%3FReqID%3D_a692e615538801ddc2dc1ae6dc073da04ebe436da1%26index%3Dnull%26acsURL%3Dhttps%253A%252F%252Fwww.brightmls.com%252Fsaml%252Fmodule.php%252Fsaml%252Fsp%252Fsaml2-acs.php%252Faccounts_prod%26spEntityID%3Dhttps%253A%252F%252Fwww.brightmls.com%252Fsaml%26binding%3Durn%253Aoasis%253Anames%253Atc%253ASAML%253A2.0%253Abindings%253AHTTP-POST&AMAuthCookie=';
+                            window.top.location.href = '{!$Label.CSODLogin_Redirection_URL}';
+                        }
+                    }
+                
+                    $scope.registrationConfirmed = function(){
+                        console.log('---$scope.classId-->'+$scope.classId);
+                        var clsId = $scope.classId;
+                        callRegister(clsId);
+                    }
+                    $scope.closeRegistrationConfirm = function(){
+                        releasePopup();
+                        console.log('---$scope.classId-->'+$scope.classId);
+                        $scope.registrationConf = false;
+                    }
+                
+                    //adjustContainer();
+                });
+             
+                function freezePopup() {
+                    window.parent.scrollTo(0, 0);
+                    $('body', window.parent.document).css('height', '100%');
+                    $('body', window.parent.document).css('overflow', 'hidden');
+                    $('#popup_header_background', window.parent.document).show();             
+                }
+                
+                function releasePopup() {
+                    window.parent.scrollTo(0, 0);
+                    $('body', window.parent.document).css('height', '');
+                    $('body', window.parent.document).css('overflow', '');
+                    $('#popup_header_background', window.parent.document).hide();             
+                }             
+
+                function adjustContainer() {
+                    setInterval(function() { 
+                        if(screen.width < window.innerWidth){
+                           $('iframe', window.parent.document).height((document.getElementById('ContentContainer').scrollHeight+100) + 'px');                            
+                        } else {
+                           $('iframe', window.parent.document).height(document.getElementById('ContentContainer').scrollHeight + 'px');
+                        }                       
+                    }, 500);
+                }
+                     
+                
+                function refreshCourseDetails() {
+                    window.top.location.reload();   
+                }
+                
+                function escapeSpecialChars(jsonString) {
+                    return jsonString.replace(/\n/g, "\\n")
+                    .replace(/\r/g, "\\r")
+                    .replace(/\t/g, "\\t")
+                    .replace(/\f/g, "\\f");
+                }
+                
+                
+                $( window ).resize(function() {
+                    adjustContainer(); 
+                });
+
+            </script>
+        </div>
+    </apex:outputPanel>
+    <apex:actionFunction name="callRegister" action="{!registerClass}" oncomplete="refreshCourseDetails()">
+        <apex:param name="classId" value=""/>
+    </apex:actionFunction>
+    <apex:actionFunction name="callCancel" action="{!cancelClass}" oncomplete="refreshCourseDetails()" >
+        <apex:param name="classId" value=""/>
+    </apex:actionFunction>
+    </apex:form>
+</apex:page>

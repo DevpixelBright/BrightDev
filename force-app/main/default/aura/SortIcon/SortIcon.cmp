@@ -1,0 +1,18 @@
+<aura:component >
+    <aura:attribute name="sortColumn" type="String" default="Name"/>
+    <aura:attribute name="descending" type="Boolean" default="true"/>
+    <aura:attribute name="column" type="String" default="Name"/>
+    
+	<aura:if isTrue="{!v.sortColumn == v.column}">
+        <aura:if isTrue="{!v.descending}">
+            <lightning:icon iconName="utility:down" title="Descending Order" size="xx-small"/>
+            <aura:set attribute="else">
+                <lightning:icon iconName="utility:up" title="Ascending Order" size="xx-small"/>
+            </aura:set>
+        </aura:if>
+        <aura:set attribute="else">
+           <img class="sort" src="{!$Resource.acc + '/acc/images/sort1.png'}" />
+            
+        </aura:set>
+    </aura:if>
+</aura:component>

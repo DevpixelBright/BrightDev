@@ -1,0 +1,195 @@
+@font-face {
+    font-family: 'LatoBold';
+    src: url(/resource/LatoBold);
+}
+@font-face {
+    font-family: 'LatoRegular';
+    src: url(/resource/LatoRegular);
+}
+.THIS.slds-scope{ background:#fff;}
+
+.THIS .fullpage { background:#f2f3f7;  margin:0;  padding:0;}
+.THIS .slds-box_x-small{ padding:0; border:none;}
+/*header css start*/
+.THIS .header-part{ display: inline-block; padding:0;line-height: 40px; vertical-align: top;}
+.THIS .header-part .logo img{ width:140px;}
+.THIS .new-container { margin: 0 auto; border: none; width: 100%;
+    width: -moz-available;          /* WebKit-based browsers will ignore this. */
+    width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+    width: fill-available;}
+.THIS .new-containerpage { margin: 0 auto;border-bottom:1px solid #ccc; width: 100%;
+    width: -moz-available;          /* WebKit-based browsers will ignore this. */
+    width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+    width: fill-available;}
+.THIS .header-full{ padding:14px 0;}
+.THIS .header-part .bar h2{ color: #00b0b9;font-size: 20px;font-family:LatoBold;} 
+.THIS .header-part .bar1 h2{ color: #282828;} 
+.THIS .bar-title-box{display: inline-block;}
+.THIS .bar-title{ display:block;line-height: normal;}
+.THIS .bar-title h5{ display:inline-block; color:#333; font-family:LatoRegular; font-size:13px;}
+.THIS .bar-title h6{color:#333; font-family:LatoRegular; font-size:13px; text-align: right;}
+.THIS .call{ margin:0; padding:0;text-align: right;line-height: normal;}
+.THIS .call h4{ color:#333; font-family:LatoRegular; font-size:13px; margin:12px 54px 5px 0;}
+.THIS .call h3{ color:#282828; font-family:LatoRegular; font-size:18px;}
+.THIS .middleone{vertical-align: middle;text-align: center;  margin: 10px 0 0 0;}
+/*header css end*/
+/*footer css start*/
+.THIS .footer-full{ padding:26px 0; margin:0;}
+.THIS .footerbottom{background: #212b3d;width: 100%;}
+.THIS .footer-part{ margin:0; padding:0; display:inline-block;}
+.THIS .footer-part p{color:#a8b3c6; margin:0 ;font-size:14px; font-family:LatoRegular;  display:inline-block; }
+.THIS .footer-part p a{color:#a8b3c6; margin:0 40px 0 0 ;font-size:14px; font-family:LatoRegular;  display:inline-block; }
+.THIS .footer-part p.copy{   text-align: right;    display: block;}
+/*footer css end*/
+/*content css start*/
+.THIS .newapplication{ margin:20px 0; padding:0;}
+.THIS .newapplication h2{ margin:0 0 20px; padding:0; color:#000;font-family: 'LatoBold'; font-size:20px; text-align:left;}
+.THIS .newapplication .Edit{ display:inline-block; margin:0;padding:0;}
+.THIS .newapplication .Edit1{ text-align:right;}
+.THIS .newapplication .Edit h2{ margin:0 0 20px; padding:0; color:#000;font-family: 'LatoBold'; font-size:20px; text-align:left;}
+.THIS .newapplication .Edit .slds-button_brand{  border-radius:5px; height:auto; margin:0 0 26px 0 ;    min-width: auto; color:#fff;border:1px solid #FE4602; font-size:14px; padding:5px 20px; background:#FE4602; font-family:LatoRegular;}
+.THIS .newapplication .Edit .slds-button_brand:hover{border:1px solid #FE4602;color:#FE4602;background:#fff;}
+.THIS .newapplication .Edit .slds-button_brand:active{border:1px solid #FE4602;color:#FE4602;background:#fff;}
+.THIS .newapplication .Edit .slds-button_brand:focus{border:1px solid #FE4602;color:#fff;background:#FE4602;outline: 0; box-shadow: none;}
+.THIS .newapplication1{ margin:0; padding:0; display:inline-block; vertical-align: top;}
+.THIS .newapplication1 h3{ margin:0 0 10px; padding:0; color:#fe4602;font-family: 'LatoBold';font-size:14px;text-align:left; }
+.THIS .newapplication3 h3{  margin:0 0 0; padding:0; color:#666; font-family: 'LatoRegular';font-size:14px;text-align:left; }
+.THIS .newapplication3 h4{ margin:0 0 0; padding:0; color:#000; font-family: 'LatoRegular';font-size:14px;text-align:left; width:75%; }
+.THIS .newapplication31 h4{width:100%; }
+.THIS .newapplication2{vertical-align: top; display:inline-block; margin:0 0 0;}
+.THIS .newapplication3{vertical-align: top; display:inline-block; margin:0 0 0px;}
+.THIS .newapplication4{vertical-align: top; display:inline-block; margin:0 0 10px;padding: 0 20px 0 0;}
+.THIS .newapplication54{vertical-align: top; display:inline-block; margin:0 0 22px;padding: 0 0px 0 0;}
+.THIS .newapplication41{ padding:0;}
+.THIS .newapplication41 h4 .slds-input{ padding:0 10px 0 0;}
+.THIS .agentname1{ text-align:right;}
+.THIS .newapplication3 h4 label{ display:none;}
+.THIS .newapplication3 h4 .slds-input:focus {border: 1px solid #ccc;
+    outline: none;
+    box-shadow: none;}
+.THIS .agentname{ display:inline-block;}
+.THIS .agentname h4 .slds-input {
+    height: inherit;margin:0;
+    border: 1px solid #ccc;
+    padding: 2px 4px;
+    color: #000;
+    background: #fff;
+    border-radius: 0;
+    font-size: 14px;
+    font-family: 'LatoRegular';font-size:14px;
+}
+.THIS .newapplication3 h4 .slds-select  {
+    height: inherit;margin:0;
+    border: 1px solid #ccc;
+    padding: 2px 4px;
+    color: #000;
+    background: #fff;
+    border-radius: 0;line-height: 1.875rem;
+    font-size: 14px;
+    font-family: 'LatoRegular';font-size:14px;
+}
+.THIS .requiredline h4 .slds-select{
+    border-left: 2px solid #ff3334;
+}
+.THIS .requiredline h4 .slds-input {
+    border-left: 2px solid #ff3334 !important;
+}
+.THIS .requiredline h4 .slds-select:focus{ border-left: 2px solid #ff3334;}
+.THIS .requiredline h4 .slds-input:focus{ border-left: 2px solid #ff3334;}
+.THIS .requiredline h4 .slds-select:active{ border-left: 2px solid #ff3334;}
+.THIS .requiredline h4 .slds-input:active{ border-left: 2px solid #ff3334;}
+
+.THIS .newapplication3 h4 .slds-select:focus{ outline:none;box-shadow: none;}
+.THIS .agentname1{ text-align:right;}
+.THIS .agentname img{ margin:0 0 0 5px; height:35px; text-align:left;}
+.THIS .newapplication3 h4 .slds-input {
+    height: inherit;margin:0;
+    border: 1px solid #ccc;
+    padding: 2px 4px;
+    color: #000;
+    background: #fff;
+    border-radius: 0;
+    font-size: 14px;
+    font-family: 'LatoRegular';font-size:14px;
+}
+
+.THIS .succesmsg .rejected{ background:#f2dede; margin:20px 0 0; padding:10px 10px; border-radius:5px;}
+.THIS .succesmsg .rejected p img{ margin:0 10px 0 0; padding:0;}
+.THIS .succesmsg .rejected p{ margin:0; padding:0; color:#000; font-size:14px;font-family: 'LatoRegular';}
+.THIS .succesmsg .approved{ background:#dff0d8; margin:20px 0 0; padding:10px 10px; border-radius:5px;}
+.THIS .succesmsg .approved p img{ margin:0 10px 0 0; padding:0;}
+.THIS .succesmsg .approved p{ margin:0; padding:0; color:#000; font-size:14px;font-family: 'LatoRegular';}
+.THIS .succesmsg .info{ background:#cee8fe; margin:20px 0 0; padding:10px 10px; border-radius:5px;}
+.THIS .succesmsg .info p img{ margin:0 10px 0 0; padding:0;}
+.THIS .succesmsg .info p{ margin:0; padding:0; color:#000; font-size:14px;font-family: 'LatoRegular';}
+.THIS .timepoint .slds-button_brand .ezjoinarrow{position: absolute;
+    right: 14px;}
+.THIS .timepoint .cancelpoint{    vertical-align: top;
+    text-align: center;
+    display: initial;  border-radius:0px; height:auto; margin:0 0 26px 20px ;    min-width: auto; color:#FE4602;border:1px solid #fff; font-size:14px; padding:5px; background:#fff; font-family:LatoRegular;}
+.THIS .timepoint .cancelpoint:hover{border:1px solid #fff;color:#000;background:#fff;}
+.THIS .timepoint .cancelpoint:active{border:1px solid #fff;color:#000;background:#fff;}
+.THIS .timepoint .cancelpoint:focus{border:1px solid #fff;color:#FE4602;background:#fff;outline: 0; box-shadow: none;}
+.THIS .timepoint .slds-button_brand{  border-radius:5px; height:auto; margin:0 0 26px 0 ;    min-width: 160px; color:#fff;border:1px solid #FE4602; font-size:14px; padding:5px 20px; background:#FE4602; font-family:LatoRegular;}
+.THIS .timepoint .slds-button_brand:hover{border:1px solid #FE4602;color:#FE4602;background:#fff;}
+.THIS .timepoint .slds-button_brand:active{border:1px solid #FE4602;color:#FE4602;background:#fff;}
+.THIS .timepoint .slds-button_brand:focus{border:1px solid #FE4602;color:#FE4602;background:#fff;outline: 0; box-shadow: none;}
+.THIS .timepoint .slds-button_brand2{  border-radius:5px; height:auto; margin:0 20px 26px 0 ;vertical-align: top; min-width: auto; color:#FE4602;border:1px solid #FE4602; font-size:14px; padding:5px 20px; background:#fff; font-family:LatoRegular;}
+.THIS .timepoint .slds-button_brand2:hover{border:1px solid #FE4602;color:#fff;background:#FE4602;}
+.THIS .timepoint .slds-button_brand2:active{border:1px solid #FE4602;color:#fff;background:#FE4602;}
+.THIS .timepoint .slds-button_brand2:focus{border:1px solid #FE4602;color:#FE4602;background:#fff;outline: 0; box-shadow: none;}
+.THIS .succesmsg1{display:inline-block;    vertical-align: text-bottom;}
+.THIS .succesmsg1 .slds-button_brand{  border-radius:5px;     float: right;height:auto; margin:0 0 0 0 ;vertical-align: top; min-width: auto; color:#FE4602;border:1px solid #FE4602; font-size:14px; padding:5px 20px; background:#fff; font-family:LatoRegular;}
+.THIS .succesmsg1 .slds-button_brand:hover{border:1px solid #FE4602;color:#FE4602;background:#fff;}
+.THIS .succesmsg1 .slds-button_brand:active{border:1px solid #FE4602;color:#FE4602;background:#fff;}
+.THIS .succesmsg1 .slds-button_brand:focus{border:1px solid #FE4602;color:#FE4602;background:#fff;outline: 0; box-shadow: none;}
+.THIS .timepoint .spaceline2 {margin: 26px 0; border-bottom: 1px solid #ccc;}
+.THIS .slds-modal__container { width: 35%; }
+.THIS .slds-modal__container .slds-modal__footer {padding: .5em 2rem 2rem; text-align:left;}
+.THIS .slds-modal__container .slds-p-around_medium{}
+.THIS .slds-button_neutral1{border:1px solid #fff;padding-left: 10px;padding-right: 10px; }
+.THIS .slds-button_neutral:hover{ background:#fff;}
+.THIS .slds-text-heading_medium{padding-left: 1rem; text-align:left;}
+/*footer css end*/
+
+.THIS .Successful{ margin:8% auto 10%; text-align:center;}
+.THIS .Successful img{}
+.THIS .Successful h3{font-family:LatoBold; font-size:20px;color:#333; margin:10px 0 0px;padding:0;line-height: normal;}
+.THIS .Successful h4{font-family:LatoBold; font-size:20px;color:#333; margin:0px 0 5px;padding:0;line-height: normal;}
+.THIS .Successful h5{font-family:LatoRegular; font-size:16px;color:#282828; margin:0 0 5px;padding:0;line-height: normal;}
+.THIS .Successful p{font-family:LatoRegular; font-size:16px;color:#282828; margin:0 0 20px;padding:0;line-height: normal;}
+.THIS .spaceline3{ margin:20px 0 14px 0;border-bottom:1px solid #ccc; }
+
+.THIS .slds-spinner_container {position:fixed !important;}
+.THIS .timepoint .spaceline2 {
+    margin: 26px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.THIS .return .slds-button_brand {
+    margin: 0 0 26px;
+    height: auto;
+    cursor: pointer;
+    pointer-events: auto;
+    border-radius: 5px;
+    color: #fff;
+    border: 1px solid #FE4602;
+    font-size: 14px;
+    padding: 5px 20px;
+    background: #FE4602;
+    font-family: LatoRegular;
+}
+
+.THIS .return .slds-button_brand:hover{
+    border: 1px solid #FE4602;
+    background: #fff;
+    color: #FE4602;
+}
+
+.THIS .return .slds-button_brand:focus {
+    border: 1px solid #FE4602;
+    color: #FE4602;
+    background: #fff;
+    outline: 0;
+    box-shadow: none;
+}

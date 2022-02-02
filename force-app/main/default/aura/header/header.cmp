@@ -1,0 +1,37 @@
+<aura:component >
+	<div class="page-section page-header">
+                           <lightning:layoutItem  >
+                              <div class="custom-box logo">
+                                  <img class="web" src="{!$Resource.bright + '/bright-3.0/images/bright-main-logo.svg'}" alt="" />
+                                  <img class="mobile" src="{!$Resource.bright + '/bright-3.0/images/mobile-bright-logo.svg'}" alt="" />
+                                          
+                                  <!-- <lightning:carouselImage
+                                    src="/resource/bright/bright-3.0/images/Bright-logo.svg"
+                                    alternativeText="brightlogo"> </lightning:carouselImage>-->
+                              </div>
+                           </lightning:layoutItem>
+                           <lightning:layoutItem >
+                              <div class="custom-box account">
+                                 <h3>Accounts &amp; Settings</h3>
+                              </div>
+                           </lightning:layoutItem>
+                           <lightning:layoutItem alignmentBump="right">
+                              <div class="custom-box ">
+                                 <div class="all">
+                                    <h5>AL</h5>
+                                 </div>
+                                 <div class="call">
+                                    <h4>Amanda Lynn </h4>
+                                    <h3>
+                                       Subscriber ID: 8987987 &nbsp;  
+                                       <lightning:carouselImage
+                                          src="/resource/bright/bright-3.0/images/Down-arrow.svg"> </lightning:carouselImage>
+                                       | <a href="#">Active</a>
+                                    </h3>
+                                 </div>
+                              </div>
+                           </lightning:layoutItem>
+                        </div>
+    
+        
+</aura:component>

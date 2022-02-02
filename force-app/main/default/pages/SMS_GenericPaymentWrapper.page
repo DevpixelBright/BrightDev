@@ -1,0 +1,61 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="SMS_GenericPaymentWrapper_Controller" lightningstylesheets="true">
+    <apex:composition template="Bootstrap_Framed">
+        
+        <apex:define name="content">
+            <style>
+                @media (min-width: 750px) {
+                    body {
+                        width: 750px;
+                    }
+                }
+
+                @media (min-width: 970px) {
+                    body {
+                        width: 970px;
+                    }
+                }
+
+                @media (min-width: 1170px) {
+                    body {
+                        width: 1170px;
+                    }
+                }
+            </style>
+
+            <iframe id="gpp_iframe" src="{!iframeUrl}" scrolling="no" frameBorder="0"></iframe>
+
+            <script>
+                var parent_url = decodeURIComponent(document.location.hash.replace(/^#/, ''));
+
+                function resize_iframe(height) {
+                    if ($("#gpp_iframe").height() == height) return;
+                    
+                    $("#gpp_iframe").height(height);
+
+                    var message = JSON.stringify({ operation: "resize_iframe", params: { height: height } });
+
+                    ZXD.postMessage(message, parent_url, parent);
+                }
+
+                function payment_success() {
+                    var message = JSON.stringify({ operation: "payment_success" });
+
+                    ZXD.postMessage(message, parent_url, parent);
+                }
+
+                function generic_payment_complete() {
+                    var message = JSON.stringify({ operation: "generic_payment_complete" });
+
+                    ZXD.postMessage(message, parent_url, parent);
+                }
+
+                function generic_payment_cancel() {
+                    var message = JSON.stringify({ operation: "generic_payment_cancel" });
+
+                    ZXD.postMessage(message, parent_url, parent);
+                }
+            </script>
+        </apex:define>
+        
+    </apex:composition> 
+</apex:page>

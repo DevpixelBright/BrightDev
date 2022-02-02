@@ -1,0 +1,816 @@
+<apex:page id="thePage" sidebar="false" showheader="false" controller="Communities_AgentListings_New" action="{!validateListingRequests}" lightningstylesheets="true">
+    <apex:composition template="Communities_Base">
+    <apex:define name="content">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/angular.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/ui-bootstrap-tpls-0.12.0.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.AngularJsTable,'/ng-table.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.AngularJsTable,'/ng-table.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.DataArchive_Library,'js/jquery.min.js')}"/>
+    <c:Bootstrap_Resources />       
+    <apex:stylesheet value="{!URLFOR($Resource.ListingsCSS,'AgentStyleSheet.css')}"/>        
+
+    <style> 
+        #content-container{ margin-bottom: 0 !important; margin-top:10px; }
+        .selectdiv1 select:focus{ outline:none;}
+        body {overflow-x: hidden;overflow-y: auto;}
+        .table>tbody>tr>td { border:none; padding:0; }
+        .table > thead > tr > th { border:none; padding:0; }
+        .row{ display: block}
+        .ng-table-counts { display:none; }
+        .pagination { margin:0 0 0 18%;}
+        .ng-table-pager{ margin:0 auto; text-align:center;}
+        .pagination>li>a{ margin:0 10px 0 0;}
+        .pagination>li:first-child>a, .pagination>li:last-child>a{color: #fff;background-color: #ff6920;border-color: #ff6920; border-radius:50px;}
+        .pagination>li>a{color: #202b3c;background-color: #dfe9f0;border: 1px solid #dfe9f0;border-radius:50px;}
+        .pagination>.active>a,  .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus{color: #fff;background-color: #202b3c;}
+        .correctmark{ margin:0; float:left }
+        .topper {
+    margin: 0 auto;
+    background: #dfe9f0;
+    width: 2000px;
+    margin: -0 0 0 -430px;
+    border-top: 1px solid #00a8af;
+}
+       .disablePointer { pointer-events:none;}
+       .enablePointer { pointer-events:auto;}
+       .get-start1{    margin: 4px 0 0 0;
+    cursor: pointer;
+    color: #fff;
+    background: #ff6920;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 8px 20px;
+    display: inline-block;
+    float: right;}
+    .get-start1:hover {
+    background: #010101;
+    color: #fff;
+    text-decoration: none;
+    }
+    div.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 50px;z-index:999;
+    }
+    .topper .container{width:1200px;}
+    .topper{margin:-0 0 0 -412px;}
+    </style>
+        
+    <div id="resultPanel" ng-app="first" ng-controller="firstcontroller" style="font-size:12px;">
+        <apex:form id="theForm">
+
+            <!-- first screen div -->
+            <div class="steps-part" ng-show="currentScreen == 'Instructions'">
+                <div class="header-steps">
+                    <h2><img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/arrow-title.png')}" /> 
+                        <span>Agent Listing Transfer</span>
+                    </h2>
+                </div>
+                <div class="topper">
+                    <div class="container">
+                <div class="steps">
+                    <h2 class="active"><a style="cursor:pointer;" ng-click="currentScreen = 'Instructions';"><span>Step1 :</span> Instructions</a></h2>
+                    <h2>
+                        <a ng-show="!step1Completed;" style="cursor:pointer;"><span>Step2 :</span> Select Listings</a>
+                        <a ng-show="step1Completed;" style="cursor:pointer;" ng-click="currentScreen = 'Selection';"><span>Step2 :</span> Select Listings</a>
+                    </h2>
+                    <h2>
+                        <a ng-show="!step2Completed;" style="cursor:pointer;"><span>Step3 :</span> Review &amp; Submit</a>
+                        <a ng-show="step2Completed;" style="cursor:pointer;" ng-click="currentScreen = 'Review';"><span>Step3 :</span> Review &amp; Submit</a>
+                    </h2>
+                     <a class="get-start1" style="cursor:pointer;" ng-click="currentScreen = 'Selection'; step1Completed = true;">Get Started&nbsp;&nbsp;<img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/orangearrow.png')}"/></a> 
+                </div></div></div>
+                <div class="content-view">
+                    <div class="comment">
+                        <img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/info.jpg')}" alt="info" title="info"/>
+                        <p>This is your request to transfer listings to the destination office, the office you currently work for.</p>
+                    </div>
+                    <div class="steps-point">
+                        <h2>Once the request has been submitted</h2>
+                        <ul>
+                            <li><img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/icon-drop.jpg')}" />The origination office (the office that owns the listing) will be notified of your request and will have seven days to approve or decline the transfer</li>
+                            <li><img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/icon-drop.jpg')}" />If approved, the destination office will be notified of your request and will have seven days to approve or decline the transfer</li>
+                            <li><img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/icon-drop.jpg')}" />If declined by either the origination or the destination office, listings will not be transferred</li>
+                            <li><img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/icon-drop.jpg')}" />Please contact the appropriate Broker Office if you have questions.</li>
+                        </ul>
+                    </div>
+                    <div class="select-view">
+                        <h2>How to request a transfer</h2>
+                        <div class="stepline">
+                            <img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/step1.jpg')}" />
+                            <p>Filter the request which you intend to transfer</p>
+                        </div>
+                        <div class="lineup">
+                            <img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/arrowpoint.jpg')}" width="22" height="43" alt=""/>
+                        </div>
+                        <div class="stepline">
+                            <img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/step2.jpg')}" />
+                            <p>Select the request which you want to transfer</p>
+                        </div>
+                        <div class="lineup">
+                            <img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/arrowpoint.jpg')}" width="22" height="43" alt=""/>
+                        </div>
+                        <div class="stepline">
+                            <img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/step3.jpg')}" />
+                            <p>Review your final listing selection</p>
+                        </div>
+                        <div class="lineup">
+                            <img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/arrowpoint.jpg')}" width="22" height="43" alt=""/>
+                        </div>
+                        <div class="stepline">
+                            <img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/step4.jpg')}" />
+                            <p>Submit your listing transfer request</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="border:none;" class="topper">
+                    <div class="container">
+               <!-- <div class="started-view">
+                    <a style="cursor:pointer;" ng-click="currentScreen = 'Selection'; step1Completed = true;">Get Started&nbsp;&nbsp;<img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/orangearrow.png')}"/></a>                    
+                </div>-->
+                 </div> </div>
+            </div>
+            <!------------- first screen div end ------------->
+            
+            <!------------- second screen -------------------->
+            <div class="steps-part" ng-show="currentScreen == 'Selection'">
+                <apex:pageMessages />
+                
+                <div class="header-steps">
+                    <h2>
+                        <apex:image value="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/arrow-title.png')}"/>
+                        <span>Agent Listing Transfer</span>
+                    </h2>
+                </div>
+                <div class="topper sticky">
+                    <div class="container">
+                <div class="steps">
+                    <h2><a style="cursor:pointer;" ng-click="currentScreen = 'Instructions';"><span>Step1 :</span> Instructions</a></h2>
+                    <h2 class="active">
+                        <a ng-show="!step1Completed;" style="cursor:pointer;"><span>Step2 :</span> Select Listings</a>
+                        <a ng-show="step1Completed;" style="cursor:pointer;" ng-click="currentScreen = 'Selection';"><span>Step2 :</span> Select Listings</a>
+                    </h2>
+                    <h2>
+                        <a ng-show="!step2Completed;" style="cursor:pointer;"><span>Step3 :</span> Review &amp; Submit
+                        
+                        </a>
+                        <a ng-show="step2Completed;" style="cursor:pointer;" ng-click="currentScreen = 'Review';"><span>Step3 :</span> Review &amp; Submit</a>
+                    </h2> 
+                    <a class="get-start1" ng-show="listingsData" ng-click="checkListingSelection()">Continue&nbsp;&nbsp;<apex:image value="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/orangearrow.png')}"/></a>                  
+                </div></div></div>
+                <div class="filter" ng-class="{disablePointer: showLoading, enablePointer: !showLoading}">
+                    
+                    <div class="show-case">
+                        <div class="list-show" >
+                            <!-- <h3>show</h3> -->
+                            <ul style="cursor:pointer;">
+                                <li ><a ng-class="{active: selectedEligibility == 'eligible'}" ng-click="getEligibleListings()">Eligible</a></li> 
+                                <li><a ng-class="{active: selectedEligibility == 'Pending Approval'}" ng-click="getPendingListings()" >Pending Approval</a></li>
+                                <li><a ng-class="{active: selectedEligibility == 'ineligible'}" ng-click="getIneligibleListings()" >Ineligible</a></li>
+                                <li><a ng-class="{active: selectedEligibility == 'all'}" ng-click="getAllListings()">All</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="list-sort">
+                        <div class="selectbox">
+                            <div class="selectdiv status">
+                                <label>
+                                    <apex:selectList id="statusesId" value="{!selectedStatus}" multiselect="false" size="1" onchange="displayByStatus(this.value)">
+                                        <apex:selectOptions value="{!ListingStatus}"/>
+                                    </apex:selectList>
+                                </label>
+                            </div>
+
+                            <div class="selectdiv status">
+                                <label>
+                                    <select onchange="sorting(this.value)">
+                                        <option selected="true" value="None"> Sort by </option>
+                                        <option value="ListingId,asc">MLS Number</option>
+                                        <option value="PostalCode,asc">PostalCode</option>
+                                    </select>
+                                </label>
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="selectdiv1" ng-show="numberOfPages.length > 0">
+                            Page <select id="custom-pagination" name="pagechange"  onchange="changePage(this.value)" ng-model="pageselection" ng-options="page for page in numberOfPages">
+                            </select> / <label >{{numberOfPages.length}}</label>
+                        </div>
+                    </div>
+
+                </div>
+<!--                 <div> -->
+<!--                    <input type="Text"/> -->
+<!--                 </div> -->
+                
+                <div style="margin: 0 auto;text-align: center;" ng-show="showLoading;"><img style="margin:auto;" src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/Loading_icon.gif')}" /></div>
+                <div class="checkview" ng-show="listingsData.length > 0 && selectedEligibility == 'eligible' && !showLoading;">
+                    <label class="control control--checkbox">Select all eligible listings
+                        <input type="checkbox" ng-modal="selectAll" ng-checked="selectAll" ng-click="selectAllEligibleListings()" />
+                        <div class="control__indicator"></div>
+                    </label>
+                </div>
+                
+                <div class="list-info" ng-show="listingsData.length > 0 && !showLoading">
+                    <!-- Angular ng-table container -->
+                    
+                    <table style="width:100%; border: none" ng-table="tableParams" class='table' id='table'>   
+                    <tr>
+                        
+                    </tr>
+                        <tr ng-repeat="property in $data " ng-show="$data.length > 0">
+                                                    
+                            <td >
+                                <div class="correctmark">
+                                    <label class="control control--checkbox">
+                                        <input type="checkbox" ng-modal="property.Selected" ng-checked="property.Selected" ng-click="checkListing(property)" />
+                                        <div ng-class="{'control__indicator': property.status == 'eligible', 'control__indicator1': property.status == 'pending', 'control__indicator2': property.status == 'ineligible' }"></div>
+                                    </label>
+                                </div>
+                                <div style="cursor:pointer;" class="info-list" ng-class="{'info-listhide': property.status == 'pending', 'info-listdel': property.status == 'ineligible'}" ng-click="checkListing(property)">
+                                    
+                                    <div class="info-left">
+                                            <img ng-src="{{property.imageURL != null && property.imageURL || '{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/no-image.jpg')}'}}" alt="Image corrupted"/>
+                                            
+                                    </div>
+                                    <div class="info-middle" >
+                                        <div class="titlebar" ng-class="{'titlebarhide': property.status == 'pending', 'titlebardel': property.status == 'ineligible'}">
+                                            <img src=""/>
+                                            <img ng-src="{{property.status == 'eligible' && '{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/mapicon.jpg')}' || (property.status == 'ineligible' && '{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/mapicondel.jpg')}' || '{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/mapiconhide.jpg')}')}}" />
+                                            
+                                            <!-- <p>{{property.FullStreetAddress}} {{property.CityName}}, {{property.State}} {{property.PostalCode}} </p> -->
+                                            <p>{{property.address}}</p>
+                                        </div>
+                                        <ul class="middle-left" ng-class="{'middle-lefthide': property.status == 'pending', 'middle-leftdel': property.status == 'ineligible'}">
+                                            <li><label>MLS# </label>:<p></p>{{property.ListingId}}</li>
+                                            <li><label>Status</label>       :<p>{{property.ListingStatus}}    </p></li>
+                                            <li>
+                                                <div ng-class="{'leftstatus': property.status == 'eligible', 'leftstatusgrey': property.status == 'pending', 'leftstatusred': property.status == 'ineligible' }">
+                                                    <div ng-class="{'greenstatus': property.status == 'eligible', 'greystatus': property.status == 'pending', 'redstatus': property.status == 'ineligible' }"></div>
+                                                    <h4>{{property.statusMessage}}</h4>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        
+                                         <ul class="middle-mid" ng-class="{'middle-lefthide': property.status == 'pending', 'middle-leftdel': property.status == 'ineligible'}">
+                                            
+                                            <li><label>List Price</label>   :<p>  $  {{property.ListPrice}}</p></li>
+                                            <li><label>List Office</label>  :<p></p>{{property.ListOfficeCode}} </li>
+                                        </ul>
+                                        <ul class="middle-right" ng-class="{'middle-righthide': property.status == 'pending', 'middle-rightdel': property.status == 'ineligible'}">
+                                            <li>
+                                                <label>
+                                                <p>
+                                                    <img ng-src="{{property.status == 'eligible' && '{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/bed.jpg')}' || ( property.status == 'ineligible' && '{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/beddel.jpg')}' || '{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/bedhide.jpg')}')}}"/>
+                                                </p>
+                                                Bedrooms </label> : <p>{{property.Beds}}</p>
+                                            </li>
+                                            <li>
+                                                <label>
+                                                    <p>
+                                                        <img ng-src="{{property.status == 'eligible' && '{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/bed2.jpg')}' || ( property.status == 'ineligible' && '{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/bed2del.jpg')}' || '{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/bed2hide.jpg')}')}}"/>
+                                                    </p>
+                                                    Full Baths</label> : <p>{{property.BathsFull}}</p>
+                                            </li>
+                                            <li>
+                                                <label>
+                                                    <p>
+                                                        <img ng-src="{{property.status == 'eligible' && '{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/bed3.jpg')}' || ( property.status == 'ineligible' && '{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/bed3del.jpg')}' || '{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/bed3hide.jpg')}')}}"/>
+                                                    </p>
+                                                    Half Baths</label> : <p>{{property.BathsHalf}}</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- <div class="info-right">
+                                        <img ng-show="property.Selected;" class="correct" src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/correct.png')}" />
+                                        <div class="period-status" ng-class="{'period-statushide': property.status == 'pending', 'period-statusdel': property.status == 'ineligible'}">
+                                            <p>
+                                                <img ng-src="{{property.status == 'eligible' && '{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/context.jpg')}' || ( property.status == 'ineligible' && '{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/contextdel.jpg')}' || '{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/contexthide.jpg')}')}}"/>
+                                                </p>
+                                            <h3>Status</h3>
+                                            <h2>
+                                                <a > {{property.statusMessage}}</a><ng-show="property.ListingStatus != 'ACTIVE'" 
+                                            </h2>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </td>
+                            
+                        </tr>
+                        
+                    </table>                    
+                    
+                </div>
+                
+                <div class="list-info" ng-show="!listingsData">
+                    <h5 class="NoListingTextCls">
+                        No Listings available, Please click on other Tabs to view Listings.
+                    </h5>
+                </div>
+                    
+                 <div style="border:none; margin-left: -414px;" class="topper topper1" ng-show="!showLoading;">
+                    <div style="width: 1200px;" class="container">
+                        <div class="started-view">
+                           <!--- <a ng-click="currentScreen = 'Instructions';"><apex:image style="margin:-4px 5px 0 0" value="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/orangearrowline.png')}"/>Back</a>--->
+                            <div>
+                                <!---<a class="cancel" style="cursor:pointer;" ng-click="cancelReturnHome()" >Cancel</a>--->
+                                <!---<a class="get-con" ng-click="checkListingSelection()">Continue&nbsp;&nbsp;<apex:image value="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/orangearrow.png')}"/></a>--->
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            </div>
+            <!--------------- end of second screen ------------------->
+      
+            <!--------------- third screen start --------------------->
+            <div class="steps-part" ng-show="currentScreen == 'Review'">
+                <div class="header-steps">
+                    <h2><img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/arrow-title.png')}" /> <span>Agent Listing Transfer</span></h2>
+                    
+                </div>
+                <div class="topper sticky">
+                    <div class="container">
+                <div class="steps">
+                    <h2><a style="cursor:pointer;" ng-click="currentScreen = 'Instructions';"><span>Step1 :</span> Instructions</a></h2>
+                    <h2>
+                        <a ng-show="!step1Completed;" style="cursor:pointer;"><span>Step2 :</span> Select Listings</a>
+                        <a ng-show="step1Completed;" style="cursor:pointer;" ng-click="currentScreen = 'Selection';"><span>Step2 :</span> Select Listings</a>
+                    </h2>
+                    <h2 class="active">
+                        <a ng-show="!step2Completed;" style="cursor:pointer;"><span>Step3 :</span> Review &amp; Submit</a>
+                        <a ng-show="step2Completed;" style="cursor:pointer;" ng-click="currentScreen = 'Review';"><span>Step3 :</span> Review &amp; Submit</a>
+                    </h2> 
+                     <a class="get-start1" style="cursor:pointer;" ng-click="submitTransfer()">&nbsp;&nbsp;Submit&nbsp;&nbsp;</a>                  
+                </div>
+                    </div></div>
+                <div class="content-view">
+                    <div class="comment">
+                        <img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/info.jpg')}" alt="info" title="info"/>
+                        <p>The listings you have requested are shown below for your review. Go back to make any changes or click SUBMIT to finish</p> 
+                    </div>
+                    <div style="margin-bottom: 0;" class="steps-point">
+                        <div class="transfer">
+                            <div class="transferleft">
+                                <h2>Origination Office:</h2>
+                                <div class="transferstatus">
+                                    <p><img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/making.jpg')}"/></p>
+                                    <h3>{{originationOfficeDetails.Name}}</h3><br/>
+                                    <h2>
+                                        {{originationOfficeDetails.Street_Number__c}} {{originationOfficeDetails.Street_Number_Suffix__c}} {{originationOfficeDetails.Street_Name__c}} {{originationOfficeDetails.Street_Type__c}}
+                                        {{originationOfficeDetails.Street_Direction__c}} {{originationOfficeDetails.Unit_Type__c}} {{originationOfficeDetails.Unit__c}}
+                                        <br/>
+                                        {{originationOfficeDetails.City__c}}, {{originationOfficeDetails.State__c}} {{originationOfficeDetails.Zip__c}}
+                                    </h2>
+                                </div>
+                            </div>
+                            <div class="transfermiddle"><img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/arrow-share.jpg')}"/></div>    
+                            <div class="transferleft transferright">
+                                <h2>Destination Office:</h2>
+                                <div class="transferstatus">
+                                    <p><img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/making.jpg')}"/></p>
+                                    <h3>{!subscription.Related_Location_Broker_Office__r.Name}</h3><br/>
+                                    <h2>{!subscription.Related_Location_Broker_Office__r.Street_Number__c} {!subscription.Related_Location_Broker_Office__r.Street_Number_Suffix__c} 
+                                        {!subscription.Related_Location_Broker_Office__r.Street_Name__c} {!subscription.Related_Location_Broker_Office__r.Street_Type__c} 
+                                        {!subscription.Related_Location_Broker_Office__r.Street_Direction__c} {!subscription.Related_Location_Broker_Office__r.Unit_Type__c} 
+                                        {!subscription.Related_Location_Broker_Office__r.Unit__c} 
+                                        <br/>
+                                        {!subscription.Related_Location_Broker_Office__r.City__c}, {!subscription.Related_Location_Broker_Office__r.State__c} {!subscription.Related_Location_Broker_Office__r.Zip__c} {!subscription.Related_Location_Broker_Office__r.Zip_4__c}
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="select-view">
+                            <h2>Review listing</h2>
+                            <div id="table">
+                                <div style="display:table-row" class="header-row row">
+                                    <span class="cell primary">MLS#</span>
+                                    <span class="cell">Property Address </span>
+                                    <span style="text-align: right;" class="cell">Status</span>
+                                </div>
+                                <div style="display:table-row" class="row" ng-repeat="property in reviewListing">
+                                    <input type="radio" name="expand"/>
+                                    <span class="cell primary" data-label="Vehicle">{{property.ListingId}}   </span>
+                                    <!-- <span class="cell" data-label="Exterior">{{property.FullStreetAddress}} {{property.CityName}}, {{property.State}} {{property.PostalCode}}</span> -->
+                                    <span class="cell" data-label="Exterior">{{property.address}}</span>
+                                    <span style="text-align: right;" class="cell cell1" data-label="Interior"><p style="text-align: right;display: inline;">{{property.ListingStatus}}</p></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="border:none;margin-left: -414px;" class="topper">
+                    <div style="padding: 0" class="container">
+                        <!--<div class="started-view">
+                            <a ng-click="currentScreen = 'Selection';"><apex:image style="margin:-4px 5px 0 0" value="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/orangearrowline.png')}"/>Back</a>
+                            <div>
+                                <a class="cancel" style="cursor:pointer;" ng-click="cancelReturnHome()">Cancel</a>
+                                <a class="get-con" style="cursor:pointer;" ng-click="submitTransfer()">&nbsp;&nbsp;Submit&nbsp;&nbsp;</a>
+                            </div>
+                        </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                    
+            <!---------------- third screen end ---------------->
+            
+            <!-------------- fourth screen start --------------->
+            <div class="steps-part" ng-show="currentScreen == 'Success'">
+                <div class="header-steps">
+                    <h2><img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/arrow-title.png')}" /> <span>Agent Listing Transfer</span></h2>
+                </div>
+             <div class="topper">
+                    <div class="container">
+                 </div></div>
+                <div class="content-view">
+                    <div class="success">
+                        <img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/success.jpg')}" />
+                        <h3>Request submitted successfully</h3>
+                        <!--<p>Your request to transfer listings is submitted successfully. An email has been sent to your registered mail address use <b style="color:#33cc00;">{!subscription.Private_Email__c}</b>. Please check the mail for more details on the request status</p>-->
+                        <p>Your request to transfer listings was submitted successfully. We have notified your broker, and a confirmation email will be sent to you at <b style="color:#33cc00;">{!subscription.Private_Email__c}</b>. Please check this email for additional information on the status of your request.</p>
+                        <a onclick="window.location = '{!$Site.CurrentSiteUrl}apex/Communities_Subscription';" style="cursor: pointer;">Back to home</a>
+                    </div>
+                </div>
+            </div>
+            <!------------- fourth screen end -------------->
+            
+        </apex:form>
+    </div>
+
+    <script>
+               
+        var app = angular.module('first', ['ngTable']).
+        controller('firstcontroller', function($scope, $filter, NgTableParams) {
+            $scope.currentScreen = 'Instructions';
+            var data = [];
+            $scope.search;
+            $scope.listingsData = [];
+            $scope.selectedStatus;
+            $scope.sortColumn;
+            $scope.selectedEligibility = 'eligible';
+            $scope.selectAll = false;
+            $scope.step1Completed = false;
+            $scope.step2Completed = false;
+            $scope.step3Completed = false;
+
+            $scope.eligibleListing = [];
+            $scope.inEligibleListing = [];
+            $scope.pendingListing = [];
+            $scope.allListing = []; 
+            $scope.reviewListing = [];
+            $scope.subId = '{!subscriptionId}';
+            $scope.originationOfficeDetails;
+            $scope.showLoading = false;
+            $scope.numberOfPages;
+            $scope.pageselection = 1;
+            
+            console.log('---subId--'+$scope.subId);
+                        
+            $scope.eligibleStatusKeywords = '\'ACTIVE UNDER CONTRACT-BRIGHT\',\'ACTIVE-BRIGHT\',\'COMING SOON-BRIGHT\',\'TEMP OFF MARKET-BRIGHT\'';
+            $scope.ineligibleStatusKeywords = '\'PENDING-BRIGHT\',\'WITHDRAWN-BRIGHT\',\'EXPIRED-BRIGHT\',\'DELETED-BRIGHT\',\'CLOSED-BRIGHT\',\'CANCELED-BRIGHT\'';
+            $scope.allStatusKeywords = $scope.eligibleStatusKeywords+','+$scope.ineligibleStatusKeywords;
+        
+            $scope.ListingKeys = [];
+            $scope.getListingKeys = function(eligibles, listingStatus) {
+                $scope.listingsData = [];
+                $scope.showLoading = true;
+                console.log('---eligibles--->'+listingStatus+'-->'+eligibles);
+                Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.Communities_AgentListings_New.getListingKeys}', eligibles, $scope.subId, listingStatus, function(listingKeysResult, event) {
+                   
+                    console.log('listingKeysResult: ', listingKeysResult);
+                    if(listingKeysResult && listingKeysResult != '') {                   
+                        $scope.ListingKeys = listingKeysResult;
+                        
+                        var recordsToBePulled = 200;
+                        
+                        var noOfCallouts = Math.ceil( ($scope.ListingKeys.length) / recordsToBePulled);
+                        console.log('--noOfCallouts--->'+noOfCallouts);
+                        var startIndex = 0;
+                        
+                        for(var i = 1; i <= noOfCallouts; i++){
+                            var sendListings = [];
+                            var endIndex = i * recordsToBePulled;
+                            
+                            for(var j = startIndex; j < endIndex; j++){
+                                if($scope.ListingKeys[j] == '' || $scope.ListingKeys[j] == null || $scope.ListingKeys[j] == "undefined"){
+                                    break;
+                                }
+                                else
+                                    sendListings.push($scope.ListingKeys[j]);
+                            }
+                            startIndex = endIndex;
+                            $scope.getProperties(eligibles, listingStatus, sendListings);
+                        }
+                    }
+                    else{
+                        $scope.showLoading = false;
+                        $scope.listingsData = '';
+                        $scope.tableParams.data = data;
+                        $scope.tableParams.reload();
+                        $scope.$apply();              
+                        return;
+                    }
+                }, {buffer: true, escape: true, timeout: 120000});
+            }
+            
+            $scope.getProperties = function(eligibles, listingStatus, sendListings){
+                console.log('---sendListings in properties-->'+sendListings);
+                /* Property details API call */
+                Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.Communities_AgentListings_New.getProperties}', sendListings, $scope.selectedEligibility, $scope.subId, function(propertiesResult, event) {
+                    console.log('propertiesResult: ', propertiesResult);
+                    
+                    if(!propertiesResult)
+                        return;
+                        
+                    if(listingStatus == 'eligible') {
+                        for(var i=0; i<propertiesResult.length; i++) {
+                            propertiesResult[i]['Selected'] = false;
+                        }
+                        //$scope.eligibleListing = propertiesResult;
+                        
+                        Array.prototype.push.apply($scope.eligibleListing, propertiesResult);
+                        console.log('--$scope.eligibleListing--',$scope.eligibleListing);
+                        propertiesResult = $scope.eligibleListing;
+                    }
+                    
+                    else if(listingStatus == 'pending'){
+                        //$scope.pendingListing = propertiesResult;
+                        Array.prototype.push.apply($scope.pendingListing, propertiesResult);
+                        propertiesResult = $scope.pendingListing;
+                    }
+                    
+                    else if(listingStatus == 'ineligible'){
+                        //$scope.inEligibleListing = propertiesResult;
+                        Array.prototype.push.apply($scope.inEligibleListing, propertiesResult);
+                        propertiesResult = $scope.inEligibleListing;
+                    }
+                    
+                    else if(listingStatus == 'all'){
+                        //$scope.allListing = propertiesResult;
+                        Array.prototype.push.apply($scope.allListing, propertiesResult);
+                        propertiesResult = $scope.allListing;
+                    }
+                    
+                    $scope.showLoading = false;
+                    data = [];
+                    data = propertiesResult;
+                    $scope.listingsData = data;
+                    $scope.tableParams.data = data;
+                    $scope.tableParams.reload();
+                    $scope.tableParams.page(1);
+                    $scope.$apply();
+                    propertiesResult = []; 
+                }, {buffer: true, escape: true, timeout: 120000});  
+                
+            }
+            
+            $scope.getListingKeys($scope.eligibleStatusKeywords, 'eligible');
+
+            /* Ng-table initiation */
+            $scope.tableParams = new NgTableParams({
+                page: 1,
+                count: 25,
+                sorting: {
+                    ListingKey: 'asc'
+                }
+            }, {
+                total: data.length,
+                getData: function($defer, params) {
+                    var searchedData = searchData();
+                    params.total(searchedData.length);
+                    var orderedData = params.sorting() ? $filter('orderBy')(searchedData , params.orderBy()) : searchedData;
+                    $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                    $scope.pageselection = params.page();
+                    console.log(' after pagination---',$scope.pageselection);
+                    var pagescount = Math.ceil( (searchedData.length) / params.count());
+                    $scope.numberOfPages = [];
+                    for(var i = 1; i < pagescount+1; i++){
+                        $scope.numberOfPages.push(i);
+                    }
+                }
+            });
+            
+
+            $scope.$watch("search", function () {
+                console.log('---watch function---');
+                $scope.tableParams.reload();
+            });                
+            
+            var searchData = function(){
+                console.log('---search data function---');
+                if($scope.search){
+                    //return $filter('filter')(data, $scope.search, true);
+                    return $filter('filter')(data, {'ListingStatus':$scope.search});    
+                }
+                return data;
+            }
+
+            $scope.searchByStatus = function(status) {
+                $scope.selectedStatus = status;
+                $scope.search = status;       
+            }  
+
+            $scope.sortBy = function(sortField) {
+                if(sortField == 'None')
+                    sortField = 'ListingId';
+                
+                var temp = sortField.split(',');
+                console.log('--temp--',temp);
+                //$scope.tableParams.sorting(sortField, 'asc');
+                $scope.tableParams.sorting(temp[0], temp[1]);  
+            }
+
+            $scope.getEligibleListings = function() {
+                
+                if($scope.eligibleListing.length == 0) {
+                    $scope.getListingKeys($scope.eligibleStatusKeywords, 'eligible');
+                }
+                else {
+                    console.log('* Eligible already loaded');
+                    data = [];
+                    data = $scope.eligibleListing;
+                    $scope.listingsData = data;
+                    $scope.tableParams.data = data;
+                    $scope.tableParams.page(1);
+                    $scope.tableParams.reload();
+                }
+
+                $scope.selectedEligibility = 'eligible';
+            }
+
+            $scope.getPendingListings = function() {
+                
+                if($scope.pendingListing.length == 0) {
+                    $scope.getListingKeys($scope.eligibleStatusKeywords, 'pending');
+                }
+                else {
+                    console.log('* Pending already loaded');
+                    data = [];
+                    data = $scope.pendingListing;
+                    $scope.listingsData = data;
+                    $scope.tableParams.data = data;
+                    $scope.tableParams.page(1);
+                    $scope.tableParams.reload();                    
+                }
+
+                $scope.selectedEligibility = 'pending';                
+            } 
+
+            $scope.getIneligibleListings = function() {
+                
+                if($scope.inEligibleListing.length == 0) {
+                    $scope.getListingKeys($scope.ineligibleStatusKeywords, 'ineligible');
+                }
+                else {
+                    data = [];
+                    console.log('* Ineligible already loaded');
+                    data = $scope.inEligibleListing;
+                    $scope.listingsData = data;
+                    $scope.tableParams.data = data;
+                    $scope.tableParams.page(1);
+                    $scope.tableParams.reload();
+                } 
+
+                $scope.selectedEligibility = 'ineligible';               
+            } 
+
+            $scope.getAllListings = function() {
+                
+                if($scope.allListing.length == 0) {
+                    $scope.getListingKeys($scope.allStatusKeywords, 'all');
+                }
+                else {
+                    console.log('* All already loaded');
+                    data = [];
+                    data = $scope.allListing;
+                    $scope.listingsData = data;
+                    $scope.tableParams.data = data;
+                    $scope.tableParams.page(1);
+                    $scope.tableParams.reload();                    
+                }
+
+                $scope.selectedEligibility = 'all';
+            }
+
+            $scope.checkListing = function(property) {
+                if(property.status == 'eligible'){
+                    if(property.Selected){
+                        property.Selected = false;
+                        $scope.selectAll = false;
+                    }
+                    else    
+                        property.Selected = true;
+    
+                    $scope.eligibleListing = data;
+                    var allSelected = true;
+                    for(var i=0; i<data.length; i++) {
+                        if(!data[i].Selected){
+                           allSelected = false;
+                           break;
+                        }
+                    }
+                    if(allSelected){
+                        $scope.selectAll = true;
+                    }
+                }
+            } 
+
+            $scope.selectAllEligibleListings = function() {                
+                $scope.selectAll = !$scope.selectAll;
+                for(var i=0; i<data.length; i++) {
+                    if($scope.selectAll)
+                        data[i].Selected = true;
+                    else 
+                        data[i].Selected = false;
+                }
+                $scope.eligibleListing = data;
+                console.log($scope.eligibleListing);                
+            } 
+            
+            $scope.checkListingSelection = function() {
+                $scope.reviewListing = [];
+                var isSelected = false;
+                for(var i=0; i<$scope.eligibleListing.length; i++) {
+                    if($scope.eligibleListing[i].Selected) {
+                        isSelected = true;
+                        $scope.reviewListing.push($scope.eligibleListing[i]);
+                    }
+                }
+                
+                if(!isSelected)
+                    alert("Please select atleast one listing to continue");
+                else {   
+                    $scope.step2Completed = true;
+                    $scope.currentScreen = 'Review';
+                    
+                    Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.Communities_AgentListings_New.getOriginationOfficeDetails}', $scope.eligibleListing[0].ListOfficeCode, function(officeDetails, event) {
+                        if(event.status){
+                            $scope.originationOfficeDetails = officeDetails;
+                            console.log('---origin office detial---',$scope.originationOfficeDetails);
+                            $scope.$apply();
+                        }
+                    });
+                }            
+            }
+            
+            $scope.cancelReturnHome = function(){
+                if(confirm('Are you sure you want to cancel this Transfer request ?')){
+                    window.location = '{!$Site.CurrentSiteUrl}apex/Communities_Home';
+                }
+            }
+
+            $scope.submitTransfer = function() {
+                var finalDetails = [];
+                for(var i=0; i<$scope.reviewListing.length; i++) {
+                    finalDetails.push({listingKey: $scope.reviewListing[i].ListingKey, listingId: $scope.reviewListing[i].ListingId, agentId: $scope.reviewListing[i].agentId, originatingOffice: $scope.reviewListing[i].ListOfficeCode});
+                }
+
+                if(finalDetails.length > 0) {
+                    Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.Communities_AgentListings_New.submitListingTransferRequest}', finalDetails, function(response, event) {
+                        console.log(response);
+                        if(response == 'success') {
+                            $scope.currentScreen = 'Success';
+                            $scope.$apply();
+                            data = [];
+                        }
+                        else {
+                            alert(response);
+                        }
+                    });
+                }
+            }                                              
+                   
+        });
+
+        function displayByStatus(status) {
+            var scope = angular.element(document.getElementById("resultPanel")).scope();                
+            scope.$apply(function () {
+                scope.searchByStatus(status);
+            });
+        }
+
+        function sorting(sortField) {
+            console.log(sortField);
+            var scope = angular.element(document.getElementById("resultPanel")).scope();
+            scope.$apply(function () {
+                scope.sortBy(sortField);
+            });
+        }
+        
+        function changePage(page){
+            page = parseInt(page) + 1;
+            var scope = angular.element(document.getElementById("resultPanel")).scope();                
+            scope.$apply(function () {
+                scope.tableParams.page(page);
+                console.log('*** changePage function:' + scope.pageselection);
+            });
+        }
+        
+        markOptionPanel("subscription"); 
+    </script>
+    </apex:define>
+    </apex:composition>
+</apex:page>

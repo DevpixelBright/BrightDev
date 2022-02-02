@@ -1,0 +1,171 @@
+<aura:component controller="BuyPremiumProductController" implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,force:hasRecordId,lightning:isUrlAddressable" access="global" >
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    
+    <ltng:require styles="{!$Resource.newproduct }"></ltng:require>
+    <ltng:require styles="{!$Resource.headeras }"></ltng:require>
+    <ltng:require styles="{!$Resource.bcomfooter }"></ltng:require>
+    
+    <aura:attribute name="today" type="Date" />
+    <aura:attribute name="name" type="String"/>
+    <aura:attribute name="name2" type="String"/>
+    <aura:attribute name="subscriptionId" type="String"/>
+    <aura:attribute name="subscription" type="Object"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="productType" type="string"/>
+    <aura:attribute name="subscriptionObj" type="Subscriptions__c" default="{'sObjectType':'Subscriptions__c'}"/>
+    
+    <div class="c-container">
+        <div class="fullpage slds-scope">
+            <div class="slds-grid slds-wrap">
+                <lightning:layout multipleRows="true">                        
+                    <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                        
+                        <lightning:layout>
+                            <div class="new-containerpage">
+                                <div class="slds-container--x-large new-container">
+                                    
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                        <div class="page-section page-main">
+                                            
+                                            <div class="dev dev1">
+                                                
+                                                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="5" largeDeviceSize="5" >
+                                                     <h3 class="bold">Summary</h3>
+                                                    <div class="fultable">
+                                                    <div class="sum">
+                                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4" >
+                                                        <h6 class="flex">Product</h6>
+                                                        </lightning:layoutItem>
+                                                         <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4" >
+                                                        <p class="flex1">Sphere by Bright MLS</p>
+                                                        </lightning:layoutItem>
+                                                         <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4" >
+                                                       <h6 class="result">$199.00</h6>
+                                                        </lightning:layoutItem>
+                                                    </div>
+                                                                     <div class="sum">
+                                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4" >
+                                                        <h6 class="flex">Plan</h6>
+                                                        </lightning:layoutItem>
+                                                         <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4" >
+                                                        <p class="flex1">Sphere by Bright MLS Pro Annual Term</p>
+                                                        </lightning:layoutItem>
+                                                         <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4" >
+                                                       <h6 class="result">$49.95</h6>
+                                                        </lightning:layoutItem>
+                                                    </div>
+                                                    <div class="sum">
+                                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4" >
+                                                        <h6 class="flex">Discount</h6>
+                                                        </lightning:layoutItem>
+                                                         <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4" >
+                                                        <p class="flex1">- NA -</p>
+                                                        </lightning:layoutItem>
+                                                         <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4" >
+                                                       <h6 class="result"></h6>
+                                                        </lightning:layoutItem>
+                                                    </div>
+                                                        </div>
+                                                    <div class="fultable">
+                                                    <div class="sum">
+                                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4" >
+                                                        <h6 class="flex">Total</h6>
+                                                        </lightning:layoutItem>
+                                                         <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4" >
+                                                        <p class="flex1"></p>
+                                                        </lightning:layoutItem>
+                                                         <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4" >
+                                                       <h6 class="result">$248.95</h6>
+                                                        </lightning:layoutItem>
+                                                    </div>
+                                                                     <div class="sum">
+                                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4" >
+                                                        <h6 class="flex">Tax</h6>
+                                                        </lightning:layoutItem>
+                                                         <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4" >
+                                                        <p class="flex1"></p>
+                                                        </lightning:layoutItem>
+                                                         <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4" >
+                                                       <h6 class="result">$00.00</h6>
+                                                        </lightning:layoutItem>
+                                                    </div>
+                                                    
+                                                        </div>
+                                                                             <div class="sum sump">
+                                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4" >
+                                                        <h6 class="flex">Amount Due Today</h6>
+                                                        </lightning:layoutItem>
+                                                         <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4" >
+                                                        <p class="flex1"></p>
+                                                        </lightning:layoutItem>
+                                                         <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4" >
+                                                       <h6 class="result1">$ 248.95</h6>
+                                                        </lightning:layoutItem>
+                                                    </div>
+                                                    
+                                                    <div class="height"></div>
+                                                              <lightning:button class="brand" variant="brand " 
+                                                                          label="Check out" title="Brand action" 
+                                                                          aura:id="continueBtn" 
+                                                                          />
+                                                    
+                                                    
+                                                     
+                                                        
+                                                        
+                                                </lightning:layoutItem>
+                                                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="7" largeDeviceSize="7" >
+                                                    <div class="linet1">
+                                                        <h3 class="bold1">Terms &amp; Conditions</h3>
+                                                    <div class="layer part2">
+                                                        <div class="t1q">
+                                                        <lightning:textarea name="input1" label="Enter some text" />
+                                                            
+                                                           
+   <div class="slds-form-element">
+  <div class="slds-form-element__control">
+    <div class="slds-checkbox">
+      <input type="checkbox" name="options" id="checkbox-unique-id-73" value="checkbox-unique-id-73" checked="" />
+      <label class="slds-checkbox__label" for="checkbox-unique-id-73">
+        <span class="slds-checkbox_faux"></span>
+        <span class="slds-form-element__label">I accept</span>
+      </label>
+    </div>
+  </div>
+</div>
+
+                                                        
+                                                        </div>
+                                                        
+                                                        
+                                                            </div>
+                                                   
+                                                        <!--<lightning:button class="brand" variant="brand " 
+                                                                          label="Continue" title="Brand action" 
+                                                                          aura:id="continueBtn" 
+                                                                          />-->
+                                                    </div>
+                                                </lightning:layoutItem>
+                                      
+                                            </div>
+                                        </div>
+                                    </lightning:layoutItem>
+                                </div>
+                            </div>
+                        </lightning:layout>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                        <div class="new-containerpage footer-new-containerpage">
+                            <div class="slds-container--x-large new-container">
+                                <!--<c:footeras />-->
+                                <c:bcomfooter />
+                            </div>
+                        </div>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </div>
+        </div>
+        
+    </div>   
+</aura:component>

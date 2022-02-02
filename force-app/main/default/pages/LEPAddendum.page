@@ -1,0 +1,21 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" lightningstylesheets="true">
+    <apex:composition template="Bootstrap_Single">
+        
+        <apex:define name="title">
+            {!$Label.MRIS_LEP_ADDENDUM_TITLE}
+        </apex:define>
+
+        <apex:define name="instructions">
+            <div class="row-fluid">
+                <div class="span12">
+                    <apex:composition template="Bootstrap_Legal">
+                        <apex:define name="terms">
+                            <c:LEPAddendum />
+                        </apex:define>
+                    </apex:composition>
+                </div>
+            </div>
+        </apex:define>
+        
+    </apex:composition> 
+</apex:page>

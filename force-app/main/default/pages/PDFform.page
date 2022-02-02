@@ -1,0 +1,59 @@
+<apex:page renderAs="pdf">
+    
+    
+   
+    <!-- <style type="text/css">
+            @font-face {
+            font-family: 'Acronym-Regular';
+            src: url(../../resource/brightas/brightas/fonts/Acronym-Regular.ttf);
+            }
+            @font-face {
+            font-family: 'Acronym-Bold';
+            src: url(../../resource/brightas/brightas/fonts/Acronym-Bold.ttf);
+            }
+            p{
+            font-family: 'Acronym-Regular';
+            font-size: 12pt;
+            color:#4F5A65;
+            }
+            p a{
+            text-decoration:underline;
+            }
+            p a:hover{
+            text-decoration:none;
+            }
+            p, label {
+            }
+            .form-group {
+            background-color:#D5CCD1;
+            }
+            label {
+            display: inline-block;
+            margin: 10px 6px 6px 16px;
+            color:#4F5A65;
+            }
+            h4{
+            font-family: 'Acronym-Bold';
+            color:#1f3a93;
+            font-size:12pt;
+            }
+            table td {font-family: 'Acronym-Regular'; font-size:12pt; color:#4F5A65; width:100%; margin-bottom:5px; vertical-align:Top; word-break:break-all;}
+
+    </style>-->
+    
+    <table>
+        
+   
+          
+            <tr>
+                
+                <td style="line-break: anywhere;
+                               word-break: break-all;
+    overflow-wrap: anywhere;">
+                    testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest
+           
+                    </td></tr>
+            
+            
+        </table>
+</apex:page>

@@ -1,0 +1,4 @@
+<aura:component >
+	<ltng:require styles="{!$Resource.bcomfooter }"></ltng:require>
+    <c:bcomfooter/>
+</aura:component>

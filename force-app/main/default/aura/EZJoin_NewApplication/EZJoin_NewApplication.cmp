@@ -1,0 +1,62 @@
+<aura:component implements="force:appHostable,lightning:isUrlAddressable" controller="EZJoin_NewApplicationController">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    
+    <!-- Variables -->
+    <aura:attribute name="applicationType" type="String" default="" />
+    <aura:attribute name="cmpStructure" type="List" default="[]" description="Attribute used to store the lightning architecture object2" />
+    <aura:attribute name="applicationData" type="Object" default="{}" description="Attribute to hold all information captured in different steps" />
+    <aura:attribute name="childCmp" type="Aura.Component[]" default="" description="Attribute to capture body of dynamically loading component" />
+    <aura:attribute name="application" type="MRIS_Application__c" default="{ 'sobjectType': 'MRIS_Application__c' }"/>
+    <aura:attribute name="showSuccess" type="Boolean" default="false" />
+    <aura:attribute name="applicationId" type="String" default="" />
+    <aura:attribute name="showSpinner" type="Boolean" default="false" />
+    
+    <!-- Actions -->
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}" /> 
+    <aura:handler event="c:EZJoin_NewApplicationAppConfigEvent" action="{!c.getAppConfigChanges}" phase="bubble" />
+    <aura:handler name="cmpEvent" event="c:EZJoin_LoadComponentEvent" action="{!c.loadComponentEvent}"/>
+    
+    <!-- Loading spinner container -->
+    <aura:if isTrue="{!v.showSpinner}">
+        <div class="slds-is-relative">
+            <lightning:spinner />
+        </div>
+    </aura:if>    
+    
+    <div class="fullpage slds-scope">
+        <div class="slds-grid slds-wrap">
+            
+            <c:EZJoin_NewApplicationHeader appConfig="{!v.cmpStructure}" />
+            
+            <div class="slds-container--x-large new-container" id="content-container">
+                <aura:if isTrue="{!!v.showSuccess}">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 tab-form">
+                        <div class="slds-vertical-tabs">
+                            <c:EZJoin_NewApplicationNav appConfig="{!v.cmpStructure}" />
+                            
+                            <div class="slds-vertical-tabs__content slds-show" id="slds-vertical-tabs-0" role="tabpanel" aria-labelledby="slds-vertical-tabs-0__nav">
+                                {!v.body}
+                            </div>                        
+                        </div>
+                    </div>
+                </aura:if>
+                
+                <aura:if isTrue="{!v.showSuccess}">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 Successful">
+                            <img src="{!$Resource.ejoin + '/ejoinimages/submittick.jpg'}" />
+                            <h3>Application ID: {!v.applicationId}</h3>
+                            <h4>Submitted Successfully </h4> 
+                            <h5>Thank you for submitting your application to Bright MLS.</h5>
+                            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 spaceline3"></div>
+                            <p>Your application will be reviewed. Updates on your application status will be sent to the email address you provided.</p>
+                            <button class="slds-button slds-button_brand" onclick="{!c.backToHomeEvtHandler}">Return to Join Page</button>
+                        </div>
+                    </div>
+                </aura:if>                     
+            </div>
+            
+            <c:EZJoin_NewApplicationFooter />
+        </div>
+    </div>
+</aura:component>

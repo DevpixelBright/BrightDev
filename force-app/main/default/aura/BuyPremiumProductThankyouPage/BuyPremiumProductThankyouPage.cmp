@@ -1,0 +1,68 @@
+<aura:component controller="BuyPremiumProductController" implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,force:hasRecordId,lightning:isUrlAddressable" access="global" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="subscriptionId" type="String"/>
+    <aura:attribute name="productType" type="string"/>
+    <aura:attribute name="productName" type="string" />
+    <ltng:require styles="{!$Resource.newproduct }"></ltng:require>
+    <ltng:require styles="{!$Resource.headeras }"></ltng:require>
+    <ltng:require styles="{!$Resource.bcomfooter }"></ltng:require>
+    
+    <div class="c-container">
+        <div class="fullpage slds-scope">
+            <div class="slds-grid slds-wrap">
+                <lightning:layout multipleRows="true">                        
+                    <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                        
+                        <lightning:layout>
+                            <div class="new-containerpage">
+                                <div class="slds-container--x-large new-container">
+                                    
+                                    <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+            <lightning:layout>
+                <div class="new-containerpage">
+                    <div class="slds-container--x-large new-container">
+                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                            <div class="page-section page-main">
+                                <div class="dev">
+                                    <div class="bodybottom">
+                                        
+                                        <div class="slds-container--x-large new-container">
+                                            <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                                <div class="footer-full ">
+                                                    
+                                                    <div class="sucuss">
+                                                        
+                                                        <img src="{!$Resource.brightas + '/brightas/images/success.svg'}" alt="Bright" />
+                                                    <h4>Thank you for ordering {!v.productName}</h4>    
+                                                        <p>Please allow 48 hours for us to set up your access to {!v.productName}. Once your sign up is processed, an email will be sent to the Private Email Address that you have on file with Bright MLS. Please check your email for instructions on how to access this product as well as support information.</p>
+                                                        <p>If you have any questions, please contact our Customer Support Center at <span style="white-space:nowrap;">1-844-55-BRIGHT (1-844-552-7444)</span> or email us at <a href="mailto:support@brightmls.com" target="_blank">support@brightmls.com</a></p>
+                                                    </div>
+                                                </div>
+                                            </lightning:layoutItem>
+                                        </div></div>
+                                </div>
+                            </div>
+                        </lightning:layoutItem>
+                    </div>
+                </div>
+            </lightning:layout>
+        </lightning:layoutItem>
+                                </div>
+                            </div>
+                        </lightning:layout>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                        <div class="new-containerpage footer-new-containerpage">
+                            <div class="slds-container--x-large new-container">
+                                <!--<c:footeras />-->
+                                <c:bcomfooter />
+                            </div>
+                        </div>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </div>
+        </div>
+        
+    </div>   
+</aura:component>

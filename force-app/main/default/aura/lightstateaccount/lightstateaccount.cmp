@@ -1,0 +1,522 @@
+<aura:component>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <ltng:require styles="{!$Resource.headerpart }"></ltng:require>
+   <ltng:require styles="{!$Resource.side }"></ltng:require> 
+   <ltng:require styles="{!$Resource.body }"></ltng:require>
+<aura:attribute name="popup1" type="boolean" default="false"/>
+   
+   <div class="c-container">
+      <div class="fullpage slds-scope">
+         <div class="slds-grid slds-wrap">
+            <lightning:layout multipleRows="true">
+               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage header-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:header />
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+               <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <c:mobilemenu />
+                   <lightning:layout>
+                     <div class="new-containerpage">
+                        <div class="slds-container--x-large new-container">
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <c:sidebarnew />
+                           </lightning:layoutItem>
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                              <div class="page-section page-main">
+                                 <div class="middlebar1">
+                                    <h2>Statement of Account</h2>
+                         </div>
+                                 <div class="dev">
+                                    <p class="recent">The following statement lists the invoices, payments and credits (if applicable) relating to your MLS account for the calendar year you have selected. These totals are shown below. If you are using this statement of accounts for tax reporting purposes and a tax professional will be assisting you, you may want to share this information with them. </p>
+                                    <p class="recent">For a printer-friendly copy, click the Download to PDF button.</p>
+                                     <div class="view"></div>
+                                   <div class="bodybottom">
+          
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+            <div class="part0 ">
+                
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                               <div class="layer part1 vpart"> 
+                           <h3>11/25/2020</h3> 
+                           <h2>Bright Test</h2>
+                               <p>9707 Key West Ave
+
+</p> 
+                                   <p>Rockville, MD 20850</p>
+                             </div>
+                    
+                </lightning:layoutItem>  
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                                <div class="layer part3 current"> 
+                             
+                                  <h3>Current Balance</h3>
+                                    <h4>$170.00</h4>
+                             </div>
+                </lightning:layoutItem>
+                        </div>
+            
+            </lightning:layoutItem>
+                
+                <div class="slds-container--x-large new-container">
+                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                    <div class="footer-full">
+                              <lightning:tabset>
+        <lightning:tab label="2020">
+            
+            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+            <div class="part0 pdown">
+              <div class="down">
+              
+                <lightning:button class="brand" variant="brand" label="Download as PDF" title="Download as PDF" onclick="{! c.openModel }" />
+                </div>
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <div class="layer part1 linepar"> 
+                           
+                           <h4>Total Subscription Fees</h4>
+                                   <h5>$ 1,513.00</h5>
+                               
+                             </div>
+                    
+                </lightning:layoutItem>  
+                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <div class="layer part1 linepar"> 
+                           
+                           <h4>Total Credits Applied</h4>
+                                   <h5>$ 0.00</h5>
+                               
+                             </div>
+                    
+                </lightning:layoutItem>
+                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <div class="layer part1 linepar"> 
+                           
+                           <h4>Total Payments Received</h4>
+                                   <h5>$1,343.00</h5>
+                               
+                             </div>
+                    
+                </lightning:layoutItem>
+                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <div class="layer part2 linepar"> 
+                           
+                           <h4>Total Balance Outstanding</h4>
+                                   <h5>$ 170.00</h5>
+                               
+                             </div>
+                    
+                </lightning:layoutItem>
+                        </div>
+            
+            </lightning:layoutItem>
+
+       <div class="table-form">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped new">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            
+                                            
+                                            
+                                            
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Opportunity Name">Date     </div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Application ID</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Close Date">Description</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Stage">Amount</div>
+                                            </th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="slds-hint-parent blue">
+                                           
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">10/20/2020 </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub"><a href="#">INV00105388</a></div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Invoice</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">169.95</div>
+                                            </td>
+                                            
+                     
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                          <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">10/20/2020 </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub"><a href="#">INV00105388</a></div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Invoice</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">169.95</div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                             <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">10/20/2020 </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub"><a href="#">INV00105388</a></div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Invoice</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">169.95</div>
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr class="slds-hint-parent white">
+                                          <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">10/20/2020 </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub"><a href="#">INV00105388</a></div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Invoice</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">169.95</div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                             <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">10/20/2020 </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub"><a href="#">INV00105388</a></div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Invoice</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">169.95</div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                          <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">10/20/2020 </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub"><a href="#">INV00105388</a></div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Invoice</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">169.95</div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                             <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">10/20/2020 </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub"><a href="#">INV00105388</a></div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Invoice</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">169.95</div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+           </table></div>
+            
+        </lightning:tab>
+        <lightning:tab label="2019" title="2nd tab extended title">
+            
+        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+            <div class="part0 pdown">
+              <div class="down">
+                 <lightning:button class="brand" variant="brand" label=" Download as PDF" title="Brand action" />
+               
+                </div>
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <div class="layer part1 linepar"> 
+                           
+                           <h4>Total Subscription Fees</h4>
+                                   <h5>$ 1,513.00</h5>
+                               
+                             </div>
+                    
+                </lightning:layoutItem>  
+                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <div class="layer part1 linepar"> 
+                           
+                           <h4>Total Credits Applied</h4>
+                                   <h5>$ 0.00</h5>
+                               
+                             </div>
+                    
+                </lightning:layoutItem>
+                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <div class="layer part1 linepar"> 
+                           
+                           <h4>Total Payments Received</h4>
+                                   <h5>$1,343.00</h5>
+                               
+                             </div>
+                    
+                </lightning:layoutItem>
+                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <div class="layer part2 linepar"> 
+                           
+                           <h4>Total Balance Outstanding</h4>
+                                   <h5>$ 170.00</h5>
+                               
+                             </div>
+                    
+                </lightning:layoutItem>
+                        </div>
+            
+            </lightning:layoutItem>
+<div class="table-form">
+       
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped new">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            
+                                            
+                                            
+                                            
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Opportunity Name">Date     </div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Application ID</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Close Date">Description</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Stage">Amount</div>
+                                            </th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="slds-hint-parent blue">
+                                           
+     
+                                            <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">10/20/2020 </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub"><a href="#">INV00105388</a></div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Invoice</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">169.95</div>
+                                            </td>
+                                            
+                     
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                          <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">10/20/2020 </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub"><a href="#">INV00105388</a></div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Invoice</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">169.95</div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                             <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">10/20/2020 </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub"><a href="#">INV00105388</a></div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Invoice</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">169.95</div>
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr class="slds-hint-parent white">
+                                          <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">10/20/2020 </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub"><a href="#">INV00105388</a></div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Invoice</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">169.95</div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                             <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">10/20/2020 </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub"><a href="#">INV00105388</a></div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Invoice</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">169.95</div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent white">
+                                          <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">10/20/2020 </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub"><a href="#">INV00105388</a></div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Invoice</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">169.95</div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent blue">
+                                             <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">10/20/2020 </div>
+                                            </td>
+                                            <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub"><a href="#">INV00105388</a></div>
+                                            </td>
+                                            <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">Invoice</div>
+                                            </td>
+                                            <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">169.95</div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+            </div>
+              
+        </lightning:tab>
+        
+    </lightning:tabset>
+                        
+                    </div>
+                    
+                </lightning:layoutItem>    
+                    
+                </div></div> 
+                                    
+                                    
+                                    
+                                    
+                                  
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                  
+                                   
+                                    
+                                 </div>
+                              </div>
+                           </lightning:layoutItem>
+                        </div>
+                     </div>
+                  </lightning:layout>
+               </lightning:layoutItem>
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage footer-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:footer />
+                         
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+            </lightning:layout>
+         </div>
+      </div>
+    <!-- PopUp 1 start -->
+       <aura:if isTrue="{!v.popup1}">
+           <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- ###### MODAL BOX HEADER Start ######-->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModel }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate email">Payment Details</h2>
+                    </header>
+                    <!--###### MODAL BOX BODY Part Start######-->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                         <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                              <div class="page-section page-main page-main2">
+                      
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                                          <div class="layer part1 ">
+                                             <h4>Amount</h4>
+                                            <h5>
+                                               $ 1,343.44
+                                             </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                                          <div class="layer part1">
+                                             <h4>Date Posted</h4>
+                                             <h5>
+                                             10/16/2020
+                                             </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                           
+                                       
+                                    </lightning:layoutItem>
+                                  
+                                  <p>Your payment information is not available. You have elected to either not store the payment method or have deleted it.</p>
+                                
+                                                              
+                                          
+                              </div>
+                           </lightning:layoutItem>
+                    </div>
+                    <!--###### MODAL BOX FOOTER Part Start ######-->
+                    
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+       </aura:if>
+       <!-- PopUp 1 end -->
+   </div>
+</aura:component>

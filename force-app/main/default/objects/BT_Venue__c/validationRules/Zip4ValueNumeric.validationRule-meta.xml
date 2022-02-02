@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Zip4ValueNumeric</fullName>
+    <active>true</active>
+    <description>Validates if the zip+4 has a value and is numeric</description>
+    <errorConditionFormula>AND(OR(NOT(ISNUMBER(Zip_4__c)),(CONTAINS(Zip_4__c, &quot;.&quot;))), NOT(ISBLANK(Zip_4__c)))</errorConditionFormula>
+    <errorDisplayField>Zip_4__c</errorDisplayField>
+    <errorMessage>Zip+4 must contain only numeric values</errorMessage>
+</ValidationRule>

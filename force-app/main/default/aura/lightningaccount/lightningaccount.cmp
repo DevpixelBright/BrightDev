@@ -1,0 +1,345 @@
+<aura:component>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <ltng:require styles="{!$Resource.headerpart }"></ltng:require>
+   <ltng:require styles="{!$Resource.side }"></ltng:require> 
+   <ltng:require styles="{!$Resource.body }"></ltng:require>
+  
+   <div class="c-container">
+      <div class="fullpage slds-scope">
+         <div class="slds-grid slds-wrap">
+            <lightning:layout multipleRows="true">
+               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage header-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:header />
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+               <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <c:mobilemenu />
+                   <lightning:layout>
+                      
+                     <div class="new-containerpage">
+                        <div class="slds-container--x-large new-container">
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <c:sidebarnew />
+                           </lightning:layoutItem>
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                              <div class="page-section page-main">
+                                 <div class="middlebar1">
+                               <h2>Hello <b>Amanda,</b> here is a quick look at what’s happening.</h2>
+                                    </div>
+                                  
+                                      <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="8" largeDeviceSize="8">
+                                  <div class="part4">
+                                          <div class="dev dev1">
+                    <h2><img src="{!$Resource.bright + '/bright-3.0/images/notifications-small.svg'}" alt="Account &amp; Settings Notifications" />Account &amp; Settings Notifications</h2>
+                    
+                    <div class="centerview centerview1">
+                        <img src="{!$Resource.bright + '/bright-3.0/images/notifications-big.svg'}" alt="No notifications" />
+                        
+                    <h4>Account &amp; Settings Notifications</h4>
+                        <p>Once you start using your Accounts &amp; Settings, you will get all your notification alerts here.</p>
+                    </div>
+                          <div class="review">
+                           <div class="line-by">
+                              <div class="singleline">
+                                 <h4>Agent Approval Needed</h4>
+                                 <p>Andreas Dias has sent you an agent transfer request</p>
+                              </div>
+                              <div class="singleline1">
+                                 <lightning:button class="brand" variant="brand" label="Review" title="Brand action" onclick="{! c.handleClick }" />
+                              </div>
+                           </div>
+                           <div class="line-by">
+                              <div class="singleline">
+                                 <h4>Agent Approval Needed</h4>
+                                 <p>Andreas Dias has sent you an agent transfer request</p>
+                              </div>
+                              <div class="singleline1">
+                                 <lightning:button class="brand" variant="brand" label="Review" title="Brand action" onclick="{! c.handleClick }" />
+                              </div>
+                           </div>
+                           <div class="line-by">
+                              <div class="singleline">
+                                 <h4>Agent Approval Needed</h4>
+                                 <p>Andreas Dias has sent you an agent transfer request</p>
+                              </div>
+                              <div class="singleline1">
+                                 <lightning:button class="brand" variant="brand" label="View Notice" title="Brand action" onclick="{! c.handleClick }" />
+                              </div>
+                           </div>
+                           <div class="line-by">
+                              <div class="singleline">
+                                 <h4>Agent Approval Needed</h4>
+                                 <p>Andreas Dias has sent you an agent transfer request</p>
+                              </div>
+                              <div class="singleline1">
+                                 <lightning:button class="brand" variant="brand" label="Review" title="Brand action" onclick="{! c.handleClick }" />
+                              </div>
+                           </div>
+                        </div>                    
+                                              
+                                              
+                    </div>
+                                           <div class="dev dev1">
+                    <h2><img style="margin-top:8px" src="{!$Resource.bright + '/bright-3.0/images/cases-small.svg'}" alt="Cases" />Cases<span>2</span></h2>
+                    
+                    <div class="centerview centerview1">
+                        <img src="{!$Resource.bright + '/bright-3.0/images/cases-icon-big.svg'}" alt="No cases" />
+                        
+                    <h4>No cases right now</h4>
+                        <p>Once you submit a case, you can view them here.</p>
+                    </div>
+                                               <div class="review">
+                           <div class="line-by">
+                           
+                               
+<div class="tabs">
+    <input type="radio" name="tabs" id="tabone" checked="checked"></input>
+  <label class="newtabs" for="tabone"><span>Case ID</span> - Ticket Short Description<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></label>
+  <div class="tab">
+  <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_fixed-layout slds-table_striped">
+  <thead>
+    <tr class="slds-line-height_reset">
+      <th class="" scope="col">
+        <div class="slds-truncate" title="Typical Column Header">Date Opened</div>
+      </th>
+      <th class="" scope="col">
+        <div class="slds-truncate" title="Truncated, no wrap">Subscription ID</div>
+      </th>
+      <th class="" scope="col">
+        <div class="slds-truncate" title="Typical Column Header">Status</div>
+      </th>
+        <th class="" scope="col">
+        <div class="slds-truncate" title="Truncated, no wrap">Department</div>
+      </th>
+      <th class="" scope="col">
+        <div class="slds-truncate" title="Typical Column Header">
+          
+          </div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="slds-hint-parent">
+        <td data-label="Typical Column Header">
+        <div class="slds-truncate" title="Date">October 22, 2020</div>
+      </td>
+      <td class="slds-cell-wrap" data-label="Truncated, no wrap">
+          <div class="slds-truncate" title="number">18354256</div></td>
+      <td data-label="Typical Column Header">
+        <div class="slds-truncate" title="Active">Active</div>
+      </td>
+        <td class="slds-cell-wrap" data-label="Truncated, no wrap">
+        <div class="slds-truncate" title="Support">Support Center</div>
+      </td>
+      <td data-label="Typical Column Header">
+        <div class="slds-truncate" title="Typical cell content">
+          <lightning:button class="brand" variant="brand" label="Manage" title="Brand action" onclick="{! c.handleClick }" />
+          </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+   </div>
+      <input type="radio" name="tabs" id="tabtwo"></input>
+  <label for="tabtwo"><span>Case ID</span> - Ticket Short Description<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></label>
+  <div class="tab">
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_fixed-layout slds-table_striped">
+  <thead>
+    <tr class="slds-line-height_reset">
+      <th class="" scope="col">
+        <div class="slds-truncate" title="Typical Column Header">Date Opened</div>
+      </th>
+      <th class="" scope="col">
+        <div class="slds-truncate" title="Truncated, no wrap">Subscription ID</div>
+      </th>
+      <th class="" scope="col">
+        <div class="slds-truncate" title="Typical Column Header">Status</div>
+      </th>
+        <th class="" scope="col">
+        <div class="slds-truncate" title="Truncated, no wrap">Department</div>
+      </th>
+      <th class="" scope="col">
+        <div class="slds-truncate" title="Typical Column Header">
+          
+          </div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="slds-hint-parent">
+        <td data-label="Typical Column Header">
+        <div class="slds-truncate" title="Date">October 22, 2020</div>
+      </td>
+      <td class="slds-cell-wrap" data-label="Truncated, no wrap">
+          <div class="slds-truncate" title="number">18354256</div></td>
+      <td data-label="Typical Column Header">
+        <div class="slds-truncate" title="Active">Active</div>
+      </td>
+        <td class="slds-cell-wrap" data-label="Truncated, no wrap">
+        <div class="slds-truncate" title="Support">Support Center</div>
+      </td>
+      <td data-label="Typical Column Header">
+        <div class="slds-truncate" title="Typical cell content">
+          <lightning:button class="brand" variant="brand" label="Manage" title="Brand action" onclick="{! c.handleClick }" />
+          </div>
+      </td>
+    </tr>
+  </tbody>
+</table></div>
+      <input type="radio" name="tabs" id="tabthree"></input>
+  <label for="tabthree"><span>Case ID</span> - Ticket Short Description<img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" /></label>
+  <div class="tab">
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_fixed-layout slds-table_striped">
+  <thead>
+    <tr class="slds-line-height_reset">
+      <th class="" scope="col">
+        <div class="slds-truncate" title="Typical Column Header">Date Opened</div>
+      </th>
+      <th class="" scope="col">
+        <div class="slds-truncate" title="Truncated, no wrap">Subscription ID</div>
+      </th>
+      <th class="" scope="col">
+        <div class="slds-truncate" title="Typical Column Header">Status</div>
+      </th>
+        <th class="" scope="col">
+        <div class="slds-truncate" title="Truncated, no wrap">Department</div>
+      </th>
+      <th class="" scope="col">
+        <div class="slds-truncate" title="Typical Column Header">
+          
+          </div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="slds-hint-parent">
+        <td data-label="Typical Column Header">
+        <div class="slds-truncate" title="Date">October 22, 2020</div>
+      </td>
+      <td class="slds-cell-wrap" data-label="Truncated, no wrap">
+          <div class="slds-truncate" title="number">18354256</div></td>
+      <td data-label="Typical Column Header">
+        <div class="slds-truncate" title="Active">Active</div>
+      </td>
+        <td class="slds-cell-wrap" data-label="Truncated, no wrap">
+        <div class="slds-truncate" title="Support">Support Center</div>
+      </td>
+      <td data-label="Typical Column Header">
+        <div class="slds-truncate" title="Typical cell content">
+          <lightning:button class="brand" variant="brand" label="Manage" title="Brand action" onclick="{! c.handleClick }" />
+          </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+</div>
+                           </div>
+                        </div>
+                    </div>
+                                      
+                                          
+                                          
+                                          
+                                          </div>
+                                  </lightning:layoutItem>
+                                      <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                  <div class="dev dev1">
+                    <h2><img src="{!$Resource.bright + '/bright-3.0/images/invoice-small.svg'}" alt="Account-Balance" /> Account Balance</h2>
+                    
+                    <div class="centerview">
+                         <img src="{!$Resource.bright + '/bright-3.0/images/Invoice-icon-big.svg'}" alt="No invoices" />
+                    <h4>You have no invoices now</h4>
+                        <p>As you start receiving invoices, the details will be here.</p>
+                    </div>
+                                      <div class="review">
+                           <div class="line-by">
+                              <div class="singleline">
+                                 <h4>Invoice # : INV00105237</h4>
+                                 <p>Date Issued: 09/24/2020</p>
+                              </div>
+                              <div class="singleline1">
+                                 <h5>$370.00</h5>
+                              </div>
+                           </div>
+                           <div class="line-by">
+                              <div class="singleline">
+                                 <h4>Invoice # : INV00105237</h4>
+                                 <p>Date Issued: 09/24/2020</p>
+                              </div>
+                              <div class="singleline1">
+                                 <h5>$370.00</h5>
+                              </div>
+                           </div>
+                           <div class="line-by line-by1">
+                              <div class="singleline">
+                                 <lightning:button class="brand" variant="brand" label="Pay Balance" title="Brand action" onclick="{! c.handleClick }" />
+                              </div>
+                              <div class="singleline1">
+                                 <h5>$370.00</h5>
+                              </div>
+                           </div>
+                        </div>
+                    </div>
+                                            <div class="dev dev1">
+                    <div class="full">
+                        <div class="fullleft">
+                        <h5>AL</h5>
+                        </div>
+                        <div class="fullright">
+                        <h4>Amanda Lynn</h4>
+                        <p>Broker | Fox &amp; Roach LP Devon, PA amandalynn@foxroach.com (301) 729-3843</p>
+                        </div>
+                               <div class="fullright1">
+                        <img src="{!$Resource.bright + '/bright-3.0/images/edit-black.svg'}" alt="Edit" />    </div>
+                        </div>
+                        
+                    
+               
+                    </div>
+                                          <div class="dev dev1">
+                    <div class="full">
+                        
+                        <div class="fullright">
+                        <h4>Amanda Lynn</h4>
+                        <p>Broker | Fox &amp; Roach LP Devon, PA amandalynn@foxroach.com (301) 729-3843</p>
+                        </div>
+                               <div class="fullright1">
+                        <img src="{!$Resource.bright + '/bright-3.0/images/edit-black.svg'}" alt="Edit" />    </div>
+                        </div>
+                        
+                    
+               
+                    </div>
+                                  </lightning:layoutItem>
+                                  
+                                  
+                                 
+                              </div>
+                           </lightning:layoutItem>
+                        </div>
+                     </div>
+                  </lightning:layout>
+               </lightning:layoutItem>
+                 <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage footer-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:footer />
+                         
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+                
+                
+                
+                
+                
+            </lightning:layout>
+         </div>
+      </div>
+      
+   </div>
+</aura:component>

@@ -1,0 +1,90 @@
+<apex:page sidebar="false" showheader="false" standardStylesheets="false" docType="html-5.0" controller="Communities_AgentListingInstructionsCls" lightningstylesheets="true">
+    <apex:composition template="Communities_Base">  
+        <apex:define name="content">
+        
+            <script>
+               // markOptionPanel("support");
+            </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/angular.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/ui-bootstrap-tpls-0.12.0.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.AngularJsTable,'/ng-table.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.AngularJsTable,'/ng-table.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.DataArchive_Library,'js/jquery.min.js')}"/>
+    <c:Bootstrap_Resources />
+    <apex:stylesheet value="{!URLFOR($Resource.ListingsCSS,'AgentStyleSheet.css')}"/>
+    
+    <style>
+        
+    </style>
+    <apex:form >
+        <div class="steps-part">
+            <div class="header-steps">
+                <h2><img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/arrow-title.png')}" /> 
+                    <span>Agent Listing Transfer</span>
+                </h2>
+            </div>
+            <div class="steps">
+				<h2 class="active">
+					<a href="#"><span>Step1 :</span> Instructions</a>
+				</h2>
+				<h2>
+					<!-- <a href="step2.html"><span>Step2 :</span> Select listings</a> -->
+					<apex:commandLink action="{!getStarted}"><span>Step2 :</span> Select listings</apex:commandLink>
+				</h2>
+				<h2><a href="#"><span>Step3 :</span> Review &amp; Submit</a></h2>
+            </div>
+            <div class="content-view">
+                <div class="comment">
+                    <img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/info.jpg')}" alt="info" title="info"/>
+                    <p>This is your request to transfer listings to the destination office, the office you currently work in.</p>
+                </div>
+                <div class="steps-point">
+                    <h2>Once the request has been submitted</h2>
+                    <ul>
+                        <li><img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/icon-drop.jpg')}" />The origination office (the office that owns the listing) will be notified of your request and will have seven days to approve or decline the transfer</li>
+                        <li><img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/icon-drop.jpg')}" />If approved, the destination office will be notified of your request and will have seven days to approve or decline the transfer</li>
+                        <li><img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/icon-drop.jpg')}" />If declined by either the origination or the destination office, listings will not be transferred</li>
+                        <li><img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/icon-drop.jpg')}" />Please contact the appropriate Broker Office if you have questions.</li>
+                    </ul>
+                </div>
+                <div class="select-view">
+                    <h2>How to request a transfer</h2>
+                    <div class="stepline">
+                        <img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/step1.jpg')}" />
+                        <p>Filter the request which you intend to transfer</p>
+                    </div>
+                    <div class="lineup">
+                        <img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/arrowpoint.jpg')}" width="22" height="43" alt=""/>
+                    </div>
+                    <div class="stepline">
+                        <img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/step2.jpg')}" />
+                        <p>Filter the request which you intend to transfer</p>
+                    </div>
+                    <div class="lineup">
+                        <img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/arrowpoint.jpg')}" width="22" height="43" alt=""/>
+                    </div>
+                    <div class="stepline">
+                        <img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/step3.jpg')}" />
+                        <p>Filter the request which you intend to transfer</p>
+                    </div>
+                    <div class="lineup">
+                        <img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/arrowpoint.jpg')}" width="22" height="43" alt=""/>
+                    </div>
+                    <div class="stepline">
+                        <img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/step4.jpg')}" />
+                        <p>Filter the request which you intend to transfer</p>
+                    </div>
+                </div>
+            </div>
+            <div class="started-view">
+            	<apex:commandLink action="{!getStarted}">Get Started&nbsp;&nbsp;<img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/orangearrow.png')}"/>
+            	</apex:commandLink>
+                <!-- <a href="/apex/AgentListings?id={!subId}">Get Started&nbsp;&nbsp;<img src="{!URLFOR($Resource.ListingsCSS,'/AgentListingLogos/orangearrow.png')}"/></a> -->
+            </div>
+        </div>
+        
+    </apex:form>
+    </apex:define>
+    </apex:composition>
+</apex:page>

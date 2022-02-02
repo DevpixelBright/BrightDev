@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QP_Not_Success</fullName>
+    <columns>NAME</columns>
+    <columns>OBJECT_ID</columns>
+    <columns>SFMessageID__c</columns>
+    <columns>SFDC_Transaction_ID__c</columns>
+    <columns>QPStatus__c</columns>
+    <columns>ObjectType__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>LAST_UPDATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>QPStatus__c</field>
+        <operation>notEqual</operation>
+        <value>Success</value>
+    </filters>
+    <label>QP Not Success</label>
+</ListView>

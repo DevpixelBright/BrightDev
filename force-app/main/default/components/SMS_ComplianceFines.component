@@ -1,0 +1,42 @@
+<apex:component controller="SMS_ComplianceFinesController" >
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/angular.js')}"/>
+	<apex:includeScript value="{!URLFOR($Resource.AngularLibrary,'/ui-bootstrap-tpls-0.12.0.js')}"/>
+	<apex:includeScript value="{!URLFOR($Resource.AngularJsTable,'/ng-table.js')}"/>
+	<apex:stylesheet value="{!URLFOR($Resource.AngularJsTable,'/ng-table.css')}"/>
+	<apex:includeScript value="{!URLFOR($Resource.DataArchive_Library,'js/jquery.min.js')}"/>
+	<c:Bootstrap_Resources />
+	
+	
+	<apex:attribute name="SMSComplianceId" type="string" assignTo="{!complianceId}" description="SMS Compliance Id" />
+	<div>
+		<table class="table">
+			<thead>
+				<tr>
+				<th scope="col">Date of Violation</th>
+				<th scope="col">Fine Amount</th>
+				<th scope="col">Violation Reason</th>
+				<th scope="col">MLS Number</th>
+				<th scope="col">Violation Number</th>
+				<th scope="col">Last Date to Appeal</th>
+				<th scope="col">Under Appeal</th>
+				</tr>
+			</thead>
+			<tbody>
+			<apex:repeat value="{!complianceFines}" var="fine">
+				<tr>
+					<td scope="row">{!fine.Date_of_Fine__c}</td>
+					<td>{!fine.Fine_Amount__c}</td>
+					<td>Reason(which field is this)</td>
+					<td>{!fine.Compliance_Violation__r.MLS_Number__c}</td>
+					<td>{!fine.Compliance_Violation__r.Name}</td>
+					<td>{!fine.Last_Date_to_Appeal__c}</td>
+					<td>Under Appeal (which field is this)</td>
+					
+				</tr>
+			</apex:repeat>
+			</tbody>
+		</table>
+	</div>
+	
+</apex:component>

@@ -1,0 +1,117 @@
+<apex:page controller="NewLoginIdCls"  lightningstylesheets="true">
+    
+    <script src="{!URLFOR($Resource.Bootstrap_Layout_Library, '/js/jquery.min.js')}"></script>
+    <apex:form id="fm">
+    <style>
+        .new-btn{ margin:0 0 0 15%;}
+        .field-error {color:red; font-size:12px; display:none;padding-left: 440px;}
+        .new-login{ margin:10px 0; padding:0; clear:both;}
+        .new-login label{font-size: 13px;color: #999; width:30%; display:inline-block;}
+        .new-login input{margin-left: 15px;padding: 5px;border-radius: 10px;border: 1px solid #999;color: #000;}
+        .new-login label.opb{ color:#000; }
+        .new-login input:focus{ outline:none;}
+        .new-login label.field-error{margin: 5px 0 5px -9%;width: 100%;}
+        .cancelbtn {background: #1797c0 !important;margin:0 0 0 10px; color: #fff !important; padding: 8px 15px !important; border: none !important;}
+        
+    </style>
+   
+        <div id="apexMsg">
+            <apex:pageMessages id="showmsg"></apex:pageMessages>
+        </div>
+            <div class="new-login" style=""> 
+                <apex:outputLabel value="Old Login Name" ></apex:outputLabel>
+                <apex:outputLabel styleclass="opb" style="margin-left: 15px;" value="{!sub.BRIGHT_LoginName__c}" id="opb" rendered="{!IF(sub.Service_Jurisdiction__c == 'BRIGHT', TRUE, FALSE)}"/>
+                <apex:outputLabel style="margin-left: 15px;" value="{!sub.TREND_Login_Name__c}" id="opt" rendered="{!IF(sub.Service_Jurisdiction__c == 'TREND', TRUE, FALSE)}"/> 
+            </div>
+            <div class="new-login"> 
+                <apex:outputLabel value="Enter New Login Name" ></apex:outputLabel>
+                <apex:inputText style="margin-left: 15px;" value="{!newValue}" id="ipt"/> 
+                <label class="field-error" id="loginAvailable" ></label>
+            </div>
+                
+        <!--<apex:commandButton id="updateBtn" value="Save LoginId" action="{!updateSubscription}" rendered="{!available}"/>-->
+         <div class="new-btn">
+            <apex:commandbutton styleclass="cancelbtn" oncomplete="validate();" value="Validate" rerender="fm" id="cb"></apex:commandbutton>
+            <button class="hideclass cancelbtn" type="button" style="display:none;" onclick="updateSubscription()" id="updateBtn" >Save LoginId </button> 
+            <apex:commandButton id="cancelBtnCss" value="Cancel" styleclass="cancelbtn" action="/{!sub.id}"/>
+         </div>  
+        <apex:actionFunction name="updateSubscription" action="{!updateSubscription}" rerender="fm"></apex:actionFunction>
+         
+        <apex:actionFunction name="callMethod" action="{!furtherValidate}" reRender="fm" onComplete="displaymsg();">
+            <apex:param name="pattern" value=""/>
+        </apex:actionFunction>
+        <script>
+                function validate() {
+                console.log();
+                var newValue = '{!newValue}';
+                if(newValue.length < 3 || newValue.length > 25){
+                    $("#loginAvailable").html("Login Name should be a minimum of 3 characters or a maximum of 25 characters.");
+                    $(".field-error").css('display', 'grid');
+                    $(".field-error").css('color', 'red');
+                    $("#loginAvailable").show();
+                    $("#apexMsg").hide();
+                    $("#updateBtn").hide();
+                }
+                else {
+                    var regex = new RegExp('^[A-Za-z0-9@.-]*$');
+                    var pattern = newValue.match(regex);
+                    if(pattern) {
+                        if(!isNaN(pattern[0])) {
+                            if(pattern[0] == '{!sub.Name}'){
+                                $("#loginAvailable").html("");
+                                $(".field-error").css('display', 'none');
+                                $("#loginAvailable").hide();
+                                
+                                callMethod(pattern[0]);
+                            }
+                            else{
+                                $("#loginAvailable").html("Login Name with all numbers will not be allowed unless it matches your subscription id.");
+                                $(".field-error").css('display', 'grid');
+                                $(".field-error").css('color', 'red');
+                                $("#loginAvailable").show();
+                                $("#apexMsg").hide();
+                                $("#updateBtn").hide();
+                            }
+                        }
+                        else if(isNaN(pattern[0])){
+                            $("#loginAvailable").html("");
+                            $(".field-error").css('display', 'none');
+                            $("#loginAvailable").hide();
+                            callMethod(pattern[0]);
+                        }
+                    }
+                    else{
+                        $("#loginAvailable").html("Login Name can contain one of the following special characters: @ or . or -");
+                        $(".field-error").css('display', 'grid');
+                        $(".field-error").css('color', 'red');
+                        $("#loginAvailable").show();
+                        $("#apexMsg").hide();
+                        $("#updateBtn").hide();
+                    }
+                }                
+            }
+            function displaymsg() {
+                var bool = '{!available}';
+                console.log('---bool---'+bool);
+                
+                if(bool == 'true') {
+                    $("#loginAvailable").html("Available");
+                    $(".field-error").css('display', 'grid');
+                    $(".field-error").css('color', 'green');
+                    $("#loginAvailable").show();
+                    $("#updateBtn").show();
+                    $("[id$=cb]").hide();
+                    $("[id$=ipt]").attr('disabled', 'disabled');
+                }
+                else {
+                    $("#loginAvailable").html("Unavailable");
+                    $(".field-error").css('display', 'grid');
+                    $(".field-error").css('color', 'red');
+                    $("#loginAvailable").show();
+                    $("#updateBtn").hide();
+                }
+            }
+        </script>
+    </apex:form>  
+    
+</apex:page>

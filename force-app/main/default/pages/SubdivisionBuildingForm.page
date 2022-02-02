@@ -1,0 +1,20 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" lightningstylesheets="true">
+    <apex:includeLightning />
+   <div id="dataTable" />
+    <script>
+    try {
+        $Lightning.use("c:SubDivisionBuildForm", function() {
+            $Lightning.createComponent("c:SubDivisionBuildingForm", {}, "dataTable", function(cmp) {
+                console.log('done');
+            });
+        });       
+    }
+    catch(err) {
+        if(err.message && err.message.contains('This page has an error. You might just need to refresh it.'))
+            window.location = '';
+    }
+    </script>
+    <style>
+        #auraErrorMessage {display:none;}
+    </style>
+</apex:page>

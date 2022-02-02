@@ -1,0 +1,12 @@
+<apex:page showHeader="false" standardStylesheets="false">
+    <apex:includeLightning />
+    <apex:slds />
+    <div id="dataTable" />
+    <script>
+        $Lightning.use("c:EzjoinPersonalassistantAPP", function() {
+            $Lightning.createComponent("c:EzjoinPersonalassistant", {}, "dataTable", function(cmp) {
+               console.log('done');
+            });
+        });       
+    </script>
+</apex:page>

@@ -1,0 +1,194 @@
+<apex:page controller="SMS_LateFees_Config" standardStylesheets="false" showHeader="false" lightningStyleSheets="true" applyBodyTag="false" sidebar="false" applyHtmlTag="false" docType="html-5.0" >
+    
+    <apex:form styleClass="slds-form">
+        <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+            <head>
+                <apex:slds />
+            </head>
+            
+            <body class="slds-scope">
+                <apex:slds />
+                <div>
+                    <apex:pageMessages ></apex:pageMessages>
+                </div>
+                <div class="slds-page-header">
+                    <div class="slds-media">
+                        <div class="slds-media__body">
+                            <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Late Fees Configuration">Late Fees Configuration</h1>
+                        </div>
+                    </div>
+                </div>
+                
+                <apex:pageBlock mode="edit" ><!--title="Late Fees Configuration"-->
+                    
+                    <apex:pageBlockSection columns="1" >
+                        
+                        <apex:outputPanel rendered="{!if(!isEditSetting && isEdit == false, true, false)}">
+                            <div>
+                                <div>
+                                    <apex:outputLabel styleClass="slds-item_label slds-text-color_weak slds-truncate" value="Is Active">&nbsp;
+                                        <apex:inputCheckbox value="{!isActive}" disabled="{!!isEditSetting}"  label="Is Active" ></apex:inputCheckbox>                
+                                    </apex:outputLabel><br/>
+                                </div>
+                                <div style="padding-top: 10px;">
+                                    <div style="float:left;">
+                                        <apex:outputLabel styleClass="slds-item_label slds-text-color_weak slds-truncate">Scheduled Time: </apex:outputLabel>&nbsp;
+                                        <apex:outputText styleClass="slds-item_label slds-text-color_weak slds-truncate" value="{!scheduleHour}"  > </apex:outputText>: 
+                                        <apex:outputText styleClass="slds-item_label slds-text-color_weak slds-truncate" value="{!scheduleMinute}" > </apex:outputText>
+                                        <apex:outputText styleClass="slds-item_label slds-text-color_weak slds-truncate" value="{!scheduleMeridiem}" > </apex:outputText><br/>
+                                    </div>
+                                    <div style="float:right; padding-right: 50%;">
+                                        <apex:commandButton action="{!editSetting}" value="Edit" styleClass="slds-button slds-button_brand"  />
+                                    </div>
+                                </div><br/>
+                                <!--<apex:outputLabel styleClass="slds-item_label slds-text-color_weak slds-truncate" value="Service Jurisdictions:"> &nbsp;
+                                <apex:outputText Value="{!includedServiceJurisdiction}" label="Service Jurisdictions"></apex:outputText>
+                                </apex:outputLabel><br/> 
+                                -->
+                                <div style="padding-top: 10px;">
+                                    <apex:outputLabel styleClass="slds-item_label slds-text-color_weak slds-truncate" value="Included Billing Jurisdictions:"> &nbsp;
+                                        <apex:outputText Value="{!includedBillingJurisdiction}" label="Included Billing Jurisdictions"></apex:outputText>
+                                    </apex:outputLabel> 
+                                </div>
+                            </div>
+                        </apex:outputPanel>
+                        <!--<apex:pageBlockButtons location="top" rendered="{!isNotEdit}"  >-->
+                        <!--<apex:outputPanel rendered="{!isNotEdit}" styleClass="slds-p-top_medium" >
+                        <apex:commandButton action="{!editSetting}" value="Edit" styleClass="slds-button slds-button_brand" style="margin-top: 15px;"  />
+                        </apex:outputPanel>-->
+                        <!--</apex:pageBlockButtons>-->
+                    </apex:pageBlockSection>
+                    
+                    <apex:pageBlockSection columns="1">
+                        <apex:outputPanel id="billPanel" rendered="{!isEditSetting}">
+                            <div style="padding: 5px;  text-align:centre;">            
+                                
+                                <table style="width:58%; background-color: #f8f8f8;" Class="slds-table">
+                                    
+                                    <tr class="slds-col">
+                                        <td><apex:outputLabel value="Is Active" /></td>
+                                        <td><apex:inputCheckbox value="{!isActive}" disabled="{!!isEditSetting}"  label="Is Active" ></apex:inputCheckbox></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="slds-col">
+                                        <td>Schedule Time </td>
+                                        <td><apex:selectList styleClass="slds-select slds-size_1-of-12" style="width: 70px; " value="{!scheduleHour}" size="1">
+                                            <apex:selectOptions value="{!hour}"></apex:selectOptions>
+                                            </apex:selectList>                                        
+                                            <apex:selectList styleClass="slds-select slds-size_1-of-12" style="width: 70px; margin-left: 5px;" value="{!scheduleMinute}" size="1" >
+                                                <apex:selectOptions value="{!minute}"></apex:selectOptions>
+                                            </apex:selectList>
+                                            <apex:selectList styleClass="slds-select slds-size_1-of-12" style="width: 70px; margin-left: 5px;" value="{!scheduleMeridiem}" size="1" >
+                                                <apex:selectOptions value="{!meridiem}"></apex:selectOptions>
+                                            </apex:selectList></td>
+                                    </tr>
+                                    <tr class="slds-col">
+                                        <td></td>
+                                        <td style="text-align: center;"><apex:outputLabel value="Available Billing Jurisdictions"/></td>
+                                        <td></td>
+                                        <td style="text-align: center;"><apex:outputLabel value="Selected Billing Jurisdictions"/></td>
+                                    </tr>
+                                    <tr class="slds-col">
+                                        <td style="vertical-align: middle;">
+                                            <apex:outputLabel value="Billing Jurisdictions"/>
+                                        </td>
+                                        <td>
+                                            <apex:selectList value="{!notSelectedBJs}" multiselect="true" size="{!picklistlength}" styleclass="slds-select" style="border-radius: 4px; color:black; width:100%;">
+                                                <apex:selectOptions value="{!notSelectedBJOptions}"/>
+                                            </apex:selectList>
+                                        </td>
+                                        <td style="text-align: center; vertical-align: middle;">
+                                            <div style="padding:inherit;">
+                                                <!--<apex:image alt="Add" value="/img/s.gif" style="height: 20px;" styleClass="rightArrowIcon slds-button_icon" title="Add" onclick="addBJ();" />-->
+                                                <span  class="slds-icon_container slds-icon-standard-account" title="Add" onclick="addBJ();" >
+                                                    <svg aria-hidden="true" class="slds-icon">
+                                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#chevronright"></use>
+                                                    </svg>
+                                                </span>
+                                                <apex:actionFunction name="addBJ" action="{!addBJ}" reRender="billPanel"/>
+                                            </div>
+                                            
+                                            <div>
+                                                <!--<apex:image alt="Remove" value="/img/s.gif" style="height: 20px;" styleClass="leftArrowIcon slds-button_icon" title="Remove" onclick="removeBJ();" />-->
+                                                <span class="slds-icon_container slds-icon-standard-account" title="Remove" onclick="removeBJ();" >
+                                                    <svg class="slds-icon">
+                                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#chevronleft"></use>                                                            
+                                                    </svg>
+                                                </span>
+                                                <apex:actionFunction name="removeBJ" action="{!removeBJ}" reRender="billPanel"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <apex:selectList value="{!selectedBJs}" multiselect="true" size="{!picklistlength}" style="border-radius: 4px; color:black; width:100%;" styleclass="slds-select ">
+                                                <apex:selectOptions value="{!selectedBJOptions}"/>
+                                            </apex:selectList>
+                                        </td>
+                                    </tr>
+                                </table>
+                                
+                            </div>
+                            <div style="text-align: center;" >
+                                <apex:commandButton action="{!saveSetting}" value="Save" styleClass="slds-button slds-button_brand"/> 
+                                <apex:commandButton action="{!cancel}" value="Cancel" styleClass="slds-button slds-button_brand"/>
+                            </div>
+                        </apex:outputPanel>
+                    </apex:pageBlockSection>
+                    
+                    
+                    <apex:pageBlockSection columns="1">
+                        
+                        <apex:pageBlockTable value="{!lateFeesConfigs}" var="config" rendered="{!isNotEdit}" styleClass="slds-table">
+                            <apex:column headerValue="Action">              
+                                <apex:commandLink action="{!editConfig}" value="Edit">
+                                    <apex:param name="editConfigId" value="{!config.lateFeesConfig.Id}" assignTo="{!editConfigId}"/>
+                                </apex:commandLink>
+                            </apex:column>
+                            <apex:column value="{!config.lateFeesConfig.Is_Active__c}" headerValue="Late Fee Assessment"/>
+                            <apex:column value="{!config.lateFeesConfig.Day_of_Week__c}"/>            
+                            <apex:column value="{!config.lateFeesConfig.Threshold_Accounts__c}"/>
+                            <apex:column value="{!config.lateFeesConfig.Threshold_Amount__c}"/>
+                            <apex:column value="{!config.lateFeesConfig.Threshold_Days__c}"/>            
+                        </apex:pageBlockTable>
+                        
+                    </apex:pageBlockSection>
+                    
+                    
+                    <apex:pageBlockSection rendered="{!IsEdit}">
+                        
+                        <apex:inputField styleclass="slds-input" value="{!editLateFeesConfig.Threshold_Accounts__c}"/>
+                        <apex:outputField styleclass="slds-input" value="{!editLateFeesConfig.Day_of_Week__c}"/>            
+                        <apex:inputField styleclass="slds-input" value="{!editLateFeesConfig.Threshold_Amount__c}"/>
+                        <apex:inputField styleclass="slds-checkbox" value="{!editLateFeesConfig.Is_Active__c}"/>         
+                        <apex:inputField styleclass="slds-input" value="{!editLateFeesConfig.Threshold_Days__c}"/>
+                        <br/>
+                        
+                        <apex:outputPanel rendered="{!IsEdit}" styleClass="slds-align_absolute-center" style="float:right;">
+                            <!--<apex:pageBlockButtons location="bottom" rendered="{!IsEdit}">-->
+                            <apex:commandButton value="Save" action="{!saveConfig}" styleClass="slds-button slds-button_brand"/>
+                            <apex:commandButton value="Cancel" action="{!cancel}" styleClass="slds-button slds-button_brand"/>
+                            <!--</apex:pageBlockButtons>-->
+                        </apex:outputPanel>
+                    </apex:pageBlockSection> 
+                    
+                    <apex:pageBlockSection title="Run Late Fees" columns="2" rendered="{!isNotEdit}">
+                        
+                        <apex:inputText style="width:50%;" styleClass="slds-input" value="{!maximumAccounts}" label="Threshold Accounts"> </apex:inputText>
+                        <apex:inputText style="width:50%;" styleClass="slds-input" value="{!amount}" label="Threshold Amount"> </apex:inputText>
+                        <apex:inputText style="width:50%;" styleClass="slds-input" value="{!days}" label="Threshold Days"> </apex:inputText>           
+                        <!--<div style="text-align:center;">
+                        <apex:commandButton styleClass="slds-button slds-button_brand" style="height:32px; margin-left:85%; width:37%; margin-top:10px;" value="Run Late Fee Assessment" action="{!runLateFeesAssessment}"/>
+                        </div>
+                        -->
+                    </apex:pageBlockSection>
+                    
+                    <apex:pageBlockSection columns="1" rendered="{!isNotEdit}">
+                        <div style="text-align:center;">
+                            <apex:commandButton styleClass="slds-button slds-button_brand" style="margin-left:42%; width:18%;" value="Run Late Fee Assessment" action="{!runLateFeesAssessment}"/>
+                        </div>
+                    </apex:pageBlockSection>
+                </apex:pageBlock>
+            </body>
+        </html>
+    </apex:form>       
+</apex:page>

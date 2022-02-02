@@ -1,0 +1,230 @@
+<aura:component controller="BuyPremiumProductController" implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,force:hasRecordId,lightning:isUrlAddressable" access="global" >
+    <aura:registerEvent name="loadMyEvent" type="c:BuyProductEvent"/>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    
+    <ltng:require styles="{!$Resource.newproduct }"></ltng:require>
+    <ltng:require styles="{!$Resource.headeras }"></ltng:require>
+    <ltng:require styles="{!$Resource.bcomfooter }"></ltng:require>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="subscriptionId" type="String"/>
+    <aura:attribute name="subscription" type="Object"/>
+    
+    <aura:attribute name="newSetupFeeMapping" type="String"/>
+    <aura:attribute name="recurringRatePlanList" type="List" default="[]" />
+    <aura:attribute name="oneTimeRatePlanList" type="List" default="[]" />
+    <aura:attribute name="selectedRecurringRatePlanId" type="String"/>
+    <aura:attribute name="selectedOneTimeRatePlanId" type="String"/>
+    <aura:attribute name="oneTimeRatePlanMap" type="Map" />
+    <aura:attribute name="recurringRatePlanMap" type="Map"/>
+    <aura:attribute name="oneTimeRatePlanAmountMap" type="Map" />
+    <aura:attribute name="recurringRatePlanAmountMap" type="Map"/>
+    <aura:attribute name="selectedOneTimeRatePlanAmount" type="String" />
+    <aura:attribute name="selectedRecurringRatePlanAmount" type="String"/>
+    
+    <aura:attribute name="selectPlan" type="List" default="[]" />
+    <aura:attribute name="setupFee" type="String" default="[]"/>
+    <aura:attribute name="disabled" type="Boolean" default="false" />
+    <aura:attribute name="setupFeeDisabled" type="Boolean" default="false" />
+    <aura:attribute name="today" type="Date" />
+    <aura:attribute name="showSecondScreen" type="Boolean" default="false"/>
+    <aura:attribute name="selected" type="String" default="[]"/>
+    
+    <aura:attribute name="productType" type="string"/>
+    <aura:attribute name="promoCode" type="string"/>
+    <aura:attribute name="subscriptionObj" type="Subscriptions__c" default="{'sObjectType':'Subscriptions__c'}"/>
+    <aura:attribute name="productName" type="string" />
+    <aura:attribute name="ratePlanList" type="List" />
+    
+    <aura:attribute name="errorMsg" type="String" default="" description="test" />
+    <aura:attribute name="errorMsg2" type="String" default="" description="test" />
+    <aura:attribute name="existDisabled" type="Boolean" default="false" />
+    
+    
+    <aura:if isTrue="{!!v.showSecondScreen}">
+        <div class="c-container">
+            <div class="fullpage slds-scope">
+                <div class="slds-grid slds-wrap">
+                    <lightning:layout multipleRows="true">                        
+                        <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                            
+                            <lightning:layout>
+                                <div class="new-containerpage">
+                                    <div class="slds-container--x-large new-container">
+                                        
+                                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                            <div class="page-section page-main">
+                                                
+                                                <div class="dev dev1">
+                                                    <aura:if isTrue="{!v.errorMsg != ''}">
+                                                        <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error blueline" role="alert" style="margin-bottom:26px; border-radius: 2px;">
+                                                            <span class="slds-assistive-text">error</span>
+                                                            <span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small" title="Description of icon when needed"></span>
+                                                            <h2 class="newarrow" style="margin:0;"><img src="{!$Resource.ejoin + '/ejoinimages/ezjoininfo.png'}" /><aura:unescapedHtml  value="{!v.errorMsg}" /></h2>
+                                                        </div>
+                                                        
+                                                    </aura:if>
+                                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="5" largeDeviceSize="5" >
+                                                        
+                                                        <div class="layer part1">
+                                                            <h4>Selected Product</h4>
+                                                            
+                                                            <!-- <lightning:combobox aura:id="selPlan" name="plan" variant = "label-hidden"
+                                                                                value="{!v.productName}" />-->
+                                                            
+                                                            <p class="recent">{!v.productName}</p>
+                                                        </div>
+                                                        
+                                                        <div class="layer part1">
+                                                            <h4>Select a Plan</h4>
+                                                            <h5>
+                                                                <lightning:combobox aura:id="selPlan" 
+                                                                                    name="ratePlans" 
+                                                                                    variant = "label-hidden"
+                                                                                    value="{!v.selectedRecurringRatePlanId}" 
+                                                                                    options="{!v.recurringRatePlanList}" 
+                                                                                    placeholder="Select a Plan"
+                                                                                    disabled = "{!v.existDisabled}"
+                                                                                    />
+                                                                <!--<lightning:select name="ratePlans" aura:id="selPlan" value="{!v.selectedValue}">
+                                                                <aura:iteration items="{!v.recurringRatePlanList}" var="ratePlanVar">
+                                                                    <option value="{!ratePlanVar.rateplanNameId}">{!ratePlanVar.rateplanName}</option> 
+                                                                </aura:iteration>
+                                                            </lightning:select>-->
+                                                            </h5>
+                                                        </div>
+                                                        <div class="layer part1">
+                                                            <h4>Setup Fee</h4>
+                                                            <h5 >
+                                                                <aura:if isTrue="{!v.setupFeeDisabled}">
+                                                                    <lightning:combobox aura:id="setupFee" 
+                                                                                        name="setupFee" 
+                                                                                        value="{!v.selectedOneTimeRatePlanId}" 
+                                                                                        options="{!v.oneTimeRatePlanList}"
+                                                                                        variant = "label-hidden" 
+                                                                                        placeholder="No Set Up Fee"
+                                                                                        disabled="{!v.setupFeeDisabled}"
+                                                                                        />
+                                                                    
+                                                                    <aura:set attribute="else">
+                                                                        <lightning:combobox aura:id="setupFee" 
+                                                                                            name="setupFee" 
+                                                                                            value="{!v.selectedOneTimeRatePlanId}" 
+                                                                                            options="{!v.oneTimeRatePlanList}"
+                                                                                            variant = "label-hidden" 
+                                                                                            placeholder="Select Set Up Fee"
+                                                                                            disabled="false"
+                                                                                            />
+                                                                    </aura:set>
+                                                                </aura:if>
+                                                            </h5>
+                                                            <!-- <aura:if isTrue="{!v.setupFeeDisabled}">
+                                                        <h5 style="color:red">No Set Up Fee for {!v.productName}</h5>
+                                                        </aura:if>-->
+                                                        </div>
+                                                       <!-- <div class="layer part1">
+                                                            <h4>Promo Code</h4>
+                                                            <h5>
+                                                                <lightning:input type="string" aura:id="promoCode" 
+                                                                                 name="promoCodeValue" 
+                                                                                 value="{!v.promoCode}" 
+                                                                                 variant = "label-hidden"
+                                                                                 disabled="{!v.existDisabled}"
+                                                                                 />
+                                                            </h5>
+                                                        </div>-->
+                                                        <!--  <div class="layer part1">
+                                                            <h4>New Setup Fee</h4>
+                                                            <h5>
+                                                                <lightning:input type="string" aura:id="setupFeeMapping" 
+                                                                                 name="setupFeeMapping" 
+                                                                                 value="{!v.newSetupFeeMapping}" 
+                                                                                 variant = "label-hidden"
+                                                                                 />
+                                                            </h5>
+                                                        </div> -->
+                                                    </lightning:layoutItem>
+                                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="7" largeDeviceSize="7" >
+                                                        <div class="linet">
+                                                            
+                                                            <img class="cma" src="{!$Resource.CloudCMALogo}"/>
+                                                            <!--<h3 class="bold">Cloud CMA</h3>-->
+                                                         
+                                                            <div class="layer part2">
+                                                                
+                                                                <p class="newpo" style="font-size: 15px;">
+                                                                    If you already have a subscription to Cloud CMA and would like to upgrade or downgrade your plan, please contact our Customer Support Center for assistance <a href='https://www.brightmls.com/bright-support' target="_blank">here.</a>
+                                                                </p>
+                                                                
+                                                                <p class="newpo" style="font-size: 15px;">
+                                                                    Cloud CMA does more than generate attractive CMA reports. 
+                                                                    Easily create virtual and printed listing presentations, Buyer Tours, 
+                                                                    Property Reports and Flyers from your desktop or mobile device. 
+                                                                    Use Cloud CMA’s Homebeat feature to schedule automated CMAs that keep 
+                                                                    you top-of-mind with prospective clients and homeowners.
+                                                                </p>
+                                                                
+                                                                <ul style="list-style-type:disc;padding-left: 2rem;">
+                                                                <li><p class="newpo" style="font-size: 15px;">
+                                                                    <b>Personalized presentations - </b>  
+                                                                    Create your own custom-branded interactive presentations with dozens of 
+                                                                    report themes, styles and fonts to match your brand.
+                                                                </p></li>
+                                                                
+                                                                <li><p class="newpo" style="font-size: 15px;">
+                                                                    <b>Generate in-depth, customized reports instantly - </b>  
+                                                                    Blend Bright listing data with unique neighborhood information from Google, 
+                                                                    Yelp, Walk Score and even Education.com.
+                                                                    </p></li>
+                                                                
+                                                                <li><p class="newpo" style="font-size: 15px;">
+                                                                    <b>Automatically send online CMAs with Homebeat - </b>  
+                                                                    Schedule online CMAs to be sent automatically to your clients showing the 
+                                                                    latest market data, your personal branding and contact information.
+                                                                    </p></li>
+                                                                    </ul>
+                                                              
+                                                                <p class="newpo" style="font-size: 15px;">
+                                                                    A free 30-day trial is included with each of the available plans.
+                                                                </p>
+                                                                    
+                                                            </div>
+                                                            
+                                                            <!--<lightning:button class="brand" variant="brand " 
+                                                                          label="Continue" title="Brand action" 
+                                                                          aura:id="continueBtn" 
+                                                                          />-->
+                                                        </div>
+                                                    </lightning:layoutItem>
+                                                    <lightning:button class="brand" variant="brand" 
+                                                                      label="Continue" title="Brand action" onclick="{!c.gotoNextPage}"
+                                                                      aura:id="continueBtn" 
+                                                                      disabled="{!or(v.selectedRecurringRatePlanId == null, v.selectedRecurringRatePlanId == 'None')}"
+                                                                      />
+                                                </div>
+                                            </div>
+                                        </lightning:layoutItem>
+                                    </div>
+                                </div>
+                            </lightning:layout>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                            <div class="new-containerpage footer-new-containerpage">
+                                <div class="slds-container--x-large new-container">
+                                    <!--<c:footeras />-->
+                                    <c:bcomfooter />
+                                </div>
+                            </div>
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </div>
+            </div>
+        </div>  
+    </aura:if>
+    
+    <aura:if isTrue="{!v.showSecondScreen}">
+        <c:BuyPremiumProductSummaryPage subscriptionId="{!v.subscriptionId}"/>
+    </aura:if>
+    
+</aura:component>

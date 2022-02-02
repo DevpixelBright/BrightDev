@@ -1,0 +1,332 @@
+<apex:page controller="Communities_BrokerAuthorizationRequest" docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" lightningstylesheets="true">
+    <apex:styleSheet value="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/themes/smoothness/jquery-ui.css" />
+    <apex:composition template="Communities_Base">
+        <apex:define name="content">
+            <apex:form id="autoCompleteForm" >
+                <c:Bootstrap_Resources />   
+
+                <apex:pageBlock title="Subscription Id" id="details" >
+          
+                    <style>
+                       
+                        label {
+                            padding-top:0px !important;
+                        }
+                        #content-container {
+                            margin-top:0px !important;
+                        }
+                        @media(min-width:400px) {
+                            .detailList th {
+                                width:30% !important;
+                            }
+                            .mandatory {
+                                color:red; font-weight:bold; 
+                                font-size:18px;
+                            }
+                        }
+                        i.fa {
+                            margin: auto 20px;
+                            position: relative;
+                            top: 5px;
+                        }
+                        .fa-2x {
+                            font-size: 2em;
+                        }
+                        .fa-1x {
+                            font-size: 1.5em;
+                        }
+                        .fa {
+                            display: inline-block;
+                            font-family: FontAwesome;
+                            font-style: normal;
+                            font-weight: normal;
+                            line-height: 1;
+                            -webkit-font-smoothing: antialiased;
+                            -moz-osx-font-smoothing: grayscale;
+                        } 
+                        .two_buttons {
+                            text-align: center;
+                            margin-bottom: 0px;
+                            margin-top: 10px;
+                        }                        
+                        .page_messages h4 {
+                            border-bottom:none;
+                        }
+                         .radio{ width:auto; padding-bottom: 20px;} //margin:0 0 0 16%;
+                         .radio tr{ width:600px;}
+                         .radio tr td { width:173px;}
+                        .radio tr td input[type=radio]{ border:none; width:16px;height: auto; }
+                        .radio tr td input[type=radio]:focus{outline: none;box-shadow: none;}
+                        .radio tr td .control-label { width:120px; text-align:left;}
+                        
+                        @media (min-width: 768px) {
+                        	.form-horizontal .control-label {  
+                        		text-align: left; 
+                        	}
+                        }
+                        .inputblock {padding-left: 181px;}
+                        
+						
+						.Helptooltip {
+						    display:inline-block;
+						    position:relative;
+						    text-align:left;
+						}
+						
+						.Helptooltip .top {
+						    min-width:200px; 
+						    top:0px;
+						    left:50%;
+						    transform:translate(-50%, -100%);
+						    padding:10px 20px;
+						    color:#444444;
+						    background-color:#EEEEEE;
+						    font-weight:normal;
+						    font-size:13px;
+						    border-radius:8px;
+						    position:absolute;
+						    z-index:99999999;
+						    box-sizing:border-box;
+						    box-shadow:0 1px 8px rgba(0,0,0,0.5);
+						    display:none;
+						}
+						
+						.Helptooltip:hover .top {
+						    display:block;
+						}
+						
+						.Helptooltip .top i {
+						    position:absolute;
+						    top:100%;
+						    left:50%;
+						    margin-left:-12px;
+						    width:24px;
+						    height:12px;
+						    overflow:hidden;
+						}
+						
+						.Helptooltip .top i::after {
+						    content:'';
+						    position:absolute;
+						    width:12px;
+						    height:12px;
+						    left:50%;
+						    transform:translate(-50%,-50%) rotate(45deg);
+						    background-color:#EEEEEE;
+						    box-shadow:0 1px 8px rgba(0,0,0,0.5);
+						}
+
+						
+                    </style>  
+                        
+                    <apex:outputPanel id="address_update">                   
+
+                    <script>
+                        $(document).ready(function(){
+                            $("form").addClass("form-horizontal");
+                            $("label").addClass("col-sm-2 control-label");
+                            $(".for_inputs input").addClass("form-control");
+                            $("select").addClass("form-control");
+                            //$(".errorM3").addClass("alert alert-danger");
+                            //$(".infoM3").addClass("alert alert-info");
+                            //$(".confirmM3").addClass("alert alert-success");
+                            
+                            
+                            /*           
+                            var errorMsg;
+                            $('[id$=contactSaveButton]').click(function() {
+                                errorMsg = '';
+                                var regx = /^\([0-9]{3}\) [0-9]{3}-[0-9]{4}$/;
+                                var regxEmail = /^[^@]+@[^@]+\.[^@]{2,3}$/;
+
+                                if(typeof $('input[id$=Phone]').val() != 'undefined' && (!regx.test($('input[id$=Phone]').val()) || $('input[id$=Phone]').val() == null)) {
+                                    errorMsg = '<div>Invalid phone number</div>';                          
+                                }
+                                
+                                if(typeof $('input[id$=Fax]').val() != 'undefined' && !regx.test($('input[id$=Fax]').val()) && $('input[id$=Fax]').val() != null) {
+                                    errorMsg += '<div>Invalid Fax number</div>';                                  
+                                }                                                               
+                                
+                                if(typeof $('input[id$=Email]').val() != 'undefined' && !regxEmail.test($('input[id$=Email]').val()) && $('input[id$=Email]').val() != null) {
+                                    errorMsg += '<div>Invalid Email Address</div>';                                  
+                                }
+                                
+                                if(errorMsg != '') {    
+                                    var errorBlock = '<div class="alert alert-danger" role="alert"><h4>Error</h4>' + errorMsg + '</div>';
+                                    $('#contactMessages').html(errorBlock);
+                                    return false;
+                                }
+                                else {
+                                    $('#contactMessages').html('');
+                                    //alert('--'+$('input[id$=Phone]').val());
+                                    //saveContactDetails();
+                                    return true;
+                                }
+                            });
+                            */
+                        });
+                        
+                    </script>
+                    </apex:outputPanel>
+                    
+                    <div class="row">
+                        <c:Communities_Definition pageTitle="Vendor Authorization Request" pageTitleClass="fa fa-shield fa-2x" hasDefinitions="false">
+                            <p><b class="term">Term</b> Definition goes here.</p>
+                        </c:Communities_Definition>
+
+                        <div class="col-xs-12 instructions">
+                            <p>This form is to be used for all subscribers who wish to utilize approved IDX, VOW, OR Broker Only Feed vendors and their authorized products (this includes brokerage office websites). Any changes or updates to information on this form will require a new completed form to be submitted and processed. <b>Data Licensing Fees will be charged in accordance with Bright MLS billing policies.</b></p>
+                        </div>
+                    </div>
+                    
+                    <div id="messages">
+                        <apex:pagemessages rendered="{!message}"></apex:pagemessages>
+                    </div> 
+                    
+                    <apex:pageBlock mode="inlineEdit" id="contact_details">
+       
+                    <div class="row for_inputs">
+                        <div class="inputblock">
+                                
+                                <div id="output1">
+                                    <div>
+                                        <apex:selectRadio styleclass="radio" value="{!selectedProdType}">
+                                            <apex:selectOptions value="{!ProductType}"/>
+                                        </apex:selectRadio>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group">
+
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Vendor Name" />
+                                        <div class="col-sm-5">
+                                            <input  id="VendorNameInput"/>
+                                        </div>
+                                        
+                                        <div class="Helptooltip">
+                                            <img src="{!$Resource.BlueHelpIcon}"/>
+                                            <div class="top">
+                                                <span>If the Vendor is not listed, please go through the steps <a href="https://www.brightmls.com/#/IDX" target="_blank">https://www.brightmls.com/#/IDX </a></span>                                                
+                                            </div>
+                                        </div>
+                                        
+                                    </div> 
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Vendor Office ID"/>
+                                        <div class="col-sm-5">
+                                        <apex:outputText styleClass="OfficeId" />
+<!--                                         <output Class="OfficeId"/> -->
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <apex:outputLabel value="Website URL"/>
+                                        <div class="col-sm-5">
+                                            <apex:inputText />
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    </apex:pageBlock>
+                    
+                    <apex:pageBlock mode="inlineEdit2" id="AddressInformation">
+                    <div class="two_buttons" id="address-info-buttons">                
+                        <apex:commandButton id="addressCancelButton" styleClass="btn btn-default" value="Cancel" />
+                        <apex:commandButton id="addressSaveButton" styleClass="btn btn-primary" value="Save"/>
+                    </div> 
+                    
+                    <div class="row" id="loading-block" style="display:none;">
+                        <div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-5">
+                            <div class="progress progress-striped active">
+                                <div class="progress-bar" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>                                        
+                    </apex:pageBlock>
+                                               
+                </apex:pageBlock>           
+            </apex:form>
+            
+            <script>
+                markOptionPanel("subscription");
+            </script>            
+            
+        </apex:define>       
+    </apex:composition>   
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        function redirectFromHelp(){
+            window.open('https://www.brightmls.com/#/IDX');
+        }
+    
+		var PLACEHOLDER = 'Enter Vendor Name Here'; 
+		var movieObjects;
+		var queryTerm;
+ 
+	    $('[id$=VendorNameInput]').autocomplete({
+	        minLength: 2,
+	        source: function(request, response) {
+                    queryTerm = request.term;
+                    var searchString = document.getElementById('VendorNameInput').value;
+            		var webSite =	$("input[type='radio']:checked").val()
+                    Communities_BrokerAuthorizationRequest.Acc(searchString, webSite, function(result, event){
+                        if(event.type == 'exception') {
+                              alert(event.message);
+                        } else {
+                            if(result.length > 0){
+                                 movieObjects = result;
+                                 response(movieObjects);
+                                 $('.HelpText').removeClass('sr-only');
+                            }else{
+                                 $('.HelpText').addClass('sr-only');
+                            }
+                        }
+                    });
+               },
+        focus: function( event, ui ) {
+                $('[id$=VendorNameInput]').val( ui.item.Account_Name__c );
+                return false;
+                },
+        select: function( event, ui ) {
+				$('[id$=VendorNameInput]').val( ui.item.Account_Name__c );
+				$('.OfficeId').val( ui.item.Name );
+				console.log('---ofc id-'+ ui.item.Name);
+				return false;
+                },
+     })
+	.data( "uiAutocomplete" )._renderItem = function( ul, item ) {
+		var entry = "<a>" + item.Account_Name__c;
+             
+        entry = entry + "</a>";
+        entry = entry.replace(queryTerm, "<b>" + queryTerm + "</b>");
+        return $( "<li></li>" )
+            .data( "item.autocomplete", item )
+            .append( entry )
+            .appendTo( ul );
+    };
+        
+    // Add or remove placeholder values
+    $('[id$=VendorNameInput]').val(PLACEHOLDER);
+    $('[id$=VendorNameInput]').on("focus",  function(event){
+        $tgt = $(event.target);
+        if($tgt.val() === PLACEHOLDER ){
+            $tgt.val('');
+            $tgt.removeClass('placeHolder');
+        }
+    });
+    $('[id$=VendorNameInput]').on( "blur",  function(event){
+        $tgt = $(event.target);
+        if($tgt.val() === '' ){
+            $tgt.val(PLACEHOLDER);
+            $tgt.addClass('placeHolder');
+        }
+    });
+
+</script>
+</apex:page>

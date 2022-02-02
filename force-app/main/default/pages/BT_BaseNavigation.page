@@ -1,0 +1,26 @@
+<apex:page controller="BT_BaseController"  sidebar="false" showheader="false" lightningstylesheets="true">
+  <div style="margin: 0px auto 0 auto; width: 1150px; padding: 0; background: #f5f5f5;">
+    <h5 style="margin: 0 30px 0 10px; padding: 14px 10px; font-family: 'Segoe UI'; font-size: 14px; color: #000; cursor: pointer;
+    display: inline-block; font-weight:bold; display: inline-block;">
+        <a style="text-decoration: none;
+    color: #444;" href="/learnbrightmls/s/training" target="_top">All Courses</a>
+    </h5>
+    
+    <h5 style="margin: 0 30px 0 10px; padding: 14px 10px; font-family: 'Segoe UI'; font-size: 14px; color: #000; cursor: pointer;  border-bottom: 2px solid #ff4220;
+    background: #f5f5f5;   font-weight:bold; display: inline-block;">
+        <a style="text-decoration: none;
+    color: #444;" href="/learnbrightmls/s/classes" target="_top">All Classes</a>
+    </h5>
+    
+    <apex:outputPanel rendered="{!isAuthenticatedUser}">
+    <h5 style="margin: 0 30px 0 10px; padding: 14px 10px; font-family: 'Segoe UI'; font-size: 14px; color: #000; cursor: pointer;   font-weight:bold; display: inline-block;">
+        <a style="text-decoration: none;
+    color: #444;" href="/learnbrightmls/s/myclasses" target="_top">My Classes</a>
+    </h5>
+    </apex:outputPanel>
+    <h5 style="margin: 0 30px 0 10px; padding: 14px 10px; font-family: 'Segoe UI'; font-size: 14px; color: #000; cursor: pointer;  font-weight:bold; display: inline-block;">
+        <a style="text-decoration: none;
+    color: #444;" href="/learnbrightmls/s/training" target="_top">On-Demand Training</a>
+    </h5>    
+</div>
+</apex:page>

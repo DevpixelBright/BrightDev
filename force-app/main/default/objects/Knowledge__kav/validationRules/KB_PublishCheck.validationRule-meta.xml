@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>KB_PublishCheck</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISPICKVAL( PublishStatus , &apos;Published&apos;) &amp;&amp;  NOT($Permission.KB_Publish_External)</errorConditionFormula>
+    <errorMessage>You do not have the permission to publish knowledge article.</errorMessage>
+</ValidationRule>

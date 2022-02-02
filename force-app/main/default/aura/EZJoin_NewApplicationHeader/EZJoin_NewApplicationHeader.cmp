@@ -1,0 +1,68 @@
+<aura:component implements="force:appHostable,lightning:isUrlAddressable">
+    <!-- Aura Attributes -->
+    <aura:attribute name="appConfig" type="List" />
+    <aura:attribute name="statusPercent" type="Integer" default="0" description="Testing" />
+    <aura:attribute name="applicationType" type="String" />
+    <aura:attribute name="isApplicationProgress" type="Boolean" default="false" />
+    <aura:attribute name="progress" type="Integer" default="0" />
+    
+    <!-- Aura Actions -->
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}" />
+    <aura:handler event="c:EZJoin_NewApplicationAppConfigEvent" action="{!c.getAppConfigChanges}" />    
+    
+    <div class="new-containerpage" id="header-container">
+        <div class="slds-container--x-large new-container">
+            <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12  header-full">
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 header-part">
+                    <div class="logo">
+                        <img onclick="{!c.logoClickEvtHandler}" src="{!$Resource.ejoin + '/ejoinimages/brightlogolightning.png'}" style="cursor:pointer;"  />
+                    </div>
+                </div>
+                
+                <aura:if isTrue="{!v.isApplicationProgress}">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_5-of-12 slds-large-size_5-of-12 header-part">
+                        <div class="middleone" id="ApplicationProgressBar">
+                            <aura:if isTrue="{!v.progress == 1}"><img src="{!$Resource.ejoin + '/ejoinimages/ezjointop1.jpg'}" /></aura:if>
+                            <aura:if isTrue="{!v.progress == 2}"><img src="{!$Resource.ejoin + '/ejoinimages/ezjointop2.jpg'}" /></aura:if>
+                            <aura:if isTrue="{!v.progress == 3}"><img src="{!$Resource.ejoin + '/ejoinimages/ezjointop3.jpg'}" /></aura:if>
+                        </div>
+                    </div>                
+                </aura:if>
+                
+                <aura:if isTrue="{!!v.isApplicationProgress}">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_5-of-12 slds-large-size_5-of-12 header-part">
+                        <aura:if isTrue="{!v.appConfig.length > 0}">
+                            <div class="bar">
+                                <h2>Join {!v.applicationType}</h2>
+                                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_7-of-12 slds-large-size_7-of-12">
+                                    <div class="bar-title">
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 bar-title-box">
+                                            <h5>Progress</h5>
+                                        </div>
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 bar-title-box">
+                                            <div class="slds-progress-bar slds-progress-bar_medium" aria-valuemin="0" aria-valuemax="100" aria-valuenow="75" role="progressbar">
+                                                <span class="slds-progress-bar__value" style="{!'width:' + v.statusPercent + '%'}">
+                                                    <span class="slds-assistive-text">Progress: {!v.statusPercent}%</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_2-of-12 slds-large-size_2-of-12 bar-title-box">
+                                            <h6>{!v.statusPercent}%</h6> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </aura:if>
+                    </div>
+                </aura:if>
+                
+                <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 header-part">
+                    <div class="call">
+                        <h4>Looking for support? </h4>
+                        <h3>Call: 1-844-552-7444</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

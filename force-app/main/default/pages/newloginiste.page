@@ -1,0 +1,45 @@
+<apex:page showHeader="false" sidebar="false" >
+    <style>
+        .loginForm{ background: #eff5a1;padding: 100px 0;}
+        .fullpage{width: 50%; margin: 0 auto; background: #fff; border: none; box-shadow: 1px 0 40px 0 rgba(0,0,0,0.52);}
+        .leftpage{ padding: 20% 32px 0; width:40%; display:inline-block;vertical-align:top;}
+        .leftpage h2 {font-size: 24px; text-align: left;}
+        .rightpage{	background-image: url(https://iste-dev--partialdb.lightning.force.com/resource/logobg); 
+        	padding: 24% 0; text-align: center; margin: 0;width:50%; display:inline-block;background-repeat: no-repeat;}
+        .leftpage table label {color: #222;font-size: .75rem;margin: 0 0 5px 0; text-align: left; line-height: normal; display: block; letter-spacing: .5px;
+}
+        .rightpage h2 {border-radius: 50%;background: #fff;width: 120px; height: 120px; margin: 0 auto; display: block;}
+        .rightpage h2  img { padding: 33% 0 0;width: 80px;}
+    </style>
+    
+    <apex:form id="loginForm" styleClass="loginForm" forceSSL="true">
+        <apex:outputPanel layout="block">
+            <apex:pageMessages id="error"/>
+            <div class="fullpage">
+                 <div class="leftpage">
+                     <h2>Login</h2>
+                      <apex:panelGrid columns="2" style="margin-top:1em;">
+                <apex:outputLabel value="{!$Label.site.username}" for="username"/>
+                <apex:inputText id="username" />
+                <apex:outputLabel value="{!$Label.site.password}" for="password"/>
+                <apex:inputSecret id="password" />
+                <apex:outputText value=""/>
+                <apex:commandButton value="{!$Label.site.login_button}" id="loginButton"/>
+                <apex:outputText value=""/>
+                <apex:outputText value=""/>
+                <apex:outputText value=""/>
+                <apex:panelGroup id="theLinks">
+                    <apex:outputLink value="{!$Page.ForgotPassword}"> {!$Label.site.forgot_your_password_q}</apex:outputLink>
+                    <apex:outputText value=" | " rendered="{!$Site.RegistrationEnabled}" />
+                    <apex:outputLink value="{!$Page.SiteRegister}" rendered="{!$Site.RegistrationEnabled}">{!$Label.site.new_user_q}</apex:outputLink>
+                </apex:panelGroup>
+            </apex:panelGrid>
+                </div>
+                <div class="rightpage">
+                     <h2><img src="https://iste-dev--partialdb.lightning.force.com/resource/1570165013000/istelogofile"/></h2>
+                </div>
+            </div>
+           
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,22 @@
+<aura:component >
+	<!-- attributes -->
+    <aura:attribute name="recordData" type="object"/>
+    <aura:attribute name="fieldName" type="string"/>
+    <aura:attribute name="dataType" type="string" default="text" description="allowed types are text,clickable"/>
+    <aura:attribute name="dataDisplay" type="string"/>
+    <aura:attribute name="hrefLink" type="string"/>
+    <aura:attribute name="hrefLinkClickable" type="string"/>
+    <!-- handlers-->
+    <aura:handler name="init" value="{!this }" action="{!c.init }"/>
+    
+    
+    <aura:if isTrue="{!v.dataType == 'clickable'}">
+        <div class="slds-truncate">
+            <a class="namestatus" href="{!v.hrefLinkClickable}" tabindex="0" target="_blank">{!v.dataDisplay}</a>
+        </div>
+        <aura:set attribute="else">
+            <div class="slds-truncate">{!v.dataDisplay}</div>
+        </aura:set>
+    </aura:if>
+    
+</aura:component>

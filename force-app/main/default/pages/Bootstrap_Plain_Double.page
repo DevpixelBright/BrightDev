@@ -1,0 +1,14 @@
+<apex:page standardStylesheets="false" lightningstylesheets="true">
+    <apex:composition template="Bootstrap_Plain">
+        
+        <apex:define name="layout">
+            <div class="col-md-3">
+                <c:Bootstrap_Navigation />
+            </div>
+            <div class="col-md-9">
+                <c:Bootstrap_Content />
+            </div>
+        </apex:define>
+        
+    </apex:composition>
+</apex:page>

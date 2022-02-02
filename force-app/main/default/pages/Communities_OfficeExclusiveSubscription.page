@@ -1,0 +1,16 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" lightningstylesheets="true">
+   <apex:composition template="Communities_Base">
+        <apex:define name="content"> 
+            <apex:includeLightning />
+            <div id="dataTable" />
+            <script>
+            $Lightning.use("c:Communities_OfficeExclusiveSubscriptionApp", function() {
+                $Lightning.createComponent("c:Communities_OfficeExclusiveSubscription", {}, "dataTable", function(cmp) {
+                    console.log('done');
+                });
+            });       
+            
+            </script>
+        </apex:define>
+    </apex:composition> 
+</apex:page>

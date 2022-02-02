@@ -1,0 +1,14 @@
+<apex:page contentType="application/octet-stream#Subscribers.csv" controller="Communities_OfficeRoster_Export" readOnly="true" lightningstylesheets="true">    
+<apex:outputText rendered="{!and(status.size == 1, status[0] == 'Active')}">
+Name,Subscription Id,Type,Sub Type,Status,Team Lead,Team Name,License Number on File,License State,License Expiration,Office Id,Association Affiliation
+<apex:repeat value="{!activeSubscriptions}" var="subscription">
+{!subscription.contactName},{!subscription.subscriptionName},{!subscription.type},{!subscription.subType},{!subscription.status},{!subscription.isTeamLead},{!subscription.TeamName},{!subscription.licenseNumber},{!subscription.licenseState},<apex:outputText value="{0,date,MM/dd/yyyy}"> <apex:param value="{!subscription.licenseExpiration}" /> </apex:outputText>,{!subscription.officeId},{!subscription.associationAffiliation}
+</apex:repeat>
+</apex:outputText>
+<apex:outputText rendered="{!and(status.size == 1, status[0] == 'Inactive')}">
+Name,Subscription Id,Type,Sub Type,Status,Status Change Reason,Date of Termination,Office Id
+<apex:repeat value="{!activeSubscriptions}" var="subscription">
+{!subscription.contactName},{!subscription.subscriptionName},{!subscription.type},{!subscription.subType},{!subscription.status},{!subscription.statusChangeReason},<apex:outputText value="{0,date,MM/dd/yyyy}"> <apex:param value="{!subscription.dateTerminated}" /> </apex:outputText>,{!subscription.officeId}       
+</apex:repeat>
+</apex:outputText>
+</apex:page>

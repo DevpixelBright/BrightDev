@@ -1,0 +1,694 @@
+<apex:page controller="Communities_OfficeExclusive" docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false"
+           standardStylesheets="false" lightningstylesheets="true">
+    
+    <link href="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/css/font-awesome.min.css')}" rel="stylesheet" type="text/css" />
+    <style>
+        .Invalid input,
+        .Invalid textarea,
+        .Invalid select {
+        border-color: red;
+        }
+        
+        .Invalid input[type='checkbox'] {
+        outline: red 1px solid;
+        }
+        
+        .Invalid .control-label {
+        color: red;
+        }
+        
+        input[type='checkbox'] {}
+        
+        .showError {
+        display: block !important;
+        }
+        
+        #communities-definition-component-title {
+        border-bottom: 1px solid #999 !important;
+        }
+        
+        .ui-border {
+        border-bottom: 1px solid #999;
+        padding-bottom: 20px;
+        margin-top: 0px !important;
+        margin-bottom: 20px;
+        }
+        
+        .newline {
+        margin: 0;
+        padding: 0 0 0 15px;
+        display: inline-block;
+        }
+        
+        .newline1 {
+        font-weight: 600;
+        }
+        
+        .newline2 {
+        font-weight: 500;padding: 0 0 0 2px;font-size: 10px;;
+        }
+        
+        .glyphicon.glyphicon-minus-sign {
+        color: #e33636;
+        }
+        
+        .form1 span {
+        word-break: break-all;
+        }
+        
+        .attachmentInvalid {
+        color: red
+        }
+        .ui-autocomplete { z-index:9999; font-family:'Lato', sans-serif; max-height:200px; overflow-y:scroll; }
+        .ui-autocomplete li{ list-style:none;  } 
+        .ui-menu-item { padding:2px; }
+        .ui-menu-item-wrapper:hover {border:none;}
+        .ui-state-active,
+        .ui-widget-content .ui-state-active,
+        .ui-widget-header .ui-state-active,
+        a.ui-button:active,
+        .ui-button:active,
+        .ui-button.ui-state-active:hover {
+        border: none;
+        background: #ededed;
+        color: #000;
+        }
+        .ui-autocomplete li a{ width:100%;display:block; padding:5px 4px 5px 12px;font-family: inherit;font-size: 1em; color:#333; cursor:pointer; border:none;}
+        .ui-autocomplete li a:hover{ background:#ccc; text-decoration:none; color:#000 }  
+        
+        .ui-state-active, .ui-widget-content .ui-state-active {
+        border: 1px solid #ccc !important;
+        background: #ccc !important;   
+        color: #212B3D !important;
+        }
+        .city{margin: 0 0 0 22px;}
+        .form-group2{clear:both;}
+        .form-group span{word-break: break-all;}
+        @media(max-width: 1200px){.city{margin: 0;} }
+    </style>
+    <apex:composition template="Communities_Base">
+        <apex:define name="content">
+            <apex:form id="theform">
+                
+                <c:Bootstrap_Resources />
+                <link href="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/font-awesome.min.css')}" rel="stylesheet" type="text/css"/>
+                <apex:actionFunction action="{!dummy}" name="dummy" reRender="thepageblock,buttonsPanel,attachmentSection,printSection,attachmentTextSection,errorPanelId"/>
+                <apex:pageBlock id="thepageblock">
+                    <div class="row">
+                        <apex:outputPanel rendered="{!oOfficeExclusive.id != null}" id="printSection">
+                            <div style="float:right">
+                                <a class="btn btn-primary" href="/customers/apex/Communities_OfficeExclusivesPDF?id={!oOfficeExclusive.id}" target="_blank">Print</a>
+                            </div>
+                        </apex:outputPanel>
+                        <c:Communities_Definition pageTitle="Office Exclusive Certification" pageTitleClass="fa fa-home fa-2x" hasDefinitions="false">
+                            
+                        </c:Communities_Definition>
+                        
+                        <div class="col-xs-12 instructions">
+                            <p>
+                                Please use this online form to certify that you have an Office Exclusive form signed by the sellers/landlords.<b> Please note, you are required to include the Office Exclusive form or similar addendum to complete the certification.</b> 
+                            </p>
+                        </div>
+                        <div class="col-xs-12 instructions">
+                            <a href="https://support.brightmls.com/s/article/Waiver-of-Broker-Cooperation" target="_blank"><b>Download the Office Exclusive form.</b></a>
+                        </div>
+                        <div class="col-xs-12 instructions">
+                            <p>
+                                To comply with Bright’s policy on Office Exclusive listings, this online form must be submitted to Bright MLS within 3 business days after the seller/landlord signatures are obtained on the listing contract and the listing term has begun.
+                            </p>
+                            <p>
+                                If you are completing this form on behalf of the Listing Agent, click the pencil icon next to Listing Agent ID field to update the form with their ID and information.                            
+                            </p>
+                        </div>
+                        
+                    </div>
+                    
+                    <div id="messages">
+                        
+                        <div id="validationErrorSection">
+                        </div>
+                        <apex:outputPanel id="successPanelId" rendered="{!isSuccessMsg}">
+                            <p class="alert alert-success">
+                                <apex:outputtext value="{!message}" escape="false" />
+                            </p>
+                        </apex:outputPanel>
+                        <apex:outputPanel id="errorPanelId" rendered="{!hasError}">
+                            <p class="alert alert-danger">
+                                <apex:outputtext value="{!message}" escape="false" />
+                            </p>
+                        </apex:outputPanel>
+                        <apex:outputPanel styleClass="jvalidation" style="display: none;" rendered="{!!hasError}">
+                            <p class="alert alert-danger">
+                                <strong>Error:</strong> Required fields must be populated.
+                            </p>
+                        </apex:outputPanel>
+                    </div>
+                    <apex:pageBlock id="pageblocktag">
+                        <div class="row address-edit" id="mailing-address-edit">
+                            
+                            <div class="sf-fields">
+                                <input type="text" data-bind="AddressLine1" id="AddressLine1" value="" />
+                                <input type="text" data-bind="Unit_Type__c" id="Unit_Type__c" />
+                                <input type="text" data-bind="Unit__c" id="Unit__c" />
+                                <input type="text" data-bind="City__c" id="City__c" />
+                                <input type="text" data-bind="Zip__c" id="Zip__c" />
+                                <input type="text" data-bind="State__c" id="State__c" />
+                                <input type="text" data-bind="Street_Number__c" id="Street_Number__c" />
+                                <input type="text" data-bind="Street_Number_Suffix__c" id="Street_Number_Suffix__c" />
+                                <input type="text" data-bind="Street_Name__c" id="Street_Name__c" />
+                                <input type="text" data-bind="Street_Type__c" id="Street_Type__c" />
+                                <input type="text" data-bind="Street_Direction__c" id="Street_Direction__c" />
+                            </div>
+                            
+                            <div class="form-group col-sm-12 col-lg-6">
+                                <span class="col-lg-4 col-sm-4 control-label">
+                                    <b>Listing Agent ID </b>
+                                    <span style="color:red;">*</span>
+                                </span>
+                                
+                                <div class="col-lg-5 col-sm-5 listing_agent_view agent_Id_view">
+                                    {!subscription.Name} 
+                                </div>
+                                
+                                <apex:outputPanel rendered="{!!isSuccessMsg}">
+                                    <div class="col-lg-3 col-sm-3 edit listing_agent_view">
+                                        <a onclick="editListingAgent()">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-8 col-sm-8 listing_agent_edit" style="display:none;">
+                                        <input type="text" class="form-control" id="AgentId" placeholder=" " autocomplete="off" maxlength="249" value="{!subscription.Name}" />
+                                        <!--input type="text" id="AgentSFId" value="{!subscription.Id}" /> 
+                                        <input type="text" id="OfficeSFId" value="{!subscription.Related_Location_Broker_Office__c}" /-->
+                                        <apex:inputtext value="{!oOfficeExclusive.List_Agent_ID__c}" style="display:none" styleClass="AgentSFId"/>
+                                        <apex:inputtext value="{!oOfficeExclusive.List_Office_ID__c}" style="display:none" styleClass="OfficeSFId"/>
+                                    </div>                                    
+                                </apex:outputPanel>
+                            </div>
+                            
+                            <div class="form-group col-sm-12 col-lg-6">
+                                <span class="col-lg-4 col-sm-4 control-label">
+                                    <b>Listing Office ID</b>
+                                    <span style="color:red;">*</span>
+                                </span>
+                                <div class="col-lg-8 col-sm-8 agent_officeId_view">
+                                    {!subscription.Related_Location_Broker_Office__r.name}
+                                </div>
+                            </div>
+                            <div class="form-group form-group2 col-sm-12 col-lg-6">
+                                <span class="col-lg-4 col-sm-4 control-label">
+                                    <b>Listing Agent Name</b>
+                                    <span style="color:red;">*</span>
+                                </span>
+                                <div class="col-lg-8 col-sm-8 agent_name_view">
+                                    {!subscription.contact__r.Name}
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12 col-lg-6">
+                                <span class="col-lg-4 col-sm-4 control-label">
+                                    <b>Listing Office Name</b>
+                                    <span style="color:red;">*</span>
+                                </span>
+                                <div class="col-lg-8 col-sm-8 agent_office_view" id="">
+                                    {!subscription.Related_Location_Broker_Office__r.Account_Name__c}
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12 col-lg-6">
+                                <span class="col-lg-4 col-sm-4 control-label clabel">
+                                    <b>Seller/Landlord Name 1</b>
+                                    <span style="color:red;">*</span>
+                                </span>
+                                <div class="form1 col-lg-8 col-sm-8">
+                                    <apex:outputPanel layout="none" rendered="{!!isSuccessMsg}">
+                                        <apex:inputField styleClass="form-control required Seller_Landlord_Name_1__c"  id="land1" value="{!oOfficeExclusive.Seller_Landlord_Name_1__c}" html-autocomplete="off" />
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{!isSuccessMsg}">
+                                        <apex:outputField value="{!oOfficeExclusive.Seller_Landlord_Name_1__c}" />
+                                    </apex:outputPanel>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12 col-lg-6">
+                                <span class="col-lg-4 col-sm-4 control-label">
+                                    <b>Seller/Landlord Name 2</b>
+                                </span>
+                                <div class="form1 col-lg-8 col-sm-8">
+                                    <apex:outputPanel layout="none" rendered="{!!isSuccessMsg}">
+                                        <apex:inputField styleClass="form-control Seller_Landlord_Name_2__c" value="{!oOfficeExclusive.Seller_Landlord_Name_2__c}" html-autocomplete="off" />
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{!isSuccessMsg}">
+                                        <apex:outputField value="{!oOfficeExclusive.Seller_Landlord_Name_2__c}" />
+                                    </apex:outputPanel>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12 col-lg-12">
+                                <span class="col-sm-2 control-label">
+                                    <b>New Construction</b>
+                                </span>
+                                <div class="col-sm-10">
+                                    <apex:outputPanel layout="none" rendered="{!!isSuccessMsg}">
+                                        <apex:inputField value="{!oOfficeExclusive.New_Construction__c}" styleClass="New_Construction__c" onchange="enableUSPS()"/>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{!isSuccessMsg}">
+                                        <apex:outputField value="{!oOfficeExclusive.New_Construction__c}" />
+                                    </apex:outputPanel>
+                                    <div class="control-label newline newline2" style="font-weight: 500;padding: 0 0 0 2px;font-size: 10px;">
+                                        <p> Check New Construction for lots or properties that do not have a valid address registered with USPS.</p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="form-group col-sm-12 col-lg-6">
+                                <span class="col-lg-4 col-sm-4 control-label">
+                                    <b>Property Address</b>
+                                    <span style="color:red;">*</span>
+                                    <div class="control-label newline newline2" style="font-weight: 500;padding: 0 0 0 2px;font-size: 10px; word-break: break-word;">
+                                        <p> Enter Street Address </p>
+                                    </div>
+                                </span>
+                                <div class="form1 col-lg-8 col-sm-8">
+                                    <apex:outputPanel layout="none" rendered="{!!isSuccessMsg}">
+                                        <apex:inputField styleClass="form-control required Property_Address__c" id="Property_Address" value="{!oOfficeExclusive.Property_Address__c}"
+                                                         html-autocomplete="off" html-data-bind="Street_Name__c" onblur="validateAddress()"
+                                                         />
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{!isSuccessMsg}">
+                                        <apex:outputField value="{!oOfficeExclusive.Property_Address__c}" />
+                                    </apex:outputPanel>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12 col-lg-6">
+                                <div class="col-lg-12 col-sm-12 usps">
+                                    <c:Communities_AddressValidation ></c:Communities_AddressValidation>
+                                    <div style="display:none;">
+                                        <input class="full-address" type="text"/>
+                                    </div>
+                                    <div class="form-group alerts usps">
+                                        <apex:outputLabel value="" />
+                                        <div class="col-sm-12">
+                                            <div class="alert"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group options col-sm-12 usps">
+                                        <apex:outputLabel value="" />
+                                        <div class="">
+                                            <ul></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                            <div style=" padding-left:0;padding-bottom: 8px;" class="col-sm-12 col-lg-12">
+                                <div style="padding-right:0;" class="form-group col-sm-12 col-lg-3">
+                                    <span class="col-lg-4 col-sm-4 control-label">
+                                        <b>Apt/Suite</b>
+                                    </span>
+                                    <div class="col-lg-8 col-sm-8">
+                                        <apex:outputPanel layout="none" rendered="{!!isSuccessMsg}">
+                                            <apex:inputField styleClass="form-control Unit_Type__c" value="{!oOfficeExclusive.Unit_Type__c}" html-autocomplete="off" id="Unit_Type__c"
+                                                             onblur="validateAddress()" />
+                                        </apex:outputPanel>
+                                        <apex:outputPanel layout="none" rendered="{!isSuccessMsg}">
+                                            <apex:outputField value="{!oOfficeExclusive.Unit_Type__c}" />
+                                        </apex:outputPanel>
+                                    </div>
+                                </div>
+                                
+                                <div style="padding-right:0;" class="form-group col-sm-12 col-lg-3">
+                                    <span class="col-lg-4 col-sm-4 control-label">
+                                        <b class="city">City</b><span style="color:red;">*</span>
+                                    </span>
+                                    <div class="col-lg-8 col-sm-8">
+                                        <apex:outputPanel layout="none" rendered="{!!isSuccessMsg}">
+                                            <apex:inputField styleClass="form-control required City__c" value="{!oOfficeExclusive.City__c}" html-autocomplete="off" id="City__c" onblur="validateAddress()" />
+                                        </apex:outputPanel>
+                                        <apex:outputPanel layout="none" rendered="{!isSuccessMsg}">
+                                            <apex:outputField value="{!oOfficeExclusive.City__c}" />
+                                        </apex:outputPanel>
+                                    </div>
+                                </div>
+                                
+                                <div style="padding-right:0;" class="form-group col-sm-12 col-lg-3">
+                                    <span class="col-lg-4 col-sm-4 control-label">
+                                        <b class="city">State</b><span style="color:red;">*</span>
+                                    </span>
+                                    <div class="col-lg-8 col-sm-8">
+                                        <apex:outputPanel layout="none" rendered="{!!isSuccessMsg}">
+                                            <apex:inputField styleClass="form-control required State__c" value="{!oOfficeExclusive.State__c}" html-autocomplete="off" id="State__c" onblur="validateAddress()" />
+                                        </apex:outputPanel>
+                                        <apex:outputPanel layout="none" rendered="{!isSuccessMsg}">
+                                            <apex:outputField value="{!oOfficeExclusive.State__c}" />
+                                        </apex:outputPanel>
+                                    </div>
+                                </div>
+                                <div style="padding-right:0;" class="form-group col-sm-12 col-lg-3">
+                                    <span class="col-lg-4 col-sm-4 control-label">
+                                        <b class="city">Zip</b><span style="color:red;">*</span>
+                                    </span>
+                                    <div class="col-lg-8 col-sm-8">
+                                        <apex:outputPanel layout="none" rendered="{!!isSuccessMsg}">
+                                            <apex:inputField styleClass="form-control required ZIP__c" value="{!oOfficeExclusive.ZIP__c}" html-autocomplete="off" id="ZIP__c" onblur="validateAddress()" html-data-bind="Zip__c" />
+                                        </apex:outputPanel>
+                                        <apex:outputPanel layout="none" rendered="{!isSuccessMsg}">
+                                            <apex:outputField value="{!oOfficeExclusive.ZIP__c}" />
+                                        </apex:outputPanel>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </apex:pageBlock>
+                    <apex:pageBlock >
+                        <div class="row">
+                            <div class="form-group col-sm-12 col-lg-12">
+                                <span class="col-lg-12 col-sm-12 control-label">By submitting the Office Exclusive form, signed by the seller/landlord, I <span class="agent_name_view">{!subscription.contact__r.Name}</span> 
+                                    with <span class="agent_office_view">{!subscription.Related_Location_Broker_Office__r.Account_Name__c}</span> understand that
+                                    this property will not be entered into the Bright MLS system for Bright MLS to disseminate
+                                    information about the property. I affirm, that I will not publicly market the property,
+                                    including through communications with other licensees or brokers outside of my Broker/Licensee’s
+                                    firm.
+                                </span>
+                            </div>
+                            
+                        </div>
+                    </apex:pageBlock>
+                    <apex:pageBlock rendered="{!oOfficeExclusive.id == null}" id="attachmentSection">
+                        <div class="row">
+                            <div style="margin-bottom:0;" class="form-group col-sm-12 col-lg-12">
+                                <div class="control-label newline">
+                                    Please upload a copy of your Office Exclusive or Listing Agreement form signed by the seller/landlord before submitting this online form.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="control-label newline newline1 attachment">
+                                Add Attachment(s)
+                                <span style="color:red;">*</span>
+                            </div>
+                            <div class="control-label newline newline2" style="font-weight: 500;padding: 0 0 0 2px;font-size: 10px;">
+                                (maximum file size 25MB)
+                            </div>
+                            <div class="control-label newline newline3" style="padding-top:7px;" id="filesContainer">
+                                <div id="fileContainer1" style="margin-bottom:5px;">
+                                    <apex:inputfile value="{!att.body}" filename="{!att.Name}" styleClass="fileinput"/>
+                                </div>
+                                <span class="attachmentInvalid sizeError" style="font-weight: 500;padding: 0 0 0 2px;font-size: 10px;display:none;position: absolute;">
+                                    File upload size is limited to 25MB
+                                </span>
+                            </div>
+                        </div>
+                    </apex:pageBlock>
+                    
+                    <apex:pageBlock id="buttonsPanel" rendered="{!oOfficeExclusive.id == null}">
+                        <div class="row">
+                            <div class="form-group col-sm-12 col-lg-12">
+                                <div class="col-sm-6 col-lg-1">
+                                    <div class="btn btn-default" onclick="confirmCancel()">
+                                        Cancel
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-lg-1">
+                                    <div class="validateButton">
+                                    	<!--apex:commandButton styleClass="btn btn-primary my_save" id="SaveButton" value="Submit" onclick="validateForm(this);"/-->
+                                        <input type="button" class="btn btn-primary my_save" onclick="validateForm(this);" value="Submit"/>
+                                    </div>
+                                    <div class="noValidateButton" style="display:none">
+                                        <!--apex:commandButton styleClass="btn btn-primary" value="Submit" onclick="validateForm(this);" /-->
+                                        <input type="button" class="btn btn-primary" onclick="validateForm(this);" value="Submit"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </apex:pageBlock>
+                </apex:pageBlock>
+                
+                <apex:actionFunction action="{!submitOfficeExclusiveForm}" name="saveForm">
+                    <apex:param name="subId" value="" assignTo="{!oOfficeExclusive.List_Agent_ID__c}" />
+                    <apex:param name="officeId" value="" assignTo="{!oOfficeExclusive.List_Office_ID__c}" />
+                </apex:actionFunction>
+                
+            </apex:form>
+            <div class="modal fade" id="OE-option-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-vertical-centered">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="caseResult">
+                                Please wait while form is being submitted.
+                                <br/>
+                                <br/>
+                                <div class="row" id="loading-block">
+                                    <div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-5">
+                                        <div class="progress progress-striped active">
+                                            <div class="progress-bar" style="width: 100%">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uploadBox" style="display:none;">
+                                <div class="row" id="loading-block">
+                                    <div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-5">
+                                        <div class="progress progress-striped active">
+                                            <div class="progress-bar" style="width: 100%">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="modal fade" id="cancel-button-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-vertical-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="modal-label">Confirm Cancel</h4>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to cancel?
+                        </div>
+                        
+                        <div class="modal-footer">
+                            <button class="btn btn-default" data-dismiss="modal">No</button>
+                            <button class="btn btn-primary" data-dismiss="modal" onclick="window.location='/customers/apex/Communities_Subscription';">Yes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </apex:define>
+    </apex:composition>
+    
+    <apex:pageBlock id="buttonsPanel" rendered="{!oOfficeExclusive.id == null}">
+        
+        <script>
+        
+        function okHandler() {
+            dummy();
+            $('#OE-option-modal').modal('hide');
+        }
+        
+        var myVar;
+        $("ul").click(function () {
+            myVar = setInterval(checkAddressFields, 500);
+        });
+        
+        function checkAddressFields() {
+            if ($('#AddressLine1').val() != '' && $('#City__c').val() != '' && $('#State__c').val() != '' && $('#Zip__c').val() != '') {
+                $('.Property_Address__c').val($('#Street_Number__c').val() +' '+ $('#Street_Number_Suffix__c').val() +' '+$('#Street_Name__c').val()+' '+$('#Street_Type__c').val()+' '+$('#Street_Direction__c').val());
+                $('.Unit_Type__c').val($('#Unit_Type__c').val()+' '+$('#Unit__c').val());
+                $('.City__c').val($('#City__c').val());
+                $('.State__c').val($('#State__c').val());
+                $('.ZIP__c').val($('#Zip__c').val());
+                stopTimer();
+            }
+        }
+        
+        function stopTimer() {
+            clearInterval(myVar);
+        }
+        
+        function confirmCancel() {
+            $('#cancel-button-modal').modal();
+        }
+        
+        $("#mailing-address-edit .full-address").val('');
+        new AddressValidation.bind("#mailing-address-edit", "input.my_save");
+        
+        function validateForm(btn) {
+            $('.jvalidation .alert').html('<strong>Error:</strong> Required fields must be populated.');
+            var vError = '';
+            window.scrollTo(0, 0);
+            let flag = true;
+            $.each($('.required'), function (index, value) {
+                value.value = value.value.trim();
+                if ((value.type != 'checkbox' && value.value == '') || (value.type == 'checkbox' && value.checked != true)) {
+                    flag = false;
+                    $(value).closest(".form-group").addClass('Invalid');
+                } else {
+                    $(value).closest(".form-group").removeClass('Invalid');
+                }
+                if (value.dataset && value.dataset.type == 'date') {
+                    if (new Date(value.value) == 'Invalid Date') {
+                        flag = false;
+                        $(value).closest(".form-group").addClass('Invalid');
+                    }
+                    if (value.dataset && value.dataset.isFuture == true) {
+                        if (new Date(value.value).getTime() < new Date().getTime()) {
+                            flag = false;
+                            $(value).closest(".form-group").addClass('Invalid'); 
+                        }
+                    }
+                }
+                
+            });
+            
+            if(flag && $('.AgentSFId').val() == '' && $('#AgentId').val() != '') {
+                $('.jvalidation .alert').html('<strong>Error:</strong> Please enter and select a valid Listing Agent ID from the following list.');
+                flag = false;
+            }
+            try{
+                var files = document.getElementsByClassName('fileinput')[0].files;
+                if (files.length === 0) {
+                    $('.attachment').addClass('attachmentInvalid');
+                    flag = false;
+                } else {
+                    $('.attachment').removeClass('attachmentInvalid');
+                }
+                if(files.length && files.length > 0 && files[0].size >= 26214400){
+                	$('.attachment').addClass('attachmentInvalid');
+                    $('.sizeError').show();
+                    flag = false;
+                }else{
+                    $('.sizeError').hide();
+                }
+            }catch(ex){
+                $('.attachment').removeClass('attachmentInvalid');
+                flag = false;
+            }
+            
+            if (flag) {
+                $('.jvalidation').removeClass('showError');        
+                if($('#AgentId').val() == '') {
+                    $('.listing_agent_view').show();
+                    $('.listing_agent_edit').hide();
+                }
+                saveForm();//$('.AgentSFId').val(), $('.OfficeSFId').val());
+                $("#OE-option-modal").modal({ backdrop: 'static' })
+                $(".caseResult").html("<center>Office Exclusive Certification is being uploaded.</center><br/>");
+                $(".uploadBox").show();
+            } else {
+                $('.jvalidation').addClass('showError');
+            }
+        }
+        
+        function enableUSPS() {
+            var newConn = $('.New_Construction__c').prop("checked");
+            if (newConn != true) {
+                validateAddress();
+                $('.validateButton').show()
+                $('.noValidateButton').hide()
+                $('.usps').show()
+            } else {
+                $('.validateButton').hide()
+                $('.noValidateButton').show()
+                $('.usps').hide()
+            }
+        }
+        
+        function validateAddress() {
+            var newConn = $('.New_Construction__c').prop("checked");
+            if (newConn != true) {
+                $('.validateButton').show()
+                $('.noValidateButton').hide()
+                var mailing_address = AddressValidation.standardize({
+                    Street_Name__c: $('.Property_Address__c').val(),
+                    City__c: $('.City__c').val(),
+                    State__c: $('.State__c').val(),
+                    Zip__c: $('.ZIP__c').val()
+                });
+                $("#mailing-address-edit .full-address").val(mailing_address.render.text);
+                new AddressValidation.bind("#mailing-address-edit", "input.my_save");
+            } else {
+                $('.validateButton').hide()
+                $('.noValidateButton').show()
+                $('.usps').hide()
+            }
+        }
+        
+        
+        function editListingAgent() {
+            $('.listing_agent_view').hide();
+            $('.listing_agent_edit').show();
+        }
+        </script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+        <link href="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/dataTables.bootstrap.min.css')}" rel="stylesheet" type="text/css" /> 
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+            //jQuery auto complete to display Broker Office information on typing input.
+            var queryTerm;
+            $('[id$=AgentId]').autocomplete({
+                minLength: 2,
+                source: function(request, response) {
+                    //$('[id$=AgentSFId]').val('');
+                    $('.AgentSFId').val('');
+                    queryTerm = request.term;
+                    var officeIdsStr = '{!officeIds}'.replace('[', '');
+                    officeIdsStr = officeIdsStr.replace(']', '');
+                    console.log('***OfficeIds:', officeIdsStr);
+                    
+                    //Remote action to connect with Apex
+                    Communities_OfficeExclusive.searchAgentListings(request.term, officeIdsStr, function(result, event) {
+                        if(event.type != 'exception') {
+                            if(result.length > 0) {
+                                response(result);
+                            }
+                            else {
+                                response([]);
+                                return false;
+                            }
+                        }
+                        else {
+                            console.log('Failed to get the accounts information');    
+                        }
+                    });
+                },
+                onclick: function( event, ui ) {
+                    $('[id$=AgentId]').val(ui.item.Name);
+                    //$('[id$=AgentId]').val(ui.item.Name);
+                    return false;
+                },
+                select: function( event, ui ) {
+                    $('[id$=AgentId]').val(ui.item.Name);
+                    //$('[id$=AgentId]').val(ui.item.Name);
+                    $('.AgentSFId').val(ui.item.Id);//$('[id$=AgentSFId]').val(ui.item.Id);
+                    $('.OfficeSFId').val(ui.item.Related_Location_Broker_Office__c);//$('[id$=OfficeSFId]').val(ui.item.Related_Location_Broker_Office__c);
+                    $('.listing_agent_view').show();
+                    $('.listing_agent_edit').hide();
+                    $('.agent_Id_view').html(ui.item.Name);
+                    $('.agent_name_view').html(ui.item.Contact__r.Name);
+                    $('.agent_office_view').html(ui.item.Related_Location_Broker_Office__r.Account_Name__c);
+                    $('.agent_officeId_view').html(ui.item.Related_Location_Broker_Office__r.Name);
+                    return false;
+                }
+            })
+            .data( "uiAutocomplete" )._renderItem = function( ul, item ) {
+                var entry = "<a>" + item.Name + ' - ' + item.Contact__r.Name; 
+                //var entry = "<a>" + item.Name; 
+                entry = entry + "</a>";
+                return $( "<li></li>" )
+                .data( "item.autocomplete", item )
+                .append( entry )
+                .appendTo( ul );
+            };
+        });
+        </script>
+    </apex:pageBlock>
+</apex:page>

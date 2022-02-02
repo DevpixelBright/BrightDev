@@ -1,0 +1,104 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="Communities_Brokerage_Old" lightningstylesheets="true">
+    <apex:composition template="Communities_Base">
+        <style>
+            .hide {display:none;}
+        </style>
+        <apex:define name="content">
+            <c:Bootstrap_Resources />
+            <link href="{!URLFOR($Resource.Communities_OfficeRoster,'/OfficeRoster/css/font-awesome.min.css')}" rel="stylesheet" type="text/css" />
+            
+            <apex:outputPanel rendered="{!isBOR || isAS || isOM}">
+                <div class="jumbotron landing_instructions">
+                    <p>Want to review your current office roster? Need to make changes? Update your office information using the options below. </p>
+                </div>
+                
+                <apex:outputPanel rendered="{!!isTrendUser}">
+                    <div class="row action-panels">
+                        <div class="col-sm-6 col-md-4">
+                            <a href="Communities_OfficeRoster">
+                                <h4><i class="fa fa-sign-in fa-2x"></i>Office Roster</h4>
+                                <p>View active and inactive agents as well as manage terminations</p>
+                            </a>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <a href="Communities_OfficeDetails">
+                                <h4><i class="fa fa-shield fa-2x"></i>Office Information</h4>
+                                <p>Change your office phone number or company address</p>
+                            </a>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <a href="Communities_OfficeStatement">
+                                <h4><i class="fa fa-money fa-2x"></i> Office Statement</h4>
+                                <p>The Office Billing Statement Information will indicate by Subscription and Office any balance due and oldest invoice date</p>
+                            </a>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <a href="Communities_NewApplications">
+                                <h4><i class="fa fa-file-text fa-2x"></i> New Applications</h4>
+                                <p>Approve or decline applications for subscribers who want to join your office(s).</p>
+                            </a>
+                        </div>
+                        <div class="col-sm-6 col-md-4 {!if((isAS || isBOR), '', 'hide')}">
+                            <a href="Communities_AgentTransferListing">
+                                <h4><i class="fa fa-arrow-right fa-2x"></i> Agent Transfer Requests</h4>
+                                <p>Approve or decline transfer requests for subscribers who want to transfer to your office(s).</p>
+                            </a>
+                        </div>
+    
+                        <div class="col-sm-6 col-md-4 {!if(isBOR, '', 'hide')}">
+                            <a href="Communities_AuthorizedSigners">
+                                <h4><i class="fa fa-user fa-2x"></i> Authorized Signers</h4>
+                                <p>Add or remove authorized signers who have the ability to make decisions, including approving or denying application requests, for your office(s).</p>
+                            </a>
+                        </div>
+                                                    
+                    </div>
+                </apex:outputPanel>
+                
+                <apex:outputPanel rendered="{!isTrendUser}">
+                    <div class="row action-panels">
+                        <div class="col-sm-6 col-md-4">
+                            <a href="Communities_TrendOfficeRoster">
+                                <h4><i class="fa fa-sign-in fa-2x"></i>Office Roster</h4>
+                                <p>View active and inactive agents as well as manage terminations</p>
+                            </a>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <a href="Communities_TrendOfficeInformation">
+                                <h4><i class="fa fa-shield fa-2x"></i>Office Information</h4>
+                                <p>Change your office phone number or company address</p>
+                            </a>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <a href="Communities_OfficeStatement">
+                                <h4><i class="fa fa-money fa-2x"></i> Office Statement</h4>
+                                <p>The Office Billing Statement Information will indicate by Subscription and Office any balance due and oldest invoice date</p>
+                            </a>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <a href="Communities_NewApplications">
+                                <h4><i class="fa fa-file-text fa-2x"></i> New Applications</h4>
+                                <p>Approve or decline applications for subscribers who want to join your office(s).</p>
+                            </a>
+                        </div>
+    
+                        <div class="col-sm-6 col-md-4 {!if(isBOR, '', 'hide')}">
+                            <a href="Communities_AuthorizedSigners">
+                                <h4><i class="fa fa-user fa-2x"></i> Authorized Signers</h4>
+                                <p>Add or remove authorized signers who have the ability to make decisions, including approving or denying application requests, for your office(s).</p>
+                            </a>
+                        </div>                                        
+                    </div>            
+                </apex:outputPanel>
+                            
+                <script>markOptionPanel("brokerage")</script>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!!isBOR && !isAS && !isOM}">
+                <div class="alert alert-danger">
+                    <p>We’re sorry, but you do not appear to have access to this page.</p>
+                </div>            
+            </apex:outputPanel>
+        </apex:define>
+
+    </apex:composition> 
+</apex:page>

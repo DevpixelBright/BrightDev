@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
+  <defs>
+    <clipPath id="clip-Custom_Size_1">
+      <rect width="20" height="20"/>
+    </clipPath>
+  </defs>
+  <g id="Custom_Size_1" data-name="Custom Size – 1" clip-path="url(#clip-Custom_Size_1)">
+    <g id="account_balance_wallet-black-18dp" transform="translate(-3 -2)">
+      <path id="Path_215" data-name="Path 215" d="M0,0H24V24H0Z" fill="none"/>
+      <path id="Path_216" data-name="Path 216" d="M21,7.28V5a2.006,2.006,0,0,0-2-2H5A2,2,0,0,0,3,5V19a2,2,0,0,0,2,2H19a2.006,2.006,0,0,0,2-2V16.72A2,2,0,0,0,22,15V9a2,2,0,0,0-1-1.72ZM20,9v6H13V9ZM5,19V5H19V7H13a2.006,2.006,0,0,0-2,2v6a2.006,2.006,0,0,0,2,2h6v2Z" fill="#1f3a93"/>
+      <circle id="Ellipse_19" data-name="Ellipse 19" cx="1.5" cy="1.5" r="1.5" transform="translate(14.5 10.5)" fill="#1f3a93"/>
+    </g>
+  </g>
+</svg>

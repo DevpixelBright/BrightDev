@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>In_Progress_to_Inactive_Not_Allowed</fullName>
+    <active>true</active>
+    <description>Status change from In Progress to Inactive is not allowed</description>
+    <errorConditionFormula>ISCHANGED(Status__c) &amp;&amp; TEXT(Status__c)=&quot;Inactive&quot; &amp;&amp; PRIORVALUE(Status__c)=&quot;In Progress&quot;
+&amp;&amp; NOT( $Setup.Bypass_Validation_rules__c.Disable_Validation_Rules__c )</errorConditionFormula>
+    <errorDisplayField>Status__c</errorDisplayField>
+    <errorMessage>Status change from In Progress to Inactive is not allowed</errorMessage>
+</ValidationRule>

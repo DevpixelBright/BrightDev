@@ -1,0 +1,25 @@
+<apex:page standardController="Subscriptions__c" extensions="ResendToLmsEx" title="Sync with MRIS-U" lightningstylesheets="true">
+<apex:form >
+  <apex:pageMessages id="msgBlock" showDetail="true"/>
+  <apex:pageBlock title="Resend Subscription to MRIS-U" mode="maindetail">
+    <apex:pageblockButtons >
+      <apex:commandButton action="{!ResendSub}" value="Resend" rendered="{!ShowResendButton}" rerender="results_panel, msgBlock" />
+    </apex:pageblockButtons>
+    <apex:pageBlockSection >
+      <apex:pageblockSectionItem >
+        <apex:outputText >Subscription ID</apex:outputText>
+        <apex:outputLink value="/{!Subscriptions__c.Id}"><apex:outputField value="{!Subscriptions__c.Name}"/></apex:outputLink>
+      </apex:pageblockSectionItem>
+      <apex:outputField value="{!Subscriptions__c.Status__c}"/>
+      <apex:outputField value="{!Subscriptions__c.Related_Location_Broker_Office__c}"/>
+    </apex:pageBlockSection>
+    </apex:pageBlock>
+  <apex:pageBlock >
+    <apex:outputPanel id="results_panel">
+      <apex:pageBlockSection id="results_block" title="Status" collapsible="false" rendered="{!ShowStatusBlock}">
+        <apex:outputText value="{!StatusMessage}" escape="false"/>
+      </apex:pageBlockSection>
+    </apex:outputPanel>
+  </apex:pageBlock>
+</apex:form>
+</apex:page>

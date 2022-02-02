@@ -1,0 +1,432 @@
+<aura:component>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <ltng:require styles="{!$Resource.headerpart }"></ltng:require>
+  <ltng:require styles="{!$Resource.side }"></ltng:require>
+  <ltng:require styles="{!$Resource.body }"></ltng:require>
+  <aura:attribute name="toggle1" type="boolean" default="false"/>
+  <aura:attribute name="toggle2" type="boolean" default="false"/>
+  <aura:attribute name="toggle3" type="boolean" default="false"/>
+  <div class="c-container">
+    <div class="fullpage slds-scope">
+      <div class="slds-grid slds-wrap">
+        <lightning:layout multipleRows="true">
+          <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+            <div class="new-containerpage header-new-containerpage">
+              <div class="slds-container--x-large new-container">
+                <c:header />
+              </div>
+            </div>
+          </lightning:layoutItem>
+          <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+               <c:mobilemenu />
+              <lightning:layout>
+              <div class="new-containerpage">
+                <div class="slds-container--x-large new-container">
+                  <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                    <c:sidebarnew />
+                  </lightning:layoutItem>
+                  <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                    <div class="page-section page-main">
+                      <div class="middlebar1">
+                        <h2>Responsible Broker</h2>
+                        <lightning:button class="brand" variant="brand " label="Add Responsible Broker" title="Brand action" onclick="{! c.handleClick }" />
+                      </div>
+                      <div class="dev">
+                        <p class="recent">Assign or remove a Responsible Broker on listings in your office(s) by state. The Responsible broker is the license recognised by the state licensing authority as the managing of responsible broker. Associate Broker licensees may not be entered into this field. To remove an individual as a Responsible Broker, go to their name below and click the number underneath the offices they are assigned followed by the Modify button.</p>
+                        <div class="view"></div>
+                        <div class="bodybottom">
+                          <div class="slds-container--x-large new-container">
+                            <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                              <div class="footer-full">
+                                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                  <div class="part0">
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                                      <div class="layer part1">
+                                        <h5 class="search">
+                                          <lightning:input type="text" name="input3" placeholder="Type your search terms here"  variant = "label-hidden" />
+                                          <img src="{!$Resource.bright + '/bright-3.0/images/search.svg'}" alt="Bright" />
+                                        </h5>
+                                      </div>
+                                    </lightning:layoutItem>
+                                      <div class="table-form">
+                                    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped new">
+                                      <thead>
+                                        <tr class="slds-line-height_reset">
+                                          <th class="" scope="col" style="width: 32px;">
+                                          </th>
+                                          <th class="" scope="col">
+                                            <div class="slds-truncate" title="Opportunity Name">Name of Responsible Broker     </div>
+                                          </th>
+                                          <th class="" scope="col">
+                                            <div class="slds-truncate" title="Account Name">Subscription ID</div>
+                                          </th>
+                                          <th class="" scope="col">
+                                            <div class="slds-truncate" title="Close Date">Offices Assigned</div>
+                                          </th>
+                                          <th class="" scope="col">
+                                            <div class="slds-truncate" title="Stage">State</div>
+                                          </th>
+                                          <th class="" scope="col">
+                                            <div class="slds-truncate" title="Contact"> Decision</div>
+                                          </th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr class="slds-hint-parent blue" onclick="{!c.toggleFunction1}">
+                                          <td class="art" data-label="Opportunity Name" scope="row">
+                                          </td>
+                                          <td data-label="Opportunity Name" scope="row">
+                                            <div class="slds-truncate" title="Cloudhub">Bright test</div>
+                                          </td>
+                                          <td data-label="Account Name">
+                                            <div class="slds-truncate" title="Cloudhub">1234456</div>
+                                          </td>
+                                          <td data-label="Close Date">
+                                            <div class="slds-truncate" title="4/14/2015">0</div>
+                                          </td>
+                                          <td data-label="Prospecting">
+                                            <div class="slds-truncate" title="Prospecting">NJ</div>
+                                          </td>
+                                          <td data-label="Contact">
+                                            <div class="slds-truncate" title="jrogers@cloudhub.com">
+                                              Assigned by bright test, 10/16/2020
+                                            </div>
+                                          </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent white" onclick="{!c.toggleFunction2}">
+                                          <td class="art" data-label="Opportunity Name" scope="row">
+                                            <img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" />  
+                                          </td>
+                                          <td data-label="Opportunity Name" scope="row">
+                                            <div class="slds-truncate" title="Cloudhub"><a href="#">Bright test</a></div>
+                                          </td>
+                                          <td data-label="Account Name">
+                                            <div class="slds-truncate" title="Cloudhub">1234456</div>
+                                          </td>
+                                          <td data-label="Close Date">
+                                            <div class="slds-truncate" title="4/14/2015">0</div>
+                                          </td>
+                                          <td data-label="Prospecting">
+                                            <div class="slds-truncate" title="Prospecting">NJ</div>
+                                          </td>
+                                          <td data-label="Contact">
+                                            <div class="slds-truncate" title="jrogers@cloudhub.com">
+                                              Assigned by bright test, 10/16/2020
+                                            </div>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                      </div>
+                                    <aura:if isTrue="{!v.toggle2}">
+                                      <div class="newstrip ">
+                                        <h3>Offices assigned to PA test agent</h3>
+                                           <div class="table-form">
+                                        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped ">
+                                          <thead>
+                                            <tr class="slds-line-height_reset">
+                                              <th class="" scope="col" >
+                                                <div class="slds-truncate" title="Opportunity Name">Name of Responsible Broker</div>
+                                              </th>
+                                              <th class="" scope="col">
+                                                <div class="slds-truncate" title="Opportunity Name">Subscription ID </div>
+                                              </th>
+                                              <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Offices Assigned</div>
+                                              </th>
+                                              <th class="" scope="col">
+                                                <div class="slds-truncate" title="Close Date">License State</div>
+                                              </th>
+                                              <th class="" scope="col">
+                                                <div class="slds-truncate" title="Stage">License Type</div>
+                                              </th>
+                                              <th class="" scope="col">
+                                                <div class="slds-truncate" title="Contact"> </div>
+                                              </th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            <tr class="slds-hint-parent">
+                                              <td class="art" data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Assoc_Name</div>
+                                              </td>
+                                              <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">123456</div>
+                                              </td>
+                                              <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">BRGT040</div>
+                                              </td>
+                                              <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">VA</div>
+                                              </td>
+                                              <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">Broker</div>
+                                              </td>
+                                              <td data-label="Contact">
+                                                <div class="slds-truncate" title="jrogers@cloudhub.com">
+                                                  <lightning:button class="brand" variant="brand " label="Modify" title="Brand action" onclick="{! c.handleClick }" />
+                                                </div>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                          </div>
+                                      </div>
+                                    </aura:if>
+                                       <div class="table-form">
+                                    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped new">
+                                      <thead style="visibility: collapse;">
+                                        <tr class="slds-line-height_reset">
+                                          <th class="" scope="col" style="width: 32px;">
+                                          </th>
+                                          <th class="" scope="col">
+                                            <div class="slds-truncate" title="Opportunity Name">Name of Responsible Broker     </div>
+                                          </th>
+                                          <th class="" scope="col">
+                                            <div class="slds-truncate" title="Account Name">Subscription ID</div>
+                                          </th>
+                                          <th class="" scope="col">
+                                            <div class="slds-truncate" title="Close Date">Offices Assigned</div>
+                                          </th>
+                                          <th class="" scope="col">
+                                            <div class="slds-truncate" title="Stage">State</div>
+                                          </th>
+                                          <th class="" scope="col">
+                                            <div class="slds-truncate" title="Contact"> Decision</div>
+                                          </th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr class="slds-hint-parent blue" onclick="{!c.toggleFunction3}">
+                                          <td class="art" data-label="Opportunity Name" scope="row">
+                                            <img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" />  
+                                          </td>
+                                          <td data-label="Opportunity Name" scope="row">
+                                            <div class="slds-truncate" title="Cloudhub"><a href="#">Bright test</a></div>
+                                          </td>
+                                          <td data-label="Account Name">
+                                            <div class="slds-truncate" title="Cloudhub">1234456</div>
+                                          </td>
+                                          <td data-label="Close Date">
+                                            <div class="slds-truncate" title="4/14/2015">0</div>
+                                          </td>
+                                          <td data-label="Prospecting">
+                                            <div class="slds-truncate" title="Prospecting">NJ</div>
+                                          </td>
+                                          <td data-label="Contact">
+                                            <div class="slds-truncate" title="jrogers@cloudhub.com">
+                                              Assigned by bright test, 10/16/2020
+                                            </div>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                      </div>
+                                    <aura:if isTrue="{!v.toggle3}">
+                                      <div class="newstrip blueline">
+                                        <h3>Offices assigned to PA test agent</h3>
+                                           <div class="table-form">
+                                        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped ">
+                                          <thead>
+                                            <tr class="slds-line-height_reset">
+                                              <th class="" scope="col" >
+                                                <div class="slds-truncate" title="Opportunity Name">Name of Responsible Broker</div>
+                                              </th>
+                                              <th class="" scope="col">
+                                                <div class="slds-truncate" title="Opportunity Name">Subscription ID </div>
+                                              </th>
+                                              <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Offices Assigned</div>
+                                              </th>
+                                              <th class="" scope="col">
+                                                <div class="slds-truncate" title="Close Date">License State</div>
+                                              </th>
+                                              <th class="" scope="col">
+                                                <div class="slds-truncate" title="Stage">License Type</div>
+                                              </th>
+                                              <th class="" scope="col">
+                                                <div class="slds-truncate" title="Contact"> </div>
+                                              </th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            <tr class="slds-hint-parent">
+                                              <td class="art" data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Assoc_Name</div>
+                                              </td>
+                                              <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">123456</div>
+                                              </td>
+                                              <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">BRGT040</div>
+                                              </td>
+                                              <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">VA</div>
+                                              </td>
+                                              <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">Broker</div>
+                                              </td>
+                                              <td data-label="Contact">
+                                                <div class="slds-truncate" title="jrogers@cloudhub.com">
+                                                  <lightning:button class="brand" variant="brand " label="Modify" title="Brand action" onclick="{! c.handleClick }" />
+                                                </div>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                          </div>
+                                      </div>
+                                    </aura:if>
+                                       <div class="table-form">
+                                    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped new">
+                                      <thead style="visibility: collapse;">
+                                        <tr class="slds-line-height_reset">
+                                          <th class="" scope="col" style="width: 32px;">
+                                          </th>
+                                          <th class="" scope="col">
+                                            <div class="slds-truncate" title="Opportunity Name">Name of Responsible Broker     </div>
+                                          </th>
+                                          <th class="" scope="col">
+                                            <div class="slds-truncate" title="Account Name">Subscription ID</div>
+                                          </th>
+                                          <th class="" scope="col">
+                                            <div class="slds-truncate" title="Close Date">Offices Assigned</div>
+                                          </th>
+                                          <th class="" scope="col">
+                                            <div class="slds-truncate" title="Stage">State</div>
+                                          </th>
+                                          <th class="" scope="col">
+                                            <div class="slds-truncate" title="Contact"> Decision</div>
+                                          </th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr class="slds-hint-parent white" onclick="{!c.toggleFunction1}">
+                                          <td class="art" data-label="Opportunity Name" scope="row">
+                                            <img class="down" src="{!$Resource.bright + '/bright-3.0/images/Down-arrow.svg'}" alt="Down arrow" />  
+                                          </td>
+                                          <td data-label="Opportunity Name" scope="row">
+                                            <div class="slds-truncate" title="Cloudhub"><a href="#">Bright test</a></div>
+                                          </td>
+                                          <td data-label="Account Name">
+                                            <div class="slds-truncate" title="Cloudhub">1234456</div>
+                                          </td>
+                                          <td data-label="Close Date">
+                                            <div class="slds-truncate" title="4/14/2015">0</div>
+                                          </td>
+                                          <td data-label="Prospecting">
+                                            <div class="slds-truncate" title="Prospecting">NJ</div>
+                                          </td>
+                                          <td data-label="Contact">
+                                            <div class="slds-truncate" title="jrogers@cloudhub.com">
+                                              Assigned by bright test, 10/16/2020
+                                            </div>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                      </div>
+                                    <aura:if isTrue="{!v.toggle1}">
+                                      <div class="newstrip">
+                                        <h3>Offices assigned to PA test agent</h3>
+                                           <div class="table-form">
+                                        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped ">
+                                          <thead>
+                                            <tr class="slds-line-height_reset">
+                                              <th class="" scope="col" >
+                                                <div class="slds-truncate" title="Opportunity Name">Name of Responsible Broker</div>
+                                              </th>
+                                              <th class="" scope="col">
+                                                <div class="slds-truncate" title="Opportunity Name">Subscription ID </div>
+                                              </th>
+                                              <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Offices Assigned</div>
+                                              </th>
+                                              <th class="" scope="col">
+                                                <div class="slds-truncate" title="Close Date">License State</div>
+                                              </th>
+                                              <th class="" scope="col">
+                                                <div class="slds-truncate" title="Stage">License Type</div>
+                                              </th>
+                                              <th class="" scope="col">
+                                                <div class="slds-truncate" title="Contact"> </div>
+                                              </th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            <tr class="slds-hint-parent">
+                                              <td class="art" data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">Assoc_Name</div>
+                                              </td>
+                                              <td data-label="Opportunity Name" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">123456</div>
+                                              </td>
+                                              <td data-label="Account Name">
+                                                <div class="slds-truncate" title="Cloudhub">BRGT040</div>
+                                              </td>
+                                              <td data-label="Close Date">
+                                                <div class="slds-truncate" title="4/14/2015">VA</div>
+                                              </td>
+                                              <td data-label="Prospecting">
+                                                <div class="slds-truncate" title="Prospecting">Broker</div>
+                                              </td>
+                                              <td data-label="Contact">
+                                                <div class="slds-truncate" title="jrogers@cloudhub.com">
+                                                  <lightning:button class="brand" variant="brand " label="Modify" title="Brand action" onclick="{! c.handleClick }" />
+                                                </div>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                          </div>
+                                      </div>
+                                    </aura:if>
+                                  </div>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                  <div class="part0">
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                                      <div class="layer part1">
+                                        <h5 class="search1">
+                                          Showing 1 to 10 of 34 entries
+                                        </h5>
+                                      </div>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="6" largeDeviceSize="6">
+                                      <div class="layer part3">
+                                        <h5 class="onechoose1">
+                                          <div class="pagination">
+                                            <a href="#">Previous</a>
+                                            <a href="#" class="active">1</a>
+                                            <a href="#" >2</a>
+                                            <a href="#">Next</a>
+                                          </div>
+                                        </h5>
+                                      </div>
+                                    </lightning:layoutItem>
+                                  </div>
+                                </lightning:layoutItem>
+                              </div>
+                            </lightning:layoutItem>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </lightning:layoutItem>
+                </div>
+              </div>
+            </lightning:layout>
+          </lightning:layoutItem>
+              <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage footer-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:footer />
+                         
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+        </lightning:layout>
+      </div>
+    </div>
+  </div>
+</aura:component>

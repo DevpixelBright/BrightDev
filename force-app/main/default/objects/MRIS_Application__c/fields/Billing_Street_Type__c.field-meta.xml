@@ -1,0 +1,970 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Billing_Street_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Billing Street Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>ACRES, ACRES</fullName>
+                <default>false</default>
+                <label>ACRES, ACRES</label>
+            </value>
+            <value>
+                <fullName>ALLEY, ALY</fullName>
+                <default>false</default>
+                <label>ALLEY, ALY</label>
+            </value>
+            <value>
+                <fullName>ANNEX, ANX</fullName>
+                <default>false</default>
+                <label>ANNEX, ANX</label>
+            </value>
+            <value>
+                <fullName>ARCADE, ARC</fullName>
+                <default>false</default>
+                <label>ARCADE, ARC</label>
+            </value>
+            <value>
+                <fullName>AVENUE, AVE</fullName>
+                <default>false</default>
+                <label>AVENUE, AVE</label>
+            </value>
+            <value>
+                <fullName>BAY, BAY</fullName>
+                <default>false</default>
+                <label>BAY, BAY</label>
+            </value>
+            <value>
+                <fullName>BAYOU, BYU</fullName>
+                <default>false</default>
+                <label>BAYOU, BYU</label>
+            </value>
+            <value>
+                <fullName>BEACH, BCH</fullName>
+                <default>false</default>
+                <label>BEACH, BCH</label>
+            </value>
+            <value>
+                <fullName>BELTWAY, BLTY</fullName>
+                <default>false</default>
+                <label>BELTWAY, BLTY</label>
+            </value>
+            <value>
+                <fullName>BEND, BND</fullName>
+                <default>false</default>
+                <label>BEND, BND</label>
+            </value>
+            <value>
+                <fullName>BLUFF, BLF</fullName>
+                <default>false</default>
+                <label>BLUFF, BLF</label>
+            </value>
+            <value>
+                <fullName>BOTTOM, BTM</fullName>
+                <default>false</default>
+                <label>BOTTOM, BTM</label>
+            </value>
+            <value>
+                <fullName>BOULEVARD, BLVD</fullName>
+                <default>false</default>
+                <label>BOULEVARD, BLVD</label>
+            </value>
+            <value>
+                <fullName>BRANCH, BR</fullName>
+                <default>false</default>
+                <label>BRANCH, BR</label>
+            </value>
+            <value>
+                <fullName>BRIDGE, BRG</fullName>
+                <default>false</default>
+                <label>BRIDGE, BRG</label>
+            </value>
+            <value>
+                <fullName>BROOK, BRK</fullName>
+                <default>false</default>
+                <label>BROOK, BRK</label>
+            </value>
+            <value>
+                <fullName>BURG, BG</fullName>
+                <default>false</default>
+                <label>BURG, BG</label>
+            </value>
+            <value>
+                <fullName>BYPASS, BYP</fullName>
+                <default>false</default>
+                <label>BYPASS, BYP</label>
+            </value>
+            <value>
+                <fullName>CAMP, CP</fullName>
+                <default>false</default>
+                <label>CAMP, CP</label>
+            </value>
+            <value>
+                <fullName>CANYON, CYN</fullName>
+                <default>false</default>
+                <label>CANYON, CYN</label>
+            </value>
+            <value>
+                <fullName>CAPE, CPE</fullName>
+                <default>false</default>
+                <label>CAPE, CPE</label>
+            </value>
+            <value>
+                <fullName>CAUSEWAY, CSWY</fullName>
+                <default>false</default>
+                <label>CAUSEWAY, CSWY</label>
+            </value>
+            <value>
+                <fullName>CENTER, CTR</fullName>
+                <default>false</default>
+                <label>CENTER, CTR</label>
+            </value>
+            <value>
+                <fullName>CHASE, CHASE</fullName>
+                <default>false</default>
+                <label>CHASE, CHASE</label>
+            </value>
+            <value>
+                <fullName>CIRCLE, CIR</fullName>
+                <default>false</default>
+                <label>CIRCLE, CIR</label>
+            </value>
+            <value>
+                <fullName>CLIFFS, CLFS</fullName>
+                <default>false</default>
+                <label>CLIFFS, CLFS</label>
+            </value>
+            <value>
+                <fullName>CLUB, CLB</fullName>
+                <default>false</default>
+                <label>CLUB, CLB</label>
+            </value>
+            <value>
+                <fullName>CLUSTER, CL</fullName>
+                <default>false</default>
+                <label>CLUSTER, CL</label>
+            </value>
+            <value>
+                <fullName>COMMON, COM</fullName>
+                <default>false</default>
+                <label>COMMON, COM</label>
+            </value>
+            <value>
+                <fullName>CORNER, COR</fullName>
+                <default>false</default>
+                <label>CORNER, COR</label>
+            </value>
+            <value>
+                <fullName>CORNERS, CORS</fullName>
+                <default>false</default>
+                <label>CORNERS, CORS</label>
+            </value>
+            <value>
+                <fullName>CORRIDOR, CORR</fullName>
+                <default>false</default>
+                <label>CORRIDOR, CORR</label>
+            </value>
+            <value>
+                <fullName>COURSE, CRSE</fullName>
+                <default>false</default>
+                <label>COURSE, CRSE</label>
+            </value>
+            <value>
+                <fullName>COURT, CT</fullName>
+                <default>false</default>
+                <label>COURT, CT</label>
+            </value>
+            <value>
+                <fullName>COURTS, CTS</fullName>
+                <default>false</default>
+                <label>COURTS, CTS</label>
+            </value>
+            <value>
+                <fullName>COVE, CV</fullName>
+                <default>false</default>
+                <label>COVE, CV</label>
+            </value>
+            <value>
+                <fullName>CREEK, CRK</fullName>
+                <default>false</default>
+                <label>CREEK, CRK</label>
+            </value>
+            <value>
+                <fullName>CRESCENT, CRES</fullName>
+                <default>false</default>
+                <label>CRESCENT, CRES</label>
+            </value>
+            <value>
+                <fullName>CREST, CRST</fullName>
+                <default>false</default>
+                <label>CREST, CRST</label>
+            </value>
+            <value>
+                <fullName>CROSSING, XING</fullName>
+                <default>false</default>
+                <label>CROSSING, XING</label>
+            </value>
+            <value>
+                <fullName>CROSSOVER, XOVER</fullName>
+                <default>false</default>
+                <label>CROSSOVER, XOVER</label>
+            </value>
+            <value>
+                <fullName>CROSSROAD, XRD</fullName>
+                <default>false</default>
+                <label>CROSSROAD, XRD</label>
+            </value>
+            <value>
+                <fullName>CROSSROADS, XRDS</fullName>
+                <default>false</default>
+                <label>CROSSROADS, XRDS</label>
+            </value>
+            <value>
+                <fullName>CURVE, CURV</fullName>
+                <default>false</default>
+                <label>CURVE, CURV</label>
+            </value>
+            <value>
+                <fullName>DALE, DL</fullName>
+                <default>false</default>
+                <label>DALE, DL</label>
+            </value>
+            <value>
+                <fullName>DAM, DM</fullName>
+                <default>false</default>
+                <label>DAM, DM</label>
+            </value>
+            <value>
+                <fullName>DELL, DELL</fullName>
+                <default>false</default>
+                <label>DELL, DELL</label>
+            </value>
+            <value>
+                <fullName>DIVIDE, DV</fullName>
+                <default>false</default>
+                <label>DIVIDE, DV</label>
+            </value>
+            <value>
+                <fullName>DRIVE, DR</fullName>
+                <default>false</default>
+                <label>DRIVE, DR</label>
+            </value>
+            <value>
+                <fullName>DRIVEWAY, DRWY</fullName>
+                <default>false</default>
+                <label>DRIVEWAY, DRWY</label>
+            </value>
+            <value>
+                <fullName>END, END</fullName>
+                <default>false</default>
+                <label>END, END</label>
+            </value>
+            <value>
+                <fullName>ESPLANADE, ESP</fullName>
+                <default>false</default>
+                <label>ESPLANADE, ESP</label>
+            </value>
+            <value>
+                <fullName>ESTATE, EST</fullName>
+                <default>false</default>
+                <label>ESTATE, EST</label>
+            </value>
+            <value>
+                <fullName>ESTATES, ESTS</fullName>
+                <default>false</default>
+                <label>ESTATES, ESTS</label>
+            </value>
+            <value>
+                <fullName>EXPRESSWAY, EXPY</fullName>
+                <default>false</default>
+                <label>EXPRESSWAY, EXPY</label>
+            </value>
+            <value>
+                <fullName>EXTENSION, EXT</fullName>
+                <default>false</default>
+                <label>EXTENSION, EXT</label>
+            </value>
+            <value>
+                <fullName>FALL, FL</fullName>
+                <default>false</default>
+                <label>FALL, FL</label>
+            </value>
+            <value>
+                <fullName>FALLS, FLS</fullName>
+                <default>false</default>
+                <label>FALLS, FLS</label>
+            </value>
+            <value>
+                <fullName>FARE, FARE</fullName>
+                <default>false</default>
+                <label>FARE, FARE</label>
+            </value>
+            <value>
+                <fullName>FERRY, FRY</fullName>
+                <default>false</default>
+                <label>FERRY, FRY</label>
+            </value>
+            <value>
+                <fullName>FIELD, FLD</fullName>
+                <default>false</default>
+                <label>FIELD, FLD</label>
+            </value>
+            <value>
+                <fullName>FIELDS, FLDS</fullName>
+                <default>false</default>
+                <label>FIELDS, FLDS</label>
+            </value>
+            <value>
+                <fullName>FLATS, FLT</fullName>
+                <default>false</default>
+                <label>FLATS, FLT</label>
+            </value>
+            <value>
+                <fullName>FORD, FRD</fullName>
+                <default>false</default>
+                <label>FORD, FRD</label>
+            </value>
+            <value>
+                <fullName>FOREST, FRST</fullName>
+                <default>false</default>
+                <label>FOREST, FRST</label>
+            </value>
+            <value>
+                <fullName>FORGE, FRG</fullName>
+                <default>false</default>
+                <label>FORGE, FRG</label>
+            </value>
+            <value>
+                <fullName>FORK, FRK</fullName>
+                <default>false</default>
+                <label>FORK, FRK</label>
+            </value>
+            <value>
+                <fullName>FORKS, FRKS</fullName>
+                <default>false</default>
+                <label>FORKS, FRKS</label>
+            </value>
+            <value>
+                <fullName>FORT, FT</fullName>
+                <default>false</default>
+                <label>FORT, FT</label>
+            </value>
+            <value>
+                <fullName>FREEWAY, FWY</fullName>
+                <default>false</default>
+                <label>FREEWAY, FWY</label>
+            </value>
+            <value>
+                <fullName>GAP, GAP</fullName>
+                <default>false</default>
+                <label>GAP, GAP</label>
+            </value>
+            <value>
+                <fullName>GARDENS, GDNS</fullName>
+                <default>false</default>
+                <label>GARDENS, GDNS</label>
+            </value>
+            <value>
+                <fullName>GARTH, GRTH</fullName>
+                <default>false</default>
+                <label>GARTH, GRTH</label>
+            </value>
+            <value>
+                <fullName>GATE, GATE</fullName>
+                <default>false</default>
+                <label>GATE, GATE</label>
+            </value>
+            <value>
+                <fullName>GATEWAY, GTWY</fullName>
+                <default>false</default>
+                <label>GATEWAY, GTWY</label>
+            </value>
+            <value>
+                <fullName>GLEN, GLN</fullName>
+                <default>false</default>
+                <label>GLEN, GLN</label>
+            </value>
+            <value>
+                <fullName>GRADE, GRADE</fullName>
+                <default>false</default>
+                <label>GRADE, GRADE</label>
+            </value>
+            <value>
+                <fullName>GREEN, GRN</fullName>
+                <default>false</default>
+                <label>GREEN, GRN</label>
+            </value>
+            <value>
+                <fullName>GROVE, GRV</fullName>
+                <default>false</default>
+                <label>GROVE, GRV</label>
+            </value>
+            <value>
+                <fullName>HARBOR, HBR</fullName>
+                <default>false</default>
+                <label>HARBOR, HBR</label>
+            </value>
+            <value>
+                <fullName>HAVEN, HVN</fullName>
+                <default>false</default>
+                <label>HAVEN, HVN</label>
+            </value>
+            <value>
+                <fullName>HEIGHTS, HTS</fullName>
+                <default>false</default>
+                <label>HEIGHTS, HTS</label>
+            </value>
+            <value>
+                <fullName>HIGHWAY, HWY</fullName>
+                <default>false</default>
+                <label>HIGHWAY, HWY</label>
+            </value>
+            <value>
+                <fullName>HILL, HL</fullName>
+                <default>false</default>
+                <label>HILL, HL</label>
+            </value>
+            <value>
+                <fullName>HILLS, HLS</fullName>
+                <default>false</default>
+                <label>HILLS, HLS</label>
+            </value>
+            <value>
+                <fullName>HOLLOW, HOLW</fullName>
+                <default>false</default>
+                <label>HOLLOW, HOLW</label>
+            </value>
+            <value>
+                <fullName>INLET, INLT</fullName>
+                <default>false</default>
+                <label>INLET, INLT</label>
+            </value>
+            <value>
+                <fullName>ISLAND, ISL</fullName>
+                <default>false</default>
+                <label>ISLAND, ISL</label>
+            </value>
+            <value>
+                <fullName>ISLANDS, ISS</fullName>
+                <default>false</default>
+                <label>ISLANDS, ISS</label>
+            </value>
+            <value>
+                <fullName>ISLE, ISLE</fullName>
+                <default>false</default>
+                <label>ISLE, ISLE</label>
+            </value>
+            <value>
+                <fullName>JUNCTION, JCT</fullName>
+                <default>false</default>
+                <label>JUNCTION, JCT</label>
+            </value>
+            <value>
+                <fullName>KEY, KY</fullName>
+                <default>false</default>
+                <label>KEY, KY</label>
+            </value>
+            <value>
+                <fullName>KEYS, KYS</fullName>
+                <default>false</default>
+                <label>KEYS, KYS</label>
+            </value>
+            <value>
+                <fullName>KNOLL, KNL</fullName>
+                <default>false</default>
+                <label>KNOLL, KNL</label>
+            </value>
+            <value>
+                <fullName>KNOLLS, KNLS</fullName>
+                <default>false</default>
+                <label>KNOLLS, KNLS</label>
+            </value>
+            <value>
+                <fullName>LAKE, LK</fullName>
+                <default>false</default>
+                <label>LAKE, LK</label>
+            </value>
+            <value>
+                <fullName>LAKES, LKS</fullName>
+                <default>false</default>
+                <label>LAKES, LKS</label>
+            </value>
+            <value>
+                <fullName>LAND, LAND</fullName>
+                <default>false</default>
+                <label>LAND, LAND</label>
+            </value>
+            <value>
+                <fullName>LANDING, LNDG</fullName>
+                <default>false</default>
+                <label>LANDING, LNDG</label>
+            </value>
+            <value>
+                <fullName>LANE, LN</fullName>
+                <default>false</default>
+                <label>LANE, LN</label>
+            </value>
+            <value>
+                <fullName>LIGHT, LGT</fullName>
+                <default>false</default>
+                <label>LIGHT, LGT</label>
+            </value>
+            <value>
+                <fullName>LINE, LINE</fullName>
+                <default>false</default>
+                <label>LINE, LINE</label>
+            </value>
+            <value>
+                <fullName>LOCK, LCK</fullName>
+                <default>false</default>
+                <label>LOCK, LCK</label>
+            </value>
+            <value>
+                <fullName>LOCKS, LCKS</fullName>
+                <default>false</default>
+                <label>LOCKS, LCKS</label>
+            </value>
+            <value>
+                <fullName>LODGE, LDG</fullName>
+                <default>false</default>
+                <label>LODGE, LDG</label>
+            </value>
+            <value>
+                <fullName>LOFT, LF</fullName>
+                <default>false</default>
+                <label>LOFT, LF</label>
+            </value>
+            <value>
+                <fullName>LOOP, LOOP</fullName>
+                <default>false</default>
+                <label>LOOP, LOOP</label>
+            </value>
+            <value>
+                <fullName>MALL, MALL</fullName>
+                <default>false</default>
+                <label>MALL, MALL</label>
+            </value>
+            <value>
+                <fullName>MANOR, MNR</fullName>
+                <default>false</default>
+                <label>MANOR, MNR</label>
+            </value>
+            <value>
+                <fullName>MEADOW, MDW</fullName>
+                <default>false</default>
+                <label>MEADOW, MDW</label>
+            </value>
+            <value>
+                <fullName>MEADOWS, MDWS</fullName>
+                <default>false</default>
+                <label>MEADOWS, MDWS</label>
+            </value>
+            <value>
+                <fullName>MEWS, MEWS</fullName>
+                <default>false</default>
+                <label>MEWS, MEWS</label>
+            </value>
+            <value>
+                <fullName>MILL, ML</fullName>
+                <default>false</default>
+                <label>MILL, ML</label>
+            </value>
+            <value>
+                <fullName>MILLS, MLS</fullName>
+                <default>false</default>
+                <label>MILLS, MLS</label>
+            </value>
+            <value>
+                <fullName>MISSION, MSN</fullName>
+                <default>false</default>
+                <label>MISSION, MSN</label>
+            </value>
+            <value>
+                <fullName>MOUNT, MT</fullName>
+                <default>false</default>
+                <label>MOUNT, MT</label>
+            </value>
+            <value>
+                <fullName>MOUNTAIN, MTN</fullName>
+                <default>false</default>
+                <label>MOUNTAIN, MTN</label>
+            </value>
+            <value>
+                <fullName>MOUNTAINS, MTNS</fullName>
+                <default>false</default>
+                <label>MOUNTAINS, MTNS</label>
+            </value>
+            <value>
+                <fullName>NECK, NCK</fullName>
+                <default>false</default>
+                <label>NECK, NCK</label>
+            </value>
+            <value>
+                <fullName>NOOK, NOOK</fullName>
+                <default>false</default>
+                <label>NOOK, NOOK</label>
+            </value>
+            <value>
+                <fullName>NORTHWAY, NWAY</fullName>
+                <default>false</default>
+                <label>NORTHWAY, NWAY</label>
+            </value>
+            <value>
+                <fullName>ORCHARD, ORCH</fullName>
+                <default>false</default>
+                <label>ORCHARD, ORCH</label>
+            </value>
+            <value>
+                <fullName>OVAL, OVAL</fullName>
+                <default>false</default>
+                <label>OVAL, OVAL</label>
+            </value>
+            <value>
+                <fullName>OVERLOOK, OLOOK</fullName>
+                <default>false</default>
+                <label>OVERLOOK, OLOOK</label>
+            </value>
+            <value>
+                <fullName>PARK, PARK</fullName>
+                <default>false</default>
+                <label>PARK, PARK</label>
+            </value>
+            <value>
+                <fullName>PARKWAY, PKWY</fullName>
+                <default>false</default>
+                <label>PARKWAY, PKWY</label>
+            </value>
+            <value>
+                <fullName>PASS, PASS</fullName>
+                <default>false</default>
+                <label>PASS, PASS</label>
+            </value>
+            <value>
+                <fullName>PASSAGE, PSGE</fullName>
+                <default>false</default>
+                <label>PASSAGE, PSGE</label>
+            </value>
+            <value>
+                <fullName>PATH, PATH</fullName>
+                <default>false</default>
+                <label>PATH, PATH</label>
+            </value>
+            <value>
+                <fullName>PENINSULA, PNSLA</fullName>
+                <default>false</default>
+                <label>PENINSULA, PNSLA</label>
+            </value>
+            <value>
+                <fullName>PIKE, PIKE</fullName>
+                <default>false</default>
+                <label>PIKE, PIKE</label>
+            </value>
+            <value>
+                <fullName>PINES, PNES</fullName>
+                <default>false</default>
+                <label>PINES, PNES</label>
+            </value>
+            <value>
+                <fullName>PLACE, PL</fullName>
+                <default>false</default>
+                <label>PLACE, PL</label>
+            </value>
+            <value>
+                <fullName>PLAIN, PLN</fullName>
+                <default>false</default>
+                <label>PLAIN, PLN</label>
+            </value>
+            <value>
+                <fullName>PLAINS, PLNS</fullName>
+                <default>false</default>
+                <label>PLAINS, PLNS</label>
+            </value>
+            <value>
+                <fullName>PLAZA, PLZ</fullName>
+                <default>false</default>
+                <label>PLAZA, PLZ</label>
+            </value>
+            <value>
+                <fullName>POINT, PT</fullName>
+                <default>false</default>
+                <label>POINT, PT</label>
+            </value>
+            <value>
+                <fullName>POND, POND</fullName>
+                <default>false</default>
+                <label>POND, POND</label>
+            </value>
+            <value>
+                <fullName>PORT, PRT</fullName>
+                <default>false</default>
+                <label>PORT, PRT</label>
+            </value>
+            <value>
+                <fullName>PRAIRIE, PR</fullName>
+                <default>false</default>
+                <label>PRAIRIE, PR</label>
+            </value>
+            <value>
+                <fullName>QUAY, QUAY</fullName>
+                <default>false</default>
+                <label>QUAY, QUAY</label>
+            </value>
+            <value>
+                <fullName>RADIAL, RADL</fullName>
+                <default>false</default>
+                <label>RADIAL, RADL</label>
+            </value>
+            <value>
+                <fullName>RANCH, RNCH</fullName>
+                <default>false</default>
+                <label>RANCH, RNCH</label>
+            </value>
+            <value>
+                <fullName>RAPIDS, RPDS</fullName>
+                <default>false</default>
+                <label>RAPIDS, RPDS</label>
+            </value>
+            <value>
+                <fullName>REST, RST</fullName>
+                <default>false</default>
+                <label>REST, RST</label>
+            </value>
+            <value>
+                <fullName>RIDGE, RDG</fullName>
+                <default>false</default>
+                <label>RIDGE, RDG</label>
+            </value>
+            <value>
+                <fullName>RIDING, RDNG</fullName>
+                <default>false</default>
+                <label>RIDING, RDNG</label>
+            </value>
+            <value>
+                <fullName>RIVER, RIV</fullName>
+                <default>false</default>
+                <label>RIVER, RIV</label>
+            </value>
+            <value>
+                <fullName>ROAD, RD</fullName>
+                <default>false</default>
+                <label>ROAD, RD</label>
+            </value>
+            <value>
+                <fullName>ROADWAY, RDWY</fullName>
+                <default>false</default>
+                <label>ROADWAY, RDWY</label>
+            </value>
+            <value>
+                <fullName>ROUTE, RTE</fullName>
+                <default>false</default>
+                <label>ROUTE, RTE</label>
+            </value>
+            <value>
+                <fullName>ROW, ROW</fullName>
+                <default>false</default>
+                <label>ROW, ROW</label>
+            </value>
+            <value>
+                <fullName>RUN, RUN</fullName>
+                <default>false</default>
+                <label>RUN, RUN</label>
+            </value>
+            <value>
+                <fullName>SHOAL, SHL</fullName>
+                <default>false</default>
+                <label>SHOAL, SHL</label>
+            </value>
+            <value>
+                <fullName>SHOALS, SHLS</fullName>
+                <default>false</default>
+                <label>SHOALS, SHLS</label>
+            </value>
+            <value>
+                <fullName>SHORE, SHR</fullName>
+                <default>false</default>
+                <label>SHORE, SHR</label>
+            </value>
+            <value>
+                <fullName>SHORES, SHRS</fullName>
+                <default>false</default>
+                <label>SHORES, SHRS</label>
+            </value>
+            <value>
+                <fullName>SOUTHWAY, SWAY</fullName>
+                <default>false</default>
+                <label>SOUTHWAY, SWAY</label>
+            </value>
+            <value>
+                <fullName>SPRING, SPG</fullName>
+                <default>false</default>
+                <label>SPRING, SPG</label>
+            </value>
+            <value>
+                <fullName>SPRINGS, SPGS</fullName>
+                <default>false</default>
+                <label>SPRINGS, SPGS</label>
+            </value>
+            <value>
+                <fullName>SPUR, SPUR</fullName>
+                <default>false</default>
+                <label>SPUR, SPUR</label>
+            </value>
+            <value>
+                <fullName>SQUARE, SQ</fullName>
+                <default>false</default>
+                <label>SQUARE, SQ</label>
+            </value>
+            <value>
+                <fullName>STATION, STA</fullName>
+                <default>false</default>
+                <label>STATION, STA</label>
+            </value>
+            <value>
+                <fullName>STRAIT, STRT</fullName>
+                <default>false</default>
+                <label>STRAIT, STRT</label>
+            </value>
+            <value>
+                <fullName>STRAVENUE, STV</fullName>
+                <default>false</default>
+                <label>STRAVENUE, STV</label>
+            </value>
+            <value>
+                <fullName>STREAM, STRM</fullName>
+                <default>false</default>
+                <label>STREAM, STRM</label>
+            </value>
+            <value>
+                <fullName>STREET, ST</fullName>
+                <default>false</default>
+                <label>STREET, ST</label>
+            </value>
+            <value>
+                <fullName>STREETS, STS</fullName>
+                <default>false</default>
+                <label>STREETS, STS</label>
+            </value>
+            <value>
+                <fullName>SUMMIT, SMT</fullName>
+                <default>false</default>
+                <label>SUMMIT, SMT</label>
+            </value>
+            <value>
+                <fullName>TERRACE, TER</fullName>
+                <default>false</default>
+                <label>TERRACE, TER</label>
+            </value>
+            <value>
+                <fullName>TRACE, TRCE</fullName>
+                <default>false</default>
+                <label>TRACE, TRCE</label>
+            </value>
+            <value>
+                <fullName>TRACT, TRACT</fullName>
+                <default>false</default>
+                <label>TRACT, TRACT</label>
+            </value>
+            <value>
+                <fullName>TRAIL, TRL</fullName>
+                <default>false</default>
+                <label>TRAIL, TRL</label>
+            </value>
+            <value>
+                <fullName>TRAILER, TRLR</fullName>
+                <default>false</default>
+                <label>TRAILER, TRLR</label>
+            </value>
+            <value>
+                <fullName>TUNNEL, TUNL</fullName>
+                <default>false</default>
+                <label>TUNNEL, TUNL</label>
+            </value>
+            <value>
+                <fullName>TURN, TURN</fullName>
+                <default>false</default>
+                <label>TURN, TURN</label>
+            </value>
+            <value>
+                <fullName>TURNPIKE, TPKE</fullName>
+                <default>false</default>
+                <label>TURNPIKE, TPKE</label>
+            </value>
+            <value>
+                <fullName>UNDEFINED, UNDEF</fullName>
+                <default>false</default>
+                <label>UNDEFINED, UNDEF</label>
+            </value>
+            <value>
+                <fullName>UNION, UN</fullName>
+                <default>false</default>
+                <label>UNION, UN</label>
+            </value>
+            <value>
+                <fullName>VALLEY, VLY</fullName>
+                <default>false</default>
+                <label>VALLEY, VLY</label>
+            </value>
+            <value>
+                <fullName>VIADUCT, VIA</fullName>
+                <default>false</default>
+                <label>VIADUCT, VIA</label>
+            </value>
+            <value>
+                <fullName>VIEW, VW</fullName>
+                <default>false</default>
+                <label>VIEW, VW</label>
+            </value>
+            <value>
+                <fullName>VIEWS, VWS</fullName>
+                <default>false</default>
+                <label>VIEWS, VWS</label>
+            </value>
+            <value>
+                <fullName>VILLAGE, VLG</fullName>
+                <default>false</default>
+                <label>VILLAGE, VLG</label>
+            </value>
+            <value>
+                <fullName>VILLE, VL</fullName>
+                <default>false</default>
+                <label>VILLE, VL</label>
+            </value>
+            <value>
+                <fullName>VISTA, VIS</fullName>
+                <default>false</default>
+                <label>VISTA, VIS</label>
+            </value>
+            <value>
+                <fullName>WALK, WALK</fullName>
+                <default>false</default>
+                <label>WALK, WALK</label>
+            </value>
+            <value>
+                <fullName>WALKWAY, WWAY</fullName>
+                <default>false</default>
+                <label>WALKWAY, WWAY</label>
+            </value>
+            <value>
+                <fullName>WALL, WL</fullName>
+                <default>false</default>
+                <label>WALL, WL</label>
+            </value>
+            <value>
+                <fullName>WAY, WAY</fullName>
+                <default>false</default>
+                <label>WAY, WAY</label>
+            </value>
+            <value>
+                <fullName>WELLS, WLS</fullName>
+                <default>false</default>
+                <label>WELLS, WLS</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

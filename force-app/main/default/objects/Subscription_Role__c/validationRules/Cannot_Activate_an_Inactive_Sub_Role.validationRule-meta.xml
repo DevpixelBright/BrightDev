@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cannot_Activate_an_Inactive_Sub_Role</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND( 
+ISPICKVAL( PRIORVALUE( Status__c ) , &quot;Inactive&quot;), 
+ISPICKVAL(Status__c, &quot;Active&quot;) )
+&amp;&amp; NOT(( $Setup.Bypass_Validation_rules__c.Disable_Validation_Rules__c ) || ( $Setup.Bypass_VR_for_AmsAdmin__c.Bypass_VR__c ))</errorConditionFormula>
+    <errorMessage>You cannot Activate an Inactive Subscription Role. You must create a new Subscription Role.</errorMessage>
+</ValidationRule>

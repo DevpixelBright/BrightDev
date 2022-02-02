@@ -1,0 +1,18 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" lightningstylesheets="true">
+    <apex:includeLightning />
+    <div id="dataTable" />
+    <script>
+     try {
+    $Lightning.use("c:SubdivisionFormHeaderAndFooterApp", function() {
+        $Lightning.createComponent("c:SubdivisionFormHeaderAndFooter", {}, "dataTable", function(cmp) {
+            console.log('done');
+        });
+    }); 
+         }
+        catch(err) {
+        if(err.message == 'This page has an error. You might just need to refresh it.[NoErrorObjectAvailable] Script error.')
+        	window.location = '';
+    }
+    </script>
+   
+</apex:page>

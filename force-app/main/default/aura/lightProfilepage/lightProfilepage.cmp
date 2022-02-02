@@ -1,0 +1,253 @@
+<aura:component>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <ltng:require styles="{!$Resource.headerpart }"></ltng:require>
+   <ltng:require styles="{!$Resource.side }"></ltng:require> 
+   <ltng:require styles="{!$Resource.body }"></ltng:require>
+   
+   <div class="c-container">
+      <div class="fullpage slds-scope">
+         <div class="slds-grid slds-wrap">
+            <lightning:layout multipleRows="true">
+               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage header-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:header />
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+               <lightning:layoutItem flexibility="grow bar" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                    <c:mobilemenu />
+                   <lightning:layout>
+                     <div class="new-containerpage">
+                        <div class="slds-container--x-large new-container">
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="3" largeDeviceSize="3">
+                               <c:sidebarnew />
+                           </lightning:layoutItem>
+                           <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="9" largeDeviceSize="9">
+                            
+                               <div class="page-section page-main">
+                                 <div class="middlebar1">
+                                    <h2>Profile</h2><lightning:button class="brand" variant="brand" label="Edit" title="Brand action" onclick="{! c.handleClick }" />
+                                 </div>
+                                 <div class="dev">
+                                    <p class="recent">Have your contact details recently changed? Update the contact information for your MLS Subscription.</p>
+                                      <div class="view"></div>
+                                     <h2 class="notes">
+                                      <img src="{!$Resource.bright + '/bright-3.0/images/Personal-Information.svg'}" alt="Account &amp; Settings Notifications" />
+                                       Personal Information
+                                    </h2>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Title</h4>
+                                             <h5>
+                                                -</h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1 log">
+                                             <h4>Login Name <a onclick="{! c.openModel2 }"> <span>Change Login Name</span> </a></h4>
+                                             <h5>
+                                                319005
+                                             </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part2">
+                                             <h4>Job Title</h4>
+                                             <h5>
+                                                -
+                                             </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1 log">
+                                             <h4>First Name <a onclick="{! c.openModel2 }"> <span>Change First Name</span> </a></h4>
+                                             <h5>
+                                                John </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Middle Initial </h4>
+                                             <h5>
+                                               - </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part2">
+                                             <h4>Last Name</h4>
+                                             <h5>
+                                               - </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Generation/Suffix</h4>
+                                             <h5>
+                                                -</h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Nickname </h4>
+                                             <h5>
+                                               John  </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                               <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part2">
+                                             <h4>Preferred Name</h4>
+                                             <h5>
+                                               - </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                    </lightning:layoutItem>
+                                    
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Website</h4>
+                                             <h5>-</h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                    </lightning:layoutItem>
+                                    <div class="view"></div>
+                                    <h2 class="notes">
+                                      <img src="{!$Resource.bright + '/bright-3.0/images/TelephoneContact-Information.svg'}" alt="Account &amp; Settings Notifications" />Telephone &amp; Contact Information
+                                    </h2>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Preferred Phone</h4>
+                                             <h5>
+                                                (320) 452-7100</h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Mobile</h4>
+                                             <h5>
+                                                (320) 452-7100 </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Home Phone</h4>
+                                             <h5>
+                                                -</h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Home Fax </h4>
+                                             <h5>
+                                               -  </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part2">
+                                             <h4>Agent Office Phone</h4>
+                                             <h5>
+                                               - </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <div class="layer part2">
+                                          <p><img src="{!$Resource.bright + '/bright-3.0/images/information.svg'}" alt="Account &amp; Settings Notifications" />This information WILL appear in your listings</p>
+                                       </div>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Public Email</h4>
+                                             <h5>
+                                               qonavewoll-9840@yopmail.com</h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <div class="layer part2">
+                                          <p><img src="{!$Resource.bright + '/bright-3.0/images/information.svg'}" alt="Account &amp; Settings Notifications" />This information WILL NOT appear in your listings</p>
+                                       </div>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Private Email</h4>
+                                             <h5>
+                                              qonavewoll-9840@yopmail.com </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Alternate Private Email </h4>
+                                             <h5>
+                                               qonavewoll-9840@yopmail.com </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>NRDS ID</h4>
+                                             <h5>
+                                               -  </h5>
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <lightning:button class="brand step" variant="brand" label="Find my NRDS ID"  onclick="{! c.handleClick }" />
+                                          </div>
+                                       </lightning:layoutItem>
+                                    </lightning:layoutItem>
+                                    <div class="view"></div>
+                                    <h2 class="notes">
+                                      <img src="{!$Resource.bright + '/bright-3.0/images/location.svg'}" alt="Account &amp; Settings Notifications" /> Address(es
+                                    </h2>
+                                    <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Mailing Address</h4>
+                                             <h5>
+                                               9707 Key West Ave<br/>Rockville, MD 20850-3992 </h5>
+                                            
+                                          </div>
+                                       </lightning:layoutItem>
+                                       <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                          <div class="layer part1">
+                                             <h4>Home Address</h4>
+                                             <h5>
+                                               -  </h5>
+                                            </div>
+                                       </lightning:layoutItem>
+                                    </lightning:layoutItem>
+                                 </div>
+                              </div>
+                           </lightning:layoutItem>
+                        </div>
+                     </div>
+                  </lightning:layout>
+               </lightning:layoutItem>
+                <lightning:layoutItem flexibility="grow" size="12" mediumDeviceSize="12" largeDeviceSize="12">
+                  <div class="new-containerpage footer-new-containerpage">
+                     <div class="slds-container--x-large new-container">
+                         <c:footer />
+                         
+                     </div>
+                  </div>
+               </lightning:layoutItem>
+            </lightning:layout>
+         </div>
+      </div>
+     
+      
+   </div>
+</aura:component>
